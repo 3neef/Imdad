@@ -4,18 +4,21 @@ namespace App\Models\UM;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends Model
 {
+    use SoftDeletes;
+    protected $tabel = 'roles';
     protected $guarded = ['id'];
-    protected $fillable = array('name','status', 'label', 'description');
+    protected $fillable = array('name');
 
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class);
+        return RolePermission::where("role_id",$this->id)->value("json");
     }
 
-    public function givePermissionTo(Permission $permission)
+    public function givePermissionTo(RolePermission $permission)
     {
         return $this->permissions()->save($permission);
     }
@@ -25,7 +28,7 @@ class Role extends Model
      * @param  Permission $permission
      * @return boolean
      */
-    public function hasPermission(Permission $permission, User $user)
+    public function hasPermission(RolePermission $permission, User $user)
     {
         return $this->hasRole($permission->roles);
     }
