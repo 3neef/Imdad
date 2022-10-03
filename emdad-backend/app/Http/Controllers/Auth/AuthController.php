@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\emdad;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserRequest;
@@ -58,6 +58,7 @@ class AuthController extends Controller
     {
 
         $request->user()->tokens()->delete();
+        session()->invalidate();
 
         return response()->json(
             [
