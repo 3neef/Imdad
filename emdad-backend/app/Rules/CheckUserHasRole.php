@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use App\Models\UM\role_user;
+use App\Models\User;
 use Illuminate\Contracts\Validation\Rule;
 
 class CheckUserHasRole implements Rule
@@ -26,10 +27,9 @@ class CheckUserHasRole implements Rule
      */
     public function passes($attribute, $value)
     {
-        $role_user = role_user::where('role_id','=',$value)->count();
+        $role_user = User::where('role_id','=',$value)->count();
         
         if($role_user == 0 ){
-            //dd($role_user);
             return true;
         }
         return false;

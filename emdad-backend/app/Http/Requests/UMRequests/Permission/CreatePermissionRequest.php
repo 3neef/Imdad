@@ -26,7 +26,7 @@ class CreatePermissionRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'role'=>'required|min:4|string|exists:roles,name',
+            'role'=>'required|string|exists:roles,name',
             'privileges'=>['required','array'],
             'privileges.*'=>['required','integer','exists:permissions,id']  
         ];

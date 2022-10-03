@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->integer('role_id');
+            $table->unsignedBigInteger('role_id');
             $table->json('json');
             $table->softDeletes();
             $table->timestamps();

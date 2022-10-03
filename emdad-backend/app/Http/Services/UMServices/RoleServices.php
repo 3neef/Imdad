@@ -46,7 +46,7 @@ class RoleServices{
         $role = Role::find($id);
         $deleted = $role->delete();
         if($deleted){
-            return response()->json( [ 'message'=>'deleted succsesfully' ], 200 );
+            return response()->json( [ 'message'=>'deleted succsesfully' ], 301 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
     }

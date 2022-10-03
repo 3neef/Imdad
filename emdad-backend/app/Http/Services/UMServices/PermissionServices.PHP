@@ -13,11 +13,11 @@ class PermissionServices{
         $colmun = gettype($request ->json()->get( 'role' )) == 'integer' ? 'id' : 'name';
         $role = Role::where( $colmun, $request ->json()->get( 'role' ) )->first();
        // $exist = RolePermission::where('role_id','=',$role->id)->value('json');
-       $exist= $role->permissions();
+       $exists= $role->permissions();
        
         $json = json_encode( $request ->json()->get( 'privileges' ), true );
         //dd($json);
-        if(empty($exist)){
+        if(empty($exists)){
             return $this->create($json,$role);
         }else{
             return $this->update($json,$role);
@@ -39,9 +39,8 @@ class PermissionServices{
 
     public function update($json,$roleId)
     {
-        $exist = RolePermission::where('role_id','=',$roleId)->first();
-        //dd($json);
-        $update = $exist->update(['json' => $json]);
+        $role = RolePermission::where('role_id','=',$roleId)->first();
+        $update = $role->update(['json' => $json]);
         if($update){
             return response()->json( [ 'message'=>'updated succsesfully' ], 200 );
         }
