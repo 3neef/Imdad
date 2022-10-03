@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Models\Quotations\Quotation;
 use App\Models\rfq\Rfq;
+use App\Models\User;
 use App\Observers\QuotationObserver;
 use App\Observers\RFQObserver;
+use App\Observers\UserObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
         //
         Rfq::observe(RFQObserver::class);
         Quotation::observe(QuotationObserver::class);
+        User::observe(UserObserver::class);
     }
 }
