@@ -6,6 +6,7 @@ use App\Models\UM\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class RestoreUserByIdRequest extends FormRequest
 {
@@ -31,7 +32,7 @@ class RestoreUserByIdRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','integer',User::exists('users')->whereNotNull('deleted_at')]
+            'id' => ['required','integer',Rule::exists('users')->whereNotNull('deleted_at')]
         ];
     }
 
