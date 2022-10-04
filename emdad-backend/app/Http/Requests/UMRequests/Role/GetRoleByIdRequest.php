@@ -3,7 +3,6 @@
 namespace App\Http\Requests\UMRequests\Role;
 
 use App\Rules\CheckUserHasRole;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;

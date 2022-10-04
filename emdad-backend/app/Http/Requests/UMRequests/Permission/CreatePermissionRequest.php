@@ -30,7 +30,7 @@ class CreatePermissionRequest extends FormRequest
             'privileges'=>['required','array'],
             'privileges.*'=>['required','integer','exists:permissions,id']  
         ];
-        //dd(gettype(request()->role));
+        
         if (gettype(request()->role) == 'integer') {
             $rules['role'] = 'required|integer|exists:roles,id';
         } else {

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\emdad\UMController;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\UMServices\RoleServices;
 use App\Http\Requests\UMRequests\Role\GetRoleRequest;
@@ -12,33 +11,46 @@ use App\Http\Requests\UMRequests\Role\RestoreRoleByIdRequest;
 
 class RoleController extends Controller
 {
-    public function saveRole(CreateRoleRequest $request,RoleServices $roleServices)
+    protected $roleServices;
+ 
+    /**
+     * Create a new controller instance.
+     *
+     * @param  App\Http\Services\UMServices\RoleServices  $roleServices
+     * @return void
+     */
+    public function __construct(RoleServices $roleServices)
     {
-        return $roleServices->create($request);
+        $this->roleServices = $roleServices;
     }
 
-    public function updateRole(GetRoleRequest $request ,RoleServices $roleServices)
+    public function saveRole(CreateRoleRequest $request)
     {
-        return $roleServices->update($request);
+        return $this->roleServices->create($request);
     }
 
-    public function deleteRole(GetRoleByIdRequest $request,$id,RoleServices $roleServices)
+    public function updateRole(GetRoleRequest $request)
     {
-        return $roleServices->delete($id);
+        return $this->roleServices->update($request);
     }
 
-    public function getAllRoles(RoleServices $roleServices)
+    public function deleteRole(GetRoleByIdRequest $request,$id)
     {
-        return $roleServices->showAll();
+        return $this->roleServices->delete($id);
     }
 
-    public function getByRoleId(GetRoleByIdRequest $request,$id,RoleServices $roleServices)
+    public function getAllRoles()
     {
-        return $roleServices->showById($id);
+        return $this->roleServices->showAll();
     }
 
-    public function restoreByRoleId($id,RestoreRoleByIdRequest $request,RoleServices $roleServices)
+    public function getByRoleId(GetRoleByIdRequest $request,$id)
     {
-        return $roleServices->restoreById($id);
+        return $this->roleServices->showById($id);
+    }
+
+    public function restoreByRoleId($id,RestoreRoleByIdRequest $request)
+    {
+        return $this->roleServices->restoreById($id);
     }
 }
