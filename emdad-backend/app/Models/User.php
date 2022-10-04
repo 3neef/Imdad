@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\UM;
+namespace App\Models;
 
 use App\Models\Accounts\CompanyInfo;
 use App\Models\UM\Role;

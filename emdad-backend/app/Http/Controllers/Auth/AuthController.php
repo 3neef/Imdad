@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UMRequests\User\CreateUserRequest;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
@@ -13,24 +13,6 @@ use App\Http\Services\UMServices\UserServices;
 
 class AuthController extends Controller
 {
-    // public function login(LoginRequest $request)
-    // {
-    //     $request->authenticate();
-
-
-    //     $token = $request->user()->createToken('authtoken');
-
-    //    return response()->json(
-    //        [
-    //            'message'=>'Logged in',
-    //            'data'=> [
-    //                'user'=> $request->user(),
-    //                'token'=> $token->plainTextToken
-    //            ]
-    //        ]
-    //     );
-    // }
-
     public function createUser(CreateUserRequest $request,UserServices $userServices)
     {
         return $userServices->create($request);
@@ -45,6 +27,7 @@ class AuthController extends Controller
     {
         return $userServices->login($request);
     }
+
 
     public function logoutUser(GetUserRequest $request ,UserServices $userServices)
     {

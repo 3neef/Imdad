@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Models\Quotations\Quotation;
 use App\Models\rfq\Rfq;
-use App\Models\UM\User;
+use App\Models\User;
 use App\Observers\QuotationObserver;
 use App\Observers\RFQObserver;
 use App\Observers\UserObserver;

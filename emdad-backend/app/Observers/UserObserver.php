@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\UM\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use App\Mail\WelcomeMail;

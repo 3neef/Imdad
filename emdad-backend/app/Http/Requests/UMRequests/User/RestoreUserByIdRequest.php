@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\UMRequests\User;
 
-use App\Models\UM\User;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;

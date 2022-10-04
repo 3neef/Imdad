@@ -3,8 +3,9 @@
 namespace App\Http\Services\UMServices;
 
 
-use App\Models\UM\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\Auth\LoginRequest;
 
 class UserServices
 {
@@ -50,7 +51,7 @@ class UserServices
         return response()->json(['error' => 'system error'], 500);
     }
 
-    public function login($request)
+    public function login(LoginRequest $request)
     {
         $request->authenticate();
         $token = $request->user()->createToken('authtoken');
