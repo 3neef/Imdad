@@ -2,12 +2,10 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\emdad\UMController\RoleController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\emdad\UMController\PermissionsController;
 use App\Http\Controllers\Auth\EmailVerificationController;
-
-
+use App\Http\Controllers\UMController\PermissionsController;
+use App\Http\Controllers\UMController\RoleController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

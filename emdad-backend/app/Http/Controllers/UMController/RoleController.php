@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\emdad\UMController;
+namespace App\Http\Controllers\UMController;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\UMServices\RoleServices;
