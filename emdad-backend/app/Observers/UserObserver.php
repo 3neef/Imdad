@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\User;
+use App\Models\UM\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use App\Mail\WelcomeMail;
@@ -13,7 +13,7 @@ class UserObserver
     /**
      * Handle the User "created" event.
      *
-     * @param  \App\Models\User  $User
+     * @param  \App\Models\UM\User  $User
      * @return void
      */
     public function created(User $User)

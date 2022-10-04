@@ -3,7 +3,7 @@
 namespace App\Rules;
 
 use App\Models\UM\role_user;
-use App\Models\User;
+use App\Models\UM\User;
 use Illuminate\Contracts\Validation\Rule;
 
 class CheckUserHasRole implements Rule

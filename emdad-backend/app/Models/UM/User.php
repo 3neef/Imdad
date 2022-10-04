@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\UM;
 
 use App\Models\Accounts\CompanyInfo;
 use App\Models\UM\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -12,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use SanctumHasApiTokens, Notifiable;
+    use SanctumHasApiTokens, Notifiable, SoftDeletes;
     protected $dates = ['deleted_at'];
 
     /**

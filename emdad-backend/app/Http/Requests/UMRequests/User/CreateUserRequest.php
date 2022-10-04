@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\UMRequests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class createUserRequest extends FormRequest
 {
@@ -24,10 +26,15 @@ class createUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "username"=>"required|string|max:50|unique:user_test_table",
+            "name"=>"required|string|max:50|unique:users",
             "password"=>"required|string|max:50",
             "email"=>"required|email|string|max:255",
         ];
+    }
+
+    protected function failedValidation(Validator $validator): void
+    {
+        throw new HttpResponseException( response()->json(["errors"=>$validator->errors()],422));
     }
 
 }

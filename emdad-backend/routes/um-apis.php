@@ -11,10 +11,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('login', [AuthController::class, 'login']);
-Route::post('register', [AuthController::class, 'register']);
-Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::put("updateUser/{id}", [AuthController::class, 'update']);
+Route::group(['prefix' => 'users'], function() {
+    Route::post('login', [AuthController::class, 'loginUser']);
+    Route::post('register', [AuthController::class, 'createUser']);
+    Route::post('logout', [AuthController::class, 'logoutUser'])->middleware('auth:sanctum');
+    Route::put("update", [AuthController::class, 'updateUser']);
+    Route::delete("delete/{id}", [AuthController::class, 'deleteUser']);
+    Route::put("restore/{id}", [AuthController::class, 'restoreUser']);
+});
 
 Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
 Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
