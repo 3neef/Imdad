@@ -2,7 +2,6 @@
 
 namespace App\Models\UM;
 
-use App\Models\UM\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -28,7 +27,7 @@ class Role extends Model
      * @param  Permission $permission
      * @return boolean
      */
-    public function hasPermission(RolePermission $permission, User $user)
+    public function hasPermission(RolePermission $permission)
     {
         return $this->hasRole($permission->roles);
     }
