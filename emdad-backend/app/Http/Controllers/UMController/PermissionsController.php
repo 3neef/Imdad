@@ -25,7 +25,7 @@ class PermissionsController extends Controller
         $this->PermissionService = $PermissionService;
     }
 
-    public function savePermission( CreatePermissionRequest $request) {
+    public function savePermission(CreatePermissionRequest $request) {
         return $this->PermissionService->createOrUpdate($request);
     }
 

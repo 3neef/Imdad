@@ -15,7 +15,7 @@ class RoleServices{
         $role->name = $request->get('name');
         $result =$role->save();
         if ($result) {
-            return response()->json( [ 'message'=>'created succsesfully' ], 200 );
+            return response()->json( [ 'message'=>'created successfully' ], 200 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
     }
@@ -25,7 +25,7 @@ class RoleServices{
         $role = Role::find($request->get('id'));
         $result=$role->update(['name' => $request->get('name')]);
         if($result){
-            return response()->json( [ 'message'=>'updated succsesfully' ], 200 );
+            return response()->json( [ 'message'=>'updated successfully' ], 200 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
     }
@@ -46,7 +46,7 @@ class RoleServices{
         $role = Role::find($id);
         $deleted = $role->delete();
         if($deleted){
-            return response()->json( [ 'message'=>'deleted succsesfully' ], 301 );
+            return response()->json( [ 'message'=>'deleted successfully' ], 301 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
     }
@@ -55,7 +55,7 @@ class RoleServices{
     {
        $restore = Role::where('id', $id)->withTrashed()->restore();
        if($restore){
-            return response()->json( [ 'message'=>'restored succsesfully' ], 200 );
+            return response()->json( [ 'message'=>'restored successfully' ], 200 );
        }
        return response()->json( [ 'error'=>'system error' ], 500 );
     }

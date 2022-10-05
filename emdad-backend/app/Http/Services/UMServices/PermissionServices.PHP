@@ -28,7 +28,7 @@ class PermissionServices{
         $Permissions->role_id=$role->id;
         $result = $Permissions->save();
         if($result){
-            return response()->json( [ 'message'=>'created succsesfully' ], 200 );
+            return response()->json( [ 'message'=>'created successfully' ], 200 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
     }
@@ -38,7 +38,7 @@ class PermissionServices{
         $Permission = RolePermission::where('role_id','=',$roleId)->first();
         $update = $Permission->update(['json' => $json]);
         if($update){
-            return response()->json( [ 'message'=>'updated succsesfully' ], 200 );
+            return response()->json( [ 'message'=>'updated successfully' ], 200 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
     }
@@ -65,7 +65,7 @@ class PermissionServices{
         $Permissions = RolePermission::find($id);
         $deleted = $Permissions->delete();
         if($deleted){
-            return response()->json( [ 'message'=>'deleted succsesfully' ], 301 );
+            return response()->json( [ 'message'=>'deleted successfully' ], 301 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
     }
@@ -74,7 +74,7 @@ class PermissionServices{
     {
        $restore = RolePermission::where('id', $id)->withTrashed()->restore();
        if($restore){
-            return response()->json( [ 'message'=>'restored succsesfully' ], 200 );
+            return response()->json( [ 'message'=>'restored successfully' ], 200 );
        }
        return response()->json( [ 'error'=>'system error' ], 500 );
     }
