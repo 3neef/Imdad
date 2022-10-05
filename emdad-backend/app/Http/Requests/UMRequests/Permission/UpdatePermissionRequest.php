@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\UMRequests\Permission;
 
+use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -27,7 +28,7 @@ class UpdatePermissionRequest extends FormRequest
     {
         return [
             'id' => ['required','integer','exists:roles,id'],
-            'privileges'=>['required','array'],
+            'privileges'=>['required','array',new UniqeValues],
             'privileges.*'=>['required','integer','exists:permissions,id']  
         ];
     }
