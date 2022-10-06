@@ -18,6 +18,7 @@ Route::group(['prefix' => 'users'], function() {
     Route::put("update", [AuthController::class, 'updateUser']);
     Route::delete("delete/{id}", [AuthController::class, 'deleteUser']);
     Route::put("restore/{id}", [AuthController::class, 'restoreUser']);
+    Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
 });
 
 Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');

@@ -97,6 +97,18 @@ class UserServices
         return response()->json(['error' => 'system error'], 500);
     }
 
+    public function forgotPassword($request)
+    {   
+        $otp = rand(100000,999999);
+        $email = ($request->get('email'));
+        $user = User::where('email', $email);
+        $result = $user->update(['login_otp' => $otp]);
+        if ($result) {
+            return response()->json(['message' => 'OTP has been created successfully', 'OTP' => $otp], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
     public function showAll()
     {
         #code...
