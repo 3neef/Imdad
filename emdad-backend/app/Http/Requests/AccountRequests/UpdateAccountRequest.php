@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\UMRequests\User;
+namespace App\Http\Requests\AccountRequests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class createUserRequest extends FormRequest
+class UpdateAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +26,14 @@ class createUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required|string|max:50|unique:users",
-            "password"=>"string|max:50",
-            "email"=>"required|email|string|max:255",
+            'id' => ['required','integer','exists:company_infos,id'],
+            'name' => ['string','max:100','unique:company_infos,name'],
+            'company_id' => ['string','max:25','unique:company_infos,company_id'],
+            'company_type' => ['integer','max:1','min:1','between:0,2'],
+            'company_vat_id' => ['string','max:25','unique:company_infos,company_vat_id'],
+            'contact_name' => ['string','max:100'],
+            'contact_phone' => ['max:15','min:15','regex:/^(00966)/'],
+            'contact_email' => ['email','max:100']
         ];
     }
 
@@ -36,5 +41,4 @@ class createUserRequest extends FormRequest
     {
         throw new HttpResponseException( response()->json(["errors"=>$validator->errors()],422));
     }
-
 }

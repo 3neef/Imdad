@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\UMRequests\User;
+namespace App\Http\Requests\AccountRequests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class createUserRequest extends FormRequest
+class RestoreAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,6 +19,11 @@ class createUserRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation() 
+    {
+        $this->merge(['id' => $this->route('id')]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,9 +32,7 @@ class createUserRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"required|string|max:50|unique:users",
-            "password"=>"string|max:50",
-            "email"=>"required|email|string|max:255",
+            'id' => ['required','integer',Rule::exists('company_infos')->whereNotNull('deleted_at')]
         ];
     }
 
@@ -36,5 +40,4 @@ class createUserRequest extends FormRequest
     {
         throw new HttpResponseException( response()->json(["errors"=>$validator->errors()],422));
     }
-
 }

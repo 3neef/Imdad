@@ -32,7 +32,7 @@ class GetRoleByIdRequest extends FormRequest
     {
         $rules =['id' => ['required','integer','exists:roles,id']];
         if($this->isMethod('delete')){
-            $rules =['id' => ['required','integer',new CheckUserHasRole]];
+            $rules =['id' => ['required','integer','exists:roles,id',new CheckUserHasRole]];
         }
         return $rules;
     }
