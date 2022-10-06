@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string("contact_name",100)->nullable(false);
             $table->string("contact_phone",15)->nullable(false);
             $table->string("contact_email",100)->nullable(false);
+            $table->softDeletes();
         });
     }
 

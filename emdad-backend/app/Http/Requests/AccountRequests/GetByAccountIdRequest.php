@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\UMRequests\Role;
+namespace App\Http\Requests\AccountRequests;
 
-use App\Rules\CheckUserHasRole;
+use App\Rules\CheckUserAssingCompany;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class GetRoleByIdRequest extends FormRequest
+class GetByAccountIdRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,7 @@ class GetRoleByIdRequest extends FormRequest
     {
         $this->merge(['id' => $this->route('id')]);
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,9 +31,9 @@ class GetRoleByIdRequest extends FormRequest
      */
     public function rules()
     {
-        $rules =['id' => ['required','integer','exists:roles,id']];
+        $rules =['id' => ['required','integer','exists:company_infos,id']];
         if($this->isMethod('delete')){
-            $rules =['id' => ['required','integer','exists:roles,id',new CheckUserHasRole]];
+            $rules =['id' => ['required','integer','exists:company_infos,id',new CheckUserAssingCompany]];
         }
         return $rules;
     }
