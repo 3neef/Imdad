@@ -9,6 +9,7 @@ use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
+use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Services\UMServices\UserServices;
 
 class AuthController extends Controller
@@ -47,6 +48,11 @@ class AuthController extends Controller
     public function forgotPassword(ForgotPasswordRequest $request, UserServices $userServices)
     {
         return $userServices->forgotPassword($request);
+    }
+
+    public function resetPassword(ResetPasswordRequest $request, UserServices $userServices)
+    {
+        return $userServices->resetPassword($request);
     }
 
 
