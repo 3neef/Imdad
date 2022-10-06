@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_infos', function (Blueprint $table) {
+        Schema::create('company_info', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string("name",100)->unique();
