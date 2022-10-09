@@ -17,7 +17,7 @@ class CompanyController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  App\Http\Services\UMServices\PermissionServices  $PermissionService
+     * @param  App\Http\Services\AccountServices\AccountService  $accountService
      * @return void
      */
     public function __construct(AccountService $accountService)

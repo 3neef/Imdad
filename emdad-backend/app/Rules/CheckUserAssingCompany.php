@@ -26,9 +26,9 @@ class CheckUserAssingCompany implements Rule
      */
     public function passes($attribute, $value)
     {
-        $role_user = User::where('company_id','=',$value)->count();
+        $user_company = User::where('company_id','=',$value)->count();
         
-        if($role_user == 0 ){
+        if($user_company == 0 ){
             return true;
         }
         return false;
