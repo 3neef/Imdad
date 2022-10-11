@@ -27,7 +27,6 @@ class createUserRequest extends FormRequest
     {
         return [
             "name"=>"required|string|max:50|unique:users",
-            "password"=>"string|max:50",
             "email"=>"required|email|string|max:255",
         ];
     }
