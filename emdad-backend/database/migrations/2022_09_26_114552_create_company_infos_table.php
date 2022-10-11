@@ -28,7 +28,6 @@ return new class extends Migration
             $table->string("contact_phone",15)->nullable(false);
             $table->boolean("is_validated")->default(false);
             $table->string("contact_email",100)->nullable(false);
-            $table->foreignId('created_by')->references("id")->on("users")->restrictOnDelete()->restrictOnUpdate();
             $table->softDeletes();
         });
     }
@@ -40,6 +39,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_infos');
+        Schema::dropIfExists('company_info');
     }
 };

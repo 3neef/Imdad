@@ -16,14 +16,12 @@ return new class extends Migration
         Schema::create('company_locations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger("company_id");
-            $table->unsignedBigInteger("city_id");
             $table->string("address_name",255);
             $table->string("address_details",255);
             $table->string("address_contact_phone",15);
 
-            $table->foreign('company_id')->references('id')->on('company_infos')->onDelete('cascade');
-            $table->foreign('city_id')->references('id')->on('city')->onDelete('cascade');
+            $table->foreignId('company_info_id');
+            $table->foreignId('city_id');
         });
     }
 
