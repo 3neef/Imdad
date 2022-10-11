@@ -183,7 +183,7 @@ class UserServices
         $otp = rand(100000, 999999);
         $otp_expires_at = Carbon::now()->addMinutes(1);
         $email = ($request->get('email'));
-        $user = User::where('email', $email);
+        $user = User::where('email', $email)->first();
         if ($user === null) {
             return response()->json(
                 [
@@ -209,7 +209,7 @@ class UserServices
     public function resetPassword($request)
     {
         $email = ($request->get('email'));
-        $user = User::where('email', $email);
+        $user = User::where('email', $email)->first();
         $new_password = ($request->get('new_password'));
         if ($user === null) {
             return response()->json(
@@ -218,8 +218,7 @@ class UserServices
                 ]
             );
         }
-        // $old_password = ($request->get('old_password'));
-        if ($user->forget_pass === 1) {
+        if ($user->forget_pass == 1) {
             $pass_or_otp = $request->get('old_password');
             $user = User::where('login_otp', '=', $pass_or_otp)->first();
             if ($user === null) { //not otp
@@ -231,22 +230,15 @@ class UserServices
                         ]
                     );
                 }
-                $user->update([
-                    'password' => $new_password,
-                    'forget_pass' => 0,
-                    'login_otp' => null,
-                    'otp_expires_at' => null
-                ]);
             }
-            $user->update([
-                'password' => $new_password,
-                'forget_pass' => 0,
-                'login_otp' => null,
-                'otp_expires_at' => null
-            ]);
         }
-        /////////// Continue from here tomorrow
-        
+        $user->update([
+            'password' => $new_password,
+            'forget_pass' => 0,
+            'login_otp' => null,
+            'otp_expires_at' => null
+        ]);
+
         return response()->json(
             [
                 "message" => "Password has been reset successfully!!"
