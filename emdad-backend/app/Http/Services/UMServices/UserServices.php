@@ -3,10 +3,11 @@
 namespace App\Http\Services\UMServices;
 
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\UM\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\LoginRequest;
-use Carbon\Carbon;
 
 
 class UserServices
@@ -244,6 +245,25 @@ class UserServices
                 "message" => "Password has been reset successfully!!"
             ]
         );
+    }
+
+    public function assignRole($request){
+        $colmun = gettype($request ->json()->get( 'role' )) == 'integer' ? 'id' : 'name';
+        $role = Role::where( $colmun, $request ->json()->get( 'role' ) )->first();
+        $user = User::find($request->get('user_id'));
+        $userRole = $user->role_id;
+        $result = false;
+        if(empty($userRole)){
+            $user->role_id = $role->id;
+            $result = $user->save();
+        }else{
+            $result = $user->update(['role_id' => $role->id]);
+        }
+
+        if($result){
+            return response()->json( [ 'message'=>'assign role successfully' ], 200 );
+        }
+        return response()->json( [ 'error'=>'system error' ], 500 );
     }
 
     public function showAll()

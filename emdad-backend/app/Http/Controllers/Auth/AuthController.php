@@ -3,14 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UMRequests\User\CreateUserRequest;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
-use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
-use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
-use App\Http\Requests\UMRequests\User\GetUserRequest;
-use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Services\UMServices\UserServices;
+use App\Http\Requests\UMRequests\User\GetUserRequest;
+use App\Http\Requests\UMRequests\User\AssignRoleRequest;
+use App\Http\Requests\UMRequests\User\CreateUserRequest;
+use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
+use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
+use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
+use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 
 class AuthController extends Controller
 {
@@ -53,6 +54,11 @@ class AuthController extends Controller
     public function resetPassword(ResetPasswordRequest $request, UserServices $userServices)
     {
         return $userServices->resetPassword($request);
+    }
+
+    public function assignRole(AssignRoleRequest $request,UserServices $userServices)
+    {
+        return $userServices->assignRole($request);
     }
 
 
