@@ -18,8 +18,6 @@ return new class extends Migration
             $table->timestamp('created_at');
             $table->string('subscription_name');
             $table->json('subscription_details');
-            $table->foreignId('created_by')->references("id")->on("users")->restrictOnDelete()->restrictOnUpdate();            
-
         });
     }
 
