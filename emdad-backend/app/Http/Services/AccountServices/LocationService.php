@@ -36,8 +36,8 @@ class LocationService{
 
     public function update($request)
     {
-        $id = $request->get('user_id');
-        $location = CompanyLocations::where('confirm_by','=',$id)->first();
+        $id = $request->get('id');
+        $location = CompanyLocations::find($id);
         $address_name = empty($request->get('warehouse_name')) ? $location->address_name : $request->get('warehouse_name');
         $address_type = empty($request->get('warehouse_type')) ? $location->address_type : $request->get('warehouse_type');
         $gate_type = empty($request->get('gate_type')) ? $location->gate_type : $request->get('gate_type');
@@ -93,10 +93,11 @@ class LocationService{
     }
 
     public function verfied($request){
-        $userId = $request->get('user_id');
-        $companyId = $request->get('company_id');
-        $location = CompanyLocations::where('company_id','=',$companyId)->first();
-        $verfied = $location->update(['confirm_by' => $userId]);
+        $userId = $request->get('userId');
+        $id = $request->get('id');
+        $companyId = $request->get('companyId');
+        $location = CompanyLocations::where('id','=',$id)->where('company_id','=',$companyId)->first();
+        $verfied = $location->update(['confirm_by' => $userId,'otp_receiver' => null , 'otp_expires_at' => null , 'otp_verfied' => true]);
         if($verfied){
             return response()->json( [ 'message'=>'verfied successfully' ], 200 );
         }

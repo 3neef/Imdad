@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Khartoum', // change to  Asia/Riyadh befor end test
 
     /*
     |--------------------------------------------------------------------------

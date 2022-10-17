@@ -8,6 +8,7 @@ use App\Http\Requests\AccountRequests\Location\CreateLocationRequest;
 use App\Http\Requests\AccountRequests\Location\UpdateLocationRequest;
 use App\Http\Requests\AccountRequests\Location\GetByLocationIdRequest;
 use App\Http\Requests\AccountRequests\Location\RestoreLocationRequest;
+use App\Http\Requests\AccountRequests\Location\VerfiedLocationRequest;
 
 class LocationController extends Controller
 {
@@ -62,5 +63,10 @@ class LocationController extends Controller
     public function restoreByLocationId(RestoreLocationRequest $request,$id)
     {
         return $this->locationService->restore($id);
+    }
+
+    public function verfiedLocation(VerfiedLocationRequest $request)
+    {
+        return $this->locationService->verfied($request);
     }
 }

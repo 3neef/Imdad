@@ -19,6 +19,7 @@ Route::group(['prefix' => 'warehouses'], function() {
     Route::get('getByUserId/{userId}',[LocationController::class,'getByLocationByUserId']);
     Route::get('getByCompanyId/{companyId}',[LocationController::class,'getByLocationByCompanyId']);
     Route::put('update',[LocationController::class,'updateLocation']);
+    Route::put('verfied',[LocationController::class,'verfiedLocation']);
     Route::delete('delete/{id}',[LocationController::class,'deleteLocation']);
     Route::put('restore/{id}',[LocationController::class,'restoreByLocationId']);
 });

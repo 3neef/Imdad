@@ -4,10 +4,11 @@ namespace App\Models\Accounts;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CompanyLocations extends Model
 {
-    use HasFactory;
+    use HasFactory , SoftDeletes;
     protected $fillable = [
         'address_name',
          'company_id', 
@@ -18,5 +19,6 @@ class CompanyLocations extends Model
            'gate_type',
            'otp_receiver',
            'otp_expires_at',
+           'otp_verfied',
            'confirm_by'];
 }
