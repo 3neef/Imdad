@@ -30,8 +30,7 @@ return new class extends Migration
             $table->string("contact_email",100)->nullable(false);
             $table->date("cr_expire_data")->nullable(true);
             $table->json("subscription_details")->nullable(true);
-            $table->foreignId('subs_id')->references("id")->on("subscription")->restrictOnDelete();
-            $table->foreignId('created_by')->references("id")->on("users")->restrictOnDelete()->restrictOnUpdate();
+            $table->foreignId('subs_id')->references("id")->on("subscription_packages")->restrictOnDelete();
             $table->softDeletes();
         });
     }

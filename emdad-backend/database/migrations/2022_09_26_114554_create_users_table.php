@@ -20,11 +20,11 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->unsignedBigInteger('role_id')->nullable();
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->string('mobile')->unique()->nullable(false);
             $table->boolean("is_super_admin")->default(false);
-
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreign('company_id')->references('id')->on('company_info')->onDelete('cascade');
         });
