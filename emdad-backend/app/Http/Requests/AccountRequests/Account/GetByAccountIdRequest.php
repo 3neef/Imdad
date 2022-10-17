@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\AccountRequests;
+namespace App\Http\Requests\AccountRequests\Account;
 
 use App\Rules\CheckUserAssingCompany;
 use Illuminate\Foundation\Http\FormRequest;
@@ -31,9 +31,9 @@ class GetByAccountIdRequest extends FormRequest
      */
     public function rules()
     {
-        $rules =['id' => ['required','integer','exists:company_infos,id']];
+        $rules =['id' => ['required','integer','exists:company_info,id']];
         if($this->isMethod('delete')){
-            $rules =['id' => ['required','integer','exists:company_infos,id',new CheckUserAssingCompany]];
+            $rules =['id' => ['required','integer','exists:company_info,id',new CheckUserAssingCompany]];
         }
         return $rules;
     }

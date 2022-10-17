@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\UMRequests\Role;
+namespace App\Http\Requests\AccountRequests\Account;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class GetRoleRequest extends FormRequest
+class RestoreAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,6 +19,11 @@ class GetRoleRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation() 
+    {
+        $this->merge(['id' => $this->route('id')]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,9 +32,7 @@ class GetRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','integer','exists:roles,id'],
-            'name' => ['required','string','unique:roles,name'],
-            'type' => ['required','integer','between:0,2']
+            'id' => ['required','integer',Rule::exists('company_info')->whereNotNull('deleted_at')]
         ];
     }
 

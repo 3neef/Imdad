@@ -40,6 +40,7 @@ Route::group(['prefix' => 'roles'], function() {
     Route::post('save',[RoleController::class,'saveRole']);
     Route::get('getAll',[RoleController::class,'getAllRoles']);
     Route::get('getByRoleId/{id}',[RoleController::class,'getByRoleId']);
+    Route::get('getByType/{type}',[RoleController::class,'getByType']);
     Route::put('update',[RoleController::class,'updateRole']);
     Route::delete('delete/{id}',[RoleController::class,'deleteRole']);
     Route::put('restore/{id}',[RoleController::class,'restoreByRoleId']);

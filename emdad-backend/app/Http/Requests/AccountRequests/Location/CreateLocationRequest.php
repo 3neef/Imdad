@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Http\Requests\AccountRequests;
+namespace App\Http\Requests\AccountRequests\Location;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class UpdateAccountRequest extends FormRequest
+class CreateLocationRequest extends FormRequest
 {
-    /**
+        /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -26,14 +27,12 @@ class UpdateAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','integer','exists:company_infos,id'],
-            'name' => ['string','max:100','unique:company_infos,name'],
-            'company_id' => ['string','max:25','unique:company_infos,company_id'],
-            'company_type' => ['integer','max:1','min:1','between:0,2'],
-            'company_vat_id' => ['string','max:25','unique:company_infos,company_vat_id'],
-            'contact_name' => ['string','max:100'],
-            'contact_phone' => ['max:15','min:15','regex:/^(00966)/'],
-            'contact_email' => ['email','max:100']
+            'warehouse_name' => ['required','string','max:100'],
+            'warehouse_type' => ['required','string'],
+            'location' => ['required','string','regex:/\d+\/\d+/'],
+            'gate_type' => ['required','string'],
+            'receiver_name' => ['required','string','max:25'],
+            'receiver_phone' => ['required','string','max:15','min:15','regex:/^(00966)/']
         ];
     }
 

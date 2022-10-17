@@ -53,4 +53,9 @@ class RoleController extends Controller
     {
         return $this->roleServices->restoreById($id);
     }
+
+    public function getByType(GetRoleByIdRequest $request,$type)
+    {
+        return $this->roleServices->showByType($type);
+    }
 }

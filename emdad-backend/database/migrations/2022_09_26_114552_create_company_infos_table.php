@@ -23,11 +23,15 @@ return new class extends Migration
             $table->string("company_id",25)->unique();
             $table->tinyInteger("company_type")->default(0)->comment("0=emdad,1=buyer,2=supplier");
             $table->string("company_vat_id",25)->unique();
-            $table->string("company_cr_id",25)->unique();
+            $table->string("company_cr_id",25)->unique()->nullable(true);
             $table->string("contact_name",100)->nullable(false);
             $table->string("contact_phone",15)->nullable(false);
             $table->boolean("is_validated")->default(false);
             $table->string("contact_email",100)->nullable(false);
+            $table->date("cr_expire_data")->nullable(true);
+            $table->json("subscription_details")->nullable(true);
+            $table->foreignId('subs_id')->references("id")->on("subscription")->restrictOnDelete();
+            $table->foreignId('created_by')->references("id")->on("users")->restrictOnDelete()->restrictOnUpdate();
             $table->softDeletes();
         });
     }

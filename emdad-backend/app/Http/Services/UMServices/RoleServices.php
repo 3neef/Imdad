@@ -13,6 +13,7 @@ class RoleServices{
         }
         $role = new Role();
         $role->name = $request->get('name');
+        $role->type = $request->get('type');
         $result =$role->save();
         if ($result) {
             return response()->json( [ 'message'=>'created successfully' ], 200 );
@@ -23,7 +24,7 @@ class RoleServices{
     public function update($request)
     {
         $role = Role::find($request->get('id'));
-        $result=$role->update(['name' => $request->get('name')]);
+        $result=$role->update(['name' => $request->get('name'),'type' => $request->get('type')]);
         if($result){
             return response()->json( [ 'message'=>'updated successfully' ], 200 );
         }
@@ -58,6 +59,17 @@ class RoleServices{
             return response()->json( [ 'message'=>'restored successfully' ], 200 );
        }
        return response()->json( [ 'error'=>'system error' ], 500 );
+    }
+
+    public function showByType($type)
+    {
+        $roles = Role::where( 'type','=', $type )->get();
+        if(!$roles->isEmpty()){
+            return response()->json( [ 'data'=>$roles ], 200 );
+        }else{
+            return response()->json( [ 'message'=>'not found any role by this type -> '.$type.'' ], 404 );
+        }
+        return response()->json( [ 'error'=>'system error' ], 500 );
     }
 
 }

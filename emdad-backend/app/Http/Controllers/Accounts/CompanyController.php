@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Accounts;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AccountRequests\CreateAccountRequest;
-use App\Http\Requests\AccountRequests\UpdateAccountRequest;
-use App\Http\Requests\AccountRequests\GetByAccountIdRequest;
-use App\Http\Requests\AccountRequests\RestoreAccountRequest;
+use App\Http\Requests\AccountRequests\Account\CreateAccountRequest;
+use App\Http\Requests\AccountRequests\Account\UpdateAccountRequest;
+use App\Http\Requests\AccountRequests\Account\GetByAccountIdRequest;
+use App\Http\Requests\AccountRequests\Account\RestoreAccountRequest;
 use App\Http\Services\AccountServices\AccountService;
 
 class CompanyController extends Controller

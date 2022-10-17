@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests\Auth;
 
-use Illuminate\Auth\Events\Lockout;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\RateLimiter;
+use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Auth\Events\Lockout;
+use App\Models\Accounts\CompanyInfo;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
@@ -79,6 +82,18 @@ class LoginRequest extends FormRequest
                 'minutes' => ceil($seconds / 60),
             ]),
         ]);
+    }
+    public function withValidator($validator)
+    {
+        if(!$validator->fails()){
+            $validator->after(function ($validator){
+                $user = User::find($this->session()->get('user_id'));
+                $company = CompanyInfo::whereDate('cr_expire_data','>',Carbon::now()->format('Y-m-d'))->where('created_by','=',$user->id)->first();
+                if(empty($company)){
+                    $validator->errors()->add('cr expired', 'cr expired');
+                }
+            });
+        }
     }
 
     /**

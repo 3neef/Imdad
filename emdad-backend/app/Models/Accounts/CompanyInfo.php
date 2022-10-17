@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class CompanyInfo extends Model
 {
     use HasFactory,SoftDeletes;
+    protected $table = 'company_info';
     protected $fillable = [
-        'name', 'company_id', 'company_type', 'company_vat_id', 'contact_name', 'contact_phone', 'contact_email'
+        'name', 'company_id', 'company_type', 'company_vat_id', 'contact_name', 'contact_phone', 'contact_email','subscription_details','cr_expire_data'
     ];
 }

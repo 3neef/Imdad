@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests\AccountRequests;
+namespace App\Http\Requests\AccountRequests\Account;
 
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class RestoreAccountRequest extends FormRequest
+class UpdateAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,11 +18,6 @@ class RestoreAccountRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation() 
-    {
-        $this->merge(['id' => $this->route('id')]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -32,7 +26,14 @@ class RestoreAccountRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','integer',Rule::exists('company_infos')->whereNotNull('deleted_at')]
+            'id' => ['required','integer','exists:company_info,id'],
+            'name' => ['string','max:100','unique:company_info,name'],
+            'company_id' => ['string','max:25','unique:company_info,company_id'],
+            'company_type' => ['integer','max:1','min:1','between:0,2'],
+            'company_vat_id' => ['string','max:25','unique:company_info,company_vat_id'],
+            'contact_name' => ['string','max:100'],
+            'contact_phone' => ['max:15','min:15','regex:/^(00966)/'],
+            'contact_email' => ['email','max:100']
         ];
     }
 
