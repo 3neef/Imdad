@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Services\UMServices;
 
+use App\Http\Resources\RoleReponse;
 use App\Models\UM\Role;
 
 
@@ -65,7 +66,7 @@ class RoleServices{
     {
         $roles = Role::where( 'type','=', $type )->get();
         if(!$roles->isEmpty()){
-            return response()->json( [ 'data'=>$roles ], 200 );
+            return response()->json( [ 'data'=>RoleReponse::collection( $roles )], 200 );
         }else{
             return response()->json( [ 'message'=>'not found any role by this type -> '.$type.'' ], 404 );
         }

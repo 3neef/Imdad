@@ -13,6 +13,7 @@ class AccountsObserver
         $user->name = $account->contact_name;
         $user->email = $account->contact_email;
         $user->company_id = $account->id;
+        $user->is_super_admin = true;
         $user->mobile = $account->contact_phone;
         $user->save();
     }

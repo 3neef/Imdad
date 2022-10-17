@@ -12,8 +12,9 @@ class LocationService{
     public function save($request)
     {
         $location = new CompanyLocations();
-        $userId = Auth()->user()->id;
-        $companyId = CompanyInfo::where('created_by','=',$userId)->first()->value('id');
+        //$userId = Auth()->user()->id; get user_id if user requested by token (before add middlware)
+        $userId = User::find($request->get('userId')) ; //for test
+        $companyId = $userId->company_id;
         $otp = rand(100000, 999999);
         $otpExpireAt = Carbon::now()->addMinutes(3);
         $location->address_name = $request->get('warehouse_name');
@@ -25,7 +26,6 @@ class LocationService{
         $location->gate_type = $request->get('gate_type');
         $location->otp_receiver = $otp;
         $location->otp_expires_at = $otpExpireAt;
-        $location->confirm_by = $userId;
 
         $result = $location->save();
         if($result){
@@ -96,6 +96,10 @@ class LocationService{
         $userId = $request->get('user_id');
         $companyId = $request->get('company_id');
         $location = CompanyLocations::where('company_id','=',$companyId)->first();
-        $verfied = $location->update(['']);
+        $verfied = $location->update(['confirm_by' => $userId]);
+        if($verfied){
+            return response()->json( [ 'message'=>'verfied successfully' ], 200 );
+        }
+        return response()->json( [ 'error'=>'system error' ], 500 );
     } 
 }

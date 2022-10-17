@@ -21,12 +21,12 @@ class LocationController extends Controller
      */
     public function __construct(LocationService $locationService)
     {
-        $this->LocationService = $locationService;
+        $this->locationService = $locationService;
     }
 
     public function saveLocation(CreateLocationRequest $request)
     {
-        return $this->locationService->createCompany($request);
+        return $this->locationService->save($request);
     }
 
     public function updateLocation(UpdateLocationRequest $request)
@@ -39,9 +39,19 @@ class LocationController extends Controller
         return $this->locationService->getAll();
     }
 
+    public function getByLocationByCompanyId(GetByLocationIdRequest $request,$id)
+    {
+        return $this->locationService->showByCompanyId($id);
+    }
+
+    public function getByLocationByUserId(GetByLocationIdRequest $request,$id)
+    {
+        return $this->locationService->showByUserId($id);
+    }
+
     public function getByLocationById(GetByLocationIdRequest $request,$id)
     {
-        return $this->locationService->getById($id);
+        return $this->locationService->showById($id);
     }
 
     public function deleteLocation(GetByLocationIdRequest $request,$id)

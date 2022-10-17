@@ -9,5 +9,51 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class GetByLocationIdRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 
+    protected function prepareForValidation() 
+    {
+        $uri = $this->path();
+        $id = $this->id == null ? "1" : $this->id;
+        $userId = $this->userId == null ? "1" : $this->userId;
+        $companyId = $this->companyId == null ? "1" : $this->companyId;
+        if($uri == 'api/warehouses/getWarehouseById/'.$id.'' || $uri == 'api/warehouses/delete/'.$id.''){
+            $this->merge(['id' => $this->route('id')]);
+        }elseif($uri == 'api/warehouses/getWarehouseByUserId/'.$userId.''){
+            $this->merge(['userId' => $this->route('userId')]); 
+        }else{
+            $this->merge(['companyId' => $this->route('companyId')]); 
+        }
+        
+    }
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
+     */
+    public function rules()
+    {
+        $userId = $this->userId == null ? "1" : $this->userId;
+        $companyId = $this->companyId == null ? "1" : $this->companyId;
+        $rules =['id' => ['required','integer','exists:company_locations,id']];
+        if($this->path() == 'api/warehouses/getWarehouseByUserId/'.$userId.''){
+            $rules =['userId' => ['required','integer','exists:users,id']];
+        }elseif ($this->path() == 'api/warehouses/getWarehouseByCompanyId/'.$companyId.'') {
+            $rules =['companyId' => ['required','integer','exists:company_info,id']];
+        }
+        return $rules;
+    }
+
+    protected function failedValidation(Validator $validator): void
+    {
+        throw new HttpResponseException( response()->json(["errors"=>$validator->errors()],422));
+    }
 }
