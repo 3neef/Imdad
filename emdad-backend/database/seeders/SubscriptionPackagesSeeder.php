@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Accounts\SubscriptionPackages;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Models\Accounts\SubscriptionPackages;
+use Carbon\Carbon;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class SubscriptionPackagesSeeder extends Seeder
 {
@@ -22,19 +24,10 @@ class SubscriptionPackagesSeeder extends Seeder
         ];
 
         foreach ($subscriptions as $subscription) {
-            # code...
-           SubscriptionPackages::factory()->create([
-            "name"=>$subscription['name'],
-            "superAdmin"=>$subscription['superAdmin'],
-            "users"=>$subscription['users'],
-            "paymentMethods"=>$subscription['paymentMethods'],
-            "delivery"=>$subscription['delivery'],
-            "warehouses"=>$subscription['warehouses'],
-            "addSuppliers"=>$subscription['addSuppliers'],
-            "item_in_each_requisition"=>$subscription['item_in_each_requisition'],
-            "live_tracking"=>$subscription['live_tracking'],
-            "price"=>$subscription['price'],
-            "subscription_details"=>$subscription
+            DB::table('subscription_packages')->insert([
+            "subscription_name"=>$subscription['name'],
+            "subscription_details"=>json_encode($subscription, true ),
+            "created_at"=>Carbon::now(),
            ]);
         }
     }
