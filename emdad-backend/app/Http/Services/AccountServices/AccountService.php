@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Services\AccountServices;
 
+use App\Http\Resources\AccountResourses\Company\CompanyResponse;
 use App\Models\Accounts\CompanyInfo;
 
 class AccountService{
@@ -9,12 +10,12 @@ class AccountService{
     {
         $account = new CompanyInfo();
         $account->name = $request->get('name');
-        $account->company_id = $request->get('company_id');
-        $account->company_type = $request->get('company_type');
-        $account->company_vat_id = $request->get('company_vat_id');
-        $account->contact_name = $request->get('contact_name');
-        $account->contact_phone = $request->get('contact_phone');
-        $account->contact_email = $request->get('contact_email');
+        $account->company_id = $request->get('companyId');
+        $account->company_type = $request->get('companyType');
+        $account->company_vat_id = $request->get('companyVatId');
+        $account->contact_name = $request->get('contactName');
+        $account->contact_phone = $request->get('contactPhone');
+        $account->contact_email = $request->get('contactEmail');
 
         $result = $account->save();
         if($result){
@@ -28,12 +29,12 @@ class AccountService{
         $id = $request->get('id');
         $company = CompanyInfo::find($id);
         $name = empty($request->get('name')) ? $company->name : $request->get('name');
-        $company_id = empty($request->get('company_id')) ? $company->company_id : $request->get('company_id');
-        $company_type = empty($request->get('company_type')) ? $company->company_type : $request->get('company_type');
-        $company_vat_id = empty($request->get('company_vat_id')) ? $company->company_vat_id : $request->get('company_vat_id');
-        $contact_name = empty($request->get('contact_name')) ? $company->contact_name : $request->get('contact_name');
-        $contact_phone = empty($request->get('contact_phone')) ? $company->contact_phone : $request->get('contact_phone');
-        $contact_email = empty($request->get('contact_email')) ? $company->contact_email : $request->get('contact_email');
+        $company_id = empty($request->get('companyId')) ? $company->company_id : $request->get('companyId');
+        $company_type = empty($request->get('companyType')) ? $company->company_type : $request->get('companyType');
+        $company_vat_id = empty($request->get('companyVatId')) ? $company->company_vat_id : $request->get('companyVatId');
+        $contact_name = empty($request->get('contactName')) ? $company->contact_name : $request->get('contactName');
+        $contact_phone = empty($request->get('contactPhone')) ? $company->contact_phone : $request->get('contactPhone');
+        $contact_email = empty($request->get('contactEmail')) ? $company->contact_email : $request->get('contactEmail');
         $update = $company->update(['name' => $name,'company_id' => $company_id,'company_type' => $company_type,'company_vat_id' => $company_vat_id,'contact_name' => $contact_name,'contact_phone' => $contact_phone,'contact_email' => $contact_email]);
         if($update){
             return response()->json( [ 'message'=>'updated successfully' ], 200 );
@@ -44,13 +45,13 @@ class AccountService{
     public function getById($id)
     {
         $account = CompanyInfo::where( 'id', $id )->get();
-        return response()->json( [ 'data'=>$account ], 200 );
+        return response()->json( [ 'data'=>new CompanyResponse($account)  ], 200 );
     }
 
     public function getAll()
     {
         $allAccounts = CompanyInfo::all();
-        return response()->json( [ 'data'=>$allAccounts ], 200 );
+        return response()->json( [ 'data'=>CompanyResponse::collection($allAccounts) ], 200 );
     }
 
     public function delete($id)

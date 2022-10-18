@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Services\UMServices;
 
-use App\Http\Resources\RoleReponse;
+use App\Http\Resources\UMResourses\Role\RoleResponse;
 use App\Models\UM\Role;
 
 
@@ -34,13 +34,13 @@ class RoleServices{
 
     public function showAll(){
         $roles = Role::all();
-        return response()->json(['data' => $roles ]);
+        return response()->json(['data' => RoleResponse::collection($roles) ]);
     }
 
     public function showById($id)
     {
         $role = Role::where( 'id', $id )->get();
-        return response()->json( [ 'data'=>$role ], 200 );
+        return response()->json( [ 'data'=>new RoleResponse($role) ], 200 );
     }
 
     public function delete($id)
@@ -66,7 +66,7 @@ class RoleServices{
     {
         $roles = Role::where( 'type','=', $type )->get();
         if(!$roles->isEmpty()){
-            return response()->json( [ 'data'=>RoleReponse::collection( $roles )], 200 );
+            return response()->json( [ 'data'=> RoleResponse::collection( $roles )], 200 );
         }else{
             return response()->json( [ 'message'=>'not found any role by this type -> '.$type.'' ], 404 );
         }

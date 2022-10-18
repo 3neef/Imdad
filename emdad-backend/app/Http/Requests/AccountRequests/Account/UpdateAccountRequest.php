@@ -28,12 +28,12 @@ class UpdateAccountRequest extends FormRequest
         return [
             'id' => ['required','integer','exists:company_info,id'],
             'name' => ['string','max:100','unique:company_info,name'],
-            'company_id' => ['string','max:25','unique:company_info,company_id'],
-            'company_type' => ['integer','max:1','min:1','between:0,2'],
-            'company_vat_id' => ['string','max:25','unique:company_info,company_vat_id'],
-            'contact_name' => ['string','max:100'],
-            'contact_phone' => ['max:15','min:15','regex:/^(00966)/'],
-            'contact_email' => ['email','max:100']
+            'companyId' => ['string','max:25','unique:company_info,company_id'],
+            'companyType' => ['integer','max:1','min:1','between:0,2'],
+            'companyVatId' => ['string','max:25','unique:company_info,company_vat_id'],
+            'contactName' => ['string','max:100'],
+            'contactPhone' => ['max:15','min:15','regex:/^(00966)/'],
+            'contactEmail' => ['email','max:100']
         ];
     }
 

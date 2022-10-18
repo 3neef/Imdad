@@ -8,7 +8,7 @@ use App\Models\User;
 use App\Models\UM\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\LoginRequest;
-
+use App\Http\Resources\UMResourses\User\UserResponse;
 
 class UserServices
 {
@@ -32,7 +32,7 @@ class UserServices
         if ($result) {
             return response()->json([
                 'message' => 'User created successfully',
-                'data' => ['token' => $token->plainTextToken, 'user' => $user]
+                'data' => ['token' => $token->plainTextToken, 'user' => new UserResponse($user)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
@@ -88,10 +88,10 @@ class UserServices
                 return response()->json(
                     [
                         'message' => 'Logged in',
-                        'pass_type' => 'Password',
-                        'redirect_to' => 'Reset password',
+                        'passwordType' => 'Password',
+                        'redirectTo' => 'Reset password',
                         'data' => [
-                            'user' => $user,
+                            'user' => new UserResponse($user),
                             'token' => $token->plainTextToken
                         ]
                     ]
@@ -115,10 +115,10 @@ class UserServices
                 return response()->json(
                     [
                         'message' => 'Logged in',
-                        'pass_type' => 'otp',
-                        'redirect_to' => 'Reset password',
+                        'passwordType' => 'otp',
+                        'redirectTo' => 'Reset password',
                         'data' => [
-                            'user' => $user,
+                            'user' => new UserResponse($user),
                             'token' => $token->plainTextToken
                         ]
                     ]
@@ -138,9 +138,9 @@ class UserServices
             return response()->json(
                 [
                     'message' => 'Logged in',
-                    'pass_type' => 'Password',
+                    'passwordType' => 'Password',
                     'data' => [
-                        'user' => $user,
+                        'user' => new UserResponse($user),
                         'token' => $token->plainTextToken
                     ]
                 ]
@@ -201,7 +201,7 @@ class UserServices
             return response()->json([
                 'message' => 'OTP has been created successfully',
                 'OTP' => $otp,
-                'otp_expires_at' => $otp_expires_at
+                'otpExpiresAt' => $otp_expires_at
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
@@ -211,7 +211,7 @@ class UserServices
     {
         $email = ($request->get('email'));
         $user = User::where('email', $email)->first();
-        $new_password = ($request->get('new_password'));
+        $new_password = ($request->get('newPassword'));
         if ($user === null) {
             return response()->json(
                 [
@@ -220,7 +220,7 @@ class UserServices
             );
         }
         if ($user->forget_pass == 1) {
-            $pass_or_otp = $request->get('old_password');
+            $pass_or_otp = $request->get('oldPassword');
             $user = User::where('login_otp', '=', $pass_or_otp)->first();
             if ($user === null) { //not otp
                 $user = User::where('password', '=', $pass_or_otp)->first();
@@ -250,7 +250,7 @@ class UserServices
     public function assignRole($request){
         $colmun = gettype($request ->json()->get( 'role' )) == 'integer' ? 'id' : 'name';
         $role = Role::where( $colmun, $request ->json()->get( 'role' ) )->first();
-        $user = User::find($request->get('user_id'));
+        $user = User::find($request->get('userId'));
         $userRole = $user->role_id;
         $result = false;
         if(empty($userRole)){

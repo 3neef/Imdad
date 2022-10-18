@@ -27,12 +27,12 @@ class CreateLocationRequest extends FormRequest
     public function rules()
     {
         return [
-            'warehouse_name' => ['required','string','max:100'],
-            'warehouse_type' => ['required','string'],
+            'warehouseName' => ['required','string','max:100'],
+            'warehouseType' => ['required','string'],
             'location' => ['required','string','regex:/\d+\/\d+/'],
-            'gate_type' => ['required','string'],
-            'receiver_name' => ['required','string','max:25'],
-            'receiver_phone' => ['required','string','max:15','min:15','regex:/^(00966)/']
+            'gateType' => ['required','string'],
+            'receiverName' => ['required','string','max:25'],
+            'receiverPhone' => ['required','string','max:15','min:15','regex:/^(00966)/']
         ];
     }
 

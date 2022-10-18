@@ -24,7 +24,7 @@ class AssignRoleRequest extends FormRequest {
     */
 
     public function rules() {
-        $rules = [ 'user_id' => 'required|integer|exists:users,id', 'role'=>'required|string|exists:roles,name' ];
+        $rules = [ 'userId' => 'required|integer|exists:users,id', 'role'=>'required|string|exists:roles,name' ];
         if ( gettype( request()->role ) == 'integer' ) {
             $rules[ 'role' ] = 'required|integer|exists:roles,id';
         } else {

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Services\AccountServices;
 
+use App\Http\Resources\AccountResourses\Location\LocationResponse;
 use Carbon\Carbon;
 use App\Models\Accounts\CompanyInfo;
 use Illuminate\Support\Facades\Auth;
@@ -17,13 +18,13 @@ class LocationService{
         $companyId = $userId->company_id;
         $otp = rand(100000, 999999);
         $otpExpireAt = Carbon::now()->addMinutes(3);
-        $location->address_name = $request->get('warehouse_name');
+        $location->address_name = $request->get('warehouseName');
         $location->company_id = $companyId;
-        $location->address_contact_phone = $request->get('receiver_phone');
+        $location->address_contact_phone = $request->get('receiverPhone');
         $location->latitude_longitude = $request->get('location');
-        $location->address_contact_name = $request->get('receiver_name');
-        $location->address_type = $request->get('warehouse_type');
-        $location->gate_type = $request->get('gate_type');
+        $location->address_contact_name = $request->get('receiverName');
+        $location->address_type = $request->get('warehouseType');
+        $location->gate_type = $request->get('gateType');
         $location->otp_receiver = $otp;
         $location->otp_expires_at = $otpExpireAt;
 
@@ -38,11 +39,11 @@ class LocationService{
     {
         $id = $request->get('id');
         $location = CompanyLocations::find($id);
-        $address_name = empty($request->get('warehouse_name')) ? $location->address_name : $request->get('warehouse_name');
-        $address_type = empty($request->get('warehouse_type')) ? $location->address_type : $request->get('warehouse_type');
-        $gate_type = empty($request->get('gate_type')) ? $location->gate_type : $request->get('gate_type');
-        $address_contact_name = empty($request->get('receiver_name')) ? $location->address_contact_name : $request->get('receiver_name');
-        $address_contact_phone = empty($request->get('receiver_phone')) ? $location->address_contact_phone : $request->get('receiver_phone');
+        $address_name = empty($request->get('warehouseName')) ? $location->address_name : $request->get('warehouseName');
+        $address_type = empty($request->get('warehouseType')) ? $location->address_type : $request->get('warehouseType');
+        $gate_type = empty($request->get('gateType')) ? $location->gate_type : $request->get('gateType');
+        $address_contact_name = empty($request->get('receiverName')) ? $location->address_contact_name : $request->get('receiverName');
+        $address_contact_phone = empty($request->get('receiverPhone')) ? $location->address_contact_phone : $request->get('receiverPhone');
         $latitude_longitude = empty($request->get('location')) ? $location->latitude_longitude : $request->get('location');
         $update = $location->update(['address_name' => $address_name,'address_type' => $address_type,'gate_type' => $gate_type,'address_contact_name' => $address_contact_name,'address_contact_phone' => $address_contact_phone,'latitude_longitude' => $latitude_longitude]);
         if($update){
@@ -54,24 +55,24 @@ class LocationService{
     public function showById($id)
     {
         $location = CompanyLocations::where( 'id', $id )->get();
-        return response()->json( [ 'data'=>$location ], 200 );
+        return response()->json( [ 'data'=>new LocationResponse($location)  ], 200 );
     }
     public function showByUserId($id)
     {
         $userId = User::find($id)->id;
         $location = CompanyLocations::where( 'confirm_by', $userId )->first();
-        return response()->json( [ 'data'=>$location ], 200 );
+        return response()->json( [ 'data'=>new LocationResponse($location) ], 200 );
     }
     public function showByCompanyId($id)
     {
-        $location = CompanyLocations::where( 'company_id', $id )->first();
-        return response()->json( [ 'data'=>$location ], 200 );
+        $location = CompanyLocations::where( 'company_id', $id );
+        return response()->json( [ 'data'=> LocationResponse::collection($location) ], 200 );
     }
 
     public function getAll()
     {
         $allLocations = CompanyLocations::all();
-        return response()->json( [ 'data'=>$allLocations ], 200 );
+        return response()->json( [ 'data'=> LocationResponse::collection($allLocations)  ], 200 );
     }
 
     public function delete($id)

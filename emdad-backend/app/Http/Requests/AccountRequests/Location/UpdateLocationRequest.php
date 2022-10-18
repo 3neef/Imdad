@@ -28,12 +28,12 @@ class UpdateLocationRequest extends FormRequest
     {
         return [
             'id' => ['required','integer','exists:company_locations,id'],
-            'warehouse_name' => ['string','max:100'],
-            'warehouse_type' => ['string'],
+            'warehouseName' => ['string','max:100'],
+            'warehouseType' => ['string'],
             'location' => ['string','regex:/\d+\/\d+/'],
-            'gate_type' => ['string'],
-            'receiver_name' => ['string','max:25'],
-            'receiver_phone' => ['string','max:15','min:15','regex:/^(00966)/']
+            'gateType' => ['string'],
+            'receiverName' => ['string','max:25'],
+            'receiverPhone' => ['string','max:15','min:15','regex:/^(00966)/']
         ];
     }
 

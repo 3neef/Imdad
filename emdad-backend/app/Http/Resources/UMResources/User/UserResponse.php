@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\UMResourses\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoleReponse extends JsonResource
+class UserResponse extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,11 @@ class RoleReponse extends JsonResource
     {
         return [
             "id"=>$this->id,
-            "createdAt"=>$this->created_at,
-            "deletedAt"=>$this->deleted_at,
-            "updatedAt"=>$this->updated_at,
+            "name"=>$this->name,
+            "email"=>$this->email,
+            "type"=>$this->type,
+            "loginOtp"=>$this->login_otp,
+            "otpExpiresAt"=>$this->otp_expires_at,
         ];
     }
 }
