@@ -7,6 +7,8 @@ use App\Http\Controllers\Accounts\SubscriptionController;
 Route::group(['prefix' => 'accounts'], function() {
     Route::post('create',[CompanyController::class,'createAccount']);
     Route::get('getAll',[CompanyController::class,'getAllAccount']);
+    Route::get('getAllUnValidated',[CompanyController::class,'allUnValidatedAccounts']);
+    Route::put('validate/{id}',[CompanyController::class,'validatedAccount']);
     Route::get('getById/{id}',[CompanyController::class,'getByAccountId']);
     Route::put('update',[CompanyController::class,'updateAccount']);
     Route::delete('delete/{id}',[CompanyController::class,'deleteAccount']);

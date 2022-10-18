@@ -31,9 +31,12 @@ class GetByAccountIdRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->id == null ? "1" : $this->id;
         $rules =['id' => ['required','integer','exists:company_info,id']];
         if($this->isMethod('delete')){
             $rules =['id' => ['required','integer','exists:company_info,id',new CheckUserAssingCompany]];
+        }elseif($this->path() == 'api/accounts/validate/'.$id.''){
+            $rules =['id' => ['required','integer','exists:company_info,id,is_validated,0']];
         }
         return $rules;
     }

@@ -81,4 +81,21 @@ class AccountService{
         return response()->json( [ 'error'=>'system error' ], 500 );
     }
 
+    public function unValidate(){
+        $unValidated = CompanyInfo::where('is_validated','=',false)->get();
+        if(empty($unValidated)){
+            return response()->json( [ 'message'=>'all companys validated' ], 200 );
+        }
+        return response()->json( [ 'data'=>CompanyResponse::collection($unValidated) ], 200 );
+    }
+
+    public function validate($id){
+        $company = CompanyInfo::find($id);
+        $validated = $company->update(['is_validated'=>true]);
+        if($validated){
+            return response()->json( [ 'message'=>'validated successfully' ], 200 );
+        }
+        return response()->json(  [ 'error'=>'system error' ], 500  );
+    }
+
 }

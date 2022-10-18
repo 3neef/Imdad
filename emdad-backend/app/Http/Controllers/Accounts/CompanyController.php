@@ -54,4 +54,14 @@ class CompanyController extends Controller
     {
         return $this->accountService->restore($id);
     }
+
+    public function allUnValidatedAccounts()
+    {
+        return $this->accountService->unValidate();
+    }
+
+    public function validatedAccount(GetByAccountIdRequest $request,$id)
+    {
+        return $this->accountService->validate($id);
+    }
 }
