@@ -33,14 +33,14 @@ class AccountService{
         $id = $request->get('id');
         $company = CompanyInfo::find($id);
         $name = empty($request->get('name')) ? $company->name : $request->get('name');
-        $company_id = empty($request->get('company_id')) ? $company->company_id : $request->get('company_id');
-        $company_type = empty($request->get('company_type')) ? $company->company_type : $request->get('company_type');
-        $company_vat_id = empty($request->get('company_vat_id')) ? $company->company_vat_id : $request->get('company_vat_id');
-        $contact_name = empty($request->get('contact_name')) ? $company->contact_name : $request->get('contact_name');
-        $contact_phone = empty($request->get('contact_phone')) ? $company->contact_phone : $request->get('contact_phone');
-        $contact_email = empty($request->get('contact_email')) ? $company->contact_email : $request->get('contact_email');
-        $subs_id = empty($request->get('subs_id')) ? $company->subs_id : $request->get('subs_id');
-        $subscription_details = empty($request->get('subscription_details')) ? $company->subscription_details : $request->get('subscription_details');
+        $company_id = empty($request->get('companyId')) ? $company->company_id : $request->get('companyId');
+        $company_type = empty($request->get('companyType')) ? $company->company_type : $request->get('companyType');
+        $company_vat_id = empty($request->get('companyVatId')) ? $company->company_vat_id : $request->get('companyVatId');
+        $contact_name = empty($request->get('contactName')) ? $company->contact_name : $request->get('contactName');
+        $contact_phone = empty($request->get('contactPhone')) ? $company->contact_phone : $request->get('contactPhone');
+        $contact_email = empty($request->get('contactEmail')) ? $company->contact_email : $request->get('contactEmail');
+        $subs_id = empty($request->get('subscriptionId')) ? $company->subs_id : $request->get('subscriptionId');
+        $subscription_details = empty($request->get('subscriptionDetails')) ? $company->subscription_details : $request->get('subscriptionDetails');
         $update = $company->update(['name' => $name,'company_id' => $company_id,'company_type' => $company_type,
         'company_vat_id' => $company_vat_id,'contact_name' => $contact_name,'contact_phone' => $contact_phone,
         'contact_email' => $contact_email, 'subs_id' => $subs_id, 'subscription_details'=> $subscription_details]);
