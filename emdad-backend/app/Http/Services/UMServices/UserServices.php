@@ -23,10 +23,11 @@ class UserServices
         $otp_expires_at = Carbon::now()->addMinutes(1);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
-        $user->type = $request->get('type');
-        $user->login_otp = strval($otp);
+        $user->mobile = $request->get('mobile');
+        $user->password = $request->get('password');
+        $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
-        $user->forget_pass = 1;
+        $user->forget_pass = 0;
         $result = $user->save();
         $token = $user->createToken('authtoken');
         if ($result) {

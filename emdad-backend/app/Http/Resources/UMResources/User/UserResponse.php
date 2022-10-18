@@ -18,9 +18,12 @@ class UserResponse extends JsonResource
             "id"=>$this->id,
             "name"=>$this->name,
             "email"=>$this->email,
-            "type"=>$this->type,
-            "loginOtp"=>$this->login_otp,
-            "otpExpiresAt"=>$this->otp_expires_at,
+            "roleId"=>$this->role_id,
+            "companyId"=>$this->company_id,
+            "mobile"=>$this->mobile,
+            "isSuperAdmin"=>$this->is_super_admin,
+            "otp"=>$this->otp,
+            "otpExpiresAt"=>$this->otp_expires_at
         ];
     }
 }

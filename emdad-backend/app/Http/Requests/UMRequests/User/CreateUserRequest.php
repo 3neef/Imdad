@@ -27,7 +27,9 @@ class createUserRequest extends FormRequest
     {
         return [
             "name"=>"required|string|max:50|unique:users",
+            "password"=>"required|string|min:8|max:50",
             "email"=>"required|email|string|max:255",
+            "mobile"=>"required|min:9|max:14|string",
         ];
     }
 
