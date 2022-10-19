@@ -12,8 +12,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['prefix' => 'users'], function() {
-    Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [AuthController::class, 'createUser']);
+    Route::post('login', [AuthController::class, 'loginUser']);
+    Route::post('activate', [AuthController::class, 'activateUser'])->middleware('auth:sanctum');
     Route::post('logout', [AuthController::class, 'logoutUser'])->middleware('auth:sanctum');
     Route::put("update", [AuthController::class, 'updateUser']);
     Route::delete("delete/{id}", [AuthController::class, 'deleteUser']);

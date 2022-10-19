@@ -83,18 +83,19 @@ class LoginRequest extends FormRequest
             ]),
         ]);
     }
-    public function withValidator($validator)
-    {
-        if(!$validator->fails()){
-            $validator->after(function ($validator){
-                $user = User::find($this->session()->get('user_id'));
-                $company = CompanyInfo::whereDate('cr_expire_data','>',Carbon::now()->format('Y-m-d'))->where('created_by','=',$user->id)->first();
-                if(empty($company)){
-                    $validator->errors()->add('cr expired', 'cr expired');
-                }
-            });
-        }
-    }
+    // public function withValidator($validator)
+    // {
+    //     if(!$validator->fails()){
+    //         $validator->after(function ($validator){
+    //             $user = User::find($this->session()->get('user_id'));
+    //             dd($user->id);
+    //             $company = CompanyInfo::whereDate('cr_expire_data','>',Carbon::now()->format('Y-m-d'))->where('created_by','=',$user->id)->first();
+    //             if(empty($company)){
+    //                 $validator->errors()->add('cr expired', 'cr expired');
+    //             }
+    //         });
+    //     }
+    // }
 
     /**
      * Get the rate limiting throttle key for the request.

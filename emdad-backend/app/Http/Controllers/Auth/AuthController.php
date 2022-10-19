@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\UMRequests\User\ActivateRequest;
 use App\Http\Services\UMServices\UserServices;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
 use App\Http\Requests\UMRequests\User\AssignRoleRequest;
@@ -29,7 +30,12 @@ class AuthController extends Controller
     {
         return $userServices->login($request);
     }
-
+    
+    public function activateUser(ActivateRequest $request ,UserServices $userServices)
+    {
+        dd($request);
+        return $userServices->activate($request);
+    }
 
     public function logoutUser(GetUserRequest $request ,UserServices $userServices)
     {

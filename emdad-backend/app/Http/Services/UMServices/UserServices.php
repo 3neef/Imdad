@@ -6,9 +6,8 @@ namespace App\Http\Services\UMServices;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\UM\Role;
-use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Resources\UMResources\User\UserCreatedResponse;
+use App\Http\Requests\UMRequests\User\ActivateRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 
 class UserServices
@@ -21,7 +20,7 @@ class UserServices
         }
         $user = new User();
         $otp = rand(100000, 999999);
-        $otp_expires_at = Carbon::now()->addMinutes(1);
+        $otp_expires_at = Carbon::now()->addMinutes(2);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
@@ -62,7 +61,6 @@ class UserServices
 
     public function login(LoginRequest $request)
     {
-
         $email = ($request->get('email'));
 
         $user = User::where('email', '=', $email)->first();
@@ -74,60 +72,7 @@ class UserServices
             );
         }
 
-        if ($user->forget_pass === 1) {
-            $pass_or_otp = ($request->get('password'));
-            $user = User::where('login_otp', '=', $pass_or_otp)->first();
-            if ($user === null) { //not otp
-                $user = User::where('password', '=', $pass_or_otp)->first();
-                if ($user === null) { // not password
-                    return response()->json(
-                        [
-                            "message" => "We didn't recognize this password"
-                        ]
-                    );
-                }
-                $token = $user->createToken('authtoken');
-                return response()->json(
-                    [
-                        'message' => 'Logged in',
-                        'passwordType' => 'Password',
-                        'redirectTo' => 'Reset password',
-                        'data' => [
-                            'user' => new UserResponse($user),
-                            'token' => $token->plainTextToken
-                        ]
-                    ]
-                );
-            }
-
-            $time_now = Carbon::now();
-            if ($time_now > $user->otp_expires_at) {
-                $otp = rand(100000, 999999);
-                $otp_expires_at = Carbon::now()->addMinutes(1);
-                $user->login_otp = $otp;
-                $user->otp_expires_at = $otp_expires_at;
-                $user->save();
-                return response()->json(
-                    [
-                        "message" => "Your OTP has expired, New OTP has been sent!!"
-                    ]
-                );
-            } else {
-                $token = $user->createToken('authtoken');
-                return response()->json(
-                    [
-                        'message' => 'Logged in',
-                        'passwordType' => 'otp',
-                        'redirectTo' => 'Reset password',
-                        'data' => [
-                            'user' => new UserResponse($user),
-                            'token' => $token->plainTextToken
-                        ]
-                    ]
-                );
-            }
-        } else {
-            $password = ($request->get('password'));
+        $password = ($request->get('password'));
             $user = User::where('password', '=', $password)->first();
             if ($user === null) {
                 return response()->json(
@@ -140,16 +85,64 @@ class UserServices
             return response()->json(
                 [
                     'message' => 'Logged in',
-                    'passwordType' => 'Password',
                     'data' => [
                         'user' => new UserResponse($user),
                         'token' => $token->plainTextToken
                     ]
                 ]
             );
-        }
+
     }
 
+    public function activate($request)
+    {
+        $id = ($request->get('id'));
+
+        $user = User::where('id', '=', $id)->first();
+        if ($user === null) {
+            return response()->json(
+                [
+                    "message" => "We didn't recognize this id"
+                ]
+            );
+        }
+
+        $otp = ($request->get('otp'));
+        $user = User::where('otp', '=', $otp)->first();
+        if ($user === null) {
+            return response()->json(
+                [
+                    "message" => "We didn't recognize this otp"
+                ]
+            );
+        }
+        $time_now = Carbon::now();
+            if ($time_now > $user->otp_expires_at) {
+                $otp = rand(100000, 999999);
+                $otp_expires_at = Carbon::now()->addMinutes(1);
+                $user->otp = $otp;
+                $user->otp_expires_at = $otp_expires_at;
+                $user->save();
+                return response()->json(
+                    [
+                        "message" => "Your OTP has expired, New OTP has been sent!!"
+                    ]
+                );
+            }else {
+                $token = $user->createToken('authtoken');
+                return response()->json(
+                    [
+                        'message' => 'Your account has been activated successfully.',
+                        'data' => [
+                            'user' => new UserResponse($user),
+                            'token' => $token->plainTextToken
+                        ]
+                    ]
+                );
+            }
+
+        }
+    
     public function logout($request)
     {
         $request->user()->tokens()->delete();
@@ -195,7 +188,7 @@ class UserServices
             );
         }
         $result = $user->update([
-            'login_otp' => $otp,
+            'otp' => $otp,
             'otp_expires_at' => $otp_expires_at,
             'forget_pass' => 1
         ]);
@@ -223,7 +216,7 @@ class UserServices
         }
         if ($user->forget_pass == 1) {
             $pass_or_otp = $request->get('oldPassword');
-            $user = User::where('login_otp', '=', $pass_or_otp)->first();
+            $user = User::where('otp', '=', $pass_or_otp)->first();
             if ($user === null) { //not otp
                 $user = User::where('password', '=', $pass_or_otp)->first();
                 if ($user === null) { // not password
@@ -238,7 +231,7 @@ class UserServices
         $user->update([
             'password' => $new_password,
             'forget_pass' => 0,
-            'login_otp' => null,
+            'otp' => null,
             'otp_expires_at' => null
         ]);
 
