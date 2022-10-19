@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Services\UMServices;
 
-use App\Http\Resources\UMResourses\Permission\PermissionResponse;
+use App\Http\Resources\UMResources\Permission\PermissionResponse;
 use App\Models\UM\permission;
 use App\Models\UM\RolePermission;
 use App\Models\UM\Role;

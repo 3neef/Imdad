@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\UMResourses\Role;
+namespace App\Http\Resources\UMResources\Role;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

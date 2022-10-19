@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Services\UMServices;
 
-use App\Http\Resources\UMResourses\Role\RoleResponse;
+use App\Http\Resources\UMResources\Role\RoleResponse;
 use App\Models\UM\Role;
 
 

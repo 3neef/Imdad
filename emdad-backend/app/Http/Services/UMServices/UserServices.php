@@ -8,7 +8,8 @@ use App\Models\User;
 use App\Models\UM\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Resources\UMResourses\User\UserResponse;
+use App\Http\Resources\UMResources\User\UserCreatedResponse;
+use App\Http\Resources\UMResources\User\UserResponse;
 
 class UserServices
 {
