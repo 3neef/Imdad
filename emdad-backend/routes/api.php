@@ -21,3 +21,4 @@ require('rfq-apis.php');
 require('delivery-apis.php');
 require('quotation-apis.php');
 require('account-apis.php');
+require('category-apis.php');

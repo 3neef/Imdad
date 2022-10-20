@@ -15,7 +15,12 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('aproved');
+            $table->integer('parent_id');
+            $table->boolean('isleaf');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
