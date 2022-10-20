@@ -13,6 +13,7 @@ use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
+use App\Http\Requests\UMRequests\User\UpdateRequest;
 
 class AuthController extends Controller
 {
@@ -21,7 +22,7 @@ class AuthController extends Controller
         return $userServices->create($request);
     }
 
-    public function updateUser(GetUserRequest $request ,UserServices $userServices)
+    public function updateUser(UpdateRequest $request ,UserServices $userServices)
     {
         return $userServices->update($request);
     }
@@ -33,7 +34,6 @@ class AuthController extends Controller
     
     public function activateUser(ActivateRequest $request ,UserServices $userServices)
     {
-        dd($request);
         return $userServices->activate($request);
     }
 

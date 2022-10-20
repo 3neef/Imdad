@@ -29,11 +29,10 @@ class UserServices
         $user->otp_expires_at = $otp_expires_at;
         $user->forget_pass = 0;
         $result = $user->save();
-        $token = $user->createToken('authtoken');
         if ($result) {
             return response()->json([
                 'message' => 'User created successfully',
-                'data' => ['token' => $token->plainTextToken, 'user' => new UserResponse($user)]
+                'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
@@ -47,14 +46,21 @@ class UserServices
         $user = User::find($request->get('id'));
         $name = empty($request->get('name')) ? $user->value('name') : $request->get('name');
         $email = empty($request->get('email')) ? $user->value('email') : $request->get('email');
+        $mobile = empty($request->get('mobile')) ? $user->value('mobile') : $request->get('mobile');
+        $roleId = empty($request->get('roleId')) ? $user->value('role_id') : $request->get('roleId');
+        $companyId = empty($request->get('companyId')) ? $user->value('company_id') : $request->get('companyId');
         $result = $user->update([
             'name' => $name,
             'email' => $email,
-            'role_id' => $request->get('role_id'),
-            'type' => $request->get('type')
+            'mobile' => $mobile,
+            'role_id' => $roleId,
+            'company_id' => $companyId
         ]);
         if ($result) {
-            return response()->json(['message' => 'User updated successfully'], 200);
+            return response()->json([
+                'message' => 'User updated successfully',
+                'data'=> ['user' => new UserResponse($user)]
+            ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
@@ -73,8 +79,7 @@ class UserServices
         }
 
         $password = ($request->get('password'));
-            $user = User::where('password', '=', $password)->first();
-            if ($user === null) {
+            if ($user->password != $password) {
                 return response()->json(
                     [
                         "message" => "We didn't recognize this password"
@@ -129,13 +134,11 @@ class UserServices
                     ]
                 );
             }else {
-                $token = $user->createToken('authtoken');
                 return response()->json(
                     [
                         'message' => 'Your account has been activated successfully.',
                         'data' => [
                             'user' => new UserResponse($user),
-                            'token' => $token->plainTextToken
                         ]
                     ]
                 );

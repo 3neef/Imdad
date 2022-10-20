@@ -30,6 +30,8 @@ class createUserRequest extends FormRequest
             "password"=>"required|string|min:8|max:50",
             "email"=>"required|email|string|max:255",
             "mobile"=>"required|min:9|max:14|string",
+            "roleId"=> "integer|exists:roles,id",
+            "companyId"=> "integer|exists:company_info,id"
         ];
     }
 
