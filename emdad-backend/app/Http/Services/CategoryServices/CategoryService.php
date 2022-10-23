@@ -11,7 +11,7 @@ class CategoryService{
         $catogry = Categories::where('name', $request->name)->first();
         if ($catogry != null) {
             return response()->json([
-                'خطا في الاضافة'
+                'error'=>'error in created'
             ]);
         } else {
             $aproved = 0;
@@ -23,9 +23,7 @@ class CategoryService{
                 'parent_id' => $parentid,
             ]);
 
-            return response()->json([
-                'تمت   الاضافة'
-            ]);
+            return response()->json( [ 'message'=>'created successfully' ], 200 );
         }
     }
 
@@ -36,14 +34,12 @@ class CategoryService{
         $category = Categories::find($catogre_id);
         if (!$category) {
             return response()->json([
-                'خطا في التعديل'
+                'error'=>'error in created'
             ]);
         } else {
             $category->aproved = 1;
             $category->update();
-            return response()->json([
-                'تم   التعديل'
-            ]);
+            return response()->json( [ 'message'=>'updated successfully' ], 200 );
         }
     }
 
@@ -68,7 +64,7 @@ class CategoryService{
         $subcatogry = Categories::where('name', $request->name)->where('parent_id', '=', $request->parent_id)->first();
         if ($subcatogry != null) {
             return response()->json([
-                'خطا في الاضافة'
+              'error'=>'error in created'
             ]);
         } else {
 
@@ -80,9 +76,7 @@ class CategoryService{
                 'parent_id' => 0,
             ]);
 
-            return response()->json([
-                'تمت   الاضافة'
-            ]);
+            return response()->json( [ 'message'=>'created successfully' ], 200 );
         }
     }
 
@@ -104,17 +98,9 @@ class CategoryService{
     public function aprovedsubcatogre($catogre_id)
     {
         $subcategory = Categories::find($catogre_id);
-        if (!$subcategory) {
-            return response()->json([
-                'خطا في التعديل'
-            ]);
-        } else {
-            $subcategory->aproved = 1;
-            $subcategory->update();
-            return response()->json([
-                'تم   التعديل'
-            ]);
-        }
+        $subcategory->aproved = 1;
+        $subcategory->update();
+        return response()->json( [ 'message'=>'updated successfully' ], 200 );
     }
 
 
