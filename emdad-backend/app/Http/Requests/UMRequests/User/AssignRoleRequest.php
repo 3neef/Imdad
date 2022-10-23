@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\UMRequests\User;
 
+use App\Models\User;
+use App\Models\UM\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -24,13 +26,29 @@ class AssignRoleRequest extends FormRequest {
     */
 
     public function rules() {
-        $rules = [ 'userId' => 'required|integer|exists:users,id', 'role'=>'required|string|exists:roles,name' ];
+        $rules = [ 'userId' => 'required|integer|exists:users,id', 'role'=>'required|string|exists:roles,name' ,'companyId'=> 'required|integer|exists:company_info,id'];
         if ( gettype( request()->role ) == 'integer' ) {
             $rules[ 'role' ] = 'required|integer|exists:roles,id';
         } else {
             $rules[ 'role' ] = 'required|string|exists:roles,name';
         }
         return $rules;
+    }
+
+    public function withValidator($validator)
+     {
+        if(!$validator->fails()){
+            $validator->after(function ($validator){
+                $user = User::find($this->get('userId'));
+                $colmun = gettype($this ->json()->get( 'role' )) == 'integer' ? 'id' : 'name';
+                $role = Role::where( $colmun, $this ->json()->get( 'role' ) )->first();
+                $exists=$user->exists($role->id,$this->get('companyId'));
+                //dd($exists);
+                if(!empty($exists)){
+                    $validator->errors()->add('user has role', 'this user has role with this company');
+                }
+            });
+        }
     }
 
     protected function failedValidation(Validator $validator): void

@@ -9,6 +9,7 @@ use App\Models\UM\Role;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\UMRequests\User\ActivateRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
+use App\Models\UM\RoleUserCompany;
 
 class UserServices
 {
@@ -249,19 +250,10 @@ class UserServices
         $colmun = gettype($request ->json()->get( 'role' )) == 'integer' ? 'id' : 'name';
         $role = Role::where( $colmun, $request ->json()->get( 'role' ) )->first();
         $user = User::find($request->get('userId'));
-        $userRole = $user->role_id;
-        $result = false;
-        if(empty($userRole)){
-            $user->role_id = $role->id;
-            $result = $user->save();
-        }else{
-            $result = $user->update(['role_id' => $role->id]);
-        }
-
-        if($result){
-            return response()->json( [ 'message'=>'assign role successfully' ], 200 );
-        }
-        return response()->json( [ 'error'=>'system error' ], 500 );
+        $companyId = $request->get('companyId');
+        $userId = $request->get('userId');
+        $user->roleInCompany()->attach($userId,['roles_id' =>$role->id,'company_info_id'=>$companyId]);
+        return response()->json( [ 'message'=>'assign role successfully' ], 200 );
     }
 
     public function showAll()

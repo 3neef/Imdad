@@ -23,7 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'firstname', 'lastname', 'name', 'email', 'password', 'phone', 'status', 
-        'avatar','type', 'role_id', 'otp', 'otp_expires_at', 'forget_pass','otp_used', 'mobile'
+        'avatar', 'otp', 'otp_expires_at', 'forget_pass','otp_used', 'mobile'
     ];
 
     /**
@@ -72,6 +72,17 @@ class User extends Authenticatable implements MustVerifyEmail
             return $this->roles->contains('name', $role);
         }
         return !!$role->intersect($this->roles)->count();
+    }
+
+    public function roleInCompany(){
+        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id');
+    }
+
+    public function exists($roleId,$companyId){
+        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id')
+        ->wherePivot('roles_id',$roleId)
+        ->wherePivot('company_info_id',$companyId)
+        ->first();
     }
 
 }

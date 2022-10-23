@@ -17,7 +17,7 @@ class ProductController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  App\Http\Services\CategoryServices\ProductService  $accountService
+     * @param  App\Http\Services\CategoryServices\ProductService  $productService
      * @return void
      */
     public function __construct(ProductService $productService)
