@@ -75,7 +75,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function roleInCompany(){
-        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id');
+        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id')->withTimestamps();
     }
 
     public function exists($roleId,$companyId){
