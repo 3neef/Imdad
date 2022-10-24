@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\UMServices;
 
-
+use App\Http\Controllers\Auth\MailController;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\UM\Role;
@@ -26,6 +26,7 @@ class UserServices
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
         $user->password = $request->get('password');
+        $user->default_company = $request->get('defaultCompany');
         $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
         $user->forget_pass = 0;
@@ -129,12 +130,16 @@ class UserServices
                 $user->otp = $otp;
                 $user->otp_expires_at = $otp_expires_at;
                 $user->save();
+                MailController::sendSignupEmail($user->name, $user->email, $user->otp);
                 return response()->json(
                     [
                         "message" => "Your OTP has expired, New OTP has been sent!!"
                     ]
                 );
             }else {
+                $user->otp = null;
+                $user->otp_expires_at = null;
+                $user->is_verified = 1;
                 return response()->json(
                     [
                         'message' => 'Your account has been activated successfully.',
@@ -197,6 +202,7 @@ class UserServices
             'forget_pass' => 1
         ]);
         if ($result) {
+            MailController::forgetPasswordEmail($user->name, $user->email, $user->otp);
             return response()->json([
                 'message' => 'OTP has been created successfully',
                 'OTP' => $otp,

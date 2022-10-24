@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Http\Controllers\Auth\MailController;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -18,9 +19,10 @@ class UserObserver
      */
     public function created(User $User)
     {
-        if ($User instanceof MustVerifyEmail && ! $User->hasVerifiedEmail()) {
-            $User->sendEmailVerificationNotification();
-        }
+        MailController::sendSignupEmail($User->name, $User->email, $User->otp);
+        // if ($User instanceof MustVerifyEmail && ! $User->hasVerifiedEmail()) {
+        //     $User->sendEmailVerificationNotification();
+        // }
         //
         // SendEmailVerificationNotification::class;
         // Mail::to($User->email)->send(new VerifyEmail());

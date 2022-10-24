@@ -21,7 +21,7 @@ Route::group(['prefix' => 'users'], function() {
     Route::put("restore/{id}", [AuthController::class, 'restoreUser']);
     Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
     Route::put("reset-password", [AuthController::class, 'resetPassword']);
-    Route::post("assginRole", [AuthController::class, 'assignRole']);
+    Route::post("assginRole", [AuthController::class, 'assignRole']); 
 });
 
 Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
