@@ -19,7 +19,7 @@ class UserServices
       
         $user = new User();
         $otp = rand(100000, 999999);
-        $otp_expires_at = Carbon::now()->addMinutes(2);
+        $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
@@ -42,7 +42,7 @@ class UserServices
     {
         $user = new User();
         $otp = rand(100000, 999999);
-        $otp_expires_at = Carbon::now()->addMinutes(2);
+        $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
