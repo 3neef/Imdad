@@ -30,7 +30,7 @@ class createUserRequest extends FormRequest
             "password"=>"required|string|min:8|max:50",
             "email"=>"required|email|string|max:255",
             "mobile"=>"required|min:9|max:14|string",
-            "default_company"=> "integer|exists:company_info,id"
+            "companyId"=> "integer|exists:company_info,id"
         ];
         if($this->path() == 'api/users/createUser'){
             $rules = [

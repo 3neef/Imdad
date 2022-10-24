@@ -24,7 +24,7 @@ class UserServices
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
         $user->password = $request->get('password');
-        $user->default_company = $request->get('defaultCompany');
+        $user->default_company = $request->get('companyId');
         $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
         $user->forget_pass = 0;
@@ -304,6 +304,23 @@ class UserServices
             return response()->json( [ 'message'=>'restored successfully' ], 200 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
+    }
+
+    public function setDefaultCompany($request)
+    {
+        $user = User::find($request->get('id'));
+        $companyId = $request->get('companyId');
+        $result = $user->update([
+            'default_comapny' => $companyId
+        ]);
+        if ($result) {
+            return response()->json([
+                'message' => 'Default company successfully',
+                'data'=> ['user' => new UserResponse($user)]
+            ], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+
     }
 
     public function showAll()

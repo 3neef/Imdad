@@ -9,6 +9,7 @@ use App\Http\Services\UMServices\UserServices;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
 use App\Http\Requests\UMRequests\User\AssignRoleRequest;
 use App\Http\Requests\UMRequests\User\CreateUserRequest;
+use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
@@ -80,6 +81,11 @@ class AuthController extends Controller
     public function restoreOldRole(AssignRoleRequest $request,UserServices $userServices)
     {
         return $userServices->restoreOldRole($request);
+    }
+
+    public function setDefaultCompany(DefaultCompanyRequest $request,UserServices $userServices)
+    {
+        return $userServices->setDefaultCompany($request);
     }
 
 

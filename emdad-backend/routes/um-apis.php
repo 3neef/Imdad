@@ -25,6 +25,7 @@ Route::group(['prefix' => 'users'], function() {
     Route::post("assginRole", [AuthController::class, 'assignRole']);
     Route::post("unAssginRole", [AuthController::class, 'unAssignRole']);
     Route::post("oldRole", [AuthController::class, 'restoreOldRole']);
+    Route::put("setDefaultCompany", [AuthController::class, 'setDefaultCompany']);
 });
 
 Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
