@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('company_info_id')->nullable(true)->references("id")->on("company_info")->restrictOnDelete();
             $table->unique(["roles_id","users_id","company_info_id","deleted_at"])->name("user_role_company_deletedat");
             $table->softDeletes();
+            $table->tinyInteger("status")->default(1)->comment("1=active,0=inactive");
             $table->timestamps();
         });
     }
