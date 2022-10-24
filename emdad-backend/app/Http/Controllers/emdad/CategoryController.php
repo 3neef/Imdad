@@ -9,48 +9,48 @@ use App\Http\Requests\CategroyRequests\Categroy\CreateCategoryRequest;
 
 class CategoryController extends Controller
 {
-    protected $catogreServec;
-    public function __construct(CategoryService $catogreServec)
+    protected CategoryService $categoryService ;
+    public function __construct(CategoryService $categoryService)
     {
-        $this->catogreServec = $catogreServec;
+        $this->categoryService = $categoryService;
     }
 
-    public function addCatogre(CreateCategoryRequest $request)
+    public function addCatogre(CreateCategoryRequest $request )
     {
-        return $this->catogreServec->addcatogre($request);
+        return $this->categoryService->addCategory($request);
     }
 
 
     public function aprovedcatogre(CreateCategoryRequest $request,$catogre_id)
     {
-        return $this->catogreServec->aprovedcatogre($catogre_id);
+        return $this->categoryService->approveCategory($catogre_id);
     }
 
 
     
     public function showallaprovedcatogre(Request $request)
     {
-        return $this->catogreServec->showallaprovedcatogre();
+        return $this->categoryService->showAllApprovedCategories();
     }
     public function showallcatogre(Request $request)
     {
-        return $this->catogreServec->showallcatogre();
+        return $this->categoryService->showAllCategories();
     }
     public function addsubCatogre(CreateCategoryRequest $request)
     {
-        return $this->catogreServec->addsubCatogre($request);
+        return $this->categoryService->addSubCategory($request);
     }
     public function showwithcatogreid(Request $request)
     {
-        return $this->catogreServec->showwithcatogreid($request);
+        return $this->categoryService->showApprovedWithParentCategoryId($request);
     }
     public function aprovedsubcatogre(CreateCategoryRequest $request,$catogre_id)
     {
-        return $this->catogreServec->aprovedsubcatogre($catogre_id);
+        return $this->categoryService->approveCategory($catogre_id);
     }
 
     public function getByCompany(CreateCategoryRequest $request,$companyId)
     {
-        return $this->catogreServec->showByCompanyId($companyId);
+        return $this->categoryService->showCategoriesByCompanyId($companyId);
     }
 }

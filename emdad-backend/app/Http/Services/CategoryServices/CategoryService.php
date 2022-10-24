@@ -6,7 +6,7 @@ use App\Models\Emdad\Categories;
 class CategoryService{
 
 
-    public function addcatogre($request)
+    public function addCategory($request)
     {
         $catogry = Categories::where('name', $request->name)->first();
         if ($catogry != null) {
@@ -30,7 +30,7 @@ class CategoryService{
 
 
 
-    public function aprovedcatogre($catogre_id)
+    public function approveCategory($catogre_id)
     {
         $category = Categories::find($catogre_id);
         if (!$category) {
@@ -44,7 +44,7 @@ class CategoryService{
         }
     }
 
-    public function showallaprovedcatogre()
+    public function showAllApprovedCategories()
     {
         $category = Categories::where('aproved', '1')->get();
         return  response()->json([
@@ -52,7 +52,7 @@ class CategoryService{
         ]);
     }
 
-    public function showallcatogre()
+    public function showAllCategories()
     {
         $category = Categories::get();
         return  response()->json([
@@ -60,7 +60,7 @@ class CategoryService{
         ]);
     }
 
-    public function addsubCatogre($request)
+    public function addSubCategory($request)
     {
         $subcatogry = Categories::where('name', $request->name)->where('parent_id', '=', $request->parent_id)->first();
         if ($subcatogry != null) {
@@ -83,7 +83,7 @@ class CategoryService{
     }
 
 
-    public function showwithcatogreid($request)
+    public function showApprovedWithParentCategoryId($request)
     {
         if ($request->aproved == 1) {
             $subcategory = Categories::where('aproved', '1')->where('parent_id', $request->parent_id)->get();
@@ -97,15 +97,9 @@ class CategoryService{
             ]);
         }
     }
-    public function aprovedsubcatogre($catogre_id)
-    {
-        $subcategory = Categories::find($catogre_id);
-        $subcategory->aproved = 1;
-        $subcategory->update();
-        return response()->json( [ 'message'=>'updated successfully' ], 200 );
-    }
 
-    public function showByCompanyId($companyId)
+
+    public function showCategoriesByCompanyId($companyId)
     {
         $categorys = Categories::where('company_id','=',$companyId);
         return response()->json( [ 'data'=>$categorys ], 200 );
