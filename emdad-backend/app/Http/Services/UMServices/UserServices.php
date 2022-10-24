@@ -163,7 +163,8 @@ class UserServices
             }else {
                 $user->otp = null;
                 $user->otp_expires_at = null;
-                $user->is_verified = 1;
+                $user->is_verified = true;
+                $user->save();
                 return response()->json(
                     [
                         'message' => 'Your account has been activated successfully.',
