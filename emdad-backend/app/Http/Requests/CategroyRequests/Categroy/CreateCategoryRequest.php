@@ -20,7 +20,14 @@ class CreateCategoryRequest extends FormRequest
 
     protected function prepareForValidation() 
     {
-        $this->merge(['id' => $this->route('id')]);
+        $id = empty($this->id)?1:$this->id;
+        $companyId = empty($this->companyId)?1:$this->companyId;
+        if($this->path() == 'api/categroyes/getByCompanyId/'.$companyId.''){
+            $this->merge(['companyId' => $this->route('companyId')]);
+        }else{
+            $this->merge(['id' => $this->route('id')]);
+        }
+        
     }
 
     /**
@@ -30,10 +37,12 @@ class CreateCategoryRequest extends FormRequest
      */
     public function rules()
     {
+        $companyId = empty($this->companyId)?1:$this->companyId;
         $id = empty($this->id)?1:$this->id;
         $rules = [
             'name' => 'required|unique:categories,name,' . $this->name . ',id,parent_id,' . $this->parentId,
-            'isleaf' => 'required|boolean'
+            'isleaf' => 'required|boolean',
+            'companyId' => 'required|integer|exists:categories,id'
         ];
         if ($this->path() == 'api/categroyes/SavesubCatogre') {
             $rules = [
@@ -51,6 +60,11 @@ class CreateCategoryRequest extends FormRequest
         if ($this->path() == 'api/categroyes/aprovedsubcatogre/'.$id.'') {
             $rules = [
                 'id' => 'required|integer|exists:categories,id'
+            ];
+        }
+        if($this->path() == 'api/categroyes/getByCompanyId/'.$companyId.''){
+            $rules = [
+                'companyId' => 'required|integer|exists:company_info,id'
             ];
         }
         return $rules;

@@ -48,4 +48,9 @@ class CategoryController extends Controller
     {
         return $this->catogreServec->aprovedsubcatogre($catogre_id);
     }
+
+    public function getByCompany(CreateCategoryRequest $request,$companyId)
+    {
+        return $this->catogreServec->showByCompanyId($companyId);
+    }
 }

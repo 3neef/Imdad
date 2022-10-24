@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('aproved');
             $table->integer('parent_id');
             $table->boolean('isleaf');
+            $table->foreignId('company_id')->nullable(true)->references("id")->on("company_info")->restrictOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -21,9 +21,10 @@ class CategoryService{
                 'aproved' => $aproved,
                 'isleaf' => $request->isleaf,
                 'parent_id' => $parentid,
+                'company_id' => $request->companyId,
             ]);
 
-            return response()->json( [ 'message'=>'created successfully' ], 200 );
+            return response()->json( [ 'message'=>'created successfully' ], 201 );
         }
     }
 
@@ -73,7 +74,8 @@ class CategoryService{
                 'name' => $request->name,
                 'aproved' => $aproved,
                 'isleaf' => $request->isleaf,
-                'parent_id' => 0,
+                'parent_id' => $request->parent_id,
+                'company_id' => $request->companyId, //change to Auth()->user()->company_id (befor add middleware)
             ]);
 
             return response()->json( [ 'message'=>'created successfully' ], 200 );
@@ -103,5 +105,10 @@ class CategoryService{
         return response()->json( [ 'message'=>'updated successfully' ], 200 );
     }
 
+    public function showByCompanyId($companyId)
+    {
+        $categorys = Categories::where('company_id','=',$companyId);
+        return response()->json( [ 'data'=>$categorys ], 200 );
+    }
 
 }
