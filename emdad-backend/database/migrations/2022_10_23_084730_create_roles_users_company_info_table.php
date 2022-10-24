@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('roles_id')->nullable(true)->references("id")->on("roles")->restrictOnDelete();
             $table->foreignId('users_id')->nullable(true)->references("id")->on("users")->restrictOnDelete();
             $table->foreignId('company_info_id')->nullable(true)->references("id")->on("company_info")->restrictOnDelete();
-            $table->unique(["roles_id","users_id","company_info_id","deleted_at"]);
+            $table->unique(["roles_id","users_id","company_info_id","deleted_at"])->name("user_role_company_deletedat");
             $table->softDeletes();
             $table->timestamps();
         });
