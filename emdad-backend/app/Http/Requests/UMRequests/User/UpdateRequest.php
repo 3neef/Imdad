@@ -32,7 +32,7 @@ class UpdateRequest extends FormRequest
             "email"=>"email|string|max:255",
             "mobile"=>"min:9|max:14|string",
             "roleId"=> "integer|exists:roles,id",
-            "companyId"=> "integer|exists:company_info,id"
+            "companyId"=> "required|integer|exists:company_info,id"
         ];
     }
 

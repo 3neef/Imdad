@@ -76,12 +76,21 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function roleInCompany(){
-        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id')->withTimestamps();
+        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id')
+        ->withPivot('company_info_id')
+        ->withTimestamps();
     }
 
     public function exists($roleId,$companyId){
         return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id')
         ->wherePivot('roles_id',$roleId)
+        ->wherePivot('company_info_id',$companyId)
+        ->first();
+    }
+
+    public function getRoleOfUserByCompanyId($companyId)
+    {
+        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id')
         ->wherePivot('company_info_id',$companyId)
         ->first();
     }

@@ -22,6 +22,11 @@ class AuthController extends Controller
         return $userServices->create($request);
     }
 
+    public function createUserToCompany(CreateUserRequest $request,UserServices $userServices)
+    {
+        return $userServices->createUserToCompany($request);
+    }
+
     public function updateUser(UpdateRequest $request ,UserServices $userServices)
     {
         return $userServices->update($request);
@@ -65,6 +70,16 @@ class AuthController extends Controller
     public function assignRole(AssignRoleRequest $request,UserServices $userServices)
     {
         return $userServices->assignRole($request);
+    }
+
+    public function unAssignRole(AssignRoleRequest $request,UserServices $userServices)
+    {
+        return $userServices->unAssignRole($request);
+    }
+
+    public function restoreOldRole(AssignRoleRequest $request,UserServices $userServices)
+    {
+        return $userServices->restoreOldRole($request);
     }
 
 

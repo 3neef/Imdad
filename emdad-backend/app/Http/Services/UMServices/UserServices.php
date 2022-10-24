@@ -6,19 +6,17 @@ use App\Http\Controllers\Auth\MailController;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\UM\Role;
-use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\UMRequests\User\ActivateRequest;
-use App\Http\Resources\UMResources\User\UserResponse;
 use App\Models\UM\RoleUserCompany;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\UMResources\User\UserResponse;
+use App\Http\Requests\UMRequests\User\ActivateRequest;
 
 class UserServices
 {
 
     public function create($request)
     {
-        if (!$request->isMethod('post')) {
-            return response()->json(['error' => 'this route supported post method only'], 402);
-        }
+      
         $user = new User();
         $otp = rand(100000, 999999);
         $otp_expires_at = Carbon::now()->addMinutes(2);
@@ -40,6 +38,30 @@ class UserServices
         return response()->json(['error' => 'system error'], 500);
     }
 
+    public function createUserToCompany($request)
+    {
+        $user = new User();
+        $otp = rand(100000, 999999);
+        $otp_expires_at = Carbon::now()->addMinutes(2);
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
+        $user->mobile = $request->get('mobile');
+        $user->otp = strval($otp);
+        $user->otp_expires_at = $otp_expires_at;
+        $user->forget_pass = 0;
+        $result = $user->save();
+        $companyId = $request->get('companyId');
+        $roleId = $request->get('roleId');
+        $user->roleInCompany()->attach($user->id,['roles_id' =>$roleId,'company_info_id'=>$companyId]);
+        if ($result) {
+            return response()->json([
+                'message' => 'User created successfully',
+                'data' => ['user' => new UserResponse($user)]
+            ], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
     public function update($request)
     {
         if (!$request->isMethod('put')) {
@@ -48,15 +70,17 @@ class UserServices
         $user = User::find($request->get('id'));
         $name = empty($request->get('name')) ? $user->value('name') : $request->get('name');
         $email = empty($request->get('email')) ? $user->value('email') : $request->get('email');
-        $mobile = empty($request->get('mobile')) ? $user->value('mobile') : $request->get('mobile');
-        $roleId = empty($request->get('roleId')) ? $user->value('role_id') : $request->get('roleId');
-        $companyId = empty($request->get('companyId')) ? $user->value('company_id') : $request->get('companyId');
+        $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
+        $companyId = $request->get('companyId');
+        $roleId = empty($request->get('roleId')) ? $user->getRoleOfUserByCompanyId($companyId)->roles_id : $request->get('roleId');
+        $userRoleCompany = RoleUserCompany::where('users_id','=',$user->id)->where('company_info_id','=',$companyId)->first();
+        $userRoleCompany->roles_id =$roleId;
+        $userRoleCompany->company_info_id =$companyId;
+        $userRoleCompany->update();
         $result = $user->update([
             'name' => $name,
             'email' => $email,
             'mobile' => $mobile,
-            'role_id' => $roleId,
-            'company_id' => $companyId
         ]);
         if ($result) {
             return response()->json([
@@ -260,6 +284,25 @@ class UserServices
         $userId = $request->get('userId');
         $user->roleInCompany()->attach($userId,['roles_id' =>$role->id,'company_info_id'=>$companyId]);
         return response()->json( [ 'message'=>'assign role successfully' ], 200 );
+    }
+
+    public function unAssignRole($request)
+    {
+        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',-$request->companyId)->first();
+        $deleted = $userRoleCompany->delete();
+        if($deleted){
+            return response()->json( [ 'message'=>'unassign role successfully' ], 200 );
+        }
+        return response()->json( [ 'error'=>'system error' ], 500 );
+    }
+
+    public function restoreOldRole($request)
+    {
+        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',-$request->companyId)->first()->withTrashed()->restore();
+        if($userRoleCompany){
+            return response()->json( [ 'message'=>'restored successfully' ], 200 );
+        }
+        return response()->json( [ 'error'=>'system error' ], 500 );
     }
 
     public function showAll()

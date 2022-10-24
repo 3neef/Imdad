@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class RoleUserCompany extends Pivot
 {
+    protected $table ='roles_users_company_info';
     public function users(){
         return $this->belongsToMany(User::class,'roles_users_company_info','users_id');
     }

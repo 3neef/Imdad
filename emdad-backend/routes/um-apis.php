@@ -13,6 +13,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'users'], function() {
     Route::post('register', [AuthController::class, 'createUser']);
+    Route::post('createUser', [AuthController::class, 'createUserToCompany']);
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('activate', [AuthController::class, 'activateUser']);
     Route::post('logout', [AuthController::class, 'logoutUser'])->middleware('auth:sanctum');
@@ -21,7 +22,9 @@ Route::group(['prefix' => 'users'], function() {
     Route::put("restore/{id}", [AuthController::class, 'restoreUser']);
     Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
     Route::put("reset-password", [AuthController::class, 'resetPassword']);
-    Route::post("assginRole", [AuthController::class, 'assignRole']); 
+    Route::post("assginRole", [AuthController::class, 'assignRole']);
+    Route::post("unAssginRole", [AuthController::class, 'unAssignRole']);
+    Route::post("oldRole", [AuthController::class, 'restoreOldRole']);
 });
 
 Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');

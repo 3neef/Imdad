@@ -25,7 +25,7 @@ class createUserRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             "name"=>"required|string|max:50|unique:users",
             "password"=>"required|string|min:8|max:50",
             "email"=>"required|email|string|max:255",
@@ -33,7 +33,29 @@ class createUserRequest extends FormRequest
             "roleId"=> "integer|exists:roles,id",
             "default_company"=> "integer"
         ];
+        if($this->path() == 'api/users/createUser'){
+            $rules = [
+                "name"=>"required|string|max:50|unique:users",
+                "email"=>"required|email|string|max:255",
+                "mobile"=>"required|min:9|max:14|string",
+                "roleId"=> "required|integer|exists:roles,id",
+                "companyId"=> "required|integer|exists:company_info,id"
+            ];
+        }
+        return $rules;
     }
+
+    
+    // protected function passedValidation()
+    // {
+    //     $requestData=[];
+    //     $requestData['company_id']=$this["companyId"];
+    //     $requestData['name']=$this["name"];
+    //     $requestData['mobile']=$this["mobile"];
+    //     $requestData['role_id']=$this["roleId"];
+    //     $requestData['company_id']=$this["companyId"];
+    //     return $requestData;
+    // }
 
     protected function failedValidation(Validator $validator): void
     {
