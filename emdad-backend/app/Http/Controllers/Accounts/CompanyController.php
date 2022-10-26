@@ -12,7 +12,7 @@ use App\Http\Services\AccountServices\AccountService;
 class CompanyController extends Controller
 {
 
-    protected $accountService;
+    protected AccountService $accountService;
  
     /**
      * Create a new controller instance.
