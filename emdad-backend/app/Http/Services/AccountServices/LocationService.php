@@ -13,9 +13,9 @@ class LocationService{
     public function save($request)
     {
         $location = new CompanyLocations();
-        //$userId = Auth()->user()->id; get user_id if user requested by token (before add middlware)
-        $userId = User::find($request->get('userId')) ; //for test
-        $companyId = $userId->company_id;
+        $user = auth()->user();// get user_id if user requested by token (before add middlware)
+        // $userId = User::find($request->get('userId')) ; //for test
+        $companyId = $user->default_company;
         $otp = rand(100000, 999999);
         $otpExpireAt = Carbon::now()->addMinutes(3);
         $location->address_name = $request->get('warehouseName');
@@ -27,6 +27,7 @@ class LocationService{
         $location->gate_type = $request->get('gateType');
         $location->otp_receiver = $otp;
         $location->otp_expires_at = $otpExpireAt;
+        $location->created_by=$user->id;
 
         $result = $location->save();
         if($result){

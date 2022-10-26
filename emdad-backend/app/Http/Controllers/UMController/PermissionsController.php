@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\UMController;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\UMServices\PermissionServices;
 use App\Http\Requests\UMRequests\Permission\GetPermissionRequest;
 use App\Http\Requests\UMRequests\Permission\CreatePermissionRequest;
 use App\Http\Requests\UMRequests\Permission\UpdatePermissionRequest;
 use App\Http\Requests\UMRequests\Permission\RestorePermissionRequest;
+use App\Http\Services\UMServices\PermissionServices;
 
 class PermissionsController extends Controller
 {
