@@ -12,7 +12,7 @@ use App\Http\Requests\UMRequests\Permission\RestorePermissionRequest;
 class PermissionsController extends Controller
 {
 
-    protected $PermissionService;
+    protected PermissionServices $PermissionService;
  
     /**
      * Create a new controller instance.

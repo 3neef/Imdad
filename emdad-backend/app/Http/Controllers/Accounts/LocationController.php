@@ -12,7 +12,7 @@ use App\Http\Requests\AccountRequests\Location\VerfiedLocationRequest;
 
 class LocationController extends Controller
 {
-    protected $locationService;
+    protected LocationService $locationService;
  
     /**
      * Create a new controller instance.

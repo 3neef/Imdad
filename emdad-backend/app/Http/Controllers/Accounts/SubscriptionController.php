@@ -9,7 +9,7 @@ use App\Http\Services\AccountServices\SubscriptionService;
 
 class SubscriptionController extends Controller
 {
-    protected $subscriptionService;
+    protected SubscriptionService $subscriptionService;
  
     /**
      * Create a new controller instance.

@@ -11,7 +11,7 @@ use App\Http\Requests\UMRequests\Role\RestoreRoleByIdRequest;
 
 class RoleController extends Controller
 {
-    protected $roleServices;
+    protected RoleServices $roleServices;
  
     /**
      * Create a new controller instance.
