@@ -12,7 +12,7 @@ use App\Http\Services\CategoryServices\ProductService;
 
 class ProductController extends Controller
 {
-    protected $productService;
+    protected ProductService $productService;
  
     /**
      * Create a new controller instance.

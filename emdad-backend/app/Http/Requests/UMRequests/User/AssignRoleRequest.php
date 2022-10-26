@@ -27,11 +27,16 @@ class AssignRoleRequest extends FormRequest {
 
     public function rules() {
         $rules = [ 'userId' => 'required|integer|exists:users,id', 'role'=>'required|string|exists:roles,name' ,'companyId'=> 'required|integer|exists:company_info,id'];
-        if ( gettype( request()->role ) == 'integer' ) {
-            $rules[ 'role' ] = 'required|integer|exists:roles,id';
-        } else {
-            $rules[ 'role' ] = 'required|string|exists:roles,name';
+        if($this->path() == 'api/users/unAssginRole' || $this->path() == 'api/users/oldRole'){
+            $rules = [ 'userId' => 'required|integer|exists:users,id','companyId'=> 'required|integer|exists:company_info,id'];
+        }else{
+            if ( gettype( request()->role ) == 'integer' ) {
+                $rules[ 'role' ] = 'required|integer|exists:roles,id';
+            } else {
+                $rules[ 'role' ] = 'required|string|exists:roles,name';
+            }
         }
+
         return $rules;
     }
 
@@ -39,6 +44,7 @@ class AssignRoleRequest extends FormRequest {
      {
         if(!$validator->fails()){
             $validator->after(function ($validator){
+                if($this->path() != 'api/users/unAssginRole' && $this->path() != 'api/users/oldRole'){
                 $user = User::find($this->get('userId'));
                 $colmun = gettype($this ->json()->get( 'role' )) == 'integer' ? 'id' : 'name';
                 $role = Role::where( $colmun, $this ->json()->get( 'role' ) )->first();
@@ -47,6 +53,7 @@ class AssignRoleRequest extends FormRequest {
                 if(!empty($exists)){
                     $validator->errors()->add('user has role', 'this user has role with this company');
                 }
+            }
             });
         }
     }

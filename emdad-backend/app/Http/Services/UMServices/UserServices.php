@@ -24,7 +24,7 @@ class UserServices
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
         $user->password = $request->get('password');
-        $user->default_company = $request->get('companyId');
+        $user->default_company = $request->get('defaultCompany');
         $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
         $user->forget_pass = 0;
@@ -71,7 +71,7 @@ class UserServices
         $name = empty($request->get('name')) ? $user->value('name') : $request->get('name');
         $email = empty($request->get('email')) ? $user->value('email') : $request->get('email');
         $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
-        $companyId = $request->get('companyId');
+        $companyId = $request->get('defaultCompany');
         $roleId = empty($request->get('roleId')) ? $user->getRoleOfUserByCompanyId($companyId)->roles_id : $request->get('roleId');
         $userRoleCompany = RoleUserCompany::where('users_id','=',$user->id)->where('company_info_id','=',$companyId)->first();
         $userRoleCompany->roles_id =$roleId;
@@ -289,7 +289,8 @@ class UserServices
 
     public function unAssignRole($request)
     {
-        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',-$request->companyId)->first();
+        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',$request->companyId)->first();
+        //dd($userRoleCompany);
         $deleted = $userRoleCompany->delete();
         if($deleted){
             return response()->json( [ 'message'=>'unassign role successfully' ], 200 );
@@ -299,7 +300,7 @@ class UserServices
 
     public function restoreOldRole($request)
     {
-        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',-$request->companyId)->first()->withTrashed()->restore();
+        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',$request->companyId)->withTrashed()->first()->restore();
         if($userRoleCompany){
             return response()->json( [ 'message'=>'restored successfully' ], 200 );
         }
