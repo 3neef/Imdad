@@ -289,7 +289,8 @@ class UserServices
 
     public function unAssignRole($request)
     {
-        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',-$request->companyId)->first();
+        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',$request->companyId)->first();
+        //dd($userRoleCompany);
         $deleted = $userRoleCompany->delete();
         if($deleted){
             return response()->json( [ 'message'=>'unassign role successfully' ], 200 );
@@ -299,7 +300,7 @@ class UserServices
 
     public function restoreOldRole($request)
     {
-        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',-$request->companyId)->first()->withTrashed()->restore();
+        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',$request->companyId)->withTrashed()->first()->restore();
         if($userRoleCompany){
             return response()->json( [ 'message'=>'restored successfully' ], 200 );
         }
