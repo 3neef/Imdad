@@ -72,8 +72,9 @@ class UserServices
         $email = empty($request->get('email')) ? $user->value('email') : $request->get('email');
         $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
         $companyId = $request->get('defaultCompany');
-        $roleId = empty($request->get('roleId')) ? $user->getRoleOfUserByCompanyId($companyId)->roles_id : $request->get('roleId');
         $userRoleCompany = RoleUserCompany::where('users_id','=',$user->id)->where('company_info_id','=',$companyId)->first();
+        $roleId = empty($request->get('roleId')) ? $userRoleCompany->roles_id : $request->get('roleId');
+        //dd($roleId);
         $userRoleCompany->roles_id =$roleId;
         $userRoleCompany->company_info_id =$companyId;
         $userRoleCompany->update();

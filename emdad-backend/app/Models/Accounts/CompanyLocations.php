@@ -20,5 +20,6 @@ class CompanyLocations extends Model
            'otp_receiver',
            'otp_expires_at',
            'otp_verfied',
-           'confirm_by'];
+           'confirm_by',
+           'created_by'];
 }

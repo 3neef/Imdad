@@ -48,7 +48,7 @@ class AssignRoleRequest extends FormRequest {
                 $user = User::find($this->get('userId'));
                 $colmun = gettype($this ->json()->get( 'role' )) == 'integer' ? 'id' : 'name';
                 $role = Role::where( $colmun, $this ->json()->get( 'role' ) )->first();
-                $exists=$user->exists($role->id,$this->get('companyId'));
+                $exists=$user->exists($this->get('userId'),$this->get('companyId'));
                 //dd($exists);
                 if(!empty($exists)){
                     $validator->errors()->add('user has role', 'this user has role with this company');
