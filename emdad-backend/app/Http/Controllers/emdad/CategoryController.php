@@ -13,10 +13,11 @@ class CategoryController extends Controller
 
     public function __construct( CategoryService $categoryService )
  {
+
         $this->categoryService = $categoryService;
     }
 
-    public function addCatogre( CreateCategoryRequest $request )
+    public function addCatogry( CreateCategoryRequest $request )
  {
         return $this->categoryService->addCategory( $request );
     }

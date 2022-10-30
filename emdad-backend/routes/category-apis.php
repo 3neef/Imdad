@@ -14,7 +14,7 @@ Route::group(['prefix' => 'products'], function() {
 });
 
 Route::group(['prefix' => 'categroyes'], function() {
-    Route::post('SaveCatogre', [CategoryController::class, 'addCatogre']);
+    Route::post('SaveCatogry', [CategoryController::class, 'addCatogry']);
     Route::post('aprovedcatogre/{id}', [CategoryController::class, 'aprovedcatogre']);
     Route::get('showallaprovedcatogre', [CategoryController::class, 'showallaprovedcatogre']);
     Route::get('showallcatogre', [CategoryController::class, 'showallcatogre']);
