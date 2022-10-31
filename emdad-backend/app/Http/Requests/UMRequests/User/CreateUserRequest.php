@@ -44,7 +44,7 @@ class createUserRequest extends FormRequest
         return $rules;
     }
 
-    
+
     // protected function passedValidation()
     // {
     //     $requestData=[];

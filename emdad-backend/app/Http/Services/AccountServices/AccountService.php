@@ -53,7 +53,7 @@ class AccountService{
     public function getById($id)
     {
         $account = CompanyInfo::where( 'id', $id )->get();
-        return response()->json( [ 'data'=>new CompanyResponse($account)  ], 200 );
+        return response()->json( [ 'data'=>new CompanyResponse($account)],200);
     }
 
     public function getAll()
