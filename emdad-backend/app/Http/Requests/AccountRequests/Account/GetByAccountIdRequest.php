@@ -19,7 +19,7 @@ class GetByAccountIdRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation() 
+    protected function prepareForValidation()
     {
         $this->merge(['id' => $this->route('id')]);
     }
@@ -35,7 +35,7 @@ class GetByAccountIdRequest extends FormRequest
         $rules =['id' => ['required','integer','exists:company_info,id']];
         if($this->isMethod('delete')){
             $rules =['id' => ['required','integer','exists:company_info,id',new CheckUserAssingCompany]];
-        }elseif($this->path() == 'api/accounts/validate/'.$id.''){
+        }elseif($this->path() == 'api/v1_0/accounts/validate/'.$id.''){
             $rules =['id' => ['required','integer','exists:company_info,id,is_validated,0']];
         }
         return $rules;

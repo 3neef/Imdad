@@ -13,7 +13,7 @@ class PermissionsController extends Controller
 {
 
     protected PermissionServices $PermissionService;
- 
+
     /**
      * Create a new controller instance.
      *
@@ -40,7 +40,7 @@ class PermissionsController extends Controller
     public function updatePermission(UpdatePermissionRequest $request){
         return $this->PermissionService->update(json_encode( $request ->json()->get( 'privileges' ), true ),$request ->get('id'));
     }
-    
+
     public function deletePermission($id ,GetPermissionRequest $request)
     {
         return $this->PermissionService->delete($id);

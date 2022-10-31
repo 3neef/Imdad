@@ -36,7 +36,7 @@ class ProductService{
 
     public function getById($id)
     {
-        $prodcut = Prodcuts::where( 'id', $id )->get();
+        $prodcut = Prodcuts::where( 'id', $id )->first();
         return response()->json( [ 'data'=>new ProductResponse($prodcut)  ], 200 );
     }
 

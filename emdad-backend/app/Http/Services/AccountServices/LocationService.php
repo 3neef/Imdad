@@ -58,6 +58,7 @@ class LocationService{
         $location = CompanyLocations::where( 'id', $id )->get();
         return response()->json( [ 'data'=>new LocationResponse($location)  ], 200 );
     }
+    
     public function showByUserId($id)
     {
         $userId = User::find($id)->id;
@@ -104,5 +105,5 @@ class LocationService{
             return response()->json( [ 'message'=>'verfied successfully' ], 200 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
-    } 
+    }
 }

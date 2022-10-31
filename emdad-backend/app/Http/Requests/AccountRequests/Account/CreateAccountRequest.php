@@ -35,7 +35,8 @@ class CreateAccountRequest extends FormRequest
             'companyVatId' => ['required','string','max:25','unique:company_info,company_vat_id'],
             'contactName' => ['required','string','max:100'],
             'contactPhone' => ['required','string','max:15','min:15','regex:/^(00966)/'],
-            'contactEmail' => ['required','email','max:100']
+            'contactEmail' => ['required','email','max:100'],
+            'subscriptionId' =>['required','integer','exists:subscription_packages,id'],
         ];
     }
 

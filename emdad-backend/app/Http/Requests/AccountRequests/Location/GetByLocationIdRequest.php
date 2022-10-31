@@ -19,21 +19,21 @@ class GetByLocationIdRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation() 
+    protected function prepareForValidation()
     {
         $uri = $this->path();
         $id = $this->id == null ? "1" : $this->id;
         $userId = $this->userId == null ? "1" : $this->userId;
         $companyId = $this->companyId == null ? "1" : $this->companyId;
         //dd('api/warehouses/getById/'.$id.'');
-        if($uri == 'api/warehouses/getById/'.$id.'' || $uri == 'api/warehouses/delete/'.$id.''){
+        if($uri == 'api/v_0/warehouses/getById/'.$id.'' || $uri == 'api/v_0/warehouses/delete/'.$id.''){
             $this->merge(['id' => $this->route('id')]);
-        }elseif($uri == 'api/warehouses/getByUserId/'.$userId.''){
-            $this->merge(['userId' => $this->route('userId')]); 
+        }elseif($uri == 'api/v_0/warehouses/getByUserId/'.$userId.''){
+            $this->merge(['userId' => $this->route('userId')]);
         }else{
-            $this->merge(['companyId' => $this->route('companyId')]); 
+            $this->merge(['companyId' => $this->route('companyId')]);
         }
-        
+
     }
     /**
      * Get the validation rules that apply to the request.
@@ -45,9 +45,9 @@ class GetByLocationIdRequest extends FormRequest
         $userId = $this->userId == null ? "1" : $this->userId;
         $companyId = $this->companyId == null ? "1" : $this->companyId;
         $rules =['id' => ['required','integer','exists:company_locations,id']];
-        if($this->path() == 'api/warehouses/getByUserId/'.$userId.''){
+        if($this->path() == 'api/v_0/warehouses/getByUserId/'.$userId.''){
             $rules =['userId' => ['required','integer','exists:users,id']];
-        }elseif ($this->path() == 'api/warehouses/getByCompanyId/'.$companyId.'') {
+        }elseif ($this->path() == 'api/v_0/warehouses/getByCompanyId/'.$companyId.'') {
             $rules =['companyId' => ['required','integer','exists:company_info,id']];
         }
         return $rules;

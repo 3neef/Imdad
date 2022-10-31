@@ -18,16 +18,16 @@ class CreateCategoryRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation() 
+    protected function prepareForValidation()
     {
         $id = empty($this->id)?1:$this->id;
         $companyId = empty($this->companyId)?1:$this->companyId;
-        if($this->path() == 'api/categroyes/getByCompanyId/'.$companyId.''){
+        if($this->path() == 'api/v1_0/categroyes/getByCompanyId/'.$companyId.''){
             $this->merge(['companyId' => $this->route('companyId')]);
         }else{
             $this->merge(['id' => $this->route('id')]);
         }
-        
+
     }
 
     /**
@@ -42,27 +42,27 @@ class CreateCategoryRequest extends FormRequest
         $rules = [
             'name' => 'required|unique:categories,name,' . $this->name . ',id,parent_id,' . $this->parentId,
             'isleaf' => 'required|boolean',
-            'companyId' => 'required|integer|exists:categories,id'
+            'companyId' => 'required|integer|exists:company_info,id',
         ];
-        if ($this->path() == 'api/categroyes/SavesubCatogre') {
+        if ($this->path() == 'api/v1_0/categroyes/SavesubCatogre') {
             $rules = [
                 'name' => 'required|unique:categories,name,' . $this->name . ',id,parent_id,' . $this->parentId,
-                'parentId' => 'required|unique:categories,parent_id,' . $this->parentId . ',id,name,' . $this->name.'|exists:categories,id,isleaf,0',
+                'parent_id' => 'required|unique:categories,parent_id,' . $this->parentId . ',id,name,' . $this->name.'|exists:categories,id,isleaf,0',
                 'isleaf' => 'required|boolean'
             ];
         }
 
-        if ($this->path() == 'api/categroyes/aprovedcatogre/'.$id.'') {
+        if ($this->path() == 'api/v1_0/categroyes/aprovedcatogre/'.$id.'') {
             $rules = [
                 'id' => 'required|integer|exists:categories,id'
             ];
         }
-        if ($this->path() == 'api/categroyes/aprovedsubcatogre/'.$id.'') {
+        if ($this->path() == 'api/v1_0/categroyes/aprovedsubcatogre/'.$id.'') {
             $rules = [
                 'id' => 'required|integer|exists:categories,id'
             ];
         }
-        if($this->path() == 'api/categroyes/getByCompanyId/'.$companyId.''){
+        if($this->path() == 'api/v1_0/categroyes/getByCompanyId/'.$companyId.''){
             $rules = [
                 'companyId' => 'required|integer|exists:company_info,id'
             ];
