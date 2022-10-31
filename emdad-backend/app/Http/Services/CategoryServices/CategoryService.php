@@ -1,17 +1,17 @@
 <?php
+
 namespace App\Http\Services\CategoryServices;
 
 use App\Models\Emdad\Categories;
 
-class CategoryService{
-
-
+class CategoryService
+{
     public function addCategory($request)
     {
-        $catogry = Categories::where('name', $request->name)->first();
-        if ($catogry != null) {
+        $category = Categories::where('name', $request->name)->first();
+        if ($category != null) {
             return response()->json([
-                'error'=>'error in created'
+                'errors' => 'error in created'
             ]);
         } else {
             $aproved = 0;
@@ -24,7 +24,7 @@ class CategoryService{
                 'company_id' => $request->companyId,
             ]);
 
-            return response()->json( [ 'message'=>'created successfully' ], 201 );
+            return response()->json(['message' => 'created successfully'],201);
         }
     }
 
@@ -32,15 +32,16 @@ class CategoryService{
 
     public function approveCategory($catogre_id)
     {
-        $category = Categories::find($catogre_id);
-        if (!$category) {
+        $category = Categories::find($catogre_id)->first();
+      //  dd($category);
+        if ($category == null) {
             return response()->json([
-                'error'=>'error in created'
+                'error' => 'error in created'
             ]);
         } else {
             $category->aproved = 1;
             $category->update();
-            return response()->json( [ 'message'=>'updated successfully' ], 200 );
+            return response()->json(['message' => 'updated successfully'], 200);
         }
     }
 
@@ -65,7 +66,7 @@ class CategoryService{
         $subcatogry = Categories::where('name', $request->name)->where('parent_id', '=', $request->parent_id)->first();
         if ($subcatogry != null) {
             return response()->json([
-              'error'=>'error in created'
+                'error' => 'error in created'
             ]);
         } else {
 
@@ -78,7 +79,7 @@ class CategoryService{
                 'company_id' => $request->companyId, //change to Auth()->user()->company_id (befor add middleware)
             ]);
 
-            return response()->json( [ 'message'=>'created successfully' ], 200 );
+            return response()->json(['message' => 'created successfully'], 200);
         }
     }
 
@@ -101,8 +102,7 @@ class CategoryService{
 
     public function showCategoriesByCompanyId($companyId)
     {
-        $categorys = Categories::where('company_id','=',$companyId);
-        return response()->json( [ 'data'=>$categorys ], 200 );
+        $categorys = Categories::where('company_id', '=', $companyId);
+        return response()->json(['data' => $categorys], 200);
     }
-
 }
