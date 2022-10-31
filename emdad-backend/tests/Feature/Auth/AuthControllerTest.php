@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Auth;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -13,11 +13,11 @@ class AuthControllerTest extends TestCase
      *
      * @return void
      */
-    public function test_example()
+    public function testCeateUser()
     {
-        $response = $this->get('/');
-
+        $response = $this->call('post','api/v1_0/users/register',[
+            "name"=>'dsffds',
+        ]);
         $response->assertStatus(200);
-
     }
 }
