@@ -16,8 +16,8 @@ class CompanyResponse extends JsonResource
     {
         return [
             "id" =>$this->id,
-            "name" =>$this->name, 
-            "companyId" =>$this->company_id, 
+            "name" =>$this->name,
+            "companyId" =>$this->company_id,
             "companyType" =>$this->company_type,
             "companyVatId" =>$this->company_vat_id,
             "contactName" =>$this->contact_name,

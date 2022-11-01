@@ -21,7 +21,7 @@ Route::group(['prefix' => 'categroyes'], function() {
     Route::post('SavesubCatogre', [CategoryController::class, 'addsubCatogre']);
     Route::post('showwithcatogreid', [CategoryController::class, 'showwithcatogreid']);
     Route::post('aprovedsubcatogre/{id}', [CategoryController::class, 'aprovedsubcatogre']);
-    Route::post('getByCompanyId/{companyId}', [CategoryController::class, 'getByCompany']);
+    Route::get('getByCompanyId/{companyId}', [CategoryController::class, 'getByCompany']);
 });
 
 

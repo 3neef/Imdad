@@ -33,7 +33,6 @@ class CategoryService
     public function approveCategory($catogre_id)
     {
         $category = Categories::find($catogre_id)->first();
-      //  dd($category);
         if ($category == null) {
             return response()->json([
                 'error' => 'error in created'
@@ -41,24 +40,20 @@ class CategoryService
         } else {
             $category->aproved = 1;
             $category->update();
-            return response()->json(['message' => 'updated successfully'], 200);
+            return response()->json(['message' => 'aproved successfully'], 200);
         }
     }
 
     public function showAllApprovedCategories()
     {
         $category = Categories::where('aproved', '1')->get();
-        return  response()->json([
-            'data' => $category,
-        ]);
+        return  response()->json(['data' => $category],200);
     }
 
     public function showAllCategories()
     {
         $category = Categories::get();
-        return  response()->json([
-            'Maincatogre' => $category,
-        ]);
+        return  response()->json(['Maincatogre' => $category],200);
     }
 
     public function addSubCategory($request)

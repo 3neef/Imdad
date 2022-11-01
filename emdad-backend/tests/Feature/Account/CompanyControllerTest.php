@@ -13,13 +13,13 @@ class CompanyControllerTest extends TestCase
     public function test_create_account()
     {
         $response = $this->call('post', 'api/v1_0/accounts/create', [
-            'name' => 'murtaada1122',
-            'companyId' => 'sa2ad2as',
+            'name' => 'murtajada1122',
+            'companyId' => 'sga2ad2as',
             'companyType' => 1,
-            'companyVatId' => 'sad22aasd',
-            'contactName' => 'omer22aff',
-            'contactPhone' => '009661200000004',
-            'contactEmail' => 'murtada.abdalgalil@nctr.sd',
+            'companyVatId' => 'gsad22aasd',
+            'contactName' => 'omfer22aff',
+            'contactPhone' => '009661210000004',
+            'contactEmail' => 'murtada.babdalgalil@nctr.sd',
             'subscriptionId' => 1,
         ]);
         //dd($response->status());
