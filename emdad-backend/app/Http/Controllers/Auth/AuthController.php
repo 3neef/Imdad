@@ -38,7 +38,7 @@ class AuthController extends Controller
         * @OA\Post(
         * path="/api/v1_0/users/login",
         * operationId="authLogin",
-        * tags={"Login"},
+        * tags={"UM"},
         * summary="User Login",
         * description="Login User Here",
         *     @OA\RequestBody(
@@ -78,6 +78,46 @@ class AuthController extends Controller
         return $userServices->login($request);
     }
     
+
+       /**
+        * @OA\Put(
+        * path="/api/v1_0/users/activate",
+        * operationId="user-activation",
+        * tags={"UM"},
+        * summary="User Activation",
+        * description="activate by otp",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="application-json",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"id", "otp"},
+        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="otp", type="string")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=201,
+        *          description="Login Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Login Successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+   
     public function activateUser(ActivateRequest $request ,UserServices $userServices)
     {
         return $userServices->activate($request);
