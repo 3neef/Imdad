@@ -13,6 +13,6 @@ class CompanyInfo extends Model
     protected $fillable = [
         'name', 'company_id', 'company_type', 'company_vat_id', 
         'contact_name', 'contact_phone', 'contact_email',
-        'subscription_details','cr_expire_data', 'subs_id', 'subscription_details',"is_validated","created_by"
+        'subscription_details','cr_expire_data', 'subs_id', 'subscription_details',"is_validated"
     ];
 }
