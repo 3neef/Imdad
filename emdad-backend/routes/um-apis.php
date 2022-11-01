@@ -28,9 +28,6 @@ Route::group(['prefix' => 'users'], function() {
     Route::put("setDefaultCompany", [AuthController::class, 'setDefaultCompany']);
 });
 
-Route::post('email/verification-notification', [EmailVerificationController::class, 'sendVerificationEmail'])->middleware('auth:sanctum');
-Route::get('verify-email/{id}/{hash}', [EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('auth:sanctum');
-
 
 Route::group(['prefix' => 'permissions'], function() {
     Route::post('save',[PermissionsController::class,'savePermission']);
