@@ -52,7 +52,7 @@ class CompanyController extends Controller
         *      @OA\Response(
         *        response=200,
         *          description="created Successfully",
-        *          @OA\JsonContent(response=500, description="system error")
+        *        
         *       ),
         *      @OA\Response(response=500, description="system error"),
         *      @OA\Response(response=422, description="Validate error"),
@@ -93,7 +93,7 @@ class CompanyController extends Controller
         *      @OA\Response(
         *        response=200,
         *          description="updated Successfully",
-        *          @OA\JsonContent(response=500, description="system error")
+        *         
         *       ),
         *      @OA\Response(response=500, description="system error"),
         *      @OA\Response(response=422, description="Validate error"),
