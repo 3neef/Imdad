@@ -13,55 +13,55 @@ class AuthControllerTest extends TestCase
      *
      * @return void
      */
-    public function testCeateUser()
+    public function testcreateuser()
     {
         $response = $this->call('post','api/v1_0/users/register',[
             "name"=>'ahmed',
-            "password"=>"ahmed",
-            "email"=>"ahmed@gmail.com",
+            "password"=>"ahmedpass",
+            "email"=>"osamaali.osali@gmail.com",
             "mobile"=>"012909892783",
-            "roleId"=> "1",
-            "companyId"=> "1"
+            "roleId"=> "anything,1",
+            "companyId"=> "anything,1"
         ]);
         $response->assertStatus(200);
     }
 
-    public function testcreateUserToCompany(){
+    // public function testcreateUserToCompany(){
 
-    }
-    public function testloginUser(){
+    // }
+    // public function testloginUser(){
 
-    }
-    public function testactivateUser(){
+    // }
+    // public function testactivateUser(){
 
-    }
-    public function testlogoutUser(){
+    // }
+    // public function testlogoutUser(){
 
-    }
-    public function testupdateUser(){
+    // }
+    // public function testupdateUser(){
 
-    }
-    public function testdeleteUser(){
+    // }
+    // public function testdeleteUser(){
 
-    }
-    public function testrestoreUser(){
-    }
-    public function testforgotPassword(){
-        //
-    }
-    public function testresetPassword(){
-        //
-    }
-    public function testassignRole(){
-        //
-    }
-    public function testunAssignRole(){
-        //
-    }
-    public function testrestoreOldRole(){
-        //
-    }
-    public function testsetDefaultCompany(){
-        //
-    }
+    // }
+    // public function testrestoreUser(){
+    // }
+    // public function testforgotPassword(){
+    //     //
+    // }
+    // public function testresetPassword(){
+    //     //
+    // }
+    // public function testassignRole(){
+    //     //
+    // }
+    // public function testunAssignRole(){
+    //     //
+    // }
+    // public function testrestoreOldRole(){
+    //     //
+    // }
+    // public function testsetDefaultCompany(){
+    //     //
+    // }
 }
