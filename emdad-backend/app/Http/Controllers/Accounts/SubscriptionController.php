@@ -24,7 +24,7 @@ class SubscriptionController extends Controller
 /**
         * @OA\put(
         * path="/api/v1_0/subscriptions/update",
-        * operationId="update Subscription",
+        * operationId="updateSubscription",
         * tags={"update Subscription"},
         * summary="update Subscription",
         * description="update Subscription",
