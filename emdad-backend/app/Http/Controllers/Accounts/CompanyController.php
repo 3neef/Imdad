@@ -197,7 +197,7 @@ class CompanyController extends Controller
 /**
         * @OA\put(
         * path="/api/v1_0/accounts/restore/{id}",
-        * operationId="restore By AccountId",
+        * operationId="restoreByAccountId",
         * tags={"restore By AccountId"},
         * summary="restore By AccountId",
         * description="restore By AccountId",
@@ -228,7 +228,7 @@ class CompanyController extends Controller
 /**
         * @OA\get(
         * path="/api/v1_0/accounts/getAllUnValidated",
-        * operationId="all UnValidated Accounts",
+        * operationId="allUnValidatedAccounts",
         * tags={"all UnValidated Accounts"},
         * summary="allUnValidatedAccounts",
         * description="allUnValidatedAccounts",
