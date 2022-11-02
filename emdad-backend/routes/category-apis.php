@@ -13,10 +13,10 @@ Route::group(['prefix' => 'products'], function() {
     Route::put('restore/{id}',[ProductController::class,'restoreByProductId']);
 });
 
-Route::group(['prefix' => 'categroyes'], function() {
+Route::group(['prefix' => 'categories'], function() {
     Route::post('SaveCatogry', [CategoryController::class, 'addCatogry']);
     Route::post('aprovedcatogre/{id}', [CategoryController::class, 'aprovedcatogre']);
-    Route::get('showallaprovedcatogre', [CategoryController::class, 'showallaprovedcatogre']);
+    Route::get('show-all-approved-categories', [CategoryController::class, 'showallaprovedcatogre']);
     Route::get('showallcatogre', [CategoryController::class, 'showallcatogre']);
     Route::post('SavesubCatogre', [CategoryController::class, 'addsubCatogre']);
     Route::post('showwithcatogreid', [CategoryController::class, 'showwithcatogreid']);
