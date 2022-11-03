@@ -26,8 +26,9 @@ class SendSmsRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => ['required','string','max:15','min:15','regex:/^(00966)/'],
-            'body'=>['required','max:500'],
+            'mobile' => ['required','string','max:14','min:10'],
+            // 'mobile' => ['required','string','max:14','min:10','regex:/^(00966)/'],
+            'msgBody'=>['required','max:500'],
 
          
         ];

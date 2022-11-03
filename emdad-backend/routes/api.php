@@ -16,6 +16,7 @@
 
 
 require('um-apis.php');
+require('general-apis.php');
 require('po-apis.php');
 require('rfq-apis.php');
 require('delivery-apis.php');

@@ -577,10 +577,287 @@
                 }
             }
         },
+        "/api/v1_0/sendSms": {
+            "get": {
+                "tags": [
+                    "System api and external integration"
+                ],
+                "summary": "send sms ",
+                "description": "send sms",
+                "operationId": "send-sms",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "mobile",
+                                    "msgBody"
+                                ],
+                                "properties": {
+                                    "mobile": {
+                                        "type": "string"
+                                    },
+                                    "msgBody": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "sent successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/SaveCatogry": {
+            "post": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "add catogry",
+                "description": "add catogry Here",
+                "operationId": "addcatogry",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "isleaf",
+                                    "companyId"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "isleaf": {
+                                        "type": "boolean"
+                                    },
+                                    "companyId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/aprovedcatogre/{id}": {
+            "post": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "aproved catogry",
+                "description": "aproved catogry Here",
+                "operationId": "aprovedcatogre",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "aproved Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/show-all-approved-categories": {
+            "get": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "show all aproved catogry",
+                "description": "show all aproved catogry Here",
+                "operationId": "showallaprovedcatogre",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    ""
+                                ],
+                                "properties": {
+                                    "": {
+                                        "type": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "data {data}"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/showallcatogre": {
+            "get": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "show all aproved catogry",
+                "description": "show all aproved catogry Here",
+                "operationId": "showallcatogre",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    ""
+                                ],
+                                "properties": {
+                                    "": {
+                                        "type": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "data of Maincatogre as json"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/SavesubCatogre": {
+            "post": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "save sub catogry",
+                "description": "save sub catogry Here",
+                "operationId": "SavesubCatogre",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "parent_id",
+                                    "isleaf"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "parent_id": {
+                                        "type": "integer"
+                                    },
+                                    "isleaf": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "created Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/showwithcatogreid": {
+            "get": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "show with catogry id",
+                "description": "show with catogry id Here",
+                "operationId": "showwithcatogreid",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    ""
+                                ],
+                                "properties": {
+                                    "": {
+                                        "type": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "data as json "
+                    }
+                }
+            }
+        },
         "/api/v1_0/categories/aprovedsubcatogre/{id}": {
             "post": {
                 "tags": [
-                    "aprovedsubcatogre"
+                    "Catogry"
                 ],
                 "summary": "aproved sub catogry",
                 "description": "aproved sub catogry Here",
@@ -611,9 +888,6 @@
                     },
                     "404": {
                         "description": "Resource Not Found"
-                    },
-                    "400": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -621,7 +895,7 @@
         "/api/v1_0/categories/getByCompanyId/{companyId}": {
             "get": {
                 "tags": [
-                    "getByCompanyId"
+                    "Catogry"
                 ],
                 "summary": "get with company id",
                 "description": "get with company id Here",
@@ -656,10 +930,184 @@
                 }
             }
         },
+        "/api/v1_0/products/create": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "create Product",
+                "description": "create Product Here",
+                "operationId": "createProduct",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "categoryId",
+                                    "name",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "categoryId": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/products/update": {
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "update Product",
+                "description": "update Product Here",
+                "operationId": "updateProduct",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "name",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully"
+                    },
+                    "500": {
+                        "description": "error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/products/getAll": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "get All Products",
+                "description": "get All Products Here",
+                "operationId": "getAllProducts",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    ""
+                                ],
+                                "properties": {
+                                    "": {
+                                        "type": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "get all data as json file"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/products/getById/{id}": {
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "get By ProductId",
+                "description": "get By ProductId Here",
+                "operationId": "getByProductId",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "get all data as json file"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/products/delete/{id}": {
             "delete": {
                 "tags": [
-                    "deleteProduct"
+                    "Product"
                 ],
                 "summary": "delete Product",
                 "description": "delete Product Here",
@@ -691,6 +1139,58 @@
                     "404": {
                         "description": "Resource Not Found"
                     }
+                }
+            }
+        },
+        "/api/v1_0/products/restore/{id}": {
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "restore By ProductId",
+                "description": "restore By ProductId Here",
+                "operationId": "restoreByProductId",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "restored successfully"
+                    },
+                    "500": {
+                        "description": "Resource Not Found"
+                    },
+                    "404": {
+                        "description": "system error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "examples": {
+            "messagesent": {
+                "summary": "message sent",
+                "value": {
+                    "success": true,
+                    "message": "sent successfuly"
                 }
             }
         }
