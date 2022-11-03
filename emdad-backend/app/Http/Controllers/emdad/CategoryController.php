@@ -18,9 +18,9 @@ class CategoryController extends Controller
     }
        /**
         * @OA\Post(
-        * path="/api/v1_0/categroyes/SaveCatogry",
+        * path="/api/v1_0/categories/SaveCatogry",
         * operationId="addcatogry",
-        * tags={"addcatogry"},
+        * tags={"Catogry"},
         * summary="add catogry",
         * description="add catogry Here",
         *     @OA\RequestBody(
@@ -29,9 +29,9 @@ class CategoryController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"name", "isleaf" ,"companyId"},
+        *               required={"name","isleaf","companyId"},
         *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="isleaf", type="boolean")
+        *               @OA\Property(property="isleaf", type="boolean"),
         *               @OA\Property(property="companyId", type="integer")
         *            ),
         *        ),
@@ -39,7 +39,6 @@ class CategoryController extends Controller
         *      @OA\Response(
         *          response=201,
         *          description="created Successfully",
-        *          @OA\JsonContent()
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -50,9 +49,9 @@ class CategoryController extends Controller
     }
 /**
         * @OA\Post(
-        * path="/api/v1_0/categroyes/aprovedcatogre/{id}",
+        * path="/api/v1_0/categories/aprovedcatogre/{id}",
         * operationId="aprovedcatogre",
-        * tags={"aprovedcatogry"},
+        * tags={"Catogry"},
         * summary="aproved catogry",
         * description="aproved catogry Here",
         *     @OA\RequestBody(
@@ -68,8 +67,7 @@ class CategoryController extends Controller
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="aproved Successfully",
-        *          @OA\JsonContent()
+        *          description="aproved Successfully"
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -80,9 +78,9 @@ class CategoryController extends Controller
 }
 /**
         * @OA\get(
-        * path="/api/v1_0/categroyes/showallaprovedcatogre",
+        * path="/api/v1_0/categories/show-all-approved-categories",
         * operationId="showallaprovedcatogre",
-        * tags={"showallaprovedcatogre"},
+        * tags={"Catogry"},
         * summary="show all aproved catogry",
         * description="show all aproved catogry Here",
         *     @OA\RequestBody(
@@ -90,14 +88,15 @@ class CategoryController extends Controller
         *         @OA\MediaType(
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
-        *               type="object"
+        *               type="object",
+         *    required={""},
+        *               @OA\Property(property="", type="")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="data {data}",
-        *          @OA\JsonContent()
+        *          description="data {data}"
         *       ),
         * )
         */
@@ -110,9 +109,9 @@ class CategoryController extends Controller
 
 /**
         * @OA\get(
-        * path="/api/v1_0/categroyes/showallaprovedcatogre",
-        * operationId="showallaprovedcatogre",
-        * tags={"showallaprovedcatogre"},
+        * path="/api/v1_0/categories/showallcatogre",
+        * operationId="showallcatogre",
+        * tags={"Catogry"},
         * summary="show all aproved catogry",
         * description="show all aproved catogry Here",
         *     @OA\RequestBody(
@@ -120,14 +119,15 @@ class CategoryController extends Controller
         *         @OA\MediaType(
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
-        *               type="object"
+        *               type="object",
+        *            required={""},
+        *               @OA\Property(property="", type="")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="data of Maincatogre as json",
-        *          @OA\JsonContent()
+        *          description="data of Maincatogre as json"
         *       ),
         * )
         */
@@ -138,9 +138,9 @@ class CategoryController extends Controller
 
        /**
         * @OA\Post(
-        * path="/api/v1_0/categroyes/SavesubCatogre",
+        * path="/api/v1_0/categories/SavesubCatogre",
         * operationId="SavesubCatogre",
-        * tags={"SavesubCatogre"},
+        * tags={"Catogry"},
         * summary="save sub catogry",
         * description="save sub catogry Here",
         *     @OA\RequestBody(
@@ -149,17 +149,16 @@ class CategoryController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"name", "parent_id" ,"isleaf"},
+        *               required={"name","parent_id","isleaf"},
         *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="parent_id", type="integer")
+        *               @OA\Property(property="parent_id", type="integer"),
         *               @OA\Property(property="isleaf", type="boolean")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=201,
-        *          description="created Successfully",
-        *          @OA\JsonContent()
+        *          description="created Successfully"
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -170,9 +169,9 @@ class CategoryController extends Controller
     }
 /**
         * @OA\get(
-        * path="/api/v1_0/categroyes/showwithcatogreid",
+        * path="/api/v1_0/categories/showwithcatogreid",
         * operationId="showwithcatogreid",
-        * tags={"showwithcatogreid"},
+        * tags={"Catogry"},
         * summary="show with catogry id",
         * description="show with catogry id Here",
         *     @OA\RequestBody(
@@ -180,14 +179,15 @@ class CategoryController extends Controller
         *         @OA\MediaType(
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
-        *               type="object"
+        *               type="object",
+        *               required={""},
+        *               @OA\Property(property="", type="")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="data as json ",
-        *          @OA\JsonContent()
+        *          description="data as json "
         *       ),
         * )
         */
@@ -199,9 +199,9 @@ class CategoryController extends Controller
 
     /**
         * @OA\Post(
-        * path="/api/v1_0/categroyes/aprovedsubcatogre/{id}",
+        * path="/api/v1_0/categories/aprovedsubcatogre/{id}",
         * operationId="aprovedsubcatogre",
-        * tags={"aprovedsubcatogre"},
+        * tags={"Catogry"},
         * summary="aproved sub catogry",
         * description="aproved sub catogry Here",
         *     @OA\RequestBody(
@@ -211,14 +211,13 @@ class CategoryController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="aproved Successfully",
-        *          @OA\JsonContent()
+        *          description="aproved Successfully"
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -230,9 +229,9 @@ class CategoryController extends Controller
 
 /**
         * @OA\get(
-        * path="/api/v1_0/categroyes/getByCompanyId/{companyId}",
+        * path="/api/v1_0/categories/getByCompanyId/{companyId}",
         * operationId="getByCompanyId",
-        * tags={"getByCompanyId"},
+        * tags={"Catogry"},
         * summary="get with company id",
         * description="get with company id Here",
         *     @OA\RequestBody(
@@ -242,14 +241,13 @@ class CategoryController extends Controller
         *            @OA\Schema(
         *               type="object",
         *                required={"companyId"},
-        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="data as json ",
-        *          @OA\JsonContent()
+        *          description="data as json "
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )

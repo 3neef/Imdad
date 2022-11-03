@@ -28,7 +28,7 @@ class CompanyController extends Controller
         * @OA\Post(
         * path="/api/v1_0/accounts/create",
         * operationId="createAccount",
-        * tags={"createCompanyAccount"},
+        * tags={"Account"},
         * summary="create Company Account",
         * description="create Company Account Here",
         *     @OA\RequestBody(
@@ -37,7 +37,7 @@ class CompanyController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"name", "companyId" ,"companyType","companyVatId","contactName","contactPhone","contactEmail","subscriptionId"},
+        *               required={"name","companyId","companyType","companyVatId","contactName","contactPhone","contactEmail","subscriptionId"},
         *               @OA\Property(property="name", type="string"),
         *               @OA\Property(property="companyId", type="string"),
         *               @OA\Property(property="companyType", type="integer"),
@@ -45,14 +45,14 @@ class CompanyController extends Controller
         *               @OA\Property(property="contactName", type="string"),
         *               @OA\Property(property="contactPhone", type="string"),
         *               @OA\Property(property="contactEmail", type="email"),
-        *               @OA\Property(property="subscriptionId", type="integer"),
+        *               @OA\Property(property="subscriptionId", type="integer")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *        response=200,
         *          description="created Successfully",
-        *        
+        *
         *       ),
         *      @OA\Response(response=500, description="system error"),
         *      @OA\Response(response=422, description="Validate error"),
@@ -69,7 +69,7 @@ class CompanyController extends Controller
         * @OA\put(
         * path="/api/v1_0/accounts/update",
         * operationId="updateAccount",
-        * tags={"updateAccount"},
+        * tags={"Account"},
         * summary="update Account",
         * description="update Account Here",
         *     @OA\RequestBody(
@@ -78,7 +78,7 @@ class CompanyController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"id", "name" ,"companyId","companyType","companyVatId","contactName","contactPhone","contactEmail"},
+        *               required={"id","name","companyId","companyType","companyVatId","contactName","contactPhone","contactEmail"},
         *               @OA\Property(property="id", type="integer"),
         *               @OA\Property(property="name", type="string"),
         *               @OA\Property(property="companyId", type="string"),
@@ -86,14 +86,14 @@ class CompanyController extends Controller
         *               @OA\Property(property="companyVatId", type="string"),
         *               @OA\Property(property="contactName", type="string"),
         *               @OA\Property(property="contactPhone", type="string"),
-        *               @OA\Property(property="contactEmail", type="email"),
+        *               @OA\Property(property="contactEmail", type="email")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *        response=200,
         *          description="updated Successfully",
-        *         
+        *
         *       ),
         *      @OA\Response(response=500, description="system error"),
         *      @OA\Response(response=422, description="Validate error"),
@@ -110,7 +110,7 @@ class CompanyController extends Controller
         * @OA\get(
         * path="/api/v1_0/accounts/getAll",
         * operationId="getAllaccounts",
-        * tags={"get All accounts"},
+        * tags={"Account"},
         * summary="get All Accounts",
         * description="get All Accounts Here",
         *     @OA\RequestBody(
@@ -120,7 +120,7 @@ class CompanyController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={""},
-        *               @OA\Property(property="", type=""),
+        *               @OA\Property(property="", type="")
         *            ),
         *        ),
         *    ),
@@ -139,7 +139,7 @@ class CompanyController extends Controller
         * @OA\get(
         * path="/api/v1_0/accounts/getById/{id}",
         * operationId="getByAccountId",
-        * tags={"get By AccountId"},
+        * tags={"Account"},
         * summary="get By AccountId",
         * description="get By AccountId Here",
         *     @OA\RequestBody(
@@ -149,7 +149,7 @@ class CompanyController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),
@@ -168,7 +168,7 @@ class CompanyController extends Controller
         * @OA\delete(
         * path="/api/v1_0/accounts/delete/{id}",
         * operationId="deleteAccount",
-        * tags={"delete Account"},
+        * tags={"Account"},
         * summary="delete Account",
         * description="delete Account",
         *     @OA\RequestBody(
@@ -178,7 +178,7 @@ class CompanyController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),
@@ -208,7 +208,7 @@ class CompanyController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),
@@ -239,7 +239,7 @@ class CompanyController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={""},
-        *               @OA\Property(property="", type=""),
+        *               @OA\Property(property="", type="")
         *            ),
         *        ),
         *    ),
@@ -262,7 +262,7 @@ class CompanyController extends Controller
         * @OA\put(
         * path="/api/v1_0/accounts/validate/{id}",
         * operationId="validatedAccount",
-        * tags={"validatedAccount"},
+        * tags={"Account"},
         * summary="validatedAccount",
         * description="validatedAccount",
         *     @OA\RequestBody(
@@ -272,7 +272,7 @@ class CompanyController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),

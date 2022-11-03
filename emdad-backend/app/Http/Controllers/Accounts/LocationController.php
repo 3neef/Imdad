@@ -13,7 +13,7 @@ use App\Http\Requests\AccountRequests\Location\VerfiedLocationRequest;
 class LocationController extends Controller
 {
     protected LocationService $locationService;
- 
+    
     /**
      * Create a new controller instance.
      *
@@ -59,7 +59,7 @@ class LocationController extends Controller
     {
         return $this->locationService->delete($id);
     }
-    
+
     public function restoreByLocationId(RestoreLocationRequest $request,$id)
     {
         return $this->locationService->restore($id);

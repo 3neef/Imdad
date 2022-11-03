@@ -28,7 +28,7 @@ class ProductController extends Controller
         * @OA\Post(
         * path="/api/v1_0/products/create",
         * operationId="createProduct",
-        * tags={"createProduct"},
+        * tags={"Product"},
         * summary="create Product",
         * description="create Product Here",
         *     @OA\RequestBody(
@@ -37,19 +37,19 @@ class ProductController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"categoryId", "name" ,"price"},
+        *               required={"categoryId","name","price"},
         *               @OA\Property(property="categoryId", type="integer"),
-        *               @OA\Property(property="name", type="string")
+        *               @OA\Property(property="name", type="string"),
         *               @OA\Property(property="price", type="integer")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *        response=200,
-        *          description="created Successfully",
-        *          @OA\JsonContent(response=500, description="system error")
+        *          description="created Successfully"
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
+         *      @OA\Response(response=500, description="system error")
         * )
         */
     public function createProduct(CreateProuductRequest $request)
@@ -61,7 +61,7 @@ class ProductController extends Controller
         * @OA\put(
         * path="/api/v1_0/products/update",
         * operationId="updateProduct",
-        * tags={"update Product"},
+        * tags={"Product"},
         * summary="update Product",
         * description="update Product Here",
         *     @OA\RequestBody(
@@ -73,16 +73,15 @@ class ProductController extends Controller
         *               required={"id","name","price"},
         *               @OA\Property(property="id", type="integer"),
         *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="price", type="integer"),
+        *               @OA\Property(property="price", type="integer")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="updated Successfully",
-        *          @OA\JsonContent()
+        *          description="updated Successfully"
         *       ),
-        *      @OA\Response(response=500, error"),
+        *      @OA\Response(response=500, description="error"),
         *      @OA\Response(response=404, description="Resource Not Found"),
 
         * )
@@ -99,7 +98,7 @@ class ProductController extends Controller
         * @OA\get(
         * path="/api/v1_0/products/getAll",
         * operationId="getAllProducts",
-        * tags={"getAllProducts"},
+        * tags={"Product"},
         * summary="get All Products",
         * description="get All Products Here",
         *     @OA\RequestBody(
@@ -109,14 +108,13 @@ class ProductController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={""},
-        *               @OA\Property(property="", type=""),
+        *               @OA\Property(property="", type="")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=200,
         *          description="get all data as json file",
-        *          @OA\JsonContent()
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -133,7 +131,7 @@ class ProductController extends Controller
         * @OA\get(
         * path="/api/v1_0/products/getById/{id}",
         * operationId="getByProductId",
-        * tags={"getByProductId"},
+        * tags={"Product"},
         * summary="get By ProductId",
         * description="get By ProductId Here",
         *     @OA\RequestBody(
@@ -143,14 +141,13 @@ class ProductController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="get all data as json file",
-        *          @OA\JsonContent()
+        *          description="get all data as json file"
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -164,7 +161,7 @@ class ProductController extends Controller
         * @OA\delete(
         * path="/api/v1_0/products/delete/{id}",
         * operationId="deleteProduct",
-        * tags={"deleteProduct"},
+        * tags={"Product"},
         * summary="delete Product",
         * description="delete Product Here",
         *     @OA\RequestBody(
@@ -174,14 +171,13 @@ class ProductController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=301,
-        *          description="deleted successfully",
-        *          @OA\JsonContent()
+        *          description="deleted successfully"
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -196,7 +192,7 @@ class ProductController extends Controller
         * @OA\put(
         * path="/api/v1_0/products/restore/{id}",
         * operationId="restoreByProductId",
-        * tags={"restoreByProductId"},
+        * tags={"Product"},
         * summary="restore By ProductId",
         * description="restore By ProductId Here",
         *     @OA\RequestBody(
@@ -206,14 +202,13 @@ class ProductController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="restored successfully",
-        *          @OA\JsonContent()
+        *          description="restored successfully"
         *       ),
         *      @OA\Response(response=500, description="Resource Not Found"),
         *      @OA\Response(response=404, description="system error"),

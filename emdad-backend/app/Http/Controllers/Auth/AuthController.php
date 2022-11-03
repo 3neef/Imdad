@@ -47,7 +47,7 @@ class AuthController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"email", "password"},
+        *               required={"email","password"},
         *               @OA\Property(property="email", type="email"),
         *               @OA\Property(property="password", type="password")
         *            ),
@@ -72,12 +72,12 @@ class AuthController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-   
+
     public function loginUser(LoginRequest $request ,UserServices $userServices)
     {
         return $userServices->login($request);
     }
-    
+
 
        /**
         * @OA\Put(
@@ -117,7 +117,7 @@ class AuthController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-   
+
     public function activateUser(ActivateRequest $request ,UserServices $userServices)
     {
         return $userServices->activate($request);

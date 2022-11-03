@@ -38,7 +38,7 @@ class SubscriptionController extends Controller
         *               @OA\Property(property="id", type="integer"),
         *                @OA\Property(property="updateOld", type="boolean"),
         *                @OA\Property(property="subscriptionDetails", type="integer"),
-        *                @OA\Property(property="subscriptionDetails.superAdmin", type="integer"),
+        *                @OA\Property(property="subscriptionDetails.superAdmin", type="integer")
         *            ),
         *        ),
         *    ),
@@ -48,7 +48,7 @@ class SubscriptionController extends Controller
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         *      @OA\Response(response=422, description="Validation error"),
-        *      @OA\Response(response=500, description="system error"),
+        *      @OA\Response(response=500, description="system error")
         * )
         */
     public function updateSubscription(UpdateSubscriptionRequest $request)
