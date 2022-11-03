@@ -76,31 +76,25 @@ class CategoryController extends Controller
  {
         return $this->categoryService->approveCategory( $catogre_id );
 }
-/**
-        * @OA\get(
-        * path="/api/v1_0/categories/show-all-approved-categories",
-        * operationId="showallaprovedcatogre",
-        * tags={"Catogry"},
-        * summary="show all aproved catogry",
-        * description="show all aproved catogry Here",
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-         *    required={""},
-        *               @OA\Property(property="", type="")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="data {data}"
-        *       ),
-        * )
-        */
 
+
+        /**
+     * @OA\get(
+     *    path="/api/v1_0/categories/show-all-approved-categories",
+     *    operationId="showallaprovedcatogre",
+     *    tags={"Catogry"},
+     *    summary="show all aproved catogry",
+     *    description="show all aproved catogry Here",
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="Maincatogre", type="integer", example="{' 'id': 1, 'name': 'Electronic','aproved': 0, 'parent_id': 0, 'isleaf': 0, 'company_id': 1}")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
 
     public function showallaprovedcatogre( Request $request )
  {
