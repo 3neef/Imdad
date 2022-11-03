@@ -28,7 +28,7 @@ class CompanyController extends Controller
         * @OA\Post(
         * path="/api/v1_0/accounts/create",
         * operationId="createAccount",
-        * tags={"Account"},
+        * tags={"Account Controller"},
         * summary="create Company Account",
         * description="create Company Account Here",
         *     @OA\RequestBody(
@@ -69,7 +69,8 @@ class CompanyController extends Controller
         * @OA\put(
         * path="/api/v1_0/accounts/update",
         * operationId="updateAccount",
-        * tags={"Account"},
+        * tags={"Account Controller"},
+
         * summary="update Account",
         * description="update Account Here",
         *     @OA\RequestBody(
@@ -110,7 +111,8 @@ class CompanyController extends Controller
         * @OA\get(
         * path="/api/v1_0/accounts/getAll",
         * operationId="getAllaccounts",
-        * tags={"Account"},
+              * tags={"Account Controller"},
+
         * summary="get All Accounts",
         * description="get All Accounts Here",
         *     @OA\RequestBody(
@@ -139,7 +141,8 @@ class CompanyController extends Controller
         * @OA\get(
         * path="/api/v1_0/accounts/getById/{id}",
         * operationId="getByAccountId",
-        * tags={"Account"},
+               * tags={"Account Controller"},
+
         * summary="get By AccountId",
         * description="get By AccountId Here",
         *     @OA\RequestBody(
@@ -168,7 +171,8 @@ class CompanyController extends Controller
         * @OA\delete(
         * path="/api/v1_0/accounts/delete/{id}",
         * operationId="deleteAccount",
-        * tags={"Account"},
+               * tags={"Account Controller"},
+
         * summary="delete Account",
         * description="delete Account",
         *     @OA\RequestBody(
@@ -198,7 +202,8 @@ class CompanyController extends Controller
         * @OA\put(
         * path="/api/v1_0/accounts/restore/{id}",
         * operationId="restoreByAccountId",
-        * tags={"restore By AccountId"},
+               * tags={"Account Controller"},
+
         * summary="restore By AccountId",
         * description="restore By AccountId",
         *     @OA\RequestBody(
@@ -229,7 +234,8 @@ class CompanyController extends Controller
         * @OA\get(
         * path="/api/v1_0/accounts/getAllUnValidated",
         * operationId="allUnValidatedAccounts",
-        * tags={"all UnValidated Accounts"},
+              * tags={"Account Controller"},
+
         * summary="allUnValidatedAccounts",
         * description="allUnValidatedAccounts",
         *     @OA\RequestBody(
@@ -262,7 +268,8 @@ class CompanyController extends Controller
         * @OA\put(
         * path="/api/v1_0/accounts/validate/{id}",
         * operationId="validatedAccount",
-        * tags={"Account"},
+             * tags={"Account Controller"},
+
         * summary="validatedAccount",
         * description="validatedAccount",
         *     @OA\RequestBody(

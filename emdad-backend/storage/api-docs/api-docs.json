@@ -5,6 +5,446 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/api/v1_0/accounts/create": {
+            "post": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "create Company Account",
+                "description": "create Company Account Here",
+                "operationId": "createAccount",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "companyId",
+                                    "companyType",
+                                    "companyVatId",
+                                    "contactName",
+                                    "contactPhone",
+                                    "contactEmail",
+                                    "subscriptionId"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "companyId": {
+                                        "type": "string"
+                                    },
+                                    "companyType": {
+                                        "type": "integer"
+                                    },
+                                    "companyVatId": {
+                                        "type": "string"
+                                    },
+                                    "contactName": {
+                                        "type": "string"
+                                    },
+                                    "contactPhone": {
+                                        "type": "string"
+                                    },
+                                    "contactEmail": {
+                                        "type": "email"
+                                    },
+                                    "subscriptionId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/update": {
+            "put": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "update Account",
+                "description": "update Account Here",
+                "operationId": "updateAccount",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "name",
+                                    "companyId",
+                                    "companyType",
+                                    "companyVatId",
+                                    "contactName",
+                                    "contactPhone",
+                                    "contactEmail"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "companyId": {
+                                        "type": "string"
+                                    },
+                                    "companyType": {
+                                        "type": "integer"
+                                    },
+                                    "companyVatId": {
+                                        "type": "string"
+                                    },
+                                    "contactName": {
+                                        "type": "string"
+                                    },
+                                    "contactPhone": {
+                                        "type": "string"
+                                    },
+                                    "contactEmail": {
+                                        "type": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/getAll": {
+            "get": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "get All Accounts",
+                "description": "get All Accounts Here",
+                "operationId": "getAllaccounts",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    ""
+                                ],
+                                "properties": {
+                                    "": {
+                                        "type": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "data=>array"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/getById/{id}": {
+            "get": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "get By AccountId",
+                "description": "get By AccountId Here",
+                "operationId": "getByAccountId",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "data=>array"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "delete Account",
+                "description": "delete Account",
+                "operationId": "deleteAccount",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "301": {
+                        "description": "deleted successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/restore/{id}": {
+            "put": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "restore By AccountId",
+                "description": "restore By AccountId",
+                "operationId": "restoreByAccountId",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "restored successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/getAllUnValidated": {
+            "get": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "allUnValidatedAccounts",
+                "description": "allUnValidatedAccounts",
+                "operationId": "allUnValidatedAccounts",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    ""
+                                ],
+                                "properties": {
+                                    "": {
+                                        "type": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "all companys validated collections "
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/validate/{id}": {
+            "put": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "validatedAccount",
+                "description": "validatedAccount",
+                "operationId": "validatedAccount",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "validated successfully "
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/subscriptions/update": {
+            "put": {
+                "tags": [
+                    "update Subscription"
+                ],
+                "summary": "update Subscription",
+                "description": "update Subscription",
+                "operationId": "updateSubscription",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "updateOld",
+                                    "subscriptionDetails",
+                                    "subscriptionDetails.superAdmin"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "updateOld": {
+                                        "type": "boolean"
+                                    },
+                                    "subscriptionDetails": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionDetails.superAdmin": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
         "/api/v1_0/users/login": {
             "post": {
                 "tags": [
@@ -130,6 +570,123 @@
                     },
                     "400": {
                         "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/aprovedsubcatogre/{id}": {
+            "post": {
+                "tags": [
+                    "aprovedsubcatogre"
+                ],
+                "summary": "aproved sub catogry",
+                "description": "aproved sub catogry Here",
+                "operationId": "aprovedsubcatogre",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "aproved Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "400": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/getByCompanyId/{companyId}": {
+            "get": {
+                "tags": [
+                    "getByCompanyId"
+                ],
+                "summary": "get with company id",
+                "description": "get with company id Here",
+                "operationId": "getByCompanyId",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "companyId"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "data as json "
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/products/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "deleteProduct"
+                ],
+                "summary": "delete Product",
+                "description": "delete Product Here",
+                "operationId": "deleteProduct",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "301": {
+                        "description": "deleted successfully"
                     },
                     "404": {
                         "description": "Resource Not Found"
