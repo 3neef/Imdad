@@ -13,6 +13,16 @@ use Illuminate\Routing\Controller as BaseController;
  *    title="Emdad Platform API",
  *    version="1.0.0",
  * )
+ * 
+ *  @OA\Examples(
+ *        summary="message sent",
+ *        example = "messagesent",
+ *       value = {
+*           "success": true,
+*              "message":"sent successfuly" 
+*         },
+*      )
+*
  */
 class Controller extends BaseController
 {
