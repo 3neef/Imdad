@@ -3,6 +3,8 @@
 namespace App\Observers;
 
 use App\Http\Controllers\Auth\MailController;
+use App\Http\Controllers\SmsController;
+use App\Http\Services\General\SmsService;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Notifications\VerifyEmail;
@@ -11,6 +13,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class UserObserver
 {
+    protected SmsService $sms;
+
+    public function __construct(SmsService $smsService)
+    {
+        $this->sms = $smsService;
+    }
     /**
      * Handle the User "created" event.
      *
@@ -20,6 +28,8 @@ class UserObserver
     public function created(User $User)
     {
         MailController::sendSignupEmail($User->name, $User->email, $User->otp);
+        $this->sms->sendSms($User->name, $User->mobile, $User->otp);
+        // SmsController::sendSms($User->name, $User->mobile, $User->otp, $this->sms);
         // if ($User instanceof MustVerifyEmail && ! $User->hasVerifiedEmail()) {
         //     $User->sendEmailVerificationNotification();
         // }

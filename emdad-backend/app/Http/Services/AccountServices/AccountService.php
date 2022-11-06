@@ -7,7 +7,8 @@ use App\Models\Accounts\SubscriptionPackages;
 
 class AccountService{
 
-    public function createCompany($request)
+    public function 
+    createCompany($request)
     {
         $account = new CompanyInfo();
         $account->name = $request->get('name');

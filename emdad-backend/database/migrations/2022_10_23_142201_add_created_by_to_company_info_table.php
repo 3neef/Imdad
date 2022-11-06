@@ -28,5 +28,5 @@ return new class extends Migration
         Schema::table('company_info', function (Blueprint $table) {
             $table->dropForeign(['created_by']);
         });
-    }
+    } 
 };
