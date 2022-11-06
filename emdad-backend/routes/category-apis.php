@@ -15,12 +15,12 @@ Route::group(['prefix' => 'products'], function() {
 
 Route::group(['prefix' => 'categories'], function() {
     Route::post('add', [CategoryController::class, 'addCatogry']);
-    Route::post('aprovedcatogre/{id}', [CategoryController::class, 'aprovedcatogre']);
-    Route::get('show-all-approved-categories', [CategoryController::class, 'showallaprovedcatogre']);
-    Route::get('showallcatogre', [CategoryController::class, 'showallcatogre']);
-    Route::post('SavesubCatogre', [CategoryController::class, 'addsubCatogre']);
-    Route::post('showwithcatogreid', [CategoryController::class, 'showwithcatogreid']);
-    Route::post('aprovedsubcatogre/{id}', [CategoryController::class, 'aprovedsubcatogre']);
+    Route::post('aprovedcategory/{id}', [CategoryController::class, 'aprovedcategory']);
+    Route::get('show-all-approved-categories', [CategoryController::class, 'showallaprovedcategory']);
+    Route::get('showallcategory', [CategoryController::class, 'showallcategory']);
+    Route::post('Savesubcategory', [CategoryController::class, 'addsubcategory']);
+    Route::post('showwithcategoryid', [CategoryController::class, 'showwithcategoryid']);
+    Route::post('aprovedsubcategory/{id}', [CategoryController::class, 'aprovedsubcategory']);
     Route::get('getByCompanyId/{companyId}', [CategoryController::class, 'getByCompany']);
 });
 

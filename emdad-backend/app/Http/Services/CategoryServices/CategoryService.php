@@ -30,9 +30,9 @@ class CategoryService
 
 
 
-    public function approveCategory($catogre_id)
+    public function approveCategory($category_id)
     {
-        $category = Categories::find($catogre_id)->first();
+        $category = Categories::find($category_id)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'error in created'
@@ -53,7 +53,7 @@ class CategoryService
     public function showAllCategories()
     {
         $category = Categories::get();
-        return  response()->json(['Maincatogre' => $category],200);
+        return  response()->json(['Maincategory' => $category],200);
     }
 
     public function addSubCategory($request)
@@ -84,12 +84,12 @@ class CategoryService
         if ($request->aproved == 1) {
             $subcategory = Categories::where('aproved', '1')->where('parent_id', $request->parent_id)->get();
             return  response()->json([
-                'subcatogre' => $subcategory,
+                'subcategory' => $subcategory,
             ]);
         } else {
             $subcategory = Categories::where('parent_id', $request->parent_id)->get();
             return  response()->json([
-                'subcatogre' => $subcategory,
+                'subcategory' => $subcategory,
             ]);
         }
     }

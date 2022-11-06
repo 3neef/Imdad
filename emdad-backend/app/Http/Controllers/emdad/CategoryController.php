@@ -49,8 +49,8 @@ class CategoryController extends Controller
     }
 /**
         * @OA\Post(
-        * path="/api/v1_0/categories/aprovedcatogre/{id}",
-        * operationId="aprovedcatogre",
+        * path="/api/v1_0/categories/aprovedcategory/{id}",
+        * operationId="aprovedcategory",
         * tags={"Catogry"},
         * summary="aproved catogry",
         * description="aproved catogry Here",
@@ -72,16 +72,16 @@ class CategoryController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function aprovedcatogre( CreateCategoryRequest $request, $catogre_id )
+    public function aprovedcategory( CreateCategoryRequest $request, $category_id )
  {
-        return $this->categoryService->approveCategory( $catogre_id );
+        return $this->categoryService->approveCategory( $category_id );
 }
 
 
         /**
      * @OA\get(
      *    path="/api/v1_0/categories/show-all-approved-categories",
-     *    operationId="showallaprovedcatogre",
+     *    operationId="showallaprovedcategory",
      *    tags={"Catogry"},
      *    summary="show all aproved catogry",
      *    description="show all aproved catogry Here",
@@ -89,22 +89,22 @@ class CategoryController extends Controller
      *         response=200,
      *         description="",
      *         @OA\JsonContent(
-     *         @OA\Property(property="Maincatogre", type="integer", example="{' 'id': 1, 'name': 'Electronic','aproved': 0, 'parent_id': 0, 'isleaf': 0, 'company_id': 1}")
+     *         @OA\Property(property="Maincategory", type="integer", example="{' 'id': 1, 'name': 'Electronic','aproved': 0, 'parent_id': 0, 'isleaf': 0, 'company_id': 1}")
      *          ),
      *       )
      *      )
      *  )
      */
 
-    public function showallaprovedcatogre( Request $request )
+    public function showallaprovedcategory( Request $request )
  {
         return $this->categoryService->showAllApprovedCategories();
     }
 
 /**
         * @OA\get(
-        * path="/api/v1_0/categories/showallcatogre",
-        * operationId="showallcatogre",
+        * path="/api/v1_0/categories/showallcategory",
+        * operationId="showallcategory",
         * tags={"Catogry"},
         * summary="show all aproved catogry",
         * description="show all aproved catogry Here",
@@ -121,19 +121,19 @@ class CategoryController extends Controller
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="data of Maincatogre as json"
+        *          description="data of Maincategory as json"
         *       ),
         * )
         */
-    public function showallcatogre( Request $request )
+    public function showallcategory( Request $request )
  {
         return $this->categoryService->showAllCategories();
     }
 
        /**
         * @OA\Post(
-        * path="/api/v1_0/categories/SavesubCatogre",
-        * operationId="SavesubCatogre",
+        * path="/api/v1_0/categories/Savesubcategory",
+        * operationId="Savesubcategory",
         * tags={"Catogry"},
         * summary="save sub catogry",
         * description="save sub catogry Here",
@@ -157,14 +157,14 @@ class CategoryController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function addsubCatogre( CreateCategoryRequest $request )
+    public function addsubcategory( CreateCategoryRequest $request )
  {
         return $this->categoryService->addSubCategory( $request );
     }
 /**
         * @OA\get(
-        * path="/api/v1_0/categories/showwithcatogreid",
-        * operationId="showwithcatogreid",
+        * path="/api/v1_0/categories/showwithcategoryid",
+        * operationId="showwithcategoryid",
         * tags={"Catogry"},
         * summary="show with catogry id",
         * description="show with catogry id Here",
@@ -186,15 +186,15 @@ class CategoryController extends Controller
         * )
         */
 
-    public function showwithcatogreid( Request $request )
+    public function showwithcategoryid( Request $request )
  {
         return $this->categoryService->showApprovedWithParentCategoryId( $request );
     }
 
     /**
         * @OA\Post(
-        * path="/api/v1_0/categories/aprovedsubcatogre/{id}",
-        * operationId="aprovedsubcatogre",
+        * path="/api/v1_0/categories/aprovedsubcategory/{id}",
+        * operationId="aprovedsubcategory",
         * tags={"Catogry"},
         * summary="aproved sub catogry",
         * description="aproved sub catogry Here",
@@ -216,9 +216,9 @@ class CategoryController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function aprovedsubcatogre( CreateCategoryRequest $request, $catogre_id )
+    public function aprovedsubcategory( CreateCategoryRequest $request, $category_id )
  {
-        return $this->categoryService->approveCategory( $catogre_id );
+        return $this->categoryService->approveCategory( $category_id );
     }
 
 /**
