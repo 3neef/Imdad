@@ -41,9 +41,9 @@ class SmsController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function sendSms(SendSmsRequest $request, SmsService $sms)
+    public static function sendSms($name, $mobile, $otp, $sms)
     {
-        $response=$sms->sendSms($request);
+        $response=$sms->sendSms($name, $mobile, $otp);
         if($response){
                 return response()->json(["success"=>true,"message"=>"sent successfully"],200);
         }

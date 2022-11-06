@@ -38,7 +38,7 @@ class AuthController extends Controller
         * @OA\Post(
         * path="/api/v1_0/users/login",
         * operationId="authLogin",
-        * tags={"UM"},
+        * tags={"UM & Permissions"},
         * summary="User Login",
         * description="Login User Here",
         *     @OA\RequestBody(
@@ -83,7 +83,7 @@ class AuthController extends Controller
         * @OA\Put(
         * path="/api/v1_0/users/activate",
         * operationId="user-activation",
-        * tags={"UM"},
+        * tags={"UM & Permissions"},
         * summary="User Activation",
         * description="activate by otp",
         *     @OA\RequestBody(

@@ -27,6 +27,7 @@ class UpdateSubscriptionRequest extends FormRequest
     {
         return [
             'id'=>['required','exists:subscription_packages,id'],
+            'type'=>['required','integer','between:1,2'], // 1 => Buyer, 2 => Supplier
             'updateOld'=>['required','boolean'],
             'subscriptionDetails'=>['required'],
             'subscriptionDetails.superAdmin'=>['required','integer'],
