@@ -403,12 +403,16 @@
                             "schema": {
                                 "required": [
                                     "id",
+                                    "type",
                                     "updateOld",
                                     "subscriptionDetails",
                                     "subscriptionDetails.superAdmin"
                                 ],
                                 "properties": {
                                     "id": {
+                                        "type": "integer"
+                                    },
+                                    "type": {
                                         "type": "integer"
                                     },
                                     "updateOld": {
