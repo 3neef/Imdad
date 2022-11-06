@@ -448,7 +448,7 @@
         "/api/v1_0/users/login": {
             "post": {
                 "tags": [
-                    "UM"
+                    "UM & Permissions"
                 ],
                 "summary": "User Login",
                 "description": "Login User Here",
@@ -514,7 +514,7 @@
         "/api/v1_0/users/activate": {
             "put": {
                 "tags": [
-                    "UM"
+                    "UM & Permissions"
                 ],
                 "summary": "User Activation",
                 "description": "activate by otp",
@@ -612,6 +612,147 @@
                 "responses": {
                     "200": {
                         "description": "sent successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/permissions/getAll": {
+            "get": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "get permisssions",
+                "description": "get all permisssions Here",
+                "operationId": "getAllPermissions",
+                "responses": {
+                    "200": {
+                        "description": "get all permissions"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/permissions/getById/{id}": {
+            "get": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "get permisssion",
+                "description": "get permission by id Here",
+                "operationId": "get-permissions",
+                "responses": {
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/permissions/update": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "update permisssion",
+                "description": "update permission to specific role Here",
+                "operationId": "update-permissions-for-specific-role",
+                "responses": {
+                    "200": {
+                        "description": "update permission"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/permissions/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "update permisssion",
+                "description": "update permission to specific role Here",
+                "operationId": "delete-permission-from-specific-role",
+                "responses": {
+                    "200": {
+                        "description": "delete permission",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/permissions/restore/{id}": {
+            "delete": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "restore permisssion",
+                "description": "restore permission to specific role Here",
+                "operationId": "restore-permission-to-specific-role",
+                "responses": {
+                    "200": {
+                        "description": "restore permission",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
                     },
                     "404": {
                         "description": "Resource Not Found"

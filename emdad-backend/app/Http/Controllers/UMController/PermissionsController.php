@@ -24,46 +24,7 @@ class PermissionsController extends Controller
     {
         $this->PermissionService = $PermissionService;
     }
-       /**
-        * @OA\Post(
-        * path="/api/v1_0/permissions/save",
-        * operationId="savePermissionToRole",
-        * tags={"permission"},
-        * summary="save permisssion",
-        * description="save permission to role Here",
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"role", "privileges"},
-        *               @OA\Property(property="role", type="integer,string"),
-        *               @OA\Property(property="privileges", type="array")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="created or updated permission",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="message", type="string"),
-        *            ),
-        *        ),
-        *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity",
-        *          @OA\JsonContent()
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     
     public function savePermission(CreatePermissionRequest $request) {
         return $this->PermissionService->createOrUpdate($request);
     }
@@ -71,24 +32,17 @@ class PermissionsController extends Controller
         * @OA\get(
         * path="/api/v1_0/permissions/getAll",
         * operationId="getAllPermissions",
-        * tags={"permission"},
+        * tags={"UM & Permissions"},
         * summary="get permisssions",
         * description="get all permisssions Here",
         *      @OA\Response(
         *          response=200,
         *          description="get all permissions",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="array",
-        *            ),
-        *        ),
+        *       
         *       ),
         *      @OA\Response(
         *          response=422,
         *          description="Unprocessable Entity",
-        *          @OA\JsonContent()
         *       ),
         *      @OA\Response(response=400, description="Bad request"),
         *      @OA\Response(response=404, description="Resource Not Found"),
@@ -100,26 +54,14 @@ class PermissionsController extends Controller
        /**
         * @OA\get(
         * path="/api/v1_0/permissions/getById/{id}",
-        * operationId="get permission",
-        * tags={"permission"},
+        * operationId="get-permissions",
+        * tags={"UM & Permissions"},
         * summary="get permisssion",
         * description="get permission by id Here",
-        *      @OA\Response(
-        *          response=200,
-        *          description="get permission",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="privileges", type="array"),
-        *            ),
-        *        ),
-        *       ),
+      
         *      @OA\Response(
         *          response=422,
         *          description="Unprocessable Entity",
-        *          @OA\JsonContent()
         *       ),
         *      @OA\Response(response=400, description="Bad request"),
         *      @OA\Response(response=404, description="Resource Not Found"),
@@ -131,11 +73,10 @@ class PermissionsController extends Controller
        /**
         * @OA\put(
         * path="/api/v1_0/permissions/update",
-        * operationId="update permission to specific role",
-        * tags={"permission"},
+        * operationId="update-permissions-for-specific-role",
+        * tags={"UM & Permissions"},
         * summary="update permisssion",
         * description="update permission to specific role Here",
-        *      @OA\JsonContent(),
         *      @OA\MediaType(
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
@@ -148,19 +89,13 @@ class PermissionsController extends Controller
         *      @OA\Response(
         *          response=200,
         *          description="update permission",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="message", type="string"),
-        *            ),
-        *        ),
+      
+   
         *       ),
         *      @OA\Response(
         *          response=422,
         *          description="Unprocessable Entity",
-        *          @OA\JsonContent()
+        *  
         *       ),
         *      @OA\Response(response=400, description="Bad request"),
         *      @OA\Response(response=404, description="Resource Not Found"),
@@ -172,14 +107,13 @@ class PermissionsController extends Controller
        /**
         * @OA\delete(
         * path="/api/v1_0/permissions/delete/{id}",
-        * operationId="delete permission to specific role",
-        * tags={"permission"},
+        * operationId="delete-permission-from-specific-role",
+        * tags={"UM & Permissions"},
         * summary="update permisssion",
         * description="update permission to specific role Here",
         *      @OA\Response(
         *          response=200,
         *          description="delete permission",
-        *          @OA\JsonContent(),
         *          @OA\MediaType(
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
@@ -191,7 +125,6 @@ class PermissionsController extends Controller
         *      @OA\Response(
         *          response=422,
         *          description="Unprocessable Entity",
-        *          @OA\JsonContent()
         *       ),
         *      @OA\Response(response=400, description="Bad request"),
         *      @OA\Response(response=404, description="Resource Not Found"),
@@ -204,14 +137,13 @@ class PermissionsController extends Controller
        /**
         * @OA\delete(
         * path="/api/v1_0/permissions/restore/{id}",
-        * operationId="restore permission to specific role",
-        * tags={"permission"},
+        * operationId="restore-permission-to-specific-role",
+        * tags={"UM & Permissions"},
         * summary="restore permisssion",
         * description="restore permission to specific role Here",
         *      @OA\Response(
         *          response=200,
         *          description="restore permission",
-        *          @OA\JsonContent(),
         *          @OA\MediaType(
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
@@ -223,7 +155,6 @@ class PermissionsController extends Controller
         *      @OA\Response(
         *          response=422,
         *          description="Unprocessable Entity",
-        *          @OA\JsonContent()
         *       ),
         *      @OA\Response(response=400, description="Bad request"),
         *      @OA\Response(response=404, description="Resource Not Found"),
