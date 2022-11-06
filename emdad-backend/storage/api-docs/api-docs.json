@@ -665,14 +665,14 @@
                 }
             }
         },
-        "/api/v1_0/categories/aprovedcatogre/{id}": {
+        "/api/v1_0/categories/aprovedcategory/{id}": {
             "post": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "aproved catogry",
                 "description": "aproved catogry Here",
-                "operationId": "aprovedcatogre",
+                "operationId": "aprovedcategory",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -710,42 +710,35 @@
                 ],
                 "summary": "show all aproved catogry",
                 "description": "show all aproved catogry Here",
-                "operationId": "showallaprovedcatogre",
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    ""
-                                ],
-                                "properties": {
-                                    "": {
-                                        "type": ""
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
+                "operationId": "showallaprovedcategory",
                 "responses": {
                     "200": {
-                        "description": "data {data}"
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Maincategory": {
+                                            "type": "integer",
+                                            "example": "{' 'id': 1, 'name': 'Electronic','aproved': 0, 'parent_id': 0, 'isleaf': 0, 'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
         },
-        "/api/v1_0/categories/showallcatogre": {
+        "/api/v1_0/categories/showallcategory": {
             "get": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "show all aproved catogry",
                 "description": "show all aproved catogry Here",
-                "operationId": "showallcatogre",
+                "operationId": "showallcategory",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -768,19 +761,19 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "data of Maincatogre as json"
+                        "description": "data of Maincategory as json"
                     }
                 }
             }
         },
-        "/api/v1_0/categories/SavesubCatogre": {
+        "/api/v1_0/categories/Savesubcategory": {
             "post": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "save sub catogry",
                 "description": "save sub catogry Here",
-                "operationId": "SavesubCatogre",
+                "operationId": "Savesubcategory",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -819,14 +812,14 @@
                 }
             }
         },
-        "/api/v1_0/categories/showwithcatogreid": {
+        "/api/v1_0/categories/showwithcategoryid": {
             "get": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "show with catogry id",
                 "description": "show with catogry id Here",
-                "operationId": "showwithcatogreid",
+                "operationId": "showwithcategoryid",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -854,14 +847,14 @@
                 }
             }
         },
-        "/api/v1_0/categories/aprovedsubcatogre/{id}": {
+        "/api/v1_0/categories/aprovedsubcategory/{id}": {
             "post": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "aproved sub catogry",
                 "description": "aproved sub catogry Here",
-                "operationId": "aprovedsubcatogre",
+                "operationId": "aprovedsubcategory",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {

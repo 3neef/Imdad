@@ -44,7 +44,7 @@ class CreateCategoryRequest extends FormRequest
             'isleaf' => 'required|boolean',
             'companyId' => 'required|integer|exists:company_info,id',
         ];
-        if ($this->path() == 'api/v1_0/categroyes/SavesubCatogre') {
+        if ($this->path() == 'api/v1_0/categroyes/Savesubcategory') {
             $rules = [
                 'name' => 'required|unique:categories,name,' . $this->name . ',id,parent_id,' . $this->parentId,
                 'parent_id' => 'required|unique:categories,parent_id,' . $this->parentId . ',id,name,' . $this->name.'|exists:categories,id,isleaf,0',
@@ -52,12 +52,12 @@ class CreateCategoryRequest extends FormRequest
             ];
         }
 
-        if ($this->path() == 'api/v1_0/categroyes/aprovedcatogre/'.$id.'') {
+        if ($this->path() == 'api/v1_0/categroyes/aprovedcategory/'.$id.'') {
             $rules = [
                 'id' => 'required|integer|exists:categories,id'
             ];
         }
-        if ($this->path() == 'api/v1_0/categroyes/aprovedsubcatogre/'.$id.'') {
+        if ($this->path() == 'api/v1_0/categroyes/aprovedsubcategory/'.$id.'') {
             $rules = [
                 'id' => 'required|integer|exists:categories,id'
             ];
