@@ -39,7 +39,7 @@ class PermissionsController extends Controller
         *               type="object",
         *               required={"role", "privileges"},
         *               @OA\Property(property="role", type="integer,string"),
-        *               @OA\Property(property="privileges", type="array")
+        *               @OA\Property(type="array", property="privileges",  @OA\Items(type = "string"))
         *            ),
         *        ),
         *    ),
@@ -51,17 +51,16 @@ class PermissionsController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               @OA\Property(property="message", type="string"),
+        *               @OA\Property(property="message", type="string")
         *            ),
         *        ),
         *       ),
         *      @OA\Response(
         *          response=422,
-        *          description="Unprocessable Entity",
-        *          @OA\JsonContent()
+        *          description="Unprocessable Entity"
         *       ),
         *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
+        *      @OA\Response(response=404, description="Resource Not Found")
         * )
         */
     public function savePermission(CreatePermissionRequest $request) {
@@ -81,7 +80,7 @@ class PermissionsController extends Controller
         *          @OA\MediaType(
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
-        *               type="array",
+        *               type="array",@OA\Items(type = "string")
         *            ),
         *        ),
         *       ),
@@ -112,7 +111,7 @@ class PermissionsController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               @OA\Property(property="privileges", type="array"),
+        *               @OA\Property(property="privileges", type="array",@OA\Items(type = "string")),
         *            ),
         *        ),
         *       ),
@@ -129,22 +128,24 @@ class PermissionsController extends Controller
         return $this->PermissionService->showById($id);
     }
        /**
-        * @OA\put(
+        * @OA\Put(
         * path="/api/v1_0/permissions/update",
-        * operationId="update permission to specific role",
+        * operationId="updatePermissionToSpecificRole",
         * tags={"permission"},
         * summary="update permisssion",
         * description="update permission to specific role Here",
-        *      @OA\JsonContent(),
-        *      @OA\MediaType(
+        *     @OA\RequestBody(
+        *        @OA\JsonContent(),
+        *        @OA\MediaType(
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
         *               required={"id","privileges"},
         *               @OA\Property(property="id", type="integer"),
-        *               @OA\Property(property="privileges", type="array"),
+        *               @OA\Property(property="privileges", type="array",@OA\Items(type = "string"))
         *            ),
-        *        ),
+        *          ),
+        *       ),
         *      @OA\Response(
         *          response=200,
         *          description="update permission",
@@ -153,17 +154,16 @@ class PermissionsController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               @OA\Property(property="message", type="string"),
+        *               @OA\Property(property="message", type="string")
         *            ),
         *        ),
         *       ),
         *      @OA\Response(
         *          response=422,
-        *          description="Unprocessable Entity",
-        *          @OA\JsonContent()
+        *          description="Unprocessable Entity"
         *       ),
         *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
+        *      @OA\Response(response=404, description="Resource Not Found")
         * )
         */
     public function updatePermission(UpdatePermissionRequest $request){
