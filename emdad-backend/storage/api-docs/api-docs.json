@@ -392,11 +392,11 @@
         "/api/v1_0/subscriptions/update": {
             "put": {
                 "tags": [
-                    "update Subscription"
+                    "Platform Settings"
                 ],
-                "summary": "update Subscription",
+                "summary": "update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
                 "description": "update Subscription",
-                "operationId": "updateSubscription",
+                "operationId": "update-sub-packages",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {

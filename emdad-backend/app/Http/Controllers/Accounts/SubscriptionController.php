@@ -25,7 +25,7 @@ class SubscriptionController extends Controller
         * @OA\put(
         * path="/api/v1_0/subscriptions/update",
         * operationId="update-sub-packages",
-        * tags={"update Subscription packages"},
+        * tags={"Platform Settings"},
         * summary="update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
         * description="update Subscription",
         *     @OA\RequestBody(
