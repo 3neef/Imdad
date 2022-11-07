@@ -74,7 +74,7 @@ class CategoryController extends Controller
         */
     public function aprovedCatogry( CreateCategoryRequest $request, $catogre_id )
  {
-        return $this->categoryService->approveCategory( $category_id );
+        return $this->categoryService->approveCategory( $catogre_id );
 }
 
 
