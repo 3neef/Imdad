@@ -149,13 +149,13 @@ class CategoryController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function addsubcategory( CreateCategoryRequest $request )
+    public function addSubCatogry( CreateCategoryRequest $request )
  {
         return $this->categoryService->addSubCategory( $request );
     }
 /**
         * @OA\get(
-        * path="/api/v1_0/categories/showwithcategoryid",
+        * path="/api/v1_0/categories/show-with-catogry-id",
         * operationId="showwithcategoryid",
         * tags={"Catogry"},
         * summary="show with catogry id",
@@ -178,7 +178,7 @@ class CategoryController extends Controller
         * )
         */
 
-    public function showwithcategoryid( Request $request )
+    public function showWithCatogryId( Request $request )
  {
         return $this->categoryService->showApprovedWithParentCategoryId( $request );
     }
@@ -208,7 +208,7 @@ class CategoryController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function aprovedsubcategory( CreateCategoryRequest $request, $category_id )
+    public function aprovedSubCatogry( CreateCategoryRequest $request, $category_id )
  {
         return $this->categoryService->approveCategory( $category_id );
     }
