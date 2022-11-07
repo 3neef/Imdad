@@ -72,9 +72,9 @@ class CategoryController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function aprovedCatogry( CreateCategoryRequest $request, $catogre_id )
+    public function aprovedCatogry( CreateCategoryRequest $request, $category_id )
  {
-        return $this->categoryService->approveCategory( $catogre_id );
+        return $this->categoryService->approveCategory( $category_id );
 }
 
 

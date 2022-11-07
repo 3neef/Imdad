@@ -731,7 +731,7 @@
         "/api/v1_0/permissions/getAll": {
             "get": {
                 "tags": [
-                    "permission"
+                    "UM & Permissions"
                 ],
                 "summary": "get permisssions",
                 "description": "get all permisssions Here",
@@ -754,12 +754,7 @@
                         }
                     },
                     "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
+                        "description": "Unprocessable Entity"
                     },
                     "400": {
                         "description": "Bad request"
@@ -773,11 +768,11 @@
         "/api/v1_0/permissions/getById/{id}": {
             "get": {
                 "tags": [
-                    "permission"
+                    "UM & Permissions"
                 ],
                 "summary": "get permisssion",
                 "description": "get permission by id Here",
-                "operationId": "get permission",
+                "operationId": "get-permissions",
                 "responses": {
                     "200": {
                         "description": "get permission",
@@ -801,12 +796,7 @@
                         }
                     },
                     "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
+                        "description": "Unprocessable Entity"
                     },
                     "400": {
                         "description": "Bad request"
@@ -886,11 +876,11 @@
         "/api/v1_0/permissions/delete/{id}": {
             "delete": {
                 "tags": [
-                    "permission"
+                    "UM & Permissions"
                 ],
                 "summary": "update permisssion",
                 "description": "update permission to specific role Here",
-                "operationId": "delete permission to specific role",
+                "operationId": "delete-permission-from-specific-role",
                 "responses": {
                     "200": {
                         "description": "delete permission",
@@ -904,19 +894,11 @@
                                     },
                                     "type": "object"
                                 }
-                            },
-                            "application/json": {
-                                "schema": {}
                             }
                         }
                     },
                     "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
+                        "description": "Unprocessable Entity"
                     },
                     "400": {
                         "description": "Bad request"
@@ -930,11 +912,11 @@
         "/api/v1_0/permissions/restore/{id}": {
             "delete": {
                 "tags": [
-                    "permission"
+                    "UM & Permissions"
                 ],
                 "summary": "restore permisssion",
                 "description": "restore permission to specific role Here",
-                "operationId": "restore permission to specific role",
+                "operationId": "restore-permission-to-specific-role",
                 "responses": {
                     "200": {
                         "description": "restore permission",
@@ -948,19 +930,11 @@
                                     },
                                     "type": "object"
                                 }
-                            },
-                            "application/json": {
-                                "schema": {}
                             }
                         }
                     },
                     "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
+                        "description": "Unprocessable Entity"
                     },
                     "400": {
                         "description": "Bad request"
@@ -1017,18 +991,14 @@
                 }
             }
         },
-<<<<<<< Updated upstream
-        "/api/v1_0/categories/aprovedcategory/{id}": {
-=======
         "/api/v1_0/categories/aproved-catogry/{id}": {
->>>>>>> Stashed changes
             "post": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "aproved catogry",
                 "description": "aproved catogry Here",
-                "operationId": "aprovedcategory",
+                "operationId": "aprovedcatogre",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -1066,11 +1036,7 @@
                 ],
                 "summary": "show all aproved catogry",
                 "description": "show all aproved catogry Here",
-<<<<<<< Updated upstream
                 "operationId": "showallaprovedcategory",
-=======
-                "operationId": "showallaprovedcatogre",
->>>>>>> Stashed changes
                 "responses": {
                     "200": {
                         "description": "",
@@ -1078,11 +1044,7 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-<<<<<<< Updated upstream
                                         "Maincategory": {
-=======
-                                        "Maincatogre": {
->>>>>>> Stashed changes
                                             "type": "integer",
                                             "example": "{' 'id': 1, 'name': 'Electronic','aproved': 0, 'parent_id': 0, 'isleaf': 0, 'company_id': 1}"
                                         }
@@ -1095,43 +1057,11 @@
                 }
             }
         },
-<<<<<<< Updated upstream
-        "/api/v1_0/categories/showallcategory": {
-=======
         "/api/v1_0/categories/show-all-catogry": {
->>>>>>> Stashed changes
             "get": {
                 "tags": [
                     "Catogry"
                 ],
-<<<<<<< Updated upstream
-                "summary": "show all aproved catogry",
-                "description": "show all aproved catogry Here",
-                "operationId": "showallcategory",
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    ""
-                                ],
-                                "properties": {
-                                    "": {
-                                        "type": ""
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "data of Maincategory as json"
-=======
                 "summary": "show all  catogry",
                 "description": "show all  catogry Here",
                 "operationId": "showallcatogre",
@@ -1151,23 +1081,18 @@
                                 }
                             }
                         }
->>>>>>> Stashed changes
                     }
                 }
             }
         },
-<<<<<<< Updated upstream
-        "/api/v1_0/categories/Savesubcategory": {
-=======
         "/api/v1_0/categories/save-sub-catogry": {
->>>>>>> Stashed changes
             "post": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "save sub catogry",
                 "description": "save sub catogry Here",
-                "operationId": "Savesubcategory",
+                "operationId": "SavesubCatogre",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -1206,18 +1131,13 @@
                 }
             }
         },
-<<<<<<< Updated upstream
-        "/api/v1_0/categories/showwithcategoryid": {
-=======
         "/api/v1_0/categories/show-with-catogry-id": {
->>>>>>> Stashed changes
             "get": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "show with catogry id",
                 "description": "show with catogry id Here",
-<<<<<<< Updated upstream
                 "operationId": "showwithcategoryid",
                 "requestBody": {
                     "content": {
@@ -1239,45 +1159,21 @@
                         }
                     }
                 },
-=======
-                "operationId": "showwithcatogryid",
->>>>>>> Stashed changes
                 "responses": {
                     "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "Maincatogre": {
-                                            "type": "integer",
-                                            "example": "{'id': 2, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
+                        "description": "data as json "
                     }
                 }
             }
         },
-<<<<<<< Updated upstream
-        "/api/v1_0/categories/aprovedsubcategory/{id}": {
-=======
         "/api/v1_0/categories/aproved-sub-catogry/{id}": {
->>>>>>> Stashed changes
             "post": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "aproved sub catogry",
                 "description": "aproved sub catogry Here",
-<<<<<<< Updated upstream
-                "operationId": "aprovedsubcategory",
-=======
                 "operationId": "aprovedsubcatogry",
->>>>>>> Stashed changes
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
