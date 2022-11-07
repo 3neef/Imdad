@@ -179,7 +179,20 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "data=>array"
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "MainAccount": {
+                                            "type": "integer",
+                                            "example": "{'id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -217,7 +230,20 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "data=>array"
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "AccountById": {
+                                            "type": "integer",
+                                            "example": "{'id': 2}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -337,7 +363,20 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "all companys validated collections "
+                        "description": "all companys validated collections ",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "AllUnVAlidateAccount": {
+                                            "type": "integer",
+                                            "example": "{'id': 2}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -978,7 +1017,11 @@
                 }
             }
         },
+<<<<<<< Updated upstream
         "/api/v1_0/categories/aprovedcategory/{id}": {
+=======
+        "/api/v1_0/categories/aproved-catogry/{id}": {
+>>>>>>> Stashed changes
             "post": {
                 "tags": [
                     "Catogry"
@@ -1023,7 +1066,11 @@
                 ],
                 "summary": "show all aproved catogry",
                 "description": "show all aproved catogry Here",
+<<<<<<< Updated upstream
                 "operationId": "showallaprovedcategory",
+=======
+                "operationId": "showallaprovedcatogre",
+>>>>>>> Stashed changes
                 "responses": {
                     "200": {
                         "description": "",
@@ -1031,7 +1078,11 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
+<<<<<<< Updated upstream
                                         "Maincategory": {
+=======
+                                        "Maincatogre": {
+>>>>>>> Stashed changes
                                             "type": "integer",
                                             "example": "{' 'id': 1, 'name': 'Electronic','aproved': 0, 'parent_id': 0, 'isleaf': 0, 'company_id': 1}"
                                         }
@@ -1044,11 +1095,16 @@
                 }
             }
         },
+<<<<<<< Updated upstream
         "/api/v1_0/categories/showallcategory": {
+=======
+        "/api/v1_0/categories/show-all-catogry": {
+>>>>>>> Stashed changes
             "get": {
                 "tags": [
                     "Catogry"
                 ],
+<<<<<<< Updated upstream
                 "summary": "show all aproved catogry",
                 "description": "show all aproved catogry Here",
                 "operationId": "showallcategory",
@@ -1075,11 +1131,36 @@
                 "responses": {
                     "200": {
                         "description": "data of Maincategory as json"
+=======
+                "summary": "show all  catogry",
+                "description": "show all  catogry Here",
+                "operationId": "showallcatogre",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Maincatogre": {
+                                            "type": "integer",
+                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+>>>>>>> Stashed changes
                     }
                 }
             }
         },
+<<<<<<< Updated upstream
         "/api/v1_0/categories/Savesubcategory": {
+=======
+        "/api/v1_0/categories/save-sub-catogry": {
+>>>>>>> Stashed changes
             "post": {
                 "tags": [
                     "Catogry"
@@ -1125,13 +1206,18 @@
                 }
             }
         },
+<<<<<<< Updated upstream
         "/api/v1_0/categories/showwithcategoryid": {
+=======
+        "/api/v1_0/categories/show-with-catogry-id": {
+>>>>>>> Stashed changes
             "get": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "show with catogry id",
                 "description": "show with catogry id Here",
+<<<<<<< Updated upstream
                 "operationId": "showwithcategoryid",
                 "requestBody": {
                     "content": {
@@ -1153,21 +1239,45 @@
                         }
                     }
                 },
+=======
+                "operationId": "showwithcatogryid",
+>>>>>>> Stashed changes
                 "responses": {
                     "200": {
-                        "description": "data as json "
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Maincatogre": {
+                                            "type": "integer",
+                                            "example": "{'id': 2, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
         },
+<<<<<<< Updated upstream
         "/api/v1_0/categories/aprovedsubcategory/{id}": {
+=======
+        "/api/v1_0/categories/aproved-sub-catogry/{id}": {
+>>>>>>> Stashed changes
             "post": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "aproved sub catogry",
                 "description": "aproved sub catogry Here",
+<<<<<<< Updated upstream
                 "operationId": "aprovedsubcategory",
+=======
+                "operationId": "aprovedsubcatogry",
+>>>>>>> Stashed changes
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -1198,14 +1308,14 @@
                 }
             }
         },
-        "/api/v1_0/categories/getByCompanyId/{companyId}": {
+        "/api/v1_0/categories/get-by-company-id/{companyId}": {
             "get": {
                 "tags": [
                     "Catogry"
                 ],
                 "summary": "get with company id",
                 "description": "get with company id Here",
-                "operationId": "getByCompanyId",
+                "operationId": "getbycompanyid",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -1228,7 +1338,20 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "data as json "
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Maincatogre": {
+                                            "type": "integer",
+                                            "example": "{'id': 2, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -1364,7 +1487,20 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "get all data as json file"
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "MainProduct": {
+                                            "type": "integer",
+                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -1372,7 +1508,7 @@
                 }
             }
         },
-        "/api/v1_0/products/getById/{id}": {
+        "/api/v1_0/products/get-By-Id/{id}": {
             "get": {
                 "tags": [
                     "Product"
@@ -1402,7 +1538,20 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "get all data as json file"
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "ProductById": {
+                                            "type": "integer",
+                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resource Not Found"

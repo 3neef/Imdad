@@ -128,7 +128,10 @@ class CompanyController extends Controller
         *    ),
         *      @OA\Response(
         *        response=200,
-        *          description="data=>array",
+        *          description="",
+        *         @OA\JsonContent(
+        *         @OA\Property(property="MainAccount", type="integer", example="{'id': 1}")
+        *          ),
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -158,7 +161,10 @@ class CompanyController extends Controller
         *    ),
         *      @OA\Response(
         *        response=200,
-        *          description="data=>array",
+        *          description="",
+        *         @OA\JsonContent(
+        *         @OA\Property(property="AccountById", type="integer", example="{'id': 2}")
+        *          ),
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -252,6 +258,9 @@ class CompanyController extends Controller
         *      @OA\Response(
         *        response=200,
         *          description="all companys validated collections ",
+        *         @OA\JsonContent(
+        *         @OA\Property(property="AllUnVAlidateAccount", type="integer", example="{'id': 2}")
+        *          ),
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         *      @OA\Response(response=500, description="system error"),
