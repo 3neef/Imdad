@@ -428,6 +428,446 @@
                 }
             }
         },
+        "/api/v1_0/warehouses/create": {
+            "post": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "create warehouse",
+                "description": "create warehouse Here",
+                "operationId": "createWarehouse",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "warehouseName",
+                                    "warehouseType",
+                                    "location",
+                                    "gateType",
+                                    "receiverName",
+                                    "receiverPhone"
+                                ],
+                                "properties": {
+                                    "warehouseName": {
+                                        "type": "string"
+                                    },
+                                    "warehouseType": {
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "type": "integer"
+                                    },
+                                    "gateType": {
+                                        "type": "string"
+                                    },
+                                    "receiverName": {
+                                        "type": "string"
+                                    },
+                                    "receiverPhone": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/update": {
+            "put": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "update warehouse",
+                "description": "update warehouse Here",
+                "operationId": "updateWarehouse",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "warehouseName": {
+                                        "type": "string"
+                                    },
+                                    "warehouseType": {
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "type": "integer"
+                                    },
+                                    "gateType": {
+                                        "type": "string"
+                                    },
+                                    "receiverName": {
+                                        "type": "string"
+                                    },
+                                    "receiverPhone": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/getAll": {
+            "get": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "get all warehouse",
+                "description": "get all warehouses Here",
+                "operationId": "getAllWarehouses",
+                "responses": {
+                    "200": {
+                        "description": "get all warehouses",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/getByCompanyId/{companyId}": {
+            "get": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "get warehouse by company id",
+                "description": "get warehouse by company id Here",
+                "operationId": "getByCompanyIdWarehouse",
+                "responses": {
+                    "200": {
+                        "description": "get warehouse by company id",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/getByUserId/{userId}'": {
+            "get": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "get warehouse By UserId",
+                "description": "get warehouse By UserId Here",
+                "operationId": "getWarehouseUserById",
+                "responses": {
+                    "200": {
+                        "description": "get warehouse By UserId",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/getById/{id}'": {
+            "get": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "get warehouse By Id",
+                "description": "get warehouse By Id Here",
+                "operationId": "getWarehouseById",
+                "responses": {
+                    "200": {
+                        "description": "get warehouse By Id",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/delete/{id}'": {
+            "delete": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "delete warehouse",
+                "description": "delete warehouse Here",
+                "operationId": "deleteWarehouse",
+                "responses": {
+                    "200": {
+                        "description": "delete warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/restore/{id}'": {
+            "put": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "restore warehouse By Id",
+                "description": "restore warehouse By Id Here",
+                "operationId": "restoreWarehouseById",
+                "responses": {
+                    "200": {
+                        "description": "restore warehouse By Id",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/verfied'": {
+            "put": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "verfied warehouse",
+                "description": "verfied warehouse",
+                "operationId": "verfiedWarehouse",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "userId",
+                                    "companyId"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "userId": {
+                                        "type": "integer"
+                                    },
+                                    "companyId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "verfied warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/subscriptions/update": {
             "put": {
                 "tags": [
@@ -930,6 +1370,320 @@
                                     },
                                     "type": "object"
                                 }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/roles/save": {
+            "post": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "create role",
+                "description": "create new role Here",
+                "operationId": "saveNewRole",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "type"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created role successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "massege": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/roles/update": {
+            "put": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "update role",
+                "description": "update role Here",
+                "operationId": "updateRole",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated role successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "massege": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/roles/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "delete roles",
+                "description": "delete roles Here",
+                "operationId": "deleteRole",
+                "responses": {
+                    "200": {
+                        "description": "deleted role successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "massege": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/roles/getAll": {
+            "get": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "get roles",
+                "description": "get all roles Here",
+                "operationId": "getAllRoles",
+                "responses": {
+                    "200": {
+                        "description": "get all roles",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/roles/getByRoleId/{id}": {
+            "get": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "get role by id",
+                "description": "get role Here",
+                "operationId": "getRole",
+                "responses": {
+                    "200": {
+                        "description": "get role",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/roles/restore/{id}": {
+            "put": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "restore role by id",
+                "description": "restore role Here",
+                "operationId": "restoreRole",
+                "responses": {
+                    "200": {
+                        "description": "restore role successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "massege": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/roles/getByType/{type}": {
+            "get": {
+                "tags": [
+                    "role"
+                ],
+                "summary": "get roles by type",
+                "description": "get all roles by type",
+                "operationId": "getAllRolesByType",
+                "responses": {
+                    "200": {
+                        "description": "get all roles by type",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     },
@@ -1516,6 +2270,7 @@
                                 "type": "object"
                             }
                         },
+                        
                         "application/json": {
                             "schema": {}
                         }
