@@ -28,7 +28,7 @@ class PermissionsController extends Controller
         * @OA\Post(
         * path="/api/v1_0/permissions/save",
         * operationId="savePermissionToRole",
-        * tags={"permission"},
+        * tags={"Roles and Permissions"},
         * summary="save permisssion",
         * description="save permission to role Here",
         *     @OA\RequestBody(
@@ -129,7 +129,7 @@ class PermissionsController extends Controller
         * @OA\Put(
         * path="/api/v1_0/permissions/update",
         * operationId="updatePermissionToSpecificRole",
-        * tags={"permission"},
+        * tags={"Roles and Permissions"},
         * summary="update permisssion",
         * description="update permission to specific role Here",
         *     @OA\RequestBody(
