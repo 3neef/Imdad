@@ -1,5 +1,5 @@
 #!/bin/bash
-MYSQL_HOST=172.21.1.115
+MYSQL_HOST=emdad_db
 MYSQL_USER=root
 MYSQL_PASS=control@123
 
