@@ -4,7 +4,7 @@ ADD emdad-backend emdad-backend
 COPY emdad-backend/.env.example2 emdad-backend/.env
 RUN rm -rf app && ln -s emdad-backend/ app
 
-COPY ./script.sh ./
-RUN chmod +x ./script.sh
+COPY ./entrypoint.sh ./
+RUN chmod +x ./entrypoint.sh
 #ENTRYPOINT ["supervisord", "-c", "/etc/supervisord.conf"]
-ENTRYPOINT ["./script.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
