@@ -5,6 +5,7 @@ variables:
     NCTR_REG : https://hub.nctr.sd
     IMAGE_NAME : emdad-be
     CON_NAME : emdad-be
+    NETWORK : emdad_network
 stages:
     - build
     - deploy
@@ -42,4 +43,4 @@ deploy:
             echo "From IF ";
             fi
         #docker stop $(docker ps -f name=$CON_NAME -aq); \ ** rmove container using the id
-        -  docker run -d -p 8000:8000 -p 80:80 -p 443:443 --name $CON_NAME $IMAGE_REG/$IMAGE_NAME:latest
+        -  docker run -d -p 8000:8000 -p 80:80 -p 443:443 --name $CON_NAME --network $NETWORK $IMAGE_REG/$IMAGE_NAME:latest
