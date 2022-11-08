@@ -74,7 +74,6 @@ class UserServices
         $companyId = $request->get('defaultCompany');
         $userRoleCompany = RoleUserCompany::where('users_id','=',$user->id)->where('company_info_id','=',$companyId)->first();
         $roleId = empty($request->get('roleId')) ? $userRoleCompany->roles_id : $request->get('roleId');
-        //dd($roleId);
         $userRoleCompany->roles_id =$roleId;
         $userRoleCompany->company_info_id =$companyId;
         $userRoleCompany->update();
@@ -291,7 +290,6 @@ class UserServices
     public function unAssignRole($request)
     {
         $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',$request->companyId)->first();
-        //dd($userRoleCompany);
         $deleted = $userRoleCompany->delete();
         if($deleted){
             return response()->json( [ 'message'=>'unassign role successfully' ], 200 );
