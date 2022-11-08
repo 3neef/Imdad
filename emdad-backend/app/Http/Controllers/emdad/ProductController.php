@@ -114,7 +114,10 @@ class ProductController extends Controller
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="get all data as json file",
+        *          description="",
+        *         @OA\JsonContent(
+        *         @OA\Property(property="MainProduct", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
+        *          ),
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
@@ -129,7 +132,7 @@ class ProductController extends Controller
 
 /**
         * @OA\get(
-        * path="/api/v1_0/products/getById/{id}",
+        * path="/api/v1_0/products/get-By-Id/{id}",
         * operationId="getByProductId",
         * tags={"Product"},
         * summary="get By ProductId",
@@ -147,7 +150,11 @@ class ProductController extends Controller
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="get all data as json file"
+        *          description="",
+        *         @OA\JsonContent(
+        *         @OA\Property(property="ProductById", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
+        *          ),
+
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )

@@ -34,8 +34,9 @@ class SubscriptionController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"id","updateOld","subscriptionDetails","subscriptionDetails.superAdmin"},
-        *               @OA\Property(property="id", type="integer"),
+        *               required={"id","type","updateOld","subscriptionDetails","subscriptionDetails.superAdmin"},
+        *                @OA\Property(property="id", type="integer"),
+        *                @OA\Property(property="type", type="integer"),
         *                @OA\Property(property="updateOld", type="boolean"),
         *                @OA\Property(property="subscriptionDetails", type="integer"),
         *                @OA\Property(property="subscriptionDetails.superAdmin", type="integer")
