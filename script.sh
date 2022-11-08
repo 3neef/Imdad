@@ -1,7 +1,7 @@
 #!/bin/bash
-MYSQL_HOST=172.21.1.43
+MYSQL_HOST=172.21.1.115
 MYSQL_USER=root
-MYSQL_PASS=control
+MYSQL_PASS=control@123
 
 cd app/
 
