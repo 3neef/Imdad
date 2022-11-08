@@ -1,0 +1,34 @@
+#!/bin/bash
+MYSQL_HOST=172.21.1.43
+MYSQL_USER=root
+MYSQL_PASS=control
+
+cd app/
+
+# Edit .env file
+sed -i "/DB_HOST=.*/c\DB_HOST=${MYSQL_HOST}" .env
+sed -i "/DB_USERNAME=.*/c\DB_USERNAME=${MYSQL_USER}" .env
+sed -i "/DB_PASSWORD=.*/c\DB_PASSWORD=${MYSQL_PASS}" .env
+
+
+# Install PHP modules
+if [ ! -d "vendor" ]; then
+composer update
+fi
+
+chown -R nobody. ../emdad-backend
+
+if [ -d "vendor" ]; then
+        if [ -f "Done.txt" ]; then
+                php artisan optimize
+                php artisan view:cache
+        else
+                php artisan migrate
+                php artisan l5-swagger:generate
+                php artisan optimize
+                php artisan view:cache
+                touch Done.txt
+        fi
+fi
+
+exec supervisord -c /etc/supervisord.conf
