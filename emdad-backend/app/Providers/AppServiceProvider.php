@@ -36,5 +36,6 @@ class AppServiceProvider extends ServiceProvider
         Quotation::observe(QuotationObserver::class);
         User::observe(UserObserver::class);
         CompanyInfo::observe(AccountsObserver::class);
+        
     }
 }
