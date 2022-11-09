@@ -10,6 +10,8 @@ use App\Observers\AccountsObserver;
 use App\Observers\QuotationObserver;
 use App\Observers\RFQObserver;
 use App\Observers\UserObserver;
+use Database\Seeders\SubscriptionPackagesSeeder;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -36,6 +38,6 @@ class AppServiceProvider extends ServiceProvider
         Quotation::observe(QuotationObserver::class);
         User::observe(UserObserver::class);
         CompanyInfo::observe(AccountsObserver::class);
-        
+        Artisan::call('db:seed');
     }
 }
