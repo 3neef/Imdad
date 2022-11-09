@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Accounts\CompanyInfo;
+use App\Models\Accounts\SubscriptionPackages;
 use App\Models\Quotations\Quotation;
 use App\Models\rfq\Rfq;
 use App\Models\User;
@@ -38,6 +39,14 @@ class AppServiceProvider extends ServiceProvider
         Quotation::observe(QuotationObserver::class);
         User::observe(UserObserver::class);
         CompanyInfo::observe(AccountsObserver::class);
-        Artisan::call('db:seed');
+        if(SubscriptionPackages::count()==0)
+        {
+            Artisan::call('db:seed');
+
+        }
+        
+
+
+    
     }
 }
