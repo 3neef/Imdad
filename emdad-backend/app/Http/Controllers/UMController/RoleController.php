@@ -27,7 +27,7 @@ class RoleController extends Controller
         * @OA\post(
         * path="/api/v1_0/roles/save",
         * operationId="saveNewRole",
-        * tags={"role"},
+        * tags={"Roles and Permissions"},
         * summary="create role",
         * description="create new role Here",
         *     @OA\RequestBody(
@@ -70,7 +70,7 @@ class RoleController extends Controller
         * @OA\put(
         * path="/api/v1_0/roles/update",
         * operationId="updateRole",
-        * tags={"role"},
+        * tags={"Roles and Permissions"},
         * summary="update role",
         * description="update role Here",
         *     @OA\RequestBody(
@@ -114,7 +114,7 @@ class RoleController extends Controller
         * @OA\delete(
         * path="/api/v1_0/roles/delete/{id}",
         * operationId="deleteRole",
-        * tags={"role"},
+        * tags={"Roles and Permissions"},
         * summary="delete roles",
         * description="delete roles Here",
         *      @OA\Response(
@@ -145,7 +145,7 @@ class RoleController extends Controller
         * @OA\get(
         * path="/api/v1_0/roles/getAll",
         * operationId="getAllRoles",
-        * tags={"role"},
+        * tags={"Roles and Permissions"},
         * summary="get roles",
         * description="get all roles Here",
         *      @OA\Response(
@@ -175,7 +175,7 @@ class RoleController extends Controller
         * @OA\get(
         * path="/api/v1_0/roles/getByRoleId/{id}",
         * operationId="getRole",
-        * tags={"role"},
+        * tags={"Roles and Permissions"},
         * summary="get role by id",
         * description="get role Here",
         *      @OA\Response(
@@ -205,7 +205,7 @@ class RoleController extends Controller
         * @OA\put(
         * path="/api/v1_0/roles/restore/{id}",
         * operationId="restoreRole",
-        * tags={"role"},
+        * tags={"Roles and Permissions"},
         * summary="restore role by id",
         * description="restore role Here",
         *      @OA\Response(
@@ -236,7 +236,7 @@ class RoleController extends Controller
         * @OA\get(
         * path="/api/v1_0/roles/getByType/{type}",
         * operationId="getAllRolesByType",
-        * tags={"role"},
+        * tags={"Roles and Permissions"},
         * summary="get roles by type",
         * description="get all roles by type",
         *      @OA\Response(

@@ -928,6 +928,90 @@
                 }
             }
         },
+        "/api/v1_0/subscriptions/get-buyer-packs": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "get package information",
+                "description": "get buyer package info",
+                "operationId": "get-buyer-packages",
+                "responses": {
+                    "200": {
+                        "description": "supplier packages",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/subscriptions/get-supplier-packs": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "get package information",
+                "description": "get buyer package info",
+                "operationId": "get-supplier-packages",
+                "responses": {
+                    "200": {
+                        "description": "supplier packages",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
         "/api/v1_0/users/login": {
             "post": {
                 "tags": [
@@ -1105,7 +1189,7 @@
         "/api/v1_0/permissions/save": {
             "post": {
                 "tags": [
-                    "permission"
+                    "Roles and Permissions"
                 ],
                 "summary": "save permisssion",
                 "description": "save permission to role Here",
@@ -1250,7 +1334,7 @@
         "/api/v1_0/permissions/update": {
             "put": {
                 "tags": [
-                    "permission"
+                    "Roles and Permissions"
                 ],
                 "summary": "update permisssion",
                 "description": "update permission to specific role Here",
@@ -1388,7 +1472,7 @@
         "/api/v1_0/roles/save": {
             "post": {
                 "tags": [
-                    "role"
+                    "Roles and Permissions"
                 ],
                 "summary": "create role",
                 "description": "create new role Here",
@@ -1451,7 +1535,7 @@
         "/api/v1_0/roles/update": {
             "put": {
                 "tags": [
-                    "role"
+                    "Roles and Permissions"
                 ],
                 "summary": "update role",
                 "description": "update role Here",
@@ -1516,7 +1600,7 @@
         "/api/v1_0/roles/delete/{id}": {
             "delete": {
                 "tags": [
-                    "role"
+                    "Roles and Permissions"
                 ],
                 "summary": "delete roles",
                 "description": "delete roles Here",
@@ -1555,7 +1639,7 @@
         "/api/v1_0/roles/getAll": {
             "get": {
                 "tags": [
-                    "role"
+                    "Roles and Permissions"
                 ],
                 "summary": "get roles",
                 "description": "get all roles Here",
@@ -1592,7 +1676,7 @@
         "/api/v1_0/roles/getByRoleId/{id}": {
             "get": {
                 "tags": [
-                    "role"
+                    "Roles and Permissions"
                 ],
                 "summary": "get role by id",
                 "description": "get role Here",
@@ -1626,7 +1710,7 @@
         "/api/v1_0/roles/restore/{id}": {
             "put": {
                 "tags": [
-                    "role"
+                    "Roles and Permissions"
                 ],
                 "summary": "restore role by id",
                 "description": "restore role Here",
@@ -1665,7 +1749,7 @@
         "/api/v1_0/roles/getByType/{type}": {
             "get": {
                 "tags": [
-                    "role"
+                    "Roles and Permissions"
                 ],
                 "summary": "get roles by type",
                 "description": "get all roles by type",
@@ -2270,7 +2354,6 @@
                                 "type": "object"
                             }
                         },
-                        
                         "application/json": {
                             "schema": {}
                         }
