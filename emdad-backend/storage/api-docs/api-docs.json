@@ -928,6 +928,90 @@
                 }
             }
         },
+        "/api/v1_0/subscriptions/get-buyer-packs": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "get package information",
+                "description": "get buyer package info",
+                "operationId": "get-buyer-packages",
+                "responses": {
+                    "200": {
+                        "description": "supplier packages",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/subscriptions/get-supplier-packs": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "get package information",
+                "description": "get buyer package info",
+                "operationId": "get-supplier-packages",
+                "responses": {
+                    "200": {
+                        "description": "supplier packages",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
         "/api/v1_0/users/login": {
             "post": {
                 "tags": [
