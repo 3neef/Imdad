@@ -1763,6 +1763,43 @@
                 }
             }
         },
+        "/api/v1_0/roles/roles-for-reg": {
+            "get": {
+                "tags": [
+                    "Roles and Permissions"
+                ],
+                "summary": "get roles register",
+                "description": "get roles register Here",
+                "operationId": "getRoleRegister",
+                "responses": {
+                    "200": {
+                        "description": "get roles register",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/roles/restore/{id}": {
             "put": {
                 "tags": [
