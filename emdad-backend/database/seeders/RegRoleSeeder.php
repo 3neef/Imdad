@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -26,6 +27,7 @@ class RegRoleSeeder extends Seeder
                 "name"=>$role['name'],
                   "type"=>$role['type'],
                 "for_reg"=>$role['for_reg'],
+                "created_at"=>Carbon::now()
                ]);
         }
     }

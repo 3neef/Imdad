@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
-    return view('welcome');
+  
+    // return view('welcome');
 });
-Route::get('/installtion',function(){
-    Artisan::call('migrate:fresh');
-    Artisan::call('db:seed');
-});
+

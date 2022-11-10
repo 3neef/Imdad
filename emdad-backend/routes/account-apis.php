@@ -27,6 +27,4 @@ Route::group(['prefix' => 'warehouses'], function() {
     Route::put('restore/{id}',[LocationController::class,'restoreByLocationId']);
 });
 
-Route::group(['prefix' => 'subscriptions'], function() {
-    Route::put('update',[SubscriptionController::class,'updateSubscription']);
-});
+

@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Models\Accounts\CompanyInfo;
-use App\Models\Accounts\SubscriptionPackages;
 use App\Models\Quotations\Quotation;
 use App\Models\rfq\Rfq;
 use App\Models\User;
