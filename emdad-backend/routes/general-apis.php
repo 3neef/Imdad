@@ -22,7 +22,6 @@ Route::group(["prefix"=>"subscriptions"], function ( )
 Route::group(['prefix' => 'installation'], function() {
 
     Route::get('migrate',[SubscriptionController::class,'migration']);
-
     Route::get('seed',[SubscriptionController::class,'seeder']);
     Route::get('fresh',[SubscriptionController::class,'migrateFresh']);
 });

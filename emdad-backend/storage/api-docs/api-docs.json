@@ -1626,6 +1626,9 @@
                                     "properties": {
                                         "massege": {
                                             "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
@@ -1765,12 +1768,7 @@
                         "description": "get all roles",
                         "content": {
                             "multipart/form-data": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object"
-                                    }
-                                }
+                                "schema": {}
                             },
                             "application/json": {
                                 "schema": {}
@@ -1833,18 +1831,24 @@
                 "operationId": "getRoleRegister",
                 "responses": {
                     "200": {
-                        "description": "get roles register",
+                        "description": "",
                         "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object"
-                                    }
-                                }
-                            },
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": "[{'id': 1, 'name': 'GM'}]"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
                             }
                         }
                     },
@@ -1912,12 +1916,7 @@
                         "description": "get all roles by type",
                         "content": {
                             "multipart/form-data": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object"
-                                    }
-                                }
+                                "schema": {}
                             },
                             "application/json": {
                                 "schema": {}

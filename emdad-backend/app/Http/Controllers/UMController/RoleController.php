@@ -54,6 +54,8 @@ class RoleController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               @OA\Property(property="massege", type="string"),
+        *               @OA\Property(property="data", type="string")
+ 
         *            ),
         *        ),
         *       ),
@@ -158,7 +160,6 @@ class RoleController extends Controller
         *          @OA\MediaType(
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
-        *               type="array",@OA\Items(type = "object")
         *            ),
         *        ),
         *       ),
@@ -211,17 +212,16 @@ class RoleController extends Controller
         * tags={"Roles and Permissions"},
         * summary="get roles register",
         * description="get roles register Here",
-        *      @OA\Response(
-        *          response=200,
-        *          description="get roles register",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *                type="array",@OA\Items(type = "object")
-        *            ),
-        *        ),
-        *       ),
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *         @OA\JsonContent(
+     *  @OA\Property(property="success", type="boolean"),
+     *  @OA\Property(property="message", type="string"),
+     *         @OA\Property(property="data", type="string"
+     *          , example="[{'id': 1, 'name': 'GM'}]")
+     *          ),
+     *       ),
         *      @OA\Response(
         *          response=422,
         *          description="Unprocessable Entity"
@@ -278,8 +278,7 @@ class RoleController extends Controller
         *          @OA\JsonContent(),
         *          @OA\MediaType(
         *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="array",@OA\Items(type = "object")
+        *            @OA\Schema(type="array",@OA\Items(type = "object")
         *            ),
         *        ),
         *       ),
