@@ -53,7 +53,7 @@ class RoleController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               @OA\Property(property="massege", type="string"),
+        *               @OA\Property(property="message", type="string"),
         *               @OA\Property(property="data", type="string")
  
         *            ),
@@ -99,7 +99,7 @@ class RoleController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               @OA\Property(property="massege", type="string"),
+        *               @OA\Property(property="message", type="string"),
         *            ),
         *        ),
         *       ),
@@ -130,7 +130,7 @@ class RoleController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               @OA\Property(property="massege", type="string")
+        *               @OA\Property(property="message", type="string")
         *            ),
         *        ),
         *       ),
@@ -249,7 +249,7 @@ class RoleController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               @OA\Property(property="massege", type="string")
+        *               @OA\Property(property="message", type="string")
         *            ),
         *        ),
         *       ),

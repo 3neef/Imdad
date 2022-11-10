@@ -1624,7 +1624,7 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "massege": {
+                                        "message": {
                                             "type": "string"
                                         },
                                         "data": {
@@ -1692,7 +1692,7 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "massege": {
+                                        "message": {
                                             "type": "string"
                                         }
                                     },
@@ -1731,7 +1731,7 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "massege": {
+                                        "message": {
                                             "type": "string"
                                         }
                                     },
@@ -1879,7 +1879,7 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "massege": {
+                                        "message": {
                                             "type": "string"
                                         }
                                     },
