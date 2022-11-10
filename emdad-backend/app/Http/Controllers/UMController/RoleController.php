@@ -202,7 +202,32 @@ class RoleController extends Controller
     {
         return $this->roleServices->showById($id);
     }
-
+       /**
+        * @OA\get(
+        * path="/api/v1_0/roles/roles-for-reg",
+        * operationId="getRoleRegister",
+        * tags={"Roles and Permissions"},
+        * summary="get roles register",
+        * description="get roles register Here",
+        *      @OA\Response(
+        *          response=200,
+        *          description="get roles register",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *                type="array",@OA\Items(type = "object")
+        *            ),
+        *        ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity"
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function getRolesForReg(Request $request)
     {
         return response()->json(["success"=>true,"data"=>RoleResponse::collection(Roles::where("for_req",1)->get)],200);
