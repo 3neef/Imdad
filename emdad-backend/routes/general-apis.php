@@ -20,27 +20,11 @@ Route::group(["prefix"=>"subscriptions"], function ( )
 
 
 Route::group(['prefix' => 'installation'], function() {
-    /**
-        * @OA\get(
-        * path="/api/v1_0/installation/migrate",
-        * operationId="migrateDb",
-        * tags={"Platform Settings"},
 
-        * summary="migrate db",
-        * description="migrate db Here",
-        *      @OA\Response(
-        *        response=200,
-        *          description="",
-        *         @OA\JsonContent(
-        *         @OA\Property(property="message", type="string", example="{'message': "Migrate Command run succssfly"}")
-        *          ),
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
     Route::get('migrate',[SubscriptionController::class,'migration']);
 
     Route::get('seed',[SubscriptionController::class,'seeder']);
+    Route::get('fresh',[SubscriptionController::class,'migrateFresh']);
 });
 
 

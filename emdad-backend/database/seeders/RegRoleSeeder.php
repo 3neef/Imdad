@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RegRoleSeeder extends Seeder
 {
@@ -23,7 +24,7 @@ class RegRoleSeeder extends Seeder
 
         foreach ($roles as $role) {
             # code...
-            \DB::table('roles')->insert([
+            DB::table('roles')->insert([
                 "name"=>$role['name'],
                   "type"=>$role['type'],
                 "for_reg"=>$role['for_reg'],

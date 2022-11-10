@@ -232,7 +232,7 @@ class RoleController extends Controller
         */
     public function getRolesForReg(Request $request)
     {
-        return response()->json(["success"=>true,"data"=>RoleResponse::collection(Role::where("for_reg",0)->get())],200);
+        return response()->json(["success"=>true,"data"=>RoleResponse::collection(Role::where("for_reg",1)->get())],200);
     }
         /**
         * @OA\put(

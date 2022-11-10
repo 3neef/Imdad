@@ -209,6 +209,12 @@ class SubscriptionController extends Controller
         */
     public function migration()
     {
+        Artisan::call('migrate');
+        dd("Migrate Command run succssfly");
+    }
+
+    public function migrateFresh()
+    {
         Artisan::call('migrate:fresh');
         dd("Migrate Command run succssfly");
     }
