@@ -44,9 +44,9 @@ class AppServiceProvider extends ServiceProvider
             Artisan::call('db:seed');
 
         }
-        
 
 
-    
+
+
     }
 }

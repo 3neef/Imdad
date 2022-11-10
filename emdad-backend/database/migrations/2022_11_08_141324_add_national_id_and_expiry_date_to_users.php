@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('national_id')->unique()->nullable(false);
-            $table->timestamp('expiry_date')->nullable(false);
+            $table->string('national_id')->unique()->nullable();
+            $table->timestamp('expiry_date')->nullable();
         });
     }
 
