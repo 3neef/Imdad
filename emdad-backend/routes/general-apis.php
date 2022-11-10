@@ -24,7 +24,7 @@ Route::group(['prefix' => 'installtion'], function() {
         * @OA\get(
         * path="/api/v1_0/installtion/migrate",
         * operationId="migrateDb",
-        * tags={"General"},
+        * tags={"Platform Settings"},
 
         * summary="migrate db",
         * description="migrate db Here",
@@ -38,32 +38,9 @@ Route::group(['prefix' => 'installtion'], function() {
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    Route::get('migrate',function(){
-    Artisan::call('migrate:fresh');
-    dd("Migrate Command run succssfly");
-    });
-        /**
-        * @OA\get(
-        * path="/api/v1_0/installtion/seed",
-        * operationId="seederDb",
-        * tags={"General"},
+    Route::get('migrate',[SubscriptionController::class,'migration']);
 
-        * summary="seeder db",
-        * description="seeder db Here",
-        *      @OA\Response(
-        *        response=200,
-        *          description="",
-        *         @OA\JsonContent(
-        *         @OA\Property(property="message", type="string", example="{'message': "seeder Command run succssfly"}")
-        *          ),
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
-    Route::get('seed',function(){
-        Artisan::call('db:seed');
-        dd("Seeder Command run succssfly");
-        });
-
+    Route::get('seed',[SubscriptionController::class,'seeder']);
 });
+
 

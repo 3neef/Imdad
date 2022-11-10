@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Accounts;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Artisan;
+use App\Models\Accounts\SubscriptionPackages;
+use App\Http\Resources\General\CreateSubPackageRequest;
+use App\Http\Services\AccountServices\SubscriptionService;
+use App\Http\Resources\SetupResources\SubscriptionPackageResource;
 use App\Http\Requests\AccountRequests\Subscription\UpdateSubscriptionRequest;
 use App\Http\Requests\General\CreateSubPackageRequest as GeneralCreateSubPackageRequest;
-use App\Http\Resources\General\CreateSubPackageRequest;
-use App\Http\Resources\SetupResources\SubscriptionPackageResource;
-use App\Http\Services\AccountServices\SubscriptionService;
-use App\Models\Accounts\SubscriptionPackages;
 
 class SubscriptionController extends Controller
 {
@@ -165,6 +166,51 @@ class SubscriptionController extends Controller
     {
 
         return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->get())], 200);
+    }
+
+        /**
+        * @OA\get(
+        * path="/api/v1_0/installtion/seed",
+        * operationId="seederDb",
+        * tags={"Platform Settings"},
+        * summary="seeder db",
+        * description="seeder db Here",
+        *      @OA\Response(
+        *        response=200,
+        *          description="",
+        *         @OA\JsonContent(
+        *         @OA\Property(property="message", type="string")
+        *          )
+        *       ),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+    public function seeder()
+    {
+        Artisan::call('db:seed');
+        dd("Seeder Command run succssfly");
+    }
+            /**
+        * @OA\get(
+        * path="/api/v1_0/installtion/migrate",
+        * operationId="migrateDb",
+        * tags={"Platform Settings"},
+        * summary="migrate db",
+        * description="migrate db Here",
+        *      @OA\Response(
+        *        response=200,
+        *          description="",
+        *         @OA\JsonContent(
+        *         @OA\Property(property="message", type="string")
+        *          )
+        *       ),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+    public function migration()
+    {
+        Artisan::call('migrate:fresh');
+        dd("Migrate Command run succssfly");
     }
 }
 
