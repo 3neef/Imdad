@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('roles', function (Blueprint $table) {
-           // $table->boolean()->default(0)->comment('');
+           $table->boolean('for_reg')->default(0)->comment('0=false 1=true');
+           $table->unsignedInteger('company_id')->nullable();
         });
     }
 

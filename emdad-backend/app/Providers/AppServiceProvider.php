@@ -39,11 +39,11 @@ class AppServiceProvider extends ServiceProvider
         Quotation::observe(QuotationObserver::class);
         User::observe(UserObserver::class);
         CompanyInfo::observe(AccountsObserver::class);
-        if(SubscriptionPackages::count()==0)
-        {
-            Artisan::call('db:seed');
+        // if(SubscriptionPackages::count()==0)
+        // {
+        //     Artisan::call('db:seed');
 
-        }
+        // }
 
 
 
