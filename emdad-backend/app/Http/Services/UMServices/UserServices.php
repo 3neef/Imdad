@@ -28,6 +28,7 @@ class UserServices
         $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
         $user->forget_pass = 0;
+        $user->lang = isset($request->lang)?$request->lang:"en";
         $result = $user->save();
         if ($result) {
             return response()->json([
@@ -46,6 +47,8 @@ class UserServices
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
+        $user->lang = isset($request->lang)?$request->lang:"en";
+
         $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
         $user->forget_pass = 0;
@@ -68,6 +71,8 @@ class UserServices
             return response()->json(['error' => 'this route supported put method only'], 402);
         }
         $user = User::find($request->get('id'));
+        $user->lang = empty($request->get('lang')) ? $user->value('lang') : $request->get('lang');
+
         $name = empty($request->get('name')) ? $user->value('name') : $request->get('name');
         $email = empty($request->get('email')) ? $user->value('email') : $request->get('email');
         $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');

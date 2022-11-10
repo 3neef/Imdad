@@ -5,6 +5,7 @@ namespace App\Http\Requests\UMRequests\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class CreateUserRequest extends FormRequest
 {
@@ -26,19 +27,21 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            "name"=>"required|string|max:50|unique:users",
-            "password"=>"required|string|min:8|max:50",
-            "email"=>"required|email|string|max:255",
-            "mobile"=>"required|min:9|max:14|string",
-            "defaultCompany"=> "integer|exists:company_info,id"
+            "name" => "required|string|max:50|unique:users",
+            "password" => "required|string|min:8|max:50",
+            "email" => "required|email|string|max:255",
+            "mobile" => "required|min:9|max:14|string",
+            "defaultCompany" => "integer|exists:company_info,id",
+            "lang" => Rule::in("en", "ar")
         ];
-        if($this->path() == 'api/users/createUser'){
+        if ($this->path() == 'api/users/createUser') {
             $rules = [
-                "name"=>"required|string|max:50|unique:users",
-                "email"=>"required|email|string|max:255",
-                "mobile"=>"required|min:9|max:14|string",
-                "roleId"=> "required|integer|exists:roles,id",
-                "companyId"=> "required|integer|exists:company_info,id"
+                "name" => "required|string|max:50|unique:users",
+                "email" => "required|email|string|max:255",
+                "mobile" => "required|min:9|max:14|string",
+                "roleId" => "required|integer|exists:roles,id",
+                "lang" => Rule::in("en", "ar"),
+                "companyId" => "required|integer|exists:company_info,id"
             ];
         }
         return $rules;
@@ -58,7 +61,6 @@ class CreateUserRequest extends FormRequest
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException( response()->json(["errors"=>$validator->errors()],422));
+        throw new HttpResponseException(response()->json(["errors" => $validator->errors()], 422));
     }
-
 }
