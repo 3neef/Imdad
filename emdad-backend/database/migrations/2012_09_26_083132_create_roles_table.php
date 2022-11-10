@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+
             $table->tinyInteger('type')->comment("0=emdad,1=buyer,2=supplier");
             $table->softDeletes();
             $table->timestamps();

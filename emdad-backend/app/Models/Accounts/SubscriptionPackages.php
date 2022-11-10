@@ -9,6 +9,6 @@ class SubscriptionPackages extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'subscription_name', 'subscription_details', 'created_at', 'type'
+        'subscription_name', 'subscription_details',  'type'
     ];
 }

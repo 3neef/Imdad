@@ -5,6 +5,8 @@ use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
 
 class SubscriptionService{
+
+
     public function update($request)
     {
         $id = $request->get('id');
@@ -21,6 +23,19 @@ class SubscriptionService{
             return response()->json( [ 'message'=>'updated successfully' ], 200 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
+    }
+
+
+    public function create($request)
+    {
+       
+     $subscription=new SubscriptionPackages();
+     $subscription->subscription_name=$request->packageName;
+     $subscription->type=$request->type;
+     $subscription->subscription_details=json_encode($request->subscriptionDetails);
+
+     $subscription->save();
+            return response()->json( [ 'message'=>'created successfully' ], 200 );
     }
 
 }

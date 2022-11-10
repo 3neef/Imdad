@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
          $this->call([
            SubscriptionPackagesSeeder::class,
+           RegRoleSeeder::class
          ]);
         // \App\Models\User::factory(10)->create();
 

@@ -868,6 +868,62 @@
                 }
             }
         },
+        "/api/v1_0/subscriptions/create": {
+            "post": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "create Subscription packages",
+                "description": "create Subscription package",
+                "operationId": "create-sub-packages",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "packageName",
+                                    "type",
+                                    "subscriptionDetails",
+                                    "subscriptionDetails.superAdmin"
+                                ],
+                                "properties": {
+                                    "packageName": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionDetails": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionDetails.superAdmin": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
         "/api/v1_0/subscriptions/update": {
             "put": {
                 "tags": [

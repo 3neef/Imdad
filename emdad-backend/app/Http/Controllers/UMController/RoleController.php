@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\UMController;
+use App\Http\Resources\UMResources\Role\RoleResponse;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\UMServices\RoleServices;
@@ -12,7 +13,7 @@ use App\Http\Requests\UMRequests\Role\RestoreRoleByIdRequest;
 class RoleController extends Controller
 {
     protected RoleServices $roleServices;
- 
+
     /**
      * Create a new controller instance.
      *
@@ -201,7 +202,12 @@ class RoleController extends Controller
     {
         return $this->roleServices->showById($id);
     }
-       /**
+
+    public function getRolesForReg(Request $request)
+    {
+        return response()->json(["success"=>true,"data"=>RoleResponse::collection(Roles::where("for_req",1)->get)],200);
+    }
+        /**
         * @OA\put(
         * path="/api/v1_0/roles/restore/{id}",
         * operationId="restoreRole",

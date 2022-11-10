@@ -13,7 +13,8 @@ class CategoryService
             return response()->json([
                 'errors' => 'error in created'
             ]);
-        } else {
+        }
+        else {
             $aproved = 0;
             $parentid = 0;
             $category = Categories::create([
@@ -25,7 +26,7 @@ class CategoryService
             ]);
 
             return response()->json(['message' => 'created successfully'],201);
-        }
+             }
     }
 
 

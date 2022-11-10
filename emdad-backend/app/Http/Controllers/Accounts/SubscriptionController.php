@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Accounts;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountRequests\Subscription\UpdateSubscriptionRequest;
+use App\Http\Requests\General\CreateSubPackageRequest as GeneralCreateSubPackageRequest;
+use App\Http\Resources\General\CreateSubPackageRequest;
 use App\Http\Resources\SetupResources\SubscriptionPackageResource;
 use App\Http\Services\AccountServices\SubscriptionService;
 use App\Models\Accounts\SubscriptionPackages;
@@ -22,6 +24,42 @@ class SubscriptionController extends Controller
     public function __construct(SubscriptionService $subscriptionService)
     {
         $this->subscriptionService = $subscriptionService;
+    }
+
+     /**
+     * @OA\post(
+     * path="/api/v1_0/subscriptions/create",
+     * operationId="create-sub-packages",
+     * tags={"Platform Settings"},
+     * summary="create Subscription packages",
+     * description="create Subscription package",
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"packageName","type","subscriptionDetails","subscriptionDetails.superAdmin"},
+     *                @OA\Property(property="packageName", type="string"),
+     *                @OA\Property(property="type", type="integer"),
+     *                @OA\Property(property="subscriptionDetails", type="integer"),
+     *                @OA\Property(property="subscriptionDetails.superAdmin", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *        response=200,
+     *          description="created successfully",
+     *       ),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=422, description="Validation error"),
+     *      @OA\Response(response=500, description="system error")
+     * )
+     */
+    public function createPackage(GeneralCreateSubPackageRequest $request)
+    {
+        return $this->subscriptionService->create($request);
+        
     }
     /**
      * @OA\put(
@@ -91,7 +129,7 @@ class SubscriptionController extends Controller
     public function getBuyerPackages(Request $request)
     {
 
-        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 0)->get())], 200);
+        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->get())], 200);
     }
 
 
@@ -126,7 +164,7 @@ class SubscriptionController extends Controller
     public function getSupplierPackages(Request $request)
     {
 
-        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->get())], 200);
+        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->get())], 200);
     }
 }
 

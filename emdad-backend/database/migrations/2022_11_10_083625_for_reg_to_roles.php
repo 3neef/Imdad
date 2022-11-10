@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('national_id')->unique()->nullable();
-            $table->timestamp('expiry_date')->nullable();
+        Schema::table('roles', function (Blueprint $table) {
+           $table->boolean('for_reg')->default(0)->comment('0=false 1=true');
+           $table->unsignedInteger('company_id')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('roles', function (Blueprint $table) {
             //
         });
     }
