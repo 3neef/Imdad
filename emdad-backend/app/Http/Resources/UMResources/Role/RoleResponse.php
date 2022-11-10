@@ -16,8 +16,8 @@ class RoleResponse extends JsonResource
     {
         return [
             "id" =>$this->id,
-            "name" =>$this->name, 
-            "type" =>$this->type, 
+            "name" =>$this->name,
+            "type" =>$this->type,
         ];
     }
 }

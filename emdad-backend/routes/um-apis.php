@@ -46,4 +46,6 @@ Route::group(['prefix' => 'roles'], function() {
     Route::put('update',[RoleController::class,'updateRole']);
     Route::delete('delete/{id}',[RoleController::class,'deleteRole']);
     Route::put('restore/{id}',[RoleController::class,'restoreByRoleId']);
+    Route::get('roles-for-reg',[RoleController::class,'getRolesForReg']);
+
 });
