@@ -9,6 +9,8 @@ use App\Http\Requests\UMRequests\Role\GetRoleRequest;
 use App\Http\Requests\UMRequests\Role\CreateRoleRequest;
 use App\Http\Requests\UMRequests\Role\GetRoleByIdRequest;
 use App\Http\Requests\UMRequests\Role\RestoreRoleByIdRequest;
+use App\Models\UM\Role;
+use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
@@ -230,7 +232,7 @@ class RoleController extends Controller
         */
     public function getRolesForReg(Request $request)
     {
-        return response()->json(["success"=>true,"data"=>RoleResponse::collection(Roles::where("for_req",1)->get)],200);
+        return response()->json(["success"=>true,"data"=>RoleResponse::collection(Role::where("for_reg",0)->get())],200);
     }
         /**
         * @OA\put(

@@ -17,8 +17,8 @@ class RegRoleSeeder extends Seeder
     {
         $roles=[
             ["name"=>"GM","type"=>0 ,"for_reg"=>1],
-            ["name"=>"CEO","type"=>1 ,"for_reg"=>1],
-            ["name"=>"OWNER","type"=>2 ,"for_reg"=>1],
+            ["name"=>"CEO","type"=>0 ,"for_reg"=>1],
+            ["name"=>"OWNER","type"=>0 ,"for_reg"=>1],
         ];
 
         foreach ($roles as $role) {

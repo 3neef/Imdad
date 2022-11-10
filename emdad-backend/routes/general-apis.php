@@ -19,10 +19,10 @@ Route::group(["prefix"=>"subscriptions"], function ( )
 });
 
 
-Route::group(['prefix' => 'installtion'], function() {
+Route::group(['prefix' => 'installation'], function() {
     /**
         * @OA\get(
-        * path="/api/v1_0/installtion/migrate",
+        * path="/api/v1_0/installation/migrate",
         * operationId="migrateDb",
         * tags={"Platform Settings"},
 
