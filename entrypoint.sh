@@ -19,16 +19,24 @@ fi
 chown -R nobody. ../emdad-backend
 
 if [ -d "vendor" ]; then
-        if [ -f "Done.txt" ]; then
-                php artisan optimize
-                php artisan view:cache
-        else
+#        if [ -f "Done.txt" ]; then
+#                php artisan optimize
+#                php artisan view:cache
+#        else
+#                php artisan migrate
+#                php artisan l5-swagger:generate
+#                php artisan optimize
+#                php artisan view:cache
+#                touch Done.txt
+#        fi
+        if [ ! -f "Done.txt" ]; then
                 php artisan migrate
                 php artisan l5-swagger:generate
-                php artisan optimize
-                php artisan view:cache
                 touch Done.txt
         fi
+        php artisan optimize
+        php artisan view:cache
+        php artisan queue:work
 fi
 
 exec supervisord -c /etc/supervisord.conf
