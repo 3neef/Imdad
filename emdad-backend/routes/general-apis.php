@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Accounts\SubscriptionController;
+use App\Http\Controllers\emdad\WathiqController;
 use App\Http\Controllers\SmsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -24,6 +25,13 @@ Route::group(['prefix' => 'installation'], function() {
     Route::get('migrate',[SubscriptionController::class,'migration']);
     Route::get('seed',[SubscriptionController::class,'seeder']);
     Route::get('fresh',[SubscriptionController::class,'migrateFresh']);
+});
+
+
+Route::group(['prefix' => 'wathiq'], function() {
+
+    Route::get('relatedCr',[WathiqController::class,'getRelatedCompanies']);
+   
 });
 
 
