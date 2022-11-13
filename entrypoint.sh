@@ -36,7 +36,7 @@ if [ -d "vendor" ]; then
         fi
         php artisan optimize
         php artisan view:cache
-#        php artisan queue:work
+        php artisan queue:work &
 fi
 
 exec supervisord -c /etc/supervisord.conf
