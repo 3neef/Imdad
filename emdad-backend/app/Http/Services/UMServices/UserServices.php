@@ -9,7 +9,6 @@ use App\Models\UM\Role;
 use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
-use App\Http\Requests\UMRequests\User\ActivateRequest;
 
 class UserServices
 {
@@ -20,7 +19,11 @@ class UserServices
         $user = new User();
         $otp = rand(100000, 999999);
         $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
-        $user->name = $request->get('name');
+        $fullname = $request->get('firstName').''.$request->get('lastName');
+        $user->first_name = $request->get('firstName');
+        $user->last_name = $request->get('lastName');
+        $user->full_name = $fullname;
+        $user->national_id = $request->get('idNational');
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
         $user->password = $request->get('password');
@@ -44,7 +47,10 @@ class UserServices
         $user = new User();
         $otp = rand(100000, 999999);
         $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
-        $user->name = $request->get('name');
+        $fullname = $request->get('firstName').''.$request->get('lastName');
+        $user->full_name = $fullname;
+        $user->first_name = $request->get('firstName');
+        $user->last_name = $request->get('lastName');
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
         $user->lang = isset($request->lang)?$request->lang:"en";
@@ -72,8 +78,9 @@ class UserServices
         }
         $user = User::find($request->get('id'));
         $user->lang = empty($request->get('lang')) ? $user->value('lang') : $request->get('lang');
-
-        $name = empty($request->get('name')) ? $user->value('name') : $request->get('name');
+        $fullname = empty($request->get('fullName')) ? $user->value('full_name') : $request->get('fullName');
+        $firstname = empty($request->get('firstName')) ? $user->value('first_name') : $request->get('firstName');
+        $lastname = empty($request->get('lastName')) ? $user->value('last_name') : $request->get('lastName');
         $email = empty($request->get('email')) ? $user->value('email') : $request->get('email');
         $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
         $companyId = $request->get('defaultCompany');
@@ -83,7 +90,9 @@ class UserServices
         $userRoleCompany->company_info_id =$companyId;
         $userRoleCompany->update();
         $result = $user->update([
-            'name' => $name,
+            'full_name' => $fullname,
+            'first_name' => $firstname,
+            'last_name' => $lastname,
             'email' => $email,
             'mobile' => $mobile,
         ]);
@@ -232,7 +241,7 @@ class UserServices
             'forget_pass' => 1
         ]);
         if ($result) {
-            MailController::forgetPasswordEmail($user->name, $user->email, $user->otp);
+            MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp);
             return response()->json([
                 'message' => 'OTP has been created successfully',
                 'OTP' => $otp,

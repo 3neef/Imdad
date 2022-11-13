@@ -18,16 +18,152 @@ use App\Http\Requests\UMRequests\User\UpdateRequest;
 
 class AuthController extends Controller
 {
+           /**
+        * @OA\Post(
+        * path="/api/v1_0/users/register",
+        * operationId="registerUser",
+        * tags={"UM & Permissions"},
+        * summary="Register User",
+        * description="Register User Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"firstName","lastName","password","email","mobile","idNational"},
+        *               @OA\Property(property="firstName", type="string"),
+        *               @OA\Property(property="lastName", type="string"),
+        *               @OA\Property(property="password", type="string"),
+        *               @OA\Property(property="email", type="email"),
+        *               @OA\Property(property="mobile", type="string"),
+        *               @OA\Property(property="idNational", type="string")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="User created successfully",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string"),
+        *               @OA\Property(property="data", type="object")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function createUser(CreateUserRequest $request,UserServices $userServices)
     {
         return $userServices->create($request);
     }
-
+           /**
+        * @OA\Post(
+        * path="/api/v1_0/users/createUser",
+        * operationId="creatUserToCompany",
+        * tags={"UM & Permissions"},
+        * summary="create User to company",
+        * description="create User to specific company Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"firstName","lastName","roleId","email","mobile","companyId"},
+        *               @OA\Property(property="firstName", type="string"),
+        *               @OA\Property(property="lastName", type="string"),
+        *               @OA\Property(property="roleId", type="integer"),
+        *               @OA\Property(property="email", type="email"),
+        *               @OA\Property(property="mobile", type="string"),
+        *               @OA\Property(property="companyId", type="integer")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="User created successfully",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string"),
+        *               @OA\Property(property="data", type="object")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function createUserToCompany(CreateUserRequest $request,UserServices $userServices)
     {
         return $userServices->createUserToCompany($request);
     }
-
+           /**
+        * @OA\put(
+        * path="/api/v1_0/users/update",
+        * operationId="updateUser",
+        * tags={"UM & Permissions"},
+        * summary="update User",
+        * description="update User Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"id"},
+        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="password", type="string"),
+        *               @OA\Property(property="fullName", type="string"),
+        *               @OA\Property(property="firstName", type="string"),
+        *               @OA\Property(property="lastName", type="string"),
+        *               @OA\Property(property="roleId", type="integer"),
+        *               @OA\Property(property="email", type="email"),
+        *               @OA\Property(property="mobile", type="string"),
+        *               @OA\Property(property="companyId", type="integer")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="User updated successfully",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string"),
+        *               @OA\Property(property="data", type = "object")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function updateUser(UpdateRequest $request ,UserServices $userServices)
     {
         return $userServices->update($request);
@@ -122,47 +258,343 @@ class AuthController extends Controller
     {
         return $userServices->activate($request);
     }
-
+       /**
+        * @OA\Post(
+        * path="/api/v1_0/users/logout",
+        * operationId="Logout",
+        * tags={"UM & Permissions"},
+        * summary="User Logout",
+        * description="Logout User Here",
+        *      @OA\Response(
+        *          response=200,
+        *          description="Logged out",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function logoutUser(GetUserRequest $request ,UserServices $userServices)
     {
         return $userServices->logout($request);
     }
-
+       /**
+        * @OA\delete(
+        * path="/api/v1_0/users/delete/{id}",
+        * operationId="deleteUser",
+        * tags={"UM & Permissions"},
+        * summary="Delete User",
+        * description="delete user here",
+        *      @OA\Response(
+        *          response=301,
+        *          description="User deleted successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function deleteUser(GetUserByIdRequest $request, $id, UserServices $userServices)
     {
         return $userServices->delete($id);
     }
-
+       /**
+        * @OA\put(
+        * path="/api/v1_0/users/restore/{id}",
+        * operationId="restoreUser",
+        * tags={"UM & Permissions"},
+        * summary="Restore User",
+        * description="restore user here",
+        *      @OA\Response(
+        *          response=200,
+        *          description="User restored successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function restoreUser(RestoreUserByIdRequest $request, $id,UserServices $userServices)
     {
         return $userServices->restoreById($id);
     }
-
+       /**
+        * @OA\put(
+        * path="/api/v1_0/users/forgot-password",
+        * operationId="forgotPassword",
+        * tags={"UM & Permissions"},
+        * summary="forgot password",
+        * description="forgot password Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"email"},
+        *               @OA\Property(property="email", type="email")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="sended otp",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string"),
+        *               @OA\Property(property="OTP", type="integer"),
+        *               @OA\Property(property="otpExpiresAt", type="string")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function forgotPassword(ForgotPasswordRequest $request, UserServices $userServices)
     {
         return $userServices->forgotPassword($request);
     }
-
+       /**
+        * @OA\put(
+        * path="/api/v1_0/users/reset-password",
+        * operationId="resetPassword",
+        * tags={"UM & Permissions"},
+        * summary="reset password",
+        * description="reset password Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"email","oldPassword","newPassword"},
+        *               @OA\Property(property="email", type="email"),
+        *               @OA\Property(property="oldPassword", type="string"),
+        *               @OA\Property(property="newPassword", type="string")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Password has been reset successfully!!",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function resetPassword(ResetPasswordRequest $request, UserServices $userServices)
     {
         return $userServices->resetPassword($request);
     }
-
+       /**
+        * @OA\post(
+        * path="/api/v1_0/users/assginRole",
+        * operationId="assginRole",
+        * tags={"UM & Permissions"},
+        * summary="assgin Role",
+        * description="assgin Role Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"userId","role","companyId"},
+        *               @OA\Property(property="userId", type="integer"),
+        *               @OA\Property(property="role", type="string,integer"),
+        *               @OA\Property(property="companyId", type="integer")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="assign role successfully",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity"
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function assignRole(AssignRoleRequest $request,UserServices $userServices)
     {
         return $userServices->assignRole($request);
     }
-
+       /**
+        * @OA\post(
+        * path="/api/v1_0/users/unAssginRole",
+        * operationId="unassginRole",
+        * tags={"UM & Permissions"},
+        * summary="assgin Role",
+        * description="assgin Role Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"userId","companyId"},
+        *               @OA\Property(property="userId", type="integer"),
+        *               @OA\Property(property="companyId", type="integer")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="unassign role successfully",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity"
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function unAssignRole(AssignRoleRequest $request,UserServices $userServices)
     {
         return $userServices->unAssignRole($request);
     }
-
+       /**
+        * @OA\post(
+        * path="/api/v1_0/users/oldRole",
+        * operationId="restoreOldRole",
+        * tags={"UM & Permissions"},
+        * summary="restore old Role",
+        * description="restore old Role Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"userId","companyId"},
+        *               @OA\Property(property="userId", type="integer"),
+        *               @OA\Property(property="companyId", type="integer")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="restored successfully'",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function restoreOldRole(AssignRoleRequest $request,UserServices $userServices)
     {
         return $userServices->restoreOldRole($request);
     }
-
+       /**
+        * @OA\put(
+        * path="/api/v1_0/users/setDefaultCompany",
+        * operationId="defaultCompany",
+        * tags={"UM & Permissions"},
+        * summary="set default company",
+        * description="set default company Here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"id","companyId"},
+        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="companyId", type="integer")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Default company successfully'",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string"),
+        *               @OA\Property(property="data",type = "object")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function setDefaultCompany(DefaultCompanyRequest $request,UserServices $userServices)
     {
         return $userServices->setDefaultCompany($request);

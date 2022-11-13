@@ -27,21 +27,24 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            "name" => "required|string|max:50|unique:users",
-            "password" => "required|string|min:8|max:50",
-            "email" => "required|email|string|max:255",
-            "mobile" => "required|min:9|max:14|string",
-            "defaultCompany" => "integer|exists:company_info,id",
+            "firstName"=>"required|string|max:50|unique:users,first_name",
+            "lastName"=>"required|string|max:50|unique:users,last_name",
+            "password"=>"required|string|min:8|max:50",
+            "email"=>"required|email|string|max:255",
+            "mobile"=>"required|min:9|max:14|string",
+            "idNational"=> "required|string|min:12|max:12",
+            "defaultCompany"=> "integer|exists:company_info,id",
             "lang" => Rule::in("en", "ar")
         ];
         if ($this->path() == 'api/users/createUser') {
             $rules = [
-                "name" => "required|string|max:50|unique:users",
-                "email" => "required|email|string|max:255",
-                "mobile" => "required|min:9|max:14|string",
-                "roleId" => "required|integer|exists:roles,id",
+                "firstName"=>"required|string|max:50|unique:users",
+                "lastName"=>"required|string|max:50|unique:users",
+                "email"=>"required|email|string|max:255",
+                "mobile"=>"required|min:9|max:14|string",
+                "roleId"=> "required|integer|exists:roles,id",
                 "lang" => Rule::in("en", "ar"),
-                "companyId" => "required|integer|exists:company_info,id"
+                "companyId"=> "required|integer|exists:company_info,id"
             ];
         }
         return $rules;
