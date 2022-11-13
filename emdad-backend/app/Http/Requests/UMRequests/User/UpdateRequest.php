@@ -27,7 +27,9 @@ class UpdateRequest extends FormRequest
     {
         return [
             'id' => "required|integer|exists:users,id",
-            "name"=>"string|max:50",
+            "fullName"=>"string|max:50",
+            "firstName"=>"string|max:50",
+            "lastName"=>"string|max:50",
             "password"=>"string|min:8|max:50",
             "email"=>"email|string|max:255",
             "mobile"=>"min:9|max:14|string",
