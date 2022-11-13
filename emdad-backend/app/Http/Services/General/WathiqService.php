@@ -4,6 +4,8 @@ namespace App\Http\Services\General;
 
 use App\Models\Emdad\RelatedCompanies;
 
+use function PHPUnit\Framework\isEmpty;
+
 class WathiqService
 {
     public function getRelatedCompanies($id, $idType)
@@ -28,15 +30,16 @@ class WathiqService
         $response = curl_exec($curl);
 
         curl_close($curl);
-      
-        foreach (json_decode($response) as $relatedCompany) {
-            $related=new RelatedCompanies();
-            $related->cr_name=$relatedCompany->crName;
-            $related->business_type=$relatedCompany->businessType->name;
-            $related->relation=$relatedCompany->relation->name;
-            $related->identity=$id;
-            $related->identity_type=$idType;
-            $related->save();
+        if (!isEmpty(json_decode($response)->code)) {
+            foreach (json_decode($response) as $relatedCompany) {
+                $related = new RelatedCompanies();
+                $related->cr_name = $relatedCompany->crName;
+                $related->business_type = $relatedCompany->businessType->name;
+                $related->relation = $relatedCompany->relation->name;
+                $related->identity = $id;
+                $related->identity_type = $idType;
+                $related->save();
+            }
         }
     }
 }
