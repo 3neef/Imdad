@@ -2098,6 +2098,75 @@
                 }
             }
         },
+        "/api/v1_0/coupon/show": {
+            "get": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "show all  coupons",
+                "description": "show all  coupons Here",
+                "operationId": "showallcoupons",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Maincatogre": {
+                                            "type": "integer",
+                                            "example": "{'id': 1, 'code': 1234567 ,'used': 0, 'allowed': 1, 'startdate': 2022-1-1, 'enddate': 2022-2-1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/coupon/used/{coupon}": {
+            "put": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "used Coupon ",
+                "description": " used Coupon Here",
+                "operationId": "usedcoupon",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "code"
+                                ],
+                                "properties": {
+                                    "code": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "coupon used Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "301": {
+                        "description": "can,t use coupon"
+                    }
+                }
+            }
+        },
         "/api/v1_0/sendSms": {
             "get": {
                 "tags": [
@@ -2140,10 +2209,17 @@
                 }
             }
         },
+<<<<<<< Updated upstream
         "/api/v1_0/subscriptionPayment/subscriptionPayment": {
             "get": {
                 "tags": [
                     "General"
+=======
+        "/api/v1_0/accounts/subscriptionPayment": {
+            "get": {
+                "tags": [
+                    "Accounts"
+>>>>>>> Stashed changes
                 ],
                 "summary": "create subscriptionPayment",
                 "description": "create subscriptionPayment",
