@@ -431,7 +431,7 @@
         "/api/v1_0/warehouses/create": {
             "post": {
                 "tags": [
-                    "Account"
+                    "warehouse"
                 ],
                 "summary": "create warehouse",
                 "description": "create warehouse Here",
@@ -510,7 +510,7 @@
         "/api/v1_0/warehouses/update": {
             "put": {
                 "tags": [
-                    "Account"
+                    "warehouse"
                 ],
                 "summary": "update warehouse",
                 "description": "update warehouse Here",
@@ -587,7 +587,7 @@
         "/api/v1_0/warehouses/getAll": {
             "get": {
                 "tags": [
-                    "Account"
+                    "warehouse"
                 ],
                 "summary": "get all warehouse",
                 "description": "get all warehouses Here",
@@ -624,7 +624,7 @@
         "/api/v1_0/warehouses/getByCompanyId/{companyId}": {
             "get": {
                 "tags": [
-                    "Account"
+                    "warehouse"
                 ],
                 "summary": "get warehouse by company id",
                 "description": "get warehouse by company id Here",
@@ -658,7 +658,7 @@
         "/api/v1_0/warehouses/getByUserId/{userId}'": {
             "get": {
                 "tags": [
-                    "Account"
+                    "warehouse"
                 ],
                 "summary": "get warehouse By UserId",
                 "description": "get warehouse By UserId Here",
@@ -692,7 +692,7 @@
         "/api/v1_0/warehouses/getById/{id}'": {
             "get": {
                 "tags": [
-                    "Account"
+                    "warehouse"
                 ],
                 "summary": "get warehouse By Id",
                 "description": "get warehouse By Id Here",
@@ -726,7 +726,7 @@
         "/api/v1_0/warehouses/delete/{id}'": {
             "delete": {
                 "tags": [
-                    "Account"
+                    "warehouse"
                 ],
                 "summary": "delete warehouse",
                 "description": "delete warehouse Here",
@@ -765,7 +765,7 @@
         "/api/v1_0/warehouses/restore/{id}'": {
             "put": {
                 "tags": [
-                    "Account"
+                    "warehouse"
                 ],
                 "summary": "restore warehouse By Id",
                 "description": "restore warehouse By Id Here",
@@ -804,7 +804,7 @@
         "/api/v1_0/warehouses/verfied'": {
             "put": {
                 "tags": [
-                    "Account"
+                    "warehouse"
                 ],
                 "summary": "verfied warehouse",
                 "description": "verfied warehouse",
@@ -2221,6 +2221,39 @@
                 "summary": "create subscriptionPayment",
                 "description": "create subscriptionPayment",
                 "operationId": "create subscriptionPayment",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "subscriptionpyment_id",
+                                    "type"
+                                ],
+                                "properties": {
+                                    "subscriptionpyment_id": {
+                                        "type": "integer"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "endDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "value": {
+                                        "type": "integer"
+                                    },
+                                    "isPercentage": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "",

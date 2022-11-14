@@ -22,6 +22,21 @@ class SubscriptionPaymentController extends Controller
      *    tags={"General"},
      *    summary="create subscriptionPayment",
      *    description="create subscriptionPayment",
+     *  *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"subscriptionpyment_id","type"},
+        *               @OA\Property(property="subscriptionpyment_id", type="integer"),
+        *               @OA\Property(property="type", type="string"),
+        *               @OA\Property(property="endDate", type="date_format:Y/m/d"),
+        *               @OA\Property(property="value", type="integer"),
+        *               @OA\Property(property="isPercentage", type="boolean")
+        *            ),
+        *        ),
+        *    ),
      *    @OA\Response(
      *         response=200,
      *         description="",
