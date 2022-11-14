@@ -3,6 +3,8 @@
 use App\Http\Controllers\Accounts\SubscriptionController;
 use App\Http\Controllers\emdad\WathiqController;
 use App\Http\Controllers\SmsController;
+use App\Http\Controllers\SubscriptionPaymentController;
+use App\Models\SubscriptionPayment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
@@ -16,8 +18,9 @@ Route::group(["prefix"=>"subscriptions"], function ( )
     Route::post('create',[SubscriptionController::class,'createPackage']);
     Route::get('get-supplier-packs',[SubscriptionController::class,'getSupplierPackages']);
     Route::get('get-buyer-packs',[SubscriptionController::class,'getBuyerPackages']);
-    
+        Route::get('subscriptionPayment',[SubscriptionPaymentController::class,'AddSubscriptionPayment']);
 });
+    
 
 
 Route::group(['prefix' => 'installation'], function() {
