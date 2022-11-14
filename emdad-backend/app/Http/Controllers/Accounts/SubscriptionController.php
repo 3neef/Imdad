@@ -116,9 +116,6 @@ class SubscriptionController extends Controller
      *               type="object",
      *               @OA\Property(property="success", type="boolean"),
      *               @OA\Property(property="data", type="string")
-    
-   
-  
      *        ),
      *       ),
      * ),
@@ -152,8 +149,6 @@ class SubscriptionController extends Controller
      *               type="object",
      *               @OA\Property(property="success", type="boolean"),
      *               @OA\Property(property="data", type="string"),
-
-  
      *        ),
      *       ),
      * ),
