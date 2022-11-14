@@ -37,11 +37,8 @@ Route::group(['prefix' => 'wathiq'], function() {
     Route::get('relatedCr',[WathiqController::class,'getRelatedCompanies']);
 });
 Route::group(['prefix' => 'coupon'], function() {
-
     Route::post('create',[CouponController::class,'createCoupon']);
-
     Route::get('show',[CouponController::class,'showCoupon']);
-
     Route::put('used/{coupon}',[CouponController::class,'usedCoupon']);
 
 });
