@@ -30,7 +30,7 @@ class WathiqService
         $response = curl_exec($curl);
 
         curl_close($curl);
-        if (!isEmpty(json_decode($response)->code)) {
+        if (is_array(json_decode($response))) {
             foreach (json_decode($response) as $relatedCompany) {
                 $related = new RelatedCompanies();
                 $related->cr_name = $relatedCompany->crName;
