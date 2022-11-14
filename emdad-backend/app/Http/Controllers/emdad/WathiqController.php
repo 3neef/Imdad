@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class WathiqController extends Controller
 {
   /**
-        * @OA\Post(
+        * @OA\Get(
         * path="/api/v1_0/wathiq/relatedCr",
         * operationId="wathiq-integration",
         * tags={"Platform Settings"},
