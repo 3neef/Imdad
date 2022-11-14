@@ -1525,7 +1525,6 @@
                 }
             }
         },
-<<<<<<< Updated upstream
         "/api/v1_0/users/logout": {
             "post": {
                 "tags": [
@@ -1778,22 +1777,11 @@
                 "summary": "assgin Role",
                 "description": "assgin Role Here",
                 "operationId": "assginRole",
-=======
-        "/api/v1_0/coupon/create": {
-            "post": {
-                "tags": [
-                    "Coupon"
-                ],
-                "summary": "create Coupon",
-                "description": "create Coupon Here",
-                "operationId": "createCoupon",
->>>>>>> Stashed changes
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-<<<<<<< Updated upstream
                                     "userId",
                                     "role",
                                     "companyId"
@@ -1853,7 +1841,7 @@
                 "tags": [
                     "UM & Permissions"
                 ],
-                "summary": "assgin Role",
+                "summary": "Unassgin Role",
                 "description": "assgin Role Here",
                 "operationId": "unassginRole",
                 "requestBody": {
@@ -1870,29 +1858,6 @@
                                     },
                                     "companyId": {
                                         "type": "integer"
-=======
-                                    "allowed",
-                                    "stratDate",
-                                    "endDate",
-                                    "value",
-                                    "isPercentage"
-                                ],
-                                "properties": {
-                                    "allowed": {
-                                        "type": "integer"
-                                    },
-                                    "stratDate": {
-                                        "type": "date_format:Y/m/d"
-                                    },
-                                    "endDate": {
-                                        "type": "date_format:Y/m/d"
-                                    },
-                                    "value": {
-                                        "type": "integer"
-                                    },
-                                    "isPercentage": {
-                                        "type": "boolean"
->>>>>>> Stashed changes
                                     }
                                 },
                                 "type": "object"
@@ -1905,7 +1870,6 @@
                 },
                 "responses": {
                     "200": {
-<<<<<<< Updated upstream
                         "description": "unassign role successfully",
                         "content": {
                             "multipart/form-data": {
@@ -2067,7 +2031,59 @@
                     },
                     "400": {
                         "description": "Bad request"
-=======
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/coupon/create": {
+            "post": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "create Coupon",
+                "description": "create Coupon Here",
+                "operationId": "createCoupon",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "allowed",
+                                    "stratDate",
+                                    "endDate",
+                                    "value",
+                                    "isPercentage"
+                                ],
+                                "properties": {
+                                    "allowed": {
+                                        "type": "integer"
+                                    },
+                                    "stratDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "endDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "value": {
+                                        "type": "integer"
+                                    },
+                                    "isPercentage": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
                         "description": "created Successfully"
                     },
                     "500": {
@@ -2075,7 +2091,6 @@
                     },
                     "422": {
                         "description": "Validate error"
->>>>>>> Stashed changes
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -2121,6 +2136,34 @@
                     },
                     "404": {
                         "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/subscriptionPayment/subscriptionPayment": {
+            "get": {
+                "tags": [
+                    "General"
+                ],
+                "summary": "create subscriptionPayment",
+                "description": "create subscriptionPayment",
+                "operationId": "create subscriptionPayment",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "subscription_id": {
+                                            "type": "integer",
+                                            "example": "{' 'id': 1, 'compnay_id': '1','subscription_id': 1, 'user_id': 1, 'sub_total': 13.0, 'days': 30,'tax_amount':15,'total':28.0}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
