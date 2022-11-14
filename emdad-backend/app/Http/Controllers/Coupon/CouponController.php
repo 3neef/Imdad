@@ -78,8 +78,8 @@ class CouponController extends Controller
 
 
   /**
-        * @OA\put(
-        * path="/api/v1_0/coupon/used/{coupon}",
+        * @OA\post(
+        * path="/api/v1_0/coupon/used",
         * operationId="usedcoupon",
         * tags={"Coupon"},
         * summary="used Coupon ",
