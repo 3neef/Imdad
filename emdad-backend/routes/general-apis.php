@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Accounts\SubscriptionController;
 use App\Http\Controllers\emdad\WathiqController;
+use App\Http\Controllers\Coupon\CouponController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\SubscriptionPaymentController;
 use App\Models\SubscriptionPayment;
@@ -20,7 +21,7 @@ Route::group(["prefix"=>"subscriptions"], function ( )
     Route::get('get-buyer-packs',[SubscriptionController::class,'getBuyerPackages']);
         Route::get('subscriptionPayment',[SubscriptionPaymentController::class,'AddSubscriptionPayment']);
 });
-    
+
 
 
 Route::group(['prefix' => 'installation'], function() {
@@ -34,7 +35,15 @@ Route::group(['prefix' => 'installation'], function() {
 Route::group(['prefix' => 'wathiq'], function() {
 
     Route::get('relatedCr',[WathiqController::class,'getRelatedCompanies']);
-   
+});
+Route::group(['prefix' => 'coupon'], function() {
+
+    Route::post('create',[CouponController::class,'createCoupon']);
+
+    Route::get('show',[CouponController::class,'showCoupon']);
+
+    Route::put('used/{coupon}',[CouponController::class,'usedCoupon']);
+
 });
 
 

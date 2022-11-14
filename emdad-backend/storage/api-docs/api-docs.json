@@ -1525,6 +1525,7 @@
                 }
             }
         },
+<<<<<<< Updated upstream
         "/api/v1_0/users/logout": {
             "post": {
                 "tags": [
@@ -1777,11 +1778,22 @@
                 "summary": "assgin Role",
                 "description": "assgin Role Here",
                 "operationId": "assginRole",
+=======
+        "/api/v1_0/coupon/create": {
+            "post": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "create Coupon",
+                "description": "create Coupon Here",
+                "operationId": "createCoupon",
+>>>>>>> Stashed changes
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
+<<<<<<< Updated upstream
                                     "userId",
                                     "role",
                                     "companyId"
@@ -1858,6 +1870,29 @@
                                     },
                                     "companyId": {
                                         "type": "integer"
+=======
+                                    "allowed",
+                                    "stratDate",
+                                    "endDate",
+                                    "value",
+                                    "isPercentage"
+                                ],
+                                "properties": {
+                                    "allowed": {
+                                        "type": "integer"
+                                    },
+                                    "stratDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "endDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "value": {
+                                        "type": "integer"
+                                    },
+                                    "isPercentage": {
+                                        "type": "boolean"
+>>>>>>> Stashed changes
                                     }
                                 },
                                 "type": "object"
@@ -1870,6 +1905,7 @@
                 },
                 "responses": {
                     "200": {
+<<<<<<< Updated upstream
                         "description": "unassign role successfully",
                         "content": {
                             "multipart/form-data": {
@@ -2031,6 +2067,15 @@
                     },
                     "400": {
                         "description": "Bad request"
+=======
+                        "description": "created Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+>>>>>>> Stashed changes
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -2694,7 +2739,12 @@
                         "description": "get all roles by type",
                         "content": {
                             "multipart/form-data": {
-                                "schema": {}
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
                             },
                             "application/json": {
                                 "schema": {}
