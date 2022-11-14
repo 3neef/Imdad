@@ -24,6 +24,8 @@ class SubscriptionPackagesSeeder extends Seeder
             ["superAdmin"=>1,"users"=>20,"paymentMethods"=>"cash/credit","delivery"=>"one_time_delivery/standing_order","warehouses"=>5,"addSuppliers"=>15,"item_in_each_requisition"=>10,"live_tracking"=>true,"price"=>"5.000"]],
             ["subscription_name"=>'Gold',"type"=>2,"subscription_details"=>
             ["superAdmin"=>1,"users"=>5,"paymentMethods"=>"cash","delivery"=>"one_time_delivery","warehouses"=>2,"addSuppliers"=>5,"item_in_each_requisition"=>5,"live_tracking"=>false,"price"=>"0"]],
+            ["subscription_name"=>'basic_2',"type"=>2,"subscription_details"=>
+            ["superAdmin"=>1,"users"=>5,"paymentMethods"=>"cash","delivery"=>"one_time_delivery","warehouses"=>2,"addSuppliers"=>5,"item_in_each_requisition"=>5,"live_tracking"=>false,"price"=>"1.000"]],
         ];
         // dd($subscriptionsDetails);
         foreach ($subscriptionsDetails as $subscriptionsDetail) {

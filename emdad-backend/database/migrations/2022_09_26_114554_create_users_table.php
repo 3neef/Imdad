@@ -25,6 +25,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('mobile')->unique()->nullable(false);
+            $table->boolean('used_basic_packeg')->default(false);
             $table->boolean("is_super_admin")->default(false);
             $table->foreign('company_id')->references('id')->on('company_info')->onDelete('cascade');
         });
