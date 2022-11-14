@@ -28,7 +28,7 @@ class LocationController extends Controller
         * @OA\Post(
         * path="/api/v1_0/warehouses/create",
         * operationId="createWarehouse",
-        * tags={"Account"},
+        * tags={"warehouse"},
         * summary="create warehouse",
         * description="create warehouse Here",
         *     @OA\RequestBody(
@@ -73,7 +73,7 @@ class LocationController extends Controller
         * @OA\put(
         * path="/api/v1_0/warehouses/update",
         * operationId="updateWarehouse",
-        * tags={"Account"},
+        * tags={"warehouse"},
         * summary="update warehouse",
         * description="update warehouse Here",
         *     @OA\RequestBody(
@@ -119,7 +119,7 @@ class LocationController extends Controller
         * @OA\get(
         * path="/api/v1_0/warehouses/getAll",
         * operationId="getAllWarehouses",
-        * tags={"Account"},
+        * tags={"warehouse"},
         * summary="get all warehouse",
         * description="get all warehouses Here",
         *      @OA\Response(
@@ -147,7 +147,7 @@ class LocationController extends Controller
         * @OA\get(
         * path="/api/v1_0/warehouses/getByCompanyId/{companyId}",
         * operationId="getByCompanyIdWarehouse",
-        * tags={"Account"},
+        * tags={"warehouse"},
         * summary="get warehouse by company id",
         * description="get warehouse by company id Here",
         *      @OA\Response(
@@ -175,7 +175,7 @@ class LocationController extends Controller
         * @OA\get(
         * path="/api/v1_0/warehouses/getByUserId/{userId}'",
         * operationId="getWarehouseUserById",
-        * tags={"Account"},
+        * tags={"warehouse"},
         * summary="get warehouse By UserId",
         * description="get warehouse By UserId Here",
         *      @OA\Response(
@@ -203,7 +203,7 @@ class LocationController extends Controller
         * @OA\get(
         * path="/api/v1_0/warehouses/getById/{id}'",
         * operationId="getWarehouseById",
-        * tags={"Account"},
+        * tags={"warehouse"},
         * summary="get warehouse By Id",
         * description="get warehouse By Id Here",
         *      @OA\Response(
@@ -231,7 +231,7 @@ class LocationController extends Controller
         * @OA\delete(
         * path="/api/v1_0/warehouses/delete/{id}'",
         * operationId="deleteWarehouse",
-        * tags={"Account"},
+        * tags={"warehouse"},
         * summary="delete warehouse",
         * description="delete warehouse Here",
         *      @OA\Response(
@@ -259,7 +259,7 @@ class LocationController extends Controller
         * @OA\put(
         * path="/api/v1_0/warehouses/restore/{id}'",
         * operationId="restoreWarehouseById",
-        * tags={"Account"},
+        * tags={"warehouse"},
         * summary="restore warehouse By Id",
         * description="restore warehouse By Id Here",
         *      @OA\Response(
@@ -287,7 +287,7 @@ class LocationController extends Controller
         * @OA\put(
         * path="/api/v1_0/warehouses/verfied'",
         * operationId="verfiedWarehouse",
-        * tags={"Account"},
+        * tags={"warehouse"},
         * summary="verfied warehouse",
         * description="verfied warehouse",
         *     @OA\RequestBody(
