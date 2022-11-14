@@ -25,7 +25,6 @@ class WathiqController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id","type"},
-        *               @OA\Property(property="name", type="string"),
         *               @OA\Property(property="id", type="string"),
         *               @OA\Property(property="type", type="integer"),
     
