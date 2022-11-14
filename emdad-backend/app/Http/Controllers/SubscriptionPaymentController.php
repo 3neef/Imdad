@@ -31,9 +31,6 @@ class SubscriptionPaymentController extends Controller
         *               required={"subscriptionpyment_id","type"},
         *               @OA\Property(property="subscriptionpyment_id", type="integer"),
         *               @OA\Property(property="type", type="string"),
-        *               @OA\Property(property="endDate", type="date_format:Y/m/d"),
-        *               @OA\Property(property="value", type="integer"),
-        *               @OA\Property(property="isPercentage", type="boolean")
         *            ),
         *        ),
         *    ),

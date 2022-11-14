@@ -2235,15 +2235,6 @@
                                     },
                                     "type": {
                                         "type": "string"
-                                    },
-                                    "endDate": {
-                                        "type": "date_format:Y/m/d"
-                                    },
-                                    "value": {
-                                        "type": "integer"
-                                    },
-                                    "isPercentage": {
-                                        "type": "boolean"
                                     }
                                 },
                                 "type": "object"
