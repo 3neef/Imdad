@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Coupon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CouponRequests\CreateCouponRequest;
 use App\Http\Services\CouponServices\CouponServices;
+use GuzzleHttp\Psr7\Request;
 
 class CouponController extends Controller
 {
@@ -86,8 +87,9 @@ class CouponController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"code"},
-        *               @OA\Property(property="code", type="integer")
+        *               required={"code","subscriptionpayment_id"},
+        *               @OA\Property(property="code", type="integer"),
+        *               @OA\Property(property="subscriptionpayment_id", type="integer")
         *            ),
         *        ),
         *    ),
@@ -100,9 +102,9 @@ class CouponController extends Controller
         * )
         */
 
-public function usedCoupon($coupon)
+public function usedCoupon(Request $request)
 {
-    return $this->couponService->usedCoupon($coupon);
+    return $this->couponService->usedCoupon($request);
 }
 
 }

@@ -39,7 +39,7 @@ Route::group(['prefix' => 'wathiq'], function() {
 Route::group(['prefix' => 'coupon'], function() {
     Route::post('create',[CouponController::class,'createCoupon']);
     Route::get('show',[CouponController::class,'showCoupon']);
-    Route::put('used/{coupon}',[CouponController::class,'usedCoupon']);
+    Route::post('used',[CouponController::class,'usedCoupon']);
 
 });
 

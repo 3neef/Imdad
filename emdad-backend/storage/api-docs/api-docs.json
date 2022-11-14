@@ -2139,10 +2139,14 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "code"
+                                    "code",
+                                    "subscriptionpayment_id"
                                 ],
                                 "properties": {
                                     "code": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionpayment_id": {
                                         "type": "integer"
                                     }
                                 },
@@ -2209,17 +2213,10 @@
                 }
             }
         },
-<<<<<<< Updated upstream
         "/api/v1_0/subscriptionPayment/subscriptionPayment": {
             "get": {
                 "tags": [
                     "General"
-=======
-        "/api/v1_0/accounts/subscriptionPayment": {
-            "get": {
-                "tags": [
-                    "Accounts"
->>>>>>> Stashed changes
                 ],
                 "summary": "create subscriptionPayment",
                 "description": "create subscriptionPayment",

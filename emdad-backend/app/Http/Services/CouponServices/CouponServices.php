@@ -3,6 +3,7 @@
 namespace App\Http\Services\CouponServices;
 
 use App\Models\Coupon\Coupon;
+use App\Models\SubscriptionPayment;
 use GuzzleHttp\Psr7\Request;
 use Carbon\Carbon;
 
@@ -28,12 +29,22 @@ class CouponServices
         return  response()->json(['data' => $couponCode],200);
     }
 
-     public function usedCoupon($coupon)
+     public function usedCoupon($request)
     {
-        $c = Coupon::where('code',$coupon)->first();
-        if($c->end_date > Carbon::now() && $c->allowed > $c ->used){
-            $c->update(['used'=>$c->used + 1]);
-            return response()->json(['message' => 'aproved successfully'], 200);
+        $coupon = Coupon::where('code',$request->code)->first();
+        $subscription = SubscriptionPayment::where('id',$request->subscriptionpayment_id)->first();
+        if($coupon->end_date > Carbon::now() && $coupon->allowed > $coupon ->used){
+            $coupon->update(['used'=>$coupon->used + 1]);
+            // if($coupon->is_percentage==1){
+            //     $total =
+            // }
+            $subscription->update([
+                'coupon_id'=>$coupon->id,
+                'discount'=>$coupon->value,
+                'total'=>$subscription->total-$coupon->value,
+            ]);
+
+            return response()->json(['data'=>$subscription,'message' => 'aproved successfully'], 200);
         }
         else{
             return response()->json(['message' => 'can,t use coupon'], 301);
