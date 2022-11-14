@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Accounts;
 
 use App\Models\User;
-use Illuminate\Http\Request; 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
@@ -62,7 +62,7 @@ class SubscriptionController extends Controller
     public function createPackage(GeneralCreateSubPackageRequest $request)
     {
         return $this->subscriptionService->create($request);
-
+        
     }
     /**
      * @OA\put(
@@ -128,7 +128,8 @@ class SubscriptionController extends Controller
      */
     public function getBuyerPackages(Request $request)
     {
-        return response()->json(["success" => true, "data" =>Auth()->user()->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->get())], 200);
+        $user = User::find(1);
+        return response()->json(["success" => true, "data" =>$user->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->where('subscription_name','!=','basic_2')->get())], 200);
     }
 
 
@@ -160,7 +161,8 @@ class SubscriptionController extends Controller
      */
     public function getSupplierPackages(Request $request)
     {
-        return response()->json(["success" => true, "data" =>Auth()->user()->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->get())], 200);
+        $user = User::find(1);
+        return response()->json(["success" => true, "data" =>$user->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->where('subscription_name','!=','basic_2')->get())], 200);
     }
 
         /**

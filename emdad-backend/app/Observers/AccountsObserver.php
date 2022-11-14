@@ -13,7 +13,7 @@ class AccountsObserver
         $user = new User();
         $otp = rand(100000, 999999);
         $otp_expires_at = Carbon::now()->addMinutes(2);
-        $user->name = $account->contact_name;
+        $user->full_name = $account->contact_name;
         $user->email = $account->contact_email;
         //dd($account);
         $user->default_company = $account->id;
