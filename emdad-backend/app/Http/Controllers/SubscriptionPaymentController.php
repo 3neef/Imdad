@@ -17,9 +17,9 @@ class SubscriptionPaymentController extends Controller
 
         /**
      * @OA\get(
-     *    path="/api/v1_0/accounts/subscriptionPayment",
+     *    path="/api/v1_0/subscriptionPayment/subscriptionPayment",
      *    operationId="create subscriptionPayment",
-     *    tags={"Accounts"},
+     *    tags={"General"},
      *    summary="create subscriptionPayment",
      *    description="create subscriptionPayment",
      *    @OA\Response(

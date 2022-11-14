@@ -19,7 +19,7 @@ Route::group(["prefix"=>"subscriptions"], function ( )
     Route::post('create',[SubscriptionController::class,'createPackage']);
     Route::get('get-supplier-packs',[SubscriptionController::class,'getSupplierPackages']);
     Route::get('get-buyer-packs',[SubscriptionController::class,'getBuyerPackages']);
-        Route::get('subscriptionPayment',[SubscriptionPaymentController::class,'AddSubscriptionPayment']);
+  Route::get('subscriptionPayment',[SubscriptionPaymentController::class,'AddSubscriptionPayment']);
 });
 
 
