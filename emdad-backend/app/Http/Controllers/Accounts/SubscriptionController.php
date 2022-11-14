@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Accounts;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\Request; 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
@@ -62,7 +62,7 @@ class SubscriptionController extends Controller
     public function createPackage(GeneralCreateSubPackageRequest $request)
     {
         return $this->subscriptionService->create($request);
-        
+
     }
     /**
      * @OA\put(

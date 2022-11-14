@@ -3,7 +3,10 @@ namespace App\Http\Controllers\Coupon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CouponRequests\CreateCouponRequest;
 use App\Http\Services\CouponServices\CouponServices;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
+
+
+// use Illuminate\Http\Client\Request;
 
 class CouponController extends Controller
 {

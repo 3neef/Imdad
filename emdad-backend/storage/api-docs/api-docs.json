@@ -2213,7 +2213,7 @@
                 }
             }
         },
-        "/api/v1_0/subscriptionPayment/subscriptionPayment": {
+        "/api/v1_0/subscriptions/subscriptionPayment": {
             "get": {
                 "tags": [
                     "General"

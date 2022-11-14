@@ -4,7 +4,8 @@ namespace App\Http\Services\CouponServices;
 
 use App\Models\Coupon\Coupon;
 use App\Models\SubscriptionPayment;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
+
 use Carbon\Carbon;
 
 class CouponServices
@@ -35,14 +36,20 @@ class CouponServices
         $subscription = SubscriptionPayment::where('id',$request->subscriptionpayment_id)->first();
         if($coupon->end_date > Carbon::now() && $coupon->allowed > $coupon ->used){
             $coupon->update(['used'=>$coupon->used + 1]);
-            // if($coupon->is_percentage==1){
-            //     $total =
-            // }
-            $subscription->update([
-                'coupon_id'=>$coupon->id,
-                'discount'=>$coupon->value,
-                'total'=>$subscription->total-$coupon->value,
-            ]);
+            if($coupon->is_percentage==1){
+                $subscription->update([
+                    'coupon_id'=>$coupon->id,
+                    'discount'=>$subscription->sub_total*$coupon->value/100,
+                ]);
+
+            }
+            else{
+                $subscription->update([
+                    'coupon_id'=>$coupon->id,
+                    'discount'=>$coupon->value,
+                ]);
+
+            }
 
             return response()->json(['data'=>$subscription,'message' => 'aproved successfully'], 200);
         }
