@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Accounts;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
 use App\Models\Accounts\SubscriptionPackages;
 use App\Http\Resources\General\CreateSubPackageRequest;
@@ -129,8 +131,7 @@ class SubscriptionController extends Controller
      */
     public function getBuyerPackages(Request $request)
     {
-
-        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->get())], 200);
+        return response()->json(["success" => true, "data" =>Auth()->user()->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->get())], 200);
     }
 
 
@@ -164,8 +165,7 @@ class SubscriptionController extends Controller
      */
     public function getSupplierPackages(Request $request)
     {
-
-        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->get())], 200);
+        return response()->json(["success" => true, "data" =>Auth()->user()->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->get())], 200);
     }
 
         /**
