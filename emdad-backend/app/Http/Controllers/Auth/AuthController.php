@@ -472,7 +472,7 @@ class AuthController extends Controller
         * path="/api/v1_0/users/unAssginRole",
         * operationId="unassginRole",
         * tags={"UM & Permissions"},
-        * summary="assgin Role",
+        * summary="Unassgin Role",
         * description="assgin Role Here",
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
