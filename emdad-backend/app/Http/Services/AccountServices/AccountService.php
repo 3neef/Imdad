@@ -11,11 +11,12 @@ class AccountService{
     createCompany($request)
     {
         $account = new CompanyInfo();
-        $account->name = $request->get('name');
-        $account->company_id = $request->get('companyId');
+        $account->first_name = $request->get('firstName');
+        $account->last_name = $request->get('lastName');
         $account->company_type = $request->get('companyType');
-        $account->company_vat_id = $request->get('companyVatId');
-        $account->contact_name = $request->get('contactName');
+        $account->role_id = $request->get('roleId');
+        $account->person_id = $request->get('personId');
+        $account->id_type = $request->get('contactName');
         $account->contact_phone = $request->get('contactPhone');
         $account->contact_email = $request->get('contactEmail');
         $account->subs_id = $request->get('subscriptionId');
