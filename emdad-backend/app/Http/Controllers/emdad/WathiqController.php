@@ -17,7 +17,7 @@ class WathiqController extends Controller
         * operationId="wathiq-integration",
         * tags={"Platform Settings"},
         * summary="Retreive registered companies by user identity + identity type nid/iqama",
-        * description="create Company Account Here",
+        * description="users' registerd companies",
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
