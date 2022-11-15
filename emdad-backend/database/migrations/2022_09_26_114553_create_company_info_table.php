@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('company_info', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("name",100)->nullable(true);
             $table->string("logo_path",90)->unique()->nullable(true);
             $table->string("cr_path",90)->unique()->nullable(true);
             $table->string("vat_path",90)->unique()->nullable(true);

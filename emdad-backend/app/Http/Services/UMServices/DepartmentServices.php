@@ -12,8 +12,8 @@ class DepartmentServices
         $db=Department::create($request);
 
         //use the same approch for other service (Murtuada) 
-        
-        // $db->users()->attach($db->id,['user_id'=>1,'company_info_id'=>1]);
+
+        $db->users()->attach($db->id,['user_id'=>2,'company_info_id'=>3]);
         
 
 

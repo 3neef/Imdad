@@ -16,7 +16,10 @@ class Department extends Model
         return $this->belongsToMany(
             User::class,
             'company_info_department_user'
-        )->withPivot('company_info_id');
+        )->withPivot('company_info_id')
+        ->withTimestamps();
+
+        ;
     }
     
     public function compnies()
@@ -24,6 +27,9 @@ class Department extends Model
         return $this->belongsToMany(
             CompanyInfo::class,
             'company_info_department_user'
-        )->withPivot('user_id');
+        )->withPivot('user_id')
+        ->withTimestamps();
+
+        ;
     }
 }

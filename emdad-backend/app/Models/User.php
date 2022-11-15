@@ -99,13 +99,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(
             CompanyInfo::class, 'company_info_department_user'
-        )->withPivot('department_id');
+        )->withPivot('department_id')
+        ->withTimestamps();
+
+        ;
     }
     public function departments()
     {
         return $this->belongsToMany(
             Department::class, 'company_info_department_user'
-        )->withPivot('company_info_id');
+        )->withPivot('company_info_id')
+        ->withTimestamps();
+
+        ;
     }
 
 }

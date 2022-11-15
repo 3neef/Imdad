@@ -22,12 +22,18 @@ class CompanyInfo extends Model
     {
         return $this->belongsToMany(
             User::class, 'company_info_department_user'
-        )->withPivot('department_id');
+        )->withPivot('department_id')
+        ->withTimestamps();
+
+        ;
     }
     public function departments()
     {
         return $this->belongsToMany(
             Department::class, 'company_info_department_user'
-        )->withPivot('user_id');
+        )->withPivot('user_id')
+        ->withTimestamps();
+
+        ;
     }
 }

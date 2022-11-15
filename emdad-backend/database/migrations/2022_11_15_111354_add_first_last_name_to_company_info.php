@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string("last_name",50);
             $table->string("person_id",11);
             $table->string("id_type",10);
-            $table->renameColumn('name', 'company_name')->default(null);
+            $table->string('company_name')->nullable();
 
-            $table->foreignId('roles_id')->nullable(true)->references("id")->on("roles")->restrictOnDelete();
+            $table->foreignId('roles_id')->nullable()->references("id")->on("roles")->restrictOnDelete();
 
 
         });
