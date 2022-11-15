@@ -1098,7 +1098,7 @@
                 }
             }
         },
-        "/api/v1_0/installtion/migrate": {
+        "/api/v1_0/installation/migrate": {
             "get": {
                 "tags": [
                     "Platform Settings"
@@ -2213,14 +2213,14 @@
                 }
             }
         },
-        "/api/v1_0/subscriptions/subscriptionPayment": {
+        "/api/v1_0/accounts/subscriptionPayment": {
             "get": {
                 "tags": [
-                    "General"
+                    "Account Controller"
                 ],
                 "summary": "create subscriptionPayment",
                 "description": "create subscriptionPayment",
-                "operationId": "create subscriptionPayment",
+                "operationId": "create-subscriptionPayment",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
