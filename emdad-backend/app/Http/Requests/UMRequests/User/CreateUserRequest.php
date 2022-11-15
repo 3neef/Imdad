@@ -33,7 +33,7 @@ class CreateUserRequest extends FormRequest
             "email"=>"required|email|string|max:255",
             "mobile"=>"required|min:9|max:14|string",
             "idNational"=> "required|string|min:12|max:12",
-            "defaultCompany"=> "integer|exists:company_info,id",
+            "defaultCompany"=> "|integer|exists:company_info,id",
             "lang" => Rule::in("en", "ar")
         ];
         if ($this->path() == 'api/users/createUser') {
