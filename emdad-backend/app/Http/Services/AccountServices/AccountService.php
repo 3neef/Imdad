@@ -28,7 +28,7 @@ class AccountService
             $account->subscription_details = $subscription->value('subscription_details');
         }
 
-        $result = CompanyInfo::create($account);
+        $result = CompanyInfo::create($account->toArray());
         if ($result) {
             $user=User::where("default_company",$result->id)->first();
             // $token = $user->createToken('authtoken');
