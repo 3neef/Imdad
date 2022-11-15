@@ -42,7 +42,7 @@ class VerfiedLocationRequest extends FormRequest
                 $updateOtp = CompanyLocations::find($this->get('id'));
                 if(!$updateOtp->otp_verfied){
                     if(empty($location)){
-                        $otp = rand(100000, 999999);
+                        $otp = rand(1000,9999);
                         $otpExpireAt = Carbon::now()->addMinutes(3);
                         $updateOtp->update(['otp_receiver' => $otp,'otp_expires_at' => $otpExpireAt]);
                         $validator->errors()->add('otp expired', 'otp expired , now sended new otp please check your phone');

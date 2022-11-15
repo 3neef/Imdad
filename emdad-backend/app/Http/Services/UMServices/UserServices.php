@@ -17,7 +17,7 @@ class UserServices
     {
       
         $user = new User();
-        $otp = rand(100000, 999999);
+        $otp = rand(1000,9999);
         $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
         $fullname = $request->get('firstName').''.$request->get('lastName');
         $user->first_name = $request->get('firstName');
@@ -45,7 +45,7 @@ class UserServices
     public function createUserToCompany($request)
     {
         $user = new User();
-        $otp = rand(100000, 999999);
+        $otp = rand(1000,9999);
         $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
         $fullname = $request->get('firstName').''.$request->get('lastName');
         $user->full_name = $fullname;
@@ -163,7 +163,7 @@ class UserServices
         }
         $time_now = Carbon::now();
             if ($time_now > $user->otp_expires_at) {
-                $otp = rand(100000, 999999);
+                $otp = rand(1000,9999);
                 $otp_expires_at = Carbon::now()->addMinutes(1);
                 $user->otp = $otp;
                 $user->otp_expires_at = $otp_expires_at;
@@ -224,7 +224,7 @@ class UserServices
 
     public function forgotPassword($request)
     {
-        $otp = rand(100000, 999999);
+        $otp = rand(1000,9999);
         $otp_expires_at = Carbon::now()->addMinutes(1);
         $email = ($request->get('email'));
         $user = User::where('email', $email)->first();

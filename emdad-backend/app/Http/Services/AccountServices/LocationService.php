@@ -16,7 +16,7 @@ class LocationService{
         $user = auth()->user();// get user_id if user requested by token (before add middlware)
         // $userId = User::find($request->get('userId')) ; //for test
         $companyId = $user->default_company;
-        $otp = rand(100000, 999999);
+        $otp = rand(1000,9999);
         $otpExpireAt = Carbon::now()->addMinutes(3);
         $location->address_name = $request->get('warehouseName');
         $location->company_id = $companyId;
