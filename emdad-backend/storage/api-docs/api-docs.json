@@ -2075,7 +2075,7 @@
                                         "type": "integer"
                                     },
                                     "isPercentage": {
-                                        "type": "boolean"
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -2164,7 +2164,19 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "coupon used Successfully"
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "subscriptionPayment": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -2265,6 +2277,44 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/department/create": {
+            "post": {
+                "tags": [
+                    "Department"
+                ],
+                "summary": "create department ",
+                "description": "create department  Here",
+                "operationId": "createdepartment",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "department created Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
                     }
                 }
             }

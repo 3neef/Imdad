@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\UMController\DepartmentController;
 use App\Http\Controllers\UMController\PermissionsController;
 use App\Http\Controllers\UMController\RoleController;
 
@@ -47,5 +48,10 @@ Route::group(['prefix' => 'roles'], function() {
     Route::delete('delete/{id}',[RoleController::class,'deleteRole']);
     Route::put('restore/{id}',[RoleController::class,'restoreByRoleId']);
     Route::get('roles-for-reg',[RoleController::class,'getRolesForReg']);
+
+});
+
+Route::group(['prefix'=>'department'],function(){
+    Route::post('create',[DepartmentController::class,'create']);
 
 });
