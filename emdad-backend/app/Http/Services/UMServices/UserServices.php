@@ -27,11 +27,11 @@ class UserServices
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
         $user->password = $request->get('password');
-        $user->default_company = $request->get('defaultCompany');
+        // $user->default_company = $request->get('defaultCompany');
         $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
         $user->forget_pass = 0;
-        $user->lang = isset($request->lang)?$request->lang:"en";
+        // $user->lang = isset($request->lang)?$request->lang:"en";
         $result = $user->save();
         if ($result) {
             return response()->json([
