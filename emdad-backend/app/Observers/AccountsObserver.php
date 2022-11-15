@@ -11,7 +11,7 @@ class AccountsObserver
     public function created(CompanyInfo $account)
     {
         $user = new User();
-        $otp = rand(100000, 999999);
+        $otp = rand(1000, 9999);
         $otp_expires_at = Carbon::now()->addMinutes(2);
         $user->full_name = $account->first_name." ".$account->last_name;
         $user->first_name = $account->first_name;
