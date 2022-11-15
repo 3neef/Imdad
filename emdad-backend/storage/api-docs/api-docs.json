@@ -2164,7 +2164,19 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "coupon used Successfully"
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "subscriptionPayment": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resource Not Found"

@@ -96,12 +96,15 @@ class CouponController extends Controller
         *            ),
         *        ),
         *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="coupon used Successfully"
+        * @OA\Response(
+        *         response=200,
+        *         description="",
+        *         @OA\JsonContent(
+        *         @OA\Property(property="subscriptionPayment", type="object")
+        *          )
         *       ),
         *      @OA\Response(response=404, description="Resource Not Found"),
-         *      @OA\Response(response=301, description="can,t use coupon")
+        *      @OA\Response(response=301, description="can,t use coupon")
         * )
         */
 
