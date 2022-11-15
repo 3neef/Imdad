@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('department_company_user', function (Blueprint $table) {
+        Schema::create('company_info_department_user', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('company_info_id')->nullable()->restrictOnDelete();
             $table->foreignId('department_id')->nullable()->restrictOnDelete();
             $table->foreignId('user_id')->nullable()->restrictOnDelete();
-            $table->foreignId('company_id')->nullable()->restrictOnDelete();
-            $table->unique(["department_id","user_id","company_id","deleted_at"])->name("department_company_user_deletedat");
+            $table->unique(["department_id","user_id","company_info_id"])->name("company_department_user");;
             $table->softDeletes();
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('department_company_users');
+        Schema::dropIfExists('company_info_department_user');
     }
 };

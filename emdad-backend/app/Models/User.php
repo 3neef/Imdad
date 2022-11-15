@@ -95,4 +95,17 @@ class User extends Authenticatable implements MustVerifyEmail
         ->first();
     }
 
+    public function compnies()
+    {
+        return $this->belongsToMany(
+            CompanyInfo::class, 'company_info_department_user'
+        )->withPivot('department_id');
+    }
+    public function departments()
+    {
+        return $this->belongsToMany(
+            Department::class, 'company_info_department_user'
+        )->withPivot('company_info_id');
+    }
+
 }
