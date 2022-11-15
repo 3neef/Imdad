@@ -2,24 +2,37 @@
 
 namespace App\Http\Services\AccountServices;
 
+use App\Http\Requests\AccountRequests\Account\AddMoreCompanyRequest;
 use App\Http\Resources\AccountResourses\Company\CompanyResponse;
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
+use App\Models\Emdad\RelatedCompanies;
 use App\Models\User;
+use Carbon\Carbon;
 
 class AccountService
 {
+    public function addMoreCompany(AddMoreCompanyRequest $request)
+    {
+        $company=RelatedCompanies::where("cr_number",$request->crNo)->first();
 
-    public function
-    createCompany($request)
+        $account=CompanyInfo::create([
+            "company_type"=>$request->companyType,
+            "company_name"=>$company->cr_name,
+            "created_by"=>auth()->user()->id,
+            
+        ]);
+
+        return response()->json(['success'=>true,'message'=>'created successfully'], 200);
+
+    }
+
+    public function createCompany($request)
     {
         $account = new CompanyInfo();
-        $account->first_name = $request->get('firstName');
-        $account->last_name = $request->get('lastName');
+  
         $account->company_type = $request->get('companyType');
-        $account->roles_id = $request->get('roleId');
-        $account->person_id = $request->get('personId');
-        $account->id_type = $request->get('idType');
+    
         $account->contact_phone = $request->get('contactPhone');
         $account->contact_email = $request->get('contactEmail');
         if (isset($request->subscriptionId)) {
@@ -29,12 +42,40 @@ class AccountService
         }
 
         $result = CompanyInfo::create($account->toArray());
+
         if ($result) {
-            $user=User::where("default_company",$result->id)->first();
+            $user=$this->createUser($result,$request);
             // $token = $user->createToken('authtoken');
             return response()->json(['success'=>true,'data'=>["user"=>$user]], 200);
         }
         return response()->json(['error' => 'system error'], 500);
+    }
+
+    public function createUser(CompanyInfo $account,$request)
+    {
+        $user = new User();
+        $otp = rand(1000, 9999);
+        $otp_expires_at = Carbon::now()->addMinutes(2);
+        $user->full_name = $request->firstName." ".$request->lastName;
+        $user->first_name = $request->firstName;
+        $user->last_name = $request->lastName;
+        $user->identity = $request->personId;
+        $user->identity_type = $request->idType;
+        $user->email = $account->contact_email;
+        
+        //dd($account);
+        $user->default_company = $account->id;
+        $user->is_super_admin = true;
+        $user->mobile = $account->contact_phone;
+        $user->otp = strval($otp);
+        $user->otp_expires_at = $otp_expires_at;
+        
+        $user->save();
+        $user->roleInCompany()->attach($user->id,['roles_id' =>$request->roleId,'company_info_id'=>$account->id]);
+
+        $updateAccount = CompanyInfo::find($account->id);
+        $updateAccount ->update(['created_by'=>$user->id]);
+        return $user;
     }
 
     public function update($request)
