@@ -35,7 +35,7 @@ class CreateAccountRequest extends FormRequest
             'roleId' => ['required','integer','between:1,3'],
             'personId' => ['required','string','max:25'],
             'idType' => ['required','string','max:100'],
-            'contactPhone' => ['required','string','max:15','min:15','regex:/^(00966)/'],
+            'contactPhone' => ['required','string','max:13','min:13','regex:/^(+966)/'],
             'contactEmail' => ['required','email','max:100'],
             'subscriptionId' =>['integer','exists:subscription_packages,id'],
         ];
