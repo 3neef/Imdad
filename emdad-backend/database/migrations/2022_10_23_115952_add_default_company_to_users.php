@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer("default_company")->nullable();
+            $table->integer("default_company");
             $table->boolean("is_verified")->default(false);
         });
     }
