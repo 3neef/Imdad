@@ -18,33 +18,37 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "name",
-                                    "companyId",
+                                    "firstName",
+                                    "lastName",
                                     "companyType",
-                                    "companyVatId",
-                                    "contactName",
+                                    "roleId",
+                                    "personId",
+                                    "idType",
                                     "contactPhone",
-                                    "contactEmail",
-                                    "subscriptionId"
+                                    "contactEmail"
                                 ],
                                 "properties": {
-                                    "name": {
+                                    "firstName": {
                                         "type": "string"
                                     },
-                                    "companyId": {
+                                    "lastName": {
                                         "type": "string"
                                     },
                                     "companyType": {
                                         "type": "integer"
                                     },
-                                    "companyVatId": {
+                                    "roleId": {
+                                        "type": "integer"
+                                    },
+                                    "personId": {
                                         "type": "string"
                                     },
-                                    "contactName": {
+                                    "idType": {
                                         "type": "string"
                                     },
                                     "contactPhone": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "+966xxxxxxxxx"
                                     },
                                     "contactEmail": {
                                         "type": "email"
@@ -1098,7 +1102,7 @@
                 }
             }
         },
-        "/api/v1_0/installtion/migrate": {
+        "/api/v1_0/installation/migrate": {
             "get": {
                 "tags": [
                     "Platform Settings"
@@ -3493,12 +3497,12 @@
             }
         },
         "/api/v1_0/wathiq/relatedCr": {
-            "post": {
+            "get": {
                 "tags": [
                     "Platform Settings"
                 ],
                 "summary": "Retreive registered companies by user identity + identity type nid/iqama",
-                "description": "create Company Account Here",
+                "description": "users' registerd companies",
                 "operationId": "wathiq-integration",
                 "requestBody": {
                     "content": {
@@ -3509,9 +3513,6 @@
                                     "type"
                                 ],
                                 "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
                                     "id": {
                                         "type": "string"
                                     },
