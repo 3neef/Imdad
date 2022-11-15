@@ -35,7 +35,7 @@ class CouponController extends Controller
         *               @OA\Property(property="stratDate", type="date_format:Y/m/d"),
         *               @OA\Property(property="endDate", type="date_format:Y/m/d"),
         *               @OA\Property(property="value", type="integer"),
-        *               @OA\Property(property="isPercentage", type="boolean")
+        *               @OA\Property(property="isPercentage", type="integer")
         *            ),
         *        ),
         *    ),

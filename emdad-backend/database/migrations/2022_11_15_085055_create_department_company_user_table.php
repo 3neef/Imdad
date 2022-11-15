@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('department_company_user', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->tinyInteger('type')->comment("0=emdad,1=buyer,2=supplier");
+            $table->foreignId('department_id')->nullable()->restrictOnDelete();
+            $table->foreignId('user_id')->nullable()->restrictOnDelete();
+            $table->foreignId('company_id')->nullable()->restrictOnDelete();
+            $table->unique(["department_id","users_id","company_id","deleted_at"])->name("department_company_user_deletedat");
             $table->softDeletes();
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('roles');
+        Schema::dropIfExists('department_company_users');
     }
 };
