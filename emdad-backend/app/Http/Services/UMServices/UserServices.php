@@ -23,7 +23,7 @@ class UserServices
         $user->first_name = $request->get('firstName');
         $user->last_name = $request->get('lastName');
         $user->full_name = $fullname;
-        $user->national_id = $request->get('idNational');
+        $user->identity = $request->get('idNational');
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
         $user->password = $request->get('password');

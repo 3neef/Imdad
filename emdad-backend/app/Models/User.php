@@ -22,9 +22,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'full_name','first_name','last_name','email', 'password', 'phone',
+     'identity_type',   'firstname', 'lastname', 'full_name','first_name','last_name','email', 'password', 'phone',
          'status', 'is_verified', 'default_company', 'avatar', 'otp', 
-         'otp_expires_at', 'forget_pass','otp_used', 'mobile, national_id, expiry_date','lang','used_basic_packeg'
+         'otp_expires_at', 'forget_pass','otp_used', 'mobile', 'identity', 'expiry_date','lang','used_basic_packeg'
     ];
 
     /**
@@ -33,7 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','otp'
     ];
 
     /**
