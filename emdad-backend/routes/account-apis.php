@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Accounts\CompanyController;
 use App\Http\Controllers\Accounts\LocationController;
 use App\Http\Controllers\Accounts\SubscriptionController;
+use App\Http\Controllers\SubscriptionPaymentController;
 
 Route::group(['prefix' => 'accounts'], function () {
     Route::post('create', [CompanyController::class, 'createAccount']);

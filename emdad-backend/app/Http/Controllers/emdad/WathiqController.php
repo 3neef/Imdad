@@ -11,11 +11,46 @@ use Illuminate\Http\Request;
 
 class WathiqController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+  /**
+        * @OA\Get(
+        * path="/api/v1_0/wathiq/relatedCr",
+        * operationId="wathiq-integration",
+        * tags={"Platform Settings"},
+        * summary="Retreive registered companies by user identity + identity type nid/iqama",
+        * description="users' registerd companies",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"id","type"},
+        *               @OA\Property(property="id", type="string"),
+        *               @OA\Property(property="type", type="integer"),
+    
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *        response=200,
+     *          description="Companies list",
+        *             @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="success", type="boolean"),
+     *               @OA\Property(property="data", type="string"),
+     *        ),
+        *
+        *       ),
+        *       ),
+        *      @OA\Response(response=500, description="system error"),
+        *      @OA\Response(response=422, description="Validate error"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+
     public function getRelatedCompanies(GetRelatedCompanyRequest $request, WathiqService $service)
     {
         $related = RelatedCompanies::where("identity", $request->id)->where("identity_type", $request->type)->get();

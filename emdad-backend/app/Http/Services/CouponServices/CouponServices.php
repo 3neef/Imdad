@@ -13,7 +13,7 @@ class CouponServices
 
     public function createCoupon($request)
     {
-            $coupon = Coupon::create([
+             Coupon::create([
                 'allowed' => $request->allowed,
                 'start_date' => $request->stratDate,
                 'end_date' => $request->endDate,

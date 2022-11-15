@@ -37,12 +37,13 @@ class CompanyController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"name","companyId","companyType","companyVatId","contactName","contactPhone","contactEmail","subscriptionId"},
-        *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="companyId", type="string"),
+        *               required={"firstName","lastName", "companyType", "roleId","personId","idType","contactPhone","contactEmail","subscriptionId"},
+        *               @OA\Property(property="firstName", type="string"),
+        *               @OA\Property(property="lastName", type="string"),
         *               @OA\Property(property="companyType", type="integer"),
-        *               @OA\Property(property="companyVatId", type="string"),
-        *               @OA\Property(property="contactName", type="string"),
+        *               @OA\Property(property="roleId", type="integer"),
+        *               @OA\Property(property="personId", type="string"),
+        *               @OA\Property(property="idType", type="string"),
         *               @OA\Property(property="contactPhone", type="string"),
         *               @OA\Property(property="contactEmail", type="email"),
         *               @OA\Property(property="subscriptionId", type="integer")
