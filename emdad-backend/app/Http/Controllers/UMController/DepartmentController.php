@@ -8,7 +8,6 @@ use App\Http\Services\UMServices\DepartmentServices;
 class DepartmentController extends Controller
 {
 
-    protected DepartmentServices $departmentService;
 
     public function __construct(DepartmentServices $departmentService) {
         $this->departmentService = $departmentService;
