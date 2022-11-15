@@ -34,6 +34,7 @@ class WathiqService
             foreach (json_decode($response) as $relatedCompany) {
                 $related = new RelatedCompanies();
                 $related->cr_name = $relatedCompany->crName;
+                $related->cr_number = $relatedCompany->crNumber;
                 $related->business_type = $relatedCompany->businessType->name;
                 $related->relation = $relatedCompany->relation->name;
                 $related->identity = $id;
