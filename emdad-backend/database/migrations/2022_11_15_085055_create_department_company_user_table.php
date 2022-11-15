@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('department_id')->nullable()->restrictOnDelete();
             $table->foreignId('user_id')->nullable()->restrictOnDelete();
             $table->foreignId('company_id')->nullable()->restrictOnDelete();
-            $table->unique(["department_id","users_id","company_id","deleted_at"])->name("department_company_user_deletedat");
+            $table->unique(["department_id","user_id","company_id","deleted_at"])->name("department_company_user_deletedat");
             $table->softDeletes();
             $table->timestamps();
         });
