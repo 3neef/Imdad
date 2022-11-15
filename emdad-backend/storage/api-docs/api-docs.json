@@ -2075,7 +2075,7 @@
                                         "type": "integer"
                                     },
                                     "isPercentage": {
-                                        "type": "boolean"
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
