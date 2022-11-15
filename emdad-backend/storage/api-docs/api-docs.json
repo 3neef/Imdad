@@ -25,8 +25,7 @@
                                     "personId",
                                     "idType",
                                     "contactPhone",
-                                    "contactEmail",
-                                    "subscriptionId"
+                                    "contactEmail"
                                 ],
                                 "properties": {
                                     "firstName": {
@@ -48,7 +47,8 @@
                                         "type": "string"
                                     },
                                     "contactPhone": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "+966xxxxxxxxx"
                                     },
                                     "contactEmail": {
                                         "type": "email"
