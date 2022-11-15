@@ -30,12 +30,13 @@ class CreateAccountRequest extends FormRequest
     {
         return [
             'firstName' => ['required','string','max:100'],
+            'companyName' => ['string','max:100'],
             'lastName' => ['required','string','max:25'],
             'companyType' => ['required','integer','between:0,2'],
             'roleId' => ['required','integer','between:1,3'],
             'personId' => ['required','string','max:25'],
             'idType' => ['required','string','max:100'],
-            'contactPhone' => ['required','string','max:13','min:13','regex:/^(+966)/'],
+            'contactPhone' => ['required','string','max:14','min:14','regex:/^(00966)/'],
             'contactEmail' => ['required','email','max:100'],
             'subscriptionId' =>['integer','exists:subscription_packages,id'],
         ];
