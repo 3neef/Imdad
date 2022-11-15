@@ -141,9 +141,9 @@ class UserServices
 
     public function activate($request)
     {
-        $id = ($request->get('id'));
+        $id = ($request->get('phone'));
 
-        $user = User::where('id', '=', $id)->first();
+        $user = User::where('phone', '=', $id)->first();
         if ($user === null) {
             return response()->json(
                 [
