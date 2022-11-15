@@ -31,8 +31,8 @@ class AccountService
         $result = CompanyInfo::create($account);
         if ($result) {
             $user=User::where("default_company",$result->id)->first();
-            $token = $user->createToken('authtoken');
-            return response()->json(['success'=>true,'data'=>["token"=>$token]], 200);
+            // $token = $user->createToken('authtoken');
+            return response()->json(['success'=>true,'data'=>["user"=>$user]], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
