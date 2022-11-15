@@ -5,6 +5,7 @@ namespace App\Http\Services\AccountServices;
 use App\Http\Resources\AccountResourses\Company\CompanyResponse;
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
+use App\Models\User;
 
 class AccountService
 {
@@ -27,9 +28,11 @@ class AccountService
             $account->subscription_details = $subscription->value('subscription_details');
         }
 
-        $result = $account->save();
+        $result = CompanyInfo::create($account);
         if ($result) {
-            return response()->json(['message' => 'created successfully'], 200);
+            $user=User::where("default_company",$result->id)->first();
+            $token = $user->createToken('authtoken');
+            return response()->json(['success'=>true,'data'=>["token"=>$token]], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
