@@ -44,7 +44,7 @@ class CompanyController extends Controller
         *               @OA\Property(property="roleId", type="integer"),
         *               @OA\Property(property="personId", type="string"),
         *               @OA\Property(property="idType", type="string"),
-        *               @OA\Property(property="contactPhone", type="string",example="+966xxxxxxxxx"),
+        *               @OA\Property(property="contactPhone", type="string",example="00966xxxxxxxxx"),
         *               @OA\Property(property="contactEmail", type="email"),
         *               @OA\Property(property="subscriptionId", type="integer")
         *            ),

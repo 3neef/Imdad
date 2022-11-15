@@ -11,8 +11,8 @@ class CompanyInfo extends Model
     use HasFactory,SoftDeletes;
     protected $table = 'company_info';
     protected $fillable = [
-        'first_name', 'last_name', 'role_id', 'person_id', 'id_type', 'company_type',
-        'contact_phone', 'contact_email', 'subscription_details',
+        'first_name', 'last_name', 'roles_id', 'person_id', 'id_type', 'company_type',
+        'contact_phone', 'contact_email', 'subscription_details','company_name',
         'cr_expire_data', 'subs_id', 'subscription_details', 'is_validated'
     ];
 }
