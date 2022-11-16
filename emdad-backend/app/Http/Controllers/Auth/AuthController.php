@@ -65,7 +65,7 @@ class AuthController extends Controller
         */
     public function createUser(CreateUserRequest $request,UserServices $userServices)
     {
-        return $userServices->create($request);
+        return $userServices->create($request->validated());
     }
            /**
         * @OA\Post(

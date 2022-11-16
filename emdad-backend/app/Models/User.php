@@ -22,9 +22,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-     'identity_type',   'firstname', 'lastname', 'full_name','first_name','last_name','email', 'password', 'phone',
-         'status', 'is_verified', 'default_company', 'avatar', 'otp', 
-         'otp_expires_at', 'forget_pass','otp_used', 'mobile', 'identity', 'expiry_date','lang','used_basic_packeg'
+        'identity_type',  'full_name', 'first_name', 'last_name', 'email', 'password',
+        'status', 'is_verified', 'default_company', 'avatar', 'otp',
+        'otp_expires_at', 'forget_pass', 'otp_used', 'mobile', 'identity', 'expiry_date', 'lang', 'used_basic_packeg'
     ];
 
     /**
@@ -33,7 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','otp'
+        'password', 'remember_token', 'otp'
     ];
 
     /**
@@ -75,43 +75,42 @@ class User extends Authenticatable implements MustVerifyEmail
         return !!$role->intersect($this->roles)->count();
     }
 
-    public function roleInCompany(){
-        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id')
-        ->withPivot('company_info_id')
-        ->withTimestamps();
+    public function roleInCompany()
+    {
+        return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
+            ->withPivot('company_info_id')
+            ->withTimestamps();
     }
 
-    public function exists($roleId,$companyId){
-        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id')
-        ->wherePivot('roles_id',$roleId)
-        ->wherePivot('company_info_id',$companyId)
-        ->first();
+    public function exists($roleId, $companyId)
+    {
+        return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
+            ->wherePivot('roles_id', $roleId)
+            ->wherePivot('company_info_id', $companyId)
+            ->first();
     }
 
     public function getRoleOfUserByCompanyId($companyId)
     {
-        return $this->belongsToMany(Role::class,'roles_users_company_info','users_id','roles_id')
-        ->wherePivot('company_info_id',$companyId)
-        ->first();
+        return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
+            ->wherePivot('company_info_id', $companyId)
+            ->first();
     }
 
     public function compnies()
     {
         return $this->belongsToMany(
-            CompanyInfo::class, 'company_info_department_user'
+            CompanyInfo::class,
+            'company_info_department_user'
         )->withPivot('department_id')
-        ->withTimestamps();
-
-        ;
+            ->withTimestamps();;
     }
     public function departments()
     {
         return $this->belongsToMany(
-            Department::class, 'company_info_department_user'
+            Department::class,
+            'company_info_department_user'
         )->withPivot('company_info_id')
-        ->withTimestamps();
-
-        ;
+            ->withTimestamps();;
     }
-
 }

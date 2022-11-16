@@ -27,14 +27,13 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            "firstName"=>"required|string|max:50|unique:users,first_name",
-            "lastName"=>"required|string|max:50|unique:users,last_name",
-            "password"=>"required|string|min:8|max:50",
-            "email"=>"required|email|string|max:255",
-            "mobile"=>"required|min:9|max:14|string",
-            "idNational"=> "required|string|min:12|max:12",
-            "defaultCompany"=> "|integer|exists:company_info,id",
-            "lang" => Rule::in("en", "ar")
+            'firstName' => ['required','string','max:100'],
+            'companyName' => ['string','max:100'],
+            'lastName' => ['required','string','max:25'],
+            'identity' => ['required','string','max:25'],
+            'identity_type' => ['required','string','max:100'],
+            'mobile' => ['required','string','max:14','min:14','regex:/^(00249)/','unique:users,mobile'],
+            'email' => ['required','email','max:100','unique:users,email'],
         ];
         if ($this->path() == 'api/users/createUser') {
             $rules = [
@@ -44,7 +43,6 @@ class CreateUserRequest extends FormRequest
                 "mobile"=>"required|min:9|max:14|string",
                 "roleId"=> "required|integer|exists:roles,id",
                 "lang" => Rule::in("en", "ar"),
-                "companyId"=> "required|integer|exists:company_info,id"
             ];
         }
         return $rules;

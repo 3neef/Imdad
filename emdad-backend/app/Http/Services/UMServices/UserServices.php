@@ -15,25 +15,15 @@ class UserServices
 
     public function create($request)
     {
-      
-        $user = new User();
-        $otp = rand(1000,9999);
-        $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
-        $fullname = $request->get('firstName').''.$request->get('lastName');
-        $user->first_name = $request->get('firstName');
-        $user->last_name = $request->get('lastName');
-        $user->full_name = $fullname;
-        $user->identity = $request->get('idNational');
-        $user->email = $request->get('email');
-        $user->mobile = $request->get('mobile');
-        $user->password = $request->get('password');
-        $user->default_company = $request->get('defaultCompany');
-        $user->otp = strval($otp);
-        $user->otp_expires_at = $otp_expires_at;
-        $user->forget_pass = 0;
-        $user->lang = isset($request->lang)?$request->lang:"en";
-        $result = $user->save();
-        if ($result) {
+     
+        $user=User::create($request,
+        array_merge(['full_name'=>$request['firstName']." ".$request['lastName'],
+        'otp_expires_at'=> Carbon::now()->addMinutes(2),
+        'is_super_admin'=>true,
+        'otp'=>strval(rand(1000, 9999))]));
+ 
+    
+        if ($user!=null) {
             return response()->json([
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
