@@ -31,13 +31,14 @@ class AuthController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"firstName","lastName","password","email","mobile","idNational"},
+        *               required={"firstName","lastName","password","email","mobile","identityNumber","identityType"},
         *               @OA\Property(property="firstName", type="string"),
         *               @OA\Property(property="lastName", type="string"),
         *               @OA\Property(property="password", type="string"),
         *               @OA\Property(property="email", type="email"),
         *               @OA\Property(property="mobile", type="string"),
-        *               @OA\Property(property="idNational", type="string")
+        *               @OA\Property(property="identityNumber", type="string"),
+        *               @OA\Property(property="identityType", type="string")
         *            ),
         *        ),
         *    ),
