@@ -9,6 +9,7 @@ use App\Models\UM\Role;
 use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
+use App\Http\Services\General\SmsService;
 
 class UserServices
 {
@@ -185,10 +186,26 @@ class UserServices
                         ]
                     ]
                 );
-            }
+            
+    }
 
-        // }
-    
+    public function resend ($request){
+        $mobile = ($request->get('mobile'));
+        $user = User::where('mobile', '=', $mobile)->first();
+        $otp = rand(1000,9999);
+        $otp_expires_at = Carbon::now()->addMinutes(5);
+        $user->otp = strval($otp);
+        $user->otp_expires_at = $otp_expires_at;
+        $user->save();
+        // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
+        return response()->json(
+            [
+                'message' => 'New OTP has been sent.',
+            ]
+        );
+    }
+
     public function logout($request)
     {
         $request->user()->tokens()->delete();

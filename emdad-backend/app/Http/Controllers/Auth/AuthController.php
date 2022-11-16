@@ -13,8 +13,10 @@ use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
+use App\Http\Requests\UMRequests\User\ResendOTPRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
+use App\Http\Services\General\SmsService;
 
 class AuthController extends Controller
 {
@@ -258,6 +260,12 @@ class AuthController extends Controller
     public function activateUser(ActivateRequest $request ,UserServices $userServices)
     {
         return $userServices->activate($request);
+    }
+    
+    
+    public function resendOTP(ResendOTPRequest $request ,UserServices $userServices)
+    {
+        return $userServices->resend($request);
     }
        /**
         * @OA\Post(
