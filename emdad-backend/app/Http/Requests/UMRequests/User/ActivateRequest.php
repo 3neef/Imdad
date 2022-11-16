@@ -28,7 +28,7 @@ class ActivateRequest extends FormRequest
         return [
             
             "id"=>"required|exists:users,id",
-            "otp"=>"required|string|min:5|max:50",
+            "otp"=>"required|string|min:4|max:50",
         ];
     }
 
