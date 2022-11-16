@@ -62,6 +62,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(CompanyInfo::class);
     }
 
+    public function currentCompany()
+    {
+        return CompanyInfo::where("id",$this->default_company)->first();
+    }
+
     public function assignRole(Role $role)
     {
         return $this->roles()->save($role);
