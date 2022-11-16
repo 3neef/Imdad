@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Accounts;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AccountRequests\Account\AddMoreCompanyRequest;
 use App\Http\Requests\AccountRequests\Account\CreateAccountRequest;
 use App\Http\Requests\AccountRequests\Account\UpdateAccountRequest;
 use App\Http\Requests\AccountRequests\Account\GetByAccountIdRequest;
@@ -64,6 +65,12 @@ class CompanyController extends Controller
     public function createAccount(CreateAccountRequest $request)
     {
         return $this->accountService->createCompany($request);
+    }
+
+
+    public function addAccount(AddMoreCompanyRequest $request)
+    {
+       return $this->accountService->addMoreCompany($request);
     }
 
     /**

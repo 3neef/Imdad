@@ -12,7 +12,7 @@ use Carbon\Carbon;
 
 class AccountService
 {
-    public function addMoreCompany(AddMoreCompanyRequest $request)
+    public function addMoreCompany( $request)
     {
         $company=RelatedCompanies::where("cr_number",$request->crNo)->first();
 
