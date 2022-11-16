@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'identity_type',  'full_name', 'first_name', 'last_name', 'email', 'password',
+        'identity_type',  'full_name', 'first_name', 'last_name', 'email', 'password','identity_number',
         'status', 'is_verified', 'default_company', 'avatar', 'otp',
         'otp_expires_at', 'forget_pass', 'otp_used', 'mobile', 'identity', 'expiry_date', 'lang', 'used_basic_packeg'
     ];
@@ -60,6 +60,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function company()
     {
         return $this->belongsToMany(CompanyInfo::class);
+    }
+
+    public function currentCompany()
+    {
+        return CompanyInfo::where("id",$this->default_company)->first();
     }
 
     public function assignRole(Role $role)

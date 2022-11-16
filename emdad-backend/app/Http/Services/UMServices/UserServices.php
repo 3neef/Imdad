@@ -15,15 +15,15 @@ class UserServices
 
     public function create($request)
     {
+        $request['full_name'] = $request['first_name'] . " " . $request['last_name'];
+        $request['otp_expires_at'] =now()->addMinutes(2);
+        $request['is_super_admin'] =true;
+        $request['otp'] = strval(rand(1000, 9999));
+        
+        $user = User::create($request);
      
-        $user=User::create($request,
-        array_merge(['full_name'=>$request['firstName']." ".$request['lastName'],
-        'otp_expires_at'=> Carbon::now()->addMinutes(2),
-        'is_super_admin'=>true,
-        'otp'=>strval(rand(1000, 9999))]));
- 
-    
-        if ($user!=null) {
+
+        if ($user) {
             return response()->json([
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
@@ -35,15 +35,15 @@ class UserServices
     public function createUserToCompany($request)
     {
         $user = new User();
-        $otp = rand(1000,9999);
+        $otp = rand(1000, 9999);
         $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
-        $fullname = $request->get('firstName').''.$request->get('lastName');
+        $fullname = $request->get('firstName') . '' . $request->get('lastName');
         $user->full_name = $fullname;
         $user->first_name = $request->get('firstName');
         $user->last_name = $request->get('lastName');
         $user->email = $request->get('email');
         $user->mobile = $request->get('mobile');
-        $user->lang = isset($request->lang)?$request->lang:"en";
+        $user->lang = isset($request->lang) ? $request->lang : "en";
 
         $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
@@ -51,7 +51,7 @@ class UserServices
         $result = $user->save();
         $companyId = $request->get('companyId');
         $roleId = $request->get('roleId');
-        $user->roleInCompany()->attach($user->id,['roles_id' =>$roleId,'company_info_id'=>$companyId]);
+        $user->roleInCompany()->attach($user->id, ['roles_id' => $roleId, 'company_info_id' => $companyId]);
         if ($result) {
             return response()->json([
                 'message' => 'User created successfully',
@@ -74,10 +74,10 @@ class UserServices
         $email = empty($request->get('email')) ? $user->value('email') : $request->get('email');
         $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
         $companyId = $request->get('defaultCompany');
-        $userRoleCompany = RoleUserCompany::where('users_id','=',$user->id)->where('company_info_id','=',$companyId)->first();
+        $userRoleCompany = RoleUserCompany::where('users_id', '=', $user->id)->where('company_info_id', '=', $companyId)->first();
         $roleId = empty($request->get('roleId')) ? $userRoleCompany->roles_id : $request->get('roleId');
-        $userRoleCompany->roles_id =$roleId;
-        $userRoleCompany->company_info_id =$companyId;
+        $userRoleCompany->roles_id = $roleId;
+        $userRoleCompany->company_info_id = $companyId;
         $userRoleCompany->update();
         $result = $user->update([
             'full_name' => $fullname,
@@ -89,7 +89,7 @@ class UserServices
         if ($result) {
             return response()->json([
                 'message' => 'User updated successfully',
-                'data'=> ['user' => new UserResponse($user)]
+                'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
@@ -109,24 +109,23 @@ class UserServices
         }
 
         $password = ($request->get('password'));
-            if ($user->password != $password) {
-                return response()->json(
-                    [
-                        "message" => "We didn't recognize this password"
-                    ]
-                );
-            }
-            $token = $user->createToken('authtoken');
+        if ($user->password != $password) {
             return response()->json(
                 [
-                    'message' => 'Logged in',
-                    'data' => [
-                        'user' => new UserResponse($user),
-                        'token' => $token->plainTextToken
-                    ]
+                    "message" => "We didn't recognize this password"
                 ]
             );
-
+        }
+        $token = $user->createToken('authtoken');
+        return response()->json(
+            [
+                'message' => 'Logged in',
+                'data' => [
+                    'user' => new UserResponse($user),
+                    'token' => $token->plainTextToken
+                ]
+            ]
+        );
     }
 
     public function activate($request)
@@ -152,35 +151,34 @@ class UserServices
             );
         }
         $time_now = Carbon::now();
-            if ($time_now > $user->otp_expires_at) {
-                $otp = rand(1000,9999);
-                $otp_expires_at = Carbon::now()->addMinutes(1);
-                $user->otp = $otp;
-                $user->otp_expires_at = $otp_expires_at;
-                $user->save();
-                MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-                return response()->json(
-                    [
-                        "message" => "Your OTP has expired, New OTP has been sent!!"
+        if ($time_now > $user->otp_expires_at) {
+            $otp = rand(1000, 9999);
+            $otp_expires_at = Carbon::now()->addMinutes(1);
+            $user->otp = $otp;
+            $user->otp_expires_at = $otp_expires_at;
+            $user->save();
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+            return response()->json(
+                [
+                    "message" => "Your OTP has expired, New OTP has been sent!!"
+                ]
+            );
+        } else {
+            $user->otp = null;
+            $user->otp_expires_at = null;
+            $user->is_verified = true;
+            $user->save();
+            return response()->json(
+                [
+                    'message' => 'Your account has been activated successfully.',
+                    'data' => [
+                        'user' => new UserResponse($user),
                     ]
-                );
-            }else {
-                $user->otp = null;
-                $user->otp_expires_at = null;
-                $user->is_verified = true;
-                $user->save();
-                return response()->json(
-                    [
-                        'message' => 'Your account has been activated successfully.',
-                        'data' => [
-                            'user' => new UserResponse($user),
-                        ]
-                    ]
-                );
-            }
-
+                ]
+            );
         }
-    
+    }
+
     public function logout($request)
     {
         $request->user()->tokens()->delete();
@@ -214,7 +212,7 @@ class UserServices
 
     public function forgotPassword($request)
     {
-        $otp = rand(1000,9999);
+        $otp = rand(1000, 9999);
         $otp_expires_at = Carbon::now()->addMinutes(1);
         $email = ($request->get('email'));
         $user = User::where('email', $email)->first();
@@ -281,33 +279,34 @@ class UserServices
         );
     }
 
-    public function assignRole($request){
-        $colmun = gettype($request ->json()->get( 'role' )) == 'integer' ? 'id' : 'name';
-        $role = Role::where( $colmun, $request ->json()->get( 'role' ) )->first();
+    public function assignRole($request)
+    {
+        $colmun = gettype($request->json()->get('role')) == 'integer' ? 'id' : 'name';
+        $role = Role::where($colmun, $request->json()->get('role'))->first();
         $user = User::find($request->get('userId'));
         $companyId = $request->get('companyId');
         $userId = $request->get('userId');
-        $user->roleInCompany()->attach($userId,['roles_id' =>$role->id,'company_info_id'=>$companyId]);
-        return response()->json( [ 'message'=>'assign role successfully' ], 200 );
+        $user->roleInCompany()->attach($userId, ['roles_id' => $role->id, 'company_info_id' => $companyId]);
+        return response()->json(['message' => 'assign role successfully'], 200);
     }
 
     public function unAssignRole($request)
     {
-        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',$request->companyId)->first();
+        $userRoleCompany = RoleUserCompany::where('users_id', '=', $request->userId)->where('company_info_id', '=', $request->companyId)->first();
         $deleted = $userRoleCompany->delete();
-        if($deleted){
-            return response()->json( [ 'message'=>'unassign role successfully' ], 200 );
+        if ($deleted) {
+            return response()->json(['message' => 'unassign role successfully'], 200);
         }
-        return response()->json( [ 'error'=>'system error' ], 500 );
+        return response()->json(['error' => 'system error'], 500);
     }
 
     public function restoreOldRole($request)
     {
-        $userRoleCompany = RoleUserCompany::where('users_id','=',$request->userId)->where('company_info_id','=',$request->companyId)->withTrashed()->first()->restore();
-        if($userRoleCompany){
-            return response()->json( [ 'message'=>'restored successfully' ], 200 );
+        $userRoleCompany = RoleUserCompany::where('users_id', '=', $request->userId)->where('company_info_id', '=', $request->companyId)->withTrashed()->first()->restore();
+        if ($userRoleCompany) {
+            return response()->json(['message' => 'restored successfully'], 200);
         }
-        return response()->json( [ 'error'=>'system error' ], 500 );
+        return response()->json(['error' => 'system error'], 500);
     }
 
     public function setDefaultCompany($request)
@@ -320,11 +319,10 @@ class UserServices
         if ($result) {
             return response()->json([
                 'message' => 'Default company successfully',
-                'data'=> ['user' => new UserResponse($user)]
+                'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
-
     }
 
     public function showAll()

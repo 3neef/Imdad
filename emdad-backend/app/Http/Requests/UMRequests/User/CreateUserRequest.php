@@ -27,11 +27,11 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'firstName' => ['required','string','max:100'],
+            'first_name' => ['required','string','max:100'],
             'companyName' => ['string','max:100'],
-            'lastName' => ['required','string','max:25'],
-            'identity' => ['required','string','max:25'],
-            'identity_type' => ['required','string','max:100'],
+            'last_name' => ['required','string','max:25'],
+            'identity_number' => ['required','string','max:25'],
+            'identity_type' => ['required'],
             'mobile' => ['required','string','max:14','min:14','regex:/^(00249)/','unique:users,mobile'],
             'email' => ['required','email','max:100','unique:users,email'],
         ];
