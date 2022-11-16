@@ -26,7 +26,8 @@ class ActivateRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => ['required','string','max:14','min:14','regex:/^(00966)/'],
+            
+            "id"=>"required|exists:users,id",
             "otp"=>"required|string|min:5|max:50",
         ];
     }
