@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('identity_number');
-            // $table->string('identity_type');
+             $table->string('company_name')->nullable();
         });
     }
 

@@ -27,13 +27,13 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'first_name' => ['required','string','max:100'],
-            'companyName' => ['string','max:100'],
-            'last_name' => ['required','string','max:25'],
-            'identity_number' => ['required','string','max:25'],
-            'identity_type' => ['required'],
+            'firstName' => ['required','string','max:100'],
+            'lastName' => ['required','string','max:25'],
+            'identityNumber' => ['required','string','max:25'],
+            'identityType' => ['required'],
             'mobile' => ['required','string','max:14','min:14','regex:/^(00249)/','unique:users,mobile'],
             'email' => ['required','email','max:100','unique:users,email'],
+            'password'=>'required|string'
         ];
         if ($this->path() == 'api/users/createUser') {
             $rules = [

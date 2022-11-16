@@ -15,7 +15,13 @@ class UserServices
 
     public function create($request)
     {
-        $request['full_name'] = $request['first_name'] . " " . $request['last_name'];
+        $request['first_name']=$request['firstName'];
+        $request['last_name']=$request['lastName'];
+        $request['identity_number']=$request['identityNumber'];
+        $request['identity_type']=$request['identityType'];
+
+
+        $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
         $request['otp_expires_at'] =now()->addMinutes(2);
         $request['is_super_admin'] = true;
         $request['otp'] = strval(rand(1000, 9999));
