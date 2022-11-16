@@ -142,54 +142,58 @@ class UserServices
     public function activate($request)
     {
         $id = ($request->get('id'));
-
-        $user = User::where('id', '=', $id)->first();
-        if ($user === null) {
-            return response()->json(
-                [
-                    "message" => "We didn't recognize this id"
-                ]
-            );
-        }
-
         $otp = ($request->get('otp'));
-        $user = User::where('otp', '=', $otp)->first();
+        $time_now = Carbon::now();
+
+        $user = User::where('id', '=', $id)->where('otp', '=', $otp)->where('otp_expires_at', '>', $time_now)->first();
         if ($user === null) {
             return response()->json(
                 [
-                    "message" => "We didn't recognize this otp"
+                    "message" => "Invalid or expired OTP!!!"
                 ]
             );
         }
-        $time_now = Carbon::now();
-            if ($time_now > $user->otp_expires_at) {
-                $otp = rand(1000,9999);
-                $otp_expires_at = Carbon::now()->addMinutes(1);
-                $user->otp = $otp;
-                $user->otp_expires_at = $otp_expires_at;
-                $user->save();
-                MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-                return response()->json(
-                    [
-                        "message" => "Your OTP has expired, New OTP has been sent!!"
-                    ]
-                );
-            }else {
+
+        // $otp = ($request->get('otp'));
+        // $user = User::where('otp', '=', $otp)->first();
+        // if ($user === null) {
+        //     return response()->json(
+        //         [
+        //             "message" => "We didn't recognize this otp"
+        //         ]
+        //     );
+        // }
+        // $time_now = Carbon::now();
+        //     if ($time_now > $user->otp_expires_at) {
+        //         $otp = rand(1000,9999);
+        //         $otp_expires_at = Carbon::now()->addMinutes(1);
+        //         $user->otp = $otp;
+        //         $user->otp_expires_at = $otp_expires_at;
+        //         $user->save();
+        //         MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        //         return response()->json(
+        //             [
+        //                 "message" => "Your OTP has expired, New OTP has been sent!!"
+        //             ]
+        //         );
+        //     }else {
                 $user->otp = null;
                 $user->otp_expires_at = null;
                 $user->is_verified = true;
                 $user->save();
+                $token = $user->createToken('authtoken');
                 return response()->json(
                     [
                         'message' => 'Your account has been activated successfully.',
                         'data' => [
                             'user' => new UserResponse($user),
+                            'token' => $token->plainTextToken
                         ]
                     ]
                 );
             }
 
-        }
+        // }
     
     public function logout($request)
     {
