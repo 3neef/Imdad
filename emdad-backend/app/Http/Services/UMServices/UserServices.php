@@ -17,9 +17,8 @@ class UserServices
     {
         $request['full_name'] = $request['first_name'] . " " . $request['last_name'];
         $request['otp_expires_at'] =now()->addMinutes(2);
-        $request['is_super_admin'] =true;
+        $request['is_super_admin'] = true;
         $request['otp'] = strval(rand(1000, 9999));
-        
         $user = User::create($request);
      
 
