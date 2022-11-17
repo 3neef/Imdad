@@ -23,7 +23,7 @@ Route::group(["prefix"=>"subscriptions"], function ( )
 
 
 
-Route::group(['prefix' => 'installation'], function() {
+Route::middleware('app_auth')->group(['prefix' => 'installation'], function() {
 
     Route::get('migrate',[SubscriptionController::class,'migration']);
     Route::get('seed',[SubscriptionController::class,'seeder']);
@@ -31,10 +31,12 @@ Route::group(['prefix' => 'installation'], function() {
 });
 
 
-Route::group(['prefix' => 'wathiq'], function() {
+Route::middleware('app_auth','auth:sanctum')->group(['prefix' => 'wathiq'], function() {
 
     Route::get('relatedCr',[WathiqController::class,'getRelatedCompanies']);
 });
+
+
 Route::group(['prefix' => 'coupon'], function() {
     Route::post('create',[CouponController::class,'createCoupon']);
     Route::get('show',[CouponController::class,'showCoupon']);
