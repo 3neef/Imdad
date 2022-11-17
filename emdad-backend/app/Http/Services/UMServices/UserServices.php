@@ -108,8 +108,7 @@ class UserServices
         $user = User::where('email', '=', $email)->first();
         if ($user === null) {
             return response()->json(
-                [
-                    "message" => "We didn't recognize this email"
+                ["success"=>false,"error"=> "We didn't recognize this email"
                 ]
             );
         }
@@ -117,8 +116,7 @@ class UserServices
         $password = ($request->get('password'));
         if ($user->password != $password) {
             return response()->json(
-                [
-                    "message" => "We didn't recognize this password"
+                ["success"=>false,"error"=> "We didn't recognize this password"
                 ]
             );
         }
@@ -143,8 +141,7 @@ class UserServices
         $user = User::where('id', '=', $id)->where('otp', '=', $otp)->where('otp_expires_at', '>', $time_now)->first();
         if ($user === null) {
             return response()->json(
-                [
-                    "message" => "Invalid or expired OTP!!!"
+                ["success"=>false,"error"=> "Invalid or expired OTP!!!"
                 ]
             );
         }
@@ -245,8 +242,7 @@ class UserServices
         $user = User::where('email', $email)->first();
         if ($user === null) {
             return response()->json(
-                [
-                    "message" => "Unregistered email"
+                ["success"=>false,"error"=> "Unregistered email"
                 ]
             );
         }
@@ -273,8 +269,7 @@ class UserServices
         $new_password = ($request->get('newPassword'));
         if ($user === null) {
             return response()->json(
-                [
-                    "message" => "Unregistered email"
+                ["success"=>false,"error"=> "Unregistered email"
                 ]
             );
         }
