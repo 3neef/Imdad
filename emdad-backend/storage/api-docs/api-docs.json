@@ -48,7 +48,7 @@
                                     },
                                     "contactPhone": {
                                         "type": "string",
-                                        "example": "+966xxxxxxxxx"
+                                        "example": "00966xxxxxxxxx"
                                     },
                                     "contactEmail": {
                                         "type": "email"
@@ -1150,7 +1150,8 @@
                                     "password",
                                     "email",
                                     "mobile",
-                                    "idNational"
+                                    "identityNumber",
+                                    "identityType"
                                 ],
                                 "properties": {
                                     "firstName": {
@@ -1168,7 +1169,10 @@
                                     "mobile": {
                                         "type": "string"
                                     },
-                                    "idNational": {
+                                    "identityNumber": {
+                                        "type": "string"
+                                    },
+                                    "identityType": {
                                         "type": "string"
                                     }
                                 },

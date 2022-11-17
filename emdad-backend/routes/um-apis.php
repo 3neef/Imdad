@@ -17,6 +17,7 @@ Route::group(['prefix' => 'users'], function() {
     Route::post('createUser', [AuthController::class, 'createUserToCompany']);
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('activate', [AuthController::class, 'activateUser']);
+    Route::post('resend-otp', [AuthController::class, 'resendOTP'])->middleware('auth:sanctum');
     Route::post('logout', [AuthController::class, 'logoutUser'])->middleware('auth:sanctum');
     Route::put("update", [AuthController::class, 'updateUser']);
     Route::delete("delete/{id}", [AuthController::class, 'deleteUser']);

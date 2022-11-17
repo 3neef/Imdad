@@ -13,8 +13,10 @@ use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
+use App\Http\Requests\UMRequests\User\ResendOTPRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
+use App\Http\Services\General\SmsService;
 
 class AuthController extends Controller
 {
@@ -31,13 +33,14 @@ class AuthController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"firstName","lastName","password","email","mobile","idNational"},
+        *               required={"firstName","lastName","password","email","mobile","identityNumber","identityType"},
         *               @OA\Property(property="firstName", type="string"),
         *               @OA\Property(property="lastName", type="string"),
         *               @OA\Property(property="password", type="string"),
         *               @OA\Property(property="email", type="email"),
         *               @OA\Property(property="mobile", type="string"),
-        *               @OA\Property(property="idNational", type="string")
+        *               @OA\Property(property="identityNumber", type="string"),
+        *               @OA\Property(property="identityType", type="string")
         *            ),
         *        ),
         *    ),
@@ -65,7 +68,7 @@ class AuthController extends Controller
         */
     public function createUser(CreateUserRequest $request,UserServices $userServices)
     {
-        return $userServices->create($request);
+        return $userServices->create($request->validated());
     }
            /**
         * @OA\Post(
@@ -257,6 +260,12 @@ class AuthController extends Controller
     public function activateUser(ActivateRequest $request ,UserServices $userServices)
     {
         return $userServices->activate($request);
+    }
+    
+    
+    public function resendOTP(ResendOTPRequest $request ,UserServices $userServices)
+    {
+        return $userServices->resend($request);
     }
        /**
         * @OA\Post(
