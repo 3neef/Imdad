@@ -31,7 +31,10 @@ Route::group(['prefix' => 'installation'], function () {
 Route::middleware(['app_auth', 'auth:sanctum'])->prefix('wathiq')->group(function () {
     Route::get('relatedCr', [WathiqController::class, 'getRelatedCompanies']);
 });
-
+    Route::get('optimize',function(){
+        Artisan::call('optimize');
+        dd("optimized successfully");
+    });
 
 Route::middleware(['app_auth', 'auth:sanctum'])->prefix('coupon')->group(function () {
     Route::post('create', [CouponController::class, 'createCoupon']);
