@@ -27,9 +27,16 @@ Route::middleware('app_auth')->group(['prefix' => 'installation'], function() {
 
     Route::get('migrate',[SubscriptionController::class,'migration']);
     Route::get('seed',[SubscriptionController::class,'seeder']);
-    Route::get('fresh',[SubscriptionController::class,'migrateFresh']);
+    Route::get('fresh',function(){
+        Artisan::call('migrate:fresh');
+        dd("Migrate Command run succssfly");
+    });
+  
 });
-
+Route::get('optimize',function(){
+    Artisan::call('optimize');
+    dd("optimize");
+});
 
 Route::middleware('app_auth','auth:sanctum')->group(['prefix' => 'wathiq'], function() {
 
