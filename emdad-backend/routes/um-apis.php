@@ -63,9 +63,7 @@ Route::middleware(['app_auth', 'auth:sanctum'])->prefix('department')->group(fun
     Route::post('create', [DepartmentController::class, 'create']);
 
     Route::group(['prefix' => 'users'], function () {
-        Route::post('register', [AuthController::class, 'createUser']);
         Route::post('createUser', [AuthController::class, 'createUserToCompany']);
-        Route::post('login', [AuthController::class, 'loginUser'])->withoutMiddleware('auth:sanctum');
         Route::post('activate', [AuthController::class, 'activateUser']);
         Route::post('resend-otp', [AuthController::class, 'resendOTP']);
         Route::post('logout', [AuthController::class, 'logoutUser']);
