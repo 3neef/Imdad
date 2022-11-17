@@ -13,34 +13,44 @@ Route::middleware("auth:sanctum")->group( function() {
 });
 Route::get('sendSms',[SmsController::class,'sendSms']);
 
-Route::group(["prefix"=>"subscriptions"], function ( )
-{
-    Route::put('update',[SubscriptionController::class,'updateSubscription']);
-    Route::post('create',[SubscriptionController::class,'createPackage']);
-    Route::get('get-supplier-packs',[SubscriptionController::class,'getSupplierPackages']);
-    Route::get('get-buyer-packs',[SubscriptionController::class,'getBuyerPackages']);
-});
-
-
-
-Route::middleware('app_auth')->group(['prefix' => 'installation'], function() {
-
-    Route::get('migrate',[SubscriptionController::class,'migration']);
-    Route::get('seed',[SubscriptionController::class,'seeder']);
-    Route::get('fresh',function(){
-        Artisan::call('migrate:fresh');
-        dd("Migrate Command run succssfly");
+Route::middleware(['app_auth'])->group(function(){
+    Route::group(["prefix"=>"subscriptions"], function ( )
+    {
+        Route::put('update',[SubscriptionController::class,'updateSubscription']);
+        Route::post('create',[SubscriptionController::class,'createPackage']);
+        Route::get('get-supplier-packs',[SubscriptionController::class,'getSupplierPackages']);
+        Route::get('get-buyer-packs',[SubscriptionController::class,'getBuyerPackages']);
     });
-  
-});
-Route::get('optimize',function(){
-    Artisan::call('optimize');
-    dd("optimize");
+
+    Route::group(['prefix' => 'installation'], function() {
+
+        Route::get('migrate',[SubscriptionController::class,'migration']);
+        Route::get('seed',[SubscriptionController::class,'seeder']);
+        Route::get('fresh',function(){
+            Artisan::call('migrate:fresh');
+            dd("Migrate Command run succssfly");
+        });
+      
+    });
+    
 });
 
-Route::middleware('app_auth','auth:sanctum')->group(['prefix' => 'wathiq'], function() {
 
-    Route::get('relatedCr',[WathiqController::class,'getRelatedCompanies']);
+
+
+Route::middleware('app_auth')->group(function(){
+    Route::get('optimize',function(){
+        Artisan::call('optimize');
+        dd("optimize");
+    });
+});
+
+
+Route::middleware(['app_auth','auth:sanctum'])->group(function(){
+    Route::group(['prefix' => 'wathiq'], function() {
+
+        Route::get('relatedCr',[WathiqController::class,'getRelatedCompanies']);
+});
 });
 
 
