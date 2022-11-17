@@ -59,10 +59,11 @@ Route::middleware(['app_auth', 'auth:sanctum'])->prefix('roles')->group(function
 
 // Route::middleware('app_auth','auth:sanctum')->group(['prefix'=>'department'],function(){
 Route::middleware(['app_auth', 'auth:sanctum'])->prefix('department')->group(function () {
-
     Route::post('create', [DepartmentController::class, 'create']);
+});
 
-    Route::group(['prefix' => 'users'], function () {
+Route::middleware(['app_auth', 'auth:sanctum'])->prefix('users')->group(function () {
+
         Route::post('createUser', [AuthController::class, 'createUserToCompany']);
         Route::post('activate', [AuthController::class, 'activateUser']);
         Route::post('resend-otp', [AuthController::class, 'resendOTP']);
@@ -79,7 +80,8 @@ Route::middleware(['app_auth', 'auth:sanctum'])->prefix('department')->group(fun
     });
 
 
-    Route::group(['prefix' => 'permissions'], function () {
+        Route::middleware(['app_auth', 'auth:sanctum'])->prefix('permissions')->group(function () {
+
         Route::post('save', [PermissionsController::class, 'savePermission']);
         Route::get('getAll', [PermissionsController::class, 'getAllPermissions']);
         Route::get('getById/{id}', [PermissionsController::class, 'getPermissionByRoleId']);
@@ -88,7 +90,8 @@ Route::middleware(['app_auth', 'auth:sanctum'])->prefix('department')->group(fun
         Route::put('restore/{id}', [PermissionsController::class, 'restoreById']);
     });
 
-    Route::group(['prefix' => 'roles'], function () {
+        Route::middleware(['app_auth', 'auth:sanctum'])->prefix('roles')->group(function () {
+
         Route::post('save', [RoleController::class, 'saveRole']);
         Route::get('getAll', [RoleController::class, 'getAllRoles']);
         Route::get('getByRoleId/{id}', [RoleController::class, 'getByRoleId']);
@@ -99,7 +102,5 @@ Route::middleware(['app_auth', 'auth:sanctum'])->prefix('department')->group(fun
         Route::get('roles-for-reg', [RoleController::class, 'getRolesForReg']);
     });
 
-    Route::group(['prefix' => 'department'], function () {
-        Route::post('create', [DepartmentController::class, 'create']);
-    });
-});
+
+
