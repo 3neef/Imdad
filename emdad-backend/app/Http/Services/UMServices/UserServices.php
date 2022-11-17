@@ -26,7 +26,7 @@ class UserServices
         $request['otp_expires_at'] =now()->addMinutes(2);
         $request['is_super_admin'] = true;
         $request['otp'] = strval(rand(1000, 9999));
-        $user = User::updateOrCreate($request);
+        $user = User::create($request);
      
 
         if ($user) {
