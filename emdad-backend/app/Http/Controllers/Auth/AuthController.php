@@ -17,6 +17,8 @@ use App\Http\Requests\UMRequests\User\ResendOTPRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
 use App\Http\Services\General\SmsService;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Client\Request as ClientRequest;
 
 class AuthController extends Controller
 {
@@ -288,9 +290,9 @@ class AuthController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function logoutUser(GetUserRequest $request ,UserServices $userServices)
+    public function logoutUser(UserServices $userServices)
     {
-        return $userServices->logout($request);
+        return $userServices->logout();
     }
        /**
         * @OA\delete(

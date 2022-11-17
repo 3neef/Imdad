@@ -203,14 +203,15 @@ class UserServices
         );
     }
 
-    public function logout($request)
+    public function logout()
     {
-        $request->user()->tokens()->delete();
+       $user=auth()->user()->tokens()->delete();
         session()->invalidate();
 
         return response()->json(
             [
                 'message' => 'Logged out'
+                ,'user'=>$user
             ]
         );
     }

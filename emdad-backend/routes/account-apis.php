@@ -6,8 +6,9 @@ use App\Http\Controllers\Accounts\LocationController;
 use App\Http\Controllers\Accounts\SubscriptionController;
 use App\Http\Controllers\SubscriptionPaymentController;
 
-Route::group(['prefix' => 'accounts'], function () {
+Route::middleware('app_auth','auth:sanctum')->group(['prefix' => 'accounts'], function () {
     Route::post('create', [CompanyController::class, 'createAccount']);
+    Route::post('addCompany', [CompanyController::class, 'addAccount']);
     Route::get('getAll', [CompanyController::class, 'getAllAccount']);
     Route::get('getAllUnValidated', [CompanyController::class, 'allUnValidatedAccounts']);
     Route::put('validate/{id}', [CompanyController::class, 'validatedAccount']);
@@ -18,7 +19,7 @@ Route::group(['prefix' => 'accounts'], function () {
     Route::get('subscriptionPayment', [SubscriptionPaymentController::class, 'AddSubscriptionPayment']);
 });
 
-Route::group(['prefix' => 'warehouses'], function () {
+Route::middleware('app_auth','auth:sanctum')->group(['prefix' => 'warehouses'], function () {
     Route::post('create', [LocationController::class, 'saveLocation']);
     Route::get('getAll', [LocationController::class, 'getAllLocations']);
     Route::get('getById/{id}', [LocationController::class, 'getByLocationById']);
