@@ -11,13 +11,14 @@ use App\Http\Controllers\UMController\RoleController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('users/login', [AuthController::class, 'loginUser'])->withoutMiddleware('app_auth');
+Route::post('users/register', [AuthController::class, 'createUser'])->withoutMiddleware('app_auth');
+
 
 Route::middleware(['app_auth', 'auth:sanctum'])->group(function(){
 
     Route::group(['prefix' => 'users'], function () {
-        Route::post('register', [AuthController::class, 'createUser']);
         Route::post('createUser', [AuthController::class, 'createUserToCompany']);
-        Route::post('login', [AuthController::class, 'loginUser'])->withoutMiddleware('auth:sanctum');
         Route::post('activate', [AuthController::class, 'activateUser']);
         Route::post('resend-otp', [AuthController::class, 'resendOTP']);
         Route::post('logout', [AuthController::class, 'logoutUser']);
