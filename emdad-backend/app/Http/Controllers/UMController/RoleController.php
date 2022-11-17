@@ -173,6 +173,7 @@ class RoleController extends Controller
         */
     public function getAllRoles()
     {
+        
         return $this->roleServices->showAll();
     }
        /**

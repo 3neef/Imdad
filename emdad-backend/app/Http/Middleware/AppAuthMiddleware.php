@@ -20,6 +20,7 @@ class AppAuthMiddleware
             return $next($request);
         }
         else{
+            
             return response()->json(["success"=>false,"error"=>"app not authenticated"],401);
         }
 
