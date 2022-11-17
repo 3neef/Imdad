@@ -14,7 +14,7 @@ build_image:
     stage: build
     tags:
         - prod_docker
-    image: docker:20.10.17
+    image: hub.nctr.sd/private/docker:20.10.17
     before_script:
         - docker login -u $R_USER -p $R_PASS $NCTR_REG
     script:
