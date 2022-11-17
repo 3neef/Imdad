@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('prodcuts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('categories_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreignId('company_id')->references('id')->on('company_info')->onDelete('cascade');
             $table->string('name');
             $table->integer('price');
             $table->timestamps();

@@ -22,7 +22,7 @@ class CategoryService
                 'aproved' => $aproved,
                 'isleaf' => $request->isleaf,
                 'parent_id' => $parentid,
-                'company_id' => $request->companyId,
+                'company_id' => auth()->user()->default_company,
             ]);
 
             return response()->json(['message' => 'created successfully'],201);
@@ -72,7 +72,7 @@ class CategoryService
                 'aproved' => $aproved,
                 'isleaf' => $request->isleaf,
                 'parent_id' => $request->parent_id,
-                'company_id' => $request->companyId, //change to Auth()->user()->company_id (befor add middleware)
+                'company_id' => auth()->user()->default_company, //change to Auth()->user()->company_id (befor add middleware)
             ]);
 
             return response()->json(['message' => 'created successfully'], 200);
