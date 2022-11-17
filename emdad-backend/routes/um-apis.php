@@ -12,7 +12,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('users/login', [AuthController::class, 'loginUser'])->middleware('app_auth');
+Route::post('login', [AuthController::class, 'loginUser'])->middleware('app_auth');
 
 
 Route::middleware('app_auth','auth:sanctum')->group(['prefix' => 'users'], function() {
