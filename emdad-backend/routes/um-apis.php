@@ -10,14 +10,14 @@ use App\Http\Controllers\UMController\RoleController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::middleware(['app_auth'])->prefix('users')->group(function () {
+Route::middleware(['app.auth'])->prefix('users')->group(function () {
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [AuthController::class, 'createUser']);
 });
 
 
 
-Route::middleware(['app_auth', 'auth:sanctum'])->prefix('users')->group(function () {
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
 
     Route::post('createUser', [AuthController::class, 'createUserToCompany']);
     Route::post('activate', [AuthController::class, 'activateUser']);
@@ -35,7 +35,7 @@ Route::middleware(['app_auth', 'auth:sanctum'])->prefix('users')->group(function
 });
 
 
-Route::middleware(['app_auth', 'auth:sanctum'])->prefix('permissions')->group(function () {
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(function () {
 
     Route::post('save', [PermissionsController::class, 'savePermission']);
     Route::get('getAll', [PermissionsController::class, 'getAllPermissions']);
@@ -45,7 +45,7 @@ Route::middleware(['app_auth', 'auth:sanctum'])->prefix('permissions')->group(fu
     Route::put('restore/{id}', [PermissionsController::class, 'restoreById']);
 });
 
-Route::middleware(['app_auth', 'auth:sanctum'])->prefix('roles')->group(function () {
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function () {
 
     Route::post('save', [RoleController::class, 'saveRole']);
     Route::get('getAll', [RoleController::class, 'getAllRoles']);
@@ -57,8 +57,8 @@ Route::middleware(['app_auth', 'auth:sanctum'])->prefix('roles')->group(function
     Route::get('roles-for-reg', [RoleController::class, 'getRolesForReg']);
 });
 
-// Route::middleware('app_auth','auth:sanctum')->group(['prefix'=>'department'],function(){
-Route::middleware(['app_auth', 'auth:sanctum'])->prefix('department')->group(function () {
+// Route::middleware('app.auth','auth:sanctum')->group(['prefix'=>'department'],function(){
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('department')->group(function () {
     Route::post('create', [DepartmentController::class, 'create']);
 });
 

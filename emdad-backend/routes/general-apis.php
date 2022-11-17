@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('sendSms', [SmsController::class, 'sendSms']);
 
-Route::middleware(['app_auth', 'auth:sanctum'])->prefix('subscriptions')->group(function () {
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('subscriptions')->group(function () {
     Route::put('update', [SubscriptionController::class, 'updateSubscription']);
     Route::post('create', [SubscriptionController::class, 'createPackage']);
     Route::get('get-supplier-packs', [SubscriptionController::class, 'getSupplierPackages']);
@@ -28,7 +28,7 @@ Route::group(['prefix' => 'installation'], function () {
 });
 
 
-Route::middleware(['app_auth', 'auth:sanctum'])->prefix('wathiq')->group(function () {
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('wathiq')->group(function () {
     Route::get('relatedCr', [WathiqController::class, 'getRelatedCompanies']);
 });
     Route::get('optimize',function(){
@@ -36,7 +36,7 @@ Route::middleware(['app_auth', 'auth:sanctum'])->prefix('wathiq')->group(functio
         dd("optimized successfully");
     });
 
-Route::middleware(['app_auth', 'auth:sanctum'])->prefix('coupon')->group(function () {
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('coupon')->group(function () {
     Route::post('create', [CouponController::class, 'createCoupon']);
     Route::get('show', [CouponController::class, 'showCoupon']);
     Route::post('used', [CouponController::class, 'usedCoupon']);
