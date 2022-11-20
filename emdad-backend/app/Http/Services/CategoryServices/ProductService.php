@@ -14,6 +14,8 @@ class ProductService{
         $prodcut->name = $request->get('name');
         $prodcut->categories_id = $categoryId;
         $prodcut->price = $request->get('price');
+
+        $prodcut->company_id = auth()->user()->default_company;
         $result = $prodcut->save();
         if($result){
             return response()->json( [ 'message'=>'created successfully' ], 200 );

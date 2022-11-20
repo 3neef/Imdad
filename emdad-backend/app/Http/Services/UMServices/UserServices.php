@@ -16,18 +16,21 @@ class UserServices
 
     public function create($request)
     {
-        $request['first_name']=$request['firstName'];
-        $request['last_name']=$request['lastName'];
-        $request['identity_number']=$request['identityNumber'];
-        $request['identity_type']=$request['identityType'];
+        $request['first_name'] = $request['firstName'];
+        $request['last_name'] = $request['lastName'];
+        $request['identity_number'] = $request['identityNumber'];
+        $request['identity_type'] = $request['identityType'];
 
 
         $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
-        $request['otp_expires_at'] =now()->addMinutes(2);
+        $request['otp_expires_at'] = now()->addMinutes(2);
         $request['is_super_admin'] = true;
+
+        
         $request['otp'] = strval(rand(1000, 9999));
-        $user = User::create($request);
-     
+
+        $user = User::updateOrCreate(['email' => $request['email'], 'mobile' => $request['mobile']], $request);
+
 
         if ($user) {
             return response()->json([
@@ -103,12 +106,13 @@ class UserServices
 
     public function login(LoginRequest $request)
     {
-        $email = ($request->get('email'));
-
-        $user = User::where('email', '=', $email)->first();
+        $user = User::where('email', '=', $request->email)
+        ->orwhere('mobile', $request->mobile)
+            ->first();
         if ($user === null) {
             return response()->json(
-                ["success"=>false,"error"=> "We didn't recognize this email"
+                [
+                    "success" => false, "error" => "We didn't recognize this email|phone"
                 ]
             );
         }
@@ -116,7 +120,8 @@ class UserServices
         $password = ($request->get('password'));
         if ($user->password != $password) {
             return response()->json(
-                ["success"=>false,"error"=> "We didn't recognize this password"
+                [
+                    "success" => false, "error" => "We didn't recognize this password"
                 ]
             );
         }
@@ -141,7 +146,8 @@ class UserServices
         $user = User::where('id', '=', $id)->where('otp', '=', $otp)->where('otp_expires_at', '>', $time_now)->first();
         if ($user === null) {
             return response()->json(
-                ["success"=>false,"error"=> "Invalid or expired OTP!!!"
+                [
+                    "success" => false, "error" => "Invalid or expired OTP!!!"
                 ]
             );
         }
@@ -169,27 +175,27 @@ class UserServices
         //             ]
         //         );
         //     }else {
-                $user->otp = null;
-                $user->otp_expires_at = null;
-                $user->is_verified = true;
-                $user->save();
-                $token = $user->createToken('authtoken');
-                return response()->json(
-                    [
-                        'message' => 'Your account has been activated successfully.',
-                        'data' => [
-                            'user' => new UserResponse($user),
-                            'token' => $token->plainTextToken
-                        ]
-                    ]
-                );
-            
+        $user->otp = null;
+        $user->otp_expires_at = null;
+        $user->is_verified = true;
+        $user->save();
+        $token = $user->createToken('authtoken');
+        return response()->json(
+            [
+                'message' => 'Your account has been activated successfully.',
+                'data' => [
+                    'user' => new UserResponse($user),
+                    'token' => $token->plainTextToken
+                ]
+            ]
+        );
     }
 
-    public function resend ($request){
+    public function resend($request)
+    {
         $mobile = ($request->get('mobile'));
         $user = User::where('mobile', '=', $mobile)->first();
-        $otp = rand(1000,9999);
+        $otp = rand(1000, 9999);
         $otp_expires_at = Carbon::now()->addMinutes(5);
         $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
@@ -205,13 +211,12 @@ class UserServices
 
     public function logout()
     {
-       $user=auth()->user()->tokens()->delete();
+        $user = auth()->user()->tokens()->delete();
         session()->invalidate();
 
         return response()->json(
             [
-                'message' => 'Logged out'
-                ,'user'=>$user
+                'message' => 'Logged out', 'user' => $user
             ]
         );
     }
@@ -243,7 +248,8 @@ class UserServices
         $user = User::where('email', $email)->first();
         if ($user === null) {
             return response()->json(
-                ["success"=>false,"error"=> "Unregistered email"
+                [
+                    "success" => false, "error" => "Unregistered email"
                 ]
             );
         }
@@ -270,7 +276,8 @@ class UserServices
         $new_password = ($request->get('newPassword'));
         if ($user === null) {
             return response()->json(
-                ["success"=>false,"error"=> "Unregistered email"
+                [
+                    "success" => false, "error" => "Unregistered email"
                 ]
             );
         }

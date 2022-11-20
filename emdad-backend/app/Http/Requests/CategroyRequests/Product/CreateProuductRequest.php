@@ -29,6 +29,7 @@ class CreateProuductRequest extends FormRequest
             'categoryId' => 'required|integer|exists:categories,id,isleaf,1',
             'name'=>'required|string|unique:prodcuts,name',
             'price'=>'required|integer',
+            
         ];
     }
 

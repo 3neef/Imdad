@@ -10,7 +10,7 @@ class Prodcuts extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['id', 'name', 'categories_id','price'];
+    protected $fillable = ['id', 'name', 'categories_id','price','company_id'];
     protected $hidden = [
         'created_at',
         'updated_at',

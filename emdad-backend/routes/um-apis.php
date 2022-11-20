@@ -14,8 +14,9 @@ Route::middleware(['app.auth'])->prefix('users')->group(function () {
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [AuthController::class, 'createUser']);
 });
-
-
+Route::middleware(['app.auth'])->prefix('roles')->group(function () {
+    Route::get('getAll', [RoleController::class, 'getAllRoles']);
+});
 
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
 
@@ -48,7 +49,6 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(fu
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function () {
 
     Route::post('save', [RoleController::class, 'saveRole']);
-    Route::get('getAll', [RoleController::class, 'getAllRoles']);
     Route::get('getByRoleId/{id}', [RoleController::class, 'getByRoleId']);
     Route::get('getByType/{type}', [RoleController::class, 'getByType']);
     Route::put('update', [RoleController::class, 'updateRole']);
@@ -61,7 +61,3 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('department')->group(function () {
     Route::post('create', [DepartmentController::class, 'create']);
 });
-
-
-
-
