@@ -109,7 +109,7 @@ class UserServices
         $user = User::where('email', '=', $request->email)
         ->orwhere('mobile', $request->mobile)
             ->first();
-        if (!$user->password === $request->password) {
+        if (!($user->password === $request->password)) {
             return response()->json(
                 [
                     "success" => false, "error" => "Wrong credentials"
