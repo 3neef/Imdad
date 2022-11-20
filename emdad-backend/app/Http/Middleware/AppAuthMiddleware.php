@@ -16,15 +16,14 @@ class AppAuthMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        return response()->json(["success"=>false,"error"=>$request],401);
 
-        if($request->header('api_key')!=null && $request->header('api_key')=='$2y$10$s2NTmAatcTQV20jBaBwTHO41n8k0YLZURdoqHs4UEs3WJLkZl8tyK'){
+        // if($request->header('api_key')!=null && $request->header('api_key')=='$2y$10$s2NTmAatcTQV20jBaBwTHO41n8k0YLZURdoqHs4UEs3WJLkZl8tyK'){
             return $next($request);
-        }
-        else{
+        // }
+        // else{
             
-            return response()->json(["success"=>false,"error"=>"app not authenticated"],401);
-        }
+            // return response()->json(["success"=>false,"error"=>"app not authenticated"],401);
+        // }
 
     }
 }
