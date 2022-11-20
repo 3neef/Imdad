@@ -26,11 +26,11 @@ class UserServices
         $request['otp_expires_at'] = now()->addMinutes(2);
         $request['is_super_admin'] = true;
 
-        
+
         $request['otp'] = strval(rand(1000, 9999));
 
         $user = User::create($request);
-
+        $user->roleInCompany()->attach($user->id, ['roles_id' =>$request['roleId']]);
 
         if ($user) {
             return response()->json([
