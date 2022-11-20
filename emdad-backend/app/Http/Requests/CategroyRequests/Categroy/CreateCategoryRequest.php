@@ -42,7 +42,6 @@ class CreateCategoryRequest extends FormRequest
         $rules = [
             'name' => 'required|unique:categories,name,' . $this->name . ',id,parent_id,' . $this->parentId,
             'isleaf' => 'required|boolean',
-            'companyId' => 'required|integer|exists:company_info,id',
         ];
         if ($this->path() == 'api/v1_0/categories/save-sub-catogry') {
             $rules = [

@@ -20,16 +20,13 @@ class UserServices
         $request['last_name'] = $request['lastName'];
         $request['identity_number'] = $request['identityNumber'];
         $request['identity_type'] = $request['identityType'];
-
-
         $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
         $request['otp_expires_at'] = now()->addMinutes(2);
         $request['is_super_admin'] = true;
 
-        
         $request['otp'] = strval(rand(1000, 9999));
 
-        $user = User::updateOrCreate(['email' => $request['email'], 'mobile' => $request['mobile']], $request);
+        $user = User::create($request);
 
 
         if ($user) {
@@ -40,6 +37,9 @@ class UserServices
         }
         return response()->json(['error' => 'system error'], 500);
     }
+
+
+    
 
     public function createUserToCompany($request)
     {
@@ -107,7 +107,7 @@ class UserServices
     public function login(LoginRequest $request)
     {
         $user = User::where('email', '=', $request->email)
-        ->orwhere('mobile', $request->mobile)
+            ->orwhere('mobile', $request->mobile)
             ->first();
         if ($user === null) {
             return response()->json(

@@ -8,6 +8,7 @@ class CategoryService
 {
     public function addCategory($request)
     {
+        
         $category = Categories::where('name', $request->name)->first();
         if ($category != null) {
             return response()->json([
