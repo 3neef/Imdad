@@ -16,9 +16,11 @@ class UserResponse extends JsonResource
     {
         return [
             "id"=>$this->id,
-            "name"=>$this->full_name,
-            "name"=>$this->first_name,
-            "name"=>$this->last_name,
+            "firstName"=>$this->first_name,
+            "lastName"=>$this->last_name,
+            "fullName"=>$this->full_name,
+            "identityNumber"=>$this->identity_number,
+            "identityType"=>$this->identity_type,
             "email"=>$this->email,
             "mobile"=>$this->mobile,
             "isSuperAdmin"=>$this->is_super_admin
