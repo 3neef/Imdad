@@ -27,7 +27,7 @@ class UserServices
         $request['otp'] = strval(rand(1000, 9999));
 
         $user = User::create($request);
-        $user->roleInCompany()->attach($user->id, ['roles_id' =>$request['roleId']]);
+        $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId']]);
 
         if ($user) {
             return response()->json([
@@ -39,7 +39,7 @@ class UserServices
     }
 
 
-    
+
 
     public function createUserToCompany($request)
     {
@@ -212,18 +212,33 @@ class UserServices
         );
     }
 
-    public function delete($id)
+    public function delete($id, $request)
     {
+
         $user = User::find($id);
-        $user->tokens()->delete();
 
-        $deleted = $user->delete();
+        if ($request->has('param') && $request->param == "true") {
+            $user->tokens()->delete();
+            $user->forceDelete();
+            if($user)
+            {
+                return response()->json(['message' => 'User delete form database successfully'], 201);
 
-        if ($deleted) {
-            return response()->json(['message' => 'User deleted successfully'], 301);
+            }
+            return response()->json(['error' => 'system error'], 500);
+
+        } else {
+            $user->tokens()->delete();
+
+            $deleted = $user->delete();
+
+            if ($deleted) {
+                return response()->json(['message' => 'User deleted successfully'], 301);
+            }
+            return response()->json(['error' => 'system error'], 500);
         }
-        return response()->json(['error' => 'system error'], 500);
     }
+
 
     public function restoreById($id)
     {

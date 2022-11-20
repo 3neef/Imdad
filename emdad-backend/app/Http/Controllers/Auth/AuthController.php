@@ -233,7 +233,7 @@ class AuthController extends Controller
         *            mediaType="application-json",
         *            @OA\Schema(
         *               type="object",
-        *               required={"id", "otp"},
+        *               required={"id","otp"},
         *               @OA\Property(property="id", type="integer"),
         *               @OA\Property(property="otp", type="string")
         *            ),
@@ -301,6 +301,18 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="Delete User",
         * description="delete user here",
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="application-json",
+        *            @OA\Schema(
+        *               type="object",
+        *               optional={"param"},
+        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="param", type="boolean")
+        *            ),
+        *        ),
+        *    ),
         *      @OA\Response(
         *          response=301,
         *          description="User deleted successfully",
@@ -317,7 +329,7 @@ class AuthController extends Controller
         */
     public function deleteUser(GetUserByIdRequest $request, $id, UserServices $userServices)
     {
-        return $userServices->delete($id);
+        return $userServices->delete($id,$request);
     }
        /**
         * @OA\put(

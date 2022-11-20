@@ -26,9 +26,6 @@ class CompanyController extends Controller
         $this->accountService = $accountService;
     }
 
-
-
-
 /**
         * @OA\Post(
         * path="/api/v1_0/accounts/add-company",
@@ -46,7 +43,6 @@ class CompanyController extends Controller
         *               @OA\Property(property="roleId", type="string"),
         *               @OA\Property(property="crNo", type="string"),
         *               @OA\Property(property="companyType", type="integer"),
-      
         *            ),
         *        ),
         *    ),
