@@ -29,7 +29,7 @@ class UserServices
         
         $request['otp'] = strval(rand(1000, 9999));
 
-        $user = User::updateOrCreate(['email' => $request['email'], 'mobile' => $request['mobile']], $request);
+        $user = User::create($request);
 
 
         if ($user) {

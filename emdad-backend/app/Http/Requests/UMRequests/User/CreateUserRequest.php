@@ -29,10 +29,10 @@ class CreateUserRequest extends FormRequest
         $rules = [
             'firstName' => ['required','string','max:100'],
             'lastName' => ['required','string','max:25'],
-            'identityNumber' => ['required','string','max:25'],
+            'identityNumber' => ['unique:users,identity_number','required','string','max:25'],
             'identityType' => ['required'],
-            'mobile' => ['required','string','max:14','min:14','regex:/^(00249)/',],
-            'email' => ['required','email','max:100',],
+            'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
+            'email' => ['unique:users,email','required','email','max:100',],
             'password'=>'required|string'
         ];
         if ($this->path() == 'api/users/createUser') {
