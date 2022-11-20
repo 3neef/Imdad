@@ -107,21 +107,12 @@ class UserServices
     public function login(LoginRequest $request)
     {
         $user = User::where('email', '=', $request->email)
-        ->orwhere('mobile', $request->mobile)
+        ->orwhere('mobile', $request->mobile)->where("password",$request->password)
             ->first();
         if ($user === null) {
             return response()->json(
                 [
-                    "success" => false, "error" => "We didn't recognize this email|phone"
-                ]
-            );
-        }
-
-        $password = ($request->get('password'));
-        if ($user->password != $password) {
-            return response()->json(
-                [
-                    "success" => false, "error" => "We didn't recognize this password"
+                    "success" => false, "error" => "Wrong credentials"
                 ]
             );
         }
