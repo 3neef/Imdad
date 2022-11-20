@@ -215,7 +215,10 @@ class UserServices
     public function delete($id)
     {
         $user = User::find($id);
+        $user->tokens()->delete();
+        
         $deleted = $user->delete();
+
         if ($deleted) {
             return response()->json(['message' => 'User deleted successfully'], 301);
         }
