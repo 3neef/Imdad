@@ -25,9 +25,13 @@ class CompanyController extends Controller
     {
         $this->accountService = $accountService;
     }
+
+
+
+
 /**
         * @OA\Post(
-        * path="/api/v1_0/accounts/create",
+        * path="/api/v1_0/accounts/add-company",
         * operationId="createAccount",
         * tags={"Account Controller"},
         * summary="create Company Account",
@@ -38,16 +42,11 @@ class CompanyController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"firstName","lastName", "companyType", "roleId","personId","idType","contactPhone","contactEmail"},
-        *               @OA\Property(property="firstName", type="string"),
-        *               @OA\Property(property="lastName", type="string"),
+        *               required={"crNo","roleId", "companyType"},
+        *               @OA\Property(property="roleId", type="string"),
+        *               @OA\Property(property="crNo", type="string"),
         *               @OA\Property(property="companyType", type="integer"),
-        *               @OA\Property(property="roleId", type="integer"),
-        *               @OA\Property(property="personId", type="string"),
-        *               @OA\Property(property="idType", type="string"),
-        *               @OA\Property(property="contactPhone", type="string",example="00966xxxxxxxxx"),
-        *               @OA\Property(property="contactEmail", type="email"),
-        *               @OA\Property(property="subscriptionId", type="integer")
+      
         *            ),
         *        ),
         *    ),
@@ -61,13 +60,6 @@ class CompanyController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-
-    public function createAccount(CreateAccountRequest $request)
-    {
-        return $this->accountService->createCompany($request);
-    }
-
-
     public function addAccount(AddMoreCompanyRequest $request)
     {
        return $this->accountService->addMoreCompany($request);

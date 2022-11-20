@@ -8,8 +8,7 @@ use App\Http\Controllers\SubscriptionPaymentController;
 
 Route::middleware(['app.auth','auth:sanctum'])->prefix('accounts')->group(function() {
 
-    Route::post('create', [CompanyController::class, 'createAccount']);
-    Route::post('addCompany', [CompanyController::class, 'addAccount']);
+    Route::post('add-company', [CompanyController::class, 'addAccount']);
     Route::get('getAll', [CompanyController::class, 'getAllAccount']);
     Route::get('getAllUnValidated', [CompanyController::class, 'allUnValidatedAccounts']);
     Route::put('validate/{id}', [CompanyController::class, 'validatedAccount']);
