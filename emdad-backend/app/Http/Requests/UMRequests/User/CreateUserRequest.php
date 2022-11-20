@@ -33,6 +33,7 @@ class CreateUserRequest extends FormRequest
             'identityType' => ['required'],
             'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
             'email' => ['unique:users,email','required','email','max:100',],
+            "roleId"=> "required|integer|exists:roles,id",
             'password'=>'required|string'
         ];
         if ($this->path() == 'api/users/createUser') {

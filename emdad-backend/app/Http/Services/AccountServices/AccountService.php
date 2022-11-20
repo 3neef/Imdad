@@ -7,6 +7,7 @@ use App\Http\Resources\AccountResourses\Company\CompanyResponse;
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
 use App\Models\Emdad\RelatedCompanies;
+use App\Models\UM\RoleUserCompany;
 use App\Models\User;
 use Carbon\Carbon;
 
@@ -20,7 +21,7 @@ class AccountService
             "company_type"=>$request->companyType,
             "company_name"=>$company->cr_name,
             "created_by"=>auth()->user()->id,
-            
+
         ]);
 
         return response()->json(['success'=>true,'message'=>'created successfully'], 200);
@@ -30,9 +31,9 @@ class AccountService
     public function createCompany($request)
     {
         $account = new CompanyInfo();
-  
+
         $account->company_type = $request->get('companyType');
-    
+
         $account->contact_phone = $request->get('contactPhone');
         $account->contact_email = $request->get('contactEmail');
         if (isset($request->subscriptionId)) {
@@ -42,7 +43,9 @@ class AccountService
         }
 
         $result = CompanyInfo::create($account->toArray());
-
+        $userRoleCompany = RoleUserCompany::where('users_id', '=', auth()->user()->id)->where('company_info_id', '=', null)->first();
+        $userRoleCompany->company_info_id = $result->id;
+        $userRoleCompany->update();
         if ($result) {
             $user=$this->createUser($result,$request);
             // $token = $user->createToken('authtoken');
@@ -62,14 +65,14 @@ class AccountService
         $user->identity = $request->personId;
         $user->identity_type = $request->idType;
         $user->email = $account->contact_email;
-        
+
         //dd($account);
         $user->default_company = $account->id;
         $user->is_super_admin = true;
         $user->mobile = $account->contact_phone;
         $user->otp = strval($otp);
         $user->otp_expires_at = $otp_expires_at;
-        
+
         $user->save();
         $user->roleInCompany()->attach($user->id,['roles_id' =>$request->roleId,'company_info_id'=>$account->id]);
 

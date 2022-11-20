@@ -27,7 +27,7 @@ class UserServices
         $request['otp'] = strval(rand(1000, 9999));
 
         $user = User::create($request);
-
+        $user->roleInCompany()->attach($user->id, ['roles_id' =>$request['roleId']]);
 
         if ($user) {
             return response()->json([
@@ -216,7 +216,7 @@ class UserServices
     {
         $user = User::find($id);
         $user->tokens()->delete();
-        
+
         $deleted = $user->delete();
 
         if ($deleted) {
