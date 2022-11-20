@@ -19,7 +19,15 @@
                         "in": "header",
                         "description": "Set api_key",
                         "schema": {
-                            "type": "bearer"
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
                         }
                     }
                 ],
