@@ -28,7 +28,7 @@ Route::group(['prefix' => 'installation'], function () {
 });
 
 
-Route::middleware(['app.auth', 'auth:sanctum'])->prefix('wathiq')->group(function () {
+Route::middleware(['app.auth'])->prefix('wathiq')->group(function () {
     Route::get('relatedCr', [WathiqController::class, 'getRelatedCompanies']);
 });
     Route::get('optimize',function(){
