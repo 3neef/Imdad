@@ -27,29 +27,29 @@ class AccountService
 
     }
 
-    public function createCompany($request)
-    {
-        $account = new CompanyInfo();
+    // public function createCompany($request)
+    // {
+    //     $account = new CompanyInfo();
   
-        $account->company_type = $request->get('companyType');
+    //     $account->company_type = $request->get('companyType');
     
-        $account->contact_phone = $request->get('contactPhone');
-        $account->contact_email = $request->get('contactEmail');
-        if (isset($request->subscriptionId)) {
-            $account->subs_id = $request->get('subscriptionId');
-            $subscription = SubscriptionPackages::find($request->get('subscriptionId'));
-            $account->subscription_details = $subscription->value('subscription_details');
-        }
+    //     $account->contact_phone = $request->get('contactPhone');
+    //     $account->contact_email = $request->get('contactEmail');
+    //     if (isset($request->subscriptionId)) {
+    //         $account->subs_id = $request->get('subscriptionId');
+    //         $subscription = SubscriptionPackages::find($request->get('subscriptionId'));
+    //         $account->subscription_details = $subscription->value('subscription_details');
+    //     }
 
-        $result = CompanyInfo::create($account->toArray());
+    //     $result = CompanyInfo::create($account->toArray());
 
-        if ($result) {
-            $user=$this->createUser($result,$request);
-            // $token = $user->createToken('authtoken');
-            return response()->json(['success'=>true,'data'=>["user"=>$user]], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
-    }
+    //     if ($result) {
+    //         $user=$this->createUser($result,$request);
+    //         // $token = $user->createToken('authtoken');
+    //         return response()->json(['success'=>true,'data'=>["user"=>$user]], 200);
+    //     }
+    //     return response()->json(['error' => 'system error'], 500);
+    // }
 
     public function createUser(CompanyInfo $account,$request)
     {
