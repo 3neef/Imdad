@@ -5,7 +5,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/v1_0/accounts/create": {
+        "/api/v1_0/accounts/add-company": {
             "post": {
                 "tags": [
                     "Account Controller"
@@ -13,47 +13,33 @@
                 "summary": "create Company Account",
                 "description": "create Company Account Here",
                 "operationId": "createAccount",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "bearer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "firstName",
-                                    "lastName",
-                                    "companyType",
+                                    "crNo",
                                     "roleId",
-                                    "personId",
-                                    "idType",
-                                    "contactPhone",
-                                    "contactEmail"
+                                    "companyType"
                                 ],
                                 "properties": {
-                                    "firstName": {
+                                    "roleId": {
                                         "type": "string"
                                     },
-                                    "lastName": {
+                                    "crNo": {
                                         "type": "string"
                                     },
                                     "companyType": {
-                                        "type": "integer"
-                                    },
-                                    "roleId": {
-                                        "type": "integer"
-                                    },
-                                    "personId": {
-                                        "type": "string"
-                                    },
-                                    "idType": {
-                                        "type": "string"
-                                    },
-                                    "contactPhone": {
-                                        "type": "string",
-                                        "example": "00966xxxxxxxxx"
-                                    },
-                                    "contactEmail": {
-                                        "type": "email"
-                                    },
-                                    "subscriptionId": {
                                         "type": "integer"
                                     }
                                 },
