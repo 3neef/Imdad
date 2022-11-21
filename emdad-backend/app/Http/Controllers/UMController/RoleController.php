@@ -33,6 +33,22 @@ class RoleController extends Controller
         * tags={"Roles and Permissions"},
         * summary="create role",
         * description="create new role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -78,6 +94,22 @@ class RoleController extends Controller
         * tags={"Roles and Permissions"},
         * summary="update role",
         * description="update role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -122,6 +154,22 @@ class RoleController extends Controller
         * tags={"Roles and Permissions"},
         * summary="delete roles",
         * description="delete roles Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="deleted role successfully",
@@ -153,6 +201,14 @@ class RoleController extends Controller
         * tags={"Roles and Permissions"},
         * summary="get roles",
         * description="get all roles Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="get all roles",
@@ -183,6 +239,22 @@ class RoleController extends Controller
         * tags={"Roles and Permissions"},
         * summary="get role by id",
         * description="get role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="get role",
@@ -213,6 +285,22 @@ class RoleController extends Controller
         * tags={"Roles and Permissions"},
         * summary="get roles register",
         * description="get roles register Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *    @OA\Response(
      *         response=200,
      *         description="",
@@ -242,6 +330,22 @@ class RoleController extends Controller
         * tags={"Roles and Permissions"},
         * summary="restore role by id",
         * description="restore role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="restore role successfully",
@@ -273,6 +377,22 @@ class RoleController extends Controller
         * tags={"Roles and Permissions"},
         * summary="get roles by type",
         * description="get all roles by type",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="get all roles by type",

@@ -31,6 +31,22 @@ class PermissionsController extends Controller
         * tags={"Roles and Permissions"},
         * summary="save permisssion",
         * description="save permission to role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -164,6 +180,22 @@ class PermissionsController extends Controller
         * tags={"Roles and Permissions"},
         * summary="update permisssion",
         * description="update permission to specific role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *        @OA\JsonContent(),
         *        @OA\MediaType(
