@@ -18,11 +18,27 @@ class CategoryController extends Controller
     }
        /**
         * @OA\Post(
-        * path="/api/v1_0/categories/SaveCatogry",
+        * path="/api/v1_0/categories/add",
         * operationId="addcatogry",
         * tags={"Catogry"},
         * summary="add catogry",
         * description="add catogry Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -54,6 +70,22 @@ class CategoryController extends Controller
         * tags={"Catogry"},
         * summary="aproved catogry",
         * description="aproved catogry Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -85,6 +117,22 @@ class CategoryController extends Controller
      *    tags={"Catogry"},
      *    summary="show all aproved catogry",
      *    description="show all aproved catogry Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *    @OA\Response(
      *         response=200,
      *         description="",
@@ -107,6 +155,22 @@ class CategoryController extends Controller
      *    tags={"Catogry"},
      *    summary="show all  catogry",
      *    description="show all  catogry Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *    @OA\Response(
      *         response=200,
      *         description="",
@@ -129,6 +193,22 @@ class CategoryController extends Controller
         * tags={"Catogry"},
         * summary="save sub catogry",
         * description="save sub catogry Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -160,6 +240,22 @@ class CategoryController extends Controller
         * tags={"Catogry"},
         * summary="show with catogry id",
         * description="show with catogry id Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -190,6 +286,22 @@ class CategoryController extends Controller
         * tags={"Catogry"},
         * summary="aproved sub catogry",
         * description="aproved sub catogry Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -220,6 +332,22 @@ class CategoryController extends Controller
         * tags={"Catogry"},
         * summary="get with company id",
         * description="get with company id Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
