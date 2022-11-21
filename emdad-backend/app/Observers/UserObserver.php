@@ -27,9 +27,9 @@ class UserObserver
      */
     public function created(User $User)
     {
-        //   $this->sms->sendOtp($User->name, $User->mobile, $User->otp);
+        $this->sms->sendOtp($User->name, $User->mobile, $User->otp);
 
-        // MailController::sendSignupEmail($User->name, $User->email, $User->otp);
+        MailController::sendSignupEmail($User->name, $User->email, $User->otp);
         // SmsController::sendSms($User->name, $User->mobile, $User->otp, $this->sms);
         // if ($User instanceof MustVerifyEmail && ! $User->hasVerifiedEmail()) {
         //     $User->sendEmailVerificationNotification();
