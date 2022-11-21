@@ -77,7 +77,7 @@ class CompanyController extends Controller
        return $this->accountService->addMoreCompany($request);
     }
 
-    /**
+/**
         * @OA\put(
         * path="/api/v1_0/accounts/update",
         * operationId="updateAccount",
