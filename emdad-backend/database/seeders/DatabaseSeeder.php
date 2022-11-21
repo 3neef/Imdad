@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
          $this->call([
            SubscriptionPackagesSeeder::class,
            RegRoleSeeder::class,
-           CategoriesSeeder::class,
+          //  CategoriesSeeder::class,
          ]);
         // \App\Models\User::factory(10)->create();
 
