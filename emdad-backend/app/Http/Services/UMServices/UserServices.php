@@ -17,7 +17,7 @@ class UserServices
     public function create($request)
     {
         $request['first_name'] = $request['firstName'];
-        $request['expiry_date']=$request['expireDate'];
+        $request['expiry_date'] = $request['expireDate'];
         $request['last_name'] = $request['lastName'];
         $request['identity_number'] = $request['identityNumber'];
         $request['identity_type'] = $request['identityType'];
@@ -132,12 +132,18 @@ class UserServices
     public function activate($request)
     {
 
-        $user = User::where('id', '=', $request->id)->where('otp', '=', $request->otp)->where('otp_expires_at', '>', now())->first();
+        $user = User::where('id', '=', $request->id)->first();
 
-        if ($user === null) {
+        if ($request->otp != $user->otp) {
             return response()->json(
                 [
-                    "success" => false, "error" => "Invalid or expired OTP!!!"
+                    "success" => false, "error" => "Invalid OTP"
+                ]
+            );
+        } elseif ($user->otp_expires_at > now()) {
+            return response()->json(
+                [
+                    "success" => false, "error" => "Expired OTP"
                 ]
             );
         }
@@ -147,10 +153,7 @@ class UserServices
         return response()->json(
             [
                 'message' => 'Your account has been activated successfully.',
-                'data' => [
-                    'user' => new UserResponse($user),
-                    'token' => $token->plainTextToken
-                ]
+                'token' => $token->plainTextToken,
             ]
         );
     }
@@ -159,7 +162,7 @@ class UserServices
     {
         $user = User::where('mobile', '=', $request->mobile)->first();
         $otp = rand(1000, 9999);
-        $user->update(['otp'=>strval($otp),'otp_expires_at'=>now()->addMinutes(5)]);
+        $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
         // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
         // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
