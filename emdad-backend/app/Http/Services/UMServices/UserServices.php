@@ -17,6 +17,7 @@ class UserServices
     public function create($request)
     {
         $request['first_name'] = $request['firstName'];
+        $request['expiry_date']=$request['expireDate'];
         $request['last_name'] = $request['lastName'];
         $request['identity_number'] = $request['identityNumber'];
         $request['identity_type'] = $request['identityType'];
