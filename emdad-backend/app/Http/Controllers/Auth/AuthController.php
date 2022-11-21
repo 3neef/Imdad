@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\RemoveUserRequets;
 use App\Http\Requests\UMRequests\User\ActivateRequest;
 use App\Http\Services\UMServices\UserServices;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
@@ -418,7 +419,7 @@ class AuthController extends Controller
         */
     public function deleteUser(GetUserByIdRequest $request, $id, UserServices $userServices)
     {
-        return $userServices->delete($id,$request);
+        return $userServices->delete($id);
     }
        /**
         * @OA\put(
@@ -822,6 +823,12 @@ class AuthController extends Controller
     public function setDefaultCompany(DefaultCompanyRequest $request,UserServices $userServices)
     {
         return $userServices->setDefaultCompany($request);
+    }
+
+
+    public function removeUser(RemoveUserRequets $request,$id, UserServices $userServices)
+    {
+        return $userServices->removeUser($id);
     }
 
 
