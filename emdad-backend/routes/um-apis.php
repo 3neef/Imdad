@@ -16,6 +16,8 @@ Route::middleware(['app.auth'])->prefix('users')->group(function () {
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [AuthController::class, 'createUser']);
     Route::put('activate', [AuthController::class, 'activateUser']);
+    Route::delete("delete/{id}", [AuthController::class, 'deleteUser']);
+
 
 });
 Route::middleware(['app.auth'])->prefix('roles')->group(function () {
@@ -28,7 +30,6 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
     Route::post('logout', [AuthController::class, 'logoutUser']);
     Route::put("update", [AuthController::class, 'updateUser']);
-    Route::delete("delete/{id}", [AuthController::class, 'deleteUser']);
     Route::put("restore/{id}", [AuthController::class, 'restoreUser']);
     Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
     Route::put("reset-password", [AuthController::class, 'resetPassword']);

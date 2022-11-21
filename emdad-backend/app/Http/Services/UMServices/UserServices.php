@@ -110,6 +110,14 @@ class UserServices
         $user = User::where('email', '=', $request->email)
             ->orwhere('mobile', $request->mobile)
             ->first();
+            
+        if ($user->is_verified == 0) {
+            return response()->json(
+                [
+                    "success" => false, "error" => "verifiy your otp first"
+                ]
+            );
+        }
         if (!($user->password === $request->password)) {
             return response()->json(
                 [
