@@ -29,6 +29,14 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="Register User",
         * description="Register User Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -81,6 +89,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="create User to company",
         * description="create User to specific company Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -130,6 +154,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="update User",
         * description="update User Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -184,6 +224,14 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="User Login",
         * description="Login User Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -229,6 +277,14 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="User Activation",
         * description="activate by otp",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -278,6 +334,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="User Logout",
         * description="Logout User Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="Logged out",
@@ -303,6 +375,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="Delete User",
         * description="delete user here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -339,6 +427,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="Restore User",
         * description="restore user here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="User restored successfully",
@@ -364,6 +468,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="forgot password",
         * description="forgot password Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -409,6 +529,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="reset password",
         * description="reset password Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -454,6 +590,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="assgin Role",
         * description="assgin Role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -498,6 +650,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="Unassgin Role",
         * description="assgin Role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -541,6 +709,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="restore old Role",
         * description="restore old Role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -585,6 +769,22 @@ class AuthController extends Controller
         * tags={"UM & Permissions"},
         * summary="set default company",
         * description="set default company Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(

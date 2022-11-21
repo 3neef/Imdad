@@ -73,6 +73,22 @@ class PermissionsController extends Controller
         * tags={"UM & Permissions"},
         * summary="get permisssions",
         * description="get all permisssions Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="get all permissions",
@@ -102,6 +118,22 @@ class PermissionsController extends Controller
         * tags={"UM & Permissions"},
         * summary="get permisssion",
         * description="get permission by id Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="get permission",
@@ -174,6 +206,22 @@ class PermissionsController extends Controller
         * tags={"UM & Permissions"},
         * summary="update permisssion",
         * description="update permission to specific role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="delete permission",
@@ -204,6 +252,22 @@ class PermissionsController extends Controller
         * tags={"UM & Permissions"},
         * summary="restore permisssion",
         * description="restore permission to specific role Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="restore permission",
