@@ -128,8 +128,8 @@ class SubscriptionController extends Controller
      */
     public function getBuyerPackages(Request $request)
     {
-        $user = User::first();
-        return response()->json(["success" => true, "data" =>$user->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->where('subscription_name','!=','basic_2')->get())], 200);
+      
+        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->get())], 200);
     }
 
 
@@ -162,7 +162,7 @@ class SubscriptionController extends Controller
     public function getSupplierPackages(Request $request)
     {
         $user = User::first();
-        return response()->json(["success" => true, "data" =>$user->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->where('subscription_name','!=','basic_2')->get())], 200);
+        return response()->json(["success" => true, "data" =>SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->get())], 200);
     }
 
         /**
