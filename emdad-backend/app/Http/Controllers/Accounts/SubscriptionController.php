@@ -36,6 +36,22 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="create Subscription packages",
      * description="create Subscription package",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
@@ -71,6 +87,22 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
      * description="update Subscription",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
@@ -108,6 +140,22 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="get package information",
      * description="get buyer package info",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="supplier packages",
@@ -141,6 +189,22 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="get package information",
      * description="get buyer package info",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="supplier packages",
