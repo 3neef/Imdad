@@ -19,7 +19,7 @@ class CategoriesSeeder extends Seeder
     {
         $Categories=[['name_ar'=>'طعام','name_en'=>'Food','aproved'=>rand(0,1),'parent_id'=>rand(0,1),'isleaf'=>rand(0,1)],
         ['name_ar'=>'أجهزه كهربائية','name_en'=>'electerc Device','aproved'=>rand(0,1),'parent_id'=>rand(0,1),'isleaf'=>rand(0,1)],
-        ['name_ar'=>'لورم','name_en'=>'lorem','aproved'=>rand(0,1),'parent_id'=>rand(0,1),'isleaf'=>rand(0,1)]
+        ['name_ar'=>'البناء والتشييد','name_en'=>'Building and Construction','aproved'=>rand(0,1),'parent_id'=>rand(0,1),'isleaf'=>rand(0,1)]
     ];
     foreach($Categories as $Category)
     {
