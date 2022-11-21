@@ -2730,6 +2730,34 @@
                 }
             }
         },
+        "/api/v1_0/measures/get-all-unit-of-measure": {
+            "get": {
+                "tags": [
+                    "UOM"
+                ],
+                "summary": "show all unit of measure",
+                "description": "show all unit of measure Here",
+                "operationId": "getallunitofmeasure",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "example": "{'id': 1, 'name':'kg'}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1_0/sendSms": {
             "get": {
                 "tags": [

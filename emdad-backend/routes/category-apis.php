@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Coupon\CouponController;
 use App\Http\Controllers\emdad\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\emdad\ProductController;
@@ -14,6 +15,9 @@ Route::middleware(['app.auth','auth:sanctum'])->prefix('products')->group(functi
     Route::put('restore/{id}',[ProductController::class,'restoreByProductId']);
 });
 
+
+
+
 Route::middleware(['app.auth','auth:sanctum'])->prefix('categories')->group(function() {
 
     Route::post('add', [CategoryController::class, 'addCatogry']);
@@ -26,4 +30,8 @@ Route::middleware(['app.auth','auth:sanctum'])->prefix('categories')->group(func
     Route::get('get-by-company-id/{companyId}', [CategoryController::class, 'getByCompany']);
 });
 
+
+Route::middleware(['app.auth','auth:sanctum'])->prefix('measures')->group(function() {
+    Route::get('get-all-unit-of-measure',[CouponController::class,'Unit_of_measures']);
+});
 

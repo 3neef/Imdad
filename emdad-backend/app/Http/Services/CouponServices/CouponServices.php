@@ -3,6 +3,7 @@
 namespace App\Http\Services\CouponServices;
 
 use App\Models\Coupon\Coupon;
+use App\Models\Emdad\Unit_of_measures;
 use App\Models\SubscriptionPayment;
 use Illuminate\Http\Request;
 
@@ -59,4 +60,13 @@ class CouponServices
             return response()->json(['message' => 'can,t use coupon'], 301);
         }
     }
+
+
+
+    public function get_all_unit_of_measure()
+    {
+        $unit = Unit_of_measures::get();
+        return response()->json( [ 'data'=>$unit], 200 );
+    }
+
 }
