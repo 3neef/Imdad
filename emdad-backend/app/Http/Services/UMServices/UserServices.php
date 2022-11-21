@@ -175,7 +175,7 @@ class UserServices
         return response()->json(
             [
                 'message' => 'New OTP has been sent.',
-                'otp'=>$otp,
+                'otp'=>$user->otp,
             ]
         );
     }
