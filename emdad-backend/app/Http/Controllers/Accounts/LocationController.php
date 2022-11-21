@@ -31,6 +31,22 @@ class LocationController extends Controller
         * tags={"warehouse"},
         * summary="create warehouse",
         * description="create warehouse Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -76,6 +92,22 @@ class LocationController extends Controller
         * tags={"warehouse"},
         * summary="update warehouse",
         * description="update warehouse Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -122,6 +154,22 @@ class LocationController extends Controller
         * tags={"warehouse"},
         * summary="get all warehouse",
         * description="get all warehouses Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *        response=200,
         *          description="get all warehouses",
@@ -150,6 +198,22 @@ class LocationController extends Controller
         * tags={"warehouse"},
         * summary="get warehouse by company id",
         * description="get warehouse by company id Here",
+    *     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *        response=200,
         *          description="get warehouse by company id",
@@ -178,6 +242,22 @@ class LocationController extends Controller
         * tags={"warehouse"},
         * summary="get warehouse By UserId",
         * description="get warehouse By UserId Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *        response=200,
         *          description="get warehouse By UserId",
@@ -206,6 +286,22 @@ class LocationController extends Controller
         * tags={"warehouse"},
         * summary="get warehouse By Id",
         * description="get warehouse By Id Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *        response=200,
         *          description="get warehouse By Id",
@@ -234,6 +330,22 @@ class LocationController extends Controller
         * tags={"warehouse"},
         * summary="delete warehouse",
         * description="delete warehouse Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *        response=200,
         *        description="delete warehouse",
@@ -262,6 +374,22 @@ class LocationController extends Controller
         * tags={"warehouse"},
         * summary="restore warehouse By Id",
         * description="restore warehouse By Id Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *        response=200,
         *          description="restore warehouse By Id",
@@ -290,6 +418,22 @@ class LocationController extends Controller
         * tags={"warehouse"},
         * summary="verfied warehouse",
         * description="verfied warehouse",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(

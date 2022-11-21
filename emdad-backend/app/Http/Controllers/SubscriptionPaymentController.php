@@ -22,6 +22,22 @@ class SubscriptionPaymentController extends Controller
      *    tags={"Account Controller"},
      *    summary="create subscriptionPayment",
      *    description="create subscriptionPayment",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *  *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(

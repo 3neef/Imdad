@@ -309,7 +309,6 @@ class AuthController extends Controller
         *            mediaType="application-json",
         *            @OA\Schema(
         *               type="object",
-        *               optional={"param"},
         *               @OA\Property(property="id", type="integer"),
         *               @OA\Property(property="param", type="boolean")
         *            ),
