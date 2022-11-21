@@ -9,7 +9,7 @@ class Categories extends Model
 {
     use HasFactory;
         
-    protected $fillable = [ 'name', 'aproved','parent_id','isleaf','company_id'];
+    protected $fillable = [ 'name_en', 'name_ar','aproved','parent_id','isleaf','company_id'];
     protected $hidden = [
         'created_at',
         'updated_at',

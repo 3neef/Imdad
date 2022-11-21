@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name_en');
             $table->integer('aproved');
             $table->integer('parent_id');
             $table->boolean('isleaf');
-            $table->foreignId('company_id')->nullable(true)->references("id")->on("company_info")->restrictOnDelete();
+            $table->foreignId('company_id')->nullable(true)->references("id")->on("company_info")->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

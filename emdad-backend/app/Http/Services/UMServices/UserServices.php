@@ -201,7 +201,7 @@ class UserServices
             $user->tokens()->delete();
             $user->forceDelete();
             if ($user) {
-                return response()->json(['message' => 'User delete form database successfully'], 201);
+                return response()->json(['message' => 'User delete form database successfully'], 200);
             }
             return response()->json(['error' => 'system error'], 500);
         } else {

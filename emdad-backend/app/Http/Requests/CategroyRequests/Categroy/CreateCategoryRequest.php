@@ -40,7 +40,8 @@ class CreateCategoryRequest extends FormRequest
         $companyId = empty($this->companyId)?1:$this->companyId;
         $id = empty($this->id)?1:$this->id;
         $rules = [
-            'name' => 'required|unique:categories,name,' . $this->name . ',id,parent_id,' . $this->parentId,
+            'name_ar' => 'required|unique:categories,name,' . $this->name . ',id,parent_id,' . $this->parentId,
+            'name_en'=>'required|unique:categories,name',
             'isleaf' => 'required|boolean',
         ];
         if ($this->path() == 'api/v1_0/categories/save-sub-catogry') {
