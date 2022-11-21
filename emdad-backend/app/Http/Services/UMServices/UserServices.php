@@ -175,6 +175,7 @@ class UserServices
         return response()->json(
             [
                 'message' => 'New OTP has been sent.',
+                'otp'=>$otp,
             ]
         );
     }
@@ -347,7 +348,7 @@ class UserServices
         $user = User::find($id);
 
         $user->tokens()->delete();
-        
+
         $user->forceDelete();
         if ($user) {
             return response()->json(['message' => 'User delete form database successfully'], 200);
