@@ -18,6 +18,14 @@ class WathiqController extends Controller
         * tags={"Platform Settings"},
         * summary="Retreive registered companies by user identity + identity type nid/iqama",
         * description="users' registerd companies",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(

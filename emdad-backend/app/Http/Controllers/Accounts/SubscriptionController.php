@@ -36,6 +36,22 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="create Subscription packages",
      * description="create Subscription package",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
@@ -71,6 +87,22 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
      * description="update Subscription",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
@@ -108,6 +140,22 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="get package information",
      * description="get buyer package info",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="supplier packages",
@@ -128,8 +176,8 @@ class SubscriptionController extends Controller
      */
     public function getBuyerPackages(Request $request)
     {
-        $user = User::first();
-        return response()->json(["success" => true, "data" =>$user->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->where('subscription_name','!=','basic_2')->get())], 200);
+      
+        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->get())], 200);
     }
 
 
@@ -141,6 +189,22 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="get package information",
      * description="get buyer package info",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="supplier packages",
@@ -162,7 +226,7 @@ class SubscriptionController extends Controller
     public function getSupplierPackages(Request $request)
     {
         $user = User::first();
-        return response()->json(["success" => true, "data" =>$user->used_basic_packeg ? SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->where('subscription_name','!=','basic')->get()): SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->where('subscription_name','!=','basic_2')->get())], 200);
+        return response()->json(["success" => true, "data" =>SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->get())], 200);
     }
 
         /**

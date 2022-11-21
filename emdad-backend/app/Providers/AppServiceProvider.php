@@ -12,7 +12,7 @@ use App\Observers\QuotationObserver;
 use App\Observers\RFQObserver;
 use App\Observers\SubscriptionPaymentObserver;
 use App\Observers\UserObserver;
-
+use Database\Seeders\UOMSeeder;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

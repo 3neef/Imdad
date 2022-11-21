@@ -322,8 +322,8 @@ class AuthController extends Controller
     {
         return $userServices->activate($request);
     }
-    
-    
+
+
     public function resendOTP(ResendOTPRequest $request ,UserServices $userServices)
     {
         return $userServices->resend($request);

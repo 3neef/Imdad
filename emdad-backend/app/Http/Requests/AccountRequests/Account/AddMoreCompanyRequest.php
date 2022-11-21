@@ -16,7 +16,7 @@ class AddMoreCompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->user()!=null;
+        return true;
     }
 
     /**

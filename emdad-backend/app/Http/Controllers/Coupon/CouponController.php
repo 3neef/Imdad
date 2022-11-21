@@ -24,6 +24,22 @@ class CouponController extends Controller
         * tags={"Coupon"},
         * summary="create Coupon",
         * description="create Coupon Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -59,6 +75,22 @@ class CouponController extends Controller
      *    tags={"Coupon"},
      *    summary="show all  coupons",
      *    description="show all  coupons Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *    @OA\Response(
      *         response=200,
      *         description="",
@@ -84,6 +116,22 @@ class CouponController extends Controller
         * tags={"Coupon"},
         * summary="used Coupon ",
         * description=" used Coupon Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -112,5 +160,33 @@ public function usedCoupon(Request $request)
 {
     return $this->couponService->usedCoupon($request);
 }
+
+
+
+
+
+/**
+     * @OA\get(
+     *    path="/api/v1_0/measures/get-all-unit-of-measure",
+     *    operationId="getallunitofmeasure",
+     *    tags={"UOM"},
+     *    summary="show all unit of measure",
+     *    description="show all unit of measure Here",
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="data", type="object", example="{'id': 1, 'name':'kg'}")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
+public function Unit_of_measures(Request $request)
+{
+    return $this->couponService->get_all_unit_of_measure();
+}
+
+
 
 }

@@ -13,18 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prodcuts', function (Blueprint $table) {
+        Schema::create('unit_of_measures', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('categories_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreignId('company_id')->references('id')->on('company_info')->onDelete('cascade');
-            $table->string('name');
-            $table->integer('price');
-            $table->string('image');
+            $table->string('name_ar');
+            $table->string('name_en');
+            $table->string('symbol');
+            $table->string('related_unit');
+            $table->string('relation');
+            $table->string('value');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
-
     /**
      * Reverse the migrations.
      *
@@ -32,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prodcuts');
+        Schema::dropIfExists('unit_of_measures');
     }
 };
