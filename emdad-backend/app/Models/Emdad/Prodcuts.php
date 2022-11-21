@@ -10,7 +10,7 @@ class Prodcuts extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $fillable = ['id', 'name', 'categories_id','price','company_id'];
+    protected $fillable = ['id', 'name','measruing_unit','categories_id','price','company_id','image'];
     protected $hidden = [
         'created_at',
         'updated_at',
@@ -19,4 +19,14 @@ class Prodcuts extends Model
     {
         return $this->belongsTo(Categories::class);
     }
+
+
+    public function unit_measruing()
+    {
+        return $this->hasMany(unit_measruing::class);
+    }
 }
+
+
+
+

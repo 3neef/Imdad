@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prodcuts', function (Blueprint $table) {
+        Schema::create('products_attachments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('categories_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreignId('company_id')->references('id')->on('company_info')->onDelete('cascade');
-            $table->string('name');
-            $table->integer('price');
-            $table->string('image');
+            $table->foreignId('file_type_id')->references('id')->on('file_types')->onDelete('cascade');
+            $table->foreignId('product_id')->nullable();
+            $table->string('path');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('prodcuts');
+        Schema::dropIfExists('products_attachments');
     }
 };

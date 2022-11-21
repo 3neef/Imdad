@@ -4,24 +4,34 @@ namespace App\Http\Services\CategoryServices;
 
 use App\Http\Resources\CategoryResourses\Product\ProductResponse;
 use App\Models\Emdad\Prodcuts;
+use App\Models\Emdad\Unit_of_measures;
 
 class ProductService{
 
     public function createProdcut($request)
     {
+        $file_extention = $request -> image -> getClientOriginalExtension();
+        $file_name = time() . '.' . $file_extention ;
+        $path = 'images/products';
+        $request -> image ->move($path,$file_name);
+
         $prodcut = new Prodcuts();
         $categoryId = $request->get('categoryId');
         $prodcut->name = $request->get('name');
         $prodcut->categories_id = $categoryId;
         $prodcut->price = $request->get('price');
-
         $prodcut->company_id = auth()->user()->default_company;
+        $prodcut->measruing_unit = $request->get('measruing_unit');
+        $prodcut->image = $file_name;
+
+
         $result = $prodcut->save();
         if($result){
             return response()->json( [ 'message'=>'created successfully' ], 200 );
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
     }
+
 
     public function update($request)
     {
@@ -66,4 +76,7 @@ class ProductService{
         }
         return response()->json( [ 'error'=>'system error' ], 500 );
     }
+
+
+    
 }
