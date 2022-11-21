@@ -23,6 +23,7 @@ class UserResponse extends JsonResource
             "identityType"=>$this->identity_type,
             "email"=>$this->email,
             "mobile"=>$this->mobile,
+            "otp"=>$this->otp,
             "isSuperAdmin"=>$this->is_super_admin
         ];
     }
