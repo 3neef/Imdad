@@ -824,7 +824,46 @@ class AuthController extends Controller
     {
         return $userServices->setDefaultCompany($request);
     }
-
+/**
+        * @OA\delete(
+        * path="/api/v1_0/users/remove-user/{id}",
+        * operationId="removeUser",
+        * tags={"UM & Permissions"},
+        * summary="remove User",
+        * description="remove user here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="application-json",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="id", type="integer"),
+        *               @OA\Property(property="param", type="boolean")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=301,
+        *          description="User deleted successfully",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *          @OA\JsonContent()
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
 
     public function removeUser(RemoveUserRequets $request,$id, UserServices $userServices)
     {
