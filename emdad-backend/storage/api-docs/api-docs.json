@@ -83,6 +83,24 @@
                 "summary": "update Account",
                 "description": "update Account Here",
                 "operationId": "updateAccount",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -155,6 +173,24 @@
                 "summary": "get All Accounts",
                 "description": "get All Accounts Here",
                 "operationId": "getAllaccounts",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -206,6 +242,24 @@
                 "summary": "get By AccountId",
                 "description": "get By AccountId Here",
                 "operationId": "getByAccountId",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -257,6 +311,24 @@
                 "summary": "delete Account",
                 "description": "delete Account",
                 "operationId": "deleteAccount",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -298,6 +370,24 @@
                 "summary": "restore By AccountId",
                 "description": "restore By AccountId",
                 "operationId": "restoreByAccountId",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -339,6 +429,24 @@
                 "summary": "allUnValidatedAccounts",
                 "description": "allUnValidatedAccounts",
                 "operationId": "allUnValidatedAccounts",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -393,6 +501,24 @@
                 "summary": "validatedAccount",
                 "description": "validatedAccount",
                 "operationId": "validatedAccount",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -1145,11 +1271,17 @@
                                     "email",
                                     "mobile",
                                     "identityNumber",
-                                    "identityType"
+                                    "identityType",
+                                    "roleId",
+                                    "expireDate"
                                 ],
                                 "properties": {
                                     "firstName": {
                                         "type": "string"
+                                    },
+                                    "expireDate": {
+                                        "type": "string",
+                                        "format": "date"
                                     },
                                     "lastName": {
                                         "type": "string"
@@ -1159,6 +1291,9 @@
                                     },
                                     "email": {
                                         "type": "email"
+                                    },
+                                    "roleId": {
+                                        "type": "integer"
                                     },
                                     "mobile": {
                                         "type": "string"
@@ -1569,6 +1704,26 @@
                 "summary": "Delete User",
                 "description": "delete user here",
                 "operationId": "deleteUser",
+                "requestBody": {
+                    "content": {
+                        "application-json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "param": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
                 "responses": {
                     "301": {
                         "description": "User deleted successfully",
@@ -2235,6 +2390,24 @@
                 "summary": "create subscriptionPayment",
                 "description": "create subscriptionPayment",
                 "operationId": "create-subscriptionPayment",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
