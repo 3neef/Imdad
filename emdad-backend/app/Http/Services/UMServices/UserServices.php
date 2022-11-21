@@ -17,6 +17,7 @@ class UserServices
     public function create($request)
     {
         $request['first_name'] = $request['firstName'];
+        $request['expiry_date']=$request['expireDate'];
         $request['last_name'] = $request['lastName'];
         $request['identity_number'] = $request['identityNumber'];
         $request['identity_type'] = $request['identityType'];
@@ -130,11 +131,9 @@ class UserServices
 
     public function activate($request)
     {
-        $id = ($request->get('id'));
-        $otp = ($request->get('otp'));
-        $time_now = Carbon::now();
 
-        $user = User::where('id', '=', $id)->where('otp', '=', $otp)->where('otp_expires_at', '>', $time_now)->first();
+        $user = User::where('id', '=', $request->id)->where('otp', '=', $request->otp)->where('otp_expires_at', '>', now())->first();
+
         if ($user === null) {
             return response()->json(
                 [
@@ -143,33 +142,7 @@ class UserServices
             );
         }
 
-        // $otp = ($request->get('otp'));
-        // $user = User::where('otp', '=', $otp)->first();
-        // if ($user === null) {
-        //     return response()->json(
-        //         [
-        //             "message" => "We didn't recognize this otp"
-        //         ]
-        //     );
-        // }
-        // $time_now = Carbon::now();
-        //     if ($time_now > $user->otp_expires_at) {
-        //         $otp = rand(1000,9999);
-        //         $otp_expires_at = Carbon::now()->addMinutes(1);
-        //         $user->otp = $otp;
-        //         $user->otp_expires_at = $otp_expires_at;
-        //         $user->save();
-        //         MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-        //         return response()->json(
-        //             [
-        //                 "message" => "Your OTP has expired, New OTP has been sent!!"
-        //             ]
-        //         );
-        //     }else {
-        $user->otp = null;
-        $user->otp_expires_at = null;
-        $user->is_verified = true;
-        $user->save();
+        $user->update(['is_verified' => true]);
         $token = $user->createToken('authtoken');
         return response()->json(
             [
@@ -184,13 +157,9 @@ class UserServices
 
     public function resend($request)
     {
-        $mobile = ($request->get('mobile'));
-        $user = User::where('mobile', '=', $mobile)->first();
+        $user = User::where('mobile', '=', $request->mobile)->first();
         $otp = rand(1000, 9999);
-        $otp_expires_at = Carbon::now()->addMinutes(5);
-        $user->otp = strval($otp);
-        $user->otp_expires_at = $otp_expires_at;
-        $user->save();
+        $user->update(['otp'=>strval($otp),'otp_expires_at'=>now()->addMinutes(5)]);
         // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
         // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
@@ -220,13 +189,10 @@ class UserServices
         if ($request->has('param') && $request->param == "true") {
             $user->tokens()->delete();
             $user->forceDelete();
-            if($user)
-            {
+            if ($user) {
                 return response()->json(['message' => 'User delete form database successfully'], 201);
-
             }
             return response()->json(['error' => 'system error'], 500);
-
         } else {
             $user->tokens()->delete();
 

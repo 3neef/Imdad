@@ -6,13 +6,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UMController\DepartmentController;
 use App\Http\Controllers\UMController\PermissionsController;
 use App\Http\Controllers\UMController\RoleController;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::middleware(['app.auth'])->prefix('users')->group(function () {
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [AuthController::class, 'createUser']);
+    Route::put('activate', [AuthController::class, 'activateUser']);
+
 });
 Route::middleware(['app.auth'])->prefix('roles')->group(function () {
     Route::get('getAll', [RoleController::class, 'getAllRoles']);
@@ -21,7 +25,6 @@ Route::middleware(['app.auth'])->prefix('roles')->group(function () {
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
 
     Route::post('createUser', [AuthController::class, 'createUserToCompany']);
-    Route::post('activate', [AuthController::class, 'activateUser']);
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
     Route::post('logout', [AuthController::class, 'logoutUser']);
     Route::put("update", [AuthController::class, 'updateUser']);

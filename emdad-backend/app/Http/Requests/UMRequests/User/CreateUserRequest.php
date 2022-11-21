@@ -34,7 +34,8 @@ class CreateUserRequest extends FormRequest
             'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
             'email' => ['unique:users,email','required','email','max:100',],
             "roleId"=> "required|integer|exists:roles,id",
-            'password'=>'required|string'
+            'password'=>'required|string',
+            'expireDate'=>'required|date',
         ];
         if ($this->path() == 'api/users/createUser') {
             $rules = [
