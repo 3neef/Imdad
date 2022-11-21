@@ -560,6 +560,24 @@
                 "summary": "create warehouse",
                 "description": "create warehouse Here",
                 "operationId": "createWarehouse",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -639,6 +657,24 @@
                 "summary": "update warehouse",
                 "description": "update warehouse Here",
                 "operationId": "updateWarehouse",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -716,6 +752,24 @@
                 "summary": "get all warehouse",
                 "description": "get all warehouses Here",
                 "operationId": "getAllWarehouses",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "get all warehouses",
@@ -753,6 +807,24 @@
                 "summary": "get warehouse by company id",
                 "description": "get warehouse by company id Here",
                 "operationId": "getByCompanyIdWarehouse",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "get warehouse by company id",
@@ -787,6 +859,24 @@
                 "summary": "get warehouse By UserId",
                 "description": "get warehouse By UserId Here",
                 "operationId": "getWarehouseUserById",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "get warehouse By UserId",
@@ -821,6 +911,24 @@
                 "summary": "get warehouse By Id",
                 "description": "get warehouse By Id Here",
                 "operationId": "getWarehouseById",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "get warehouse By Id",
@@ -855,6 +963,24 @@
                 "summary": "delete warehouse",
                 "description": "delete warehouse Here",
                 "operationId": "deleteWarehouse",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "delete warehouse",
@@ -894,6 +1020,24 @@
                 "summary": "restore warehouse By Id",
                 "description": "restore warehouse By Id Here",
                 "operationId": "restoreWarehouseById",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "restore warehouse By Id",
@@ -933,6 +1077,24 @@
                 "summary": "verfied warehouse",
                 "description": "verfied warehouse",
                 "operationId": "verfiedWarehouse",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
