@@ -17,8 +17,7 @@ Route::middleware(['app.auth'])->prefix('users')->group(function () {
     Route::post('register', [AuthController::class, 'createUser']);
     Route::put('activate', [AuthController::class, 'activateUser']);
     Route::delete('remove-user/{id}',[AuthController::class, 'removeUser']);
-
-
+    Route::post('resend-otp', [AuthController::class, 'resendOTP']);
 });
 Route::middleware(['app.auth'])->prefix('roles')->group(function () {
     Route::get('getAll', [RoleController::class, 'getAllRoles']);
@@ -27,7 +26,6 @@ Route::middleware(['app.auth'])->prefix('roles')->group(function () {
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
 
     Route::post('createUser', [AuthController::class, 'createUserToCompany']);
-    Route::post('resend-otp', [AuthController::class, 'resendOTP']);
     Route::post('logout', [AuthController::class, 'logoutUser']);
     Route::put("update", [AuthController::class, 'updateUser']);
     Route::put("restore/{id}", [AuthController::class, 'restoreUser']);
