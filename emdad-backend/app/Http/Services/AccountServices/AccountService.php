@@ -21,6 +21,9 @@ class AccountService
             "company_type"=>$request->companyType,
             "company_name"=>$company->cr_name,
             "created_by"=>auth()->user()->id,
+            "contact_phone"=>auth()->user()->mobile,
+            "contact_email"=>auth()->user()->email,
+            "is_validated"=>true,
 
         ]);
 
@@ -106,12 +109,15 @@ class AccountService
     public function getById($id)
     {
         $account = CompanyInfo::where('id', $id)->get();
+        dd($account);
+
         return response()->json(['data' => new CompanyResponse($account)], 200);
     }
 
     public function getAll()
     {
         $allAccounts = CompanyInfo::all();
+        dd($allAccounts);
         return response()->json(['data' => CompanyResponse::collection($allAccounts)], 200);
     }
 
