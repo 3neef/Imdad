@@ -72,9 +72,7 @@ class UserServices
 
     public function update($request)
     {
-        if (!$request->isMethod('put')) {
-            return response()->json(['error' => 'this route supported put method only'], 402);
-        }
+      
         $user = User::find($request->get('id'));
         $user->lang = empty($request->get('lang')) ? $user->value('lang') : $request->get('lang');
         $fullname = empty($request->get('fullName')) ? $user->value('full_name') : $request->get('fullName');
@@ -84,10 +82,14 @@ class UserServices
         $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
         $companyId = $request->get('defaultCompany');
         $userRoleCompany = RoleUserCompany::where('users_id', '=', $user->id)->where('company_info_id', '=', $companyId)->first();
-        $roleId = empty($request->get('roleId')) ? $userRoleCompany->roles_id : $request->get('roleId');
-        $userRoleCompany->roles_id = $roleId;
-        $userRoleCompany->company_info_id = $companyId;
-        $userRoleCompany->update();
+
+        if(isset($request->roleId)&&$userRoleCompany!=null){
+            $roleId = empty($request->get('roleId')) ? $userRoleCompany->roles_id : $request->get('roleId');
+            $userRoleCompany->roles_id = $roleId;
+            $userRoleCompany->company_info_id = $companyId;
+            $userRoleCompany->update();
+        }
+       
         $result = $user->update([
             'full_name' => $fullname,
             'first_name' => $firstname,
