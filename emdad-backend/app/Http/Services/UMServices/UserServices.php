@@ -168,7 +168,7 @@ class UserServices
 
     public function resend($request)
     {
-        $user = User::where('mobile', '=', $request->mobile)->first();
+        $user =isset($request->mobile)? User::where('mobile', '=', $request->mobile)->first():User::where('email', '=', $request->email)->first();
         $otp = rand(1000, 9999);
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
         // MailController::sendSignupEmail($user->name, $user->email, $user->otp);

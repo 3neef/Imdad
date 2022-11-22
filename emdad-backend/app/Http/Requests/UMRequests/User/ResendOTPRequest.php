@@ -27,7 +27,8 @@ class ResendOTPRequest extends FormRequest
     public function rules()
     {
         return [
-            "mobile"=>"required|exists:users,mobile"
+            "mobile"=>"required_without:email|exists:users,mobile",
+            "email"=>"required_without:mobile|exists:users,email"
         ];
     }
 
