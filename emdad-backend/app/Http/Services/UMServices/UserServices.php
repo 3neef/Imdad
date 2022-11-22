@@ -22,13 +22,12 @@ class UserServices
         $request['identity_number'] = $request['identityNumber'];
         $request['identity_type'] = $request['identityType'];
         $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
-        $request['otp_expires_at'] = now()->addMinutes(2);
+        $request['otp_expires_at'] = now()->addMinutes(5);
         $request['is_super_admin'] = true;
 
         $request['otp'] = strval(rand(1000, 9999));
 
         $user = User::create($request);
-        $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId']]);
 
         if ($user) {
             return response()->json([
@@ -110,7 +109,7 @@ class UserServices
         $user = User::where('email', '=', $request->email)
             ->orwhere('mobile', $request->mobile)
             ->first();
-            
+
         if ($user->is_verified == 0) {
             return response()->json(
                 [
@@ -148,7 +147,7 @@ class UserServices
                     "success" => false, "error" => "Invalid OTP"
                 ]
             );
-        } elseif ($user->otp_expires_at > now()) {
+        } elseif ($user->otp_expires_at < now()) {
             return response()->json(
                 [
                     "success" => false, "error" => "Expired OTP"
@@ -176,6 +175,7 @@ class UserServices
         return response()->json(
             [
                 'message' => 'New OTP has been sent.',
+                'otp'=>$user->otp,
             ]
         );
     }
@@ -192,28 +192,20 @@ class UserServices
         );
     }
 
-    public function delete($id, $request)
+    public function delete($id)
     {
 
         $user = User::find($id);
 
-        if ($request->has('param') && $request->param == "true") {
-            $user->tokens()->delete();
-            $user->forceDelete();
-            if ($user) {
-                return response()->json(['message' => 'User delete form database successfully'], 200);
-            }
-            return response()->json(['error' => 'system error'], 500);
-        } else {
-            $user->tokens()->delete();
 
-            $deleted = $user->delete();
+        $user->tokens()->delete();
 
-            if ($deleted) {
-                return response()->json(['message' => 'User deleted successfully'], 301);
-            }
-            return response()->json(['error' => 'system error'], 500);
+        $deleted = $user->delete();
+
+        if ($deleted) {
+            return response()->json(['message' => 'User deleted successfully'], 301);
         }
+        return response()->json(['error' => 'system error'], 500);
     }
 
 
@@ -349,5 +341,18 @@ class UserServices
     public function showById($id)
     {
         #code...
+    }
+
+    public function removeUser($id)
+    {
+        $user = User::find($id);
+
+        $user->tokens()->delete();
+
+        $user->forceDelete();
+        if ($user) {
+            return response()->json(['message' => 'User delete form database successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
     }
 }
