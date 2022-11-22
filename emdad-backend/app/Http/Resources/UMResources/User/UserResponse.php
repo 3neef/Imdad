@@ -14,6 +14,8 @@ class UserResponse extends JsonResource
      */
     public function toArray($request)
     {
+
+      
         return [
             "id"=>$this->id,
             "firstName"=>$this->first_name,
@@ -26,5 +28,9 @@ class UserResponse extends JsonResource
             "otp"=>$this->otp,
             "isSuperAdmin"=>$this->is_super_admin
         ];
+
+
     }
+
+   
 }
