@@ -80,7 +80,7 @@ class UserServices
         $lastname = empty($request->get('lastName')) ? $user->value('last_name') : $request->get('lastName');
         $email = empty($request->get('email')) ? $user->value('email') : $request->get('email');
         $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
-        $companyId = $request->get('defaultCompany');
+        $companyId = empty($request->get('defaultCompany')) ? $user->default_company : $request->get('defaultCompany');
         $userRoleCompany = RoleUserCompany::where('users_id', '=', $user->id)->where('company_info_id', '=', $companyId)->first();
 
         if(isset($request->roleId)&&$userRoleCompany!=null){
