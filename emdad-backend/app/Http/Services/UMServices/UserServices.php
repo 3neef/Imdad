@@ -73,12 +73,12 @@ class UserServices
     public function update($request)
     {
       
-        $user = User::find($request->get('id'));
-        $user->lang = empty($request->get('lang')) ? $user->value('lang') : $request->get('lang');
-        $fullname = empty($request->get('fullName')) ? $user->value('full_name') : $request->get('fullName');
-        $firstname = empty($request->get('firstName')) ? $user->value('first_name') : $request->get('firstName');
-        $lastname = empty($request->get('lastName')) ? $user->value('last_name') : $request->get('lastName');
-        $email = empty($request->get('email')) ? $user->value('email') : $request->get('email');
+        $user = auth()->user();
+        $user->lang = empty($request->get('lang')) ? $user->lang : $request->get('lang');
+        $fullname = empty($request->get('fullName')) ? $user->full_name : $request->get('fullName');
+        $firstname = empty($request->get('firstName')) ? $user->first_name: $request->get('firstName');
+        $lastname = empty($request->get('lastName')) ? $user->last_name : $request->get('lastName');
+        $email = empty($request->get('email')) ? $user->email : $request->get('email');
         $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
         $companyId = empty($request->get('defaultCompany')) ? $user->default_company : $request->get('defaultCompany');
         $userRoleCompany = RoleUserCompany::where('users_id', '=', $user->id)->where('company_info_id', '=', $companyId)->first();

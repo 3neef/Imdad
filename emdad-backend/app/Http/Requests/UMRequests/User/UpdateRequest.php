@@ -26,7 +26,6 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => "required|integer|exists:users,id",
             "fullName"=>"string|max:50",
             "firstName"=>"string|max:50",
             "lastName"=>"string|max:50",
@@ -34,7 +33,6 @@ class UpdateRequest extends FormRequest
             "email"=>"email|string|max:255",
             "mobile"=>"min:9|max:14|string",
             "roleId"=> "integer|exists:roles,id",
-            "companyId"=> "required|integer|exists:company_info,id"
         ];
     }
 
