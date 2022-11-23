@@ -73,7 +73,7 @@ class UserServices
     public function update($request)
     {
       
-        $user = auth()->user;
+        $user = auth()->user();
         $user->lang = empty($request->get('lang')) ? $user->lang : $request->get('lang');
         $user->first_name = empty($request->get('firstName')) ? $user->first_name: $request->get('firstName');
         $user->last_name = empty($request->get('lastName')) ? $user->last_name : $request->get('lastName');
@@ -81,7 +81,7 @@ class UserServices
         $user->email = empty($request->get('email')) ? $user->email : $request->get('email');
         $user->mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
         $user->default_company = empty($request->get('defaultCompany')) ? $user->default_company : $request->get('defaultCompany');
-        $userRoleCompany = RoleUserCompany::where('users_id', '=', $user->id)->where('company_info_id', '=', $companyId)->first();
+        $userRoleCompany = RoleUserCompany::where('users_id', '=', $user->id)->where('company_info_id', '=', $user->default_Company)->first();
 
         if(isset($request->roleId)&&$userRoleCompany!=null){
             $roleId = empty($request->get('roleId')) ? $userRoleCompany->roles_id : $request->get('roleId');
