@@ -177,16 +177,12 @@ class AuthController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
         *               @OA\Property(property="password", type="string"),
-        *               @OA\Property(property="fullName", type="string"),
         *               @OA\Property(property="firstName", type="string"),
         *               @OA\Property(property="lastName", type="string"),
         *               @OA\Property(property="roleId", type="integer"),
         *               @OA\Property(property="email", type="email"),
         *               @OA\Property(property="mobile", type="string"),
-        *               @OA\Property(property="companyId", type="integer")
         *            ),
         *        ),
         *    ),

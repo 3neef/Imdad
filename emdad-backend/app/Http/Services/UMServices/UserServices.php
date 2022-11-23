@@ -73,30 +73,24 @@ class UserServices
     public function update($request)
     {
       
-        $user = auth()->user();
+        $user = auth()->user;
         $user->lang = empty($request->get('lang')) ? $user->lang : $request->get('lang');
-        $fullname = empty($request->get('fullName')) ? $user->full_name : $request->get('fullName');
-        $firstname = empty($request->get('firstName')) ? $user->first_name: $request->get('firstName');
-        $lastname = empty($request->get('lastName')) ? $user->last_name : $request->get('lastName');
-        $email = empty($request->get('email')) ? $user->email : $request->get('email');
-        $mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
-        $companyId = empty($request->get('defaultCompany')) ? $user->default_company : $request->get('defaultCompany');
+        $user->first_name = empty($request->get('firstName')) ? $user->first_name: $request->get('firstName');
+        $user->last_name = empty($request->get('lastName')) ? $user->last_name : $request->get('lastName');
+        $user->full_name = $user->first_name." ".$user->last_name;
+        $user->email = empty($request->get('email')) ? $user->email : $request->get('email');
+        $user->mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
+        $user->default_company = empty($request->get('defaultCompany')) ? $user->default_company : $request->get('defaultCompany');
         $userRoleCompany = RoleUserCompany::where('users_id', '=', $user->id)->where('company_info_id', '=', $companyId)->first();
 
         if(isset($request->roleId)&&$userRoleCompany!=null){
             $roleId = empty($request->get('roleId')) ? $userRoleCompany->roles_id : $request->get('roleId');
             $userRoleCompany->roles_id = $roleId;
-            $userRoleCompany->company_info_id = $companyId;
+            $userRoleCompany->company_info_id = $user->defualt_company;
             $userRoleCompany->update();
         }
        
-        $result = $user->update([
-            'full_name' => $fullname,
-            'first_name' => $firstname,
-            'last_name' => $lastname,
-            'email' => $email,
-            'mobile' => $mobile,
-        ]);
+        $result = $user->update();
         if ($result) {
             return response()->json([
                 'message' => 'User updated successfully',
