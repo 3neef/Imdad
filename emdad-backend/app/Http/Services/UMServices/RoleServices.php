@@ -21,7 +21,6 @@ class RoleServices
     public function update($request)
     {
         $role = Role::findOrFail($request->id);
-        // dd($role);
         $result = $role->update(['name' => $request->name, 'type' => $request->type]);
         if ($result) {
             return response()->json(['message' => 'updated successfully'], 200);
