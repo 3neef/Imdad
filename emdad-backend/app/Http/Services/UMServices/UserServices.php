@@ -101,9 +101,11 @@ class UserServices
 
     public function login(LoginRequest $request)
     {
+
         $user = User::where('email', '=', $request->email)
             ->orwhere('mobile', $request->mobile)
             ->first();
+
 
         if ($user->is_verified == 0) {
             return response()->json(
@@ -119,10 +121,10 @@ class UserServices
                 ]
             );
         }
-       $permissions= $this->getAbilities();
-       dd($permissions);
-        $permissions->toArray();
-        $token = $user->createToken('authtoken',[$permissions]);
+    //    $permissions= $this->getAbilities();
+    //    dd($permissions);
+    //     $permissions->toArray();
+      $token = $user->createToken('authtoken');
 
         return response()->json(
             [
