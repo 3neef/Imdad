@@ -10,6 +10,7 @@ use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\General\SmsService;
+use App\Models\UM\Permission;
 
 class UserServices
 {
@@ -118,7 +119,11 @@ class UserServices
                 ]
             );
         }
-        $token = $user->createToken('authtoken');
+       $permissions= $this->getAbilities();
+       dd($permissions);
+        $permissions->toArray();
+        $token = $user->createToken('authtoken',[$permissions]);
+
         return response()->json(
             [
                 'message' => 'Logged in',
@@ -348,5 +353,10 @@ class UserServices
             return response()->json(['message' => 'User delete form database successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
+    }
+    protected function getAbilities(){
+        $role_id=RoleUserCompany::where('users_id',auth()->id())->where('company_info_id',auth()->user()->default_company)->first();
+        $permissions=Permission::where('role_id',$role_id)->get();
+        return $permissions;
     }
 }
