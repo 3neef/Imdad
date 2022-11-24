@@ -60,7 +60,6 @@ class UserServices
         $result = $user->save();
         $companyId = $request->get('companyId');
         $roleId = $request->get('roleId');
-        $user->roleInCompany()->attach($user->id, ['roles_id' => $roleId, 'company_info_id' => $companyId]);
         if ($result) {
             return response()->json([
                 'message' => 'User created successfully',
@@ -72,7 +71,7 @@ class UserServices
 
     public function update($request)
     {
-      
+
         $user = auth()->user();
         $user->lang = empty($request->get('lang')) ? $user->lang : $request->get('lang');
         $user->first_name = empty($request->get('firstName')) ? $user->first_name: $request->get('firstName');
@@ -89,7 +88,7 @@ class UserServices
             $userRoleCompany->company_info_id = $user->defualt_company;
             $userRoleCompany->update();
         }
-       
+
         $result = $user->update();
         if ($result) {
             return response()->json([
