@@ -80,13 +80,13 @@ class UserServices
         $user->email = empty($request->get('email')) ? $user->email : $request->get('email');
         $user->mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
         $user->default_company = empty($request->get('defaultCompany')) ? $user->default_company : $request->get('defaultCompany');
-        $userRoleCompany = RoleUserCompany::where('users_id', '=', $user->id)->where('company_info_id', '=', $user->default_Company)->first();
+        $userRoleCompany = RoleUserCompany::where('users_id', $user->id)->where('company_info_id', $user->default_company)->first();
+
 
         if(isset($request->roleId)&&$userRoleCompany!=null){
-            $roleId = empty($request->get('roleId')) ? $userRoleCompany->roles_id : $request->get('roleId');
-            $userRoleCompany->roles_id = $roleId;
-            $userRoleCompany->company_info_id = $user->defualt_company;
-            $userRoleCompany->update();
+
+            $userRoleCompany->update(['users_id'=>$user->id,'roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
+
         }
 
         $result = $user->update();
