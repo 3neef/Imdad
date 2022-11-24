@@ -5,6 +5,7 @@ namespace App\Http\Requests\UMRequests\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class GetRoleRequest extends FormRequest
 {
@@ -27,8 +28,9 @@ class GetRoleRequest extends FormRequest
     {
         return [
             'id' => ['required','integer','exists:roles,id'],
-            'name' => ['required','string','unique:roles,name'],
-            'type' => ['required','integer','between:0,2']
+            'name' => ['string','unique:roles,name'],
+            'type' => Rule::in(['emdad','supplier','buyier']),
+
         ];
     }
 

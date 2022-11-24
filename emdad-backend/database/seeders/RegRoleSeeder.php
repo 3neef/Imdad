@@ -16,20 +16,20 @@ class RegRoleSeeder extends Seeder
      */
     public function run()
     {
-        $roles=[
-            ["name"=>"GM","type"=>0 ,"for_reg"=>1],
-            ["name"=>"CEO","type"=>0 ,"for_reg"=>1],
-            ["name"=>"OWNER","type"=>0 ,"for_reg"=>1],
+        $roles = [
+            ["name" => "GM", "type" => 'emdad', "for_reg" => 1],
+            ["name" => "CEO", "type" => 'supplier', "for_reg" => 1],
+            ["name" => "OWNER", "type" => 'buyier', "for_reg" => 1],
         ];
 
         foreach ($roles as $role) {
             # code...
             DB::table('roles')->insert([
-                "name"=>$role['name'],
-                  "type"=>$role['type'],
-                "for_reg"=>$role['for_reg'],
-                "created_at"=>Carbon::now()
-               ]);
+                "name" => $role['name'],
+                "type" => $role['type'],
+                "for_reg" => $role['for_reg'],
+                "created_at" => Carbon::now()
+            ]);
         }
     }
 }

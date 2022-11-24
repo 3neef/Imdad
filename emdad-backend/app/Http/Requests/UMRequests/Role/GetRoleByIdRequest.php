@@ -22,8 +22,8 @@ class GetRoleByIdRequest extends FormRequest
     protected function prepareForValidation() 
     {
         $uri = $this->path();
-        $id = $this->id == null ? "1" : $this->id;
-        if($uri == 'api/roles/getByRoleId/'.$id.'' || $uri == 'api/roles/delete/'.$id.''){
+        $id = $this->id == null ? 1: $this->id;
+        if($uri == 'api/v1_0/roles/getByRoleId/'.$id.'' || $uri == 'api/v1_0/roles/delete/'.$id.''){
             $this->merge(['id' => $this->route('id')]);
         }else{
             $this->merge(['type' => $this->route('type')]); 
@@ -41,7 +41,7 @@ class GetRoleByIdRequest extends FormRequest
         $rules =['id' => ['required','integer','exists:roles,id']];
         if($this->isMethod('delete')){
             $rules =['id' => ['required','integer','exists:roles,id',new CheckUserHasRole]];
-        }elseif($this->path() == 'api/roles/getByType/'.$type.''){
+        }elseif($this->path() == 'api/v1_0/roles/getByType/'.$type.''){
            // dd('type');
             $rules =['type' => ['required','integer','between:0,2']];
         }
