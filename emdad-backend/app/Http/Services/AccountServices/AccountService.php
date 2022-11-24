@@ -16,7 +16,7 @@ class AccountService
     public function addMoreCompany( $request)
     {
         $company=RelatedCompanies::where("cr_number",$request->crNo)->first();
-
+       $user=User::where('id',auth()->id)->first();
         $account=CompanyInfo::create([
             "company_type"=>$request->companyType,
             "company_name"=>$company->cr_name,
@@ -26,6 +26,8 @@ class AccountService
             "is_validated"=>true,
 
         ]);
+        $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => $account->id]);
+
 
         return response()->json(['success'=>true,'message'=>'created successfully'], 200);
 
@@ -34,9 +36,9 @@ class AccountService
     // public function createCompany($request)
     // {
     //     $account = new CompanyInfo();
-  
+
     //     $account->company_type = $request->get('companyType');
-    
+
     //     $account->contact_phone = $request->get('contactPhone');
     //     $account->contact_email = $request->get('contactEmail');
     //     if (isset($request->subscriptionId)) {

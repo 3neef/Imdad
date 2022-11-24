@@ -10,6 +10,7 @@ use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\General\SmsService;
+use App\Models\UM\Permission;
 
 class UserServices
 {
@@ -43,25 +44,23 @@ class UserServices
 
     public function createUserToCompany($request)
     {
-        $user = new User();
-        $otp = rand(1000, 9999);
-        $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
-        $fullname = $request->get('firstName') . '' . $request->get('lastName');
-        $user->full_name = $fullname;
-        $user->first_name = $request->get('firstName');
-        $user->last_name = $request->get('lastName');
-        $user->email = $request->get('email');
-        $user->mobile = $request->get('mobile');
-        $user->lang = isset($request->lang) ? $request->lang : "en";
+        $request['first_name'] = $request['firstName'];
+        $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
+        $request['email'] = $request['email'];
+        $request['last_name'] = $request['lastName'];
+        $request['mobile'] = $request['mobile'];
+        $request['identity_number'] = $request['identityNumber'];
+        $request['identity_type'] = $request['identityType'];
+        $request['password'] = $request['password'];
+         $request['expire_date'] = $request['expireDate'];
 
-        $user->otp = strval($otp);
-        $user->otp_expires_at = $otp_expires_at;
-        $user->forget_pass = 0;
-        $result = $user->save();
-        $companyId = $request->get('companyId');
-        $roleId = $request->get('roleId');
-        $user->roleInCompany()->attach($user->id, ['roles_id' => $roleId, 'company_info_id' => $companyId]);
-        if ($result) {
+        //  dd($request['roleId']);
+
+
+        $user = User::create($request);
+
+        $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
+        if ($user) {
             return response()->json([
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
@@ -72,7 +71,7 @@ class UserServices
 
     public function update($request)
     {
-      
+
         $user = auth()->user();
         $user->lang = empty($request->get('lang')) ? $user->lang : $request->get('lang');
         $user->first_name = empty($request->get('firstName')) ? $user->first_name: $request->get('firstName');
@@ -89,7 +88,7 @@ class UserServices
             $userRoleCompany->company_info_id = $user->defualt_company;
             $userRoleCompany->update();
         }
-       
+
         $result = $user->update();
         if ($result) {
             return response()->json([
@@ -120,7 +119,11 @@ class UserServices
                 ]
             );
         }
-        $token = $user->createToken('authtoken');
+       $permissions= $this->getAbilities();
+       dd($permissions);
+        $permissions->toArray();
+        $token = $user->createToken('authtoken',[$permissions]);
+
         return response()->json(
             [
                 'message' => 'Logged in',
@@ -350,5 +353,10 @@ class UserServices
             return response()->json(['message' => 'User delete form database successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
+    }
+    protected function getAbilities(){
+        $role_id=RoleUserCompany::where('users_id',auth()->id())->where('company_info_id',auth()->user()->default_company)->first();
+        $permissions=Permission::where('role_id',$role_id)->get();
+        return $permissions;
     }
 }
