@@ -29,7 +29,7 @@ class CreatePermissionRequest extends FormRequest
         $rules = [
             'role'=>'required|string|exists:roles,name',
             'privileges'=>['required','array',new UniqeValues],
-            'privileges.*'=>['required','integer','exists:permissions,id']  
+            'privileges.*'=>['required','integer','exists:permissions,id'] 
         ];
         
         if (gettype(request()->role) == 'integer') {
@@ -40,19 +40,6 @@ class CreatePermissionRequest extends FormRequest
         return $rules;
     }
 
-    public function messages()
-    {
-        return [
-            'role.required' => 'role is required!',
-            'role.exists' => 'role is inValid!',
-            'privileges.required' => 'privileges is required!',
-            'privileges.array' => 'privileges is must be array!',
-            'privileges.*.required' => ':attribute is required!',
-            'privileges.*.integer' => ':attribute is must be integer',
-            'privileges.*.exists' => ':attribute is inValid'
-
-        ];
-    }
 
     protected function failedValidation(Validator $validator): void
     {

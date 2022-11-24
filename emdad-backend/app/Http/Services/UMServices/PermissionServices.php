@@ -11,6 +11,7 @@ use App\Models\UM\Role;
 class PermissionServices{
     public function createOrUpdate($request)
     {
+        dd($request);
         $colmun = gettype($request ->json()->get( 'role' )) == 'integer' ? 'id' : 'name';
         $role = Role::where( $colmun, $request ->json()->get( 'role' ) )->first();
         $exists= $role->permissions();
