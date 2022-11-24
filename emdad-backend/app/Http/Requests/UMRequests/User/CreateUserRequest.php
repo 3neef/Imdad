@@ -37,16 +37,7 @@ class CreateUserRequest extends FormRequest
             'password'=>'required|string',
             'expireDate'=>'required|date',
         ];
-        if ($this->path() == 'api/users/createUser') {
-            $rules = [
-                "firstName"=>"required|string|max:50|unique:users",
-                "lastName"=>"required|string|max:50|unique:users",
-                "email"=>"required|email|string|max:255",
-                "mobile"=>"required|min:9|max:14|string",
-                "roleId"=> "required|integer|exists:roles,id",
-                "lang" => Rule::in("en", "ar"),
-            ];
-        }
+
         return $rules;
     }
 

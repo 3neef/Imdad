@@ -146,7 +146,7 @@ class AuthController extends Controller
         */
     public function createUserToCompany(CreateUserRequest $request,UserServices $userServices)
     {
-        return $userServices->createUserToCompany($request);
+        return $userServices->createUserToCompany($request->validated());
     }
            /**
         * @OA\put(

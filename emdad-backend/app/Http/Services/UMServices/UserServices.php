@@ -43,24 +43,23 @@ class UserServices
 
     public function createUserToCompany($request)
     {
-        $user = new User();
-        $otp = rand(1000, 9999);
-        $otp_expires_at = Carbon::now()->addMinutes(env("otp_life_time"));
-        $fullname = $request->get('firstName') . '' . $request->get('lastName');
-        $user->full_name = $fullname;
-        $user->first_name = $request->get('firstName');
-        $user->last_name = $request->get('lastName');
-        $user->email = $request->get('email');
-        $user->mobile = $request->get('mobile');
-        $user->lang = isset($request->lang) ? $request->lang : "en";
+        $request['first_name'] = $request['firstName'];
+        $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
+        $request['email'] = $request['email'];
+        $request['last_name'] = $request['lastName'];
+        $request['mobile'] = $request['mobile'];
+        $request['identity_number'] = $request['identityNumber'];
+        $request['identity_type'] = $request['identityType'];
+        $request['password'] = $request['password'];
+         $request['expire_date'] = $request['expireDate'];
 
-        $user->otp = strval($otp);
-        $user->otp_expires_at = $otp_expires_at;
-        $user->forget_pass = 0;
-        $result = $user->save();
-        $companyId = $request->get('companyId');
-        $roleId = $request->get('roleId');
-        if ($result) {
+        //  dd($request['roleId']);
+
+
+        $user = User::create($request);
+
+        $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
+        if ($user) {
             return response()->json([
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
