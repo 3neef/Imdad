@@ -6,6 +6,7 @@ use App\Rules\CheckUserHasRole;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class GetRoleByIdRequest extends FormRequest
 {
@@ -37,13 +38,13 @@ class GetRoleByIdRequest extends FormRequest
      */
     public function rules()
     {
-        $type = $this->type == null ? "1" : $this->type;
+        $type = $this->type == null ? 1 : $this->type;
         $rules =['id' => ['required','integer','exists:roles,id']];
         if($this->isMethod('delete')){
-            $rules =['id' => ['required','integer','exists:roles,id',new CheckUserHasRole]];
+            $rules =['id' => ['required','integer','exists:roles,id']];
         }elseif($this->path() == 'api/v1_0/roles/getByType/'.$type.''){
            // dd('type');
-            $rules =['type' => ['required','integer','between:0,2']];
+            $rules =['type' => ['required', Rule::in(['emdad', 'supplier', 'buyier'])],];
         }
         //dd($this->path());
         return $rules;

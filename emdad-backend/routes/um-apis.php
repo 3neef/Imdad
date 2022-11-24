@@ -42,7 +42,7 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(function () {
 
     Route::post('save', [PermissionsController::class, 'savePermission']);
-    Route::get('getAll', [PermissionsController::class, 'getAllPermissions']);
+    Route::get('getAallll', [PermissionsController::class, 'getAllPermissions']);
     Route::get('getById/{id}', [PermissionsController::class, 'getPermissionByRoleId']);
     Route::put('update', [PermissionsController::class, 'updatePermission']);
     Route::delete('delete/{id}', [PermissionsController::class, 'deletePermission']);

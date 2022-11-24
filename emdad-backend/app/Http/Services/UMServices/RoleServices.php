@@ -31,6 +31,7 @@ class RoleServices
     public function showAll()
     {
         $roles = Role::all();
+
         return response()->json(['data' => RoleResponse::collection($roles)]);
     }
 
@@ -44,7 +45,9 @@ class RoleServices
     public function delete($id)
     {
         $role = Role::find($id);
+
         $deleted = $role->delete();
+
         if ($deleted) {
             return response()->json(['message' => 'deleted successfully'], 301);
         }
@@ -62,7 +65,7 @@ class RoleServices
 
     public function showByType($type)
     {
-        $roles = Role::where('type', '=', $type)->get();
+        $roles = Role::where('type',$type)->get();
         if (!$roles->isEmpty()) {
             return response()->json(['data' => RoleResponse::collection($roles)], 200);
         } else {
