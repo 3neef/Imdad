@@ -13,24 +13,24 @@ use Carbon\Carbon;
 
 class AccountService
 {
-    public function addMoreCompany( $request)
+    public function addMoreCompany($request)
     {
-        $company=RelatedCompanies::where("cr_number",$request->crNo)->first();
-       $user=User::where('id',auth()->id)->first();
-        $account=CompanyInfo::create([
-            "company_type"=>$request->companyType,
-            "company_name"=>$company->cr_name,
-            "created_by"=>auth()->user()->id,
-            "contact_phone"=>auth()->user()->mobile,
-            "contact_email"=>auth()->user()->email,
-            "is_validated"=>true,
+        $company = RelatedCompanies::where("cr_number", $request->crNo)->first();
+        $user = User::where('id', auth()->id())->first();
+        $account = CompanyInfo::create([
+            "company_type" => $request->companyType,
+            "company_name" => $company->cr_name,
+            "created_by" => auth()->user()->id,
+            "contact_phone" => auth()->user()->mobile,
+            "contact_email" => auth()->user()->email,
+            "is_validated" => true,
 
         ]);
         $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => $account->id]);
 
-
-        return response()->json(['success'=>true,'message'=>'created successfully'], 200);
-
+        $user->update(['default_company' => $account->id]);
+        
+        return response()->json(['success' => true, 'message' => 'created successfully'], 200);
     }
 
     // public function createCompany($request)
@@ -57,12 +57,12 @@ class AccountService
     //     return response()->json(['error' => 'system error'], 500);
     // }
 
-    public function createUser(CompanyInfo $account,$request)
+    public function createUser(CompanyInfo $account, $request)
     {
         $user = new User();
         $otp = rand(1000, 9999);
         $otp_expires_at = Carbon::now()->addMinutes(2);
-        $user->full_name = $request->firstName." ".$request->lastName;
+        $user->full_name = $request->firstName . " " . $request->lastName;
         $user->first_name = $request->firstName;
         $user->last_name = $request->lastName;
         $user->identity = $request->personId;
@@ -77,10 +77,10 @@ class AccountService
         $user->otp_expires_at = $otp_expires_at;
 
         $user->save();
-        $user->roleInCompany()->attach($user->id,['roles_id' =>$request->roleId,'company_info_id'=>$account->id]);
+        $user->roleInCompany()->attach($user->id, ['roles_id' => $request->roleId, 'company_info_id' => $account->id]);
 
         $updateAccount = CompanyInfo::find($account->id);
-        $updateAccount ->update(['created_by'=>$user->id]);
+        $updateAccount->update(['created_by' => $user->id]);
         return $user;
     }
 
