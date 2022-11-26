@@ -27,6 +27,7 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function
 
     Route::post('createUser', [AuthController::class, 'createUserToCompany']);
     Route::post('logout', [AuthController::class, 'logoutUser']);
+    Route::get('user-data', [AuthController::class, 'getUserInfoByToken']);
     Route::put("update", [AuthController::class, 'updateUser']);
     Route::put("restore/{id}", [AuthController::class, 'restoreUser']);
     Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
