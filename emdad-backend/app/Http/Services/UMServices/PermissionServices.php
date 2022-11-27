@@ -2,7 +2,7 @@
 namespace App\Http\Services\UMServices;
 
 use App\Http\Resources\UMResources\Permission\PermissionResponse;
-use App\Models\UM\permission;
+use App\Models\UM\Permission;
 use App\Models\UM\RolePermission;
 use App\Models\UM\Role;
 
@@ -46,7 +46,7 @@ class PermissionServices{
     }
 
     public function showAll(){
-        $allPermissions = permission::all();
+        $allPermissions = Permission::all();
         return response()->json(['data' => PermissionResponse::collection($allPermissions)  ]);
     }
 

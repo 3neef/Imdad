@@ -35,14 +35,6 @@ class GetPermissionRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'id.required' => 'id is required!',
-            'id.exists' => 'id is inValid!',
-            'id.integer' => 'id is must be integer',
-        ];
-    }
 
     protected function failedValidation(Validator $validator): void
     {
