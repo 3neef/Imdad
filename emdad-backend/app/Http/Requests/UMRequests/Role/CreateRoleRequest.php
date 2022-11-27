@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests\UMRequests\Role;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+
 
 class CreateRoleRequest extends FormRequest
 {
@@ -26,13 +28,13 @@ class CreateRoleRequest extends FormRequest
     public function rules()
     {
         return [
-           'name' => 'required|string|unique:roles,name',
-           'type' => 'required|integer|between:0,2'
+            'name' => 'required|string|unique:roles,name',
+            'type' => ['required', Rule::in(['emdad', 'supplier', 'buyier'])],
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+        throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors()], 422));
     }
 }

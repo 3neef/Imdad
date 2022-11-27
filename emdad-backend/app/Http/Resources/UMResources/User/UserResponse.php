@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources\UMResources\User;
 
+use App\Http\Resources\AccountResourses\Company\CompanyResponse;
+use App\Http\Resources\Company\CompanyResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResponse extends JsonResource
@@ -26,7 +28,8 @@ class UserResponse extends JsonResource
             "email"=>$this->email,
             "mobile"=>$this->mobile,
             "otp"=>$this->otp,
-            "isSuperAdmin"=>$this->is_super_admin
+            "isSuperAdmin"=>$this->is_super_admin,
+            "company"=>$this->currentCompany()!=null?new CompanyResponse($this->currentCompany()):null
         ];
 
 

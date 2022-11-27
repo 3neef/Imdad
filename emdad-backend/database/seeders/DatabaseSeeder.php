@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
            SubscriptionPackagesSeeder::class,
            RegRoleSeeder::class,
            CategoriesSeeder::class,
-           UOMSeeder::class
+           UOMSeeder::class,
+           PermissionSeeder::class,
          ]);
         // \App\Models\User::factory(10)->create();
 

@@ -19,7 +19,7 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * The attributes that are mass assignable.
      *
-     * @var array   
+     * @var array
      */
     protected $fillable = [
         'identity_type',  'full_name', 'first_name', 'last_name', 'email', 'password','identity_number',
@@ -64,7 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function currentCompany()
     {
-        return CompanyInfo::where("id",$this->default_company)->first();
+        return CompanyInfo::where("id",$this->default_company)->select(["company_name",'is_validated','subscription_details','cr_expire_data','company_type','company_id'])->first();
     }
 
     public function assignRole(Role $role)
@@ -95,10 +95,10 @@ class User extends Authenticatable implements MustVerifyEmail
             ->first();
     }
 
-    public function getRoleOfUserByCompanyId($companyId)
+    public function getRoleOfUserByCompanyId()
     {
         return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
-            ->wherePivot('company_info_id', $companyId)
+            ->wherePivot('company_info_id', $this->default_company)
             ->first();
     }
 

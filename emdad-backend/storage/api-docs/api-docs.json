@@ -1731,17 +1731,8 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "id"
-                                ],
                                 "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
                                     "password": {
-                                        "type": "string"
-                                    },
-                                    "fullName": {
                                         "type": "string"
                                     },
                                     "firstName": {
@@ -1758,9 +1749,6 @@
                                     },
                                     "mobile": {
                                         "type": "string"
-                                    },
-                                    "companyId": {
-                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -2699,6 +2687,80 @@
                     "301": {
                         "description": "User deleted successfully",
                         "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/user-data": {
+            "get": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "Get user Info by token ",
+                "description": "Register User Here",
+                "operationId": "get-user-data-by-token",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "dataset[defalut_company]": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }

@@ -10,7 +10,7 @@ class Role extends Model
     use SoftDeletes;
     protected $tabel = 'roles';
     protected $guarded = ['id'];
-    protected $fillable = array('name');
+    protected $fillable = ['name','type'];
 
     public function permissions()
     {

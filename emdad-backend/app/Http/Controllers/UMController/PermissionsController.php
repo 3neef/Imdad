@@ -80,7 +80,7 @@ class PermissionsController extends Controller
         * )
         */
     public function savePermission(CreatePermissionRequest $request) {
-        return $this->PermissionService->createOrUpdate($request);
+        return $this->PermissionService->create($request);
     }
        /**
         * @OA\get(
@@ -229,7 +229,7 @@ class PermissionsController extends Controller
         * )
         */
     public function updatePermission(UpdatePermissionRequest $request){
-        return $this->PermissionService->update(json_encode( $request ->json()->get( 'privileges' ), true ),$request ->get('id'));
+        return $this->PermissionService->update($request);
     }
        /**
         * @OA\delete(

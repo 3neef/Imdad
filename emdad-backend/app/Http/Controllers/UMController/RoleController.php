@@ -85,7 +85,7 @@ class RoleController extends Controller
         */
     public function saveRole(CreateRoleRequest $request)
     {
-        return $this->roleServices->create($request);
+        return $this->roleServices->create($request->validated());
     }
        /**
         * @OA\put(

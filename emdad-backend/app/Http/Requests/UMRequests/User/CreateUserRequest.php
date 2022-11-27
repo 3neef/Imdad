@@ -33,34 +33,15 @@ class CreateUserRequest extends FormRequest
             'identityType' => ['required'],
             'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
             'email' => ['unique:users,email','required','email','max:100',],
-            "roleId"=> "required|integer|exists:roles,id",
+            "roleId"=> "|integer|exists:roles,id",
             'password'=>'required|string',
             'expireDate'=>'required|date',
         ];
-        if ($this->path() == 'api/users/createUser') {
-            $rules = [
-                "firstName"=>"required|string|max:50|unique:users",
-                "lastName"=>"required|string|max:50|unique:users",
-                "email"=>"required|email|string|max:255",
-                "mobile"=>"required|min:9|max:14|string",
-                "roleId"=> "required|integer|exists:roles,id",
-                "lang" => Rule::in("en", "ar"),
-            ];
-        }
+
         return $rules;
     }
 
 
-    // protected function passedValidation()
-    // {
-    //     $requestData=[];
-    //     $requestData['company_id']=$this["companyId"];
-    //     $requestData['name']=$this["name"];
-    //     $requestData['mobile']=$this["mobile"];
-    //     $requestData['role_id']=$this["roleId"];
-    //     $requestData['company_id']=$this["companyId"];
-    //     return $requestData;
-    // }
 
     protected function failedValidation(Validator $validator): void
     {
