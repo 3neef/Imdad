@@ -24,13 +24,15 @@ class UserServices
         $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
         $request['otp_expires_at'] = now()->addMinutes(5);
         $request['is_super_admin'] = true;
+        // dd($request);
 
         $request['otp'] = strval(rand(1000, 9999));
-
         $user = User::create($request);
-
-        if ($request->has('roleId')) {
+        $role_id = $request['roleId'];
+        if ($role_id){
             $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
+
+            $user->update(['default_company' => auth()->user()->default_company]);
         }
 
         if ($user) {
@@ -72,8 +74,8 @@ class UserServices
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
-    } 
-    
+    }
+
 
     public function login(LoginRequest $request)
     {
