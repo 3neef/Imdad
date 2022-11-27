@@ -10,7 +10,6 @@ use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Models\UM\Permission;
-use Laravel\Sanctum\PersonalAccessToken;
 
 class UserServices
 {
@@ -74,6 +73,7 @@ class UserServices
         }
         return response()->json(['error' => 'system error'], 500);
     } 
+    
 
     public function login(LoginRequest $request)
     {

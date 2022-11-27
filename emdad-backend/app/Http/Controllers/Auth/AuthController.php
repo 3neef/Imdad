@@ -82,79 +82,11 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function createUser(
-        CreateUserRequest $request,
-        UserServices $userServices
-    ) {
+    public function createUser(CreateUserRequest $request,UserServices $userServices)
+     {
         return $userServices->create($request->validated());
     }
-    /**
-     * @OA\Post(
-     * path="/api/v1_0/users/createUser",
-     * operationId="creatUserToCompany",
-     * tags={"UM & Permissions"},
-     * summary="create User to company",
-     * description="create User to specific company Here",
-     *     @OA\Parameter(
-     *         name="api_key",
-     *         in="header",
-     *         description="Set api_key",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
-     *     @OA\RequestBody(
-     *         @OA\JsonContent(),
-     *         @OA\MediaType(
-     *            mediaType="multipart/form-data",
-     *            @OA\Schema(
-     *               type="object",
-     *               required={"firstName","lastName","roleId","email","mobile","companyId"},
-     *               @OA\Property(property="firstName", type="string"),
-     *               @OA\Property(property="lastName", type="string"),
-     *               @OA\Property(property="roleId", type="integer"),
-     *               @OA\Property(property="email", type="email"),
-     *               @OA\Property(property="mobile", type="string"),
-     *               @OA\Property(property="companyId", type="integer")
-     *            ),
-     *        ),
-     *    ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="User created successfully",
-     *          @OA\JsonContent(),
-     *          @OA\MediaType(
-     *            mediaType="multipart/form-data",
-     *            @OA\Schema(
-     *               type="object",
-     *               @OA\Property(property="message", type="string"),
-     *               @OA\Property(property="data", type="object")
-     *            ),
-     *          ),
-     *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     * )
-     */
-    public function createUserToCompany(
-        CreateUserRequest $request,
-        UserServices $userServices
-    ) {
-        return $userServices->createUserToCompany($request->validated());
-    }
+
     /**
      * @OA\put(
      * path="/api/v1_0/users/update",
@@ -319,17 +251,11 @@ class AuthController extends Controller
      * )
      */
 
-    public function activateUser(
-        ActivateRequest $request,
-        UserServices $userServices
-    ) {
+    public function activateUser(ActivateRequest $request,UserServices $userServices) {
         return $userServices->activate($request);
     }
 
-    public function resendOTP(
-        ResendOTPRequest $request,
-        UserServices $userServices
-    ) {
+    public function resendOTP( ResendOTPRequest $request,UserServices $userServices) {
         return $userServices->resend($request);
     }
     /**
@@ -421,11 +347,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function deleteUser(
-        GetUserByIdRequest $request,
-        $id,
-        UserServices $userServices
-    ) {
+    public function deleteUser(GetUserByIdRequest $request,$id,UserServices $userServices) {
         return $userServices->delete($id);
     }
     /**
@@ -465,11 +387,8 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function restoreUser(
-        RestoreUserByIdRequest $request,
-        $id,
-        UserServices $userServices
-    ) {
+    public function restoreUser(RestoreUserByIdRequest $request,$id,UserServices $userServices) 
+    {
         return $userServices->restoreById($id);
     }
     /**
@@ -529,10 +448,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function forgotPassword(
-        ForgotPasswordRequest $request,
-        UserServices $userServices
-    ) {
+    public function forgotPassword(ForgotPasswordRequest $request,UserServices $userServices) {
         return $userServices->forgotPassword($request);
     }
     /**
