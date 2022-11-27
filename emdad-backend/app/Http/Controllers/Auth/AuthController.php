@@ -897,7 +897,7 @@ class AuthController extends Controller
         return $userServices->removeUser($id);
     }
 
-      /**
+    /**
      * @OA\Get(
      * path="/api/v1_0/users/user-data",
      * operationId="get-user-data-by-token",
@@ -956,11 +956,10 @@ class AuthController extends Controller
                     array_map('strtolower', $request->dataset)
                 )
             ) {
-
             }
         }
 
 
-        return response()->json(["status"=>"success","data"=>new UserResponse( $user)],200);
+        return response()->json(["status" => "success", "data" => new UserResponse($user)], 200);
     }
 }

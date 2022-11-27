@@ -33,7 +33,7 @@ class CreateUserRequest extends FormRequest
             'identityType' => ['required'],
             'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
             'email' => ['unique:users,email','required','email','max:100',],
-            "roleId"=> "required|integer|exists:roles,id",
+            "roleId"=> "|integer|exists:roles,id",
             'password'=>'required|string',
             'expireDate'=>'required|date',
         ];
@@ -42,16 +42,6 @@ class CreateUserRequest extends FormRequest
     }
 
 
-    // protected function passedValidation()
-    // {
-    //     $requestData=[];
-    //     $requestData['company_id']=$this["companyId"];
-    //     $requestData['name']=$this["name"];
-    //     $requestData['mobile']=$this["mobile"];
-    //     $requestData['role_id']=$this["roleId"];
-    //     $requestData['company_id']=$this["companyId"];
-    //     return $requestData;
-    // }
 
     protected function failedValidation(Validator $validator): void
     {
