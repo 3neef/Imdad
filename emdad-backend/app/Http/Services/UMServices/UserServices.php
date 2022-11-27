@@ -9,8 +9,8 @@ use App\Models\UM\Role;
 use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
-use App\Http\Services\General\SmsService;
 use App\Models\UM\Permission;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class UserServices
 {
@@ -30,6 +30,10 @@ class UserServices
 
         $user = User::create($request);
 
+        if ($request->has('roleId')) {
+            $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
+        }
+
         if ($user) {
             return response()->json([
                 'message' => 'User created successfully',
@@ -42,62 +46,34 @@ class UserServices
 
 
 
-    public function createUserToCompany($request)
-    {
-        $request['first_name'] = $request['firstName'];
-        $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
-        $request['email'] = $request['email'];
-        $request['last_name'] = $request['lastName'];
-        $request['mobile'] = $request['mobile'];
-        $request['identity_number'] = $request['identityNumber'];
-        $request['identity_type'] = $request['identityType'];
-        $request['password'] = $request['password'];
-         $request['expire_date'] = $request['expireDate'];
-
-        //  dd($request['roleId']);
-
-
-        $user = User::create($request);
-
-        $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
-        if ($user) {
-            return response()->json([
-                'message' => 'User created successfully',
-                'data' => ['user' => new UserResponse($user)]
-            ], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
-    }
 
     public function update($request)
     {
+        $user = User::where('id', auth()->id())->first();
 
-        $user = auth()->user();
-        $user->lang = empty($request->get('lang')) ? $user->lang : $request->get('lang');
-        $user->first_name = empty($request->get('firstName')) ? $user->first_name: $request->get('firstName');
-        $user->last_name = empty($request->get('lastName')) ? $user->last_name : $request->get('lastName');
-        $user->full_name = $user->first_name." ".$user->last_name;
-        $user->email = empty($request->get('email')) ? $user->email : $request->get('email');
-        $user->mobile = empty($request->get('mobile')) ? $user->mobile : $request->get('mobile');
-        $user->default_company = empty($request->get('defaultCompany')) ? $user->default_company : $request->get('defaultCompany');
+        $user->update([
+            'first_name' => $request->firstName ?? $user->first_name,
+            "last_name" => $request->lastName ?? $user->last_name,
+            "full_name" => $request->firstName . " " . $request->lastName ?? $user->full_name,
+            "email" => $request->email ?? $user->email,
+            "mobile" => $request->mobile ?? $user->mobile,
+        ]);
+
         $userRoleCompany = RoleUserCompany::where('users_id', $user->id)->where('company_info_id', $user->default_company)->first();
 
+        if ($request->has("roleId") && $userRoleCompany != null) {
 
-        if(isset($request->roleId)&&$userRoleCompany!=null){
-
-            $userRoleCompany->update(['users_id'=>$user->id,'roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
-
+            $userRoleCompany->update(['users_id' => $user->id, 'roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
         }
 
-        $result = $user->update();
-        if ($result) {
+        if ($user) {
             return response()->json([
                 'message' => 'User updated successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
-    }
+    } 
 
     public function login(LoginRequest $request)
     {
@@ -121,10 +97,10 @@ class UserServices
                 ]
             );
         }
-    //    $permissions= $this->getAbilities();
-    //    dd($permissions);
-    //     $permissions->toArray();
-      $token = $user->createToken('authtoken');
+        //    $permissions= $this->getAbilities();
+        //    dd($permissions);
+        //     $permissions->toArray();
+        $token = $user->createToken('authtoken');
 
         return response()->json(
             [
@@ -168,7 +144,7 @@ class UserServices
 
     public function resend($request)
     {
-        $user =isset($request->mobile)? User::where('mobile', '=', $request->mobile)->first():User::where('email', '=', $request->email)->first();
+        $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
         $otp = rand(1000, 9999);
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
         // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
@@ -176,7 +152,7 @@ class UserServices
         return response()->json(
             [
                 'message' => 'New OTP has been sent.',
-                'otp'=>$user->otp,
+                'otp' => $user->otp,
             ]
         );
     }
@@ -356,9 +332,10 @@ class UserServices
         }
         return response()->json(['error' => 'system error'], 500);
     }
-    protected function getAbilities(){
-        $role_id=RoleUserCompany::where('users_id',auth()->id())->where('company_info_id',auth()->user()->default_company)->first();
-        $permissions=Permission::where('role_id',$role_id)->get();
+    protected function getAbilities()
+    {
+        $role_id = RoleUserCompany::where('users_id', auth()->id())->where('company_info_id', auth()->user()->default_company)->first();
+        $permissions = Permission::where('role_id', $role_id)->get();
         return $permissions;
     }
 }

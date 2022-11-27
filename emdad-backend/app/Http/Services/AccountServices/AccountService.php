@@ -33,33 +33,6 @@ class AccountService
         return response()->json(['success' => true, 'message' => 'created successfully'], 200);
     }
 
-    public function createUser(CompanyInfo $account, $request)
-    {
-        $user = new User();
-        $otp = rand(1000, 9999);
-        $otp_expires_at = Carbon::now()->addMinutes(2);
-        $user->full_name = $request->firstName . " " . $request->lastName;
-        $user->first_name = $request->firstName;
-        $user->last_name = $request->lastName;
-        $user->identity = $request->personId;
-        $user->identity_type = $request->idType;
-        $user->email = $account->contact_email;
-
-        //dd($account);
-        $user->default_company = $account->id;
-        $user->is_super_admin = true;
-        $user->mobile = $account->contact_phone;
-        $user->otp = strval($otp);
-        $user->otp_expires_at = $otp_expires_at;
-
-        $user->save();
-        $user->roleInCompany()->attach($user->id, ['roles_id' => $request->roleId, 'company_info_id' => $account->id]);
-
-        $updateAccount = CompanyInfo::find($account->id);
-        $updateAccount->update(['created_by' => $user->id]);
-        return $user;
-    }
-
     public function update($request)
     {
         $id = $request->get('id');

@@ -28,7 +28,7 @@ class PermissionServices
     public function update($request)
     {
         $Permission = RolePermission::where('role_id', $request->id)->first();
-        
+
         $rolePermission = $Permission->update(['json' => json_encode($request->privileges), true]);
 
         if ($rolePermission) {
@@ -40,6 +40,7 @@ class PermissionServices
     public function showAll()
     {
         $allPermissions = Permission::all();
+
         return response()->json(['data' => PermissionResponse::collection($allPermissions)]);
     }
 
@@ -58,6 +59,7 @@ class PermissionServices
     public function delete($id)
     {
         $Permissions = RolePermission::find($id);
+        
         $deleted = $Permissions->delete();
         if ($deleted) {
             return response()->json(['message' => 'deleted successfully'], 301);

@@ -26,17 +26,17 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "firstName"=>"string|max:50",
-            "lastName"=>"string|max:50",
-            "password"=>"string|min:8|max:50",
-            "email"=>"email|string|max:255",
-            "mobile"=>"min:9|max:14|string",
-            "roleId"=> "integer|exists:roles,id",
+            "firstName" => "string|max:50",
+            "lastName" => "string|max:50",
+            "password" => "string|min:8|max:50",
+            "email" => "email|string|max:255",
+            "mobile" => "min:9|max:14|string",
+            "roleId" => "integer|exists:roles,id",
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+        throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors()], 422));
     }
 }

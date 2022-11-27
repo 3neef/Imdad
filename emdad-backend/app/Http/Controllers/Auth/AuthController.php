@@ -215,10 +215,8 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function updateUser(
-        UpdateRequest $request,
-        UserServices $userServices
-    ) {
+    public function updateUser(UpdateRequest $request, UserServices $userServices) 
+    {
         return $userServices->update($request);
     }
 
