@@ -30,7 +30,7 @@ class UpdateLocationRequest extends FormRequest
             'id' => ['required','integer','exists:company_locations,id'],
             'warehouseName' => ['string','max:100'],
             'warehouseType' => ['string'],
-            'location' => ['string','regex:/\d+\/\d+/'],
+            'location' => ['string'],
             'gateType' => ['string'],
             'receiverName' => ['string','max:25'],
             'receiverPhone' => ['string','max:15','min:15','regex:/^(00966)/']
