@@ -34,6 +34,7 @@ class PermissionSeeder extends Seeder
             ["name"=>"buyer_delivery_view","label"=>"BD2","description"=>""],
             ["name"=>"supplier_rfq_view_accept_reject","label"=>"SR1","description"=>""],
             ["name"=>"supplier_rfq_view_accept","label"=>"SR2","description"=>""],
+            ["name"=>"supplier_quotes_send_cancel_renew_reject","label"=>"SQ3","description"=>""],
 
         ];
 
