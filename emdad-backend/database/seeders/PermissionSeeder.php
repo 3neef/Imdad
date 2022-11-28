@@ -51,6 +51,50 @@ class PermissionSeeder extends Seeder
             ["name"=>"supplier_tracking_accept_edit_delivery","label"=>"SAP3","description"=>""],
             ["name"=>"supplier_tracking_reject_return","label"=>"SAP2","description"=>""],
             ["name"=>"supplier_tracking_proceding_full_chain_delivery","label"=>"SAP1","description"=>""],
+            ["name"=>"supplier_customer_freeze_delayed_payment","label"=>"SMCS5","description"=>""],
+            ["name"=>"supplier_customer_partnership_freeze","label"=>"SMCS4","description"=>""],
+            ["name"=>"supplier_customer_reject_accept","label"=>"SMCS3","description"=>""],
+            ["name"=>"supplier_customer_add_request_join","label"=>"SMCS2","description"=>""],
+            ["name"=>"supplier_customer_view","label"=>"SMCS1","description"=>""],
+            ["name"=>"supplier_user_inter","label"=>"SMU4","description"=>""],
+            ["name"=>"supplier_user_accept_reject_activate_edit","label"=>"SMU3","description"=>""],
+            ["name"=>"supplier_user_add","label"=>"SMU2","description"=>""],
+            ["name"=>"supplier_user_view","label"=>"SMU1","description"=>""],
+            ["name"=>"supplier_communication_company_messages","label"=>"SML2","description"=>""],
+            ["name"=>"supplier_communication_user_messages","label"=>"SML1","description"=>""],
+            ["name"=>"supplier_account_subscription_freeze","label"=>"SMC3","description"=>""],
+            ["name"=>"supplier_account_subscription_view_sub_upgrade","label"=>"SMC2","description"=>""],
+            ["name"=>"supplier_account_subscription_view_company","label"=>"SMC1","description"=>""],
+            ["name"=>"supplier_category_prdouct_managment_request_add","label"=>"SMCT2","description"=>""],
+            ["name"=>"supplier_category_prdouct_managment_view","label"=>"SMCT1","description"=>""],
+            ["name"=>"supplier_notification_all_company","label"=>"SMUP2","description"=>""],
+            ["name"=>"supplier_notification_user","label"=>"SMUP1","description"=>""],
+            ["name"=>"supplier_add_companies_add","label"=>"SMCD1","description"=>""],
+            ["name"=>"supplier_alrts_view","label"=>"SMAL1","description"=>""],
+            ["name"=>"supplier_business_mail_create_action_send","label"=>"SMMB2","description"=>""],
+            ["name"=>"supplier_business_mail_view","label"=>"SMMB1","description"=>""],
+            ["name"=>"supplier_Fleet_unactive_active","label"=>"SMFL4","description"=>""],
+            ["name"=>"supplier_Fleet_edit","label"=>"SMFL3","description"=>""],
+            ["name"=>"supplier_Fleet_add","label"=>"SMFL2","description"=>""],
+            ["name"=>"supplier_Fleet_view","label"=>"SMFL1","description"=>""],
+            ["name"=>"supplier_digital_apps_all_reports","label"=>"SMAP","description"=>""],
+            ["name"=>"supplier_digital_user_reports","label"=>"SMAP","description"=>""],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
