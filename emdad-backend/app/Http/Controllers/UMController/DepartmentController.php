@@ -61,4 +61,9 @@ class DepartmentController extends Controller
        return $this->departmentService->AddDepartment($request->validated());
 
     }
+
+    // public function assingUser(AssingUserRequest $request)
+    // {
+    //     # code...
+    // }
 }

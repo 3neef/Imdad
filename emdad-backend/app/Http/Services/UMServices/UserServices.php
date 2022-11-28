@@ -28,8 +28,8 @@ class UserServices
 
         $request['otp'] = strval(rand(1000, 9999));
         $user = User::create($request);
-        $role_id = $request['roleId'];
-        if ($role_id){
+        $role_id = $request['roleId'] ?? '';
+        if ($role_id != null) {
             $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
 
             $user->update(['default_company' => auth()->user()->default_company]);
