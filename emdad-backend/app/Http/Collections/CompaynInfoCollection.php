@@ -5,7 +5,6 @@ namespace App\Http\Collections;
 
 use App\Models\Accounts\CompanyInfo;
 use Spatie\QueryBuilder\QueryBuilder;
-use App\Models\User;
 
 class CompaynInfoCollection
 {
