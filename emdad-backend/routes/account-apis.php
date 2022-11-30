@@ -7,7 +7,7 @@ use App\Http\Controllers\Accounts\SubscriptionController;
 use App\Http\Controllers\SubscriptionPaymentController;
 
 Route::middleware(['app.auth','auth:sanctum'])->prefix('accounts')->group(function() {
-
+    Route::get('filter-company-info',[CompanyController::class,'index']);
     Route::post('add-company', [CompanyController::class, 'addAccount']);
     Route::get('getAll', [CompanyController::class, 'getAllAccount']);
     Route::get('getAllUnValidated', [CompanyController::class, 'allUnValidatedAccounts']);
