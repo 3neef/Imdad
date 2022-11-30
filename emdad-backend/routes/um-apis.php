@@ -25,7 +25,7 @@ Route::middleware(['app.auth'])->prefix('roles')->group(function () {
 });
 
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
-
+    Route::get('FilterUser',[AuthController::class,'index']);
     Route::post('createUser', [AuthController::class, 'createUser']);
     Route::post('logout', [AuthController::class, 'logoutUser']);
     Route::get('user-data', [AuthController::class, 'getUserInfoByToken']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Collections\UserCollection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\RemoveUserRequets;
@@ -26,6 +27,11 @@ use Illuminate\Http\Request as HttpRequest;
 
 class AuthController extends Controller
 {
+
+    public function index()
+    {
+        return UserCollection::collection();
+    }
     /**
      * @OA\Post(
      * path="/api/v1_0/users/register",
@@ -82,8 +88,8 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function createUser(CreateUserRequest $request,UserServices $userServices)
-     {
+    public function createUser(CreateUserRequest $request, UserServices $userServices)
+    {
         return $userServices->create($request->validated());
     }
 
@@ -147,7 +153,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function updateUser(UpdateRequest $request, UserServices $userServices) 
+    public function updateUser(UpdateRequest $request, UserServices $userServices)
     {
         return $userServices->update($request);
     }
@@ -251,11 +257,13 @@ class AuthController extends Controller
      * )
      */
 
-    public function activateUser(ActivateRequest $request,UserServices $userServices) {
+    public function activateUser(ActivateRequest $request, UserServices $userServices)
+    {
         return $userServices->activate($request);
     }
 
-    public function resendOTP( ResendOTPRequest $request,UserServices $userServices) {
+    public function resendOTP(ResendOTPRequest $request, UserServices $userServices)
+    {
         return $userServices->resend($request);
     }
     /**
@@ -347,7 +355,8 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function deleteUser(GetUserByIdRequest $request,$id,UserServices $userServices) {
+    public function deleteUser(GetUserByIdRequest $request, $id, UserServices $userServices)
+    {
         return $userServices->delete($id);
     }
     /**
@@ -387,7 +396,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function restoreUser(RestoreUserByIdRequest $request,$id,UserServices $userServices) 
+    public function restoreUser(RestoreUserByIdRequest $request, $id, UserServices $userServices)
     {
         return $userServices->restoreById($id);
     }
@@ -448,7 +457,8 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function forgotPassword(ForgotPasswordRequest $request,UserServices $userServices) {
+    public function forgotPassword(ForgotPasswordRequest $request, UserServices $userServices)
+    {
         return $userServices->forgotPassword($request);
     }
     /**
@@ -870,8 +880,6 @@ class AuthController extends Controller
                     array_map('strtolower', $request->dataset)
                 )
             ) {
-    
-
             }
         }
 
