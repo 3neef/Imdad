@@ -5,6 +5,7 @@ use App\Http\Controllers\emdad\WathiqController;
 use App\Http\Controllers\Coupon\CouponController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\SubscriptionPaymentController;
+use App\Http\Controllers\Translatoin\TranslationController;
 use App\Models\SubscriptionPayment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -40,4 +41,14 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('coupon')->group(functio
     Route::post('create', [CouponController::class, 'createCoupon']);
     Route::get('show', [CouponController::class, 'showCoupon']);
     Route::post('used', [CouponController::class, 'usedCoupon']);
+});
+
+
+
+
+
+Route::group(['prefix' => 'translation'],function(){
+    Route::post('create', [TranslationController::class, 'create']);
+
+
 });
