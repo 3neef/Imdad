@@ -1596,111 +1596,6 @@
                 }
             }
         },
-        "/api/v1_0/users/createUser": {
-            "post": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "create User to company",
-                "description": "create User to specific company Here",
-                "operationId": "creatUserToCompany",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "firstName",
-                                    "lastName",
-                                    "roleId",
-                                    "email",
-                                    "mobile",
-                                    "companyId"
-                                ],
-                                "properties": {
-                                    "firstName": {
-                                        "type": "string"
-                                    },
-                                    "lastName": {
-                                        "type": "string"
-                                    },
-                                    "roleId": {
-                                        "type": "integer"
-                                    },
-                                    "email": {
-                                        "type": "email"
-                                    },
-                                    "mobile": {
-                                        "type": "string"
-                                    },
-                                    "companyId": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User created successfully",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
         "/api/v1_0/users/update": {
             "put": {
                 "tags": [
@@ -3118,6 +3013,55 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/translation/create": {
+            "post": {
+                "tags": [
+                    "Translation"
+                ],
+                "summary": "translation create",
+                "description": "translation create Here",
+                "operationId": "translation create",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "key",
+                                    "en_value",
+                                    "ar_value"
+                                ],
+                                "properties": {
+                                    "key": {
+                                        "type": "string"
+                                    },
+                                    "en_value": {
+                                        "type": "string"
+                                    },
+                                    "ar_value": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
                     }
                 }
             }
