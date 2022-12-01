@@ -85,17 +85,8 @@ class UserServices
             ->first();
 
         if (isset($request->mobile)) {
-            $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
-            $otp = rand(1000, 9999);
-            $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
-            // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-            // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
-            return response()->json(
-                [
-                    'message' => 'New OTP has been sent.',
-                    'otp' => $user->otp,
-                ]
-            );
+            $user = User::where('mobile', '=', $request->mobile)->first();
+            $this->sendOtp($user);
         }
 
 
@@ -132,7 +123,7 @@ class UserServices
     public function activate($request)
     {
 
-        $user = User::where('id', '=', $request->id)->orWhere("mobile",$request->mobile)->first();
+        $user = User::where('id', '=', $request->id)->orWhere("mobile", $request->mobile)->first();
 
         if ($request->otp != $user->otp) {
             return response()->json(
@@ -161,16 +152,8 @@ class UserServices
     public function resend($request)
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
-        $otp = rand(1000, 9999);
-        $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
-        // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-        // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
-        return response()->json(
-            [
-                'message' => 'New OTP has been sent.',
-                'otp' => $user->otp,
-            ]
-        );
+
+        $this->sendOtp($user);
     }
 
     public function logout()
@@ -353,5 +336,20 @@ class UserServices
         $role_id = RoleUserCompany::where('users_id', auth()->id())->where('company_info_id', auth()->user()->default_company)->first();
         $permissions = Permission::where('role_id', $role_id)->get();
         return $permissions;
+    }
+
+
+    protected  function sendOtp($user)
+    {
+        $otp = rand(1000, 9999);
+        $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
+        // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
+        return response()->json(
+            [
+                'message' => 'New OTP has been sent.',
+                'otp' => $user->otp,
+            ]
+        );
     }
 }
