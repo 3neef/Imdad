@@ -19,10 +19,8 @@ class UserServices
     {
         // // dd('l');
         if (isset($request["permissions"])) {
-            $request['permissions'] = json_encode($request['permissions'], JSON_FORCE_OBJECT);
+            $request['permissions'] = json_encode($request['permissions'] , JSON_FORCE_OBJECT);
         }
-
-    
 
         $request['first_name'] = $request['firstName'];
         $request['expiry_date'] = $request['expireDate'];
@@ -33,7 +31,6 @@ class UserServices
         $request['otp_expires_at'] = now()->addMinutes(5);
         $request['is_super_admin'] = true;
         $request['otp'] = strval(rand(1000, 9999));
-
         $user = User::create($request);
         $role_id = $request['roleId'] ?? '';
 
@@ -123,7 +120,7 @@ class UserServices
         //    $permissions= $this->getAbilities();
         //    dd($permissions);
         //     $permissions->toArray();
-        $token = $user->createToken('authtoken');
+        $token = $user->createToken('authtoken',json_decode($user->permissions,true));
 
         return response()->json(
             [
