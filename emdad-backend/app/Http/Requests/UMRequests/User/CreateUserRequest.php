@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\UMRequests\User;
 
+use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -36,7 +37,11 @@ class CreateUserRequest extends FormRequest
             "roleId"=> "|integer|exists:roles,id",
             'password'=>'required|string',
             'expireDate'=>'required|date',
+            'permissions'=>['array',new UniqeValues],
+            'permissions.*'=>['string','exists:permissions,label'] 
+
         ];
+        // dd($this->all());
 
         return $rules;
     }
