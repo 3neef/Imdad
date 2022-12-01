@@ -25,7 +25,7 @@ class DeleteTranslateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'required',
+            'id'=>'required|exists:translations,id',
         ];
     }
 
