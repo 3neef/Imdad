@@ -26,8 +26,8 @@ class ActivateRequest extends FormRequest
     public function rules()
     {
         return [
-            
-            "id"=>"required|exists:users,id",
+            'mobile'=>[ 'required_without:id','string','exists:users,mobile'],
+            "id"=>"required_without:mobile|exists:users,id",
             "otp"=>"required|string|min:4|max:50",
         ];
     }

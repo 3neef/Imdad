@@ -1769,14 +1769,14 @@
                 }
             }
         },
-        "/api/v1_0/users/activate": {
+        "/api/v1_0/users/verifiy-otp": {
             "put": {
                 "tags": [
                     "UM & Permissions"
                 ],
-                "summary": "User Activation",
-                "description": "activate by otp",
-                "operationId": "user-activation",
+                "summary": "User Activation/ user login mobile + otp",
+                "description": "activate by otp also allows login by confirming otp",
+                "operationId": "user-verify-otp",
                 "parameters": [
                     {
                         "name": "api_key",
@@ -1792,7 +1792,6 @@
                         "application-json": {
                             "schema": {
                                 "required": [
-                                    "id",
                                     "otp"
                                 ],
                                 "properties": {
@@ -1800,6 +1799,9 @@
                                         "type": "integer"
                                     },
                                     "otp": {
+                                        "type": "string"
+                                    },
+                                    "mobile": {
                                         "type": "string"
                                     }
                                 },
