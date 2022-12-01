@@ -18,6 +18,8 @@ Route::middleware(['app.auth'])->prefix('users')->group(function () {
     Route::put('activate', [AuthController::class, 'activateUser']);
     Route::delete('remove-user/{id}',[AuthController::class, 'removeUser']);
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
+    Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
+
 });
 
 Route::middleware(['app.auth'])->prefix('roles')->group(function () {
@@ -31,7 +33,6 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function
     Route::get('user-data', [AuthController::class, 'getUserInfoByToken']);
     Route::put("update", [AuthController::class, 'updateUser']);
     Route::put("restore/{id}", [AuthController::class, 'restoreUser']);
-    Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
     Route::put("reset-password", [AuthController::class, 'resetPassword']);
     Route::delete("delete/{id}", [AuthController::class, 'deleteUser']);
     Route::post("assginRole", [AuthController::class, 'assignRole']);
