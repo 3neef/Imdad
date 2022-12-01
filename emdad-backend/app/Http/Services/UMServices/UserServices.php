@@ -84,6 +84,20 @@ class UserServices
             ->orwhere('mobile', $request->mobile)
             ->first();
 
+        if (isset($request->mobile)) {
+            $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
+            $otp = rand(1000, 9999);
+            $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
+            // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+            // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
+            return response()->json(
+                [
+                    'message' => 'New OTP has been sent.',
+                    'otp' => $user->otp,
+                ]
+            );
+        }
+
 
         if ($user->is_verified == 0) {
             return response()->json(
@@ -118,7 +132,7 @@ class UserServices
     public function activate($request)
     {
 
-        $user = User::where('id', '=', $request->id)->first();
+        $user = User::where('id', '=', $request->id)->orWhere("mobile",$request->mobile)->first();
 
         if ($request->otp != $user->otp) {
             return response()->json(

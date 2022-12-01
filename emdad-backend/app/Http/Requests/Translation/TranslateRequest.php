@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests\UMRequests\User;
+namespace App\Http\Requests\Translation;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-
-class ActivateRequest extends FormRequest
+class TranslateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,11 +25,13 @@ class ActivateRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile'=>[ 'required_without:id','string','exists:users,mobile'],
-            "id"=>"required_without:mobile|exists:users,id",
-            "otp"=>"required|string|min:4|max:50",
+            'key'=>'required|string|unique:translations,key',
+            'en_value'=>'required|string',
+            'ar_value'=>'required|string',
         ];
     }
+
+
 
     protected function failedValidation(Validator $validator): void
     {

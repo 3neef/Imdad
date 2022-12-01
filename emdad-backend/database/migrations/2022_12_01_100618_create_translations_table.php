@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('translations', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('label');
-            $table->string('category');
-            $table->string('description');
-            $table->softDeletes();
+            $table->string("key");
+            $table->string("ar_value");
+            $table->string("en_value");
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('translations');
     }
 };

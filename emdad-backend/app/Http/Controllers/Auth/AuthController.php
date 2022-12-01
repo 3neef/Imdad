@@ -212,11 +212,11 @@ class AuthController extends Controller
 
     /**
      * @OA\Put(
-     * path="/api/v1_0/users/activate",
-     * operationId="user-activation",
+     * path="/api/v1_0/users/verifiy-otp",
+     * operationId="user-verify-otp",
      * tags={"UM & Permissions"},
-     * summary="User Activation",
-     * description="activate by otp",
+     * summary="User Activation/ user login mobile + otp",
+     * description="activate by otp also allows login by confirming otp",
      *     @OA\Parameter(
      *         name="api_key",
      *         in="header",
@@ -231,9 +231,10 @@ class AuthController extends Controller
      *            mediaType="application-json",
      *            @OA\Schema(
      *               type="object",
-     *               required={"id","otp"},
+     *               required={"otp"},
      *               @OA\Property(property="id", type="integer"),
-     *               @OA\Property(property="otp", type="string")
+     *               @OA\Property(property="otp", type="string"),
+     *               @OA\Property(property="mobile", type="string")
      *            ),
      *        ),
      *    ),
