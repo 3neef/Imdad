@@ -19,7 +19,7 @@ class UserServices
     {
         // // dd('l');
         if (isset($request["permissions"])) {
-            $request['permissions'] = json_encode($request['permissions'] , JSON_FORCE_OBJECT);
+            $request['permissions'] = json_encode($request['permissions'], JSON_FORCE_OBJECT);
         }
 
         $request['first_name'] = $request['firstName'];
@@ -117,10 +117,7 @@ class UserServices
                 ]
             );
         }
-        //    $permissions= $this->getAbilities();
-        //    dd($permissions);
-        //     $permissions->toArray();
-        $token = $user->createToken('authtoken',json_decode($user->permissions,true));
+        $token = $user->createToken('authtoken', json_decode($user->permissions, true) ??[""]);
 
         return response()->json(
             [
