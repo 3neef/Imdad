@@ -48,7 +48,11 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('coupon')->group(functio
 
 
 Route::group(['prefix' => 'translation'],function(){
-    Route::post('create', [TranslationController::class, 'create']);
+    Route::post('create', [TranslationController::class, 'Create']);
+    Route::put('update', [TranslationController::class, 'Update']);
+    Route::get('show', [TranslationController::class, 'Show']);
+    Route::delete('delete', [TranslationController::class, 'Delete']);
+
 
 
 });

@@ -10,12 +10,18 @@ use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Models\UM\Permission;
+use PhpParser\Node\Expr\Isset_;
 
 class UserServices
 {
 
     public function create($request)
     {
+        // // dd('l');
+        if (isset($request["permissions"])) {
+            $request['permissions'] = json_encode($request['permissions'] , JSON_FORCE_OBJECT);
+        }
+
         $request['first_name'] = $request['firstName'];
         $request['expiry_date'] = $request['expireDate'];
         $request['last_name'] = $request['lastName'];
@@ -24,11 +30,11 @@ class UserServices
         $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
         $request['otp_expires_at'] = now()->addMinutes(5);
         $request['is_super_admin'] = true;
-        // dd($request);
-
         $request['otp'] = strval(rand(1000, 9999));
         $user = User::create($request);
         $role_id = $request['roleId'] ?? '';
+
+
         if ($role_id != null) {
             $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
 
@@ -85,15 +91,13 @@ class UserServices
             ->first();
 
         if (isset($request->mobile)) {
-            $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
-            $otp = rand(1000, 9999);
-            $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
-            // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-            // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
+            $user = User::where('mobile', '=', $request->mobile)->first();
+
+            $data = $this->sendOtp($user);
             return response()->json(
                 [
-                    'message' => 'New OTP has been sent.',
-                    'otp' => $user->otp,
+                    "success" => false, "error" => "verifiy your otp first",
+                    "data" => $data
                 ]
             );
         }
@@ -116,7 +120,7 @@ class UserServices
         //    $permissions= $this->getAbilities();
         //    dd($permissions);
         //     $permissions->toArray();
-        $token = $user->createToken('authtoken');
+        $token = $user->createToken('authtoken',json_decode($user->permissions,true));
 
         return response()->json(
             [
@@ -132,7 +136,7 @@ class UserServices
     public function activate($request)
     {
 
-        $user = User::where('id', '=', $request->id)->orWhere("mobile",$request->mobile)->first();
+        $user = User::where('id', '=', $request->id)->orWhere("mobile", $request->mobile)->first();
 
         if ($request->otp != $user->otp) {
             return response()->json(
@@ -161,16 +165,8 @@ class UserServices
     public function resend($request)
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
-        $otp = rand(1000, 9999);
-        $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
-        // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-        // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
-        return response()->json(
-            [
-                'message' => 'New OTP has been sent.',
-                'otp' => $user->otp,
-            ]
-        );
+
+        $this->sendOtp($user);
     }
 
     public function logout()
@@ -353,5 +349,20 @@ class UserServices
         $role_id = RoleUserCompany::where('users_id', auth()->id())->where('company_info_id', auth()->user()->default_company)->first();
         $permissions = Permission::where('role_id', $role_id)->get();
         return $permissions;
+    }
+
+
+    protected  function sendOtp($user)
+    {
+        $otp = rand(1000, 9999);
+        $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
+        // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
+        return response()->json(
+            [
+                'message' => 'New OTP has been sent.',
+                'otp' => $user->otp,
+            ]
+        );
     }
 }

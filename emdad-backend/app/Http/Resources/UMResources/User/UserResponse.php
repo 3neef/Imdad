@@ -17,23 +17,19 @@ class UserResponse extends JsonResource
     public function toArray($request)
     {
 
-      
+
         return [
-            "id"=>$this->id,
-            "firstName"=>$this->first_name,
-            "lastName"=>$this->last_name,
-            "fullName"=>$this->full_name,
-            "identityNumber"=>$this->identity_number,
-            "identityType"=>$this->identity_type,
-            "email"=>$this->email,
-            "mobile"=>$this->mobile,
-            "otp"=>$this->otp,
-            "isSuperAdmin"=>$this->is_super_admin,
-            "company"=>$this->currentCompany()!=null?new CompanyResponse($this->currentCompany()):null
+            "id" => $this->id,
+            "firstName" => $this->first_name,
+            "lastName" => $this->last_name,
+            "fullName" => $this->full_name,
+            "identityNumber" => $this->identity_number,
+            "identityType" => $this->identity_type,
+            "email" => $this->email,
+            "mobile" => $this->mobile,
+            "otp" => $this->otp,
+            "isSuperAdmin" => $this->is_super_admin,
+            "company" => $this->currentCompany() != null ? new CompanyResponse($this->currentCompany()) : null
         ];
-
-
     }
-
-   
 }

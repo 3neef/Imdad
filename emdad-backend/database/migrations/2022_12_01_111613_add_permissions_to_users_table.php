@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::Trancreate('translations', function (Blueprint $table) {
-            $table->id();
-            $table->string("key");
-            $table->string("ar_value");
-            $table->string("en_value");
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->json('permissions');
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('translations');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };
