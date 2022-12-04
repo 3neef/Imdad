@@ -27,6 +27,52 @@ class CompanyController extends Controller
         $this->accountService = $accountService;
     }
 
+
+ /**
+     * @OA\get(
+     * path="/api/v1_0/accounts/filter-company-info",
+     * operationId="filtercompanyinfo",
+     * tags={"Account Controller"},
+     * summary="filter company info",
+     * description="filter company info Here",
+     *     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *        response=200,
+     *          description="collection",
+     *
+     *       ),
+     *      @OA\Response(response=500, description="system error"),
+     *      @OA\Response(response=422, description="Validate error"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+
+
+
     public function index()
     {
         return CompaynInfoCollection::collection();
@@ -62,7 +108,7 @@ class CompanyController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               required={"crNo","roleId", "companyType"},
-     *               @OA\Property(property="roleId", type="string"),
+     *               @OA\Property(property="roleId", type="integer"),
      *               @OA\Property(property="crNo", type="string"),
      *               @OA\Property(property="companyType", type="integer"),
      *            ),

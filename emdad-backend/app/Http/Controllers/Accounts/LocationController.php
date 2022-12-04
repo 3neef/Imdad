@@ -13,7 +13,7 @@ use App\Http\Requests\AccountRequests\Location\VerfiedLocationRequest;
 class LocationController extends Controller
 {
     protected LocationService $locationService;
-    
+
     /**
      * Create a new controller instance.
      *
@@ -56,7 +56,7 @@ class LocationController extends Controller
         *               required={"warehouseName","warehouseType","location","gateType","receiverName","receiverPhone"},
         *               @OA\Property(property="warehouseName", type="string"),
         *               @OA\Property(property="warehouseType", type="string"),
-        *               @OA\Property(property="location", type="integer"),
+        *               @OA\Property(property="location", type="string"),
         *               @OA\Property(property="gateType", type="string"),
         *               @OA\Property(property="receiverName", type="string"),
         *               @OA\Property(property="receiverPhone", type="string")
@@ -118,7 +118,7 @@ class LocationController extends Controller
         *               @OA\Property(property="id", type="integer"),
         *               @OA\Property(property="warehouseName", type="string"),
         *               @OA\Property(property="warehouseType", type="string"),
-        *               @OA\Property(property="location", type="integer"),
+        *               @OA\Property(property="location", type="string"),
         *               @OA\Property(property="gateType", type="string"),
         *               @OA\Property(property="receiverName", type="string"),
         *               @OA\Property(property="receiverPhone", type="string")
