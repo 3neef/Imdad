@@ -209,10 +209,8 @@ class UserServices
 
     public function forgotPassword($request)
     {
-        $otp = rand(1000, 9999);
-        $otp_expires_at = Carbon::now()->addMinutes(1);
-        $email = ($request->get('email'));
-        $user = User::where('email', $email)->first();
+     
+        $user = User::where('email', $request->email)->first();
         if ($user === null) {
             return response()->json(
                 [
@@ -220,20 +218,11 @@ class UserServices
                 ]
             );
         }
-        $result = $user->update([
-            'otp' => $otp,
-            'otp_expires_at' => $otp_expires_at,
-            'forget_pass' => 1
-        ]);
-        if ($result) {
-            MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp);
-            return response()->json([
-                'message' => 'OTP has been created successfully',
-                'OTP' => $otp,
-                'otpExpiresAt' => $otp_expires_at
-            ], 200);
+        else{
+            $this->sendOtp($user);
         }
-        return response()->json(['error' => 'system error'], 500);
+     
+        
     }
 
     public function resetPassword($request)
