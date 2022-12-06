@@ -96,7 +96,7 @@
                                 ],
                                 "properties": {
                                     "roleId": {
-                                        "type": "string"
+                                        "type": "integer"
                                     },
                                     "crNo": {
                                         "type": "string"
@@ -652,7 +652,7 @@
                                         "type": "string"
                                     },
                                     "location": {
-                                        "type": "integer"
+                                        "type": "string"
                                     },
                                     "gateType": {
                                         "type": "string"
@@ -747,7 +747,7 @@
                                         "type": "string"
                                     },
                                     "location": {
-                                        "type": "integer"
+                                        "type": "string"
                                     },
                                     "gateType": {
                                         "type": "string"
@@ -1589,9 +1589,6 @@
                                     },
                                     "email": {
                                         "type": "email"
-                                    },
-                                    "roleId": {
-                                        "type": "integer"
                                     },
                                     "mobile": {
                                         "type": "string"
