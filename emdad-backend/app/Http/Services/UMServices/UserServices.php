@@ -348,4 +348,19 @@ dd($user);
         $permissions = Permission::where('role_id', $role_id)->get();
         return $permissions;
     }
+
+    protected  function sendOtp($user)
+    {
+        $otp = rand(1000, 9999);
+        $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
+        // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
+        return response()->json(
+            [
+                'message' => 'New OTP has been sent.',
+                'otp' => $user->otp,
+            ]
+        );
+    }
+
 }
