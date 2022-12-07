@@ -342,7 +342,6 @@ dd($user);
         }
         return response()->json(['error' => 'system error'], 500);
     }
-    
     protected function getAbilities()
     {
         $role_id = RoleUserCompany::where('users_id', auth()->id())->where('company_info_id', auth()->user()->default_company)->first();
