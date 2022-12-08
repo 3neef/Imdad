@@ -281,14 +281,6 @@ class AuthController extends Controller
      *             type="string"
      *         )
      *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
      *      @OA\Response(
      *          response=200,
      *          description="Logged out",
@@ -474,14 +466,6 @@ class AuthController extends Controller
      *         description="Set api_key",
      *         @OA\Schema(
      *             type="string"
-     *         )
-     *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
      *         )
      *     ),
      *     @OA\RequestBody(
