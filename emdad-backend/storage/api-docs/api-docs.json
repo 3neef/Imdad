@@ -160,39 +160,11 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "id",
-                                    "name",
-                                    "companyId",
-                                    "companyType",
-                                    "companyVatId",
-                                    "contactName",
-                                    "contactPhone",
-                                    "contactEmail"
+                                    "id"
                                 ],
                                 "properties": {
                                     "id": {
                                         "type": "integer"
-                                    },
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "companyId": {
-                                        "type": "string"
-                                    },
-                                    "companyType": {
-                                        "type": "integer"
-                                    },
-                                    "companyVatId": {
-                                        "type": "string"
-                                    },
-                                    "contactName": {
-                                        "type": "string"
-                                    },
-                                    "contactPhone": {
-                                        "type": "string"
-                                    },
-                                    "contactEmail": {
-                                        "type": "email"
                                     }
                                 },
                                 "type": "object"
@@ -3114,7 +3086,7 @@
                                         "type": "integer"
                                     },
                                     "type": {
-                                        "type": "string"
+                                        "type": ""
                                     }
                                 },
                                 "type": "object"
