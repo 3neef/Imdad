@@ -1893,7 +1893,7 @@
                         "application-json": {
                             "schema": {
                                 "properties": {
-                                    "otprest": {
+                                    "otp rest": {
                                         "type": "object",
                                         "additionalProperties": {
                                             "type": "array",

@@ -282,13 +282,13 @@ class AuthController extends Controller
      *            mediaType="application-json",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="otprest", type="object",
+     *               @OA\Property(property="otp rest", type="object",
      *                  @OA\AdditionalProperties(type="array",
      *                      @OA\Items(
      *                          @OA\Property(property="email", type="email"),
      *                          @OA\Property(property="phone", type="string")
      *                      )
-     *                  ),
+     *                  )
      *              ),
      *            )
      *        ),
