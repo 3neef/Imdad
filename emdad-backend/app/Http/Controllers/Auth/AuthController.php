@@ -178,9 +178,8 @@ class AuthController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"password"}
+     *               required={"email","password"},
      *               @OA\Property(property="email", type="email"),
-     *               @OA\Property(property="phone", type="string"),
      *               @OA\Property(property="password", type="password")
      *            ),
      *        ),
@@ -262,7 +261,52 @@ class AuthController extends Controller
     {
         return $userServices->activate($request);
     }
-
+    /**
+     * @OA\Post(
+     * path="/api/v1_0/users/resend-otp",
+     * operationId="resend otp",
+     * tags={"UM & Permissions"},
+     * summary="resend otp",
+     * description="resend otp Here",
+     *     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="application-json",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="otprest", type="object",
+     *                  @OA\AdditionalProperties(type="array",
+     *                      @OA\Items(
+     *                          @OA\Property(property="email", type="email"),
+     *                          @OA\Property(property="phone", type="string")
+     *                      )
+     *                  ),
+     *              ),
+     *            )
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="resent new otp",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function resendOTP(ResendOTPRequest $request, UserServices $userServices)
     {
         return $userServices->resend($request);
@@ -280,6 +324,14 @@ class AuthController extends Controller
      *         description="Set api_key",
      *         @OA\Schema(
      *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
      *         )
      *     ),
      *      @OA\Response(
@@ -467,6 +519,14 @@ class AuthController extends Controller
      *         description="Set api_key",
      *         @OA\Schema(
      *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
      *         )
      *     ),
      *     @OA\RequestBody(
