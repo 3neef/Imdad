@@ -1528,6 +1528,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -1634,6 +1642,14 @@
                         "description": "Set api_key",
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
                         }
                     },
                     {
@@ -2719,6 +2735,14 @@
                         "description": "Set api_key",
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
                         }
                     }
                 ],
