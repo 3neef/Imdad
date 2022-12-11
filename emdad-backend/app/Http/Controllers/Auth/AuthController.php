@@ -47,6 +47,14 @@ class AuthController extends Controller
      *             type="string"
      *         )
      *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
@@ -105,6 +113,14 @@ class AuthController extends Controller
      *         description="Set api_key",
      *         @OA\Schema(
      *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
      *         )
      *     ),
      *         *     @OA\Parameter(
@@ -879,6 +895,14 @@ class AuthController extends Controller
      *         description="Set api_key",
      *         @OA\Schema(
      *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
      *         )
      *     ),
      *     @OA\RequestBody(
