@@ -36,7 +36,7 @@ class UserServices
         }
 
         if ($user) {
-            return response()->json([
+            return response()->json([   
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
