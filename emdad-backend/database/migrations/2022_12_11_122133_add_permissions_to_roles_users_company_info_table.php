@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->json('permissions')->default("");
+        Schema::table('roles_users_company_info', function (Blueprint $table) {
+            $table->json('permissions')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('roles_users_company_info', function (Blueprint $table) {
             //
         });
     }

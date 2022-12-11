@@ -20122,3 +20122,26 @@ Did you mean one of these?
 #27 C:\\Users\\Marwan NCTR\\Desktop\\Marwan\\NCTR-PROJECTS\\imdad\\emdad-backend\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
 #28 {main}
 "} 
+[2022-12-11 12:21:25] local.ERROR: syntax error, unexpected token "}", expecting identifier or variable or "{" or "$" {"exception":"[object] (ParseError(code: 0): syntax error, unexpected token \"}\", expecting identifier or variable or \"{\" or \"$\" at /home/walieldin-nctr/Desktop/imdad/emdad-backend/database/migrations/2022_12_01_111613_add_permissions_to_users_table.php:18)
+[stacktrace]
+#0 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Filesystem/Filesystem.php(135): Illuminate\\Filesystem\\Filesystem::Illuminate\\Filesystem\\{closure}()
+#1 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Database/Migrations/MigrationCreator.php(97): Illuminate\\Filesystem\\Filesystem->requireOnce()
+#2 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Database/Migrations/MigrationCreator.php(59): Illuminate\\Database\\Migrations\\MigrationCreator->ensureMigrationDoesntAlreadyExist()
+#3 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateMakeCommand.php(110): Illuminate\\Database\\Migrations\\MigrationCreator->create()
+#4 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Database/Console/Migrations/MigrateMakeCommand.php(94): Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand->writeMigration()
+#5 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(36): Illuminate\\Database\\Console\\Migrations\\MigrateMakeCommand->handle()
+#6 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Container/Util.php(41): Illuminate\\Container\\BoundMethod::Illuminate\\Container\\{closure}()
+#7 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(93): Illuminate\\Container\\Util::unwrapIfClosure()
+#8 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Container/BoundMethod.php(37): Illuminate\\Container\\BoundMethod::callBoundMethod()
+#9 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Container/Container.php(651): Illuminate\\Container\\BoundMethod::call()
+#10 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php(178): Illuminate\\Container\\Container->call()
+#11 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/symfony/console/Command/Command.php(308): Illuminate\\Console\\Command->execute()
+#12 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Console/Command.php(148): Symfony\\Component\\Console\\Command\\Command->run()
+#13 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/symfony/console/Application.php(1014): Illuminate\\Console\\Command->run()
+#14 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/symfony/console/Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand()
+#15 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/symfony/console/Application.php(171): Symfony\\Component\\Console\\Application->doRun()
+#16 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Console/Application.php(102): Symfony\\Component\\Console\\Application->run()
+#17 /home/walieldin-nctr/Desktop/imdad/emdad-backend/vendor/laravel/framework/src/Illuminate/Foundation/Console/Kernel.php(155): Illuminate\\Console\\Application->run()
+#18 /home/walieldin-nctr/Desktop/imdad/emdad-backend/artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle()
+#19 {main}
+"} 
