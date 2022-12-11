@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\AccountRequests\Truck;
+namespace App\Http\Requests\Account\Driver;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteTruckRequest extends FormRequest
+class CreateDriverRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
