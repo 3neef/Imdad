@@ -28,7 +28,7 @@ class UserServices
 
         $request['otp'] = strval(rand(1000, 9999));
         $user = User::create($request);
-        $role_id = $request['roleId'];
+        $role_id = $request['roleId']??'';
         if ($role_id){
             $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
 
@@ -128,7 +128,6 @@ class UserServices
     {
 
         $user = User::where('id', '=', $request->id)->first();
-dd($user);
         if ($request->otp != $user->otp) {
             return response()->json(
                 [
