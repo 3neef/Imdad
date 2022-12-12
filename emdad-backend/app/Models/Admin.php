@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Admin extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'job_title'
+    ];
+
+    public function user () {
+        return $this->morphOne(User::class, 'userable');
+    }
 }
