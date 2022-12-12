@@ -17,5 +17,9 @@ class Truck extends Model
     {
         return $this->hasMany(Truck_image::class);
     }
+
+    public function manageable () {
+        return $this->morphTo();
+    }
     
 }

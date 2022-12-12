@@ -13,15 +13,18 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->nullableMorphs('manageable');
             $table->string('name_ar');
             $table->string('name_en');
-            $table->string('age');
-            $table->string('phone');
-            $table->string('nationality');
-            $table->softDeletes();
+            $table->string('swift')->nullable();
+            $table->string('iban')->nullable();
+            $table->string('created_by');
+            $table->enum('type', ['Buyer', 'supplier']);
+            $table->string('bank')->nullable();
+            $table->string('vat_number')->nullable();
+            $table->string('cr_number')->nullable();
+
             $table->timestamps();
         });
     }
@@ -33,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('drivers');
+        Schema::dropIfExists('profiles');
     }
 };

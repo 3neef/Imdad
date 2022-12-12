@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Driver extends Model
 {
     use HasFactory;
+
+    public function manageable () {
+        return $this->morphTo();
+    }
 }
