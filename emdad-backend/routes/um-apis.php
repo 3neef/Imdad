@@ -28,7 +28,7 @@ Route::middleware(['app.auth'])->prefix('roles')->group(function () {
 });
 
 Route::middleware(['app.auth', 'auth:sanctum'])->group(function () {
-    Route::apiResource('users', UserController::class);
+    Route::apiResource('users', UserController::class)->only(['update','destroy']);
 });
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
