@@ -6,39 +6,42 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UMController\DepartmentController;
 use App\Http\Controllers\UMController\PermissionsController;
 use App\Http\Controllers\UMController\RoleController;
+use App\Http\Controllers\User\UserController;
+use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['app.auth'])->prefix('users')->group(function () {
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('register', [AuthController::class, 'register']);
-    Route::put('verifiy-otp', [AuthController::class, 'activateUser']);
-    Route::delete('remove-user/{id}',[AuthController::class, 'removeUser']);
+Route::middleware(['app.auth'])->prefix('auth')->group(function () {
+    Route::post('login', [AuthController::class, 'loginUser']);
+    Route::post('register', [AuthController::class, 'createUser']);
+    Route::put('verifiy-otp', [AuthController::class, 'activapteUser']);
+    Route::delete('remove-user/{id}', [AuthController::class, 'removeUser']);
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
     Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
-
+    Route::post('logout', [AuthController::class, 'logoutUser'])->middleware('auth:sanctum');
+    Route::put("reset-password", [AuthController::class, 'resetPassword'])->middleware('auth:sanctum');
 });
 
 Route::middleware(['app.auth'])->prefix('roles')->group(function () {
     Route::get('getAll', [RoleController::class, 'getAllRoles']);
 });
 
-Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
-    Route::get('filter-user',[AuthController::class,'index']);
-    Route::post('createUser', [AuthController::class, 'createUser']);
-    Route::post('logout', [AuthController::class, 'logoutUser']);
-    Route::get('user-data', [AuthController::class, 'getUserInfoByToken']);
-    Route::put("update", [AuthController::class, 'updateUser']);
-    Route::put("restore/{id}", [AuthController::class, 'restoreUser']);
-    Route::put("reset-password", [AuthController::class, 'resetPassword']);
-    Route::delete("delete/{id}", [AuthController::class, 'deleteUser']);
-    Route::post("assginRole", [AuthController::class, 'assignRole']);
-    Route::post("unAssginRole", [AuthController::class, 'unAssignRole']);
-    Route::post("oldRole", [AuthController::class, 'restoreOldRole']);
-    Route::put("setDefaultCompany", [AuthController::class, 'setDefaultCompany']);
+Route::middleware(['app.auth', 'auth:sanctum'])->group(function () {
+    Route::apiResource('users', UserController::class);
 });
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
+    Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
+    Route::put("restore/{id}", [UserController::class, 'restoreUser']);
+    Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
+    Route::post("Activate", [UserController::class, 'Activate']);
+});
+
+
+
+
+
 
 
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(function () {
@@ -65,5 +68,5 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function
 // Route::middleware('app.auth','auth:sanctum')->group(['prefix'=>'department'],function(){
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('department')->group(function () {
     Route::post('create', [DepartmentController::class, 'create']);
-    Route::post('assing-User-To-Department',[DepartmentController::class,'assingUser']);
+    Route::post('assing-User-To-Department', [DepartmentController::class, 'assingUser']);
 });
