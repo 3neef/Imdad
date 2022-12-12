@@ -27,7 +27,7 @@ class AuthController extends Controller
 
     /**
      * @OA\put(
-     * path="/api/v1_0/users/reset-password",
+     * path="/api/v1_0/auth/reset-password",
      * operationId="resetPassword",
      * tags={"UM & Permissions"},
      * summary="reset password",
@@ -93,7 +93,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     * path="/api/v1_0/users/login",
+     * path="/api/v1_0/auth/login",
      * operationId="authLogin",
      * tags={"UM & Permissions"},
      * summary="User Login",
@@ -145,7 +145,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Put(
-     * path="/api/v1_0/users/verifiy-otp",
+     * path="/api/v1_0/auth/verifiy-otp",
      * operationId="user-verify-otp",
      * tags={"UM & Permissions"},
      * summary="User Activation/ user login mobile + otp",
@@ -197,7 +197,7 @@ class AuthController extends Controller
     }
     /**
      * @OA\Post(
-     * path="/api/v1_0/users/resend-otp",
+     * path="/api/v1_0/auth/resend-otp",
      * operationId="resend otp",
      * tags={"UM & Permissions"},
      * summary="resend otp",
@@ -247,7 +247,7 @@ class AuthController extends Controller
     }
     /**
      * @OA\Post(
-     * path="/api/v1_0/users/logout",
+     * path="/api/v1_0/auth/logout",
      * operationId="Logout",
      * tags={"UM & Permissions"},
      * summary="User Logout",
@@ -290,7 +290,7 @@ class AuthController extends Controller
 
     /**
      * @OA\put(
-     * path="/api/v1_0/users/forgot-password",
+     * path="/api/v1_0/auth/forgot-password",
      * operationId="forgotPassword",
      * tags={"UM & Permissions"},
      * summary="forgot password",
@@ -353,7 +353,7 @@ class AuthController extends Controller
 
     /**
      * @OA\delete(
-     * path="/api/v1_0/users/remove-user/{id}",
+     * path="/api/v1_0/auth/remove-user/{id}",
      * operationId="removeUser",
      * tags={"UM & Permissions"},
      * summary="remove User",
