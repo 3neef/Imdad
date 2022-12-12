@@ -7,7 +7,6 @@ use App\Http\Controllers\UMController\DepartmentController;
 use App\Http\Controllers\UMController\PermissionsController;
 use App\Http\Controllers\UMController\RoleController;
 use App\Http\Controllers\User\UserController;
-use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -31,17 +30,13 @@ Route::middleware(['app.auth'])->prefix('roles')->group(function () {
 Route::middleware(['app.auth', 'auth:sanctum'])->group(function () {
     Route::apiResource('users', UserController::class);
 });
+
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
     Route::put("restore/{id}", [UserController::class, 'restoreUser']);
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
     Route::post("Activate", [UserController::class, 'Activate']);
 });
-
-
-
-
-
 
 
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(function () {

@@ -10,7 +10,7 @@ class Profile extends Model
     use HasFactory;
 
     protected $fillable = [
-        'parent_id',
+        'created_by',
         'name_ar',
         'name_en',
         'swift',

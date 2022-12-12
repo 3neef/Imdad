@@ -6,15 +6,14 @@ use App\Http\Collections\UserCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UMRequests\User\AssignRoleRequest;
-use App\Http\Requests\UMRequests\User\CreateUserRequest;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
-use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
+use App\Http\Requests\UMRequests\User\StoreUserRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\UserServices;
-use Illuminate\Http\Request as HttpRequest;
+
 
 class UserController extends Controller
 {
@@ -87,7 +86,7 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function store(CreateUserRequest $request, UserServices $userServices)
+    public function store(StoreUserRequest $request, UserServices $userServices)
     {
         return $userServices->create($request->validated());
     }

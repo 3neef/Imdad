@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->integer('parent_id');
+            $table->integer('created_by');
             $table->string('name_ar')->nullable();
             $table->string('name_en')->nullable();
             $table->string('swift')->nullable();
