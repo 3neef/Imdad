@@ -26,6 +26,7 @@ return new class extends Migration
             $table->unsignedBigInteger('profile_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->date('expiry_date');
             $table->string('mobile')->unique()->nullable(false);
             $table->boolean("is_super_admin")->default(false);
         });
