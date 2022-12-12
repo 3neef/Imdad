@@ -26,8 +26,7 @@ class DefaultCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            "id"=> "integer|exists:users,id",
-            "companyId"=> "integer|exists:company_info,id"
+            "profileId"=> "integer|exists:profiles,id"
 
         ];
     }

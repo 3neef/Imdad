@@ -270,18 +270,19 @@ class UserServices
 
     public function setDefaultCompany($request)
     {
-        $user = User::find($request->get('id'));
-        $companyId = $request->get('companyId');
-        $result = $user->update([
-            'default_comapny' => $companyId
-        ]);
-        if ($result) {
+
+        $user = User::where("id",auth()->id())->first();
+        $user->update(
+            [
+                "profile_id"=>$request->profileId
+            ]
+            );
+       
             return response()->json([
                 'message' => 'Default company successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
+    
     }
 
     public function showAll()
