@@ -5,7 +5,7 @@ variables:
     NCTR_REG : https://hub.nctr.sd
     IMAGE_NAME : emdad-be
     CON_NAME : emdad-be
-    Test_CON_NAME : test-emdad-be
+    Test_CON_NAME : test-be
     NETWORK : emdad_network
 stages:
     - build
