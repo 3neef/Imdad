@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('mobile')->unique()->nullable(false);
             $table->boolean("is_super_admin")->default(false);
             $table->boolean("is_verified")->default(false);
+            $table->softDeletes();
         });
     }
 
