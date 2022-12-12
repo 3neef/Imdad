@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->nullableMorphs('userable');
+            $table->string('identity_number');
+            $table->enum('identity_type', ['nid', 'Iqama'])->default('nid');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->unsignedBigInteger('profile_id')->nullable();
@@ -27,7 +29,6 @@ return new class extends Migration
             $table->string('mobile')->unique()->nullable(false);
             $table->boolean("is_super_admin")->default(false);
         });
-
     }
 
     /**
