@@ -49,4 +49,4 @@ deploy:
         #    docker rm $(docker ps -f name=$Test_CON_NAME -aq);
         #docker stop $(docker ps -f name=$CON_NAME -aq); \ ** rmove container using the id
         -  docker run -d -p 8000:8000 -p 80:80 -p 443:443 --name $CON_NAME --network $NETWORK $IMAGE_REG/$IMAGE_NAME:latest
-        -  docker run -d -p 8888:8000 -p 8080:80 -p 443:443 --name $Test_CON_NAME --network $NETWORK $IMAGE_REG/$IMAGE_NAME:latest
+        -  docker run -d -p 9000:8000 -p 9090:80 -p 9443:443 --name $Test_CON_NAME --network $NETWORK $IMAGE_REG/$IMAGE_NAME:latest
