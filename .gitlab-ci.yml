@@ -39,12 +39,14 @@ deploy:
         - if [ $(docker ps -a | grep -w $CON_NAME | wc -l ) -gt 0 ]; then 
             docker pull $IMAGE_REG/$IMAGE_NAME:latest; 
             docker stop $CON_NAME; 
-        #    docker stop $Test_CON_NAME; 
+        
             docker rmi $(docker images | grep $IMAGE_REG/$IMAGE_NAME | awk '{print $3}') -f; 
             docker rm $(docker ps -f name=$CON_NAME -aq); 
-        #    docker rm $(docker ps -f name=$Test_CON_NAME -aq);
+        
             echo "From IF ";
             fi
+            #    docker stop $Test_CON_NAME; 
+        #    docker rm $(docker ps -f name=$Test_CON_NAME -aq);
         #docker stop $(docker ps -f name=$CON_NAME -aq); \ ** rmove container using the id
         -  docker run -d -p 8000:8000 -p 80:80 -p 443:443 --name $CON_NAME --network $NETWORK $IMAGE_REG/$IMAGE_NAME:latest
         -  docker run -d -p 8888:8000 -p 8080:80 -p 443:443 --name $Test_CON_NAME --network $NETWORK $IMAGE_REG/$IMAGE_NAME:latest
