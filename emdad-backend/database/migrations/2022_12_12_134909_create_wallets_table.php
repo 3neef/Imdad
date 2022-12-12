@@ -20,8 +20,7 @@ return new class extends Migration
             $table->double('pending')->default(0);
             $table->string('card_number')->nullable();
             $table->string('password')->nullable();
-            $table->boolean('main')->default(0);
-            $table->set('type', ['sender', 'receiver', 'both']);
+            $table->set('type', ['sender', 'receiver']);
             $table->set('status', ['active', 'disabled'])->default('active');
             $table->timestamps();
         });
