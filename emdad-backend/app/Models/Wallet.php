@@ -13,13 +13,12 @@ class Wallet extends Model
         'pending',
         'card_number',
         'password',
-        'main',
         'type',
         'status'
     ];
 
     protected $hidden = ['password'];
-    
+
     public function accountable()
     {
         return $this->morphTo();
