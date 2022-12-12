@@ -19,10 +19,10 @@ class Profile extends Model
         'bank',
         'vat_number',
         'cr_number',
-        'cr_expire_data', 
+        'cr_expire_data',
         'subs_id',
-         'subscription_details',
-         'active'
+        'subscription_details',
+        'active'
     ];
 
     public function wallet()

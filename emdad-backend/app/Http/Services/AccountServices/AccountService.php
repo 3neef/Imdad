@@ -7,6 +7,7 @@ use App\Http\Resources\AccountResourses\Company\CompanyResponse;
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
 use App\Models\Emdad\RelatedCompanies;
+use App\Models\Profile;
 use App\Models\UM\RoleUserCompany;
 use App\Models\User;
 use Carbon\Carbon;
@@ -19,18 +20,17 @@ class AccountService
         
         $user = User::where('id', auth()->id())->first();
 
-        $account = CompanyInfo::create([
-            "company_type" => $request->companyType,
-            "company_name" => $company->cr_name,
+        $account = Profile::create([
+            "type" => $request->companyType,
+            "name_ar" => $company->cr_name,
+            "cr_number"=>$company->cr_number,
             "created_by" => auth()->user()->id,
-            "contact_phone" => auth()->user()->mobile,
-            "contact_email" => auth()->user()->email,
             "is_validated" => true,
         ]);
 
-        $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => $account->id, 'permissions' => $request->permissions]);
+        $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => $account->id, 'permissions' => $request->permissions]);
 
-        $user->update(['default_company' => $account->id]);
+        $user->update(['profile_id' => $account->id]);
 
         return response()->json(['success' => true, 'message' => 'created successfully'], 200);
     }
