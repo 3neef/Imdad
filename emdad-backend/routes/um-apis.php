@@ -6,16 +6,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UMController\DepartmentController;
 use App\Http\Controllers\UMController\PermissionsController;
 use App\Http\Controllers\UMController\RoleController;
-use Illuminate\Support\Facades\Auth;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
 Route::middleware(['app.auth'])->prefix('users')->group(function () {
-    Route::post('login', [AuthController::class, 'loginUser']);
-    Route::post('register', [AuthController::class, 'createUser']);
-    Route::put('verifiy-otp', [AuthController::class, 'activapteUser']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
+    Route::put('verifiy-otp', [AuthController::class, 'activateUser']);
     Route::delete('remove-user/{id}',[AuthController::class, 'removeUser']);
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
     Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
