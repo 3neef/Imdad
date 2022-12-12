@@ -31,6 +31,7 @@ return new class extends Migration
             $table->date('otp_expires_at');
             $table->string('mobile')->unique()->nullable(false);
             $table->boolean("is_super_admin")->default(false);
+            $table->boolean("is_verified")->default(false);
         });
     }
 
