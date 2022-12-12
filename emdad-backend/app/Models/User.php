@@ -26,7 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'last_name',
         'identity_type', 'email', 'password', 'identity_number',
         'is_verified', 'profile_id', 'avatar', 'otp', 'is_super_admin',
-        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 
+        'otp_expires_at', 'mobile',  'expiry_date', 'lang',
     ];
 
     /**
@@ -69,10 +69,10 @@ class User extends Authenticatable implements MustVerifyEmail
     //     return CompanyInfo::where("id",$this->default_company)->select(["company_name",'is_validated','subscription_details','cr_expire_data','company_type','company_id'])->first();
     // }
 
-    // public function assignRole(Role $role)
-    // {
-    //     return $this->roles()->save($role);
-    // }
+    public function assignRole(Role $role)
+    {
+        return $this->roles()->save($role);
+    }
 
     // public function hasRole($role)
     // {
@@ -82,12 +82,12 @@ class User extends Authenticatable implements MustVerifyEmail
     //     return !!$role->intersect($this->roles)->count();
     // }
 
-    // public function roleInCompany()
-    // {
-    //     return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
-    //         ->withPivot('company_info_id')
-    //         ->withTimestamps();
-    // }
+    public function roleInProfile()
+    {
+        return $this->belongsToMany(Role::class, 'roles_users_profiles', 'users_id', 'roles_id')
+            ->withPivot('profiles_id')
+            ->withTimestamps();
+    }
 
     // public function exists($roleId, $companyId)
     // {
@@ -104,22 +104,22 @@ class User extends Authenticatable implements MustVerifyEmail
     //         ->first();
     // }
 
-    // public function compnies()
-    // {
-    //     return $this->belongsToMany(
-    //         CompanyInfo::class,
-    //         'company_info_department_user'
-    //     )->withPivot('department_id')
-    //         ->withTimestamps();;
-    // }
-    // public function departments()
-    // {
-    //     return $this->belongsToMany(
-    //         Department::class,
-    //         'company_info_department_user'
-    //     )->withPivot('company_info_id')
-    //         ->withTimestamps();;
-    // }
+    public function profiles()
+    {
+        return $this->belongsToMany(
+            Profile::class,
+            'profile_department_user'
+        )->withPivot('department_id')
+            ->withTimestamps();;
+    }
+    public function departments()
+    {
+        return $this->belongsToMany(
+            Department::class,
+            'profile_department_user'
+        )->withPivot('profile_id')
+            ->withTimestamps();;
+    }
 
     public function userable()
     {

@@ -30,9 +30,9 @@ class UserServices
         $user = User::create($request);
         $role_id = $request['roleId']??'';
         if ($role_id){
-            $user->roleInCompany()->attach($user->id, ['roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
+            $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id]);
 
-            $user->update(['default_company' => auth()->user()->default_company]);
+            $user->update(['profile_id' => auth()->user()->profile_id]);
         }
 
         if ($user) {
