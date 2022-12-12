@@ -13,4 +13,8 @@ class Driver extends Model
     protected $fillable = [
         'name_ar','name_en', 'age', 'phone', 'nationality'
     ];
+
+    public function manageable () {
+        return $this->morphTo();
+    }
 }
