@@ -22,8 +22,12 @@ return new class extends Migration
             $table->string('iban')->nullable();
             $table->enum('type', ['Buyer', 'supplier'])->nullable();
             $table->string('bank')->nullable();
+            $table->date('cr_expire_data')->nullable();
+            $table->foreignId('subs_id')->nullable();
+            $table->json('subscription_details')->nullable();
             $table->string('vat_number')->nullable();
             $table->string('cr_number')->nullable();
+            $table->boolean('active')->default(false);
 
             $table->timestamps();
         });
