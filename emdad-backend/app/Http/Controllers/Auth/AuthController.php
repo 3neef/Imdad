@@ -45,7 +45,7 @@ class AuthController extends Controller
      *         in="header",
      *         description="Set user authentication token",
      *         @OA\Schema(
-     *             type="beraer"
+     *             type="bearer"
      *         )
      *     ),
      *     @OA\RequestBody(
@@ -138,7 +138,7 @@ class AuthController extends Controller
      * )
      */
 
-    public function login(LoginRequest $request, UserServices $userServices)
+    public function loginUser(LoginRequest $request, UserServices $userServices)
     {
         return $userServices->login($request);
     }
