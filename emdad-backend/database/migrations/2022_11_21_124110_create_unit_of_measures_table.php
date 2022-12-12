@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('related_unit');
             $table->string('relation');
             $table->string('value');
-            $table->foreignId('measruing_unit')->references('id')->on('unit_of_measures')->onDelete('cascade');
+            $table->integer('measruing_unit')->nullable();
 
             $table->timestamps();
         });
