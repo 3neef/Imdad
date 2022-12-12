@@ -57,67 +57,67 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Role::class);
     }
 
-    public function company()
-    {
-        return $this->belongsToMany(CompanyInfo::class);
-    }
+    // public function company()
+    // {
+    //     return $this->belongsToMany(CompanyInfo::class);
+    // }
 
-    public function currentCompany()
-    {
-        return CompanyInfo::where("id",$this->default_company)->select(["company_name",'is_validated','subscription_details','cr_expire_data','company_type','company_id'])->first();
-    }
+    // public function currentCompany()
+    // {
+    //     return CompanyInfo::where("id",$this->default_company)->select(["company_name",'is_validated','subscription_details','cr_expire_data','company_type','company_id'])->first();
+    // }
 
-    public function assignRole(Role $role)
-    {
-        return $this->roles()->save($role);
-    }
+    // public function assignRole(Role $role)
+    // {
+    //     return $this->roles()->save($role);
+    // }
 
-    public function hasRole($role)
-    {
-        if (is_string($role)) {
-            return $this->roles->contains('name', $role);
-        }
-        return !!$role->intersect($this->roles)->count();
-    }
+    // public function hasRole($role)
+    // {
+    //     if (is_string($role)) {
+    //         return $this->roles->contains('name', $role);
+    //     }
+    //     return !!$role->intersect($this->roles)->count();
+    // }
 
-    public function roleInCompany()
-    {
-        return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
-            ->withPivot('company_info_id')
-            ->withTimestamps();
-    }
+    // public function roleInCompany()
+    // {
+    //     return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
+    //         ->withPivot('company_info_id')
+    //         ->withTimestamps();
+    // }
 
-    public function exists($roleId, $companyId)
-    {
-        return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
-            ->wherePivot('roles_id', $roleId)
-            ->wherePivot('company_info_id', $companyId)
-            ->first();
-    }
+    // public function exists($roleId, $companyId)
+    // {
+    //     return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
+    //         ->wherePivot('roles_id', $roleId)
+    //         ->wherePivot('company_info_id', $companyId)
+    //         ->first();
+    // }
 
-    public function getRoleOfUserByCompanyId()
-    {
-        return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
-            ->wherePivot('company_info_id', $this->default_company)
-            ->first();
-    }
+    // public function getRoleOfUserByCompanyId()
+    // {
+    //     return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
+    //         ->wherePivot('company_info_id', $this->default_company)
+    //         ->first();
+    // }
 
-    public function compnies()
-    {
-        return $this->belongsToMany(
-            CompanyInfo::class,
-            'company_info_department_user'
-        )->withPivot('department_id')
-            ->withTimestamps();;
-    }
-    public function departments()
-    {
-        return $this->belongsToMany(
-            Department::class,
-            'company_info_department_user'
-        )->withPivot('company_info_id')
-            ->withTimestamps();;
-    }
+    // public function compnies()
+    // {
+    //     return $this->belongsToMany(
+    //         CompanyInfo::class,
+    //         'company_info_department_user'
+    //     )->withPivot('department_id')
+    //         ->withTimestamps();;
+    // }
+    // public function departments()
+    // {
+    //     return $this->belongsToMany(
+    //         Department::class,
+    //         'company_info_department_user'
+    //     )->withPivot('company_info_id')
+    //         ->withTimestamps();;
+    // }
 
     public function userable() {
         return $this->morphTo();

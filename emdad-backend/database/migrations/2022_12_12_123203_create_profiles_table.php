@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ar');
-            $table->string('name_en');
+            $table->integer('parent_id');
+            $table->string('name_ar')->nullable();
+            $table->string('name_en')->nullable();
             $table->string('swift')->nullable();
             $table->string('iban')->nullable();
-            $table->string('created_by');
-            $table->enum('type', ['Buyer', 'supplier']);
+            $table->enum('type', ['Buyer', 'supplier'])->nullable();
             $table->string('bank')->nullable();
             $table->string('vat_number')->nullable();
             $table->string('cr_number')->nullable();

@@ -19,13 +19,13 @@ return new class extends Migration
             $table->nullableMorphs('userable');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
-            $table->unsignedBigInteger('company_id')->nullable();
+            $table->unsignedBigInteger('profile_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->string('mobile')->unique()->nullable(false);
             $table->boolean('used_basic_packeg')->default(false);
             $table->boolean("is_super_admin")->default(false);
-            $table->foreign('company_id')->references('id')->on('company_info')->onDelete('cascade');
+            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
         });
     }
 

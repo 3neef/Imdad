@@ -10,11 +10,11 @@ class Profile extends Model
     use HasFactory;
 
     protected $fillable = [
+        'parent_id',
         'name_ar',
         'name_en',
         'swift',
         'iban',
-        'created_by',
         'type',
         'bank',
         'vat_number',

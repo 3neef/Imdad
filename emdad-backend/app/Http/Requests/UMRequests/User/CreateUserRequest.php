@@ -38,7 +38,7 @@ class CreateUserRequest extends FormRequest
             'password'=>'required|string',
             'expireDate'=>'required|date',
             'permissions'=>['array',new UniqeValues],
-            'permissions.*'=>['string','exists:permissions,label'] 
+            'permissions.*'=>['string','exists:permissions,label']
 
         ];
         // dd($this->all());
