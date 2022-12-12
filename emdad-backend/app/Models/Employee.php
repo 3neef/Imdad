@@ -12,7 +12,7 @@ class Employee extends Model
     protected $fillable=['profile_id','first_name','last_name'];
 
 
-    public function user () {
+    public function user() {
         return $this->morphOne(User::class, 'userable');
     }
 }
