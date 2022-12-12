@@ -15,6 +15,12 @@ return new class extends Migration
     {
         Schema::create('drivers', function (Blueprint $table) {
             $table->id();
+            $table->string('name_ar');
+            $table->string('name_en');
+            $table->string('age');
+            $table->string('phone');
+            $table->string('nationality');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

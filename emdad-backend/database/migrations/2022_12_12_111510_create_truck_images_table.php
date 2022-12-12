@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('truck_images', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('truck_id');
+            $table->foreignId('truck_id')->references('id')->on('trucks')->onDelete('cascade');
             $table->timestamps();
         });
     }
