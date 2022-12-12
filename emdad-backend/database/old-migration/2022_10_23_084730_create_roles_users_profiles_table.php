@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('profiles_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
             $table->unique(["roles_id","users_id","profile_id","deleted_at"])->name("user_role_profile_deletedat");
             $table->softDeletes();
-            $table->tinyInteger("status")->default(1)->comment("1=active,0=inactive");
+            $table->enum("status",['active','inActive'])->default('active');
             $table->timestamps();
         });
     }
