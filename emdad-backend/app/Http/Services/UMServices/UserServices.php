@@ -220,7 +220,6 @@ class UserServices
         $result = $user->update([
             'otp' => $otp,
             'otp_expires_at' => $otp_expires_at,
-            'forget_pass' => 1
         ]);
         if ($result) {
             MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp);
@@ -233,45 +232,46 @@ class UserServices
         return response()->json(['error' => 'system error'], 500);
     }
 
-    public function resetPassword($request)
-    {
-        $email = ($request->get('email'));
-        $user = User::where('email', $email)->first();
-        $new_password = ($request->get('newPassword'));
-        if ($user === null) {
-            return response()->json(
-                [
-                    "success" => false, "error" => "Unregistered email"
-                ]
-            );
-        }
-        if ($user->forget_pass == 1) {
-            $pass_or_otp = $request->get('oldPassword');
-            $user = User::where('otp', '=', $pass_or_otp)->first();
-            if ($user === null) { //not otp
-                $user = User::where('password', '=', $pass_or_otp)->first();
-                if ($user === null) { // not password
-                    return response()->json(
-                        [
-                            "message" => "We didn't recognize this password"
-                        ]
-                    );
-                }
-            }
-        }
-        $user->update([
-            'password' => $new_password,
-            'forget_pass' => 0,
-            'otp' => null,
-            'otp_expires_at' => null
-        ]);
+    //Todo  Need ReCode 
+    // public function resetPassword($request)
+    // {
+    //     $email = ($request->get('email'));
+    //     $user = User::where('email', $email)->first();
+    //     $new_password = ($request->get('newPassword'));
+    //     if ($user === null) {
+    //         return response()->json(
+    //             [
+    //                 "success" => false, "error" => "Unregistered email"
+    //             ]
+    //         );
+    //     }
+    //     if ($user->forget_pass == 1) {
+    //         $pass_or_otp = $request->get('oldPassword');
+    //         $user = User::where('otp', '=', $pass_or_otp)->first();
+    //         if ($user === null) { //not otp
+    //             $user = User::where('password', '=', $pass_or_otp)->first();
+    //             if ($user === null) { // not password
+    //                 return response()->json(
+    //                     [
+    //                         "message" => "We didn't recognize this password"
+    //                     ]
+    //                 );
+    //             }
+    //         }
+    //     }
+    //     $user->update([
+    //         'password' => $new_password,
+    //         'forget_pass' => 0,
+    //         'otp' => null,
+    //         'otp_expires_at' => null
+    //     ]);
 
-        return response()->json(
-            [
-                "message" => "Password has been reset successfully!!"
-            ]
-        );
-    }
+    //     return response()->json(
+    //         [
+    //             "message" => "Password has been reset successfully!!"
+    //         ]
+    //     );
+    // }
 
     public function assignRole($request)
     {

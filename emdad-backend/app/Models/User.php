@@ -22,10 +22,9 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'identity_type',  'full_name', 'first_name', 'last_name', 'email', 'password','identity_number',
+        'identity_type','email', 'password','identity_number',
     'status', 'is_verified', 'default_company', 'avatar', 'otp', 'is_super_admin',
-        'otp_expires_at', 'forget_pass', 'otp_used', 'mobile',  'expiry_date', 'lang', 'used_basic_packeg'
-        ,'permissions'
+        'otp_expires_at',  'otp_used', 'mobile',  'expiry_date', 'lang', 'used_basic_packeg'
     ];
 
     /**
@@ -118,5 +117,9 @@ class User extends Authenticatable implements MustVerifyEmail
             'company_info_department_user'
         )->withPivot('company_info_id')
             ->withTimestamps();;
+    }
+
+    public function userable() {
+        return $this->morphTo();
     }
 }
