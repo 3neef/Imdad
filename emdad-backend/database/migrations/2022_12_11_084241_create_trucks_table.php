@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('model');
             $table->string('size');
             $table->string('brand');
-            $table->string('name');
             $table->softDeletes();
             $table->timestamps();
         });

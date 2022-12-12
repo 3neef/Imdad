@@ -31,6 +31,21 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
+        });
+
+        Schema::table('categories', function (Blueprint $table) {
+            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
+        });
+        Schema::table('products', function (Blueprint $table) {
+            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
+        });
+        Schema::table('employees', function (Blueprint $table) {
+
+            $table->foreignId('profile_id');
+        });
     }
 
     /**

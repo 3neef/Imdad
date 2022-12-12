@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('mobile')->unique()->nullable(false);
             $table->boolean('used_basic_packeg')->default(false);
             $table->boolean("is_super_admin")->default(false);
-            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
         });
+
     }
 
     /**
