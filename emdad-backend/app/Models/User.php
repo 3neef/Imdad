@@ -64,10 +64,10 @@ class User extends Authenticatable implements MustVerifyEmail
     //     return $this->belongsToMany(CompanyInfo::class);
     // }
 
-    // public function currentCompany()
-    // {
-    //     return CompanyInfo::where("id",$this->default_company)->select(["company_name",'is_validated','subscription_details','cr_expire_data','company_type','company_id'])->first();
-    // }
+    public function currentProfile()
+    {
+        return Profile::where("id",$this->profile_id)->select(["company_name",'is_validated','subscription_details','cr_expire_data','company_type','company_id'])->first();
+    }
 
     public function assignRole(Role $role)
     {
