@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Collections\ProfileCollection;
 use App\Http\Requests\AccountRequests\Account\GetByAccountIdRequest;
 use App\Http\Requests\AccountRequests\Account\RestoreAccountRequest;
-use App\Http\Requests\AccountRequests\Account\UpdateAccountRequest;
 use App\Http\Requests\Profile\StoreProfileRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Http\Services\AccountServices\AccountService;
@@ -128,6 +127,57 @@ class ProfileController extends Controller
         return $this->accountService->store($request);
     }
 
+
+    /**
+     * @OA\get(
+     * path="/api/v1_0/accounts/getById/{id}",
+     * operationId="getByAccountId",
+     * tags={"Account Controller"},
+
+     * summary="get By AccountId",
+     * description="get By AccountId Here",
+     *     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"id"},
+     *               @OA\Property(property="id", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *        response=200,
+     *          description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="AccountById", type="integer", example="{'id': 2}")
+     *          ),
+     *       ),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function show($id)
+    {
+        return $this->accountService->show($id);
+    }
+
     /**
      * @OA\put(
      * path="/api/v1_0/accounts/update",
@@ -181,55 +231,6 @@ class ProfileController extends Controller
     }
 
     /**
-     * @OA\get(
-     * path="/api/v1_0/accounts/getById/{id}",
-     * operationId="getByAccountId",
-     * tags={"Account Controller"},
-
-     * summary="get By AccountId",
-     * description="get By AccountId Here",
-     *     @OA\Parameter(
-     *         name="api_key",
-     *         in="header",
-     *         description="Set api_key",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
-     *     @OA\RequestBody(
-     *         @OA\JsonContent(),
-     *         @OA\MediaType(
-     *            mediaType="multipart/form-data",
-     *            @OA\Schema(
-     *               type="object",
-     *               required={"id"},
-     *               @OA\Property(property="id", type="integer")
-     *            ),
-     *        ),
-     *    ),
-     *      @OA\Response(
-     *        response=200,
-     *          description="",
-     *         @OA\JsonContent(
-     *         @OA\Property(property="AccountById", type="integer", example="{'id': 2}")
-     *          ),
-     *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     * )
-     */
-    public function getByAccountId(GetByAccountIdRequest $request, $id)
-    {
-        return $this->accountService->getById($id);
-    }
-    /**
      * @OA\delete(
      * path="/api/v1_0/accounts/delete/{id}",
      * operationId="deleteAccount",
@@ -272,7 +273,7 @@ class ProfileController extends Controller
      *      @OA\Response(response=500, description="system error"),
      * )
      */
-    public function deleteAccount(GetByAccountIdRequest $request, $id)
+    public function destroy($id)
     {
         return $this->accountService->delete($id);
     }
@@ -319,10 +320,10 @@ class ProfileController extends Controller
      *      @OA\Response(response=500, description="system error"),
      * )
      */
-    public function restoreByAccountId(RestoreAccountRequest $request, $id)
-    {
-        return $this->accountService->restore($id);
-    }
+    // public function restoreByAccountId(RestoreAccountRequest $request, $id)
+    // {
+    //     return $this->accountService->restore($id);
+    // }
 
     /**
      * @OA\get(
@@ -372,10 +373,10 @@ class ProfileController extends Controller
      */
 
 
-    public function allUnValidatedAccounts()
-    {
-        return $this->accountService->unValidate();
-    }
+    // public function allUnValidatedAccounts()
+    // {
+    //     return $this->accountService->unValidate();
+    // }
 
     /**
      * @OA\put(
@@ -420,10 +421,10 @@ class ProfileController extends Controller
      *      @OA\Response(response=500, description="system error"),
      * )
      */
-    public function validatedAccount(GetByAccountIdRequest $request, $id)
-    {
-        return $this->accountService->validate($id);
-    }
+    // public function validatedAccount(GetByAccountIdRequest $request, $id)
+    // {
+    //     return $this->accountService->validate($id);
+    // }
 }
 
 

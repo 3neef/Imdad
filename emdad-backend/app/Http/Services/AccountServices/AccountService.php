@@ -52,15 +52,26 @@ class AccountService
         }
     }
 
-    public function getById($id)
+    public function show($id)
     {
-        $account = Profile::where('id', $id)->get();
-        return response()->json(['data' => new ProfileResponse($account)], 200);
+
+        $profile = Profile::where('id', $id)->first();
+        if($profile!=null)
+        {
+            return response()->json(['data' => new ProfileResponse($profile)], 200);
+
+        }
+        else{
+            return response()->json(['error' => 'No data Founded'], 404);
+
+        }
     }
 
     public function delete($id)
     {
-        $profile = Profile::find($id);
+        // dd($id);
+        $profile = Profile::find($id)->first();
+        // dd($profile);
         $deleted = $profile->delete();
         if ($deleted) {
             return response()->json(['message' => 'deleted successfully'], 301);
@@ -68,31 +79,31 @@ class AccountService
         return response()->json(['error' => 'system error'], 500);
     }
 
-    public function restore($id)
-    {
-        $restore = Profile::where('id', $id)->withTrashed()->restore();
-        if ($restore) {
-            return response()->json(['message' => 'restored successfully'], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
-    }
+    // public function restore($id)
+    // {
+    //     $restore = Profile::where('id', $id)->withTrashed()->restore();
+    //     if ($restore) {
+    //         return response()->json(['message' => 'restored successfully'], 200);
+    //     }
+    //     return response()->json(['error' => 'system error'], 500);
+    // }
 
-    public function unValidate()
-    {
-        $unValidated = Profile::where('is_validated', '=', false)->get();
-        if (empty($unValidated)) {
-            return response()->json(['message' => 'all companys validated'], 200);
-        }
-        return response()->json(['data' => ProfileResponse::collection($unValidated)], 200);
-    }
+    // public function unValidate()
+    // {
+    //     $unValidated = Profile::where('is_validated', '=', false)->get();
+    //     if (empty($unValidated)) {
+    //         return response()->json(['message' => 'all companys validated'], 200);
+    //     }
+    //     return response()->json(['data' => ProfileResponse::collection($unValidated)], 200);
+    // }
 
-    public function validate($id)
-    {
-        $profile = Profile::find($id);
-        $validated = $profile->update(['is_validated' => true]);
-        if ($validated) {
-            return response()->json(['message' => 'validated successfully'], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
-    }
+    // public function validate($id)
+    // {
+    //     $profile = Profile::find($id);
+    //     $validated = $profile->update(['is_validated' => true]);
+    //     if ($validated) {
+    //         return response()->json(['message' => 'validated successfully'], 200);
+    //     }
+    //     return response()->json(['error' => 'system error'], 500);
+    // }
 }
