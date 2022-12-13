@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UMRequests\DepartmentRequest;
+use App\Http\Requests\Department\DepartmentRequest;
+use App\Http\Requests\Department\UpdateDepartmentRequest;
 use App\Http\Services\UMServices\DepartmentServices;
 use App\Models\Department;
 use Illuminate\Http\Request;
@@ -96,7 +97,7 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateDepartmentRequest $request, $id)
     {
         return $this->departmentService->updateDepartment($request->validated());
     }
