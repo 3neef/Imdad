@@ -54,4 +54,23 @@ class Profile extends Model
     {
         return $this->morphMany(Subscription::class, 'subscribed');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(
+            User::class, 'profile_department_user'
+        )->withPivot('department_id')
+        ->withTimestamps();
+
+        ;
+    }
+    public function departments()
+    {
+        return $this->belongsToMany(
+            Department::class, 'profile_department_user'
+        )->withPivot('user_id')
+        ->withTimestamps();
+
+        ;
+    }
 }

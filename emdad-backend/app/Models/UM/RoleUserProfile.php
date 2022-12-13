@@ -14,16 +14,16 @@ class RoleUserProfile extends Pivot
     protected $table = 'roles_users_profiles';
     public function users()
     {
-        return $this->belongsToMany(User::class, 'roles_users_profiles', 'users_id')->withTimestamps()->withPivot("status");
+        return $this->belongsToMany(User::class, 'role_user_profile', 'user_id')->withTimestamps()->withPivot("status");
     }
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'roles_users_profiles', 'roles_id')->withTimestamps()->withPivot("status");
+        return $this->belongsToMany(Role::class, 'role_user_profile', 'role_id')->withTimestamps()->withPivot("status");
     }
 
     public function profiles()
     {
-        return $this->belongsToMany(Profile::class, 'roles_users_profiles', 'profiles_id')->withTimestamps()->withPivot("status");
+        return $this->belongsToMany(Profile::class, 'role_user_profile', 'profile_id')->withTimestamps()->withPivot("status");
     }
 }
