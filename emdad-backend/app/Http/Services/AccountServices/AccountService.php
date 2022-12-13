@@ -2,8 +2,9 @@
 
 namespace App\Http\Services\AccountServices;
 
-use App\Http\Requests\AccountRequests\Account\AddMoreCompanyRequest;
+use App\Http\Requests\Profile\AddMoreCompanyRequest;
 use App\Http\Resources\AccountResourses\Company\CompanyResponse;
+use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
 use App\Models\Emdad\RelatedCompanies;
@@ -38,7 +39,7 @@ class AccountService
     public function update($request)
     {
         $id = $request->get('id');
-        $company = CompanyInfo::find($id);
+        $company = Profile::find($id);
         $name = empty($request->get('name')) ? $company->name : $request->get('name');
         $company_id = empty($request->get('companyId')) ? $company->company_id : $request->get('companyId');
         $company_type = empty($request->get('companyType')) ? $company->company_type : $request->get('companyType');
@@ -61,21 +62,21 @@ class AccountService
 
     public function getById($id)
     {
-        $account = CompanyInfo::where('id', $id)->get();
-        return response()->json(['data' => new CompanyResponse($account)], 200);
+        $account = Profile::where('id', $id)->get();
+        return response()->json(['data' => new ProfileResponse($account)], 200);
     }
 
     public function getAll()
     {
-        $allAccounts = CompanyInfo::all();
+        $allAccounts = Profile::all();
 
-        return response()->json(['data' => CompanyResponse::collection($allAccounts)], 200);
+        return response()->json(['data' => ProfileResponse::collection($allAccounts)], 200);
     }
 
     public function delete($id)
     {
-        $account = CompanyInfo::find($id);
-        $deleted = $account->delete();
+        $profile = Profile::find($id);
+        $deleted = $profile->delete();
         if ($deleted) {
             return response()->json(['message' => 'deleted successfully'], 301);
         }
@@ -84,7 +85,7 @@ class AccountService
 
     public function restore($id)
     {
-        $restore = CompanyInfo::where('id', $id)->withTrashed()->restore();
+        $restore = Profile::where('id', $id)->withTrashed()->restore();
         if ($restore) {
             return response()->json(['message' => 'restored successfully'], 200);
         }
@@ -93,17 +94,17 @@ class AccountService
 
     public function unValidate()
     {
-        $unValidated = CompanyInfo::where('is_validated', '=', false)->get();
+        $unValidated = Profile::where('is_validated', '=', false)->get();
         if (empty($unValidated)) {
             return response()->json(['message' => 'all companys validated'], 200);
         }
-        return response()->json(['data' => CompanyResponse::collection($unValidated)], 200);
+        return response()->json(['data' => ProfileResponse::collection($unValidated)], 200);
     }
 
     public function validate($id)
     {
-        $company = CompanyInfo::find($id);
-        $validated = $company->update(['is_validated' => true]);
+        $profile = Profile::find($id);
+        $validated = $profile->update(['is_validated' => true]);
         if ($validated) {
             return response()->json(['message' => 'validated successfully'], 200);
         }

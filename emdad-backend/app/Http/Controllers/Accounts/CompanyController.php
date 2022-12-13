@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Accounts;
 
 use App\Http\Collections\CompaynInfoCollection;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AccountRequests\Account\AddMoreCompanyRequest;
-use App\Http\Requests\AccountRequests\Account\CreateAccountRequest;
-use App\Http\Requests\AccountRequests\Account\UpdateAccountRequest;
-use App\Http\Requests\AccountRequests\Account\GetByAccountIdRequest;
-use App\Http\Requests\AccountRequests\Account\RestoreAccountRequest;
+use App\Http\Requests\Profile\AddMoreCompanyRequest;
+use App\Http\Requests\Profile\CreateAccountRequest;
+use App\Http\Requests\Profile\UpdateAccountRequest;
+use App\Http\Requests\Profile\GetByAccountIdRequest;
+use App\Http\Requests\Profile\RestoreAccountRequest;
 use App\Http\Services\AccountServices\AccountService;
 
 class CompanyController extends Controller
