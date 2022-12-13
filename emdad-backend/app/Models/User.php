@@ -8,7 +8,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
 use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -24,6 +23,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'first_name',
         'last_name',
+         'full_name',
         'identity_type', 'email', 'password', 'identity_number',
         'is_verified', 'profile_id', 'avatar', 'otp', 'is_super_admin',
         'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'is_verified'

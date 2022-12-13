@@ -17,7 +17,7 @@ class ProfileResponse extends JsonResource
         return [
             "id" => $this->id,
             "name" => $this->name_ar,
-            "profileId" => $this->profile_id,
+            "profileId" => $this->profile_id,   
             "ProfileType" => $this->type,
             "vatNmber" => $this->vat_number,
             "CrExpiredDate" => $this->cr_expire_data,

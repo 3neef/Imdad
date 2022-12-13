@@ -37,7 +37,7 @@ class UserServices
         }
 
         if ($user) {
-            return response()->json([   
+            return response()->json([
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
@@ -52,7 +52,6 @@ class UserServices
     public function update($request)
     {
         $user = User::where('id', auth()->id())->first();
-
         $user->update([
             'first_name' => $request->firstName ?? $user->first_name,
             "last_name" => $request->lastName ?? $user->last_name,
@@ -61,17 +60,17 @@ class UserServices
             "mobile" => $request->mobile ?? $user->mobile,
         ]);
 
-        $userRoleProfile= RoleUserProfile::where('users_id', $user->id)->where('profile_id', $user->profile_id)->first();
+        $userRoleProfile= RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
         if ($request->has("roleId") && $userRoleProfile != null) {
 
-            $userRoleProfile->update(['users_id' => $user->id, 'roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id]);
+            $userRoleProfile->update(['user_id' => $user->id, 'role_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id]);
         }
 
         if ($user) {
             return response()->json([
                 'message' => 'User updated successfully',
-                'data' => ['user' => new UserResponse($user)]
+                'data' => ['user' => $user]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
@@ -233,7 +232,7 @@ class UserServices
         return response()->json(['error' => 'system error'], 500);
     }
 
-    // Todo  Need Code Again ! 
+    // Todo  Need Code Again !
     public function resetPassword($request)
     {
 
@@ -252,7 +251,7 @@ class UserServices
 
     public function unAssignRole($request)
     {
-        $userRoleCompany = RoleUserCompany::where('users_id', '=', $request->userId)->where('company_info_id', '=', $request->companyId)->first();
+        $userRoleCompany = RoleUserProfile::where('user_id', '=', $request->userId)->where('profile_id', '=', $request->profile_id)->first();
         $deleted = $userRoleCompany->delete();
         if ($deleted) {
             return response()->json(['message' => 'unassign role successfully'], 200);
@@ -262,7 +261,7 @@ class UserServices
 
     public function restoreOldRole($request)
     {
-        $userRoleCompany = RoleUserCompany::where('users_id', '=', $request->userId)->where('company_info_id', '=', $request->companyId)->withTrashed()->first()->restore();
+        $userRoleCompany = RoleUserProfile::where('user_id', '=', $request->userId)->where('profile_id', '=', $request->profile_id)->withTrashed()->first()->restore();
         if ($userRoleCompany) {
             return response()->json(['message' => 'restored successfully'], 200);
         }
@@ -278,12 +277,12 @@ class UserServices
                 "profile_id"=>$request->profileId
             ]
             );
-       
+
             return response()->json([
                 'message' => 'Default company successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
-    
+
     }
 
     public function showAll()
@@ -310,7 +309,7 @@ class UserServices
     }
     protected function getAbilities()
     {
-        $role_id = RoleUserCompany::where('users_id', auth()->id())->where('company_info_id', auth()->user()->default_company)->first();
+        $role_id = RoleUserProfile::where('user_id', auth()->id())->where('profile_id', auth()->user()->profile_id)->first();
         $permissions = Permission::where('role_id', $role_id)->get();
         return $permissions;
     }
