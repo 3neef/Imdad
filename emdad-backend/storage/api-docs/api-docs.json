@@ -1716,7 +1716,60 @@
                 }
             }
         },
-        "/api/v1_0/warehouses/create": {
+        "/api/v1_0/warehouses": {
+            "get": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "get all warehouse",
+                "description": "get all warehouses Here",
+                "operationId": "getAllWarehouses",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get all warehouses",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "warehouse"
@@ -1908,166 +1961,7 @@
                 }
             }
         },
-        "/api/v1_0/warehouses/getAll": {
-            "get": {
-                "tags": [
-                    "warehouse"
-                ],
-                "summary": "get all warehouse",
-                "description": "get all warehouses Here",
-                "operationId": "getAllWarehouses",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "get all warehouses",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object"
-                                    }
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/warehouses/getByCompanyId/{companyId}": {
-            "get": {
-                "tags": [
-                    "warehouse"
-                ],
-                "summary": "get warehouse by company id",
-                "description": "get warehouse by company id Here",
-                "operationId": "getByCompanyIdWarehouse",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "get warehouse by company id",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/warehouses/getByUserId/{userId}'": {
-            "get": {
-                "tags": [
-                    "warehouse"
-                ],
-                "summary": "get warehouse By UserId",
-                "description": "get warehouse By UserId Here",
-                "operationId": "getWarehouseUserById",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "get warehouse By UserId",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/warehouses/getById/{id}'": {
+        "/api/v1_0/warehouses/{id}'": {
             "get": {
                 "tags": [
                     "warehouse"
@@ -2117,9 +2011,7 @@
                         "description": "Resource Not Found"
                     }
                 }
-            }
-        },
-        "/api/v1_0/warehouses/delete/{id}'": {
+            },
             "delete": {
                 "tags": [
                     "warehouse"
@@ -3932,6 +3824,14 @@
                         "schema": {
                             "type": "string"
                         }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
                     }
                 ],
                 "requestBody": {
@@ -4003,6 +3903,14 @@
                         "description": "Set api_key",
                         "schema": {
                             "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
                         }
                     }
                 ],
