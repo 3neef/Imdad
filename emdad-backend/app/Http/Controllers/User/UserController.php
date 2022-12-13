@@ -168,7 +168,7 @@ class UserController extends Controller
 
     /**
      * @OA\put(
-     * path="/api/v1_0/users/update",
+     * path="/api/v1_0/users",
      * operationId="updateUser",
      * tags={"UM & Permissions"},
      * summary="update User",
@@ -288,11 +288,19 @@ class UserController extends Controller
 
     /**
      * @OA\delete(
-     * path="/api/v1_0/users/delete/{id}",
+     * path="/api/v1_0/users",
      * operationId="deleteUser",
      * tags={"UM & Permissions"},
      * summary="Delete User",
      * description="delete user here",
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="api_key",
      *         in="header",
