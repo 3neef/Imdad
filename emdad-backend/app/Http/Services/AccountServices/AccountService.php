@@ -69,9 +69,9 @@ class AccountService
 
     public function delete($id)
     {
-        // dd($id);
+
         $profile = Profile::find($id)->first();
-        // dd($profile);
+
         $deleted = $profile->delete();
         if ($deleted) {
             return response()->json(['message' => 'deleted successfully'], 301);
@@ -79,14 +79,17 @@ class AccountService
         return response()->json(['error' => 'system error'], 500);
     }
 
-    // public function restore($id)
-    // {
-    //     $restore = Profile::where('id', $id)->withTrashed()->restore();
-    //     if ($restore) {
-    //         return response()->json(['message' => 'restored successfully'], 200);
-    //     }
-    //     return response()->json(['error' => 'system error'], 500);
-    // }
+    public function restore($id)
+    {
+        $profile = Profile::where('id', $id)->withTrashed()->restore();
+        if($profile!=null)
+        {
+        return response()->json(['message' => 'restored successfully'], 200);
+
+        }else{
+            return response()->json(['error' => 'No data Founded'], 404);
+        }
+    }
 
     // public function unValidate()
     // {

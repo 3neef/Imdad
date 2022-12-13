@@ -320,10 +320,10 @@ class ProfileController extends Controller
      *      @OA\Response(response=500, description="system error"),
      * )
      */
-    // public function restoreByAccountId(RestoreAccountRequest $request, $id)
-    // {
-    //     return $this->accountService->restore($id);
-    // }
+    public function restoreByAccountId($id)
+    {
+        return $this->accountService->restore($id);
+    }
 
     /**
      * @OA\get(
