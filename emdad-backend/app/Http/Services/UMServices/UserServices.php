@@ -29,8 +29,8 @@ class UserServices
 
         $request['otp'] = strval(rand(1000, 9999));
         $user = User::create($request);
-        $role_id = $request['roleId']??'';
-        if ($role_id){
+        $role_id = $request['roleId'] ?? '';
+        if ($role_id) {
             $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id]);
 
             $user->update(['profile_id' => auth()->user()->profile_id]);
@@ -60,7 +60,7 @@ class UserServices
             "mobile" => $request->mobile ?? $user->mobile,
         ]);
 
-        $userRoleProfile= RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
+        $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
         if ($request->has("roleId") && $userRoleProfile != null) {
 
@@ -111,7 +111,7 @@ class UserServices
                 ]
             );
         }
-        $token = $user->createToken('authtoken', json_decode($user->permissions, true) ??[""]);
+        $token = $user->createToken('authtoken', json_decode($user->permissions, true) ?? [""]);
 
         return response()->json(
             [
@@ -183,10 +183,8 @@ class UserServices
     {
 
         $user = User::find($id)->first();
-        if($user==null)
-        {
-        return response()->json(['error' => 'user already deleted'], 403);
-            
+        if ($user == null) {
+            return response()->json(['error' => 'user already deleted'], 403);
         }
         // dd($user);
 
@@ -241,7 +239,6 @@ class UserServices
     // Todo  Need Code Again !
     public function resetPassword($request)
     {
-
     }
 
     public function assignRole($request)
@@ -255,12 +252,32 @@ class UserServices
         return response()->json(['message' => 'assign role successfully'], 200);
     }
 
-    public function unAssignRole($request)
+    public function userActivate($request)
     {
-        $userRoleCompany = RoleUserProfile::where('user_id', '=', $request->userId)->where('profile_id', '=', $request->profile_id)->first();
-        $deleted = $userRoleCompany->delete();
-        if ($deleted) {
-            return response()->json(['message' => 'unassign role successfully'], 200);
+        $user = User::where('id', $request->userId)->first();
+        $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+
+        if($userRoleProfile==null)
+        {
+            return response()->json(['error' => 'user doesn\'t belong to this company'], 500);
+
+        }
+        $active = $userRoleProfile->update(['status' => 'active']);
+        if ($active) {
+            return response()->json(['message' => 'user account has activated successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
+
+    public function disable($request)
+    {
+        $user = User::where('id', $request->userId)->first();
+        $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+        $active = $userRoleProfile->update(['status' => 'inActive']);
+        // dd($userRoleProfile);
+        if ($active) {
+            return response()->json(['message' => 'user account has disabled successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
@@ -277,18 +294,17 @@ class UserServices
     public function setDefaultCompany($request)
     {
 
-        $user = User::where("id",auth()->id())->first();
+        $user = User::where("id", auth()->id())->first();
         $user->update(
             [
-                "profile_id"=>$request->profileId
+                "profile_id" => $request->profileId
             ]
-            );
+        );
 
-            return response()->json([
-                'message' => 'Default company successfully',
-                'data' => ['user' => new UserResponse($user)]
-            ], 200);
-
+        return response()->json([
+            'message' => 'Default company successfully',
+            'data' => ['user' => new UserResponse($user)]
+        ], 200);
     }
 
     public function showAll()
@@ -333,5 +349,4 @@ class UserServices
             ]
         );
     }
-
 }

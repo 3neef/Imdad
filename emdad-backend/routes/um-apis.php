@@ -30,7 +30,9 @@ Route::middleware(['app.auth'])->prefix('roles')->group(function () {
 Route::middleware(['app.auth','auth:sanctum'])->prefix('users')->group(function() {
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
     Route::post('register', [UserController::class, 'store']);
-    Route::put("Activate", [UserController::class, 'Activate']);
+    Route::put("Activate", [UserController::class, 'userActivate']);
+    Route::put("disable", [UserController::class, 'disable']);
+
     Route::put('update', [UserController::class, 'update']);
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
 

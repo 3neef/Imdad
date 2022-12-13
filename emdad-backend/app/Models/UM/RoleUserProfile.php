@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RoleUserProfile extends Pivot
 {
     use SoftDeletes;
-    protected $fillable = ['permissions'];
+    protected $fillable = ['permissions','status'];
 
     protected $table = 'role_user_profile';
 

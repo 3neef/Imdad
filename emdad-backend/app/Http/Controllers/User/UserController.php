@@ -12,6 +12,7 @@ use App\Http\Requests\UMRequests\User\GetUserRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\StoreUserRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
+use App\Http\Requests\UMRequests\User\UserAvtivateRerquest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\UserServices;
 use App\Models\User;
@@ -150,6 +151,7 @@ class UserController extends Controller
      */
     public function getUserInfoByToken(Request $request)
     {
+        ///TODO
         $user = auth()->user();
 
         if ($request->has('dataset') && is_array($request->dataset)) {
@@ -404,15 +406,14 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function Activate(
-        AssignRoleRequest $request,
-        UserServices $userServices
-    ) {
-        return $userServices->unAssignRole($request);
+    public function userActivate(UserAvtivateRerquest $request,UserServices $userServices) {
+        return $userServices->userActivate($request);
     }
 
 
-
+    public function disable(UserAvtivateRerquest $request,UserServices $userServices) {
+        return $userServices->disable($request);
+    }
 
 
     /**
