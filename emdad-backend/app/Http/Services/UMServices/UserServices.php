@@ -36,7 +36,7 @@ class UserServices
         }
 
         if ($user) {
-            return response()->json([   
+            return response()->json([
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
@@ -97,13 +97,13 @@ class UserServices
         }
 
 
-        if ($user->is_verified == 0) {
-            return response()->json(
-                [
-                    "success" => false, "error" => "verifiy your otp first"
-                ]
-            );
-        }
+        // if ($user->is_verified == 0) {
+        //     return response()->json(
+        //         [
+        //             "success" => false, "error" => "verifiy your otp first"
+        //         ]
+        //     );
+        // }
         if (!($user->password === $request->password)) {
             return response()->json(
                 [
@@ -117,7 +117,7 @@ class UserServices
             [
                 'message' => 'Logged in',
                 'data' => [
-                    'user' => new UserResponse($user),
+                    'user' => $user,
                     'token' => $token->plainTextToken
                 ]
             ]
@@ -232,7 +232,7 @@ class UserServices
         return response()->json(['error' => 'system error'], 500);
     }
 
-    // Todo  Need Code Again ! 
+    // Todo  Need Code Again !
     public function resetPassword($request)
     {
 
@@ -277,12 +277,12 @@ class UserServices
                 "profile_id"=>$request->profileId
             ]
             );
-       
+
             return response()->json([
                 'message' => 'Default company successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
-    
+
     }
 
     public function showAll()

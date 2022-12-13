@@ -42,7 +42,7 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
         });
-     
+
     }
 
     /**
