@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->references("id")->on("users")->cascadeOnDelete();
             $table->foreignId('profile_id')->nullable()->references("id")->on("profiles")->cascadeOnDelete();
             $table->unique(["role_id","user_id","profile_id","deleted_at"])->name("user_role_profile_deletedat");
+            $table->json('permissions')->nullable();
             $table->softDeletes();
             $table->enum("status",['active','inActive'])->default('active');
             $table->timestamps();

@@ -32,7 +32,7 @@ class CreateAccountRequest extends FormRequest
             'firstName' => ['required','string','max:100'],
             'companyName' => ['string','max:100'],
             'lastName' => ['required','string','max:25'],
-            'companyType' => ['required','integer','between:0,2'],
+            'companyType' => ['required','','between:0,2'],
             'roleId' => ['required','integer','between:1,3'],
             'personId' => ['required','string','max:25'],
             'idType' => ['required','string','max:100'],

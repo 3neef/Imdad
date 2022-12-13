@@ -12,8 +12,8 @@ class RoleUserProfile extends Pivot
     use SoftDeletes;
     protected $fillable = ['permissions'];
 
-    protected $table = 'roles_users_profiles';
-    
+    protected $table = 'role_user_profile';
+
     public function users()
     {
         return $this->belongsToMany(User::class, 'role_user_profile', 'user_id')->withTimestamps()->withPivot("status");
