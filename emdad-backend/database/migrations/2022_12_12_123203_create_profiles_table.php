@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('vat_number')->nullable();
             $table->string('cr_number')->nullable();
             $table->boolean('active')->default(false);
+            $table->softDeletes();
 
             $table->timestamps();
         });

@@ -23,6 +23,8 @@ return new class extends Migration
             $table->set('type', ['sender', 'receiver']);
             $table->set('status', ['active', 'disabled'])->default('active');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 
