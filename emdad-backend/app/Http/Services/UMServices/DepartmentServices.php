@@ -7,6 +7,15 @@ use App\Models\Department;
 class DepartmentServices
 {
 
+    public function createDepartment($request)
+    {
+        $department=Department::create([
+            "name"=>$request->name,
+            "profile_id"=>auth()->user()->profile_id
+        ]);
+        return response()->json(["success"=>true,"data"=>$department],201);
+    }
+
     public function AddDepartment($request)
     {
         $db=Department::create($request);

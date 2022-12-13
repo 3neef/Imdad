@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UMRequests\DepartmentRequest;
 use App\Http\Services\UMServices\DepartmentServices;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    public DepartmentServices $departmentService;
+
     /**
      * Display a listing of the resource.
      *
@@ -69,9 +72,9 @@ class DepartmentController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
-        return $this->departmentService->AddDepartment($request->validated());
+        return $this->departmentService->createDepartment($request->validated());
 
     }
 

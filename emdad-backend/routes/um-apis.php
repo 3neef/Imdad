@@ -69,3 +69,5 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('department')->group(fun
     Route::post('create', [Departmentontroller::class, 'create']);
     Route::post('assing-User-To-Department', [DepartmentController::class, 'assingUser']);
 });
+
+Route::apiResource('department',DepartmentController::class)->middleware(['app.auth', 'auth:sanctum']);
