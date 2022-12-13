@@ -20,14 +20,11 @@ Route::middleware(['app.auth','auth:sanctum'])->prefix('accounts')->group(functi
 });
 
 Route::middleware(['app.auth','auth:sanctum'])->prefix('warehouses')->group(function() {
-
-    Route::post('create', [LocationController::class, 'saveLocation']);
-    Route::get('getAll', [LocationController::class, 'getAllLocations']);
-    Route::get('getById/{id}', [LocationController::class, 'getByLocationById']);
-    Route::get('getByUserId/{userId}', [LocationController::class, 'getByLocationByUserId']);
-    Route::get('getByCompanyId/{companyId}', [LocationController::class, 'getByLocationByCompanyId']);
-    Route::put('update', [LocationController::class, 'updateLocation']);
     Route::put('verfied', [LocationController::class, 'verfiedLocation']);
-    Route::delete('delete/{id}', [LocationController::class, 'deleteLocation']);
     Route::put('restore/{id}', [LocationController::class, 'restoreByLocationId']);
 });
+
+
+
+Route::apiResource('warehouses',LocationController::class)->middleware(['app.auth', 'auth:sanctum']);
+

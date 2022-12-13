@@ -9,6 +9,7 @@ use App\Http\Requests\AccountRequests\Location\UpdateLocationRequest;
 use App\Http\Requests\AccountRequests\Location\GetByLocationIdRequest;
 use App\Http\Requests\AccountRequests\Location\RestoreLocationRequest;
 use App\Http\Requests\AccountRequests\Location\VerfiedLocationRequest;
+use App\Models\Accounts\CompanyLocations;
 
 class LocationController extends Controller
 {
@@ -26,7 +27,7 @@ class LocationController extends Controller
     }
 /**
         * @OA\Post(
-        * path="/api/v1_0/warehouses/create",
+        * path="/api/v1_0/warehouses",
         * operationId="createWarehouse",
         * tags={"warehouse"},
         * summary="create warehouse",
@@ -81,7 +82,7 @@ class LocationController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function saveLocation(CreateLocationRequest $request)
+    public function store(CreateLocationRequest $request)
     {
         return $this->locationService->save($request);
     }
@@ -143,13 +144,13 @@ class LocationController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function updateLocation(UpdateLocationRequest $request)
+    public function update(UpdateLocationRequest $request)
     {
         return $this->locationService->update($request);
     }
 /**
         * @OA\get(
-        * path="/api/v1_0/warehouses/getAll",
+        * path="/api/v1_0/warehouses",
         * operationId="getAllWarehouses",
         * tags={"warehouse"},
         * summary="get all warehouse",
@@ -187,101 +188,14 @@ class LocationController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function getAllLocations()
+    public function index()
     {
         return $this->locationService->getAll();
     }
+
 /**
         * @OA\get(
-        * path="/api/v1_0/warehouses/getByCompanyId/{companyId}",
-        * operationId="getByCompanyIdWarehouse",
-        * tags={"warehouse"},
-        * summary="get warehouse by company id",
-        * description="get warehouse by company id Here",
-    *     @OA\Parameter(
-     *         name="api_key",
-     *         in="header",
-     *         description="Set api_key",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
-        *      @OA\Response(
-        *        response=200,
-        *          description="get warehouse by company id",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object"
-        *            ),
-        *        ),
-        *
-        *       ),
-        *      @OA\Response(response=500, description="system error"),
-        *      @OA\Response(response=422, description="Validate error"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
-    public function getByLocationByCompanyId(GetByLocationIdRequest $request,$id)
-    {
-        return $this->locationService->showByCompanyId($id);
-    }
-/**
-        * @OA\get(
-        * path="/api/v1_0/warehouses/getByUserId/{userId}'",
-        * operationId="getWarehouseUserById",
-        * tags={"warehouse"},
-        * summary="get warehouse By UserId",
-        * description="get warehouse By UserId Here",
-*     @OA\Parameter(
-     *         name="api_key",
-     *         in="header",
-     *         description="Set api_key",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
-        *      @OA\Response(
-        *        response=200,
-        *          description="get warehouse By UserId",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object"
-        *            ),
-        *        ),
-        *
-        *       ),
-        *      @OA\Response(response=500, description="system error"),
-        *      @OA\Response(response=422, description="Validate error"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
-    public function getByLocationByUserId(GetByLocationIdRequest $request,$id)
-    {
-        return $this->locationService->showByUserId($id);
-    }
-/**
-        * @OA\get(
-        * path="/api/v1_0/warehouses/getById/{id}'",
+        * path="/api/v1_0/warehouses/{id}'",
         * operationId="getWarehouseById",
         * tags={"warehouse"},
         * summary="get warehouse By Id",
@@ -319,13 +233,18 @@ class LocationController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function getByLocationById(GetByLocationIdRequest $request,$id)
+    public function show($id)
     {
+        $location=CompanyLocations::where("id",$id)->first();
+        if($location==null||false){// replace false by checking user permission
+            return response()->json(['success'=>false,'error' => 'not found'], 404);
+
+        }
         return $this->locationService->showById($id);
     }
 /**
         * @OA\delete(
-        * path="/api/v1_0/warehouses/delete/{id}'",
+        * path="/api/v1_0/warehouses/{id}'",
         * operationId="deleteWarehouse",
         * tags={"warehouse"},
         * summary="delete warehouse",
@@ -363,8 +282,13 @@ class LocationController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function deleteLocation(GetByLocationIdRequest $request,$id)
+    public function destroy($id)
     {
+        $location=CompanyLocations::where("id",$id)->first();
+        if($location==null||false){// replace false by checking user permission
+            return response()->json(['success'=>false,'error' => 'not found'], 404);
+
+        }
         return $this->locationService->delete($id);
     }
 /**
