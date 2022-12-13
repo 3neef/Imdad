@@ -166,8 +166,8 @@ class UserController extends Controller
     }
 
     /**
-     * @OA\@put(
-     * path="/api/v1_0/users",
+     * @OA\put(
+     * path="/api/v1_0/users/update",
      * operationId="updateUser",
      * tags={"UM & Permissions"},
      * summary="update User",
@@ -284,7 +284,7 @@ class UserController extends Controller
 
 
     /**
-     * @OA\@delete(
+     * @OA\delete(
      * path="/api/v1_0/users/delete/{id}",
      * operationId="deleteUser",
      * tags={"UM & Permissions"},
