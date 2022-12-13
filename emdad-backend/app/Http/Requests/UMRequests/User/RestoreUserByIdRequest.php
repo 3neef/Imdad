@@ -32,7 +32,7 @@ class RestoreUserByIdRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','integer',Rule::exists('users')->whereNotNull('deleted_at')]
+            'id' => ['required','integer','exists:users,id']
         ];
     }
 

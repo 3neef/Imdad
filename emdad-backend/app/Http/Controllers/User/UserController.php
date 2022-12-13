@@ -278,10 +278,10 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function restoreUser(RestoreUserByIdRequest  $id, UserServices $userServices)
+    public function restoreUser(RestoreUserByIdRequest  $request, UserServices $userServices)
     {
         // dd('p');
-        return $userServices->restoreById($id);
+        return $userServices->restoreById($request);
     }
 
 

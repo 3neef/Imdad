@@ -27,17 +27,19 @@ Route::middleware(['app.auth'])->prefix('roles')->group(function () {
     Route::get('getAll', [RoleController::class, 'getAllRoles']);
 });
 
-
-Route::middleware(['app.auth', 'auth:sanctum'])->group(function() {
+Route::middleware(['app.auth','auth:sanctum'])->prefix('users')->group(function() {
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
     Route::post('register', [UserController::class, 'store']);
     Route::put("Activate", [UserController::class, 'Activate']);
     Route::put('update', [UserController::class, 'update']);
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
 
+    Route::delete('destroy/{id}', [UserController::class, 'delete']);
+    Route::put("restore/{id}", [UserController::class, 'restoreUser']);
 });
-Route::delete('destory/{id}', [UserController::class, 'delete']);
-Route::put("restore/{id}", [UserController::class, 'restoreUser']);
+
+
+
 
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(function() {
 

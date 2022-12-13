@@ -182,10 +182,15 @@ class UserServices
     public function delete($id)
     {
 
-        $user = User::find($id);
+        $user = User::find($id)->first();
+        if($user==null)
+        {
+        return response()->json(['error' => 'user already deleted'], 403);
+            
+        }
+        // dd($user);
 
         $user->tokens()->delete();
-        dd($user);
 
         $deleted = $user->delete();
 
@@ -196,9 +201,10 @@ class UserServices
     }
 
 
-    public function restoreById($id)
+    public function restoreById($request)
     {
-        $restore = User::where('id', $id)->withTrashed()->restore();
+        $restore = User::where('id', $request->id)->withTrashed()->first()->restore();
+
         if ($restore) {
             return response()->json(['message' => 'User restored successfully'], 200);
         }
