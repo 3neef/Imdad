@@ -578,6 +578,1088 @@
                 }
             }
         },
+        "/api/v1_0/subscriptions/create": {
+            "post": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "create Subscription packages",
+                "description": "create Subscription package",
+                "operationId": "create-sub-packages",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "packageName",
+                                    "type",
+                                    "subscriptionDetails",
+                                    "subscriptionDetails.superAdmin"
+                                ],
+                                "properties": {
+                                    "packageName": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionDetails": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionDetails.superAdmin": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/subscriptions/update": {
+            "put": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
+                "description": "update Subscription",
+                "operationId": "update-sub-packages",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "type",
+                                    "updateOld",
+                                    "subscriptionDetails",
+                                    "subscriptionDetails.superAdmin"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "type": {
+                                        "type": "integer"
+                                    },
+                                    "updateOld": {
+                                        "type": "boolean"
+                                    },
+                                    "subscriptionDetails": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionDetails.superAdmin": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/subscriptions/get-buyer-packs": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "get package information",
+                "description": "get buyer package info",
+                "operationId": "get-buyer-packages",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "supplier packages",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/subscriptions/get-supplier-packs": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "get package information",
+                "description": "get buyer package info",
+                "operationId": "get-supplier-packages",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "supplier packages",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/installtion/seed": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "seeder db",
+                "description": "seeder db Here",
+                "operationId": "seederDb",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/installation/migrate": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "migrate db",
+                "description": "migrate db Here",
+                "operationId": "migrateDb",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/auth/reset-password": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "reset password",
+                "description": "reset password Here",
+                "operationId": "resetPassword",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "bearer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "oldPassword",
+                                    "newPassword"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "oldPassword": {
+                                        "type": "string"
+                                    },
+                                    "newPassword": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password has been reset successfully!!",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/auth/login": {
+            "post": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "User Login",
+                "description": "Login User Here",
+                "operationId": "authLogin",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "password": {
+                                        "type": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Login Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Login Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/auth/verifiy-otp": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "User Activation/ user login mobile + otp",
+                "description": "activate by otp also allows login by confirming otp",
+                "operationId": "user-verify-otp",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application-json": {
+                            "schema": {
+                                "required": [
+                                    "otp"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "otp": {
+                                        "type": "string"
+                                    },
+                                    "mobile": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Login Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "Login Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/auth/resend-otp": {
+            "post": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "resend otp",
+                "description": "resend otp Here",
+                "operationId": "resend otp",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application-json": {
+                            "schema": {
+                                "properties": {
+                                    "otp rest": {
+                                        "type": "object",
+                                        "additionalProperties": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "email": {
+                                                        "type": "email"
+                                                    },
+                                                    "phone": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "resent new otp",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/auth/logout": {
+            "post": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "User Logout",
+                "description": "Logout User Here",
+                "operationId": "Logout",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Logged out",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/auth/forgot-password": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "forgot password",
+                "description": "forgot password Here",
+                "operationId": "forgotPassword",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "sended otp",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "OTP": {
+                                            "type": "integer"
+                                        },
+                                        "otpExpiresAt": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/auth/remove-user/{id}": {
+            "delete": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "remove User",
+                "description": "remove user here",
+                "operationId": "removeUser",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application-json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "param": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "301": {
+                        "description": "User deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/coupon/create": {
+            "post": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "create Coupon",
+                "description": "create Coupon Here",
+                "operationId": "createCoupon",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "allowed",
+                                    "stratDate",
+                                    "endDate",
+                                    "value",
+                                    "isPercentage"
+                                ],
+                                "properties": {
+                                    "allowed": {
+                                        "type": "integer"
+                                    },
+                                    "stratDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "endDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "value": {
+                                        "type": "integer"
+                                    },
+                                    "isPercentage": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/coupon/show": {
+            "get": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "show all  coupons",
+                "description": "show all  coupons Here",
+                "operationId": "showallcoupons",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Maincatogre": {
+                                            "type": "integer",
+                                            "example": "{'id': 1, 'code': 1234567 ,'used': 0, 'allowed': 1, 'startdate': 2022-1-1, 'enddate': 2022-2-1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/coupon/used": {
+            "post": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "used Coupon ",
+                "description": " used Coupon Here",
+                "operationId": "usedcoupon",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "code",
+                                    "subscriptionpayment_id"
+                                ],
+                                "properties": {
+                                    "code": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionpayment_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "subscriptionPayment": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "301": {
+                        "description": "can,t use coupon"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/measures/get-all-unit-of-measure": {
+            "get": {
+                "tags": [
+                    "UOM"
+                ],
+                "summary": "show all unit of measure",
+                "description": "show all unit of measure Here",
+                "operationId": "getallunitofmeasure",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "example": "{'id': 1, 'name':'kg'}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1_0/warehouses/create": {
             "post": {
                 "tags": [
@@ -1176,1855 +2258,6 @@
                     },
                     "404": {
                         "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/subscriptions/create": {
-            "post": {
-                "tags": [
-                    "Platform Settings"
-                ],
-                "summary": "create Subscription packages",
-                "description": "create Subscription package",
-                "operationId": "create-sub-packages",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "packageName",
-                                    "type",
-                                    "subscriptionDetails",
-                                    "subscriptionDetails.superAdmin"
-                                ],
-                                "properties": {
-                                    "packageName": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "integer"
-                                    },
-                                    "subscriptionDetails": {
-                                        "type": "integer"
-                                    },
-                                    "subscriptionDetails.superAdmin": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "created successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/subscriptions/update": {
-            "put": {
-                "tags": [
-                    "Platform Settings"
-                ],
-                "summary": "update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
-                "description": "update Subscription",
-                "operationId": "update-sub-packages",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id",
-                                    "type",
-                                    "updateOld",
-                                    "subscriptionDetails",
-                                    "subscriptionDetails.superAdmin"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "type": {
-                                        "type": "integer"
-                                    },
-                                    "updateOld": {
-                                        "type": "boolean"
-                                    },
-                                    "subscriptionDetails": {
-                                        "type": "integer"
-                                    },
-                                    "subscriptionDetails.superAdmin": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/subscriptions/get-buyer-packs": {
-            "get": {
-                "tags": [
-                    "Platform Settings"
-                ],
-                "summary": "get package information",
-                "description": "get buyer package info",
-                "operationId": "get-buyer-packages",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "supplier packages",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "data": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/subscriptions/get-supplier-packs": {
-            "get": {
-                "tags": [
-                    "Platform Settings"
-                ],
-                "summary": "get package information",
-                "description": "get buyer package info",
-                "operationId": "get-supplier-packages",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "supplier packages",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
-                                        "data": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/installtion/seed": {
-            "get": {
-                "tags": [
-                    "Platform Settings"
-                ],
-                "summary": "seeder db",
-                "description": "seeder db Here",
-                "operationId": "seederDb",
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/installation/migrate": {
-            "get": {
-                "tags": [
-                    "Platform Settings"
-                ],
-                "summary": "migrate db",
-                "description": "migrate db Here",
-                "operationId": "migrateDb",
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/register": {
-            "post": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "Register User",
-                "description": "Register User Here",
-                "operationId": "registerUser",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "firstName",
-                                    "lastName",
-                                    "password",
-                                    "email",
-                                    "mobile",
-                                    "identityNumber",
-                                    "identityType",
-                                    "roleId",
-                                    "expireDate"
-                                ],
-                                "properties": {
-                                    "firstName": {
-                                        "type": "string"
-                                    },
-                                    "expireDate": {
-                                        "type": "string",
-                                        "format": "date"
-                                    },
-                                    "lastName": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "email"
-                                    },
-                                    "mobile": {
-                                        "type": "string"
-                                    },
-                                    "identityNumber": {
-                                        "type": "string"
-                                    },
-                                    "identityType": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User created successfully",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/update": {
-            "put": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "update User",
-                "description": "update User Here",
-                "operationId": "updateUser",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "properties": {
-                                    "password": {
-                                        "type": "string"
-                                    },
-                                    "firstName": {
-                                        "type": "string"
-                                    },
-                                    "lastName": {
-                                        "type": "string"
-                                    },
-                                    "roleId": {
-                                        "type": "integer"
-                                    },
-                                    "email": {
-                                        "type": "email"
-                                    },
-                                    "mobile": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "User updated successfully",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/login": {
-            "post": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "User Login",
-                "description": "Login User Here",
-                "operationId": "authLogin",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "password"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "email"
-                                    },
-                                    "password": {
-                                        "type": "password"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Login Successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Login Successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/verifiy-otp": {
-            "put": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "User Activation/ user login mobile + otp",
-                "description": "activate by otp also allows login by confirming otp",
-                "operationId": "user-verify-otp",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application-json": {
-                            "schema": {
-                                "required": [
-                                    "otp"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "otp": {
-                                        "type": "string"
-                                    },
-                                    "mobile": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Login Successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "Login Successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/resend-otp": {
-            "post": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "resend otp",
-                "description": "resend otp Here",
-                "operationId": "resend otp",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application-json": {
-                            "schema": {
-                                "properties": {
-                                    "otp rest": {
-                                        "type": "object",
-                                        "additionalProperties": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "email": {
-                                                        "type": "email"
-                                                    },
-                                                    "phone": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "resent new otp",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/logout": {
-            "post": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "User Logout",
-                "description": "Logout User Here",
-                "operationId": "Logout",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Logged out",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/delete/{id}": {
-            "delete": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "Delete User",
-                "description": "delete user here",
-                "operationId": "deleteUser",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application-json": {
-                            "schema": {
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "param": {
-                                        "type": "boolean"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "301": {
-                        "description": "User deleted successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/restore/{id}": {
-            "put": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "Restore User",
-                "description": "restore user here",
-                "operationId": "restoreUser",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User restored successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/forgot-password": {
-            "put": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "forgot password",
-                "description": "forgot password Here",
-                "operationId": "forgotPassword",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "email"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "email"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "sended otp",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "OTP": {
-                                            "type": "integer"
-                                        },
-                                        "otpExpiresAt": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/reset-password": {
-            "put": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "reset password",
-                "description": "reset password Here",
-                "operationId": "resetPassword",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "email",
-                                    "oldPassword",
-                                    "newPassword"
-                                ],
-                                "properties": {
-                                    "email": {
-                                        "type": "email"
-                                    },
-                                    "oldPassword": {
-                                        "type": "string"
-                                    },
-                                    "newPassword": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Password has been reset successfully!!",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/assginRole": {
-            "post": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "assgin Role",
-                "description": "assgin Role Here",
-                "operationId": "assginRole",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "userId",
-                                    "role",
-                                    "companyId"
-                                ],
-                                "properties": {
-                                    "userId": {
-                                        "type": "integer"
-                                    },
-                                    "role": {
-                                        "type": "string,integer"
-                                    },
-                                    "companyId": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "assign role successfully",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/unAssginRole": {
-            "post": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "Unassgin Role",
-                "description": "assgin Role Here",
-                "operationId": "unassginRole",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "userId",
-                                    "companyId"
-                                ],
-                                "properties": {
-                                    "userId": {
-                                        "type": "integer"
-                                    },
-                                    "companyId": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "unassign role successfully",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/oldRole": {
-            "post": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "restore old Role",
-                "description": "restore old Role Here",
-                "operationId": "restoreOldRole",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "userId",
-                                    "companyId"
-                                ],
-                                "properties": {
-                                    "userId": {
-                                        "type": "integer"
-                                    },
-                                    "companyId": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "restored successfully'",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/setDefaultCompany": {
-            "put": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "set default company",
-                "description": "set default company Here",
-                "operationId": "defaultCompany",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id",
-                                    "companyId"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "companyId": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Default company successfully'",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/remove-user/{id}": {
-            "delete": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "remove User",
-                "description": "remove user here",
-                "operationId": "removeUser",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application-json": {
-                            "schema": {
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "param": {
-                                        "type": "boolean"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "301": {
-                        "description": "User deleted successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/user-data": {
-            "get": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "Get user Info by token ",
-                "description": "Register User Here",
-                "operationId": "get-user-data-by-token",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "properties": {
-                                    "dataset[defalut_company]": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "data": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/coupon/create": {
-            "post": {
-                "tags": [
-                    "Coupon"
-                ],
-                "summary": "create Coupon",
-                "description": "create Coupon Here",
-                "operationId": "createCoupon",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "allowed",
-                                    "stratDate",
-                                    "endDate",
-                                    "value",
-                                    "isPercentage"
-                                ],
-                                "properties": {
-                                    "allowed": {
-                                        "type": "integer"
-                                    },
-                                    "stratDate": {
-                                        "type": "date_format:Y/m/d"
-                                    },
-                                    "endDate": {
-                                        "type": "date_format:Y/m/d"
-                                    },
-                                    "value": {
-                                        "type": "integer"
-                                    },
-                                    "isPercentage": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "created Successfully"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/coupon/show": {
-            "get": {
-                "tags": [
-                    "Coupon"
-                ],
-                "summary": "show all  coupons",
-                "description": "show all  coupons Here",
-                "operationId": "showallcoupons",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "Maincatogre": {
-                                            "type": "integer",
-                                            "example": "{'id': 1, 'code': 1234567 ,'used': 0, 'allowed': 1, 'startdate': 2022-1-1, 'enddate': 2022-2-1}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1_0/coupon/used": {
-            "post": {
-                "tags": [
-                    "Coupon"
-                ],
-                "summary": "used Coupon ",
-                "description": " used Coupon Here",
-                "operationId": "usedcoupon",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "code",
-                                    "subscriptionpayment_id"
-                                ],
-                                "properties": {
-                                    "code": {
-                                        "type": "integer"
-                                    },
-                                    "subscriptionpayment_id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "subscriptionPayment": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "301": {
-                        "description": "can,t use coupon"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/measures/get-all-unit-of-measure": {
-            "get": {
-                "tags": [
-                    "UOM"
-                ],
-                "summary": "show all unit of measure",
-                "description": "show all unit of measure Here",
-                "operationId": "getallunitofmeasure",
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "object",
-                                            "example": "{'id': 1, 'name':'kg'}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -4241,6 +3474,602 @@
                     },
                     "422": {
                         "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/register": {
+            "post": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "Register User",
+                "description": "Register User Here",
+                "operationId": "registerUser",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "firstName",
+                                    "lastName",
+                                    "password",
+                                    "email",
+                                    "mobile",
+                                    "identityNumber",
+                                    "identityType",
+                                    "roleId",
+                                    "expireDate"
+                                ],
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "expireDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "mobile": {
+                                        "type": "string"
+                                    },
+                                    "identityNumber": {
+                                        "type": "string"
+                                    },
+                                    "identityType": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/user-data": {
+            "get": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "Get user Info by token ",
+                "description": "Register User Here",
+                "operationId": "get-user-data-by-token",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "dataset[defalut_company]": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/update": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "update User",
+                "description": "update User Here",
+                "operationId": "updateUser",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    },
+                                    "roleId": {
+                                        "type": "integer"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "mobile": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/restore/{id}": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "Restore User",
+                "description": "restore user here",
+                "operationId": "restoreUser",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User restored successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "Delete User",
+                "description": "delete user here",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application-json": {
+                            "schema": {
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "param": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "301": {
+                        "description": "User deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/unAssginRole": {
+            "post": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "Unassgin Role",
+                "description": "assgin Role Here",
+                "operationId": "unassginRole",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "userId",
+                                    "companyId"
+                                ],
+                                "properties": {
+                                    "userId": {
+                                        "type": "integer"
+                                    },
+                                    "companyId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "unassign role successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/setDefaultCompany": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "set default company",
+                "description": "set default company Here",
+                "operationId": "defaultCompany",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "companyId"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "companyId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Default company successfully'",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad request"

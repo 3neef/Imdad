@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Account\Driver;
-
+namespace App\Http\Requests\Driver;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateDriverRequest extends FormRequest
+class CreateDriverRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

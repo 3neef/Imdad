@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Driver\CreateDriverRequest;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -23,7 +24,7 @@ class DriverController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateDriverRequest $request)
     {
         //
     }
