@@ -3681,7 +3681,7 @@
                 }
             }
         },
-        "/api/v1_0/users/update": {
+        "/api/v1_0/users": {
             "put": {
                 "tags": [
                     "UM & Permissions"
@@ -3784,61 +3784,7 @@
                         "description": "Resource Not Found"
                     }
                 }
-            }
-        },
-        "/api/v1_0/users/restore/{id}": {
-            "put": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "Restore User",
-                "description": "restore user here",
-                "operationId": "restoreUser",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User restored successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/delete/{id}": {
+            },
             "delete": {
                 "tags": [
                     "UM & Permissions"
@@ -3847,6 +3793,14 @@
                 "description": "delete user here",
                 "operationId": "deleteUser",
                 "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "api_key",
                         "in": "header",
@@ -3887,6 +3841,58 @@
                 "responses": {
                     "301": {
                         "description": "User deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/restore/{id}": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "Restore User",
+                "description": "restore user here",
+                "operationId": "restoreUser",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User restored successfully",
                         "content": {
                             "application/json": {
                                 "schema": {}
