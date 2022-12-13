@@ -3,7 +3,6 @@
 namespace App\Http\Resources\UMResources\User;
 
 use App\Http\Resources\AccountResourses\Company\CompanyResponse;
-use App\Http\Resources\AccountResourses\Company\ProfileResponse;
 use App\Http\Resources\Company\CompanyResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -30,7 +29,7 @@ class UserResponse extends JsonResource
             "mobile" => $this->mobile,
             "otp" => $this->otp,
             "isSuperAdmin" => $this->is_super_admin,
-            "profile_id" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null
+            "profile_id" => $this->currentProfile() != null ? new CompanyResponse($this->currentProfile()) : null
         ];
     }
 }

@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('vat_number')->nullable();
             $table->string('cr_number')->nullable();
             $table->boolean('active')->default(false);
-            $table->softDeletes();
+
             $table->timestamps();
         });
 
@@ -42,7 +42,7 @@ return new class extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
         });
-
+     
     }
 
     /**

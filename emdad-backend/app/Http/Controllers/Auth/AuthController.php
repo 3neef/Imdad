@@ -98,7 +98,6 @@ class AuthController extends Controller
      * tags={"UM & Permissions"},
      * summary="User Login",
      * description="Login User Here",
-     * 
      *     @OA\Parameter(
      *         name="api_key",
      *         in="header",

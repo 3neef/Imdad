@@ -10,7 +10,6 @@ use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Models\UM\Permission;
-use App\Models\UM\RoleUserProfile;
 
 class UserServices
 {
@@ -37,7 +36,7 @@ class UserServices
         }
 
         if ($user) {
-            return response()->json([
+            return response()->json([   
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
@@ -61,11 +60,11 @@ class UserServices
             "mobile" => $request->mobile ?? $user->mobile,
         ]);
 
-        $roleUserProfile = RoleUserProfile::where('users_id', $user->id)->where('profile_id', $user->profile_id)->first();
+        $userRoleCompany = RoleUserCompany::where('users_id', $user->id)->where('company_info_id', $user->default_company)->first();
 
-        if ($request->has("roleId") && $roleUserProfile != null) {
+        if ($request->has("roleId") && $userRoleCompany != null) {
 
-            $roleUserProfile->update(['users_id' => $user->id, 'roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id]);
+            $userRoleCompany->update(['users_id' => $user->id, 'roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
         }
 
         if ($user) {
@@ -98,13 +97,13 @@ class UserServices
         }
 
 
-        // if ($user->is_verified == 0) {
-        //     return response()->json(
-        //         [
-        //             "success" => false, "error" => "verifiy your otp first"
-        //         ]
-        //     );
-        // }
+        if ($user->is_verified == 0) {
+            return response()->json(
+                [
+                    "success" => false, "error" => "verifiy your otp first"
+                ]
+            );
+        }
         if (!($user->password === $request->password)) {
             return response()->json(
                 [
@@ -118,7 +117,7 @@ class UserServices
             [
                 'message' => 'Logged in',
                 'data' => [
-                    'user' => $user,
+                    'user' => new UserResponse($user),
                     'token' => $token->plainTextToken
                 ]
             ]
@@ -233,7 +232,7 @@ class UserServices
         return response()->json(['error' => 'system error'], 500);
     }
 
-    // Todo  Need Code Again !
+    // Todo  Need Code Again ! 
     public function resetPassword($request)
     {
 
@@ -278,12 +277,12 @@ class UserServices
                 "profile_id"=>$request->profileId
             ]
             );
-
+       
             return response()->json([
                 'message' => 'Default company successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
-
+    
     }
 
     public function showAll()

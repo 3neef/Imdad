@@ -12,23 +12,24 @@ class ProfileResponse extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
-    public function toArray($request)
-    {
-        return [
-            "id" => $this->id,
-            "name" => $this->name_ar,
-            "companyId" => $this->profile_id,
-            "companyType" => $this->type,
-            "companyVatId" => $this->vat_number,
-            "CrExpiredDate" => $this->cr_expire_data,
-            "isValidated" => $this->active,
-            "crExpireData" => $this->cr_expire_data,
-            "subscriptionDetails" => $this->subscription_details,
-            "subscriptionid" => $this->subs_id,
-            "iban" => $this->iban,
-            "bank" => $this->bank,
-            "swift" => $this->swift,
-            "createdBy" => $this->crreated_by,
-        ];
-    }
+    // public function toArray($request)
+    // {
+    //     return [
+    //         "id" =>$this->id,
+    //         "name" =>$this->name,
+    //         "companyId" =>$this->company_id,
+    //         "companyType" =>$this->company_type,
+    //         "companyVatId" =>$this->company_vat_id,
+    //         "contactName" =>$this->contact_name,
+    //         "contactPhone" =>$this->contact_phone,
+    //         "contactEmail" =>$this->contact_email,
+    //         "logoPath" =>$this->logo_path,
+    //         "crPath" =>$this->cr_path,
+    //         "vatPath" =>$this->vat_path,
+    //         "isValidated" =>$this->is_validated,
+    //         "crExpireData" =>$this->cr_expire_data,
+    //         "subscriptionDetails" =>$this->subscription_details,
+    //         "subscriptionid" =>$this->subs_id,
+    //     ];
+    // }
 }

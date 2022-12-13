@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use SanctumHasApiTokens, Notifiable;
+    use SanctumHasApiTokens, Notifiable, SoftDeletes;
     protected $dates = ['deleted_at'];
 
     /**
@@ -66,7 +66,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function currentProfile()
     {
-        return Profile::where("id", $this->profile_id)->select(["name_ar", 'is_validated', 'subscription_details', 'cr_expire_data', 'type', 'profile_id'])->first();
+        return Profile::where("id",$this->profile_id)->select(["company_name",'is_validated','subscription_details','cr_expire_data','company_type','company_id'])->first();
     }
 
     public function assignRole(Role $role)
@@ -84,8 +84,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roleInProfile()
     {
-        return $this->belongsToMany(Role::class, 'user_role_profile', 'user_id', 'role_id')
-            ->withPivot('profile_id')
+        return $this->belongsToMany(Role::class, 'roles_users_profiles', 'users_id', 'roles_id')
+            ->withPivot('profiles_id')
             ->withTimestamps();
     }
 
