@@ -320,7 +320,7 @@ class PermissionsController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    // public function restoreById($id,RestorePermissionRequest $request){
-    //     return $this->PermissionService->restoreById($id);
-    // }
+    public function restoreById( $permissionId){
+        return $this->PermissionService->restoreById($permissionId);
+    }
 }

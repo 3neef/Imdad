@@ -50,7 +50,10 @@ Route::middleware(['app.auth', 'auth:sanctum'])->group(function() {
     // Route::delete('delete/{id}', [PermissionsController::class, 'deletePermission']);
     // Route::put('restore/{id}', [PermissionsController::class, 'restoreById']);
     Route::apiResource('permissions',PermissionsController::class);
+    Route::put('permissions/restore/{permissionId}', [PermissionsController::class, 'restoreById']);
+
 });
+
 
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function() {
 

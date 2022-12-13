@@ -69,12 +69,12 @@ class PermissionServices
         return response()->json(['error' => 'system error'], 500);
     }
 
-    // public function restoreById($id)
-    // {
-    //     $restore = RolePermission::where('id', $id)->withTrashed()->restore();
-    //     if ($restore) {
-    //         return response()->json(['message' => 'restored successfully'], 200);
-    //     }
-    //     return response()->json(['error' => 'system error'], 500);
-    // }
+    public function restoreById($permissionId)
+    {
+        $restore = Permission::where('id', $permissionId)->withTrashed()->restore();
+        if ($restore) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
 }
