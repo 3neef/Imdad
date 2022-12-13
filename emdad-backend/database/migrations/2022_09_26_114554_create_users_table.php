@@ -29,7 +29,7 @@ return new class extends Migration
             $table->timestamps();
             $table->date('expiry_date');
             $table->string('otp');
-            $table->timestamp('otp_expires_at');
+            $table->timestamp('otp_expires_at')->nullable();
             $table->string('mobile')->unique()->nullable(false);
             $table->boolean("is_super_admin")->default(false);
             $table->boolean("is_verified")->default(false);
