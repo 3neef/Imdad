@@ -307,10 +307,7 @@ class UserServices
         ], 200);
     }
 
-    public function showAll()
-    {
-        #code...
-    }
+    
 
     public function showById($id)
     {

@@ -1,12 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\UMController;
+namespace App\Http\Controllers\Profile;
+
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UMRequests\DepartmentRequest;
 use App\Http\Services\UMServices\DepartmentServices;
+use App\Models\Department;
+use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
+ 
 
 
     public function __construct(DepartmentServices $departmentService) {
@@ -56,14 +69,43 @@ class DepartmentController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function create(DepartmentRequest $request)
+    public function store(Request $request)
     {
-       return $this->departmentService->AddDepartment($request->validated());
+        return $this->departmentService->AddDepartment($request->validated());
 
     }
 
-    // public function assingUser(AssingUserRequest $request)
-    // {
-    //     # code...
-    // }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
 }

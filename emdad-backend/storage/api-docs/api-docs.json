@@ -1660,6 +1660,62 @@
                 }
             }
         },
+        "/api/v1_0/department/create": {
+            "post": {
+                "tags": [
+                    "Department"
+                ],
+                "summary": "create department ",
+                "description": "create department  Here",
+                "operationId": "createdepartment",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "department created Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/warehouses/create": {
             "post": {
                 "tags": [
@@ -2542,62 +2598,6 @@
                     },
                     "500": {
                         "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/department/create": {
-            "post": {
-                "tags": [
-                    "Department"
-                ],
-                "summary": "create department ",
-                "description": "create department  Here",
-                "operationId": "createdepartment",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "name"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "department created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }

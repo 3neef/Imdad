@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Profile\DepartmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UMController\DepartmentController;
 use App\Http\Controllers\UMController\PermissionsController;
 use App\Http\Controllers\UMController\RoleController;
 use App\Http\Controllers\User\UserController;
@@ -66,6 +66,6 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function
 
 // Route::middleware('app.auth','auth:sanctum')->group(['prefix'=>'department'],function(){
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('department')->group(function () {
-    Route::post('create', [DepartmentController::class, 'create']);
+    Route::post('create', [Departmentontroller::class, 'create']);
     Route::post('assing-User-To-Department', [DepartmentController::class, 'assingUser']);
 });
