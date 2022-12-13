@@ -12,7 +12,6 @@ class Role extends Model
     protected $guarded = ['id'];
     protected $fillable = ['name','type','permissions_list'];
 
-.
 
     // public function givePermissionTo(RolePermission $permission)
     // {
