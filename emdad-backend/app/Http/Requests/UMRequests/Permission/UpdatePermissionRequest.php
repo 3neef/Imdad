@@ -28,10 +28,12 @@ class UpdatePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'role_id' => ['integer','exists:role_permissions,role_id'],
-            'privileges'=>['array',new UniqeValues],
-            'privileges.*'=>['integer','exists:permissions,id']
+            'name'=>['string','max:255'],
+            'label'=>['string','max:255'],
+            'category'=>['string','max:255'],
+            'description'=>['string','max:255'],
         ];
+        
     }
 
 

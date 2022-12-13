@@ -27,16 +27,13 @@ class CreatePermissionRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'role'=>'required|string|exists:roles,name',
-            'privileges'=>['required','array',new UniqeValues],
-            'privileges.*'=>['required','integer','exists:permissions,id'] 
+            'name'=>['required','string','max:255'],
+            'label'=>['required','string','max:255'],
+            'category'=>['required','string','max:255'],
+            'description'=>['required','string','max:255'],
         ];
-        
-        if (gettype(request()->role) == 'integer') {
-            $rules['role'] = 'required|integer|exists:roles,id';
-        } else {
-            $rules['role'] = 'required|string|exists:roles,name';
-        }
+
+
         return $rules;
     }
 
