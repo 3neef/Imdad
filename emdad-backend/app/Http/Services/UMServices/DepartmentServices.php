@@ -28,4 +28,18 @@ class DepartmentServices
 
         return response()->json( [ 'message'=>'department created successfully' ], 200 );
     }
+
+    public function updateDepartment($request){
+        $department=Department::where('name');
+        $department->update([
+            'name' => $request->name 
+        ]);
+        if ($department) {
+            return response()->json([
+                'message' => 'department updated successfully',
+                'data' => ['department' => $department]
+            ], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
 }

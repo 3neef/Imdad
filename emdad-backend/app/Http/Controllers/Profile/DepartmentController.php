@@ -98,7 +98,7 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->departmentService->updateDepartment($request->validated());
     }
 
     /**
