@@ -25,7 +25,7 @@ class GetRelatedCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            "id"=>"required|string",
+            "identityNumber"=>"required|string",
             "type"=>'required',Rule::in("nid","iqama","passportno","crno","gccid","entityno"),
         ];
     }

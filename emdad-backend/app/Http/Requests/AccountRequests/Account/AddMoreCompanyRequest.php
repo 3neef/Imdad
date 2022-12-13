@@ -6,6 +6,7 @@ use Dotenv\Validator;
 use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class AddMoreCompanyRequest extends FormRequest
 {
@@ -29,7 +30,7 @@ class AddMoreCompanyRequest extends FormRequest
         return [
             'crNo' => ['required','exists:related_companies,cr_number'],
             'roleId' => ['required','integer','exists:roles,id'],
-            'companyType' => ['required','integer','between:0,2'],
+            'PrfoileType' => ['required',Rule::in('Buyer','suppiler')],
            
         ];
     }
