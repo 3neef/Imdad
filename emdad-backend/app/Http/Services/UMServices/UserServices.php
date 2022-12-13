@@ -10,6 +10,7 @@ use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Models\UM\Permission;
+use App\Models\UM\RoleUserProfile;
 
 class UserServices
 {
@@ -60,11 +61,11 @@ class UserServices
             "mobile" => $request->mobile ?? $user->mobile,
         ]);
 
-        $userRoleCompany = RoleUserCompany::where('users_id', $user->id)->where('company_info_id', $user->default_company)->first();
+        $userRoleProfile= RoleUserProfile::where('users_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
-        if ($request->has("roleId") && $userRoleCompany != null) {
+        if ($request->has("roleId") && $userRoleProfile != null) {
 
-            $userRoleCompany->update(['users_id' => $user->id, 'roles_id' => $request['roleId'], 'company_info_id' => auth()->user()->default_company]);
+            $userRoleProfile->update(['users_id' => $user->id, 'roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id]);
         }
 
         if ($user) {

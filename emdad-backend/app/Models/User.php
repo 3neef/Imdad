@@ -66,7 +66,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function currentProfile()
     {
-        return Profile::where("id",$this->profile_id)->select(["name_ar",'is_validated','subscription_details','cr_expire_data','type','profile_id'])->first();
+        return Profile::where("id", $this->profile_id)->select(["name_ar", 'is_validated', 'subscription_details', 'cr_expire_data', 'type', 'profile_id'])->first();
     }
 
     public function assignRole(Role $role)
@@ -84,18 +84,18 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roleInProfile()
     {
-        return $this->belongsToMany(Role::class, 'roles_users_profiles', 'users_id', 'roles_id')
-            ->withPivot('profiles_id')
+        return $this->belongsToMany(Role::class, 'user_role_profile', 'user_id', 'role_id')
+            ->withPivot('profile_id')
             ->withTimestamps();
     }
 
-    // public function exists($roleId, $companyId)
-    // {
-    //     return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
-    //         ->wherePivot('roles_id', $roleId)
-    //         ->wherePivot('company_info_id', $companyId)
-    //         ->first();
-    // }
+    public function exists($roleId, $profileId)
+    {
+        return $this->belongsToMany(Role::class, 'role_user_profile', 'user_id', 'role_id')
+            ->wherePivot('role_id', $roleId)
+            ->wherePivot('profile_id', $profileId)
+            ->first();
+    }
 
     // public function getRoleOfUserByCompanyId()
     // {
@@ -104,13 +104,14 @@ class User extends Authenticatable implements MustVerifyEmail
     //         ->first();
     // }
 
+
     public function profiles()
     {
         return $this->belongsToMany(
             Profile::class,
             'profile_department_user'
         )->withPivot('department_id')
-            ->withTimestamps();;
+            ->withTimestamps();
     }
     public function departments()
     {
