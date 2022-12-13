@@ -66,7 +66,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function currentProfile()
     {
-        return Profile::where("id", $this->profile_id)->select(["name_ar", 'active', 'subscription_details', 'cr_expire_data', 'type', 'profile_id'])->first();
+        return Profile::where("id", $this->profile_id)->select(["name_ar", 'active', 'subscription_details', 'cr_expire_data', 'type', 'id'])->first();
     }
 
     public function assignRole(Role $role)
