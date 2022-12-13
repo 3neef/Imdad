@@ -8,39 +8,45 @@ use function PHPUnit\Framework\isEmpty;
 
 class UrwayGateway
 {
-    public function initPayment($id, $idType)
+    public function initPayment($request)
     {
 
         $curl = curl_init();
-
+        $txn_details=
+        $request->trackId."|".env('TERMINAL_ID')."|".env('TERMINAL_PASS')."|".env('PAYMENT_SEC_KEY')."|".$request->amount."|SAR";
+        $hash=hash('sha256', $txn_details);
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/related/' . $id . '/' . $idType,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
-            ),
+          CURLOPT_URL => env('PAYMENT_URL'),
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS =>'
+        {
+        "transid": '.$request->transId.',
+        "trackid": '.$request->trackId.',
+        "terminalId": '.env('TERMINAL_ID').',
+        "action": "1",
+        "customerEmail" :'.$request->customerEmail.',
+        "merchantIp": "10.10.10.101",
+        "password":'.env('TERMINAL_PASS').',
+        "country":"Saudi Arabia",
+        "currency": "SAR",
+        "amount":'.$request->amount.',
+        "requestHash":'.$hash.'
+        }',
+          CURLOPT_HTTPHEADER => array(
+            'Content-Type: application/json'
+          ),
         ));
-
+        
         $response = curl_exec($curl);
-
+        
         curl_close($curl);
-        if (is_array(json_decode($response))) {
-            foreach (json_decode($response) as $relatedCompany) {
-                $related = new RelatedCompanies();
-                $related->cr_name = $relatedCompany->crName;
-                $related->cr_number = $relatedCompany->crNumber;
-                $related->business_type = $relatedCompany->businessType->name;
-                $related->relation = $relatedCompany->relation->name;
-                $related->identity = $id;
-                $related->identity_type = $idType;
-                $related->save();
-            }
-        }
+       
+       return $response;
     }
 }
