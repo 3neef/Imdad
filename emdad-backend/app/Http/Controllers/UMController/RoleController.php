@@ -26,6 +26,46 @@ class RoleController extends Controller
     {
         $this->roleServices = $roleServices;
     }
+
+           /**
+        * @OA\get(
+        * path="/api/v1_0/roles/getAll",
+        * operationId="getAllRoles",
+        * tags={"Roles and Permissions"},
+        * summary="get roles",
+        * description="get all roles Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="get all roles",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *            ),
+        *        ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+        public function index()
+        {
+
+            return $this->roleServices->showAll();
+        }
+
        /**
         * @OA\post(
         * path="/api/v1_0/roles/save",
@@ -71,7 +111,7 @@ class RoleController extends Controller
         *               type="object",
         *               @OA\Property(property="message", type="string"),
         *               @OA\Property(property="data", type="string")
- 
+
         *            ),
         *        ),
         *       ),
@@ -83,9 +123,9 @@ class RoleController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function saveRole(CreateRoleRequest $request)
+    public function store(CreateRoleRequest $request)
     {
-        return $this->roleServices->create($request->validated());
+        return $this->roleServices->store($request);
     }
        /**
         * @OA\put(
@@ -143,9 +183,9 @@ class RoleController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function updateRole(GetRoleRequest $request)
+    public function update(GetRoleRequest $request,$id)
     {
-        return $this->roleServices->update($request);
+        return $this->roleServices->update($request,$id);
     }
        /**
         * @OA\delete(
@@ -190,48 +230,11 @@ class RoleController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function deleteRole(GetRoleByIdRequest $request,$id)
+    public function destroy($id)
     {
         return $this->roleServices->delete($id);
     }
-       /**
-        * @OA\get(
-        * path="/api/v1_0/roles/getAll",
-        * operationId="getAllRoles",
-        * tags={"Roles and Permissions"},
-        * summary="get roles",
-        * description="get all roles Here",
-*     @OA\Parameter(
-     *         name="api_key",
-     *         in="header",
-     *         description="Set api_key",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="get all roles",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *            ),
-        *        ),
-        *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity",
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
-    public function getAllRoles()
-    {
-        
-        return $this->roleServices->showAll();
-    }
+
        /**
         * @OA\get(
         * path="/api/v1_0/roles/getByRoleId/{id}",
@@ -274,7 +277,7 @@ class RoleController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function getByRoleId(GetRoleByIdRequest $request,$id)
+    public function show($id)
     {
         return $this->roleServices->showById($id);
     }
@@ -366,7 +369,7 @@ class RoleController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function restoreByRoleId($id,RestoreRoleByIdRequest $request)
+    public function restoreByRoleId($id)
     {
         return $this->roleServices->restoreById($id);
     }

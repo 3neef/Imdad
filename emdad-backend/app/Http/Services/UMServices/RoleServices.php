@@ -9,23 +9,27 @@ use App\Models\UM\Role;
 class RoleServices
 {
 
-    public function create($request)
+    public function store($request)
     {
-        $role = Role::create($request);
+        $role = Role::create($request->all());
         if ($role) {
             return response()->json(['message' => 'created successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
 
-    public function update($request)
+    public function update($request,$id)
     {
-        $role = Role::findOrFail($request->id);
-        $result = $role->update(['name' => $request->name, 'type' => $request->type]);
-        if ($result) {
-            return response()->json(['message' => 'updated successfully'], 200);
+        $role = Role::where('id',$id)->first();
+        if($role==null)
+        {
+        return response()->json(['error' => 'No data Founded', 'data'=>[]], 404);
+
+        }else{
+            $result = $role->update($request->all());
+                return response()->json(['message' => 'updated successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+
     }
 
     public function showAll()

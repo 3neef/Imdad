@@ -23,10 +23,6 @@ Route::middleware(['app.auth'])->prefix('auth')->group(function() {
     Route::put("reset-password", [AuthController::class, 'resetPassword'])->middleware('auth:sanctum');
 });
 
-Route::middleware(['app.auth'])->prefix('roles')->group(function () {
-    Route::get('getAll', [RoleController::class, 'getAllRoles']);
-});
-
 Route::middleware(['app.auth','auth:sanctum'])->prefix('users')->group(function() {
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
     Route::post('register', [UserController::class, 'store']);
@@ -39,37 +35,23 @@ Route::middleware(['app.auth','auth:sanctum'])->prefix('users')->group(function(
 });
 
 
-
-
 Route::middleware(['app.auth', 'auth:sanctum'])->group(function() {
-
-    // Route::post('save', [PermissionsController::class, 'savePermission']);
-    // Route::get('getAll', [PermissionsController::class, 'getAllPermissions']);
-    // Route::get('getById/{id}', [PermissionsController::class, 'getPermissionByRoleId']);
-    // Route::put('update', [PermissionsController::class, 'updatePermission']);
-    // Route::delete('delete/{id}', [PermissionsController::class, 'deletePermission']);
-    // Route::put('restore/{id}', [PermissionsController::class, 'restoreById']);
     Route::apiResource('permissions',PermissionsController::class);
     Route::put('permissions/restore/{permissionId}', [PermissionsController::class, 'restoreById']);
 
 });
 
 
-Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function() {
-
-    Route::post('save', [RoleController::class, 'saveRole']);
-    Route::get('getByRoleId/{id}', [RoleController::class, 'getByRoleId']);
-    Route::get('getByType/{type}', [RoleController::class, 'getByType']);
-    Route::put('update', [RoleController::class, 'updateRole']);
-    Route::delete('delete/{id}', [RoleController::class, 'deleteRole']);
-    Route::put('restore/{id}', [RoleController::class, 'restoreByRoleId']);
-    Route::get('roles-for-reg', [RoleController::class, 'getRolesForReg']);
+Route::middleware(['app.auth', 'auth:sanctum'])->group(function() {
+    Route::apiResource('roles',RoleController::class);
+     Route::put('roles/restore/{roleId}', [RoleController::class, 'restoreByRoleId']);
+     Route::get('roles-for-reg', [RoleController::class, 'getRolesForReg']);
 });
 
-// Route::middleware('app.auth','auth:sanctum')->group(['prefix'=>'department'],function(){
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('department')->group(function () {
     Route::post('create', [Departmentontroller::class, 'create']);
     Route::post('assing-User-To-Department', [DepartmentController::class, 'assingUser']);
 });
+
 
 Route::apiResource('department',DepartmentController::class)->middleware(['app.auth', 'auth:sanctum']);
