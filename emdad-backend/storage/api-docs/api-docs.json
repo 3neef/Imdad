@@ -3916,14 +3916,14 @@
                 }
             }
         },
-        "/api/v1_0/users/unAssginRole": {
-            "post": {
+        "/api/v1_0/users/Activate": {
+            "put": {
                 "tags": [
                     "UM & Permissions"
                 ],
-                "summary": "Unassgin Role",
-                "description": "assgin Role Here",
-                "operationId": "unassginRole",
+                "summary": "activate user",
+                "description": "Activate a user within a company",
+                "operationId": " userActivate",
                 "parameters": [
                     {
                         "name": "api_key",
@@ -3932,29 +3932,17 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
                     }
                 ],
                 "requestBody": {
                     "content": {
-                        "multipart/form-data": {
+                        "application-json": {
                             "schema": {
                                 "required": [
-                                    "userId",
-                                    "companyId"
+                                    "userId"
                                 ],
                                 "properties": {
                                     "userId": {
-                                        "type": "integer"
-                                    },
-                                    "companyId": {
                                         "type": "integer"
                                     }
                                 },
@@ -3967,26 +3955,101 @@
                     }
                 },
                 "responses": {
-                    "200": {
-                        "description": "unassign role successfully",
+                    "201": {
+                        "description": "Activated Successfully ",
                         "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "activated Successfully",
+                        "content": {
                             "application/json": {
                                 "schema": {}
                             }
                         }
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/disable": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "disable user",
+                "description": "disable a user within a company",
+                "operationId": " disable",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application-json": {
+                            "schema": {
+                                "required": [
+                                    "userId"
+                                ],
+                                "properties": {
+                                    "userId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "disabled Successfully ",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "activated Successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "400": {
                         "description": "Bad request"

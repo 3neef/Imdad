@@ -352,12 +352,12 @@ class UserController extends Controller
 
 
     /**
-     * @OA\post(
-     * path="/api/v1_0/users/unAssginRole",
-     * operationId="unassginRole",
+     * @OA\Put(
+     * path="/api/v1_0/users/Activate",
+     * operationId=" userActivate",
      * tags={"UM & Permissions"},
-     * summary="Unassgin Role",
-     * description="assgin Role Here",
+     * summary="activate user",
+     * description="Activate a user within a company",
      *     @OA\Parameter(
      *         name="api_key",
      *         in="header",
@@ -366,50 +366,86 @@ class UserController extends Controller
      *             type="string"
      *         )
      *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
-     *            mediaType="multipart/form-data",
+     *            mediaType="application-json",
      *            @OA\Schema(
      *               type="object",
-     *               required={"userId","companyId"},
+     *               required={"userId"},
      *               @OA\Property(property="userId", type="integer"),
-     *               @OA\Property(property="companyId", type="integer")
      *            ),
      *        ),
      *    ),
      *      @OA\Response(
+     *          response=201,
+     *          description="Activated Successfully ",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
      *          response=200,
-     *          description="unassign role successfully",
-     *          @OA\JsonContent(),
-     *          @OA\MediaType(
-     *            mediaType="multipart/form-data",
-     *            @OA\Schema(
-     *               type="object",
-     *               @OA\Property(property="message", type="string")
-     *            ),
-     *          ),
+     *          description="activated Successfully",
+     *          @OA\JsonContent()
      *       ),
      *      @OA\Response(
      *          response=422,
-     *          description="Unprocessable Entity"
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
      *       ),
      *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
+
     public function userActivate(UserAvtivateRerquest $request,UserServices $userServices) {
         return $userServices->userActivate($request);
     }
 
+     /**
+     * @OA\Put(
+     * path="/api/v1_0/users/disable",
+     * operationId=" disable",
+     * tags={"UM & Permissions"},
+     * summary="disable user",
+     * description="disable a user within a company",
+     *     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="application-json",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"userId"},
+     *               @OA\Property(property="userId", type="integer"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=201,
+     *          description="disabled Successfully ",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="activated Successfully",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
 
     public function disable(UserAvtivateRerquest $request,UserServices $userServices) {
         return $userServices->disable($request);
