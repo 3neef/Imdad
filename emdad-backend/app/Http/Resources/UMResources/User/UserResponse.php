@@ -2,10 +2,7 @@
 
 namespace App\Http\Resources\UMResources\User;
 
-use App\Http\Resources\AccountResourses\Company\CompanyResponse;
-use App\Http\Resources\AccountResourses\Company\ProfileResponse;
-use App\Http\Resources\AccountResourses\Profile\ProfileResponse as ProfileProfileResponse;
-use App\Http\Resources\Company\CompanyResource;
+use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResponse extends JsonResource
