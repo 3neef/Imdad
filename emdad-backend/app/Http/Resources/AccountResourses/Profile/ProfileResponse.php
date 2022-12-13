@@ -21,7 +21,7 @@ class ProfileResponse extends JsonResource
             "companyType" => $this->type,
             "companyVatId" => $this->vat_number,
             "CrExpiredDate" => $this->cr_expire_data,
-            "isValidated" => $this->active,
+            "active" => $this->active,
             "crExpireData" => $this->cr_expire_data,
             "subscriptionDetails" => $this->subscription_details,
             "subscriptionid" => $this->subs_id,
