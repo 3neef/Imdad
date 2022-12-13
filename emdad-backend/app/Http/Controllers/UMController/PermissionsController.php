@@ -8,6 +8,7 @@ use App\Http\Requests\UMRequests\Permission\CreatePermissionRequest;
 use App\Http\Requests\UMRequests\Permission\UpdatePermissionRequest;
 use App\Http\Requests\UMRequests\Permission\RestorePermissionRequest;
 use App\Http\Services\UMServices\PermissionServices;
+use Illuminate\Http\Request;
 
 class PermissionsController extends Controller
 {
@@ -79,8 +80,8 @@ class PermissionsController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found")
         * )
         */
-    public function savePermission(CreatePermissionRequest $request) {
-        return $this->PermissionService->create($request);
+    public function store(CreatePermissionRequest $request) {
+        return $this->PermissionService->store($request);
     }
        /**
         * @OA\get(
@@ -124,8 +125,8 @@ class PermissionsController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function getAllPermissions() {
-        return $this->PermissionService->showAll();
+    public function index() {
+        return $this->PermissionService->index();
     }
        /**
         * @OA\get(
@@ -170,8 +171,8 @@ class PermissionsController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function getPermissionByRoleId( $id ,GetPermissionRequest $request) {
-        return $this->PermissionService->showById($id);
+    public function show(Request $request,$id) {
+        return $this->PermissionService->show($request,$id);
     }
        /**
         * @OA\Put(
@@ -228,7 +229,7 @@ class PermissionsController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found")
         * )
         */
-    public function updatePermission(UpdatePermissionRequest $request){
+    public function update(UpdatePermissionRequest $request){
         return $this->PermissionService->update($request);
     }
        /**
@@ -273,7 +274,7 @@ class PermissionsController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function deletePermission($id ,GetPermissionRequest $request)
+    public function destroy($id ,GetPermissionRequest $request)
     {
         return $this->PermissionService->delete($id);
     }
@@ -319,7 +320,7 @@ class PermissionsController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function restoreById($id,RestorePermissionRequest $request){
-        return $this->PermissionService->restoreById($id);
-    }
+    // public function restoreById($id,RestorePermissionRequest $request){
+    //     return $this->PermissionService->restoreById($id);
+    // }
 }

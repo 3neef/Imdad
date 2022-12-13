@@ -32,10 +32,8 @@ Route::middleware(['app.auth','auth:sanctum'])->prefix('users')->group(function(
     Route::post('register', [UserController::class, 'store']);
     Route::put("Activate", [UserController::class, 'userActivate']);
     Route::put("disable", [UserController::class, 'disable']);
-
     Route::put('update', [UserController::class, 'update']);
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
-
     Route::delete('destroy/{id}', [UserController::class, 'delete']);
     Route::put("restore/{id}", [UserController::class, 'restoreUser']);
 });
@@ -43,14 +41,15 @@ Route::middleware(['app.auth','auth:sanctum'])->prefix('users')->group(function(
 
 
 
-Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(function() {
+Route::middleware(['app.auth', 'auth:sanctum'])->group(function() {
 
-    Route::post('save', [PermissionsController::class, 'savePermission']);
-    Route::get('getAll', [PermissionsController::class, 'getAllPermissions']);
-    Route::get('getById/{id}', [PermissionsController::class, 'getPermissionByRoleId']);
-    Route::put('update', [PermissionsController::class, 'updatePermission']);
-    Route::delete('delete/{id}', [PermissionsController::class, 'deletePermission']);
-    Route::put('restore/{id}', [PermissionsController::class, 'restoreById']);
+    // Route::post('save', [PermissionsController::class, 'savePermission']);
+    // Route::get('getAll', [PermissionsController::class, 'getAllPermissions']);
+    // Route::get('getById/{id}', [PermissionsController::class, 'getPermissionByRoleId']);
+    // Route::put('update', [PermissionsController::class, 'updatePermission']);
+    // Route::delete('delete/{id}', [PermissionsController::class, 'deletePermission']);
+    // Route::put('restore/{id}', [PermissionsController::class, 'restoreById']);
+    Route::apiResource('permissions',PermissionsController::class);
 });
 
 Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function() {

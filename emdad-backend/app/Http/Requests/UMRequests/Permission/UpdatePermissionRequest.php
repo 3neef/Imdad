@@ -19,6 +19,7 @@ class UpdatePermissionRequest extends FormRequest
         return true;
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -27,25 +28,13 @@ class UpdatePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','integer','exists:roles,id'],
-            'privileges'=>['required','array',new UniqeValues],
-            'privileges.*'=>['required','integer','exists:permissions,id']  
+            'role_id' => ['integer','exists:role_permissions,role_id'],
+            'privileges'=>['array',new UniqeValues],
+            'privileges.*'=>['integer','exists:permissions,id']
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'id.required' => 'id is required!',
-            'id.exists' => 'id is inValid!',
-            'id.integer' => 'id is must be integer',
-            'privileges.required' => 'privileges is required!',
-            'privileges.array' => 'privileges is must be array!',
-            'privileges.*.required' => ':attribute is required!',
-            'privileges.*.integer' => ':attribute is must be integer',
-            'privileges.*.exists' => ':attribute is inValid'
-        ];
-    }
+
 
     protected function failedValidation(Validator $validator): void
     {

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('type',['emdad','buyier','supplier'])->default('emdad');
             $table->boolean('for_reg');
+            $table->json('permissions_list')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
