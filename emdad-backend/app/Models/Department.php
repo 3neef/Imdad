@@ -9,7 +9,7 @@ class Department extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','profile_id'];
 
     public function users()
     {
@@ -21,7 +21,7 @@ class Department extends Model
 
         ;
     }
-    
+
     public function compnies()
     {
         return $this->belongsToMany(
