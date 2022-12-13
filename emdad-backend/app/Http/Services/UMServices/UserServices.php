@@ -117,7 +117,7 @@ class UserServices
             [
                 'message' => 'Logged in',
                 'data' => [
-                    'user' => new UserResponse($user),
+                    'user' => $user,
                     'token' => $token->plainTextToken
                 ]
             ]
@@ -184,8 +184,8 @@ class UserServices
 
         $user = User::find($id);
 
-
         $user->tokens()->delete();
+        dd($user);
 
         $deleted = $user->delete();
 

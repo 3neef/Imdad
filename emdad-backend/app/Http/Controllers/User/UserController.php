@@ -8,12 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UMRequests\User\AssignRoleRequest;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
+use App\Http\Requests\UMRequests\User\GetUserRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\StoreUserRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\UserServices;
-
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -235,6 +236,7 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, UserServices $userServices)
     {
+        // dd(e);
         return $userServices->update($request);
     }
 
@@ -276,8 +278,9 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function restoreUser(RestoreUserByIdRequest $request, $id, UserServices $userServices)
+    public function restoreUser(RestoreUserByIdRequest  $id, UserServices $userServices)
     {
+        // dd('p');
         return $userServices->restoreById($id);
     }
 
@@ -331,7 +334,7 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function destroy(GetUserByIdRequest $request, $id, UserServices $userServices)
+    public function delete( GetUserRequest $id, UserServices $userServices)
     {
         return $userServices->delete($id);
     }

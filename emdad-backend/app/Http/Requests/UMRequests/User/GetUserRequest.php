@@ -17,6 +17,11 @@ class GetUserRequest extends FormRequest
     {
         return true;
     }
+    
+    protected function prepareForValidation()
+    {
+        $this->merge(['id' => $this->route('id')]);
+    }
 
     /**
      * Get the validation rules that apply to the request.

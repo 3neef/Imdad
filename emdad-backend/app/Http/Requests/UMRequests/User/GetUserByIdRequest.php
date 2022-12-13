@@ -20,11 +20,11 @@ class GetUserByIdRequest extends FormRequest
     {
         return true;
     }
-
-    protected function prepareForValidation() 
+    protected function prepareForValidation()
     {
         $this->merge(['id' => $this->route('id')]);
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -32,11 +32,9 @@ class GetUserByIdRequest extends FormRequest
      */
     public function rules()
     {
-        $rules =['id' => ['required','integer','exists:users,id']];
-        if($this->isMethod('delete')){
-            $rules =['id' => ['required','integer','exists:users,id']];
-        }
-        return $rules;
+        return [
+            'id' => ['required','integer',Rule::exists('users')->whereNotNull('deleted_at')]
+        ];
     }
 
     protected function failedValidation(Validator $validator): void

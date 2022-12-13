@@ -12,7 +12,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['app.auth'])->prefix('auth')->group(function () {
+Route::middleware(['app.auth'])->prefix('auth')->group(function() {
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [UserController::class, 'store']);
     Route::put('verifiy-otp', [AuthController::class, 'activateUser']);
@@ -27,18 +27,19 @@ Route::middleware(['app.auth'])->prefix('roles')->group(function () {
     Route::get('getAll', [RoleController::class, 'getAllRoles']);
 });
 
-Route::middleware(['app.auth', 'auth:sanctum'])->group(function () {
-    Route::apiResource('users', UserController::class)->only(['update','destroy']);
-});
-Route::middleware(['app.auth', 'auth:sanctum'])->prefix('users')->group(function () {
-    Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
-    Route::put("restore/{id}", [UserController::class, 'restoreUser']);
+
+Route::middleware(['app.auth', 'auth:sanctum'])->group(function() {
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
-    Route::post("Activate", [UserController::class, 'Activate']);
+    Route::post('register', [UserController::class, 'store']);
+    Route::put("Activate", [UserController::class, 'Activate']);
+    Route::put('update', [UserController::class, 'update']);
+    Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
+
 });
+Route::delete('destory/{id}', [UserController::class, 'delete']);
+Route::put("restore/{id}", [UserController::class, 'restoreUser']);
 
-
-Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(function () {
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(function() {
 
     Route::post('save', [PermissionsController::class, 'savePermission']);
     Route::get('getAll', [PermissionsController::class, 'getAllPermissions']);
@@ -48,7 +49,7 @@ Route::middleware(['app.auth', 'auth:sanctum'])->prefix('permissions')->group(fu
     Route::put('restore/{id}', [PermissionsController::class, 'restoreById']);
 });
 
-Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function () {
+Route::middleware(['app.auth', 'auth:sanctum'])->prefix('roles')->group(function() {
 
     Route::post('save', [RoleController::class, 'saveRole']);
     Route::get('getByRoleId/{id}', [RoleController::class, 'getByRoleId']);

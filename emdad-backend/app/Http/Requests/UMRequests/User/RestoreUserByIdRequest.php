@@ -19,7 +19,7 @@ class RestoreUserByIdRequest extends FormRequest
     {
         return true;
     }
-    protected function prepareForValidation() 
+    protected function prepareForValidation()
     {
         $this->merge(['id' => $this->route('id')]);
     }
