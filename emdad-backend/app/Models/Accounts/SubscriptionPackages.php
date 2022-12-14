@@ -4,10 +4,11 @@ namespace App\Models\Accounts;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SubscriptionPackages extends Model
 {
-    use HasFactory;
+    use HasFactory ,SoftDeletes;
     protected $fillable = [
         'subscription_name', 'subscription_details',  'type'
     ];

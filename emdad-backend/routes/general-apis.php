@@ -13,11 +13,11 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('sendSms', [SmsController::class, 'sendSms']);
 
-Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('subscriptions')->group(function () {
-    Route::put('update', [SubscriptionController::class, 'updateSubscription']);
-    Route::post('create', [SubscriptionController::class, 'createPackage']);
-    Route::get('get-supplier-packs', [SubscriptionController::class, 'getSupplierPackages']);
-    Route::get('get-buyer-packs', [SubscriptionController::class, 'getBuyerPackages']);
+Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    Route::apiResource('pakages', SubscriptionController::class);
+    Route::put('pakages/restore', [SubscriptionController::class, 'restore']);
+    Route::get('pakages/get-supplier-packs', [SubscriptionController::class, 'getSupplierPackages']);
+    Route::get('pakages/get-buyer-packs', [SubscriptionController::class, 'getBuyerPackages']);
 });
 
 
@@ -32,10 +32,10 @@ Route::group(['prefix' => 'installation'], function () {
 Route::middleware(['auth.apikey'])->prefix('wathiq')->group(function () {
     Route::get('relatedCr', [WathiqController::class, 'getRelatedCompanies']);
 });
-    Route::get('optimize',function(){
-        Artisan::call('optimize');
-        dd("optimized successfully");
-    });
+Route::get('optimize', function () {
+    Artisan::call('optimize');
+    dd("optimized successfully");
+});
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('coupon')->group(function () {
     Route::post('create', [CouponController::class, 'createCoupon']);
@@ -47,12 +47,9 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('coupon')->group(func
 
 
 
-Route::group(['prefix' => 'translation'],function(){
+Route::group(['prefix' => 'translation'], function () {
     Route::post('create', [TranslationController::class, 'Create']);
     Route::put('update', [TranslationController::class, 'Update']);
     Route::get('show', [TranslationController::class, 'Show']);
     Route::delete('delete', [TranslationController::class, 'Delete']);
-
-
-
 });
