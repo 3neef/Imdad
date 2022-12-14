@@ -32,9 +32,9 @@ class ProductController extends Controller
         * summary="create Product",
         * description="create Product Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -81,9 +81,9 @@ class ProductController extends Controller
         * summary="update Product",
         * description="update Product Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -134,9 +134,9 @@ class ProductController extends Controller
         * summary="get All Products",
         * description="get All Products Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -186,9 +186,9 @@ class ProductController extends Controller
         * summary="get By ProductId",
         * description="get By ProductId Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -236,9 +236,9 @@ class ProductController extends Controller
         * summary="delete Product",
         * description="delete Product Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -283,9 +283,9 @@ class ProductController extends Controller
         * summary="restore By ProductId",
         * description="restore By ProductId Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

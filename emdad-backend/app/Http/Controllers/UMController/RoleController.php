@@ -35,9 +35,9 @@ class RoleController extends Controller
         * summary="get roles",
         * description="get all roles Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -74,9 +74,9 @@ class RoleController extends Controller
         * summary="create role",
         * description="create new role Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -135,9 +135,9 @@ class RoleController extends Controller
         * summary="update role",
         * description="update role Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -195,9 +195,9 @@ class RoleController extends Controller
         * summary="delete roles",
         * description="delete roles Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -243,9 +243,9 @@ class RoleController extends Controller
         * summary="get role by id",
         * description="get role Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -289,9 +289,9 @@ class RoleController extends Controller
         * summary="get roles register",
         * description="get roles register Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -334,9 +334,9 @@ class RoleController extends Controller
         * summary="restore role by id",
         * description="restore role Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -381,9 +381,9 @@ class RoleController extends Controller
         * summary="get roles by type",
         * description="get all roles by type",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

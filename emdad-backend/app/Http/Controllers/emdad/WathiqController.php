@@ -19,9 +19,9 @@ class WathiqController extends Controller
         * summary="Retreive registered companies by user identity + identity type nid/iqama",
         * description="users' registerd companies",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

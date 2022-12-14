@@ -24,9 +24,9 @@ class CategoryController extends Controller
         * summary="add catogry",
         * description="add catogry Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -71,9 +71,9 @@ class CategoryController extends Controller
         * summary="aproved catogry",
         * description="aproved catogry Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -118,9 +118,9 @@ class CategoryController extends Controller
      *    summary="show all aproved catogry",
      *    description="show all aproved catogry Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -156,9 +156,9 @@ class CategoryController extends Controller
      *    summary="show all  catogry",
      *    description="show all  catogry Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -194,9 +194,9 @@ class CategoryController extends Controller
         * summary="save sub catogry",
         * description="save sub catogry Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -241,9 +241,9 @@ class CategoryController extends Controller
         * summary="show with catogry id",
         * description="show with catogry id Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -287,9 +287,9 @@ class CategoryController extends Controller
         * summary="aproved sub catogry",
         * description="aproved sub catogry Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -333,9 +333,9 @@ class CategoryController extends Controller
         * summary="get with company id",
         * description="get with company id Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
