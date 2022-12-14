@@ -26,7 +26,7 @@ class TruckController extends Controller
      */
     public function index()
     {
-
+        return $this->truckservice->index();
     }
 
    /**

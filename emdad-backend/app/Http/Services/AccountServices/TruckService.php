@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\AccountServices;
 
+use App\Http\Resources\AccountResourses\warehouses\TruckResponse;
 use App\Models\Accounts\Truck;
 use Illuminate\Support\Facades\DB;
 
@@ -75,6 +76,10 @@ public function delete($id)
     }
 
 
-
+    public function index()
+    {
+        $truck = Truck::all()->with('truckImage');
+        return response()->json(['data' => TruckResponse::collection($truck)], 200);
+    }
 
 }
