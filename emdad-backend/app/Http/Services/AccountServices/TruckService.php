@@ -25,4 +25,56 @@ class TruckService
         });
         return response()->json(['message' => 'created successfully'], 201);
     }
+
+
+
+    public function update($request, $id)
+    {
+        $truck = Truck::where('id', $id)->first();
+        if ($truck != null) {
+            $truck->update([
+                'name' => $request->name??$truck->name ,
+                "type" => $request->type??$truck-> type,
+                "class" => $request->class?? $truck->class,
+                "color" => $request->color??$truck->color ,
+                "model" => $request->model??$truck->model ,
+                "size" => $request->size??$truck->size,
+                "brand"=>$request->brand??$truck->brand,
+            ]);
+            if($request->has('image')){
+                $request->merge(['image' => UploadServices::uploadFile($request->image, 'image', 'truck images')]);
+                $truck->truckImage()->update(['name' => $request->image, 'truck_id' => $truck->id]);
+            }
+
+        return response()->json(['success' => 'Updated Successfly'], 201);
+    }
+}
+
+
+
+public function delete($id)
+    {
+        $truck = Truck::find($id);
+        if ($truck == null) {
+            return response()->json(['success' => false, 'error' => 'not found'], 404);
+        } else {
+            $truck->delete();
+            return response()->json(['message' => 'deleted successfully'], 301);
+        }
+    }
+
+
+
+    public function restore($id)
+    {
+        $restore = Truck::where('id', $id)->withTrashed()->restore();
+        if ($restore) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
+
+
+
 }

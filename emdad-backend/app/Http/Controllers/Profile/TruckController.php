@@ -101,9 +101,10 @@ class TruckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function update(Request $request,$id)
     {
-        //
+        return $this->truckservice->update($request , $id);
     }
 
     /**
@@ -114,6 +115,14 @@ class TruckController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        return $this->truckservice->delete($id);
+    }
+
+
+
+    public function restoretruck($id)
+    {
+        return $this->truckservice->restore($id);
     }
 }
