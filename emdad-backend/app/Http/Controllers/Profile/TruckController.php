@@ -37,9 +37,9 @@ class TruckController extends Controller
         * summary="create trucks ",
         * description="create trucks  Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

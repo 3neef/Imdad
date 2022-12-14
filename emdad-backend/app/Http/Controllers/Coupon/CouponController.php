@@ -25,9 +25,9 @@ class CouponController extends Controller
         * summary="create Coupon",
         * description="create Coupon Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -76,9 +76,9 @@ class CouponController extends Controller
      *    summary="show all  coupons",
      *    description="show all  coupons Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -117,9 +117,9 @@ class CouponController extends Controller
         * summary="used Coupon ",
         * description=" used Coupon Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

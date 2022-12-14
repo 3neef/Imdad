@@ -15,9 +15,9 @@
                 "operationId": "create-sub-packages",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -89,9 +89,9 @@
                 "operationId": "update-sub-packages",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -167,9 +167,9 @@
                 "operationId": "get-buyer-packages",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -227,9 +227,9 @@
                 "operationId": "get-supplier-packages",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -347,9 +347,9 @@
                 "operationId": "resetPassword",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -437,9 +437,9 @@
                 "operationId": "authLogin",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -521,9 +521,9 @@
                 "operationId": "user-verify-otp",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -599,9 +599,9 @@
                 "operationId": "resend otp",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -674,9 +674,9 @@
                 "operationId": "Logout",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -726,9 +726,9 @@
                 "operationId": "forgotPassword",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -814,9 +814,9 @@
                 "operationId": "removeUser",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -878,9 +878,9 @@
                 "operationId": "createCoupon",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -956,9 +956,9 @@
                 "operationId": "showallcoupons",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1002,9 +1002,9 @@
                 "operationId": "usedcoupon",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1105,9 +1105,9 @@
                 "operationId": "filtercompanyinfo",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1159,9 +1159,9 @@
                 "operationId": "createAccount",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1229,9 +1229,9 @@
                 "operationId": "getByAccountId",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1298,9 +1298,9 @@
                 "operationId": "updateAccount",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1360,9 +1360,9 @@
                 "operationId": "deleteAccount",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1419,9 +1419,9 @@
                 "operationId": "restoreByAccountId",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1478,9 +1478,9 @@
                 "operationId": "createdepartment",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1534,9 +1534,9 @@
                 "operationId": "createtrucks",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1618,9 +1618,9 @@
                 "operationId": "getAllWarehouses",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1671,9 +1671,9 @@
                 "operationId": "createWarehouse",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1768,9 +1768,9 @@
                 "operationId": "getWarehouseById",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1818,9 +1818,9 @@
                 "operationId": "deleteWarehouse",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1875,9 +1875,9 @@
                 "operationId": "updateWarehouse",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -1970,9 +1970,9 @@
                 "operationId": "restoreWarehouseById",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2027,9 +2027,9 @@
                 "operationId": "verfiedWarehouse",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2154,9 +2154,9 @@
                 "operationId": "create-subscriptionPayment",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2396,9 +2396,9 @@
                 "operationId": "savePermissionToRole",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2480,9 +2480,9 @@
                 "operationId": "getAllPermissions",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2535,9 +2535,9 @@
                 "operationId": "get-permissions",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2595,9 +2595,9 @@
                 "operationId": "updatePermissionToSpecificRole",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2679,9 +2679,9 @@
                 "operationId": "delete-permission-from-specific-role",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2733,9 +2733,9 @@
                 "operationId": "restore-permission-to-specific-role",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2787,9 +2787,9 @@
                 "operationId": "getAllRoles",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2829,9 +2829,9 @@
                 "operationId": "saveNewRole",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2913,9 +2913,9 @@
                 "operationId": "updateRole",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -2996,9 +2996,9 @@
                 "operationId": "deleteRole",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3053,9 +3053,9 @@
                 "operationId": "getRole",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3105,9 +3105,9 @@
                 "operationId": "getRoleRegister",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3166,9 +3166,9 @@
                 "operationId": "restoreRole",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3223,9 +3223,9 @@
                 "operationId": "getAllRolesByType",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3278,9 +3278,9 @@
                 "operationId": "registerUser",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3393,9 +3393,9 @@
                 "operationId": "get-user-data-by-token",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3475,9 +3475,9 @@
                 "operationId": "updateUser",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3586,9 +3586,9 @@
                         }
                     },
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3658,9 +3658,9 @@
                 "operationId": "restoreUser",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3710,9 +3710,9 @@
                 "operationId": " userActivate",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3790,9 +3790,9 @@
                 "operationId": " disable",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3870,9 +3870,9 @@
                 "operationId": "defaultCompany",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -3959,9 +3959,9 @@
                 "operationId": "addcatogry",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4023,9 +4023,9 @@
                 "operationId": "aprovedcatogre",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4079,9 +4079,9 @@
                 "operationId": "showallaprovedcategory",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4125,9 +4125,9 @@
                 "operationId": "showallcatogre",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4171,9 +4171,9 @@
                 "operationId": "SavesubCatogre",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4235,9 +4235,9 @@
                 "operationId": "showwithcategoryid",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4288,9 +4288,9 @@
                 "operationId": "aprovedsubcatogry",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4344,9 +4344,9 @@
                 "operationId": "getbycompanyid",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4413,9 +4413,9 @@
                 "operationId": "createProduct",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4480,9 +4480,9 @@
                 "operationId": "updateProduct",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4547,9 +4547,9 @@
                 "operationId": "getAllProducts",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4616,9 +4616,9 @@
                 "operationId": "getByProductId",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4685,9 +4685,9 @@
                 "operationId": "deleteProduct",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4741,9 +4741,9 @@
                 "operationId": "restoreByProductId",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }
@@ -4800,9 +4800,9 @@
                 "operationId": "wathiq-integration",
                 "parameters": [
                     {
-                        "name": "api_key",
+                        "name": "x-authorization",
                         "in": "header",
-                        "description": "Set api_key",
+                        "description": "Set x-authorization",
                         "schema": {
                             "type": "string"
                         }

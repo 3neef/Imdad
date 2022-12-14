@@ -34,9 +34,9 @@ class ProfileController extends Controller
      * summary="filter company info",
      * description="filter company info Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -84,9 +84,9 @@ class ProfileController extends Controller
      * summary="create Company Account",
      * description="create Company Account Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -137,9 +137,9 @@ class ProfileController extends Controller
      * summary="get By AccountId",
      * description="get By AccountId Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -187,9 +187,9 @@ class ProfileController extends Controller
      * summary="update Account",
      * description="update Account Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -239,9 +239,9 @@ class ProfileController extends Controller
      * summary="delete Account",
      * description="delete Account",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -286,9 +286,9 @@ class ProfileController extends Controller
      * summary="restore By AccountId",
      * description="restore By AccountId",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -334,9 +334,9 @@ class ProfileController extends Controller
      * summary="allUnValidatedAccounts",
      * description="allUnValidatedAccounts",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -387,9 +387,9 @@ class ProfileController extends Controller
      * summary="validatedAccount",
      * description="validatedAccount",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

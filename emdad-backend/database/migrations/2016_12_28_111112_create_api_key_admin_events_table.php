@@ -13,16 +13,16 @@ class CreateApiKeyAdminEventsTable extends Migration
      */
     public function up()
     {
-        Schema::create('api_key_admin_events', function (Blueprint $table) {
+        Schema::create('x-authorization_admin_events', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('api_key_id');
+            $table->unsignedInteger('x-authorization_id');
             $table->ipAddress('ip_address');
             $table->string('event');
             $table->timestamps();
 
             $table->index('ip_address');
             $table->index('event');
-            $table->foreign('api_key_id')->references('id')->on('api_keys');
+            $table->foreign('x-authorization_id')->references('id')->on('x-authorizations');
         });
     }
 
@@ -33,6 +33,6 @@ class CreateApiKeyAdminEventsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('api_key_admin_events');
+        Schema::dropIfExists('x-authorization_admin_events');
     }
 }
