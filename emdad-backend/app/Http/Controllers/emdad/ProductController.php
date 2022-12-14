@@ -121,7 +121,7 @@ class ProductController extends Controller
 
     public function update(UpdateProuductRequest $request,$id)
     {
-        return $this->productService->update($request);
+        return $this->productService->update($request,$id);
     }
 
 
@@ -174,7 +174,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        return $this->productService->getAll();
+        return $this->productService->index();
     }
 
 
@@ -223,9 +223,9 @@ class ProductController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function show(GetProuductByIdRequest $request,$id)
+    public function show($id)
     {
-        return $this->productService->getById($id);
+        return $this->productService->show($id);
     }
 
 /**
@@ -270,7 +270,7 @@ class ProductController extends Controller
         * )
         */
 
-    public function destory(GetProuductByIdRequest $request,$id)
+    public function destroy($id)
     {
         return $this->productService->delete($id);
     }
@@ -318,7 +318,7 @@ class ProductController extends Controller
         * )
         */
 
-    public function restore(RestoreProuductRequest $request,$id)
+    public function restore($id)
     {
         return $this->productService->restore($id);
     }

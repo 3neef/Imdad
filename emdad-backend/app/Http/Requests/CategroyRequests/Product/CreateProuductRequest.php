@@ -27,9 +27,10 @@ class CreateProuductRequest extends FormRequest
     {
         return [
             'categoryId' => 'required|integer|exists:categories,id,isleaf,1',
-            'name'=>'required|string|unique:prodcuts,name',
-            'price'=>'required|numric',
-            'attachement_file'=>'required',
+            'name'=>'required|string|unique:products,name',
+            'price'=>'required|between:0,99.99',
+            'attachementFile'=>'required|image',
+            'measruingUnit'=>'required',
         ];
     }
 

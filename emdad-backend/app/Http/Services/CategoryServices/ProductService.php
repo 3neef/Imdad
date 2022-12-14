@@ -13,7 +13,7 @@ class ProductService
 
     public function index()
     {
-        $prodcuts = Product::all();
+        $prodcuts = Product::get();
         if ($prodcuts) {
             return response()->json(['data' => ProductResponse::collection($prodcuts)], 200);
         }
@@ -22,13 +22,14 @@ class ProductService
 
     public function store($request)
     {
-        $request->merge(['image' => UploadServices::uploadFile($request->attachement_file, 'image', 'Products images')]);
+        // dd($request->all());
+        $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
 
         $prodcut = Product::create([
             'category_id' => $request->categoryId,
             'name' => $request->name,
             "price" => $request->price,
-            "measruing_unit" => $request->measruing_unit,
+            "measruing_unit" => $request->measruingUnit,
             "image" => $request->image,
 
         ]);
@@ -43,17 +44,20 @@ class ProductService
     {
 
         $prodcut = Product::find($id);
+        dd($request->all());
+
+        if ($request->has('attachementFile')) {
+            $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
+        }
 
         $prodcut->update([
-            'category_id' => $request->categoryId,
-            'name' => $request->name,
-            "price" => $request->price,
-            "measruing_unit" => $request->measruing_unit,
+            'category_id' => $request->categoryId??$prodcut->category_id,
+            'name' => $request->name ??$prodcut->name,
+            "price" => $request->price??$prodcut->price,
+            "measruing_unit" => $request->measruing_unit??$prodcut->measruing_unit,
+            'image' => $request->image??$prodcut->image,
         ]);
-        if ($request->has('image')) {
-            $request->merge(['image' => UploadServices::uploadFile($request->attachement_file, 'image', 'Products images')]);
-            $prodcut->update(['image' => $request->image]);
-        }
+
         if ($prodcut) {
             return response()->json(['message' => 'updated successfully'], 200);
         }

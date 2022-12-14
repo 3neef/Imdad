@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory,SoftDeletes;
-
-    protected $fillable = ['name','measruing_unit','categories_id','price','profile_id','image'];
+    use HasFactory, SoftDeletes;
+    protected $table = "products";
+    protected $fillable = ['name', 'measruing_unit', 'category_id', 'price', 'profile_id', 'image'];
     protected $hidden = [
         'created_at',
         'updated_at',
@@ -26,7 +26,3 @@ class Product extends Model
         return $this->hasMany(unit_measruing::class);
     }
 }
-
-
-
-
