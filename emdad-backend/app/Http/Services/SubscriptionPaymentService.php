@@ -11,15 +11,15 @@ class SubscriptionPaymentService
 
     public function addSubscriptionPayment($request)
     {
-       
+
 
         $subscription = SubscriptionPackages::where('id', $request->subscription_id)->first();
 
         $subscription_info=json_decode($subscription->subscription_details,true);
- 
+
 
         $SubscriptionPayment = SubscriptionPayment::create([
-            'compnay_id' => auth()->user()->default_company ?? 2,
+            'profile_id' => auth()->user()->profile_id ?? 2,
             'subscription_id' => $request->subscription_id,
             'user_id' => auth()->id() ?? 2,
             'sub_total' => $subscription_info['price'],

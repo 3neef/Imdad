@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SubscriptionPayment extends Model
 {
     use HasFactory;
-    protected $tabel = 'roles';
+    protected $tabel = 'subscription_payments';
 
-    protected $fillable = ['compnay_id', 'subscription_id', 'user_id', 'sub_total', 'tax_amount', 'total', 'discount', 'tx_id', 'status', 'coupon_id', 'days'];
+    protected $fillable = ['profile_id', 'subscription_id', 'user_id', 'sub_total', 'tax_amount', 'total', 'discount', 'tx_id', 'status', 'coupon_id', 'days'];
 }

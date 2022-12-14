@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('subscription_payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('compnay_id');
+            $table->foreignId('profile_id');
             $table->foreignId('subscription_id');
             $table->foreignId('user_id');
             $table->foreignId('coupon_id')->nullable();
@@ -25,7 +25,7 @@ return new class extends Migration
             $table->float('total')->default(0);
             $table->float('discount')->default(0);
             $table->unsignedBigInteger('tx_id')->nullable();
-            $table->enum('status',['Pending', 'Payed', 'Cancel'])->default('Pending');  
+            $table->enum('status',['Pending', 'Payed', 'Cancel'])->default('Pending');
             $table->timestamps();
         });
     }
