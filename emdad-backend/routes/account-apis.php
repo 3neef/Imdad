@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Profile\LocationController;
+use App\Http\Controllers\Profile\WarehousesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionPaymentController;
 
@@ -15,10 +15,10 @@ Route::middleware(['app.auth','auth:sanctum'])->group(function() {
 
 
 Route::middleware(['app.auth','auth:sanctum'])->prefix('warehouses')->group(function() {
-    Route::put('verfied', [LocationController::class, 'verfiedLocation']);
-    Route::put('restore/{id}', [LocationController::class, 'restoreByLocationId']);
+    Route::put('verfied', [WarehousesController::class, 'verfiedLocation']);
+    Route::put('restore/{id}', [WarehousesController::class, 'restoreByLocationId']);
 });
 
 
-Route::apiResource('warehouses',LocationController::class)->middleware(['app.auth', 'auth:sanctum']);
+Route::apiResource('warehouses',WarehousesController::class)->middleware(['app.auth', 'auth:sanctum']);
 
