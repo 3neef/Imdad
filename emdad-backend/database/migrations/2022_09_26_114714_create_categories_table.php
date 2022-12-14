@@ -20,9 +20,8 @@ return new class extends Migration
             $table->integer('aproved');
             $table->integer('parent_id');
             $table->boolean('isleaf');
-            $table->foreignId('profile_id')->nullable();
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes();       
         });
     }
 
