@@ -12,7 +12,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['app.auth'])->prefix('auth')->group(function() {
+Route::middleware(['auth.apikey'])->prefix('auth')->group(function() {
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [UserController::class, 'store']);
     Route::put('verifiy-otp', [AuthController::class, 'activateUser']);
@@ -23,7 +23,7 @@ Route::middleware(['app.auth'])->prefix('auth')->group(function() {
     Route::put("reset-password", [AuthController::class, 'resetPassword'])->middleware('auth:sanctum');
 });
 
-Route::middleware(['app.auth','auth:sanctum'])->prefix('users')->group(function() {
+Route::middleware(['auth.apikey','auth:sanctum'])->prefix('users')->group(function() {
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
     Route::post('register', [UserController::class, 'store']);
     Route::put("Activate", [UserController::class, 'userActivate']);
@@ -35,23 +35,23 @@ Route::middleware(['app.auth','auth:sanctum'])->prefix('users')->group(function(
 });
 
 
-Route::middleware(['app.auth', 'auth:sanctum'])->group(function() {
+Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function() {
     Route::apiResource('permissions',PermissionsController::class);
     Route::put('permissions/restore/{permissionId}', [PermissionsController::class, 'restoreById']);
 
 });
 
 
-Route::middleware(['app.auth', 'auth:sanctum'])->group(function() {
+Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function() {
     Route::apiResource('roles',RoleController::class);
      Route::put('roles/restore/{roleId}', [RoleController::class, 'restoreByRoleId']);
      Route::get('roles-for-reg', [RoleController::class, 'getRolesForReg']);
 });
 
-Route::middleware(['app.auth', 'auth:sanctum'])->prefix('department')->group(function () {
+Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('department')->group(function () {
     Route::post('create', [DepartmentController::class, 'create']);
     Route::post('assing-User-To-Department', [DepartmentController::class, 'assingUser']);
 });
 
 
-Route::apiResource('department',DepartmentController::class)->middleware(['app.auth', 'auth:sanctum']);
+Route::apiResource('department',DepartmentController::class)->middleware(['auth.apikey', 'auth:sanctum']);
