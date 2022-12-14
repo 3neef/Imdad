@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger("profile_id")->nullable();
             $table->string("address_name",255);
             $table->string("address_contact_phone",15);
             $table->string("address_contact_name",25);
@@ -32,7 +31,6 @@ return new class extends Migration
             $table->foreignId('created_by')->nullable(true)->references("id")->on("users")->restrictOnDelete();
             $table->softDeletes();
 
-            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
         });
     }
 

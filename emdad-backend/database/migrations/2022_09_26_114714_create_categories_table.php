@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('parent_id');
             $table->boolean('isleaf');
             $table->timestamps();
-            $table->softDeletes();
+            $table->softDeletes();       
         });
     }
 

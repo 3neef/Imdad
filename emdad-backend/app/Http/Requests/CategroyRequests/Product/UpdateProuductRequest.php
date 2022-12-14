@@ -26,14 +26,16 @@ class UpdateProuductRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer|exists:prodcuts,id',
-            'name'=>'string|unique:prodcuts,name',
-            'price'=>'integer',
+            "categories_id" => 'integer|exists:categories,id,isleaf,1',
+            'name' => 'string|unique:prodcuts,name',
+            'price' => 'integer',
+            'measruing_unit' => 'string|max:255',
+            'image' => 'image',
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+        throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors()], 422));
     }
 }

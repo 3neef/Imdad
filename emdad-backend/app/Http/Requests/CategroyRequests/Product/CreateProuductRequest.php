@@ -28,13 +28,13 @@ class CreateProuductRequest extends FormRequest
         return [
             'categoryId' => 'required|integer|exists:categories,id,isleaf,1',
             'name'=>'required|string|unique:prodcuts,name',
-            'price'=>'required|integer',
+            'price'=>'required|numric',
             'attachement_file'=>'required',
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+        throw new HttpResponseException(response()->json(["success"=>false,"errors"=>$validator->errors()],422));
     }
 }
