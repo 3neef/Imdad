@@ -5,6 +5,7 @@ namespace App\Http\Services\AccountServices;
 use App\Http\Requests\Profile\AddMoreCompanyRequest;
 use App\Http\Resources\AccountResourses\Company\CompanyResponse;
 use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
+use App\Http\Services\General\WalletsService;
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
 use App\Models\Emdad\RelatedCompanies;
@@ -28,6 +29,7 @@ class AccountService
             "created_by" => auth()->user()->id,
             "is_validated" => true,
         ]);
+        WalletsService::create($account);
 
         $user->roleInProfile()->attach($user->id, ['role_id' => $request['roleId'], 'profile_id' => $account->id, 'permissions' => $request->permissions]);
 

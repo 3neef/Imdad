@@ -22,9 +22,9 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->set('type', ['sender', 'receiver']);
             $table->set('status', ['active', 'disabled'])->default('active');
+            $table->foreignId('profile_id');
             $table->timestamps();
             $table->softDeletes();
-
         });
     }
 
