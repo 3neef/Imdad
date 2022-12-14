@@ -114,8 +114,8 @@ class AuthController extends Controller
      *               type="object",
      *               required={"password"},
      *               @OA\Property(
-     *                   oneOf={ @OA\Property(property="email",type="email"),
-     *                          @OA\Property(property="mobile",type="string") }),
+     *                   oneOf={ @OA\Property(property="email",type="string"),
+     *                           @OA\Property(property="email",type="string") }),
      *               @OA\Property(property="password", type="password")
      *            ),
      *        ),

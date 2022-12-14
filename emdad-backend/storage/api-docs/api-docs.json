@@ -456,12 +456,12 @@
                                     "": {
                                         "oneOf": [
                                             {
-                                                "type": "email",
+                                                "type": "string",
                                                 "property": "email"
                                             },
                                             {
                                                 "type": "string",
-                                                "property": "mobile"
+                                                "property": "email"
                                             }
                                         ]
                                     },
