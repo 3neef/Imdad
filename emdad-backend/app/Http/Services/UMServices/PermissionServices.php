@@ -20,43 +20,36 @@ class PermissionServices
 
     public function store($request)
     {
+        // dd($request->all());
+        $Permission = Permission::create($request->all());
 
-        $role = Role::where('id', $request->role)->orWhere('name', $request->role)->first();
-        $rolePermission = RolePermission::create(['json' => json_encode($request->privileges, true), 'role_id' => $role->id]);
-
-        if ($rolePermission) {
+        if ($Permission) {
             return response()->json(['message' => 'created successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
 
 
-    public function show( $request ,$id)
+    public function show($id)
     {
-        $request->validate([$id=>'exists:role_permissions,role_id']);
 
-        $Permissions = RolePermission::select(['json as privilege'])->where('role_id', $id)->get();
-        if (count($Permissions)!= 0 ) {
-        foreach ($Permissions as $rolesPrivilege) {
-            $rolesPrivilege->privilege = json_decode($rolesPrivilege->privilege);
+        $Permissions = Permission::where('id', $id)->first();
+        if ($Permissions) {
+            return response()->json(['data' => $Permissions, 'message' => 'success'], 200);
         }
-        return response()->json(['data' => $Permissions], 200);
-    }
-    else{
-        return response()->json(['data' => 'this role do not have privileges'], 404);
-    }
+        return response()->json(['message' => 'permissions not found ' ,'data'=>[]], 404);
     }
 
 
 
-    public function update($request)
+    public function update($request,$id)
     {
-    // dd($request->all());
-        $Permission = RolePermission::where('role_id', $request->role_id)->first();
-        // dd($Permission);
-        $rolePermission = $Permission->update(['json' => json_encode($request->privileges,true) ?? $Permission->json,'role_id'=>$request->id ?? $Permission->role_id]);
 
-        if ($rolePermission) {
+        $Permission = Permission::where('id', $id)->first();
+        // dd($Permission);
+        $Permission = $Permission->update($request->all());
+
+        if ($Permission) {
             return response()->json(['message' => 'updated successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
@@ -67,7 +60,7 @@ class PermissionServices
 
     public function delete($id)
     {
-        $Permissions = RolePermission::find($id);
+        $Permissions = Permission::find($id)->first();
 
         $deleted = $Permissions->delete();
         if ($deleted) {
@@ -76,12 +69,12 @@ class PermissionServices
         return response()->json(['error' => 'system error'], 500);
     }
 
-    // public function restoreById($id)
-    // {
-    //     $restore = RolePermission::where('id', $id)->withTrashed()->restore();
-    //     if ($restore) {
-    //         return response()->json(['message' => 'restored successfully'], 200);
-    //     }
-    //     return response()->json(['error' => 'system error'], 500);
-    // }
+    public function restoreById($permissionId)
+    {
+        $restore = Permission::where('id', $permissionId)->withTrashed()->restore();
+        if ($restore) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
 }

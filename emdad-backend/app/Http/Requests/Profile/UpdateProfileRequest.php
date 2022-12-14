@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Requests\AccountRequests\Account;
+namespace App\Http\Requests\Profile;
 
-use Dotenv\Validator;
-use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class AddMoreCompanyRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,14 +27,14 @@ class AddMoreCompanyRequest extends FormRequest
     public function rules()
     {
         return [
-            'crNo' => ['required','exists:related_companies,cr_number'],
-            'roleId' => ['required','integer','exists:roles,id'],
-            'PrfoileType' => ['required',Rule::in('Buyer','suppiler')],
-           
+            'nameAr' => ['string','max:100','unique:profiles,name_ar'],
+            'iban' => ['string','max:25','unique:profiles,iban'],
+            'type' => ['integer',Rule::in('Buyer','suppiler')],
+            'vatNumber' => ['string','max:25','unique:profiles,vat_number'],
         ];
     }
 
-    protected function failedValidation(ValidationValidator $validator): void
+    protected function failedValidation(Validator $validator): void
     {
         throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
     }

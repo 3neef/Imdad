@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Http\Requests\UMRequests\Permission;
+namespace App\Http\Requests\Profile;
 
-use App\Rules\UniqeValues;
+use Dotenv\Validator;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
-class CreatePermissionRequest extends FormRequest
+class StoreProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,22 +27,16 @@ class CreatePermissionRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'name'=>['required','string','max:255'],
-            'label'=>['required','string','max:255'],
-            'category'=>['required','string','max:255'],
-            'description'=>['required','string','max:255'],
+        return [
+            'crNo' => ['required','exists:related_companies,cr_number'],
+            'roleId' => ['required','integer','exists:roles,id'],
+            'PrfoileType' => ['required',Rule::in('Buyer','suppiler')],
+
         ];
-
-
-        return $rules;
     }
 
-
-    protected function failedValidation(Validator $validator): void
+    protected function failedValidation(ValidationValidator $validator): void
     {
         throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
     }
-
-
 }

@@ -6,12 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Department\DepartmentRequest;
 use App\Http\Requests\Department\UpdateDepartmentRequest;
 use App\Http\Services\UMServices\DepartmentServices;
-use App\Models\Department;
-use Illuminate\Http\Request;
+
 
 class DepartmentController extends Controller
 {
     public DepartmentServices $departmentService;
+
+
+    public function __construct(DepartmentServices $departmentService) {
+        $this->departmentService = $departmentService;
+    }
+
+
+
 
     /**
      * Display a listing of the resource.
@@ -22,14 +29,6 @@ class DepartmentController extends Controller
     {
         //
     }
-
- 
-
-
-    public function __construct(DepartmentServices $departmentService) {
-        $this->departmentService = $departmentService;
-    }
-
 
 
      /**
@@ -75,7 +74,7 @@ class DepartmentController extends Controller
         */
     public function store(DepartmentRequest $request)
     {
-        return $this->departmentService->createDepartment($request->validated());
+        return $this->departmentService->createDepartment($request);
 
     }
 
@@ -99,7 +98,7 @@ class DepartmentController extends Controller
      */
     public function update(UpdateDepartmentRequest $request, $id)
     {
-        return $this->departmentService->updateDepartment($request->validated());
+        return $this->departmentService->updateDepartment($request,$id);
     }
 
     /**

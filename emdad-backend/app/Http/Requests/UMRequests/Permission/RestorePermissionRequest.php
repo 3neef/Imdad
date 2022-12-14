@@ -19,7 +19,7 @@ class RestorePermissionRequest extends FormRequest
     {
         return true;
     }
-    protected function prepareForValidation() 
+    protected function prepareForValidation()
     {
         $this->merge(['id' => $this->route('id')]);
     }
@@ -32,7 +32,7 @@ class RestorePermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','integer',Rule::exists('role_permissions')->whereNotNull('deleted_at')]
+            'id' => ['required','integer',Rule::exists('permissions')->whereNotNull('deleted_at')]
         ];
     }
 

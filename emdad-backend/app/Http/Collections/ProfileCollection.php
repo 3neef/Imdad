@@ -4,9 +4,10 @@
 namespace App\Http\Collections;
 
 use App\Models\Accounts\CompanyInfo;
+use App\Models\Profile;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class CompaynInfoCollection
+class ProfileCollection
 {
     public static function collection()
     {
@@ -14,24 +15,29 @@ class CompaynInfoCollection
         $defaultSort = '-created_at';
 
         $defaultSelect = [
-            'id',
-            'company_type',
-            'contact_phone',
-            'contact_email',
-            'subscription_details',
-            'company_name',
+            'created_by',
+            'name_ar',
+            'name_en',
+            'swift',
+            'iban',
+            'type',
+            'bank',
+            'vat_number',
+            'cr_number',
             'cr_expire_data',
-            'updated_at',
-            'created_at',
+            'subs_id',
+            'subscription_details',
+            'active'
         ];
 
 
         $allowedFilters = [
             'id',
-            'company_type',
-            'contact_phone',
-            'contact_email',
-            'company_name',
+            'name_ar',
+            'name_en',
+            'cr_number',
+            'vat_number',
+            'iban',
             'updated_at',
             'created_at',
         ];
@@ -48,7 +54,7 @@ class CompaynInfoCollection
 
         $perPage =  100;
 
-        return QueryBuilder::for(CompanyInfo::class)
+        return QueryBuilder::for(Profile::class)
             ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)

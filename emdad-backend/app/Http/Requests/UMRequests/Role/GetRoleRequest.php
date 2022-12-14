@@ -27,7 +27,6 @@ class GetRoleRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','integer','exists:roles,id'],
             'name' => ['string','unique:roles,name'],
             'type' => Rule::in(['emdad','supplier','buyier']),
 

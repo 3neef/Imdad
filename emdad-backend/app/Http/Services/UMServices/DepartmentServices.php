@@ -11,7 +11,7 @@ class DepartmentServices
     {
         $department=Department::create([
             "name"=>$request->name,
-            "profile_id"=>auth()->user()->profile_id
+             "profile_id"=>auth()->user()->profile_id
         ]);
         return response()->json(["success"=>true,"data"=>$department],201);
     }
@@ -20,20 +20,18 @@ class DepartmentServices
     {
         $db=Department::create($request);
 
-        //use the same approch for other service (Murtuada) 
+        //use the same approch for other service (Murtuada)
 
         $db->users()->attach($db->id,['user_id'=>2,'company_info_id'=>3]);
-        
+
 
 
         return response()->json( [ 'message'=>'department created successfully' ], 200 );
     }
 
-    public function updateDepartment($request){
-        $department=Department::where('name');
-        $department->update([
-            'name' => $request->name 
-        ]);
+    public function updateDepartment($request,$id){
+        $department=Department::where('id',$id)->first();
+        $department->update($request->all());
         if ($department) {
             return response()->json([
                 'message' => 'department updated successfully',
