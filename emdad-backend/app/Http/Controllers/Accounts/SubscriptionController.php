@@ -75,9 +75,9 @@ class SubscriptionController extends Controller
      *      @OA\Response(response=500, description="system error")
      * )
      */
-    public function createPackage(GeneralCreateSubPackageRequest $request)
+    public function store(GeneralCreateSubPackageRequest $request)
     {
-        return $this->subscriptionService->create($request);
+        return $this->subscriptionService->store($request);
         
     }
     /**
@@ -127,9 +127,9 @@ class SubscriptionController extends Controller
      *      @OA\Response(response=500, description="system error")
      * )
      */
-    public function updateSubscription(UpdateSubscriptionRequest $request)
+    public function update(UpdateSubscriptionRequest $request,$id)
     {
-        return $this->subscriptionService->update($request);
+        return $this->subscriptionService->update($request,$id);
     }
 
 
@@ -177,7 +177,7 @@ class SubscriptionController extends Controller
     public function getBuyerPackages(Request $request)
     {
       
-        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 1)->get())], 200);
+        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", "Buyer")->get())], 200);
     }
 
 
@@ -223,10 +223,21 @@ class SubscriptionController extends Controller
      *      @OA\Response(response=500, description="system error")
      * )
      */
-    public function getSupplierPackages(Request $request)
+    public function getSupplierPackages()
     {
-        $user = User::first();
-        return response()->json(["success" => true, "data" =>SubscriptionPackageResource::collection(SubscriptionPackages::where("type", 2)->get())], 200);
+        return response()->json(["success" => true, "data" =>SubscriptionPackageResource::collection(SubscriptionPackages::where("type", "Supplier")->get())], 200);
+    }
+
+
+
+    public function destroy($id)
+    {
+       return $this->subscriptionService->destroy($id);
+    }
+
+    public function restore($id)
+    {
+       return $this->subscriptionService->restore($id);
     }
 
         /**

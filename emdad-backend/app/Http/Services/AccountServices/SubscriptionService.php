@@ -1,41 +1,63 @@
 <?php
+
 namespace App\Http\Services\AccountServices;
 
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
 
-class SubscriptionService{
+class SubscriptionService
+{
 
 
-    public function update($request)
+    public function store($request)
     {
-        $id = $request->get('id');
+
+        $subscription = SubscriptionPackages::create([
+            'subscription_name' => $request->packageName,
+            "type" => $request->type,
+            "subscription_details" => json_encode($request->subscriptionDetails, true),
+        ]);
+        if ($subscription) {
+            return response()->json(['message' => 'created successfully'], 200);
+        }
+        return response()->json(['message' => 'system error'], 500);
+    }
+
+    public function update($request, $id)
+    {
+
         $subscription = SubscriptionPackages::find($id);
-        $subscriptionDetails = empty($request->get('subscriptionDetails')) ? $subscription->subscription_details : $request->get('subscriptionDetails');
-        $update = $subscription->update(['subscription_details' => $subscriptionDetails]);
-        $updateOld = $request->get('updateOld');
-        if($updateOld){
-            $allCompanys = CompanyInfo::where('subs_id','=',$id);
-            $allCompanys->update(['subscription_details'=>$subscriptionDetails]);
-        }
+        $subscription->update([
+            'subscription_name' => $request->packageName ?? $subscription->subscription_name,
+            "type" => $request->type ?? $subscription->type,
+            "subscription_details" => json_encode($request->subscriptionDetails, true) ?? $subscription->subscription_details,
+        ]);
 
-        if($update){
-            return response()->json( [ 'message'=>'updated successfully' ], 200 );
+        if ($subscription) {
+            return response()->json(['message' => 'updated successfully'], 200);
         }
-        return response()->json( [ 'error'=>'system error' ], 500 );
+        return response()->json(['error' => 'system error'], 500);
     }
 
 
-    public function create($request)
+    public function destroy($id)
     {
-       
-     $subscription=new SubscriptionPackages();
-     $subscription->subscription_name=$request->packageName;
-     $subscription->type=$request->type;
-     $subscription->subscription_details=json_encode($request->subscriptionDetails);
-
-     $subscription->save();
-            return response()->json( [ 'message'=>'created successfully' ], 200 );
+        $subscription = SubscriptionPackages::find($id);
+        $sub = $subscription->delete();
+        if ($sub) {
+            return response()->json(['message' => 'deleted successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
     }
 
+
+    public function restore($id)
+    {
+        $subscription = SubscriptionPackages::find($id)->withTrashed()->restore();
+
+        if ($subscription) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
 }

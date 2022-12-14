@@ -15,10 +15,11 @@ return new class extends Migration
     {
         Schema::create('subscription_packages', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('created_at');
-            $table->integer('type');
+            $table->timestamps();
+            $table->enum('type',['Buyer','Supplier']);
             $table->string('subscription_name');
             $table->json('subscription_details');
+            $table->softDeletes();
         });
     }
 

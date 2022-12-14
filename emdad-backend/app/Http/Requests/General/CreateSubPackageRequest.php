@@ -5,6 +5,7 @@ namespace App\Http\Requests\General;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class CreateSubPackageRequest extends FormRequest
 {
@@ -27,7 +28,7 @@ class CreateSubPackageRequest extends FormRequest
     {
         return [
             'packageName'=>['required','unique:subscription_packages,subscription_name'],
-            'type'=>['required','integer','between:1,2'], // 1 => Buyer, 2 => Supplier
+            'type'=>['required','string',Rule::in(['Buyer','Supplier'])], // 1 => Buyer, 2 => Supplier
             'subscriptionDetails'=>['required'],
             'subscriptionDetails.superAdmin'=>['required','integer'],
             'subscriptionDetails.users'=>['integer'],

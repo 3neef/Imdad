@@ -5,6 +5,7 @@ namespace App\Http\Requests\AccountRequests\Subscription;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class UpdateSubscriptionRequest extends FormRequest
 {
@@ -26,24 +27,24 @@ class UpdateSubscriptionRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'=>['required','exists:subscription_packages,id'],
-            'type'=>['required','integer','between:1,2'], // 1 => Buyer, 2 => Supplier
-            'updateOld'=>['required','boolean'],
-            'subscriptionDetails'=>['required'],
-            'subscriptionDetails.superAdmin'=>['required','integer'],
-            'subscriptionDetails.users'=>['integer'],
-            'subscriptionDetails.paymentMethods'=>['string'],
-            'subscriptionDetails.delivery'=>['string'],
-            'subscriptionDetails.warehouses'=>['integer'],
-            'subscriptionDetails.addSuppliers'=>['integer'],
-            'subscriptionDetails.itemInEachRequisition'=>['integer'],
-            'subscriptionDetails.liveTracking'=>['boolean'],
-            'subscriptionDetails.price'=>['string'],
+            'id' => ['exists:subscription_packages,id'],
+            'type' => ['string', Rule::in(['Buyer', 'Supplier'])], // 1 => Buyer, 2 => Supplier
+            'updateOld' => ['required', 'boolean'],
+            'subscriptionDetails' => ['required'],
+            'subscriptionDetails.superAdmin' => ['required', 'integer'],
+            'subscriptionDetails.users' => ['integer'],
+            'subscriptionDetails.paymentMethods' => ['string'],
+            'subscriptionDetails.delivery' => ['string'],
+            'subscriptionDetails.warehouses' => ['integer'],
+            'subscriptionDetails.addSuppliers' => ['integer'],
+            'subscriptionDetails.itemInEachRequisition' => ['integer'],
+            'subscriptionDetails.liveTracking' => ['boolean'],
+            'subscriptionDetails.price' => ['string'],
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+        throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors()], 422));
     }
 }
