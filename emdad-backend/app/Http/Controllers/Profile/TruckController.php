@@ -29,12 +29,55 @@ class TruckController extends Controller
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   /**
+        * @OA\Post(
+        * path="/api/v1_0/trucks",
+        * operationId="createtrucks",
+        * tags={"Department"},
+        * summary="create trucks ",
+        * description="create trucks  Here",
+*     @OA\Parameter(
+     *         name="api_key",
+     *         in="header",
+     *         description="Set api_key",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"name","type","class","color","model","size","brand","image"},
+        *               @OA\Property(property="name", type="string"),
+        *               @OA\Property(property="type", type="string"),
+        *               @OA\Property(property="class", type="string"),
+        *               @OA\Property(property="color", type="string"),
+        *               @OA\Property(property="model", type="string"),
+        *               @OA\Property(property="size", type="string"),
+        *               @OA\Property(property="brand", type="string"),
+        *               @OA\Property(property="image", type="file")
+        *
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="department created Successfully"
+        *       ),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function store(CreateTruckRequest $request)
     {
         return $this->truckservice->store($request);
