@@ -13,13 +13,11 @@ class Truck extends Model
         'name','type', 'class', 'color', 'model','size', 'brand'
     ];
 
-    public function truck_image()
+    public function truckImage()
     {
         return $this->hasMany(Truck_image::class);
     }
 
-    public function manageable () {
-        return $this->morphTo();
-    }
-    
+
+
 }

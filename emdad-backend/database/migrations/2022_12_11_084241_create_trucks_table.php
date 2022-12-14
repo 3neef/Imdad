@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('trucks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->nullableMorphs('manageable');
             $table->string('type');
             $table->string('class');
             $table->string('color');

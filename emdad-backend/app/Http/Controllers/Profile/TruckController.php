@@ -3,10 +3,22 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AccountRequests\Truck\CreateTruckRequest;
+use App\Http\Services\AccountServices\TruckService;
 use Illuminate\Http\Request;
 
 class TruckController extends Controller
 {
+    protected TruckService $truckservice ;
+
+    public function __construct( TruckService $truckservice )
+ {
+
+        $this->truckservice = $truckservice;
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +26,7 @@ class TruckController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**
@@ -23,9 +35,9 @@ class TruckController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateTruckRequest $request)
     {
-        //
+        return $this->truckservice->store($request);
     }
 
     /**

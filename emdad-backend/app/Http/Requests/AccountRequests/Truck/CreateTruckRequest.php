@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\AccountRequests\Truck;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreateTruckRequest extends FormRequest
 {
@@ -12,7 +14,12 @@ class CreateTruckRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(['id' => $this->route('id')]);
     }
 
     /**
@@ -23,7 +30,20 @@ class CreateTruckRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' =>['required','string','max:150'],
+            'type'=>['required','string'],
+            'class'=>['required','string'],
+            'color'=>['required','string'],
+            'model'=>['required','string'],
+            'size'=>['required','string'],
+            'brand'=>['required','string'],
+            'image'=>['required','image'],
         ];
+
+    }
+
+    protected function failedValidation(Validator $validator): void
+    {
+        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
     }
 }
