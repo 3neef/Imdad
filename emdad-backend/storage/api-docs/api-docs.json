@@ -5,579 +5,6 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/v1_0/accounts/filter-company-info": {
-            "get": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "filter company info",
-                "description": "filter company info Here",
-                "operationId": "filtercompanyinfo",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "collection"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/add-company": {
-            "post": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "create Company Account",
-                "description": "create Company Account Here",
-                "operationId": "createAccount",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "crNo",
-                                    "roleId",
-                                    "companyType"
-                                ],
-                                "properties": {
-                                    "roleId": {
-                                        "type": "integer"
-                                    },
-                                    "crNo": {
-                                        "type": "string"
-                                    },
-                                    "companyType": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "created Successfully"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/update": {
-            "put": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "update Account",
-                "description": "update Account Here",
-                "operationId": "updateAccount",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated Successfully"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/getAll": {
-            "get": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "get All Accounts",
-                "description": "get All Accounts Here",
-                "operationId": "getAllaccounts",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    ""
-                                ],
-                                "properties": {
-                                    "": {
-                                        "type": ""
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "MainAccount": {
-                                            "type": "integer",
-                                            "example": "{'id': 1}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/getById/{id}": {
-            "get": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "get By AccountId",
-                "description": "get By AccountId Here",
-                "operationId": "getByAccountId",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "AccountById": {
-                                            "type": "integer",
-                                            "example": "{'id': 2}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/delete/{id}": {
-            "delete": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "delete Account",
-                "description": "delete Account",
-                "operationId": "deleteAccount",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "301": {
-                        "description": "deleted successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/restore/{id}": {
-            "put": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "restore By AccountId",
-                "description": "restore By AccountId",
-                "operationId": "restoreByAccountId",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "restored successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/getAllUnValidated": {
-            "get": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "allUnValidatedAccounts",
-                "description": "allUnValidatedAccounts",
-                "operationId": "allUnValidatedAccounts",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    ""
-                                ],
-                                "properties": {
-                                    "": {
-                                        "type": ""
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "all companys validated collections ",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "AllUnVAlidateAccount": {
-                                            "type": "integer",
-                                            "example": "{'id': 2}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/validate/{id}": {
-            "put": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "validatedAccount",
-                "description": "validatedAccount",
-                "operationId": "validatedAccount",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "validated successfully "
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
         "/api/v1_0/subscriptions/create": {
             "post": {
                 "tags": [
@@ -1023,12 +450,20 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "email",
                                     "password"
                                 ],
                                 "properties": {
-                                    "email": {
-                                        "type": "email"
+                                    "": {
+                                        "oneOf": [
+                                            {
+                                                "type": "email",
+                                                "property": "email"
+                                            },
+                                            {
+                                                "type": "string",
+                                                "property": "mobile"
+                                            }
+                                        ]
                                     },
                                     "password": {
                                         "type": "password"
@@ -1656,6 +1091,379 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/filter-company-info": {
+            "get": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "filter company info",
+                "description": "filter company info Here",
+                "operationId": "filtercompanyinfo",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "collection"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/add-company": {
+            "post": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "create Company Account",
+                "description": "create Company Account Here",
+                "operationId": "createAccount",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "crNo",
+                                    "roleId",
+                                    "companyType"
+                                ],
+                                "properties": {
+                                    "roleId": {
+                                        "type": "integer"
+                                    },
+                                    "crNo": {
+                                        "type": "string"
+                                    },
+                                    "companyType": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/getById/{id}": {
+            "get": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "get By AccountId",
+                "description": "get By AccountId Here",
+                "operationId": "getByAccountId",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "AccountById": {
+                                            "type": "integer",
+                                            "example": "{'id': 2}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/update": {
+            "put": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "update Account",
+                "description": "update Account Here",
+                "operationId": "updateAccount",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "delete Account",
+                "description": "delete Account",
+                "operationId": "deleteAccount",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "301": {
+                        "description": "deleted successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/accounts/restore/{id}": {
+            "put": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "restore By AccountId",
+                "description": "restore By AccountId",
+                "operationId": "restoreByAccountId",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "restored successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
                     }
                 }
             }
@@ -2885,6 +2693,48 @@
                 }
             }
         },
+        "/api/v1_0/roles/getAll": {
+            "get": {
+                "tags": [
+                    "Roles and Permissions"
+                ],
+                "summary": "get roles",
+                "description": "get all roles Here",
+                "operationId": "getAllRoles",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get all roles",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {}
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/roles/save": {
             "post": {
                 "tags": [
@@ -3091,48 +2941,6 @@
                                     },
                                     "type": "object"
                                 }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/roles/getAll": {
-            "get": {
-                "tags": [
-                    "Roles and Permissions"
-                ],
-                "summary": "get roles",
-                "description": "get all roles Here",
-                "operationId": "getAllRoles",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "get all roles",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {}
                             },
                             "application/json": {
                                 "schema": {}

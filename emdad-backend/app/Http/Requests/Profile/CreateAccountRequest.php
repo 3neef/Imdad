@@ -1,10 +1,7 @@
 <?php
 
-namespace App\Http\Requests\AccountRequests\Account;
+namespace App\Http\Requests\Profile;
 
-use Carbon\Carbon;
-use App\Models\User;
-use App\Models\Accounts\CompanyInfo;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
