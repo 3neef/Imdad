@@ -98,7 +98,7 @@ class TruckController extends Controller
         * @OA\put(
         * path="/api/v1_0/trucks",
         * operationId="trucks",
-        * tags={"warehouse"},
+        * tags={"trucks"},
         * summary="update trucks",
         * description="update Depatrucksrtment Here",
      *     @OA\Parameter(
@@ -151,10 +151,49 @@ class TruckController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @OA\delete(
+     * path="/api/v1_0/trucks",
+     * operationId="trucks",
+     * tags={"trucks"},
+     * summary="Delete trucks",
+     * description="delete trucks here",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *      @OA\Response(
+     *          response=301,
+     *          description="truck deleted successfully",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
      */
     public function destroy($id)
     {
