@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('used')->default(0)->comment('count of coupon use');
             $table->foreignId('user_id')->nullable();
             $table->foreignId('company_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

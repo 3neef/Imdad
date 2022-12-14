@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class CouponServices
 {
 
-    public function createCoupon($request)
+    public function create($request)
     {
              Coupon::create([
                 'allowed' => $request->allowed,
@@ -31,6 +31,7 @@ class CouponServices
         return  response()->json(['data' => $couponCode],200);
     }
 
+
      public function usedCoupon($request)
     {
         $coupon = Coupon::where('code',$request->code)->first();
@@ -44,22 +45,46 @@ class CouponServices
                     'coupon_id'=>$coupon->id,
                     'discount'=>$subscription->sub_total*$coupon->value/100,
                 ]);
-
             }
             else{
                 $subscription->update([
                     'coupon_id'=>$coupon->id,
                     'discount'=>$coupon->value,
                 ]);
-
             }
-
             return response()->json(['data'=>$subscription,'message' => 'aproved successfully'], 200);
         }
         else{
             return response()->json(['message' => 'can,t use coupon'], 301);
         }
     }
+
+
+
+
+
+    public function destroy( $id)
+    {
+        $category = Coupon::find($id);
+        if ($category == null) {
+            return response()->json(['success' => false, 'error' => 'not found'], 404);
+        } else {
+            $category->delete();
+            return response()->json(['message' => 'deleted successfully'], 301);
+        }
+    }
+
+
+    public function restore($id)
+    {
+        $restore = Coupon::where('id',$id)->where('deleted_at','!=',null)->withTrashed()->restore();
+        if ($restore) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
+
 
 
 

@@ -37,10 +37,16 @@ Route::middleware(['auth.apikey'])->prefix('wathiq')->group(function () {
         dd("optimized successfully");
     });
 
-Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('coupon')->group(function () {
-    Route::post('create', [CouponController::class, 'createCoupon']);
-    Route::get('show', [CouponController::class, 'showCoupon']);
-    Route::post('used', [CouponController::class, 'usedCoupon']);
+Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    // Route::post('create', [CouponController::class, 'createCoupon']);
+    // Route::get('show', [CouponController::class, 'showCoupon']);
+    // Route::post('used', [CouponController::class, 'usedCoupon']);
+    Route::apiResource('coupon', CouponController::class);
+    Route::post('coupon/used', [CouponController::class, 'usedCoupon']);
+    Route::put('coupon/restore/{id}', [CouponController::class, 'restore']);
+
+
+
 });
 
 
