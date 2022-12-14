@@ -13,25 +13,26 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_locations', function (Blueprint $table) {
+        Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger("company_id");
+            $table->unsignedBigInteger("profile_id")->nullable();
             $table->string("address_name",255);
             $table->string("address_contact_phone",15);
             $table->string("address_contact_name",25);
             $table->string("address_type");
             $table->string("gate_type");
-            $table->string('latitude_longitude');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->boolean("otp_verfied")->default(false);
             $table->timestamp("otp_expires_at")->nullable();
             $table->string("otp_receiver",6)->nullable();
-            $table->enum('status',['Pending', 'Active'])->default('Pending');  
+            $table->enum('status',['Pending', 'Active'])->default('Pending');
             $table->foreignId('confirm_by')->nullable(true)->references("id")->on("users")->restrictOnDelete();
             $table->foreignId('created_by')->nullable(true)->references("id")->on("users")->restrictOnDelete();
             $table->softDeletes();
 
-            $table->foreign('company_id')->references('id')->on('company_info')->onDelete('cascade');
+            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
         });
     }
 
@@ -42,6 +43,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_locations');
+        Schema::dropIfExists('warehouses');
     }
 };

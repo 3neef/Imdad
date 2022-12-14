@@ -22,7 +22,8 @@ class WarehouseService
             'profile_id' => auth()->user()->profile_id,
             'address_name' => $request->warehouseName,
             'address_contact_phone' => $request->receiverPhone,
-            'latitude_longitude' => $request->warehouses,
+            'latitude' => $request->latitude,
+            'longitude'=>$request->longitude,
             'address_contact_name' => $request->receiverName,
             'address_type' => $request->warehouseType,
             'gate_type' => $request->gateType,
@@ -41,18 +42,24 @@ class WarehouseService
 
     public function update($request, $id)
     {
+
         $warehouse = Warehouse::where('id', $id)->first();
+        // dd($warehouse);
         if ($warehouse != null) {
             $warehouse->update([
-                'address_name' => $request->warehouseName ?? $warehouse->address_name,
-                "address_type" => $request->lastName ?? $warehouse->address_type,
-                "gate_type" => $request->firstName . " " . $request->lastName ?? $warehouse->gate_type,
-                "address_contact_name" => $request->email ?? $warehouse->address_contact_name,
-                "address_contact_phone" => $request->address_contact_phone ?? $warehouse->address_contact_phone,
-                "latitude_longitude" => $request->warehouses ?? $warehouse->latitude_longitude,
+                'address_name' => $request->warehouseName??$warehouse->address_name ,
+                "address_type" => $request->warehouseType??$warehouse-> address_type,
+                "gate_type" => $request->gateType?? $warehouse->gate_type,
+                "address_contact_name" => $request->receiverName??$warehouse->address_contact_name ,
+                "address_contact_phone" => $request->receiverPhone??$warehouse->address_contact_phone ,
+                "latitude" => $request->latitude??$warehouse->latitude,
+                "longitude"=>$request->longitude??$warehouse->longitude,
 
             ]);
+        return response()->json(['success' => 'Updated Successfly'], 201);
+
         }
+
         return response()->json(['error' => 'No data Found'], 404);
     }
 
@@ -101,7 +108,7 @@ class WarehouseService
         return response()->json(['error' => 'system error'], 500);
     }
 
-    public function verfied($request, $id)
+    public function verfied($id)
     {
         $warehouses = Warehouse::where('id', $id)->first();
         $verfied = $warehouses->update(['confirm_by' => auth()->id(), 'otp_receiver' => null, 'otp_expires_at' => null, 'otp_verfied' => true]);

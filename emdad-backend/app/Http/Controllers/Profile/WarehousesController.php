@@ -129,7 +129,7 @@ class WarehousesController extends Controller
         */
     public function store(CreateWarehouesesRequest $request)
     {
-        return $this->warehouseService->save($request);
+        return $this->warehouseService->store($request);
     }
 
 
@@ -180,9 +180,9 @@ class WarehousesController extends Controller
             $location=Warehouse::where("id",$id)->first();
             if($location==null||false){// replace false by checking user permission
                 return response()->json(['success'=>false,'error' => 'not found'], 404);
-    
+
             }
-            return $this->warehouseService->showById($id);
+            return $this->warehouseService->show($id);
         }
 /**
         * @OA\put(
@@ -289,7 +289,7 @@ class WarehousesController extends Controller
         */
     public function destroy($id)
     {
-       
+
         return $this->warehouseService->delete($id);
     }
 /**
@@ -332,7 +332,7 @@ class WarehousesController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function restoreByLocationId(RestoreLocationRequest $request,$id)
+    public function restoreByLocationId($id)
     {
         return $this->warehouseService->restore($id);
     }
@@ -389,8 +389,8 @@ class WarehousesController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function verfiedLocation(VerfiedLocationRequest $request)
+    public function verfiedLocation($id)
     {
-        return $this->warehouseService->verfied($request);
+        return $this->warehouseService->verfied($id);
     }
 }

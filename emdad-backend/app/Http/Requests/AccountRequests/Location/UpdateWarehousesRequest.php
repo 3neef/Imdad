@@ -27,13 +27,13 @@ class UpdateWarehousesRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required','integer','exists:company_locations,id'],
             'warehouseName' => ['string','max:100'],
             'warehouseType' => ['string'],
-            'location' => ['string'],
+            'latitude' => ['string'],
+            'longitude' => ['string'],
             'gateType' => ['string'],
             'receiverName' => ['string','max:25'],
-            'receiverPhone' => ['string','max:15','min:15','regex:/^(00966)/']
+            'receiverPhone' => ['string','max:15','min:15','regex:/^(00249)/']
         ];
     }
 
