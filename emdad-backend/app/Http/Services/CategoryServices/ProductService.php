@@ -3,80 +3,89 @@
 namespace App\Http\Services\CategoryServices;
 
 use App\Http\Resources\CategoryResourses\Product\ProductResponse;
+use App\Http\Services\AccountServices\UploadServices;
 use App\Models\Emdad\Prodcuts;
+use App\Models\Emdad\Product;
 use App\Models\Emdad\Unit_of_measures;
 
-class ProductService{
+class ProductService
+{
 
-    public function createProdcut($request)
+    public function index()
     {
-        $file_extention = $request -> image -> getClientOriginalExtension();
-        $file_name = time() . '.' . $file_extention ;
-        $path = 'images/products';
-        $request -> image ->move($path,$file_name);
-
-        $prodcut = new Prodcuts();
-        $categoryId = $request->get('categoryId');
-        $prodcut->name = $request->get('name');
-        $prodcut->categories_id = $categoryId;
-        $prodcut->price = $request->get('price');
-        $prodcut->company_id = auth()->user()->default_company;
-        $prodcut->measruing_unit = $request->get('measruing_unit');
-        $prodcut->image = $file_name;
-
-
-        $result = $prodcut->save();
-        if($result){
-            return response()->json( [ 'message'=>'created successfully' ], 200 );
+        $prodcuts = Product::all();
+        if ($prodcuts) {
+            return response()->json(['data' => ProductResponse::collection($prodcuts)], 200);
         }
-        return response()->json( [ 'error'=>'system error' ], 500 );
+        return response()->json(['error' => 'No data Founded'], 404);
     }
 
-
-    public function update($request)
+    public function store($request)
     {
-        $id = $request->get('id');
-        $prodcut = Prodcuts::find($id);
-        $name = empty($request->get('name')) ? $prodcut->name : $request->get('name');
-        $price = empty( $request->get('price')) ? $prodcut->price :  $request->get('price');
-        $update = $prodcut->update(['name' => $name,'price' => $price]);
-        if($update){
-            return response()->json( [ 'message'=>'updated successfully' ], 200 );
+        $request->merge(['image' => UploadServices::uploadFile($request->attachement_file, 'image', 'Products images')]);
+
+        $prodcut = Product::create([
+            'category_id' => $request->categoryId,
+            'name' => $request->name,
+            "price" => $request->price,
+            "measruing_unit" => $request->measruing_unit,
+            "image" => $request->image,
+
+        ]);
+        if ($prodcut) {
+            return response()->json(['message' => 'created successfully'], 200);
         }
-        return response()->json( [ 'error'=>'system error' ], 500 );
+        return response()->json(['error' => 'system error'], 500);
     }
 
-    public function getById($id)
+
+    public function update($request, $id)
     {
-        $prodcut = Prodcuts::where( 'id', $id )->first();
-        return response()->json( [ 'data'=>new ProductResponse($prodcut)  ], 200 );
+
+        $prodcut = Product::find($id);
+
+        $prodcut->update([
+            'category_id' => $request->categoryId,
+            'name' => $request->name,
+            "price" => $request->price,
+            "measruing_unit" => $request->measruing_unit,
+        ]);
+        if ($request->has('image')) {
+            $request->merge(['image' => UploadServices::uploadFile($request->attachement_file, 'image', 'Products images')]);
+            $prodcut->update(['image' => $request->image]);
+        }
+        if ($prodcut) {
+            return response()->json(['message' => 'updated successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
     }
 
-    public function getAll()
+    public function show($id)
     {
-        $allProdcuts = Prodcuts::all();
-        return response()->json( [ 'data'=>ProductResponse::collection($allProdcuts) ], 200 );
+        $prodcut = Product::where('id', $id)->first();
+        if ($prodcut) {
+            return response()->json(['data' => new ProductResponse($prodcut)], 200);
+        }
+        return response()->json(['error' => 'No data Founded'], 404);
     }
+
 
     public function delete($id)
     {
-        $prodcut = Prodcuts::find($id);
+        $prodcut = Product::find($id);
         $deleted = $prodcut->delete();
-        if($deleted){
-            return response()->json( [ 'message'=>'deleted successfully' ], 301 );
+        if ($deleted) {
+            return response()->json(['message' => 'deleted successfully'], 301);
         }
-        return response()->json( [ 'error'=>'system error' ], 500 );
+        return response()->json(['error' => 'system error'], 500);
     }
 
     public function restore($id)
     {
-        $restore = Prodcuts::where('id', $id)->withTrashed()->restore();
-        if($restore){
-             return response()->json( [ 'message'=>'restored successfully' ], 200 );
+        $restore = Product::where('id', $id)->withTrashed()->restore();
+        if ($restore) {
+            return response()->json(['message' => 'restored successfully'], 200);
         }
-        return response()->json( [ 'error'=>'system error' ], 500 );
+        return response()->json(['error' => 'system error'], 500);
     }
-
-
-    
 }
