@@ -27,7 +27,7 @@ class SubscriptionPackagesSeeder extends Seeder
             ["subscription_name" => 'basic_2', "type" => 2, "subscription_details" =>
             ["superAdmin" => 1, "users" => 5, "paymentMethods" => "cash", "delivery" => "one_time_delivery", "warehouses" => 2, "addSuppliers" => 5, "item_in_each_requisition" => 5, "live_tracking" => false, "price" => "1.000"]],
         ];
-        
+
         foreach ($subscriptionsDetails as $subscriptionsDetail) {
             DB::table('subscription_packages')->insert([
                 "subscription_name" => $subscriptionsDetail['subscription_name'],

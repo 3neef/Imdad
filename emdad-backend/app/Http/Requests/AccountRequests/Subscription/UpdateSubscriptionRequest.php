@@ -27,11 +27,8 @@ class UpdateSubscriptionRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['exists:subscription_packages,id'],
             'type' => ['string', Rule::in(['Buyer', 'Supplier'])], // 1 => Buyer, 2 => Supplier
-            'updateOld' => ['required', 'boolean'],
-            'subscriptionDetails' => ['required'],
-            'subscriptionDetails.superAdmin' => ['required', 'integer'],
+            'subscriptionDetails.superAdmin' => [ 'integer'],
             'subscriptionDetails.users' => ['integer'],
             'subscriptionDetails.paymentMethods' => ['string'],
             'subscriptionDetails.delivery' => ['string'],

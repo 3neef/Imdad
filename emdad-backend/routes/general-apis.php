@@ -15,7 +15,7 @@ Route::get('sendSms', [SmsController::class, 'sendSms']);
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::apiResource('pakages', SubscriptionController::class);
-    Route::put('pakages/restore', [SubscriptionController::class, 'restore']);
+    Route::put('pakages/restore/{id}', [SubscriptionController::class, 'restore']);
     Route::get('pakages/get-supplier-packs', [SubscriptionController::class, 'getSupplierPackages']);
     Route::get('pakages/get-buyer-packs', [SubscriptionController::class, 'getBuyerPackages']);
 });

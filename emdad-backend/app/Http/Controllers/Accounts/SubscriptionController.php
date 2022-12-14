@@ -78,7 +78,7 @@ class SubscriptionController extends Controller
     public function store(GeneralCreateSubPackageRequest $request)
     {
         return $this->subscriptionService->store($request);
-        
+
     }
     /**
      * @OA\put(
@@ -174,9 +174,9 @@ class SubscriptionController extends Controller
      *      @OA\Response(response=500, description="system error")
      * )
      */
-    public function getBuyerPackages(Request $request)
+    public function getBuyerPackages()
     {
-      
+
         return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", "Buyer")->get())], 200);
     }
 
@@ -228,7 +228,11 @@ class SubscriptionController extends Controller
         return response()->json(["success" => true, "data" =>SubscriptionPackageResource::collection(SubscriptionPackages::where("type", "Supplier")->get())], 200);
     }
 
+    public function show($id)
+    {
+       return $this->subscriptionService->show($id);
 
+    }
 
     public function destroy($id)
     {

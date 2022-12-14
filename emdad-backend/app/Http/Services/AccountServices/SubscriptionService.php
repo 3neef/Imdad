@@ -23,6 +23,17 @@ class SubscriptionService
         return response()->json(['message' => 'system error'], 500);
     }
 
+
+    public function show($id)
+    {
+        $subscription = SubscriptionPackages::find($id);
+        if ($subscription) {
+            return response()->json(['data' => $subscription], 200);
+        }
+        return response()->json(['message' => 'system error'], 500);
+    }
+
+
     public function update($request, $id)
     {
 
@@ -53,7 +64,7 @@ class SubscriptionService
 
     public function restore($id)
     {
-        $subscription = SubscriptionPackages::find($id)->withTrashed()->restore();
+        $subscription = SubscriptionPackages::where('id',$id)->where('deleted_at',"!=",null)->withTrashed()->restore();
 
         if ($subscription) {
             return response()->json(['message' => 'restored successfully'], 200);
