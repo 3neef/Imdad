@@ -33,7 +33,7 @@ class DepartmentController extends Controller
 
      /**
         * @OA\Post(
-        * path="/api/v1_0/department/create",
+        * path="/api/v1_0/department",
         * operationId="createdepartment",
         * tags={"Department"},
         * summary="create department ",
@@ -89,13 +89,67 @@ class DepartmentController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+/**
+        * @OA\put(
+        * path="/api/v1_0/Department",
+        * operationId="updateDepartment",
+        * tags={"warehouse"},
+        * summary="update Department",
+        * description="update Department Here",
+     *     @OA\Parameter(
+     *         name="user_id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+    *     @OA\Parameter(
+        *         name="x-authorization",
+        *         in="header",
+        *         description="Set x-authorization",
+        *         @OA\Schema(
+        *             type="string"
+        *         )
+        *     ),
+        *         *     @OA\Parameter(
+        *         name="token",
+        *         in="header",
+        *         description="Set user authentication token",
+        *         @OA\Schema(
+        *             type="beraer"
+        *         )
+        *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"id"},
+        *               @OA\Property(property="name", type="string"),
+
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *        response=200,
+        *          description="updated Successfully",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *        ),
+        *
+        *       ),
+        *      @OA\Response(response=500, description="system error"),
+        *      @OA\Response(response=422, description="Validate error"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function update(UpdateDepartmentRequest $request, $id)
     {
         return $this->departmentService->updateDepartment($request,$id);
