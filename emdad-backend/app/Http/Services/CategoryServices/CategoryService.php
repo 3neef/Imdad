@@ -2,10 +2,20 @@
 
 namespace App\Http\Services\CategoryServices;
 
+use App\Http\Resources\CategoryResourses\category\CategoryResource;
 use App\Models\Emdad\Categories;
 
 class CategoryService
 {
+
+
+
+    public function index()
+    {
+        $category = Categories::all();
+        return response()->json(['data' => CategoryResource::collection($category)], 200);
+    }
+
 
     public function store($request)
     {
@@ -18,88 +28,89 @@ class CategoryService
             'parent_id' => $request->parentId ?? 0,
 
         ]);
-        if(auth()->user()->profile_id){
+        if (auth()->user()->profile_id) {
             $category->update(['profile_id' => auth()->user()->profile_id]);
         }
         if ($category) {
             return response()->json(['message' => 'created successfully'], 200);
         }
-        return response()->json(['message'=>'error'],501);
+        return response()->json(['message' => 'error'], 501);
     }
 
 
 
 
 
-    
-    public function approveCategory($category_id)
+    public function show($id)
     {
-        $category = Categories::find($category_id)->first();
+        $category = Categories::where('id', $id)->first();
+        if ($category) {
+            return response()->json(['data' => new CategoryResource($category)], 200);
+        }
+        return response()->json(['error' => 'No data Founded'], 404);
+    }
+
+
+
+
+
+
+    public function update($request, $id)
+    {
+        $category = Categories::where('id', $id)->first();
+        if ($category != null) {
+            $category -> update([
+                'name_en' => $request->nameEn??$category->name_en,
+                'name_ar' => $request->nameAr??$category->name_ar,
+                'aproved' => 0,
+                'isleaf' => $request->isleaf??$category->isleaf,
+                'parent_id' => $request->parentId ?? 0,
+
+            ]);
+        return response()->json(['success' => 'Updated Successfly'], 201);
+    }
+    }
+
+    public function destroy( $id)
+    {
+        $category = Categories::find($id);
+        if ($category == null) {
+            return response()->json(['success' => false, 'error' => 'not found'], 404);
+        } else {
+            $category->delete();
+            return response()->json(['message' => 'deleted successfully'], 301);
+        }
+    }
+
+
+    public function restore($id)
+    {
+        $restore = Categories::where('id',$id)->where('deleted_at','!=',null)->withTrashed()->restore();
+        if ($restore) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
+
+    public function approveCategory($id)
+    {
+        $category = Categories::find($id);
         if ($category == null) {
             return response()->json([
-                'error' => 'error in created'
+                'error' => 'no category founded'
             ]);
         } else {
-            $category->aproved = 1;
-            $category->update();
+            $category->update(['aproved' => 1]);
             return response()->json(['message' => 'aproved successfully'], 200);
         }
     }
 
-    public function showAllApprovedCategories()
-    {
-        $category = Categories::where('aproved', '1')->get();
-        return  response()->json(['data' => $category], 200);
-    }
-
-    public function showAllCategories()
-    {
-        $category = Categories::get();
-        return  response()->json(['Maincategory' => $category], 200);
-    }
-
-    public function addSubCategory($request)
-    {
-        $subcatogry = Categories::where('name', $request->name)->where('parent_id', '=', $request->parent_id)->first();
-        if ($subcatogry != null) {
-            return response()->json([
-                'error' => 'error in created'
-            ]);
-        } else {
-
-            $aproved = 0;
-            $subcatogry = Categories::create([
-                'name' => $request->name,
-                'aproved' => $aproved,
-                'isleaf' => $request->isleaf,
-                'parent_id' => $request->parent_id,
-                'company_id' => auth()->user()->default_company, //change to Auth()->user()->company_id (befor add middleware)
-            ]);
-
-            return response()->json(['message' => 'created successfully'], 200);
-        }
-    }
 
 
-    public function showApprovedWithParentCategoryId($request)
-    {
-        if ($request->aproved == 1) {
-            $subcategory = Categories::where('aproved', '1')->where('parent_id', $request->parent_id)->get();
-            return  response()->json([
-                'subcategory' => $subcategory,
-            ]);
-        } else {
-            $subcategory = Categories::where('parent_id', $request->parent_id)->get();
-            return  response()->json([
-                'subcategory' => $subcategory,
-            ]);
-        }
-    }
+ 
 
 
-    public function showCategoriesByCompanyId($companyId)
-    {
-        $categorys = Categories::where('company_id', '=', $companyId);
-        return response()->json(['data' => $categorys], 200);
-    }
+
+
 }
