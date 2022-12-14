@@ -99,10 +99,11 @@ class WarehousesController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"warehouseName","warehouseType","location","gateType","receiverName","receiverPhone"},
+        *               required={"warehouseName","warehouseType","latitude","longitude","gateType","receiverName","receiverPhone"},
         *               @OA\Property(property="warehouseName", type="string"),
         *               @OA\Property(property="warehouseType", type="string"),
-        *               @OA\Property(property="location", type="string"),
+        *               @OA\Property(property="latitude", type="string"),
+        *               @OA\Property(property="longitude", type="string"),
         *               @OA\Property(property="gateType", type="string"),
         *               @OA\Property(property="receiverName", type="string"),
         *               @OA\Property(property="receiverPhone", type="string")
@@ -186,7 +187,7 @@ class WarehousesController extends Controller
         }
 /**
         * @OA\put(
-        * path="/api/v1_0/warehouses/update",
+        * path="/api/v1_0/warehouses",
         * operationId="updateWarehouse",
         * tags={"warehouse"},
         * summary="update warehouse",
@@ -217,7 +218,8 @@ class WarehousesController extends Controller
         *               @OA\Property(property="id", type="integer"),
         *               @OA\Property(property="warehouseName", type="string"),
         *               @OA\Property(property="warehouseType", type="string"),
-        *               @OA\Property(property="location", type="string"),
+        *               @OA\Property(property="latitude", type="string"),
+        *               @OA\Property(property="longitude", type="string"),
         *               @OA\Property(property="gateType", type="string"),
         *               @OA\Property(property="receiverName", type="string"),
         *               @OA\Property(property="receiverPhone", type="string")
@@ -254,6 +256,14 @@ class WarehousesController extends Controller
         * tags={"warehouse"},
         * summary="delete warehouse",
         * description="delete warehouse Here",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
 *     @OA\Parameter(
      *         name="api_key",
      *         in="header",
