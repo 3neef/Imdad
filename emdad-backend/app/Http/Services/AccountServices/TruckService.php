@@ -78,7 +78,7 @@ public function delete($id)
 
     public function index()
     {
-        $truck = Truck::all()->with('truckImage');
+        $truck = Truck::with('truckImage')->get();
         return response()->json(['data' => TruckResponse::collection($truck)], 200);
     }
 
