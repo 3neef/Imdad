@@ -17,7 +17,7 @@ class AppAuthMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if ($request->header('api_key') !== env('api_key','$2y$10$s2NTmAatcTQV20jBaBwTHO41n8k0YLZURdoqHs4UEs3WJLkZl8tyK')) {
+        if ($request->header('api_key') !== env('api_key')) {
             return response()->json(["success" => false, "error" => "app not authenticated"], 401);
         }
 
