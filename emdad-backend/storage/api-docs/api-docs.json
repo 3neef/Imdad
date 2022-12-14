@@ -456,12 +456,12 @@
                                     "": {
                                         "oneOf": [
                                             {
-                                                "type": "email",
+                                                "type": "string",
                                                 "property": "email"
                                             },
                                             {
                                                 "type": "string",
-                                                "property": "mobile"
+                                                "property": "email"
                                             }
                                         ]
                                     },
@@ -1524,6 +1524,90 @@
                 }
             }
         },
+        "/api/v1_0/trucks": {
+            "post": {
+                "tags": [
+                    "Department"
+                ],
+                "summary": "create trucks ",
+                "description": "create trucks  Here",
+                "operationId": "createtrucks",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "type",
+                                    "class",
+                                    "color",
+                                    "model",
+                                    "size",
+                                    "brand",
+                                    "image"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "class": {
+                                        "type": "string"
+                                    },
+                                    "color": {
+                                        "type": "string"
+                                    },
+                                    "model": {
+                                        "type": "string"
+                                    },
+                                    "size": {
+                                        "type": "string"
+                                    },
+                                    "brand": {
+                                        "type": "string"
+                                    },
+                                    "image": {
+                                        "type": "file"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "department created Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/warehouses": {
             "get": {
                 "tags": [
@@ -1674,101 +1758,6 @@
                 }
             }
         },
-        "/api/v1_0/warehouses/update": {
-            "put": {
-                "tags": [
-                    "warehouse"
-                ],
-                "summary": "update warehouse",
-                "description": "update warehouse Here",
-                "operationId": "updateWarehouse",
-                "parameters": [
-                    {
-                        "name": "api_key",
-                        "in": "header",
-                        "description": "Set api_key",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "warehouseName": {
-                                        "type": "string"
-                                    },
-                                    "warehouseType": {
-                                        "type": "string"
-                                    },
-                                    "location": {
-                                        "type": "string"
-                                    },
-                                    "gateType": {
-                                        "type": "string"
-                                    },
-                                    "receiverName": {
-                                        "type": "string"
-                                    },
-                                    "receiverPhone": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated Successfully",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
         "/api/v1_0/warehouses/{id}'": {
             "get": {
                 "tags": [
@@ -1848,6 +1837,101 @@
                 "responses": {
                     "200": {
                         "description": "delete warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/update": {
+            "put": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "update warehouse",
+                "description": "update warehouse Here",
+                "operationId": "updateWarehouse",
+                "parameters": [
+                    {
+                        "name": "api_key",
+                        "in": "header",
+                        "description": "Set api_key",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "warehouseName": {
+                                        "type": "string"
+                                    },
+                                    "warehouseType": {
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "type": "string"
+                                    },
+                                    "gateType": {
+                                        "type": "string"
+                                    },
+                                    "receiverName": {
+                                        "type": "string"
+                                    },
+                                    "receiverPhone": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
