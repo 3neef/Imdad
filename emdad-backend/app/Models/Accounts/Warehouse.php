@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Warehouse extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $table = "warehouses";
     protected $fillable = [
         'address_name',
         'profile_id',

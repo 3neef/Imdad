@@ -15,7 +15,7 @@ Route::middleware(['app.auth','auth:sanctum'])->group(function() {
 
 
 Route::middleware(['app.auth','auth:sanctum'])->prefix('warehouses')->group(function() {
-    Route::put('verfied', [WarehousesController::class, 'verfiedLocation']);
+    Route::put('verfied/{id}', [WarehousesController::class, 'verfiedLocation']);
     Route::put('restore/{id}', [WarehousesController::class, 'restoreByLocationId']);
 });
 

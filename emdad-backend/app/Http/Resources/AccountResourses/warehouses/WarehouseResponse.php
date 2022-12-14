@@ -16,7 +16,7 @@ class WarehouseResponse extends JsonResource
     {
         return [
             "id" =>$this->id,
-            "profikeId" =>$this->profile_id, 
+            "profileId" =>$this->profile_id,
             "warehouseName" =>$this->address_name,
             "warehouseType" =>$this->address_type,
             "gateType" =>$this->gate_type,
@@ -24,7 +24,9 @@ class WarehouseResponse extends JsonResource
             "receiverName" =>$this->address_contact_name,
             "receiverPhone" =>$this->address_contact_phone,
             "otpVerfied" =>$this->otp_verfied,
+            "otp"=>$this->otp_receiver,
             "confirmBy" =>$this->confirm_by,
+            "CreatedBy"=>$this->created_by,
         ];
     }
 }
