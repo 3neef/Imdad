@@ -23,22 +23,22 @@ class CategoryController extends Controller
         * tags={"Catogry"},
         * summary="add catogry",
         * description="add catogry Here",
-*     @OA\Parameter(
-     *         name="x-authorization",
-     *         in="header",
-     *         description="Set x-authorization",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
+        *     @OA\Parameter(
+        *         name="x-authorization",
+        *         in="header",
+        *         description="Set x-authorization",
+        *         @OA\Schema(
+        *             type="string"
+        *         )
+        *     ),
+        *         *     @OA\Parameter(
+        *         name="token",
+        *         in="header",
+        *         description="Set user authentication token",
+        *         @OA\Schema(
+        *             type="beraer"
+        *           )
+        *     ),
         *     @OA\RequestBody(
         *         @OA\JsonContent(),
         *         @OA\MediaType(
@@ -59,18 +59,18 @@ class CategoryController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function addCatogry( CreateCategoryRequest $request )
+    public function store( CreateCategoryRequest $request )
  {
-        return $this->categoryService->addCategory( $request );
+        return $this->categoryService->store( $request );
     }
 /**
-        * @OA\Post(
-        * path="/api/v1_0/categories/aproved-catogry/{id}",
-        * operationId="aprovedcatogre",
-        * tags={"Catogry"},
-        * summary="aproved catogry",
-        * description="aproved catogry Here",
-*     @OA\Parameter(
+     * @OA\Post(
+     * path="/api/v1_0/categories/aproved-catogry/{id}",
+     * operationId="aprovedcatogre",
+     * tags={"Catogry"},
+     * summary="aproved catogry",
+     * description="aproved catogry Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -86,24 +86,24 @@ class CategoryController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="aproved Successfully"
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"id"},
+     *               @OA\Property(property="id", type="integer"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="aproved Successfully"
+     *       ),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function aprovedCatogry( CreateCategoryRequest $request, $category_id )
  {
         return $this->categoryService->approveCategory( $category_id );

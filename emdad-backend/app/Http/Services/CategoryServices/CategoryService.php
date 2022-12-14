@@ -6,32 +6,32 @@ use App\Models\Emdad\Categories;
 
 class CategoryService
 {
-    public function addCategory($request)
-    {
-        
-        $category = Categories::where('name', $request->name)->first();
-        if ($category != null) {
-            return response()->json([
-                'errors' => 'error in created'
-            ]);
-        }
-        else {
-            $aproved = 0;
-            $parentid = 0;
-            $category = Categories::create([
-                'name' => $request->name,
-                'aproved' => $aproved,
-                'isleaf' => $request->isleaf,
-                'parent_id' => $parentid,
-                'company_id' => auth()->user()->default_company,
-            ]);
 
-            return response()->json(['message' => 'created successfully'],201);
-             }
+    public function store($request)
+    {
+
+        $category = Categories::create([
+            'name_en' => $request->nameEn,
+            'name_ar' => $request->nameAr,
+            'aproved' => 0,
+            'isleaf' => $request->isleaf,
+            'parent_id' => $request->parentId ?? 0,
+
+        ]);
+        if(auth()->user()->profile_id){
+            $category->update(['profile_id' => auth()->user()->profile_id]);
+        }
+        if ($category) {
+            return response()->json(['message' => 'created successfully'], 200);
+        }
+        return response()->json(['message'=>'error'],501);
     }
 
 
 
+
+
+    
     public function approveCategory($category_id)
     {
         $category = Categories::find($category_id)->first();
@@ -49,13 +49,13 @@ class CategoryService
     public function showAllApprovedCategories()
     {
         $category = Categories::where('aproved', '1')->get();
-        return  response()->json(['data' => $category],200);
+        return  response()->json(['data' => $category], 200);
     }
 
     public function showAllCategories()
     {
         $category = Categories::get();
-        return  response()->json(['Maincategory' => $category],200);
+        return  response()->json(['Maincategory' => $category], 200);
     }
 
     public function addSubCategory($request)
