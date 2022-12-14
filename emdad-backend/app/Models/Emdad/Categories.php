@@ -10,7 +10,7 @@ class Categories extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = [ 'name_en', 'name_ar','aproved','parent_id','isleaf','company_id'];
+    protected $fillable = [ 'name_en', 'name_ar','aproved','parent_id','isleaf','profile_id'];
     public function Products()
     {
         return $this->hasMany(Prodcuts::class);
