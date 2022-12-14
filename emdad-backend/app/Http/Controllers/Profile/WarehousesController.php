@@ -34,9 +34,9 @@ class WarehousesController extends Controller
         * summary="get all warehouse",
         * description="get all warehouses Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -78,9 +78,9 @@ class WarehousesController extends Controller
         * summary="create warehouse",
         * description="create warehouse Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -99,10 +99,11 @@ class WarehousesController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"warehouseName","warehouseType","location","gateType","receiverName","receiverPhone"},
+        *               required={"warehouseName","warehouseType","latitude","longitude","gateType","receiverName","receiverPhone"},
         *               @OA\Property(property="warehouseName", type="string"),
         *               @OA\Property(property="warehouseType", type="string"),
-        *               @OA\Property(property="location", type="string"),
+        *               @OA\Property(property="latitude", type="string"),
+        *               @OA\Property(property="longitude", type="string"),
         *               @OA\Property(property="gateType", type="string"),
         *               @OA\Property(property="receiverName", type="string"),
         *               @OA\Property(property="receiverPhone", type="string")
@@ -143,9 +144,9 @@ class WarehousesController extends Controller
         * summary="get warehouse By Id",
         * description="get warehouse By Id Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -186,15 +187,15 @@ class WarehousesController extends Controller
         }
 /**
         * @OA\put(
-        * path="/api/v1_0/warehouses/update",
+        * path="/api/v1_0/warehouses",
         * operationId="updateWarehouse",
         * tags={"warehouse"},
         * summary="update warehouse",
         * description="update warehouse Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -217,7 +218,8 @@ class WarehousesController extends Controller
         *               @OA\Property(property="id", type="integer"),
         *               @OA\Property(property="warehouseName", type="string"),
         *               @OA\Property(property="warehouseType", type="string"),
-        *               @OA\Property(property="location", type="string"),
+        *               @OA\Property(property="latitude", type="string"),
+        *               @OA\Property(property="longitude", type="string"),
         *               @OA\Property(property="gateType", type="string"),
         *               @OA\Property(property="receiverName", type="string"),
         *               @OA\Property(property="receiverPhone", type="string")
@@ -254,10 +256,18 @@ class WarehousesController extends Controller
         * tags={"warehouse"},
         * summary="delete warehouse",
         * description="delete warehouse Here",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -300,9 +310,9 @@ class WarehousesController extends Controller
         * summary="restore warehouse By Id",
         * description="restore warehouse By Id Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -344,9 +354,9 @@ class WarehousesController extends Controller
         * summary="verfied warehouse",
         * description="verfied warehouse",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

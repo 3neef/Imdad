@@ -33,9 +33,9 @@ class PermissionsController extends Controller
         * summary="save permisssion",
         * description="save permission to role Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -91,9 +91,9 @@ class PermissionsController extends Controller
         * summary="get permisssions",
         * description="get all permisssions Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -136,9 +136,9 @@ class PermissionsController extends Controller
         * summary="get permisssion",
         * description="get permission by id Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -182,9 +182,9 @@ class PermissionsController extends Controller
         * summary="update permisssion",
         * description="update permission to specific role Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -240,9 +240,9 @@ class PermissionsController extends Controller
         * summary="update permisssion",
         * description="update permission to specific role Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -286,9 +286,9 @@ class PermissionsController extends Controller
         * summary="restore permisssion",
         * description="restore permission to specific role Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

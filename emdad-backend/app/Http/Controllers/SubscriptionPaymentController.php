@@ -23,9 +23,9 @@ class SubscriptionPaymentController extends Controller
      *    summary="create subscriptionPayment",
      *    description="create subscriptionPayment",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

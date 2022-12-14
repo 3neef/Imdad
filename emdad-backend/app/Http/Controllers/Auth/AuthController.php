@@ -33,9 +33,9 @@ class AuthController extends Controller
      * summary="reset password",
      * description="reset password Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -99,9 +99,9 @@ class AuthController extends Controller
      * summary="User Login",
      * description="Login User Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -153,9 +153,9 @@ class AuthController extends Controller
      * summary="User Activation/ user login mobile + otp",
      * description="activate by otp also allows login by confirming otp",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -205,9 +205,9 @@ class AuthController extends Controller
      * summary="resend otp",
      * description="resend otp Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -255,9 +255,9 @@ class AuthController extends Controller
      * summary="User Logout",
      * description="Logout User Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -298,9 +298,9 @@ class AuthController extends Controller
      * summary="forgot password",
      * description="forgot password Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -361,9 +361,9 @@ class AuthController extends Controller
      * summary="remove User",
      * description="remove user here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

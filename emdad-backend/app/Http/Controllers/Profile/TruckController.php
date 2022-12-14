@@ -37,9 +37,9 @@ class TruckController extends Controller
         * summary="create trucks ",
         * description="create trucks  Here",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -101,9 +101,10 @@ class TruckController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+
+    public function update(Request $request,$id)
     {
-        //
+        return $this->truckservice->update($request , $id);
     }
 
     /**
@@ -114,6 +115,14 @@ class TruckController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        return $this->truckservice->delete($id);
+    }
+
+
+
+    public function restoretruck($id)
+    {
+        return $this->truckservice->restore($id);
     }
 }

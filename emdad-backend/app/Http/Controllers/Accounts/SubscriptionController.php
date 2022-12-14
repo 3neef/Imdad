@@ -37,9 +37,9 @@ class SubscriptionController extends Controller
      * summary="create Subscription packages",
      * description="create Subscription package",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -88,9 +88,9 @@ class SubscriptionController extends Controller
      * summary="update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
      * description="update Subscription",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -141,9 +141,9 @@ class SubscriptionController extends Controller
      * summary="get package information",
      * description="get buyer package info",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -190,9 +190,9 @@ class SubscriptionController extends Controller
      * summary="get package information",
      * description="get buyer package info",
 *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )

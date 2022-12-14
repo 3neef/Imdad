@@ -33,9 +33,9 @@ class UserController extends Controller
      * summary="Register User",
      * description="Register User Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -101,9 +101,9 @@ class UserController extends Controller
      * summary="Get user Info by token ",
      * description="Register User Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -176,9 +176,9 @@ class UserController extends Controller
      * summary="update User",
      * description="update User Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -251,9 +251,9 @@ class UserController extends Controller
      * summary="Restore User",
      * description="restore user here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -304,9 +304,9 @@ class UserController extends Controller
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -359,9 +359,9 @@ class UserController extends Controller
      * summary="activate user",
      * description="Activate a user within a company",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -417,9 +417,9 @@ class UserController extends Controller
      * summary="disable user",
      * description="disable a user within a company",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -476,9 +476,9 @@ class UserController extends Controller
      * summary="set default company",
      * description="set default company Here",
      *     @OA\Parameter(
-     *         name="api_key",
+     *         name="x-authorization",
      *         in="header",
-     *         description="Set api_key",
+     *         description="Set x-authorization",
      *         @OA\Schema(
      *             type="string"
      *         )
