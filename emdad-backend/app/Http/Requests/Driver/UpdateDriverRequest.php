@@ -4,7 +4,8 @@ namespace App\Http\Requests\Driver;
 
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 class UpdateDriverRequest extends FormRequest
 {
     /**
@@ -14,7 +15,7 @@ class UpdateDriverRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,7 +26,16 @@ class UpdateDriverRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'nameAr' => [ 'string', 'max:255'],
+            'nameEn' => [ 'string', 'max:255'],
+            'age' => [ 'intger'],
+            'phone' => ['unique:drivers,phone',  'string', 'max:14', 'min:14', 'regex:/^(00249)/',],
+            'nationality' => [ 'string', 'max:255'],
         ];
+    }
+
+    protected function failedValidation(Validator $validator): void
+    {
+        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
     }
 }

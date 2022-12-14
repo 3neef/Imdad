@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\AccountServices;
 
-use App\Http\Resources\Delviery\DriverResources\DriverResources;
+use App\Http\Resources\Delviery\DriverResources;
 use App\Models\Accounts\Driver;
 
 class DriverService
@@ -35,10 +35,9 @@ class DriverService
 
     public function show($id)
     {
-
         $dirver = Driver::find($id);
         if ($dirver) {
-            return response()->json(['data' => DriverResources::collection($dirver)], 201);
+            return response()->json(['data' => $dirver], 201);
         }
         return response()->json(['error' => "System Error"], 403);
     }
@@ -72,7 +71,7 @@ class DriverService
 
     public function restore($id)
     {
-        $dirver = Driver::find($id)->withTrashed()->restore();
+        $dirver = Driver::where('id', $id)->withTrashed()->restore();
         if ($dirver) {
             return response()->json(['message' => "restored Successfly"], 201);
         }

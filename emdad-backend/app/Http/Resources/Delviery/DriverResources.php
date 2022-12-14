@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Delviery\DriverResources;
+namespace App\Http\Resources\Delviery;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 

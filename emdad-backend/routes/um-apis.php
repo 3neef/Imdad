@@ -49,7 +49,6 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function() {
 });
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('department')->group(function () {
-    Route::post('create', [DepartmentController::class, 'create']);
     Route::post('assing-User-To-Department', [DepartmentController::class, 'assingUser']);
 });
 
