@@ -38,21 +38,10 @@ Route::get('optimize', function () {
 });
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
-    // Route::post('create', [CouponController::class, 'createCoupon']);
-    // Route::get('show', [CouponController::class, 'showCoupon']);
-    // Route::post('used', [CouponController::class, 'usedCoupon']);
     Route::apiResource('coupon', CouponController::class);
     Route::post('coupon/used', [CouponController::class, 'usedCoupon']);
     Route::put('coupon/restore/{id}', [CouponController::class, 'restore']);
-
-
-
 });
-
-
-
-
-
 Route::group(['prefix' => 'translation'], function () {
     Route::post('create', [TranslationController::class, 'Create']);
     Route::put('update', [TranslationController::class, 'Update']);

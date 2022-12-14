@@ -44,8 +44,6 @@ class ProductService
     {
 
         $prodcut = Product::find($id);
-        dd($request->all());
-
         if ($request->has('attachementFile')) {
             $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
         }
