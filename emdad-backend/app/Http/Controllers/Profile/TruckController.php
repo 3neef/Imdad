@@ -97,7 +97,7 @@ class TruckController extends Controller
     /**
         * @OA\put(
         * path="/api/v1_0/trucks",
-        * operationId="trucks",
+        * operationId="update-trucks",
         * tags={"trucks"},
         * summary="update trucks",
         * description="update Depatrucksrtment Here",
@@ -153,7 +153,7 @@ class TruckController extends Controller
     /**
      * @OA\delete(
      * path="/api/v1_0/trucks",
-     * operationId="trucks",
+     * operationId="delete-trucks",
      * tags={"trucks"},
      * summary="Delete trucks",
      * description="delete trucks here",
