@@ -41,11 +41,16 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function() {
 
 });
 
+Route::middleware(['auth.apikey'])->group(function() {
+
+    Route::put('roles/restore/{roleId}', [RoleController::class, 'restoreByRoleId']);
+    Route::get('roles/roles-for-reg', [RoleController::class, 'getRolesForReg']);
+});
+
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function() {
     Route::apiResource('roles',RoleController::class);
-     Route::put('roles/restore/{roleId}', [RoleController::class, 'restoreByRoleId']);
-     Route::get('roles/roles-for-reg', [RoleController::class, 'getRolesForReg']);
+    
 });
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('department')->group(function () {

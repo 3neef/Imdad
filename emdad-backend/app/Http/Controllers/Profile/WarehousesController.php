@@ -143,7 +143,15 @@ class WarehousesController extends Controller
         * tags={"warehouse"},
         * summary="get warehouse By Id",
         * description="get warehouse By Id Here",
-*     @OA\Parameter(
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -264,6 +272,14 @@ class WarehousesController extends Controller
      *             type="string"
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
 *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -309,6 +325,14 @@ class WarehousesController extends Controller
         * tags={"warehouse"},
         * summary="restore warehouse By Id",
         * description="restore warehouse By Id Here",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
 *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
