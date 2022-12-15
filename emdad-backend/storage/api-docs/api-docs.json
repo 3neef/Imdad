@@ -340,7 +340,7 @@
         "/api/v1_0/auth/reset-password": {
             "put": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "reset password",
                 "description": "reset password Here",
@@ -427,10 +427,117 @@
                 }
             }
         },
+        "/api/v1_0/auth/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Register User",
+                "description": "Register User Here",
+                "operationId": "registerUser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "firstName",
+                                    "lastName",
+                                    "password",
+                                    "email",
+                                    "mobile",
+                                    "identityNumber",
+                                    "identityType",
+                                    "roleId",
+                                    "expireDate"
+                                ],
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "expireDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "mobile": {
+                                        "type": "string"
+                                    },
+                                    "identityNumber": {
+                                        "type": "string"
+                                    },
+                                    "identityType": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/auth/login": {
             "post": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "User Login",
                 "description": "Login User Here",
@@ -514,7 +621,7 @@
         "/api/v1_0/auth/verifiy-otp": {
             "put": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "User Activation/ user login mobile + otp",
                 "description": "activate by otp also allows login by confirming otp",
@@ -592,7 +699,7 @@
         "/api/v1_0/auth/resend-otp": {
             "post": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "resend otp",
                 "description": "resend otp Here",
@@ -667,7 +774,7 @@
         "/api/v1_0/auth/logout": {
             "post": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "User Logout",
                 "description": "Logout User Here",
@@ -719,7 +826,7 @@
         "/api/v1_0/auth/forgot-password": {
             "put": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "forgot password",
                 "description": "forgot password Here",
@@ -807,7 +914,7 @@
         "/api/v1_0/auth/remove-user/{id}": {
             "delete": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "remove User",
                 "description": "remove user here",
@@ -3511,14 +3618,14 @@
                 }
             }
         },
-        "/api/v1_0/auth/register": {
+        "/api/v1_0/users/register": {
             "post": {
                 "tags": [
                     "UM & Permissions"
                 ],
                 "summary": "Register User",
                 "description": "Register User Here",
-                "operationId": "registerUser",
+                "operationId": "add-user",
                 "parameters": [
                     {
                         "name": "x-authorization",
