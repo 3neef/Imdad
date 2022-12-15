@@ -19,7 +19,7 @@ class CategoryController extends Controller
     }
     /**
      * @OA\Post(
-     * path="/api/v1_0/categories/add",
+     * path="/api/v1_0/categories",
      * operationId="addcatogry",
      * tags={"Catogry"},
      * summary="add catogry",
@@ -113,7 +113,7 @@ class CategoryController extends Controller
 
     /**
      * @OA\get(
-     *    path="/api/v1_0/categories/show-all-catogry",
+     *    path="/api/v1_0/categories",
      *    operationId="showallcatogre",
      *    tags={"Catogry"},
      *    summary="show all  catogry",
@@ -295,7 +295,51 @@ class CategoryController extends Controller
     {
         return $this->categoryService->restore($id);
     }
+/**
+        * @OA\get(
+        * path="/api/v1_0/categories/get-By-Id/{id}",
+        * operationId="getBycategoryId",
+        * tags={"Product"},
+        * summary="get By categoryId",
+        * description="get By categoryId Here",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"id"},
+        *               @OA\Property(property="id", type="integer")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="",
+        *         @OA\JsonContent(
+        *         @OA\Property(property="categoryById", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
+        *          ),
 
+        *       ),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
 
 
     public function show($id)
