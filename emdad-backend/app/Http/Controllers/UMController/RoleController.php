@@ -283,7 +283,7 @@ class RoleController extends Controller
     }
        /**
         * @OA\get(
-        * path="/api/v1_0/roles-for-reg",
+        * path="/api/v1_0/roles/roles-for-reg",
         * operationId="getRoleRegister",
         * tags={"Roles and Permissions"},
         * summary="get roles register",
