@@ -23,7 +23,7 @@ class AccountService
         $user = User::where('id', auth()->id())->first();
 
         $account = Profile::create([
-            "type" => $request->companyType,
+            "type" => $request->PrfoileType,
             "name_ar" => $company->cr_name,
             "cr_number" => $company->cr_number,
             "created_by" => auth()->user()->id,

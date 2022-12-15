@@ -11,7 +11,7 @@ class WalletsService
             'Buyer' => 'receiver',
             'Supplier' => 'sender',
         ];
-
-        $profile->update(['profile_id' => $profile->id, 'type' => $types[$profile->type]]);
+        // dd($profile);
+        $profile->wallet()->create(['profile_id' => $profile->id, 'type' => $types[$profile->type]]);
     }
 }

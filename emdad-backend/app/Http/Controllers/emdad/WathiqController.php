@@ -61,13 +61,13 @@ class WathiqController extends Controller
 
     public function getRelatedCompanies(GetRelatedCompanyRequest $request, WathiqService $service)
     {
-        $related = RelatedCompanies::where("identity", $request->id)->where("identity_type", $request->type)->get();
+        $related = RelatedCompanies::where("identity", $request->identityNumber)->where("identity_type", $request->type)->get();
 
         if (sizeOf($related) > 0) {
             return response()->json(["status" => true, "data" => RelatedCompaiesResource::collection($related)], 200);
         } else {
-            $service->getRelatedCompanies($request->id, $request->type);
-            $related = RelatedCompanies::where("identity", $request->id)->where("identity_type", $request->type)->get();
+            $service->getRelatedCompanies($request->identityNumber, $request->type);
+            $related = RelatedCompanies::where("identity", $request->identityNumber)->where("identity_type", $request->type)->get();
             return response()->json(["status" => true, "data" => RelatedCompaiesResource::collection($related)], 200);
         }
     }
