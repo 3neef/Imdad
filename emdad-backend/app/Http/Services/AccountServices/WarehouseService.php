@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\AccountServices;
 
+use App\Http\Collections\WarehouseCollection;
 use App\Http\Resources\AccountResourses\warehouses\WarehouseResponse;
 use App\Models\Accounts\Warehouse;
 use App\Models\User;
@@ -12,8 +13,7 @@ class WarehouseService
 
     public function index()
     {
-        $warehouses = Warehouse::all();
-        return response()->json(['data' => WarehouseResponse::collection($warehouses)], 200);
+        return  WarehouseCollection::collection();
     }
 
     public function store($request)
@@ -23,7 +23,7 @@ class WarehouseService
             'address_name' => $request->warehouseName,
             'address_contact_phone' => $request->receiverPhone,
             'latitude' => $request->latitude,
-            'longitude'=>$request->longitude,
+            'longitude' => $request->longitude,
             'address_contact_name' => $request->receiverName,
             'address_type' => $request->warehouseType,
             'gate_type' => $request->gateType,
@@ -47,17 +47,16 @@ class WarehouseService
         // dd($warehouse);
         if ($warehouse != null) {
             $warehouse->update([
-                'address_name' => $request->warehouseName??$warehouse->address_name ,
-                "address_type" => $request->warehouseType??$warehouse-> address_type,
-                "gate_type" => $request->gateType?? $warehouse->gate_type,
-                "address_contact_name" => $request->receiverName??$warehouse->address_contact_name ,
-                "address_contact_phone" => $request->receiverPhone??$warehouse->address_contact_phone ,
-                "latitude" => $request->latitude??$warehouse->latitude,
-                "longitude"=>$request->longitude??$warehouse->longitude,
+                'address_name' => $request->warehouseName ?? $warehouse->address_name,
+                "address_type" => $request->warehouseType ?? $warehouse->address_type,
+                "gate_type" => $request->gateType ?? $warehouse->gate_type,
+                "address_contact_name" => $request->receiverName ?? $warehouse->address_contact_name,
+                "address_contact_phone" => $request->receiverPhone ?? $warehouse->address_contact_phone,
+                "latitude" => $request->latitude ?? $warehouse->latitude,
+                "longitude" => $request->longitude ?? $warehouse->longitude,
 
             ]);
-        return response()->json(['success' => 'Updated Successfly'], 201);
-
+            return response()->json(['success' => 'Updated Successfly'], 201);
         }
 
         return response()->json(['error' => 'No data Found'], 404);

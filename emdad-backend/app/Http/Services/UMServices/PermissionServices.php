@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\UMServices;
 
+use App\Http\Collections\PermissionsCollection;
 use App\Http\Resources\UMResources\Permission\PermissionResponse;
 use App\Models\UM\Permission;
 use App\Models\UM\RolePermission;
@@ -13,14 +14,11 @@ class PermissionServices
 
     public function index()
     {
-        $allPermissions = Permission::all();
-
-        return response()->json(['data' => PermissionResponse::collection($allPermissions)]);
+        return PermissionsCollection::collection();
     }
 
     public function store($request)
     {
-        // dd($request->all());
         $Permission = Permission::create($request->all());
 
         if ($Permission) {
@@ -37,12 +35,12 @@ class PermissionServices
         if ($Permissions) {
             return response()->json(['data' => $Permissions, 'message' => 'success'], 200);
         }
-        return response()->json(['message' => 'permissions not found ' ,'data'=>[]], 404);
+        return response()->json(['message' => 'permissions not found ', 'data' => []], 404);
     }
 
 
 
-    public function update($request,$id)
+    public function update($request, $id)
     {
 
         $Permission = Permission::where('id', $id)->first();

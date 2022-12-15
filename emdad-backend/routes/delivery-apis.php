@@ -16,7 +16,7 @@ Route::middleware(['auth.apikey','auth:sanctum'])->prefix('trucks')->group(funct
 
 
 Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
-    Route::apiResource('dirvers',DriverController::class);
+    Route::apiResource('drivers',DriverController::class);
     Route::put('dirvers/restore/{id}', [DriverController::class, 'restore']);
 
 });

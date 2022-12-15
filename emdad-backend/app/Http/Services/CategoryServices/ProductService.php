@@ -1,24 +1,19 @@
 <?php
 
 namespace App\Http\Services\CategoryServices;
-
+use App\Http\Collections\ProductsCollection;
 use App\Http\Resources\CategoryResourses\Product\ProductResponse;
 use App\Http\Services\AccountServices\UploadServices;
-use App\Models\Emdad\Prodcuts;
 use App\Models\Emdad\Product;
-use App\Models\Emdad\Unit_of_measures;
 
 class ProductService
 {
 
     public function index()
     {
-        $prodcuts = Product::get();
-        if ($prodcuts) {
-            return response()->json(['data' => ProductResponse::collection($prodcuts)], 200);
-        }
-        return response()->json(['error' => 'No data Founded'], 404);
+        return ProductsCollection::collection();
     }
+
 
     public function store($request)
     {
@@ -49,11 +44,11 @@ class ProductService
         }
 
         $prodcut->update([
-            'category_id' => $request->categoryId??$prodcut->category_id,
-            'name' => $request->name ??$prodcut->name,
-            "price" => $request->price??$prodcut->price,
-            "measruing_unit" => $request->measruing_unit??$prodcut->measruing_unit,
-            'image' => $request->image??$prodcut->image,
+            'category_id' => $request->categoryId ?? $prodcut->category_id,
+            'name' => $request->name ?? $prodcut->name,
+            "price" => $request->price ?? $prodcut->price,
+            "measruing_unit" => $request->measruing_unit ?? $prodcut->measruing_unit,
+            'image' => $request->image ?? $prodcut->image,
         ]);
 
         if ($prodcut) {

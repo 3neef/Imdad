@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\UMServices;
 
+use App\Http\Collections\RolesCollection;
 use App\Http\Resources\UMResources\Role\RoleResponse;
 use App\Models\UM\Role;
 
@@ -32,11 +33,10 @@ class RoleServices
 
     }
 
-    public function showAll()
+    public function index()
     {
-        $roles = Role::all();
 
-        return response()->json(['data' => RoleResponse::collection($roles)]);
+        return RolesCollection::collection();
     }
 
     public function showById($id)

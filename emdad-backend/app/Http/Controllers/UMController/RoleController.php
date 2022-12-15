@@ -63,7 +63,7 @@ class RoleController extends Controller
         public function index()
         {
 
-            return $this->roleServices->showAll();
+            return $this->roleServices->index();
         }
 
        /**
