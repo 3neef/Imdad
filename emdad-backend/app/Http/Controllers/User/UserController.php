@@ -28,7 +28,7 @@ class UserController extends Controller
     /**
      * @OA\Post(
      * path="/api/v1_0/users/register",
-     * operationId="registerUser",
+     * operationId="add-user",
      * tags={"UM & Permissions"},
      * summary="Register User",
      * description="Register User Here",

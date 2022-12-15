@@ -29,7 +29,7 @@ class AuthController extends Controller
      * @OA\put(
      * path="/api/v1_0/auth/reset-password",
      * operationId="resetPassword",
-     * tags={"UM & Permissions"},
+     * tags={"auth"},
      * summary="reset password",
      * description="reset password Here",
      *     @OA\Parameter(
@@ -89,13 +89,74 @@ class AuthController extends Controller
         return $userServices->resetPassword($request);
     }
 
+     /**
+     * @OA\Post(
+     * path="/api/v1_0/auth/register",
+     * operationId="registerUser",
+     * tags={"auth"},
+     * summary="Register User",
+     * description="Register User Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+ 
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"firstName","lastName","password","email","mobile","identityNumber","identityType","roleId","expireDate"},
+     *               @OA\Property(property="firstName", type="string"),
+     *               @OA\Property(property="expireDate", type="date"),
+     *               @OA\Property(property="lastName", type="string"),
+     *               @OA\Property(property="password", type="string"),
+     *               @OA\Property(property="email", type="email"),
+     *               @OA\Property(property="mobile", type="string"),
+     *               @OA\Property(property="identityNumber", type="string"),
+     *               @OA\Property(property="identityType", type="string")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="User created successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type="object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function store(StoreUserRequest $request, UserServices $userServices)
+    {
+        return $userServices->create($request->validated());
+    }
+
 
 
     /**
      * @OA\Post(
      * path="/api/v1_0/auth/login",
      * operationId="authLogin",
-     * tags={"UM & Permissions"},
+     * tags={"auth"},
      * summary="User Login",
      * description="Login User Here",
      *     @OA\Parameter(
@@ -149,7 +210,7 @@ class AuthController extends Controller
      * @OA\Put(
      * path="/api/v1_0/auth/verifiy-otp",
      * operationId="user-verify-otp",
-     * tags={"UM & Permissions"},
+     * tags={"auth"},
      * summary="User Activation/ user login mobile + otp",
      * description="activate by otp also allows login by confirming otp",
      *     @OA\Parameter(
@@ -201,7 +262,7 @@ class AuthController extends Controller
      * @OA\Post(
      * path="/api/v1_0/auth/resend-otp",
      * operationId="resend otp",
-     * tags={"UM & Permissions"},
+     * tags={"auth"},
      * summary="resend otp",
      * description="resend otp Here",
      *     @OA\Parameter(
@@ -251,7 +312,7 @@ class AuthController extends Controller
      * @OA\Post(
      * path="/api/v1_0/auth/logout",
      * operationId="Logout",
-     * tags={"UM & Permissions"},
+     * tags={"auth"},
      * summary="User Logout",
      * description="Logout User Here",
      *     @OA\Parameter(
@@ -294,7 +355,7 @@ class AuthController extends Controller
      * @OA\put(
      * path="/api/v1_0/auth/forgot-password",
      * operationId="forgotPassword",
-     * tags={"UM & Permissions"},
+     * tags={"auth"},
      * summary="forgot password",
      * description="forgot password Here",
      *     @OA\Parameter(
@@ -357,7 +418,7 @@ class AuthController extends Controller
      * @OA\delete(
      * path="/api/v1_0/auth/remove-user/{id}",
      * operationId="removeUser",
-     * tags={"UM & Permissions"},
+     * tags={"auth"},
      * summary="remove User",
      * description="remove user here",
      *     @OA\Parameter(

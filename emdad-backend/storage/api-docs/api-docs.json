@@ -340,7 +340,7 @@
         "/api/v1_0/auth/reset-password": {
             "put": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "reset password",
                 "description": "reset password Here",
@@ -427,10 +427,117 @@
                 }
             }
         },
+        "/api/v1_0/auth/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Register User",
+                "description": "Register User Here",
+                "operationId": "registerUser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "firstName",
+                                    "lastName",
+                                    "password",
+                                    "email",
+                                    "mobile",
+                                    "identityNumber",
+                                    "identityType",
+                                    "roleId",
+                                    "expireDate"
+                                ],
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string"
+                                    },
+                                    "expireDate": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "lastName": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "mobile": {
+                                        "type": "string"
+                                    },
+                                    "identityNumber": {
+                                        "type": "string"
+                                    },
+                                    "identityType": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/auth/login": {
             "post": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "User Login",
                 "description": "Login User Here",
@@ -514,7 +621,7 @@
         "/api/v1_0/auth/verifiy-otp": {
             "put": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "User Activation/ user login mobile + otp",
                 "description": "activate by otp also allows login by confirming otp",
@@ -592,7 +699,7 @@
         "/api/v1_0/auth/resend-otp": {
             "post": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "resend otp",
                 "description": "resend otp Here",
@@ -667,7 +774,7 @@
         "/api/v1_0/auth/logout": {
             "post": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "User Logout",
                 "description": "Logout User Here",
@@ -719,7 +826,7 @@
         "/api/v1_0/auth/forgot-password": {
             "put": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "forgot password",
                 "description": "forgot password Here",
@@ -807,7 +914,7 @@
         "/api/v1_0/auth/remove-user/{id}": {
             "delete": {
                 "tags": [
-                    "UM & Permissions"
+                    "auth"
                 ],
                 "summary": "remove User",
                 "description": "remove user here",
@@ -1182,7 +1289,7 @@
                                 "required": [
                                     "crNo",
                                     "roleId",
-                                    "companyType"
+                                    "PrfoileType"
                                 ],
                                 "properties": {
                                     "roleId": {
@@ -1191,7 +1298,7 @@
                                     "crNo": {
                                         "type": "string"
                                     },
-                                    "companyType": {
+                                    "PrfoileType": {
                                         "type": "integer"
                                     }
                                 },
@@ -1288,7 +1395,7 @@
                 }
             }
         },
-        "/api/v1_0/accounts/update": {
+        "/api/v1_0/accounts": {
             "put": {
                 "tags": [
                     "Account Controller"
@@ -2074,6 +2181,14 @@
                 "operationId": "getWarehouseById",
                 "parameters": [
                     {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "x-authorization",
                         "in": "header",
                         "description": "Set x-authorization",
@@ -2123,6 +2238,14 @@
                 "description": "delete warehouse Here",
                 "operationId": "deleteWarehouse",
                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "id",
                         "in": "path",
@@ -2188,6 +2311,14 @@
                 "description": "restore warehouse By Id Here",
                 "operationId": "restoreWarehouseById",
                 "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "name": "x-authorization",
                         "in": "header",
@@ -3494,7 +3625,7 @@
                 ],
                 "summary": "Register User",
                 "description": "Register User Here",
-                "operationId": "registerUser",
+                "operationId": "add-user",
                 "parameters": [
                     {
                         "name": "x-authorization",
@@ -4168,7 +4299,51 @@
                 }
             }
         },
-        "/api/v1_0/categories/add": {
+        "/api/v1_0/categories": {
+            "get": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "show all  catogry",
+                "description": "show all  catogry Here",
+                "operationId": "showallcatogre",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Maincatogre": {
+                                            "type": "integer",
+                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Catogry"
@@ -4284,52 +4459,6 @@
                     },
                     "404": {
                         "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/categories/show-all-catogry": {
-            "get": {
-                "tags": [
-                    "Catogry"
-                ],
-                "summary": "show all  catogry",
-                "description": "show all  catogry Here",
-                "operationId": "showallcatogre",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "Maincatogre": {
-                                            "type": "integer",
-                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -4520,14 +4649,14 @@
                 }
             }
         },
-        "/api/v1_0/products/create": {
-            "post": {
+        "/api/v1_0/categories/get-By-Id/{id}": {
+            "get": {
                 "tags": [
                     "Product"
                 ],
-                "summary": "create Product",
-                "description": "create Product Here",
-                "operationId": "createProduct",
+                "summary": "get By categoryId",
+                "description": "get By categoryId Here",
+                "operationId": "getBycategoryId",
                 "parameters": [
                     {
                         "name": "x-authorization",
@@ -4551,86 +4680,11 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "categoryId",
-                                    "name",
-                                    "price"
-                                ],
-                                "properties": {
-                                    "categoryId": {
-                                        "type": "integer"
-                                    },
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "price": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/products/update": {
-            "put": {
-                "tags": [
-                    "Product"
-                ],
-                "summary": "update Product",
-                "description": "update Product Here",
-                "operationId": "updateProduct",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id",
-                                    "name",
-                                    "price"
+                                    "id"
                                 ],
                                 "properties": {
                                     "id": {
                                         "type": "integer"
-                                    },
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "price": {
-                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -4643,10 +4697,20 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "updated Successfully"
-                    },
-                    "500": {
-                        "description": "error"
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "categoryById": {
+                                            "type": "integer",
+                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -4654,7 +4718,7 @@
                 }
             }
         },
-        "/api/v1_0/products/getAll": {
+        "/api/v1_0/products": {
             "get": {
                 "tags": [
                     "Product"
@@ -4719,6 +4783,136 @@
                     },
                     "404": {
                         "description": "Resource Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "update Product",
+                "description": "update Product Here",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id",
+                                    "name",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully"
+                    },
+                    "500": {
+                        "description": "error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "create Product",
+                "description": "create Product Here",
+                "operationId": "createProduct",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "categoryId",
+                                    "name",
+                                    "price"
+                                ],
+                                "properties": {
+                                    "categoryId": {
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
                     }
                 }
             }
