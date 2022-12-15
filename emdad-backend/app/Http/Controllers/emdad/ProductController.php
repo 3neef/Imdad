@@ -26,7 +26,7 @@ class ProductController extends Controller
     }
 /**
         * @OA\Post(
-        * path="/api/v1_0/products/create",
+        * path="/api/v1_0/products",
         * operationId="createProduct",
         * tags={"Product"},
         * summary="create Product",
@@ -75,7 +75,7 @@ class ProductController extends Controller
 
     /**
         * @OA\put(
-        * path="/api/v1_0/products/update",
+        * path="/api/v1_0/products",
         * operationId="updateProduct",
         * tags={"Product"},
         * summary="update Product",
@@ -128,7 +128,7 @@ class ProductController extends Controller
 
 /**
         * @OA\get(
-        * path="/api/v1_0/products/getAll",
+        * path="/api/v1_0/products",
         * operationId="getAllProducts",
         * tags={"Product"},
         * summary="get All Products",
