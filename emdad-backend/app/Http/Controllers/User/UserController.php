@@ -54,7 +54,7 @@ class UserController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"firstName","lastName","password","email","mobile","identityNumber","identityType","roleId","expireDate"},
+     *               required={"firstName","lastName","password","email","mobile","identityNumber","roleId","expireDate"},
      *               @OA\Property(property="firstName", type="string"),
      *               @OA\Property(property="expireDate", type="date"),
      *               @OA\Property(property="lastName", type="string"),
