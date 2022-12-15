@@ -105,10 +105,10 @@ class ProfileController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"crNo","roleId", "companyType"},
+     *               required={"crNo","roleId", "PrfoileType"},
      *               @OA\Property(property="roleId", type="integer"),
      *               @OA\Property(property="crNo", type="string"),
-     *               @OA\Property(property="companyType", type="integer"),
+     *               @OA\Property(property="PrfoileType", type="integer"),
      *            ),
      *        ),
      *    ),
@@ -180,7 +180,7 @@ class ProfileController extends Controller
 
     /**
      * @OA\put(
-     * path="/api/v1_0/accounts/update",
+     * path="/api/v1_0/accounts",
      * operationId="updateAccount",
      * tags={"Account Controller"},
 
