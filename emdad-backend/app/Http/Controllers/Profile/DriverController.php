@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Profile;
 
+use App\Http\Collections\DriverCollection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Driver\CreateDriverRequest;
 use App\Http\Services\AccountServices\DriverService;
+use App\Models\Accounts\Driver;
 use Illuminate\Http\Request;
 
 class DriverController extends Controller
@@ -16,7 +18,7 @@ class DriverController extends Controller
      */
     public function index(DriverService $driverService)
     {
-        return $driverService->index();
+        return DriverCollection::collection();
     }
 
     /**
