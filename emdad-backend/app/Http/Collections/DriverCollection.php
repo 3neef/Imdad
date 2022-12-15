@@ -4,7 +4,7 @@
 namespace App\Http\Collections;
 
 use App\Models\Accounts\CompanyInfo;
-use App\Models\Profile;
+use App\Models\Driver;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class DriverCollection
@@ -15,42 +15,31 @@ class DriverCollection
         $defaultSort = '-created_at';
 
         $defaultSelect = [
-            'created_by',
             'name_ar',
             'name_en',
-            'swift',
-            'iban',
-            'type',
-            'bank',
-            'vat_number',
-            'cr_number',
-            'cr_expire_data',
-            'subs_id',
-            'subscription_details',
-            'active'
+            'age',
+            'phone',
+            'nationality'
         ];
 
 
         $allowedFilters = [
-            'id',
             'name_ar',
             'name_en',
-            'cr_number',
-            'vat_number',
-            'iban',
-            'updated_at',
-            'created_at',
+            'age',
+            'phone',
+            'nationality'
         ];
 
         $allowedSorts = [
-            'updated_at',
-            'created_at',
+            'name_ar',
+            'name_en',
         ];
 
-        $allowedIncludes = [
-            'users',
-            'departments',
-        ];
+        // $allowedIncludes = [
+        //     'users',
+        //     'departments',
+        // ];
 
         $perPage =  100;
 
@@ -58,7 +47,7 @@ class DriverCollection
             ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
-            ->allowedIncludes($allowedIncludes)
+            // ->allowedIncludes($allowedIncludes)
             ->defaultSort($defaultSort)
             ->paginate($perPage);
     }
