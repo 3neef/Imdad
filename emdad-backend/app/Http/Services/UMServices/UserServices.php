@@ -101,6 +101,7 @@ class UserServices
                 ]
             );
         }
+        // dd($user);
         if (!($user->password === $request->password)) {
             return response()->json(
                 [
@@ -108,13 +109,13 @@ class UserServices
                 ]
             );
         }
-        $token = $user->createToken('authtoken', json_decode($user->permissions, true) ?? [""]);
+        $token = $user->createToken('authtoken');
 
-        return response()->json(
+        return response()->json(    
             [
                 'message' => 'Logged in',
                 'data' => [
-                    'user' => $user,
+                    'user' => new UserResponse($user),
                     'token' => $token->plainTextToken
                 ]
             ]

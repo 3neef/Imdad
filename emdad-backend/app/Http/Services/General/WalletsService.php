@@ -7,6 +7,7 @@ class WalletsService
 {
     public static function create($profile)
     {
+        // dd($profile);
         $types = [
             'Buyer' => 'receiver',
             'Supplier' => 'sender',

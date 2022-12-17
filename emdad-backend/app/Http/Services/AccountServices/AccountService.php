@@ -8,32 +8,40 @@ use App\Http\Services\General\WalletsService;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Profile;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\DB;
+use Mockery\Expectation;
+use PhpParser\Node\Stmt\Return_;
 
 class AccountService
 {
     public function store($request)
     {
-        DB::transaction(function () use ($request) {
+        try {
 
-            $company = RelatedCompanies::where("cr_number", $request->crNo)->first();
-            $user = User::where('id', auth()->user()->id)->first();
-            $account = Profile::create([
-                "type" => $request->ProfileType,
-                "name_ar" => $company->cr_name,
-                "cr_number" => $company->cr_number,
-                "created_by" => auth()->user()->id,
-                "is_validated" => true,
-            ]);
-            WalletsService::create($account);
+            $profile=DB::transaction(function () use ($request) {
 
-            $user->roleInProfile()->attach($user->id, ['role_id' => $request['roleId'], 'profile_id' => $account->id, 'permissions' => $request->permissions]);
+                $company = RelatedCompanies::where("cr_number", $request->crNo)->first();
+                $user = User::where('id', auth()->user()->id)->first();
+                $profile = Profile::create([
+                    "type" => $request->ProfileType,
+                    "name_ar" => $company->cr_name,
+                    "cr_number" => $company->cr_number,
+                    "created_by" => auth()->user()->id,
+                    "is_validated" => true,
+                ]);
+                WalletsService::create($profile);
 
-            $user->update(['profile_id' => $account->id]);
-             return response()->json(['success' => true, 'message' => 'created successfully'], 200);
+                $user->roleInProfile()->attach($user->id, ['role_id' => $request['roleId'], 'profile_id' => $profile->id, 'permissions' => $request->permissions]);
 
-        });
-        return response()->json(['success' => false, 'message' => 'not created'], 200);
+                $user->update(['profile_id' => $profile->id]);
+                
+                return $profile;
+            });
+            return response()->json(['success' => true, 'data' => new ProfileResponse($profile)], 200);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => "System Error"], 500);
+        }
     }
 
     public function update($request, $id)

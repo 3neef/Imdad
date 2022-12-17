@@ -28,7 +28,7 @@ class ProfileResponse extends JsonResource
             "iban" => $this->iban,
             "bank" => $this->bank,
             "swift" => $this->swift,
-            "createdBy" => $this->crreated_by,
+            "createdBy" => $this->created_by,
         ];
     }
 }
