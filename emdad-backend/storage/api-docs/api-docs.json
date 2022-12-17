@@ -456,7 +456,6 @@
                                     "email",
                                     "mobile",
                                     "identityNumber",
-                                    "identityType",
                                     "roleId",
                                     "expireDate"
                                 ],
@@ -1202,7 +1201,7 @@
                 }
             }
         },
-        "/api/v1_0/accounts/filter-company-info": {
+        "/api/v1_0/profiles/filter-company-info": {
             "get": {
                 "tags": [
                     "Account Controller"
@@ -1256,7 +1255,67 @@
                 }
             }
         },
-        "/api/v1_0/accounts/add-company": {
+        "/api/v1_0/profiles": {
+            "put": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "update Account",
+                "description": "update Account Here",
+                "operationId": "updateAccount",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Account Controller"
@@ -1326,7 +1385,7 @@
                 }
             }
         },
-        "/api/v1_0/accounts/getById/{id}": {
+        "/api/v1_0/profiles/{id}": {
             "get": {
                 "tags": [
                     "Account Controller"
@@ -1393,130 +1452,7 @@
                         "description": "Resource Not Found"
                     }
                 }
-            }
-        },
-        "/api/v1_0/accounts": {
-            "put": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "update Account",
-                "description": "update Account Here",
-                "operationId": "updateAccount",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated Successfully"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/delete/{id}": {
-            "delete": {
-                "tags": [
-                    "Account Controller"
-                ],
-                "summary": "delete Account",
-                "description": "delete Account",
-                "operationId": "deleteAccount",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "301": {
-                        "description": "deleted successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/accounts/restore/{id}": {
+            },
             "put": {
                 "tags": [
                     "Account Controller"
@@ -1565,6 +1501,63 @@
                 "responses": {
                     "200": {
                         "description": "restored successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Account Controller"
+                ],
+                "summary": "delete Account",
+                "description": "delete Account",
+                "operationId": "deleteAccount",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "301": {
+                        "description": "deleted successfully"
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -3655,7 +3648,6 @@
                                     "email",
                                     "mobile",
                                     "identityNumber",
-                                    "identityType",
                                     "roleId",
                                     "expireDate"
                                 ],
