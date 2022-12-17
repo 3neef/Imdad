@@ -30,7 +30,7 @@ class StoreProfileRequest extends FormRequest
         return [
             'crNo' => ['required','exists:related_companies,cr_number'],
             'roleId' => ['required','integer','exists:roles,id'],
-            'ProfileType' => ['required',Rule::in('Buyer','suppiler')],
+            'ProfileType' => ['required',Rule::in('Buyer','Suppiler')],
 
         ];
     }

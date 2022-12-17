@@ -30,8 +30,10 @@ class AccountService
             $user->roleInProfile()->attach($user->id, ['role_id' => $request['roleId'], 'profile_id' => $account->id, 'permissions' => $request->permissions]);
 
             $user->update(['profile_id' => $account->id]);
+             return response()->json(['success' => true, 'message' => 'created successfully'], 200);
+
         });
-        return response()->json(['success' => true, 'message' => 'created successfully'], 200);
+        return response()->json(['success' => false, 'message' => 'not created'], 200);
     }
 
     public function update($request, $id)
