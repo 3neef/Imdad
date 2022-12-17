@@ -19,8 +19,6 @@ class UserResponse extends JsonResource
 
         return [
             "id" => $this->id,
-            "firstName" => $this->first_name,
-            "lastName" => $this->last_name,
             "fullName" => $this->full_name,
             "identityNumber" => $this->identity_number,
             "identityType" => $this->identity_type,
