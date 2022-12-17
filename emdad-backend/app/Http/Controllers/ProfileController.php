@@ -28,7 +28,7 @@ class ProfileController extends Controller
 
  /**
      * @OA\get(
-     * path="/api/v1_0/accounts/filter-company-info",
+     * path="/api/v1_0/profiles/filter-company-info",
      * operationId="filtercompanyinfo",
      * tags={"Account Controller"},
      * summary="filter company info",
@@ -78,7 +78,7 @@ class ProfileController extends Controller
 
     /**
      * @OA\Post(
-     * path="/api/v1_0/accounts/add-company",
+     * path="/api/v1_0/profiles",
      * operationId="createAccount",
      * tags={"Account Controller"},
      * summary="create Company Account",
@@ -130,7 +130,7 @@ class ProfileController extends Controller
 
     /**
      * @OA\get(
-     * path="/api/v1_0/accounts/getById/{id}",
+     * path="/api/v1_0/profiles/{id}",
      * operationId="getByAccountId",
      * tags={"Account Controller"},
 
@@ -180,7 +180,7 @@ class ProfileController extends Controller
 
     /**
      * @OA\put(
-     * path="/api/v1_0/accounts",
+     * path="/api/v1_0/profiles",
      * operationId="updateAccount",
      * tags={"Account Controller"},
 
@@ -232,7 +232,7 @@ class ProfileController extends Controller
 
     /**
      * @OA\delete(
-     * path="/api/v1_0/accounts/delete/{id}",
+     * path="/api/v1_0/profiles/{id}",
      * operationId="deleteAccount",
      * tags={"Account Controller"},
 
@@ -279,7 +279,7 @@ class ProfileController extends Controller
     }
     /**
      * @OA\put(
-     * path="/api/v1_0/accounts/restore/{id}",
+     * path="/api/v1_0/profiles/{id}",
      * operationId="restoreByAccountId",
      * tags={"Account Controller"},
 
