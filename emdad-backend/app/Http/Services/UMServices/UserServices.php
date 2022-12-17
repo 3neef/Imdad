@@ -17,12 +17,10 @@ class UserServices
 
     public function create($request)
     {
-        $request['first_name'] = $request['firstName'];
+        $request['full_name'] = $request['fullName'];
         $request['expiry_date'] = $request['expireDate'];
-        $request['last_name'] = $request['lastName'];
         $request['identity_number'] = $request['identityNumber'];
         $request['identity_type'] = $request['identityType'];
-        $request['full_name'] = $request['firstName'] . " " . $request['lastName'];
         $request['otp_expires_at'] = now()->addMinutes(5);
         $request['is_super_admin'] = true;
         // dd($request);
@@ -53,9 +51,8 @@ class UserServices
     {
         $user = User::where('id', auth()->id())->first();
         $user->update([
-            'first_name' => $request->firstName ?? $user->first_name,
-            "last_name" => $request->lastName ?? $user->last_name,
-            "full_name" => $request->firstName . " " . $request->lastName ?? $user->full_name,
+            
+            "full_name" => $request->fullName,
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
         ]);

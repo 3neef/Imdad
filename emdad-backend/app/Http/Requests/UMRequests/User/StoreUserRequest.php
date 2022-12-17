@@ -28,8 +28,7 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'firstName' => ['required','string','max:100'],
-            'lastName' => ['required','string','max:25'],
+            'fullName' => ['required','string','max:100'],
             'identityNumber' => ['unique:users,identity_number','required','string','max:25'],
             'identityType' => ['string'],
             'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],

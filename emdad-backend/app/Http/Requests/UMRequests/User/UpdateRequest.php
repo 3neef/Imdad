@@ -26,8 +26,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "firstName" => "string|max:50",
-            "lastName" => "string|max:50",
+            "fullName" => "string|max:100",
             "password" => "string|min:8|max:50",
             "email" => "email|string|max:255",
             "mobile" => "min:9|max:14|string",
