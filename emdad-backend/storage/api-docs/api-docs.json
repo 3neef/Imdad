@@ -2240,14 +2240,6 @@
                         }
                     },
                     {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "name": "x-authorization",
                         "in": "header",
                         "description": "Set x-authorization",
