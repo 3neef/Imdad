@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('name_en')->nullable();
             $table->string('swift')->nullable();
             $table->string('iban')->nullable();
-            $table->enum('type', ['Buyer', 'supplier'])->nullable();
+            $table->enum('type', ['Buyer', 'Supplier'])->nullable();
             $table->string('bank')->nullable();
             $table->date('cr_expire_data')->nullable();
             $table->foreignId('subs_id')->nullable();
