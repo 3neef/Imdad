@@ -29,6 +29,7 @@ class AccountService
                     "cr_number" => $company->cr_number,
                     "created_by" => auth()->user()->id,
                     "is_validated" => true,
+                    "active"=>1,
                 ]);
                 WalletsService::create($profile);
 
