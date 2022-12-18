@@ -295,7 +295,7 @@ class SubscriptionController extends Controller
 
     public function apiKey()
     {
-        $pp1 = Artisan::call('apikey:generate app1');
-        dd("Api Key Command run succssfly", $pp1);
+        Artisan::call('apikey:generate app1');
+        dd("Api Key Command run succssfly");
     }
 }

@@ -20,7 +20,7 @@ class UserServices
         $request['full_name'] = $request['fullName'];
         $request['expiry_date'] = $request['expireDate'];
         $request['identity_number'] = $request['identityNumber'];
-        $request['identity_type'] = $request['identityType'];
+        $request['identity_type'] = $request['identityType'] ?? 'nid';
         $request['otp_expires_at'] = now()->addMinutes(5);
         $request['is_super_admin'] = true;
         // dd($request);
@@ -51,7 +51,7 @@ class UserServices
     {
         $user = User::where('id', auth()->id())->first();
         $user->update([
-            
+
             "full_name" => $request->fullName,
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
@@ -111,7 +111,7 @@ class UserServices
         }
         $token = $user->createToken('authtoken');
 
-        return response()->json(    
+        return response()->json(
             [
                 'message' => 'Logged in',
                 'data' => [
@@ -255,10 +255,8 @@ class UserServices
         $user = User::where('id', $request->userId)->first();
         $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
 
-        if($userRoleProfile==null)
-        {
+        if ($userRoleProfile == null) {
             return response()->json(['error' => 'user doesn\'t belong to this company'], 500);
-
         }
         $active = $userRoleProfile->update(['status' => 'active']);
         if ($active) {
@@ -305,7 +303,7 @@ class UserServices
         ], 200);
     }
 
-    
+
 
     public function showById($id)
     {
