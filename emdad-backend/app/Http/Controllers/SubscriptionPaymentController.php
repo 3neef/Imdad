@@ -60,8 +60,8 @@ class SubscriptionPaymentController extends Controller
      *      )
      *  )
      */
-    public function AddSubscriptionPayment(SubscriptionPaymentRequest $request)
+    public function store(SubscriptionPaymentRequest $request)
     {
-        return $this->subscriptionPaymentService->addSubscriptionPayment($request);
+        return $this->subscriptionPaymentService->store($request);
     }
 }

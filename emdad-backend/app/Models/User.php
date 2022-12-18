@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Accounts\CompanyInfo;
+use App\Models\Accounts\SubscriptionPackages;
 use App\Models\UM\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -21,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-     
+
         'full_name',
         'identity_type', 'email', 'password', 'identity_number',
         'is_verified', 'profile_id', 'avatar', 'otp', 'is_super_admin',
@@ -118,12 +119,31 @@ class User extends Authenticatable implements MustVerifyEmail
             Department::class,
             'profile_department_user'
         )->withPivot('profile_id')
-            ->withTimestamps();;
+            ->withTimestamps();
     }
 
     public function userable()
     {
         return $this->morphTo();
     }
-    
+
+    public function profile()
+    {
+        return $this->belongsTo(Profile::class);
+    }
+
+    public function scopebasicPackage()
+    {
+        global $package;
+        $profiles = Profile::where('created_by', auth()->id())->get();
+
+        foreach ($profiles as $profile) {
+            $package = SubscriptionPackages::where('subscription_name', 'basic')->where('id', $profile->subs_id)->first();
+        }
+        // dd($package);subs_id
+        if ($package == null) {
+            return false;
+        }
+        return true;
+    }
 }

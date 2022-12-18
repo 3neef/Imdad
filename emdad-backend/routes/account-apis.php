@@ -10,7 +10,7 @@ Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
 
     Route::put('profiles/restore/{id}', [ProfileController::class, 'restoreByAccountId']);
 
-    Route::post('subscriptionPayment', [SubscriptionPaymentController::class, 'AddSubscriptionPayment']);
+    Route::apiResource('subscriptionPayment',SubscriptionPaymentController::class);
 });
 
 

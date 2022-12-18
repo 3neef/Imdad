@@ -27,7 +27,6 @@ class SubscriptionPaymentRequest extends FormRequest
     {
         return [
             'subscription_id'=>'required|integer|exists:subscription_packages,id',
-            'type'=>'required',
         ];
     }
 
