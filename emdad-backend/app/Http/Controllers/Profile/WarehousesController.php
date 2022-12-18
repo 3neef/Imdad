@@ -272,14 +272,6 @@ class WarehousesController extends Controller
      *             type="string"
      *         )
      *     ),
-     *     @OA\Parameter(
-     *         name="id",
-     *         in="path",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
 *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
