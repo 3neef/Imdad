@@ -13,6 +13,7 @@ use App\Http\Services\AccountServices\SubscriptionService;
 use App\Http\Resources\SetupResources\SubscriptionPackageResource;
 use App\Http\Requests\AccountRequests\Subscription\UpdateSubscriptionRequest;
 use App\Http\Requests\General\CreateSubPackageRequest as GeneralCreateSubPackageRequest;
+use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller
 {
@@ -297,5 +298,12 @@ class SubscriptionController extends Controller
     {
         Artisan::call('apikey:generate app1');
         dd("Api Key Command run succssfly");
+    }
+
+    public function key()
+    {
+        $key = DB::table('api_keys')->select('key')->get();
+        
+        dd($key);
     }
 }
