@@ -29,14 +29,14 @@ class SubscriptionController extends Controller
         $this->subscriptionService = $subscriptionService;
     }
 
-     /**
+    /**
      * @OA\post(
      * path="/api/v1_0/subscriptions/create",
      * operationId="create-sub-packages",
      * tags={"Platform Settings"},
      * summary="create Subscription packages",
      * description="create Subscription package",
-*     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -78,7 +78,6 @@ class SubscriptionController extends Controller
     public function store(GeneralCreateSubPackageRequest $request)
     {
         return $this->subscriptionService->store($request);
-
     }
     /**
      * @OA\put(
@@ -87,7 +86,7 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
      * description="update Subscription",
-*     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -127,9 +126,9 @@ class SubscriptionController extends Controller
      *      @OA\Response(response=500, description="system error")
      * )
      */
-    public function update(UpdateSubscriptionRequest $request,$id)
+    public function update(UpdateSubscriptionRequest $request, $id)
     {
-        return $this->subscriptionService->update($request,$id);
+        return $this->subscriptionService->update($request, $id);
     }
 
 
@@ -140,7 +139,7 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="get package information",
      * description="get buyer package info",
-*     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -189,7 +188,7 @@ class SubscriptionController extends Controller
      * tags={"Platform Settings"},
      * summary="get package information",
      * description="get buyer package info",
-*     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -225,64 +224,63 @@ class SubscriptionController extends Controller
      */
     public function getSupplierPackages()
     {
-        return response()->json(["success" => true, "data" =>SubscriptionPackageResource::collection(SubscriptionPackages::where("type", "Supplier")->get())], 200);
+        return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", "Supplier")->get())], 200);
     }
 
     public function show($id)
     {
-       return $this->subscriptionService->show($id);
-
+        return $this->subscriptionService->show($id);
     }
 
     public function destroy($id)
     {
-       return $this->subscriptionService->destroy($id);
+        return $this->subscriptionService->destroy($id);
     }
 
     public function restore($id)
     {
-       return $this->subscriptionService->restore($id);
+        return $this->subscriptionService->restore($id);
     }
 
-        /**
-        * @OA\get(
-        * path="/api/v1_0/installtion/seed",
-        * operationId="seederDb",
-        * tags={"Platform Settings"},
-        * summary="seeder db",
-        * description="seeder db Here",
-        *      @OA\Response(
-        *        response=200,
-        *          description="",
-        *         @OA\JsonContent(
-        *         @OA\Property(property="message", type="string")
-        *          )
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+    /**
+     * @OA\get(
+     * path="/api/v1_0/installtion/seed",
+     * operationId="seederDb",
+     * tags={"Platform Settings"},
+     * summary="seeder db",
+     * description="seeder db Here",
+     *      @OA\Response(
+     *        response=200,
+     *          description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="message", type="string")
+     *          )
+     *       ),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function seeder()
     {
         Artisan::call('db:seed');
         dd("Seeder Command run succssfly");
     }
-            /**
-        * @OA\get(
-        * path="/api/v1_0/installation/migrate",
-        * operationId="migrateDb",
-        * tags={"Platform Settings"},
-        * summary="migrate db",
-        * description="migrate db Here",
-        *      @OA\Response(
-        *        response=200,
-        *          description="",
-        *         @OA\JsonContent(
-        *         @OA\Property(property="message", type="string")
-        *          )
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+    /**
+     * @OA\get(
+     * path="/api/v1_0/installation/migrate",
+     * operationId="migrateDb",
+     * tags={"Platform Settings"},
+     * summary="migrate db",
+     * description="migrate db Here",
+     *      @OA\Response(
+     *        response=200,
+     *          description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="message", type="string")
+     *          )
+     *       ),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function migration()
     {
         Artisan::call('migrate');
@@ -294,5 +292,10 @@ class SubscriptionController extends Controller
         Artisan::call('migrate:fresh');
         dd("Migrate Command run succssfly");
     }
-}
 
+    public function apiKey()
+    {
+        $pp1 = Artisan::call('apikey:generate app1');
+        dd("Api Key Command run succssfly", $pp1);
+    }
+}

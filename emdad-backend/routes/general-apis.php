@@ -27,6 +27,7 @@ Route::group(['prefix' => 'installation'], function () {
     Route::get('migrate', [SubscriptionController::class, 'migration']);
     Route::get('seed', [SubscriptionController::class, 'seeder']);
     Route::get('fresh', [SubscriptionController::class, 'migrateFresh']);
+    Route::get('apiKey',[SubscriptionController::class,'apiKey']);
 });
 
 
