@@ -23,13 +23,12 @@ class UserServices
         $request['identity_type'] = $request['identityType'] ?? 'nid';
         $request['otp_expires_at'] = now()->addMinutes(5);
         $request['is_super_admin'] = true;
-        // dd($request);
-
         $request['otp'] = strval(rand(1000, 9999));
         $user = User::create($request);
         $role_id = $request['roleId'] ?? '';
-        if ($role_id) {
-            $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id]);
+        $is_learning = $request['is_learning'] ?? false;
+        if ($role_id || $is_learning) {
+            $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'],'profile_id' => auth()->user()->profile_id,$is_learning = $request['is_learning']]);
 
             $user->update(['profile_id' => auth()->user()->profile_id]);
         }

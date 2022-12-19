@@ -37,7 +37,8 @@ class StoreUserRequest extends FormRequest
             'password'=>'required|string',
             'expireDate'=>'required|date',
             'permissions'=>['array',new UniqeValues],
-            'permissions.*'=>['string','exists:permissions,label']
+            'permissions.*'=>['string','exists:permissions,label'],
+            'is_learning'=>['boolean']
 
         ];
         // dd($this->all());
