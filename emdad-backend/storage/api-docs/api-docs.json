@@ -1685,6 +1685,9 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
                                         "message": {
                                             "type": "string"
                                         }
@@ -1750,6 +1753,21 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
+                                        "nameAr": {
+                                            "type": "string"
+                                        },
+                                        "nameEn": {
+                                            "type": "string"
+                                        },
+                                        "age": {
+                                            "type": "integer"
+                                        },
+                                        "phone": {
+                                            "type": "string"
+                                        },
+                                        "nationality": {
+                                            "type": "string"
+                                        },
                                         "message": {
                                             "type": "string"
                                         }
@@ -2067,7 +2085,41 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
+                                    "required": [
+                                        "name",
+                                        "type",
+                                        "class",
+                                        "color",
+                                        "model",
+                                        "size",
+                                        "brand",
+                                        "image"
+                                    ],
                                     "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "class": {
+                                            "type": "string"
+                                        },
+                                        "color": {
+                                            "type": "string"
+                                        },
+                                        "model": {
+                                            "type": "string"
+                                        },
+                                        "size": {
+                                            "type": "string"
+                                        },
+                                        "brand": {
+                                            "type": "string"
+                                        },
+                                        "image": {
+                                            "type": "file"
+                                        },
                                         "message": {
                                             "type": "string"
                                         }
@@ -2899,9 +2951,6 @@
                                 "properties": {
                                     "subscriptionpyment_id": {
                                         "type": "integer"
-                                    },
-                                    "type": {
-                                        "type": ""
                                     }
                                 },
                                 "type": "object"

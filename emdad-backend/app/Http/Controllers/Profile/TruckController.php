@@ -67,7 +67,6 @@ class TruckController extends Controller
         *               @OA\Property(property="size", type="string"),
         *               @OA\Property(property="brand", type="string"),
         *               @OA\Property(property="image", type="file")
-        *
         *            ),
         *        ),
         *    ),
@@ -134,6 +133,15 @@ class TruckController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
+        *               required={"name","type","class","color","model","size","brand","image"},
+        *               @OA\Property(property="name", type="string"),
+        *               @OA\Property(property="type", type="string"),
+        *               @OA\Property(property="class", type="string"),
+        *               @OA\Property(property="color", type="string"),
+        *               @OA\Property(property="model", type="string"),
+        *               @OA\Property(property="size", type="string"),
+        *               @OA\Property(property="brand", type="string"),
+        *               @OA\Property(property="image", type="file"),
         *               @OA\Property(property="message", type="string")
         *            ),
         *        ),

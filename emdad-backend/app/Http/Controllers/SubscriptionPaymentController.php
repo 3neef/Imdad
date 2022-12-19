@@ -46,7 +46,6 @@ class SubscriptionPaymentController extends Controller
         *               type="object",
         *               required={"subscriptionpyment_id","type"},
         *               @OA\Property(property="subscriptionpyment_id", type="integer"),
-        *               @OA\Property(property="type", type=""),
         *            ),
         *        ),
         *    ),
