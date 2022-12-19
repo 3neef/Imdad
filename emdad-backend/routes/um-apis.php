@@ -28,7 +28,7 @@ Route::middleware(['auth.apikey','auth:sanctum'])->prefix('users')->group(functi
     Route::post('register', [UserController::class, 'store']);
     Route::put("Activate", [UserController::class, 'userActivate']);
     Route::put("disable", [UserController::class, 'disable']);
-    Route::put('update', [UserController::class, 'update']);
+    Route::put('update/{id}', [UserController::class, 'update']);
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
     Route::delete('destroy/{id}', [UserController::class, 'delete']);
     Route::put("restore/{id}", [UserController::class, 'restoreUser']);
