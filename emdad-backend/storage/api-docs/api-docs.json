@@ -1598,7 +1598,7 @@
                                     "crNo": {
                                         "type": "string"
                                     },
-                                    "PrfoileType": {
+                                    "ProfileType": {
                                         "type": "integer"
                                     }
                                 },

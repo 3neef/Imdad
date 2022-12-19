@@ -108,7 +108,7 @@ class ProfileController extends Controller
      *               required={"crNo","roleId", "PrfoileType"},
      *               @OA\Property(property="roleId", type="integer"),
      *               @OA\Property(property="crNo", type="string"),
-     *               @OA\Property(property="PrfoileType", type="integer"),
+     *               @OA\Property(property="ProfileType", type="integer"),
      *            ),
      *        ),
      *    ),
