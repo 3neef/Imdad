@@ -2951,9 +2951,6 @@
                                 "properties": {
                                     "subscriptionpyment_id": {
                                         "type": "integer"
-                                    },
-                                    "type": {
-                                        "type": ""
                                     }
                                 },
                                 "type": "object"
