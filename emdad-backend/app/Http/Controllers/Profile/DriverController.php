@@ -175,6 +175,11 @@ class DriverController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
+        *               @OA\Property(property="nameAr", type="string"),
+        *               @OA\Property(property="nameEn", type="string"),
+        *               @OA\Property(property="age", type="integer"),
+        *               @OA\Property(property="phone", type="string"),
+        *               @OA\Property(property="nationality", type="string"),
         *               @OA\Property(property="message", type="string")
         *            ),
         *        ),

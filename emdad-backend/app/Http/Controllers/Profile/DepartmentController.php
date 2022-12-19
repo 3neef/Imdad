@@ -140,6 +140,7 @@ class DepartmentController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
+        *               @OA\Property(property="name", type="string"),
         *               @OA\Property(property="message", type="string")
         *            ),
         *        ),
