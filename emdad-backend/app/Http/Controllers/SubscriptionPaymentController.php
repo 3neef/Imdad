@@ -40,7 +40,7 @@ class SubscriptionPaymentController extends Controller
      *     ),
      *  *     @OA\RequestBody(
         *         @OA\JsonContent(),
-        *         @OA\MediaType(
+        *         @OA\MediaType( 
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",

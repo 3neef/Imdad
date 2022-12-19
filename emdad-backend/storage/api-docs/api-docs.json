@@ -35,13 +35,6 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "id",
-                                    "type",
-                                    "updateOld",
-                                    "subscriptionDetails",
-                                    "subscriptionDetails.superAdmin"
-                                ],
                                 "properties": {
                                     "id": {
                                         "type": "integer"
@@ -275,6 +268,186 @@
                 }
             }
         },
+        "/api/v1_0/packages/{id}'": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "get package By Id",
+                "description": "get package By Id Here",
+                "operationId": "getpackageById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get package By Id",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "delete package",
+                "description": "delete package Here",
+                "operationId": "deletepackage",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete package",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/packages/restore/{id}'": {
+            "put": {
+                "tags": [
+                    "packages"
+                ],
+                "summary": "restore package By Id",
+                "description": "restore package By Id Here",
+                "operationId": "restorepackageById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "restore package By Id",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/installtion/seed": {
             "get": {
                 "tags": [
@@ -453,7 +626,6 @@
                                     "email",
                                     "mobile",
                                     "identityNumber",
-                                    "roleId",
                                     "expireDate"
                                 ],
                                 "properties": {
@@ -638,7 +810,9 @@
                         "application-json": {
                             "schema": {
                                 "required": [
-                                    "otp"
+                                    "id",
+                                    "otp",
+                                    "mobile"
                                 ],
                                 "properties": {
                                     "id": {
@@ -716,22 +890,11 @@
                         "application-json": {
                             "schema": {
                                 "properties": {
-                                    "otp rest": {
-                                        "type": "object",
-                                        "additionalProperties": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "email": {
-                                                        "type": "email"
-                                                    },
-                                                    "phone": {
-                                                        "type": "string"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        }
+                                    "mobile": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
                                     }
                                 },
                                 "type": "object"
@@ -930,14 +1093,6 @@
                     "content": {
                         "application-json": {
                             "schema": {
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "param": {
-                                        "type": "boolean"
-                                    }
-                                },
                                 "type": "object"
                             }
                         },
@@ -972,85 +1127,7 @@
                 }
             }
         },
-        "/api/v1_0/coupon/create": {
-            "post": {
-                "tags": [
-                    "Coupon"
-                ],
-                "summary": "create Coupon",
-                "description": "create Coupon Here",
-                "operationId": "createCoupon",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "allowed",
-                                    "stratDate",
-                                    "endDate",
-                                    "value",
-                                    "isPercentage"
-                                ],
-                                "properties": {
-                                    "allowed": {
-                                        "type": "integer"
-                                    },
-                                    "stratDate": {
-                                        "type": "date_format:Y/m/d"
-                                    },
-                                    "endDate": {
-                                        "type": "date_format:Y/m/d"
-                                    },
-                                    "value": {
-                                        "type": "integer"
-                                    },
-                                    "isPercentage": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "created Successfully"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/coupon/show": {
+        "/api/v1_0/coupon": {
             "get": {
                 "tags": [
                     "Coupon"
@@ -1094,6 +1171,82 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "create Coupon",
+                "description": "create Coupon Here",
+                "operationId": "createCoupon",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "allowed",
+                                    "startDate",
+                                    "endDate",
+                                    "value",
+                                    "isPercentage"
+                                ],
+                                "properties": {
+                                    "allowed": {
+                                        "type": "integer"
+                                    },
+                                    "startDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "endDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "value": {
+                                        "type": "integer"
+                                    },
+                                    "isPercentage": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
             }
         },
         "/api/v1_0/coupon/used": {
@@ -1132,7 +1285,7 @@
                                 ],
                                 "properties": {
                                     "code": {
-                                        "type": "integer"
+                                        "type": "string"
                                     },
                                     "subscriptionpayment_id": {
                                         "type": "integer"
@@ -1171,6 +1324,96 @@
                 }
             }
         },
+        "/api/v1_0/coupon/{id}": {
+            "delete": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "remove coupons",
+                "description": "remove  coupons Here",
+                "operationId": "removecoupons",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{message => deleted successfully}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/coupon/restore/{id}": {
+            "put": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "restore coupons",
+                "description": "restore coupons Here",
+                "operationId": "restorecoupons",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{message => deleted successfully}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1_0/measures/get-all-unit-of-measure": {
             "get": {
                 "tags": [
@@ -1202,7 +1445,7 @@
         "/api/v1_0/profiles/filter-company-info": {
             "get": {
                 "tags": [
-                    "Account Controller"
+                    "Profile Controller"
                 ],
                 "summary": "filter company info",
                 "description": "filter company info Here",
@@ -1256,7 +1499,7 @@
         "/api/v1_0/profiles": {
             "put": {
                 "tags": [
-                    "Account Controller"
+                    "Profile Controller"
                 ],
                 "summary": "update Account",
                 "description": "update Account Here",
@@ -1316,7 +1559,7 @@
             },
             "post": {
                 "tags": [
-                    "Account Controller"
+                    "Profile Controller"
                 ],
                 "summary": "create Company Account",
                 "description": "create Company Account Here",
@@ -1386,7 +1629,7 @@
         "/api/v1_0/profiles/{id}": {
             "get": {
                 "tags": [
-                    "Account Controller"
+                    "Profile Controller"
                 ],
                 "summary": "get By AccountId",
                 "description": "get By AccountId Here",
@@ -1453,7 +1696,7 @@
             },
             "put": {
                 "tags": [
-                    "Account Controller"
+                    "Profile Controller"
                 ],
                 "summary": "restore By AccountId",
                 "description": "restore By AccountId",
@@ -1510,7 +1753,7 @@
             },
             "delete": {
                 "tags": [
-                    "Account Controller"
+                    "Profile Controller"
                 ],
                 "summary": "delete Account",
                 "description": "delete Account",
@@ -2044,22 +2287,14 @@
             }
         },
         "/api/v1_0/trucks": {
-            "put": {
+            "get": {
                 "tags": [
                     "trucks"
                 ],
-                "summary": "update trucks",
-                "description": "update Depatrucksrtment Here",
-                "operationId": "update-trucks",
+                "summary": "get trucks",
+                "description": "get all trucks Here",
+                "operationId": "gettrucks",
                 "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "name": "x-authorization",
                         "in": "header",
@@ -2067,74 +2302,25 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "updated Successfully",
+                        "description": "get all trucks",
                         "content": {
                             "multipart/form-data": {
-                                "schema": {
-                                    "required": [
-                                        "name",
-                                        "type",
-                                        "class",
-                                        "color",
-                                        "model",
-                                        "size",
-                                        "brand",
-                                        "image"
-                                    ],
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "type": {
-                                            "type": "string"
-                                        },
-                                        "class": {
-                                            "type": "string"
-                                        },
-                                        "color": {
-                                            "type": "string"
-                                        },
-                                        "model": {
-                                            "type": "string"
-                                        },
-                                        "size": {
-                                            "type": "string"
-                                        },
-                                        "brand": {
-                                            "type": "string"
-                                        },
-                                        "image": {
-                                            "type": "file"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
+                                "schema": {}
                             },
                             "application/json": {
                                 "schema": {}
                             }
                         }
                     },
-                    "500": {
-                        "description": "system error"
-                    },
                     "422": {
-                        "description": "Validate error"
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -2222,6 +2408,95 @@
                         "description": "Resource Not Found"
                     }
                 }
+            }
+        },
+        "/api/v1_0/trucks/{id}": {
+            "put": {
+                "tags": [
+                    "trucks"
+                ],
+                "summary": "update trucks",
+                "description": "update Depatrucksrtment Here",
+                "operationId": "update-trucks",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "class": {
+                                            "type": "string"
+                                        },
+                                        "color": {
+                                            "type": "string"
+                                        },
+                                        "model": {
+                                            "type": "string"
+                                        },
+                                        "size": {
+                                            "type": "string"
+                                        },
+                                        "brand": {
+                                            "type": "string"
+                                        },
+                                        "image": {
+                                            "type": "file"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
             },
             "delete": {
                 "tags": [
@@ -2282,7 +2557,7 @@
                 }
             }
         },
-        "/api/v1_0/trucks/restore/{id}'": {
+        "/api/v1_0/trucks/restore/{id}": {
             "put": {
                 "tags": [
                     "trucks"
@@ -2912,10 +3187,10 @@
                 }
             }
         },
-        "/api/v1_0/accounts/subscriptionPayment": {
+        "/api/v1_0/profiles/subscriptionPayment": {
             "get": {
                 "tags": [
-                    "Account Controller"
+                    "Profile Controller"
                 ],
                 "summary": "create subscriptionPayment",
                 "description": "create subscriptionPayment",
@@ -2966,7 +3241,7 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "subscription_id": {
+                                        "subscriptionId": {
                                             "type": "integer",
                                             "example": "{' 'id': 1, 'compnay_id': '1','subscription_id': 1, 'user_id': 1, 'sub_total': 13.0, 'days': 30,'tax_amount':15,'total':28.0}"
                                         }
@@ -3550,7 +3825,7 @@
                 }
             }
         },
-        "/api/v1_0/roles/getAll": {
+        "/api/v1_0/roles": {
             "get": {
                 "tags": [
                     "Roles and Permissions"
@@ -3590,9 +3865,7 @@
                         "description": "Resource Not Found"
                     }
                 }
-            }
-        },
-        "/api/v1_0/roles/save": {
+            },
             "post": {
                 "tags": [
                     "Roles and Permissions"
@@ -3631,7 +3904,7 @@
                                         "type": "string"
                                     },
                                     "type": {
-                                        "type": "integer"
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -3676,7 +3949,57 @@
                 }
             }
         },
-        "/api/v1_0/roles/update": {
+        "/api/v1_0/roles/{id}": {
+            "get": {
+                "tags": [
+                    "Roles and Permissions"
+                ],
+                "summary": "get role by id",
+                "description": "get role Here",
+                "operationId": "getRole",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get role",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "Roles and Permissions"
@@ -3706,13 +4029,7 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "id"
-                                ],
                                 "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
                                     "name": {
                                         "type": "string"
                                     },
@@ -3757,9 +4074,7 @@
                         "description": "Resource Not Found"
                     }
                 }
-            }
-        },
-        "/api/v1_0/roles/delete/{id}": {
+            },
             "delete": {
                 "tags": [
                     "Roles and Permissions"
@@ -3796,58 +4111,6 @@
                                             "type": "string"
                                         }
                                     },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/roles/getByRoleId/{id}": {
-            "get": {
-                "tags": [
-                    "Roles and Permissions"
-                ],
-                "summary": "get role by id",
-                "description": "get role Here",
-                "operationId": "getRole",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "get role",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
                                     "type": "object"
                                 }
                             },
@@ -3929,7 +4192,7 @@
                 }
             }
         },
-        "/api/v1_0/roles/restore/{id}": {
+        "/api/v1_0/roles/restore/{roleId}": {
             "put": {
                 "tags": [
                     "Roles and Permissions"
@@ -3967,61 +4230,6 @@
                                         }
                                     },
                                     "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/roles/getByType/{type}": {
-            "get": {
-                "tags": [
-                    "Roles and Permissions"
-                ],
-                "summary": "get roles by type",
-                "description": "get all roles by type",
-                "operationId": "getAllRolesByType",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "get all roles by type",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object"
-                                    }
                                 }
                             },
                             "application/json": {

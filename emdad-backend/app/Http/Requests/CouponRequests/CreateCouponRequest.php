@@ -31,7 +31,7 @@ class CreateCouponRequest extends FormRequest
 
             $rules = [
                 'allowed' => 'required|integer',
-                'stratDate' => 'required|',
+                'startDate' => 'required|',
                 'endDate' => 'required|after_or_equal:'.$this->stratDate.'',
                 'value'=>'required|integer',
                 'isPercentage'=>'required|boolean'

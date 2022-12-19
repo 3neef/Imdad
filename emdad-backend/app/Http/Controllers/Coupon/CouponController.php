@@ -22,7 +22,7 @@ class CouponController extends Controller
     }
     /**
      * @OA\Post(
-     * path="/api/v1_0/coupon/create",
+     * path="/api/v1_0/coupon",
      * operationId="createCoupon",
      * tags={"Coupon"},
      * summary="create Coupon",
@@ -49,12 +49,12 @@ class CouponController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"allowed","stratDate","endDate","value","isPercentage"},
+     *               required={"allowed","startDate","endDate","value","isPercentage"},
      *               @OA\Property(property="allowed", type="integer"),
-     *               @OA\Property(property="stratDate", type="date_format:Y/m/d"),
+     *               @OA\Property(property="startDate", type="date_format:Y/m/d"),
      *               @OA\Property(property="endDate", type="date_format:Y/m/d"),
      *               @OA\Property(property="value", type="integer"),
-     *               @OA\Property(property="isPercentage", type="integer")
+     *               @OA\Property(property="isPercentage", type="boolean")
      *            ),
      *        ),
      *    ),
@@ -73,7 +73,7 @@ class CouponController extends Controller
 
     /**
      * @OA\get(
-     *    path="/api/v1_0/coupon/show",
+     *    path="/api/v1_0/coupon",
      *    operationId="showallcoupons",
      *    tags={"Coupon"},
      *    summary="show all  coupons",
@@ -142,7 +142,7 @@ class CouponController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               required={"code","subscriptionpayment_id"},
-     *               @OA\Property(property="code", type="integer"),
+     *               @OA\Property(property="code", type="string"),
      *               @OA\Property(property="subscriptionpayment_id", type="integer")
      *            ),
      *        ),
@@ -164,44 +164,81 @@ class CouponController extends Controller
         return $this->couponService->usedCoupon($request);
     }
 
-    //delete coupon
+
+    /**
+     * @OA\delete(
+     *    path="/api/v1_0/coupon/{id}",
+     *    operationId="removecoupons",
+     *    tags={"Coupon"},
+     *    summary="remove coupons",
+     *    description="remove  coupons Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *        @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="message",  example="{message => deleted successfully}")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
     public function destroy($id)
     {
         return $this->couponService->destroy($id);
     }
-    //restor coupon
+    /**
+     * @OA\put(
+     *    path="/api/v1_0/coupon/restore/{id}",
+     *    operationId="restorecoupons",
+     *    tags={"Coupon"},
+     *    summary="restore coupons",
+     *    description="restore coupons Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *        @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="message",  example="{message => deleted successfully}")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
     public function restore($id)
     {
         return $this->couponService->restore($id);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * @OA\get(
