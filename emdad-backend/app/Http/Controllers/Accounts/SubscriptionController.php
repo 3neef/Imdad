@@ -231,7 +231,7 @@ class SubscriptionController extends Controller
         * path="/api/v1_0/packages/{id}'",
         * operationId="getpackageById",
         * tags={"Platform Settings"},
-        * summary="get package By Id",
+        * summary="get package By id",
         * description="get package By Id Here",
      *     @OA\Parameter(
      *         name="id",
