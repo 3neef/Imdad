@@ -5,81 +5,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/v1_0/subscriptions/create": {
-            "post": {
-                "tags": [
-                    "Platform Settings"
-                ],
-                "summary": "create Subscription packages",
-                "description": "create Subscription package",
-                "operationId": "create-sub-packages",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "packageName",
-                                    "type",
-                                    "subscriptionDetails",
-                                    "subscriptionDetails.superAdmin"
-                                ],
-                                "properties": {
-                                    "packageName": {
-                                        "type": "string"
-                                    },
-                                    "type": {
-                                        "type": "integer"
-                                    },
-                                    "subscriptionDetails": {
-                                        "type": "integer"
-                                    },
-                                    "subscriptionDetails.superAdmin": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "created successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/subscriptions/update": {
+        "/api/v1_0/packages": {
             "put": {
                 "tags": [
                     "Platform Settings"
@@ -155,9 +81,81 @@
                         "description": "system error"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "create Subscription packages",
+                "description": "create Subscription package",
+                "operationId": "create-sub-packages",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "packageName",
+                                    "type",
+                                    "subscriptionDetails",
+                                    "subscriptionDetails.superAdmin"
+                                ],
+                                "properties": {
+                                    "packageName": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionDetails": {
+                                        "type": "integer"
+                                    },
+                                    "subscriptionDetails.superAdmin": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created successfully"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
             }
         },
-        "/api/v1_0/subscriptions/get-buyer-packs": {
+        "/api/v1_0/packages/get-buyer-packs": {
             "get": {
                 "tags": [
                     "Platform Settings"
@@ -217,7 +215,7 @@
                 }
             }
         },
-        "/api/v1_0/subscriptions/get-supplier-packs": {
+        "/api/v1_0/packages/get-supplier-packs": {
             "get": {
                 "tags": [
                     "Platform Settings"
@@ -556,7 +554,8 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "password"
+                                    "email",
+                                    "mobile"
                                 ],
                                 "properties": {
                                     "": {
@@ -567,7 +566,7 @@
                                             },
                                             {
                                                 "type": "string",
-                                                "property": "email"
+                                                "property": "mobile"
                                             }
                                         ]
                                     },
@@ -617,7 +616,7 @@
                 }
             }
         },
-        "/api/v1_0/auth/verifiy-otp": {
+        "/api/v1_0/auth/verify-otp": {
             "put": {
                 "tags": [
                     "auth"
@@ -3153,7 +3152,94 @@
                 }
             }
         },
-        "/api/v1_0/permissions/save": {
+        "/api/v1_0/permissions": {
+            "put": {
+                "tags": [
+                    "Roles and Permissions"
+                ],
+                "summary": "update permisssion",
+                "description": "update permission to specific role Here",
+                "operationId": "updatePermissionToSpecificRole",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "label",
+                                    "category",
+                                    "description"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "update permission",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
             "post": {
                 "tags": [
                     "Roles and Permissions"
@@ -3184,18 +3270,23 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "role",
-                                    "privileges"
+                                    "name",
+                                    "label",
+                                    "category",
+                                    "description"
                                 ],
                                 "properties": {
-                                    "role": {
-                                        "type": "integer,string"
+                                    "name": {
+                                        "type": "string"
                                     },
-                                    "privileges": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        }
+                                    "label": {
+                                        "type": "string"
+                                    },
+                                    "category": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -3330,90 +3421,6 @@
                                             "items": {
                                                 "type": "string"
                                             }
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/permissions/update": {
-            "put": {
-                "tags": [
-                    "Roles and Permissions"
-                ],
-                "summary": "update permisssion",
-                "description": "update permission to specific role Here",
-                "operationId": "updatePermissionToSpecificRole",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id",
-                                    "privileges"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "privileges": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "string"
-                                        }
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "update permission",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
@@ -4066,8 +4073,7 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "firstName",
-                                    "lastName",
+                                    "fullName",
                                     "password",
                                     "email",
                                     "mobile",
@@ -4076,15 +4082,12 @@
                                     "expireDate"
                                 ],
                                 "properties": {
-                                    "firstName": {
+                                    "fullName": {
                                         "type": "string"
                                     },
                                     "expireDate": {
                                         "type": "string",
                                         "format": "date"
-                                    },
-                                    "lastName": {
-                                        "type": "string"
                                     },
                                     "password": {
                                         "type": "string"
@@ -4270,23 +4273,20 @@
                         "multipart/form-data": {
                             "schema": {
                                 "properties": {
+                                    "fullName": {
+                                        "type": "string"
+                                    },
                                     "password": {
                                         "type": "string"
-                                    },
-                                    "firstName": {
-                                        "type": "string"
-                                    },
-                                    "lastName": {
-                                        "type": "string"
-                                    },
-                                    "roleId": {
-                                        "type": "integer"
                                     },
                                     "email": {
                                         "type": "email"
                                     },
                                     "mobile": {
                                         "type": "string"
+                                    },
+                                    "roleId": {
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"

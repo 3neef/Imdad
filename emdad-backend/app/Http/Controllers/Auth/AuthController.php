@@ -208,7 +208,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Put(
-     * path="/api/v1_0/auth/verifiy-otp",
+     * path="/api/v1_0/auth/verify-otp",
      * operationId="user-verify-otp",
      * tags={"auth"},
      * summary="User Activation/ user login mobile + otp",
