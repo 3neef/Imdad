@@ -436,7 +436,7 @@ class SubscriptionController extends Controller
     public function key()
     {
         $key = DB::table('api_keys')->select('key')->get();
-        
+
         dd($key);
     }
 }
