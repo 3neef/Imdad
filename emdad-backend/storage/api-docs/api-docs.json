@@ -974,85 +974,7 @@
                 }
             }
         },
-        "/api/v1_0/coupon/create": {
-            "post": {
-                "tags": [
-                    "Coupon"
-                ],
-                "summary": "create Coupon",
-                "description": "create Coupon Here",
-                "operationId": "createCoupon",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "allowed",
-                                    "stratDate",
-                                    "endDate",
-                                    "value",
-                                    "isPercentage"
-                                ],
-                                "properties": {
-                                    "allowed": {
-                                        "type": "integer"
-                                    },
-                                    "stratDate": {
-                                        "type": "date_format:Y/m/d"
-                                    },
-                                    "endDate": {
-                                        "type": "date_format:Y/m/d"
-                                    },
-                                    "value": {
-                                        "type": "integer"
-                                    },
-                                    "isPercentage": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "created Successfully"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/coupon/show": {
+        "/api/v1_0/coupon": {
             "get": {
                 "tags": [
                     "Coupon"
@@ -1096,6 +1018,82 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "create Coupon",
+                "description": "create Coupon Here",
+                "operationId": "createCoupon",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "allowed",
+                                    "startDate",
+                                    "endDate",
+                                    "value",
+                                    "isPercentage"
+                                ],
+                                "properties": {
+                                    "allowed": {
+                                        "type": "integer"
+                                    },
+                                    "startDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "endDate": {
+                                        "type": "date_format:Y/m/d"
+                                    },
+                                    "value": {
+                                        "type": "integer"
+                                    },
+                                    "isPercentage": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
             }
         },
         "/api/v1_0/coupon/used": {
@@ -1134,7 +1132,7 @@
                                 ],
                                 "properties": {
                                     "code": {
-                                        "type": "integer"
+                                        "type": "string"
                                     },
                                     "subscriptionpayment_id": {
                                         "type": "integer"
@@ -1169,6 +1167,96 @@
                     },
                     "301": {
                         "description": "can,t use coupon"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/coupon/{id}": {
+            "delete": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "remove coupons",
+                "description": "remove  coupons Here",
+                "operationId": "removecoupons",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{message => deleted successfully}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/coupon/restore/{id}": {
+            "put": {
+                "tags": [
+                    "Coupon"
+                ],
+                "summary": "restore coupons",
+                "description": "restore coupons Here",
+                "operationId": "restorecoupons",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{message => deleted successfully}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
