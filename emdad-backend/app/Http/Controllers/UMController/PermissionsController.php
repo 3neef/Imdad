@@ -27,7 +27,7 @@ class PermissionsController extends Controller
     }
        /**
         * @OA\Post(
-        * path="/api/v1_0/permissions/save",
+        * path="/api/v1_0/permissions",
         * operationId="savePermissionToRole",
         * tags={"Roles and Permissions"},
         * summary="save permisssion",
@@ -54,9 +54,12 @@ class PermissionsController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"role", "privileges"},
-        *               @OA\Property(property="role", type="integer,string"),
-        *               @OA\Property(type="array", property="privileges",  @OA\Items(type = "string"))
+        *               required={"name", "label","category","description"},
+        *               @OA\Property(property="name", type="string"),
+        *               @OA\Property(property="label", type="string"),
+        *               @OA\Property(property="category", type="string"),
+        *               @OA\Property(property="category", type="string"),
+        *               @OA\Property(property="description", type="string"),
         *            ),
         *        ),
         *    ),
@@ -176,7 +179,7 @@ class PermissionsController extends Controller
     }
        /**
         * @OA\Put(
-        * path="/api/v1_0/permissions/update",
+        * path="/api/v1_0/permissions",
         * operationId="updatePermissionToSpecificRole",
         * tags={"Roles and Permissions"},
         * summary="update permisssion",
@@ -204,8 +207,12 @@ class PermissionsController extends Controller
         *            @OA\Schema(
         *               type="object",
         *               required={"id","privileges"},
-        *               @OA\Property(property="id", type="integer"),
-        *               @OA\Property(property="privileges", type="array",@OA\Items(type = "string"))
+        *               required={"name", "label","category","description"},
+        *               @OA\Property(property="name", type="string"),
+        *               @OA\Property(property="label", type="string"),
+        *               @OA\Property(property="category", type="string"),
+        *               @OA\Property(property="category", type="string"),
+        *               @OA\Property(property="description", type="string"),
         *            ),
         *          ),
         *       ),
