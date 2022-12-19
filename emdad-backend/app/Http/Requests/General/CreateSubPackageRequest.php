@@ -38,7 +38,8 @@ class CreateSubPackageRequest extends FormRequest
             'subscriptionDetails.addSuppliers'=>['integer'],
             'subscriptionDetails.itemInEachRequisition'=>['integer'],
             'subscriptionDetails.liveTracking'=>['boolean'],
-            'subscriptionDetails.price'=>['string'],
+            'subscriptionDetails.FreePrice'=>['float'],
+            'subscriptionDetails.BasePrice'=>['float'],
         ];
     }
 
