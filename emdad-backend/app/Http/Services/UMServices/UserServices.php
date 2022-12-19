@@ -134,7 +134,7 @@ class UserServices
     public function activate($request)
     {
 
-        $user = User::where('id', '=', $request->id)->first();
+        $user = User::where('id',$request->id)->orWhere('mobile',$request->mobile)->first();
         if ($request->otp != $user->otp) {
             return response()->json(
                 [
