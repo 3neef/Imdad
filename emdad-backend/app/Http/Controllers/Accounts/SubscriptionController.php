@@ -32,7 +32,7 @@ class SubscriptionController extends Controller
 
     /**
      * @OA\post(
-     * path="/api/v1_0/pakages",
+     * path="/api/v1_0/packages",
      * operationId="create-sub-packages",
      * tags={"Platform Settings"},
      * summary="create Subscription packages",
@@ -82,7 +82,7 @@ class SubscriptionController extends Controller
     }
     /**
      * @OA\put(
-     * path="/api/v1_0/pakages",
+     * path="/api/v1_0/packages",
      * operationId="update-sub-packages",
      * tags={"Platform Settings"},
      * summary="update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
@@ -135,7 +135,7 @@ class SubscriptionController extends Controller
 
     /**
      * @OA\Get(
-     * path="/api/v1_0/pakages/get-buyer-packs",
+     * path="/api/v1_0/packages/get-buyer-packs",
      * operationId="get-buyer-packages",
      * tags={"Platform Settings"},
      * summary="get package information",
@@ -184,7 +184,7 @@ class SubscriptionController extends Controller
 
     /**
      * @OA\Get(
-     * path="/api/v1_0/pakages/get-supplier-packs",
+     * path="/api/v1_0/packages/get-supplier-packs",
      * operationId="get-supplier-packages",
      * tags={"Platform Settings"},
      * summary="get package information",

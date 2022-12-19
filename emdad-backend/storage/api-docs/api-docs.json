@@ -5,7 +5,7 @@
         "version": "1.0.0"
     },
     "paths": {
-        "/api/v1_0/pakages": {
+        "/api/v1_0/packages": {
             "put": {
                 "tags": [
                     "Platform Settings"
@@ -155,7 +155,7 @@
                 }
             }
         },
-        "/api/v1_0/pakages/get-buyer-packs": {
+        "/api/v1_0/packages/get-buyer-packs": {
             "get": {
                 "tags": [
                     "Platform Settings"
@@ -215,7 +215,7 @@
                 }
             }
         },
-        "/api/v1_0/pakages/get-supplier-packs": {
+        "/api/v1_0/packages/get-supplier-packs": {
             "get": {
                 "tags": [
                     "Platform Settings"
