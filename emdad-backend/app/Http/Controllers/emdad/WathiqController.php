@@ -32,8 +32,8 @@ class WathiqController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"id","type"},
-        *               @OA\Property(property="id", type="string"),
+        *               required={"identityNumber","type"},
+        *               @OA\Property(property="identityNumber", type="string"),
         *               @OA\Property(property="type", type="integer"),
     
         *            ),

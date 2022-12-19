@@ -5747,11 +5747,11 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "id",
+                                    "identityNumber",
                                     "type"
                                 ],
                                 "properties": {
-                                    "id": {
+                                    "identityNumber": {
                                         "type": "string"
                                     },
                                     "type": {
