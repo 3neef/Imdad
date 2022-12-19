@@ -34,7 +34,7 @@ class LoginRequest extends FormRequest
         return [
             'email' =>[ 'required_without:mobile','string','email','exists:users,email'],
             'mobile'=>[ 'required_without:email','string','exists:users,mobile'],
-            'password' => 'required|string'
+            'password' => 'required_without:mobile|string'
         ];
     }
 
