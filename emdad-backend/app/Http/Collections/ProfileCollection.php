@@ -40,6 +40,8 @@ class ProfileCollection
             'iban',
             'updated_at',
             'created_at',
+            'created_by',
+
         ];
 
         $allowedSorts = [

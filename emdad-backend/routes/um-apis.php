@@ -7,12 +7,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UMController\PermissionsController;
 use App\Http\Controllers\UMController\RoleController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UsersProfilesController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware(['auth.apikey'])->prefix('auth')->group(function() {
+Route::middleware(['auth.apikey'])->prefix('auth')->group(function () {
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [AuthController::class, 'store']);
     Route::put('verify-otp', [AuthController::class, 'activateUser']);
@@ -23,8 +24,10 @@ Route::middleware(['auth.apikey'])->prefix('auth')->group(function() {
     Route::put("reset-password", [AuthController::class, 'resetPassword'])->middleware('auth:sanctum');
 });
 
-Route::middleware(['auth.apikey','auth:sanctum'])->prefix('users')->group(function() {
+Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(function () {
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
+    Route::get('index', [UserController::class, 'index']);
+
     Route::post('register', [UserController::class, 'store']);
     Route::put("Activate", [UserController::class, 'userActivate']);
     Route::put("disable", [UserController::class, 'disable']);
@@ -35,22 +38,24 @@ Route::middleware(['auth.apikey','auth:sanctum'])->prefix('users')->group(functi
 });
 
 
-Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function() {
-    Route::apiResource('permissions',PermissionsController::class);
+Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    Route::apiResource('permissions', PermissionsController::class);
     Route::put('permissions/restore/{permissionId}', [PermissionsController::class, 'restoreById']);
-
 });
 
-Route::middleware(['auth.apikey'])->group(function() {
+Route::middleware(['auth.apikey'])->group(function () {
 
     Route::put('roles/restore/{roleId}', [RoleController::class, 'restoreByRoleId']);
     Route::get('roles/roles-for-reg', [RoleController::class, 'getRolesForReg']);
 });
 
 
-Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function() {
-    Route::apiResource('roles',RoleController::class);
-    
+Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    Route::apiResource('roles', RoleController::class);
+});
+
+Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    Route::get('usersProfiles', [UsersProfilesController::class, 'index']);
 });
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('department')->group(function () {
@@ -58,4 +63,4 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('department')->group(
 });
 
 
-Route::apiResource('department',DepartmentController::class)->middleware(['auth.apikey', 'auth:sanctum']);
+Route::apiResource('department', DepartmentController::class)->middleware(['auth.apikey', 'auth:sanctum']);

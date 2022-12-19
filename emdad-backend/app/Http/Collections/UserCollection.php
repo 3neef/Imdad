@@ -18,7 +18,7 @@ class UserCollection
             'expiry_date',
             'identity_type',
             'identity_number',
-            'default_company',
+            'profile_id',
             'email',
             'updated_at',
             'created_at',
@@ -32,7 +32,7 @@ class UserCollection
             'expiry_date',
             'identity_type',
             'identity_number',
-            'default_company',
+            'profile_id',
             'email',
             'updated_at',
             'created_at',
@@ -45,7 +45,7 @@ class UserCollection
 
         $allowedIncludes = [
             'roles',
-            'company',
+            'profiles',
         ];
 
         $perPage =  100;
