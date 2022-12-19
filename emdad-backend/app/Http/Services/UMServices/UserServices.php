@@ -28,7 +28,7 @@ class UserServices
         $role_id = $request['roleId'] ?? '';
         $is_learning = $request['is_learning'] ?? false;
         if ($role_id || $is_learning) {
-            $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'],'profile_id' => auth()->user()->profile_id,$is_learning = $request['is_learning']]);
+            $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id, $is_learning = $request['is_learning']]);
 
             $user->update(['profile_id' => auth()->user()->profile_id]);
         }
@@ -46,15 +46,17 @@ class UserServices
 
 
 
-    public function update($request)
+    public function update($request, $id)
     {
-        $user = User::where('id', auth()->id())->first();
+        $user = User::where('id', $id)->first();
         $user->update([
 
             "full_name" => $request->fullName,
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
+            "identity_number" => $request->identityNumber ?? $user->identity_number,
         ]);
+
 
         $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
@@ -62,7 +64,15 @@ class UserServices
 
             $userRoleProfile->update(['user_id' => $user->id, 'role_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id]);
         }
-
+        if ($user->wasChanged('mobile')) {
+            $user->update(['is_verified' => 0]);
+            $this->sendOtp($user);
+            return response()->json(
+                [
+                    'message' => 'New OTP has been sent.',
+                    'otp' => $user->otp,
+                ]);
+        }
         if ($user) {
             return response()->json([
                 'message' => 'User updated successfully',

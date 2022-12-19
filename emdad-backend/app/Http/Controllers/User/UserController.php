@@ -234,10 +234,10 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function update(UpdateRequest $request, UserServices $userServices)
+    public function update(UpdateRequest $request, UserServices $userServices,$id)
     {
         // dd(e);
-        return $userServices->update($request);
+        return $userServices->update($request,$id);
     }
 
 
