@@ -34,7 +34,7 @@ class StoreUserRequest extends FormRequest
             'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
             'email' => ['unique:users,email','required','email','max:100',],
             "roleId"=> "|integer|exists:roles,id",
-            'password'=>'required|string',
+            'password'=>'required|string|min:8',
             'expireDate'=>'required|date',
             'permissions'=>['array',new UniqeValues],
             'permissions.*'=>['string','exists:permissions,label'],
