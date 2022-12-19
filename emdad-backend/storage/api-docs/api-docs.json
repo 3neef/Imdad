@@ -2287,22 +2287,14 @@
             }
         },
         "/api/v1_0/trucks": {
-            "put": {
+            "get": {
                 "tags": [
                     "trucks"
                 ],
-                "summary": "update trucks",
-                "description": "update Depatrucksrtment Here",
-                "operationId": "update-trucks",
+                "summary": "get trucks",
+                "description": "get all trucks Here",
+                "operationId": "gettrucks",
                 "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "name": "x-authorization",
                         "in": "header",
@@ -2310,74 +2302,25 @@
                         "schema": {
                             "type": "string"
                         }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "updated Successfully",
+                        "description": "get all trucks",
                         "content": {
                             "multipart/form-data": {
-                                "schema": {
-                                    "required": [
-                                        "name",
-                                        "type",
-                                        "class",
-                                        "color",
-                                        "model",
-                                        "size",
-                                        "brand",
-                                        "image"
-                                    ],
-                                    "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
-                                        "type": {
-                                            "type": "string"
-                                        },
-                                        "class": {
-                                            "type": "string"
-                                        },
-                                        "color": {
-                                            "type": "string"
-                                        },
-                                        "model": {
-                                            "type": "string"
-                                        },
-                                        "size": {
-                                            "type": "string"
-                                        },
-                                        "brand": {
-                                            "type": "string"
-                                        },
-                                        "image": {
-                                            "type": "file"
-                                        },
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
+                                "schema": {}
                             },
                             "application/json": {
                                 "schema": {}
                             }
                         }
                     },
-                    "500": {
-                        "description": "system error"
-                    },
                     "422": {
-                        "description": "Validate error"
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
                     },
                     "404": {
                         "description": "Resource Not Found"
@@ -2465,6 +2408,95 @@
                         "description": "Resource Not Found"
                     }
                 }
+            }
+        },
+        "/api/v1_0/trucks/{id}": {
+            "put": {
+                "tags": [
+                    "trucks"
+                ],
+                "summary": "update trucks",
+                "description": "update Depatrucksrtment Here",
+                "operationId": "update-trucks",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "class": {
+                                            "type": "string"
+                                        },
+                                        "color": {
+                                            "type": "string"
+                                        },
+                                        "model": {
+                                            "type": "string"
+                                        },
+                                        "size": {
+                                            "type": "string"
+                                        },
+                                        "brand": {
+                                            "type": "string"
+                                        },
+                                        "image": {
+                                            "type": "file"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
             },
             "delete": {
                 "tags": [
@@ -2525,7 +2557,7 @@
                 }
             }
         },
-        "/api/v1_0/trucks/restore/{id}'": {
+        "/api/v1_0/trucks/restore/{id}": {
             "put": {
                 "tags": [
                     "trucks"

@@ -24,6 +24,47 @@ class TruckController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
+
+
+
+
+
+           /**
+        * @OA\get(
+        * path="/api/v1_0/trucks",
+        * operationId="gettrucks",
+        * tags={"trucks"},
+        * summary="get trucks",
+        * description="get all trucks Here",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="get all trucks",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *            ),
+        *        ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity",
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+
     public function index()
     {
         return $this->truckservice->index();
@@ -95,7 +136,7 @@ class TruckController extends Controller
 
     /**
         * @OA\put(
-        * path="/api/v1_0/trucks",
+        * path="/api/v1_0/trucks/{id}",
         * operationId="update-trucks",
         * tags={"trucks"},
         * summary="update trucks",
@@ -133,7 +174,6 @@ class TruckController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"name","type","class","color","model","size","brand","image"},
         *               @OA\Property(property="name", type="string"),
         *               @OA\Property(property="type", type="string"),
         *               @OA\Property(property="class", type="string"),
@@ -160,7 +200,7 @@ class TruckController extends Controller
 
     /**
      * @OA\delete(
-     * path="/api/v1_0/trucks",
+     * path="/api/v1_0/trucks/{id}",
      * operationId="delete-trucks",
      * tags={"trucks"},
      * summary="Delete trucks",
@@ -211,7 +251,7 @@ class TruckController extends Controller
 
 /**
         * @OA\put(
-        * path="/api/v1_0/trucks/restore/{id}'",
+        * path="/api/v1_0/trucks/restore/{id}",
         * operationId="restoretruckById",
         * tags={"trucks"},
         * summary="restore truck By Id",
