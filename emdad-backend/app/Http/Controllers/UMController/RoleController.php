@@ -29,7 +29,7 @@ class RoleController extends Controller
 
            /**
         * @OA\get(
-        * path="/api/v1_0/roles/getAll",
+        * path="/api/v1_0/roles",
         * operationId="getAllRoles",
         * tags={"Roles and Permissions"},
         * summary="get roles",
@@ -68,7 +68,7 @@ class RoleController extends Controller
 
        /**
         * @OA\post(
-        * path="/api/v1_0/roles/save",
+        * path="/api/v1_0/roles",
         * operationId="saveNewRole",
         * tags={"Roles and Permissions"},
         * summary="create role",
@@ -97,7 +97,7 @@ class RoleController extends Controller
         *               type="object",
         *               required={"name", "type"},
         *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="type",  type = "integer")
+        *               @OA\Property(property="type",  type = "string")
         *            ),
         *        ),
         *    ),
@@ -129,7 +129,7 @@ class RoleController extends Controller
     }
        /**
         * @OA\put(
-        * path="/api/v1_0/roles/update",
+        * path="/api/v1_0/roles/{id}",
         * operationId="updateRole",
         * tags={"Roles and Permissions"},
         * summary="update role",
@@ -156,8 +156,6 @@ class RoleController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"id"},
-        *               @OA\Property(property="id", type="integer"),
         *               @OA\Property(property="name", type="string"),
         *               @OA\Property(property="type",  type = "integer")
         *            ),
@@ -189,7 +187,7 @@ class RoleController extends Controller
     }
        /**
         * @OA\delete(
-        * path="/api/v1_0/roles/delete/{id}",
+        * path="/api/v1_0/roles/{id}",
         * operationId="deleteRole",
         * tags={"Roles and Permissions"},
         * summary="delete roles",
@@ -237,7 +235,7 @@ class RoleController extends Controller
 
        /**
         * @OA\get(
-        * path="/api/v1_0/roles/getByRoleId/{id}",
+        * path="/api/v1_0/roles/{id}",
         * operationId="getRole",
         * tags={"Roles and Permissions"},
         * summary="get role by id",
@@ -279,7 +277,7 @@ class RoleController extends Controller
         */
     public function show($id)
     {
-        return $this->roleServices->showById($id);
+        return $this->roleServices->show($id);
     }
        /**
         * @OA\get(
@@ -328,7 +326,7 @@ class RoleController extends Controller
     }
         /**
         * @OA\put(
-        * path="/api/v1_0/roles/restore/{id}",
+        * path="/api/v1_0/roles/restore/{roleId}",
         * operationId="restoreRole",
         * tags={"Roles and Permissions"},
         * summary="restore role by id",
@@ -373,49 +371,5 @@ class RoleController extends Controller
     {
         return $this->roleServices->restoreById($id);
     }
-       /**
-        * @OA\get(
-        * path="/api/v1_0/roles/getByType/{type}",
-        * operationId="getAllRolesByType",
-        * tags={"Roles and Permissions"},
-        * summary="get roles by type",
-        * description="get all roles by type",
-*     @OA\Parameter(
-     *         name="x-authorization",
-     *         in="header",
-     *         description="Set x-authorization",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="get all roles by type",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(type="array",@OA\Items(type = "object")
-        *            ),
-        *        ),
-        *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity",
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
-    public function getByType(GetRoleByIdRequest $request,$type)
-    {
-        return $this->roleServices->showByType($type);
-    }
+
 }

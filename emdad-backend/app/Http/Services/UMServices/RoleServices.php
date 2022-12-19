@@ -39,7 +39,7 @@ class RoleServices
         return RolesCollection::collection();
     }
 
-    public function showById($id)
+    public function show($id)
     {
         $role = Role::where('id', $id)->first();
 
@@ -67,14 +67,5 @@ class RoleServices
         return response()->json(['error' => 'system error'], 500);
     }
 
-    public function showByType($type)
-    {
-        $roles = Role::where('type',$type)->get();
-        if (!$roles->isEmpty()) {
-            return response()->json(['data' => RoleResponse::collection($roles)], 200);
-        } else {
-            return response()->json(['message' => 'not found any role by this type -> ' . $type . ''], 404);
-        }
-        return response()->json(['error' => 'system error'], 500);
-    }
+
 }
