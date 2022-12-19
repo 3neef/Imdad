@@ -33,7 +33,7 @@ class TruckController extends Controller
         * @OA\Post(
         * path="/api/v1_0/trucks",
         * operationId="createtrucks",
-        * tags={"Department"},
+        * tags={"trucks"},
         * summary="create trucks ",
         * description="create trucks  Here",
 *     @OA\Parameter(
@@ -201,7 +201,54 @@ class TruckController extends Controller
         return $this->truckservice->delete($id);
     }
 
-
+/**
+        * @OA\put(
+        * path="/api/v1_0/trucks/restore/{id}'",
+        * operationId="restoretruckById",
+        * tags={"trucks"},
+        * summary="restore truck By Id",
+        * description="restore truck By Id Here",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *      @OA\Response(
+        *        response=200,
+        *          description="restore warehouse By Id",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(response=500, description="system error"),
+        *      @OA\Response(response=422, description="Validate error"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
 
     public function restoretruck($id)
     {
