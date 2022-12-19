@@ -17,9 +17,9 @@ class SubscriptionPaymentController extends Controller
 
         /**
      * @OA\get(
-     *    path="/api/v1_0/accounts/subscriptionPayment",
+     *    path="/api/v1_0/profiles/subscriptionPayment",
      *    operationId="create-subscriptionPayment",
-     *    tags={"Account Controller"},
+     *    tags={"Profile Controller"},
      *    summary="create subscriptionPayment",
      *    description="create subscriptionPayment",
 *     @OA\Parameter(
@@ -40,7 +40,7 @@ class SubscriptionPaymentController extends Controller
      *     ),
      *  *     @OA\RequestBody(
         *         @OA\JsonContent(),
-        *         @OA\MediaType(
+        *         @OA\MediaType( 
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
@@ -53,7 +53,7 @@ class SubscriptionPaymentController extends Controller
      *         response=200,
      *         description="",
      *         @OA\JsonContent(
-     *         @OA\Property(property="subscription_id", type="integer", example="{' 'id': 1, 'compnay_id': '1','subscription_id': 1, 'user_id': 1, 'sub_total': 13.0, 'days': 30,'tax_amount':15,'total':28.0}")
+     *         @OA\Property(property="subscriptionId", type="integer", example="{' 'id': 1, 'compnay_id': '1','subscription_id': 1, 'user_id': 1, 'sub_total': 13.0, 'days': 30,'tax_amount':15,'total':28.0}")
      *          ),
      *       )
      *      )

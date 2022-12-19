@@ -111,15 +111,15 @@ class AuthController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"firstName","lastName","password","email","mobile","identityNumber","roleId","expireDate"},
-     *               @OA\Property(property="firstName", type="string"),
+     *               required={"fullName","password","email","mobile","identityNumber","expireDate"},
+     *               @OA\Property(property="fullName", type="string"),
      *               @OA\Property(property="expireDate", type="date"),
      *               @OA\Property(property="lastName", type="string"),
      *               @OA\Property(property="password", type="string"),
      *               @OA\Property(property="email", type="email"),
      *               @OA\Property(property="mobile", type="string"),
      *               @OA\Property(property="identityNumber", type="string"),
-     *               @OA\Property(property="identityType", type="string")
+     *               @OA\Property(property="identityType", type="string,nid")
      *            ),
      *        ),
      *    ),
@@ -173,10 +173,10 @@ class AuthController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"password"},
+     *               required={"email","mobile"},
      *               @OA\Property(
      *                   oneOf={ @OA\Property(property="email",type="string"),
-     *                           @OA\Property(property="email",type="string") }),
+     *                           @OA\Property(property="mobile",type="string") }),
      *               @OA\Property(property="password", type="password")
      *            ),
      *        ),
@@ -208,7 +208,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Put(
-     * path="/api/v1_0/auth/verifiy-otp",
+     * path="/api/v1_0/auth/verify-otp",
      * operationId="user-verify-otp",
      * tags={"auth"},
      * summary="User Activation/ user login mobile + otp",
@@ -227,7 +227,7 @@ class AuthController extends Controller
      *            mediaType="application-json",
      *            @OA\Schema(
      *               type="object",
-     *               required={"otp"},
+     *               required={"id","otp","mobile"},
      *               @OA\Property(property="id", type="integer"),
      *               @OA\Property(property="otp", type="string"),
      *               @OA\Property(property="mobile", type="string")
@@ -279,15 +279,9 @@ class AuthController extends Controller
      *            mediaType="application-json",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="otp rest", type="object",
-     *                  @OA\AdditionalProperties(type="array",
-     *                      @OA\Items(
-     *                          @OA\Property(property="email", type="email"),
-     *                          @OA\Property(property="phone", type="string")
-     *                      )
-     *                  )
-     *              ),
-     *            )
+     *               @OA\Property(property="mobile", type="string"),
+     *               @OA\Property(property="email", type="email"),
+     *            ),
      *        ),
      *    ),
      *      @OA\Response(
@@ -435,8 +429,6 @@ class AuthController extends Controller
      *            mediaType="application-json",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="id", type="integer"),
-     *               @OA\Property(property="param", type="boolean")
      *            ),
      *        ),
      *    ),

@@ -26,7 +26,7 @@ class SubscriptionPaymentRequest extends FormRequest
     public function rules()
     {
         return [
-            'subscription_id'=>'required|integer|exists:subscription_packages,id',
+            'subscriptionId'=>'required|integer|exists:subscription_packages,id',
         ];
     }
 

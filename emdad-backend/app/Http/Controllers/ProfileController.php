@@ -30,7 +30,7 @@ class ProfileController extends Controller
      * @OA\get(
      * path="/api/v1_0/profiles/filter-company-info",
      * operationId="filtercompanyinfo",
-     * tags={"Account Controller"},
+     * tags={"Profile Controller"},
      * summary="filter company info",
      * description="filter company info Here",
      *     @OA\Parameter(
@@ -80,7 +80,7 @@ class ProfileController extends Controller
      * @OA\Post(
      * path="/api/v1_0/profiles",
      * operationId="createAccount",
-     * tags={"Account Controller"},
+     * tags={"Profile Controller"},
      * summary="create Company Account",
      * description="create Company Account Here",
      *     @OA\Parameter(
@@ -132,7 +132,7 @@ class ProfileController extends Controller
      * @OA\get(
      * path="/api/v1_0/profiles/{id}",
      * operationId="getByAccountId",
-     * tags={"Account Controller"},
+     * tags={"Profile Controller"},
 
      * summary="get By AccountId",
      * description="get By AccountId Here",
@@ -182,7 +182,7 @@ class ProfileController extends Controller
      * @OA\put(
      * path="/api/v1_0/profiles",
      * operationId="updateAccount",
-     * tags={"Account Controller"},
+     * tags={"Profile Controller"},
 
      * summary="update Account",
      * description="update Account Here",
@@ -234,7 +234,7 @@ class ProfileController extends Controller
      * @OA\delete(
      * path="/api/v1_0/profiles/{id}",
      * operationId="deleteAccount",
-     * tags={"Account Controller"},
+     * tags={"Profile Controller"},
 
      * summary="delete Account",
      * description="delete Account",
@@ -281,7 +281,7 @@ class ProfileController extends Controller
      * @OA\put(
      * path="/api/v1_0/profiles/{id}",
      * operationId="restoreByAccountId",
-     * tags={"Account Controller"},
+     * tags={"Profile Controller"},
 
      * summary="restore By AccountId",
      * description="restore By AccountId",
@@ -329,7 +329,7 @@ class ProfileController extends Controller
      * @OA\get(
      * path="/api/v1_0/accounts/getAllUnValidated",
      * operationId="allUnValidatedAccounts",
-     * tags={"Account Controller"},
+     * tags={"Profile Controller"},
 
      * summary="allUnValidatedAccounts",
      * description="allUnValidatedAccounts",
@@ -382,7 +382,7 @@ class ProfileController extends Controller
      * @OA\put(
      * path="/api/v1_0/accounts/validate/{id}",
      * operationId="validatedAccount",
-     * tags={"Account Controller"},
+     * tags={"Profile Controller"},
 
      * summary="validatedAccount",
      * description="validatedAccount",

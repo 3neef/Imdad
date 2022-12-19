@@ -54,10 +54,9 @@ class UserController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"firstName","lastName","password","email","mobile","identityNumber","roleId","expireDate"},
-     *               @OA\Property(property="firstName", type="string"),
+     *               required={"fullName","password","email","mobile","identityNumber","roleId","expireDate"},
+     *               @OA\Property(property="fullName", type="string"),
      *               @OA\Property(property="expireDate", type="date"),
-     *               @OA\Property(property="lastName", type="string"),
      *               @OA\Property(property="password", type="string"),
      *               @OA\Property(property="email", type="email"),
      *               @OA\Property(property="mobile", type="string"),
@@ -205,12 +204,11 @@ class UserController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
+     *               @OA\Property(property="fullName", type="string"),
      *               @OA\Property(property="password", type="string"),
-     *               @OA\Property(property="firstName", type="string"),
-     *               @OA\Property(property="lastName", type="string"),
-     *               @OA\Property(property="roleId", type="integer"),
      *               @OA\Property(property="email", type="email"),
      *               @OA\Property(property="mobile", type="string"),
+     *               @OA\Property(property="roleId", type="integer"),
      *            ),
      *        ),
      *    ),
@@ -236,10 +234,10 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function update(UpdateRequest $request, UserServices $userServices)
+    public function update(UpdateRequest $request, UserServices $userServices,$id)
     {
         // dd(e);
-        return $userServices->update($request);
+        return $userServices->update($request,$id);
     }
 
 

@@ -32,7 +32,7 @@ class SubscriptionController extends Controller
 
     /**
      * @OA\post(
-     * path="/api/v1_0/subscriptions/create",
+     * path="/api/v1_0/packages",
      * operationId="create-sub-packages",
      * tags={"Platform Settings"},
      * summary="create Subscription packages",
@@ -82,7 +82,7 @@ class SubscriptionController extends Controller
     }
     /**
      * @OA\put(
-     * path="/api/v1_0/subscriptions/update",
+     * path="/api/v1_0/packages",
      * operationId="update-sub-packages",
      * tags={"Platform Settings"},
      * summary="update Subscription packages if update old flag is set true all presubscribed companies subscription details will be overwriteen",
@@ -109,7 +109,6 @@ class SubscriptionController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"id","type","updateOld","subscriptionDetails","subscriptionDetails.superAdmin"},
      *                @OA\Property(property="id", type="integer"),
      *                @OA\Property(property="type", type="integer"),
      *                @OA\Property(property="updateOld", type="boolean"),
@@ -135,7 +134,7 @@ class SubscriptionController extends Controller
 
     /**
      * @OA\Get(
-     * path="/api/v1_0/subscriptions/get-buyer-packs",
+     * path="/api/v1_0/packages/get-buyer-packs",
      * operationId="get-buyer-packages",
      * tags={"Platform Settings"},
      * summary="get package information",
@@ -184,7 +183,7 @@ class SubscriptionController extends Controller
 
     /**
      * @OA\Get(
-     * path="/api/v1_0/subscriptions/get-supplier-packs",
+     * path="/api/v1_0/packages/get-supplier-packs",
      * operationId="get-supplier-packages",
      * tags={"Platform Settings"},
      * summary="get package information",
@@ -227,16 +226,150 @@ class SubscriptionController extends Controller
     {
         return response()->json(["success" => true, "data" => SubscriptionPackageResource::collection(SubscriptionPackages::where("type", "Supplier")->get())], 200);
     }
-
+/**
+        * @OA\get(
+        * path="/api/v1_0/packages/{id}'",
+        * operationId="getpackageById",
+        * tags={"Platform Settings"},
+        * summary="get package By Id",
+        * description="get package By Id Here",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *      @OA\Response(
+        *        response=200,
+        *          description="get package By Id",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object"
+        *            ),
+        *        ),
+        *
+        *       ),
+        *      @OA\Response(response=500, description="system error"),
+        *      @OA\Response(response=422, description="Validate error"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function show($id)
     {
         return $this->subscriptionService->show($id);
     }
-
+/**
+        * @OA\delete(
+        * path="/api/v1_0/packages/{id}'",
+        * operationId="deletepackage",
+        * tags={"Platform Settings"},
+        * summary="delete package",
+        * description="delete package Here",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *      @OA\Response(
+        *        response=200,
+        *        description="delete package",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *         ),
+        *       ),
+        *      @OA\Response(response=500, description="system error"),
+        *      @OA\Response(response=422, description="Validate error"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
     public function destroy($id)
     {
         return $this->subscriptionService->destroy($id);
     }
+/**
+        * @OA\put(
+        * path="/api/v1_0/packages/restore/{id}'",
+        * operationId="restorepackageById",
+        * tags={"packages"},
+        * summary="restore package By Id",
+        * description="restore package By Id Here",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *      @OA\Response(
+        *        response=200,
+        *          description="restore package By Id",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *          ),
+        *       ),
+        *      @OA\Response(response=500, description="system error"),
+        *      @OA\Response(response=422, description="Validate error"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
 
     public function restore($id)
     {

@@ -15,7 +15,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth.apikey'])->prefix('auth')->group(function() {
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [AuthController::class, 'store']);
-    Route::put('verifiy-otp', [AuthController::class, 'activateUser']);
+    Route::put('verify-otp', [AuthController::class, 'activateUser']);
     Route::delete('remove-user/{id}', [AuthController::class, 'removeUser']);
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
     Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
@@ -28,7 +28,7 @@ Route::middleware(['auth.apikey','auth:sanctum'])->prefix('users')->group(functi
     Route::post('register', [UserController::class, 'store']);
     Route::put("Activate", [UserController::class, 'userActivate']);
     Route::put("disable", [UserController::class, 'disable']);
-    Route::put('update', [UserController::class, 'update']);
+    Route::put('update/{id}', [UserController::class, 'update']);
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
     Route::delete('destroy/{id}', [UserController::class, 'delete']);
     Route::put("restore/{id}", [UserController::class, 'restoreUser']);
