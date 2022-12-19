@@ -448,8 +448,7 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "firstName",
-                                    "lastName",
+                                    "fullName",
                                     "password",
                                     "email",
                                     "mobile",
@@ -458,7 +457,7 @@
                                     "expireDate"
                                 ],
                                 "properties": {
-                                    "firstName": {
+                                    "fullName": {
                                         "type": "string"
                                     },
                                     "expireDate": {
@@ -481,7 +480,7 @@
                                         "type": "string"
                                     },
                                     "identityType": {
-                                        "type": "string"
+                                        "type": "string,nid"
                                     }
                                 },
                                 "type": "object"

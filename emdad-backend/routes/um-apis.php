@@ -15,7 +15,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware(['auth.apikey'])->prefix('auth')->group(function() {
     Route::post('login', [AuthController::class, 'loginUser']);
     Route::post('register', [AuthController::class, 'store']);
-    Route::put('verifiy-otp', [AuthController::class, 'activateUser']);
+    Route::put('verify-otp', [AuthController::class, 'activateUser']);
     Route::delete('remove-user/{id}', [AuthController::class, 'removeUser']);
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
     Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
