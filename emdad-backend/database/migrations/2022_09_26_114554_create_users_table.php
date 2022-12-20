@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('full_name');
             $table->string('last_name');
             $table->nullableMorphs('userable');
-            $table->nullableMorphs('userable');
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('identity_number');
             $table->enum('identity_type', ['nid', 'Iqama'])->default('nid');
