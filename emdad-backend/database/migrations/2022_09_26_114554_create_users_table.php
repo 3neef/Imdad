@@ -27,7 +27,7 @@ return new class extends Migration
             $table->unsignedBigInteger('profile_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
-            $table->timestamp('expiry_date');
+            $table->timestamp('expiry_date')->nullable();
             $table->string('otp');
             $table->timestamp('otp_expires_at')->nullable();
             $table->string('mobile')->unique()->nullable(false);
