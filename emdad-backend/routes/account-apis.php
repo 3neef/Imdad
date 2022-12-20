@@ -11,17 +11,9 @@ Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
     Route::put('profiles/restore/{id}', [ProfileController::class, 'restoreByAccountId']);
     Route::apiResource('profiles/subscriptionPayment',SubscriptionPaymentController::class);
 });
-
-
-//tomorow     ma tnsa y murtada
-
-
-
 Route::middleware(['auth.apikey','auth:sanctum'])->prefix('warehouses')->group(function() {
     Route::put('verfied/{id}', [WarehousesController::class, 'verfiedLocation']);
     Route::put('restore/{id}', [WarehousesController::class, 'restoreByLocationId']);
 });
-
-
 Route::apiResource('warehouses',WarehousesController::class)->middleware(['auth.apikey', 'auth:sanctum']);
 
