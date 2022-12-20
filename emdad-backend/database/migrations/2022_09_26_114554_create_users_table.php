@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('password')->nullable();
             $table->string('identity_number');
             $table->enum('identity_type', ['nid', 'Iqama'])->default('nid');
-            $table->timestadBigInteger('profile_id')->nullable();
+            $table->BigInteger('profile_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp('expiry_date');
