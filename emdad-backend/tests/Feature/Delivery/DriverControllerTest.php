@@ -32,7 +32,8 @@ class DriverControllerTest extends TestCase
     }
     public function test_updateDriver () {
         $user = User::find(3);
-        $response = $this->actingAs($user)->put('/drivers/{id= $this->faker->id}', [
+        $id = Truck::all()->random()->id;
+        $response = $this->actingAs($user)->put('/drivers/{id}', [
 
             'name_ar' => $this->faker->name_ar,
             'name_ar' => $this->faker->name_en,
@@ -45,7 +46,8 @@ class DriverControllerTest extends TestCase
     }
     public function test_deleteDriver () {
         $user = User::find(3);
-        $response = $this->actingAs($user)->delete('/drivers/{id= $this->faker->id}', [
+        $id = Truck::all()->random()->id;
+        $response = $this->actingAs($user)->delete('/drivers/{id}', [
         ]);
         $response->assertRedirect();
     }
