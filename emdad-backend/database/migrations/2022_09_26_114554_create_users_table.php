@@ -19,9 +19,9 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('full_name');
             $table->string('last_name');
-            $table->nullableMormp('email_verified_at')->nullable();
+            $table->nullableMorphs('userable');
+            $table->nullableMorphs('userable');
             $table->string('password')->nullable();
-            $table->unsignephs('userable');
             $table->string('identity_number');
             $table->enum('identity_type', ['nid', 'Iqama'])->default('nid');
             $table->timestadBigInteger('profile_id')->nullable();
