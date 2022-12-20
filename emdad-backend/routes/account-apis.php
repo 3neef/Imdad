@@ -6,12 +6,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionPaymentController;
 
 Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
+    Route::get('checkSubscriptionPayment', [SubscriptionPaymentController::class, 'check_subscription_payment']);
     Route::apiResource('profiles',ProfileController::class);
-
     Route::put('profiles/restore/{id}', [ProfileController::class, 'restoreByAccountId']);
-
     Route::apiResource('profiles/subscriptionPayment',SubscriptionPaymentController::class);
 });
+
+
+//tomorow     ma tnsa y murtada
+
 
 
 Route::middleware(['auth.apikey','auth:sanctum'])->prefix('warehouses')->group(function() {

@@ -38,4 +38,18 @@ class SubscriptionPaymentService
 
         return response()->json(['data' => $SubscriptionPayment], 200);
     }
+
+
+
+    public function check_subscription_payment()
+{
+    $status = SubscriptionPayment::where('profile_id',auth()->user()->profile_id)->pluck('status')->first();
+    if($status){
+        return response()->json(['status' => $status], 200);
+    }
+    else{
+        return response()->json(['message' => 'error'], 500);
+    }
+
+}
 }

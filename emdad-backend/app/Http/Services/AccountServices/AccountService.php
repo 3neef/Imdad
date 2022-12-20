@@ -7,6 +7,7 @@ use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
 use App\Http\Services\General\WalletsService;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Profile;
+use App\Models\SubscriptionPayment;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +37,7 @@ class AccountService
                 $user->roleInProfile()->attach($user->id, ['role_id' => $request['roleId'], 'profile_id' => $profile->id, 'permissions' => $request->permissions]);
 
                 $user->update(['profile_id' => $profile->id]);
-                
+
                 return $profile;
             });
             return response()->json(['success' => true, 'data' => new ProfileResponse($profile)], 200);
@@ -112,4 +113,7 @@ class AccountService
     //     }
     //     return response()->json(['error' => 'system error'], 500);
     // }
+
+
+
 }

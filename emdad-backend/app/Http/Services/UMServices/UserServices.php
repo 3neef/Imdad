@@ -96,7 +96,7 @@ class UserServices
             $data = $this->sendOtp($user);
             return response()->json(
                 [
-                    "success" => false, "error" => "verifiy your otp first",
+                    "success" => true, "message" => "verifiy your otp first",
                     "data" => $data
                 ]
             );
