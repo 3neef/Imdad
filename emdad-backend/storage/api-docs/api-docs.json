@@ -35,21 +35,12 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
+                                "required": [
+                                    "features.*.key"
+                                ],
                                 "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "type": {
-                                        "type": "integer"
-                                    },
-                                    "updateOld": {
-                                        "type": "boolean"
-                                    },
-                                    "subscriptionDetails": {
-                                        "type": "integer"
-                                    },
-                                    "subscriptionDetails.superAdmin": {
-                                        "type": "integer"
+                                    "features.*.key": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -105,22 +96,24 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "packageName",
+                                    "packageNameAr",
+                                    "packageNameEn",
                                     "type",
-                                    "subscriptionDetails",
-                                    "subscriptionDetails.superAdmin"
+                                    "features",
+                                    "features.*.key",
+                                    "price1"
                                 ],
                                 "properties": {
-                                    "packageName": {
+                                    "packageNameAr": {
+                                        "type": "string"
+                                    },
+                                    "packageNameEn": {
                                         "type": "string"
                                     },
                                     "type": {
-                                        "type": "integer"
+                                        "type": "string"
                                     },
-                                    "subscriptionDetails": {
-                                        "type": "integer"
-                                    },
-                                    "subscriptionDetails.superAdmin": {
+                                    "price1": {
                                         "type": "integer"
                                     }
                                 },

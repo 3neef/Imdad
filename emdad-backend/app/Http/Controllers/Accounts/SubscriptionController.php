@@ -59,11 +59,11 @@ class SubscriptionController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"packageName","type","subscriptionDetails","subscriptionDetails.superAdmin"},
-     *                @OA\Property(property="packageName", type="string"),
-     *                @OA\Property(property="type", type="integer"),
-     *                @OA\Property(property="subscriptionDetails", type="integer"),
-     *                @OA\Property(property="subscriptionDetails.superAdmin", type="integer")
+     *               required={"packageNameAr","packageNameEn","type","features","features.*.key","price1"},
+     *                @OA\Property(property="packageNameAr", type="string"),
+     *                @OA\Property(property="packageNameEn", type="string"),
+     *                @OA\Property(property="type", type="string"),
+     *                @OA\Property(property="price1", type="integer"),
      *            ),
      *        ),
      *    ),
@@ -109,12 +109,9 @@ class SubscriptionController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *                @OA\Property(property="id", type="integer"),
-     *                @OA\Property(property="type", type="integer"),
-     *                @OA\Property(property="updateOld", type="boolean"),
-     *                @OA\Property(property="subscriptionDetails", type="integer"),
-     *                @OA\Property(property="subscriptionDetails.superAdmin", type="integer")
-     *            ),
+     *               required={"features.*.key"},
+     *                @OA\Property(property="features.*.key", type="string"),
+     *          ),
      *        ),
      *    ),
      *      @OA\Response(
