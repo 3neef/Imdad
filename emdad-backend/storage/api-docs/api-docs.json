@@ -3181,7 +3181,7 @@
             }
         },
         "/api/v1_0/profiles/subscriptionPayment": {
-            "get": {
+            "post": {
                 "tags": [
                     "Profile Controller"
                 ],

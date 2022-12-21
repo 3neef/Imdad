@@ -16,7 +16,7 @@ class SubscriptionPaymentController extends Controller
     }
 
         /**
-     * @OA\get(
+     * @OA\post(
      *    path="/api/v1_0/profiles/subscriptionPayment",
      *    operationId="create-subscriptionPayment",
      *    tags={"Profile Controller"},
