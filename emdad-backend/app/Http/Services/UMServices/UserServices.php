@@ -6,11 +6,14 @@ use App\Http\Controllers\Auth\MailController;
 
 use App\Models\User;
 use App\Models\UM\Role;
-use App\Models\UM\RoleUserCompany;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Models\UM\Permission;
 use App\Models\UM\RoleUserProfile;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 class UserServices
 {
@@ -98,7 +101,8 @@ class UserServices
             return response()->json(
                 [
                     "success" => true, "message" => "verifiy your otp first",
-                    "data" => $data
+                    "data" => $data,
+                    "id" => $user->id,
                 ]
             );
         }
@@ -165,7 +169,8 @@ class UserServices
             [
                 'message' => 'Your account has been activated successfully.',
                 'token' => $token->plainTextToken,
-            ],200
+            ],
+            200
         );
     }
 
@@ -225,37 +230,47 @@ class UserServices
         }
         return response()->json(['error' => 'system error'], 500);
     }
+    
 
     public function forgotPassword($request)
     {
-        $otp = rand(1000, 9999);
-        $otp_expires_at = now()->addMinutes(2);
-        $user = User::where('email', $request->email)->first();
-        if ($user === null) {
-            return response()->json(
-                [
-                    "success" => false, "error" => "Unregistered email"
-                ]
-            );
-        }
-        $result = $user->update([
-            'otp' => $otp,
-            'otp_expires_at' => $otp_expires_at,
-        ]);
-        if ($result) {
-            MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp);
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+        $data = DB::table('password_resets')->select('token')->where('email', $request->email)->first();
+
+        if ($status) {
             return response()->json([
-                'message' => 'OTP has been created successfully',
-                'OTP' => $otp,
-                'otpExpiresAt' => $otp_expires_at
+                "success" => true,
+                "token" => $data->token,
+                'message' => ' Rest Link has been sended to your email id ',
+                "email" => $request->email,
             ], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json([
+            "success" => false,
+            'message' => 'System error ',
+        ], 500);
     }
 
     // Todo  Need Code Again !
     public function resetPassword($request)
     {
+        $user = User::where('email', $request->email)->first();
+
+        $user->update(['password' => $request->password]);
+
+        event(new PasswordReset($user));
+        if ($user) {
+            return response()->json([
+                "success" => true,
+                'message' => 'password Reste successfly',
+            ], 200);
+        }
+        return response()->json([
+            "success" => false,
+            'message' => 'system Error',
+        ], 500);
     }
 
     public function assignRole($request)

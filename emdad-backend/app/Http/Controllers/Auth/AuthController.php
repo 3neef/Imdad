@@ -82,10 +82,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function resetPassword(
-        ResetPasswordRequest $request,
-        UserServices $userServices
-    ) {
+    public function resetPassword(ResetPasswordRequest $request,UserServices $userServices) {
         return $userServices->resetPassword($request);
     }
 
