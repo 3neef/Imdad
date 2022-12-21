@@ -1,7 +1,7 @@
 <?php
 
 namespace Tests\Feature;
-
+use Illuminate\Support\Str;
 use App\Models\Accounts\Driver;
 use App\Models\Accounts\Truck;
 use App\Models\User;
@@ -15,7 +15,11 @@ class TruckControllerTest extends TestCase
 
     public function test_createTruck () {
         $user = User::find(3);
-        $response = $this->actingAs($user)->post('/trucks', [
+        // $user->createToken('authtoken');
+        $token = Str::random(10);
+        // dd($user);
+        $response = $this->actingAs(factory(User::class)->create())->withHeaders(['Authorization'=>'Bearer '.$token,
+        'Accept' => 'application/json'])->post('/trucks', [
             'name' => $this->faker->name,
             'type' => $this->faker->type,
             'class' => $this->faker->class,
