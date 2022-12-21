@@ -18,7 +18,6 @@ class SubscriptionPaymentService
         $user = User::where('id', auth()->id())->first();
 
         $subscription = SubscriptionPackages::where('id', $request->packageId)->first();
-        $subscription_info = json_decode($subscription->features, true);
         $oldOwner=$user->oldOwner();
         $price = $oldOwner?$subscription->price_2:$subscription->price_1;
         $SubscriptionPayment = SubscriptionPayment::create([
@@ -30,7 +29,7 @@ class SubscriptionPaymentService
             'tax_amount' => $price*15/100,
             'total' => ($price + ($price* 15 / 100)),
         ]);
-        $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription_info->features]);
+        $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => json_encode($subscription->features, true)]);
 
         return response()->json(['data' => $SubscriptionPayment], 200);
     }
