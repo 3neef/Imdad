@@ -169,7 +169,7 @@ class UserController extends Controller
 
     /**
      * @OA\put(
-     * path="/api/v1_0/users",
+     * path="/api/v1_0/users/update/{id}",
      * operationId="updateUser",
      * tags={"UM & Permissions"},
      * summary="update User",
@@ -288,7 +288,7 @@ class UserController extends Controller
 
     /**
      * @OA\delete(
-     * path="/api/v1_0/users",
+     * path="/api/v1_0/users/destroy/{id}",
      * operationId="deleteUser",
      * tags={"UM & Permissions"},
      * summary="Delete User",
