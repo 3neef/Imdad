@@ -17,8 +17,7 @@ class SubscriptionPaymentService
 
         $user = User::where('id', auth()->id())->first();
 
-        $subscription = SubscriptionPackages::where('id', $request->subscriptionId)->first();
-
+        $subscription = SubscriptionPackages::where('id', $request->packageId)->first();
         $subscription_info = json_decode($subscription->features, true);
         $oldOwner=$user->oldOwner();
         $price = $oldOwner?$subscription_info->price_2:$subscription_info->price_1;
