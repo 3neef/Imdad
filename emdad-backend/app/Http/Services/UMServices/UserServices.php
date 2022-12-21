@@ -53,8 +53,7 @@ class UserServices
     {
         $user = User::where('id', $id)->first();
         $user->update([
-
-            "full_name" => $request->fullName,
+            "full_name" => $request->fullName??$user->full_name,
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
