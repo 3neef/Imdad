@@ -16,8 +16,12 @@ class SubscriptionPackageResource extends JsonResource
     {
         return [
             "pakcage_id"=>$this->id,
-            "packageName"=>$this->subscription_name,
-            "packageDetails"=>json_decode($this->subscription_details),
+            "packageNameAr"=>$this->package_name_ar,
+            "packageNameEn"=>$this->package_name_en,
+            "freeFirstTime"=>$this->free_first_time,
+            "price1"=>$this->price_1,
+            "price2"=>$this->price_2,
+            "features"=>json_decode($this->features),
         ];
     }
 }
