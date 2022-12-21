@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('package_id');
             $table->foreignId('user_id');
             $table->foreignId('coupon_id')->nullable();
-            $table->date('days')->nullable();
+            $table->timestamp('expire_date')->nullable();
             $table->float('sub_total')->default(0);
             $table->float('tax_amount')->default(0);
             $table->float('total')->default(0);
