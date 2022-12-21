@@ -138,13 +138,22 @@ class UserServices
             return response()->json(
                 [
                     "success" => false, "error" => "Invalid OTP"
-                ]
+                ],
+                500
             );
         } elseif ($user->otp_expires_at < now()) {
             return response()->json(
                 [
                     "success" => false, "error" => "Expired OTP"
-                ]
+                ],
+                500
+            );
+        } elseif ($user->is_verified == true) {
+            return response()->json(
+                [
+                    "success" => false, "error" => "Your Account Already Activated"
+                ],
+                400
             );
         }
 
@@ -154,7 +163,7 @@ class UserServices
             [
                 'message' => 'Your account has been activated successfully.',
                 'token' => $token->plainTextToken,
-            ]
+            ],200
         );
     }
 
