@@ -90,7 +90,7 @@ class UserServices
     public function login(LoginRequest $request)
     {
 
-        $user = User::where('email',$request->email)->orwhere('mobile', $request->mobile)->first();
+        $user = User::where('email', $request->email)->orwhere('mobile', $request->mobile)->first();
 
         if (isset($request->mobile)) {
             $user = User::where('mobile', '=', $request->mobile)->first();
@@ -166,7 +166,9 @@ class UserServices
             [
                 'message' => 'Your account has been activated successfully.',
                 'token' => $token->plainTextToken,
+                "user" => new UserResponse($user),
             ],
+
             200
         );
     }
