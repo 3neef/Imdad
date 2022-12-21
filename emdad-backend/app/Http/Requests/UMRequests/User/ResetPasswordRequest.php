@@ -26,15 +26,14 @@ class ResetPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|exists:users,email',
-            'oldPassword' => 'required|string|max:50',
-            'newPassword' => 'required|string|max:50'
+            'email' => 'required|email',
+            'password' => 'required|string|max:50',
+            "token" => "required",
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+        throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors()], 422));
     }
-
 }

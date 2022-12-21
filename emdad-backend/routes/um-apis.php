@@ -19,10 +19,12 @@ Route::middleware(['auth.apikey'])->prefix('auth')->group(function () {
     Route::put('verify-otp', [AuthController::class, 'activateUser']);
     Route::delete('remove-user/{id}', [AuthController::class, 'removeUser']);
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
-    Route::put("forgot-password", [AuthController::class, 'forgotPassword']);
+    Route::post("forgot-password", [AuthController::class, 'forgotPassword']);
     Route::post('logout', [AuthController::class, 'logoutUser'])->middleware('auth:sanctum');
-    Route::put("reset-password", [AuthController::class, 'resetPassword'])->middleware('auth:sanctum');
+    Route::post("reset-password", [AuthController::class, 'resetPassword'])->name('password.reset');
 });
+
+
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(function () {
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
