@@ -100,7 +100,6 @@ class UserServices
                 [
                     "success" => true, "message" => "verifiy your otp first",
                     "data" => $data,
-                    "id" => $user->id,
                 ]
             );
         }
@@ -228,7 +227,7 @@ class UserServices
         }
         return response()->json(['error' => 'system error'], 500);
     }
-    
+
 
     public function forgotPassword($request)
     {
@@ -371,6 +370,8 @@ class UserServices
             [
                 'message' => 'New OTP has been sent.',
                 'otp' => $user->otp,
+                "id" => $user->id,
+
             ]
         );
     }
