@@ -21,6 +21,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
 
 });
 
+Route::apiResource('packages', SubscriptionController::class)->middleware('auth.apikey');
 
 
 Route::group(['prefix' => 'installation'], function () {

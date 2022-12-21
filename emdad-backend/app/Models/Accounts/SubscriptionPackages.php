@@ -10,6 +10,6 @@ class SubscriptionPackages extends Model
 {
     use HasFactory ,SoftDeletes;
     protected $fillable = [
-        'subscription_name', 'subscription_details',  'type'
+        'package_id', 'package_name_en','type' , 'package_name_ar','features','price_1','price_2','free_first_time'
     ];
 }
