@@ -21,9 +21,9 @@ class SubscriptionPaymentService
 
         $payedSubscription = SubscriptionPayment::where('id', auth()->user()->profile_id)->first();
         // dd($payedSubscription);
-        // if ($payedSubscription->days null || $payedSubscription->days < now()) {
-        //     return response()->json(['success' => false, "error" => "you are Already subscribed to another package "], 404);
-        // }
+        if ($payedSubscription == null) {
+            return response()->json(['success' => false, "error" => "you are Already subscribed to another package "], 404);
+        }
 
         $oldOwner = $user->oldOwner();
         $price = $oldOwner ? $subscription->price_2 : $subscription->price_1;
@@ -39,7 +39,7 @@ class SubscriptionPaymentService
         ]);
         $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => json_encode($subscription->features, true)]);
 
-        return response()->json(['data' => $SubscriptionPayment], 200);
+        return response()->json(['data' => $SubscriptionPayment, "oldOwner" => $oldOwner], 200);
     }
 
 
