@@ -9,6 +9,12 @@ Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
     Route::get('checkSubscriptionPayment', [SubscriptionPaymentController::class, 'check_subscription_payment']);
     Route::apiResource('profiles',ProfileController::class);
     Route::put('profiles/restore/{id}', [ProfileController::class, 'restoreByAccountId']);
+
+
+    Route::put('profiles/swap/{id}', [ProfileController::class, 'swapPOST_profile']);
+
+
+
     Route::apiResource('profiles/subscriptionPayment',SubscriptionPaymentController::class);
 });
 Route::middleware(['auth.apikey','auth:sanctum'])->prefix('warehouses')->group(function() {

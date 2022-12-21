@@ -427,6 +427,13 @@ class ProfileController extends Controller
     // }
 
 
+    public function swap_profile($id)
+    {
+        return $this->accountService->swap_profile($id);
+    }
+    
+
+
 
    
 }

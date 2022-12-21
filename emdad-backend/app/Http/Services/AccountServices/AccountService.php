@@ -8,6 +8,7 @@ use App\Http\Services\General\WalletsService;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Profile;
 use App\Models\SubscriptionPayment;
+use App\Models\UM\RoleUserProfile;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,7 @@ class AccountService
     {
         try {
 
-            $profile=DB::transaction(function () use ($request) {
+            $profile = DB::transaction(function () use ($request) {
 
                 $company = RelatedCompanies::where("cr_number", $request->crNo)->first();
                 $user = User::where('id', auth()->user()->id)->first();
@@ -30,7 +31,7 @@ class AccountService
                     "cr_number" => $company->cr_number,
                     "created_by" => auth()->user()->id,
                     "is_validated" => true,
-                    "active"=>1,
+                    "active" => 1,
                 ]);
                 WalletsService::create($profile);
 
@@ -94,6 +95,28 @@ class AccountService
             return response()->json(['error' => 'No data Founded'], 404);
         }
     }
+
+
+    public function swap_profile($id)
+    {
+        $user = RoleUserProfile::where('profile_id', $id)->where('user_id', auth()->id())->where('role_id', "!=", null)->first();
+        if ($user) {
+            $payedSubscription = SubscriptionPayment::where('profile_id', $id)->first();
+
+            if (now() > $payedSubscription->expire_date && $payedSubscription->status == 'Paid') {
+                $user->update([
+                    'profile_id' => $id
+                ]);
+                return response()->json(['message' => 'swap successfully'], 200);
+            }
+        }
+        return response()->json(['success'=>false,'error' => 'Profile Not Founded'], 404);
+    }
+
+
+
+
+
 
     // public function unValidate()
     // {
