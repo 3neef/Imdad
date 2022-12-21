@@ -25,6 +25,7 @@ class SubscriptionPackagesSeeder extends Seeder
             "descriptionAr"=>"تفاصيل شرح الميزة"],
             ["key"=>"users","titleEn"=>"Users Scheduling","titleAr"=>"المستخدمين","systemValue"=>1,"text_en"=>"10 users","text_ar"=>"  عشرة مستخدمين","descriptionEn"=>"lorem epsom",
             "descriptionAr"=>"تفاصيل شرح الميزة"]]]   
+            
         
         
         ];
