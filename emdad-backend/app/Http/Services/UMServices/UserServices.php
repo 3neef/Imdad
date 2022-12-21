@@ -71,7 +71,8 @@ class UserServices
                 [
                     'message' => 'New OTP has been sent.',
                     'otp' => $user->otp,
-                ]);
+                ]
+            );
         }
         if ($user) {
             return response()->json([
@@ -86,9 +87,7 @@ class UserServices
     public function login(LoginRequest $request)
     {
 
-        $user = User::where('email', '=', $request->email)
-            ->orwhere('mobile', $request->mobile)
-            ->first();
+        $user = User::where('email',$request->email)->orwhere('mobile', $request->mobile)->first();
 
         if (isset($request->mobile)) {
             $user = User::where('mobile', '=', $request->mobile)->first();
@@ -134,7 +133,7 @@ class UserServices
     public function activate($request)
     {
 
-        $user = User::where('id',$request->id)->orWhere('mobile',$request->mobile)->first();
+        $user = User::where('id', $request->id)->orWhere('mobile', $request->mobile)->first();
         if ($request->otp != $user->otp) {
             return response()->json(
                 [
