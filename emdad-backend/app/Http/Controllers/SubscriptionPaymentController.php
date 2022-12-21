@@ -44,8 +44,8 @@ class SubscriptionPaymentController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"subscriptionpyment_id","type"},
-        *               @OA\Property(property="subscriptionpyment_id", type="integer"),
+        *               required={"packageId","type"},
+        *               @OA\Property(property="packageId", type="integer"),
         *            ),
         *        ),
         *    ),
@@ -53,7 +53,7 @@ class SubscriptionPaymentController extends Controller
      *         response=200,
      *         description="",
      *         @OA\JsonContent(
-     *         @OA\Property(property="subscriptionId", type="integer", example="{' 'id': 1, 'compnay_id': '1','subscription_id': 1, 'user_id': 1, 'sub_total': 13.0, 'days': 30,'tax_amount':15,'total':28.0}")
+     *         @OA\Property(property="packageId", type="integer", example="{' 'id': 1, 'compnay_id': '1','subscription_id': 1, 'user_id': 1, 'sub_total': 13.0, 'days': 30,'tax_amount':15,'total':28.0}")
      *          ),
      *       )
      *      )

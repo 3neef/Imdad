@@ -132,18 +132,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Profile::class);
     }
 
-    public function scopebasicPackage()
+    public function oldOwner()
     {
-        global $package;
-        $profiles = Profile::where('created_by', auth()->id())->get();
-
-        foreach ($profiles as $profile) {
-            $package = SubscriptionPackages::where('subscription_name', 'basic')->where('id', $profile->subs_id)->first();
+        $count = SubscriptionPayment::where('user_id', auth()->id())->where('status',"Paid")->count();
+        if ($count > 0) {
+            return true;
         }
-        // dd($package);subs_id
-        if ($package == null) {
-            return false;
-        }
-        return true;
+        return false;
     }
 }

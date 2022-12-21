@@ -18,23 +18,20 @@ class SubscriptionPaymentService
         $user = User::where('id', auth()->id())->first();
 
         $subscription = SubscriptionPackages::where('id', $request->subscriptionId)->first();
-        // dd($user->BasicPackage());
-        if ($user->BasicPackage() == true && $subscription->subscription_name == 'basic') {
-            return response()->json(['susscess' => false, 'message' => "you have already used the basic package"], 403);
-        }
 
-        $subscription_info = json_decode($subscription->subscription_details, true);
-
+        $subscription_info = json_decode($subscription->features, true);
+        $oldOwner=$user->oldOwner();
+        $price = $oldOwner?$subscription_info->price_2:$subscription_info->price_1;
         $SubscriptionPayment = SubscriptionPayment::create([
-            'profile_id' => auth()->user()->profile_id ?? 2,
-            'subscriptionId' => $request->subscriptionId,
+            'profile_id' => auth()->user()->profile_id ,
+            'package_id' => $request->packageId,
             'user_id' => auth()->id() ?? 2,
-            'sub_total' => $subscription_info['price'],
+            'sub_total' => $price,
             'days' => $dt->addDays(365),
-            'tax_amount' => 15,
-            'total' => ($subscription_info['price'] + ($subscription_info['price'] * 15) / 100),
+            'tax_amount' => $price*15/100,
+            'total' => ($price + ($price* 15 / 100)),
         ]);
-        $user->profile()->update(['subs_id' => $request->subscriptionId, 'subscription_details' => $subscription_info]);
+        $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription_info->features]);
 
         return response()->json(['data' => $SubscriptionPayment], 200);
     }
