@@ -3211,11 +3211,11 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "subscriptionpyment_id",
+                                    "packageId",
                                     "type"
                                 ],
                                 "properties": {
-                                    "subscriptionpyment_id": {
+                                    "packageId": {
                                         "type": "integer"
                                     }
                                 },
@@ -3234,7 +3234,7 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "subscriptionId": {
+                                        "packageId": {
                                             "type": "integer",
                                             "example": "{' 'id': 1, 'compnay_id': '1','subscription_id': 1, 'user_id': 1, 'sub_total': 13.0, 'days': 30,'tax_amount':15,'total':28.0}"
                                         }
