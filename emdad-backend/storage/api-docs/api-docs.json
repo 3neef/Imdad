@@ -4492,7 +4492,7 @@
                 }
             }
         },
-        "/api/v1_0/users": {
+        "/api/v1_0/users/update/{id}": {
             "put": {
                 "tags": [
                     "UM & Permissions"
@@ -4592,7 +4592,61 @@
                         "description": "Resource Not Found"
                     }
                 }
-            },
+            }
+        },
+        "/api/v1_0/users/restore/{id}": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "Restore User",
+                "description": "restore user here",
+                "operationId": "restoreUser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User restored successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/users/destroy/{id}": {
             "delete": {
                 "tags": [
                     "UM & Permissions"
@@ -4649,58 +4703,6 @@
                 "responses": {
                     "301": {
                         "description": "User deleted successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/restore/{id}": {
-            "put": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "Restore User",
-                "description": "restore user here",
-                "operationId": "restoreUser",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User restored successfully",
                         "content": {
                             "application/json": {
                                 "schema": {}

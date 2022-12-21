@@ -18,33 +18,39 @@ class SubscriptionPaymentService
         $user = User::where('id', auth()->id())->first();
 
         $subscription = SubscriptionPackages::where('id', $request->packageId)->first();
-        $oldOwner=$user->oldOwner();
-        $price = $oldOwner?$subscription->price_2:$subscription->price_1;
+
+        $payedSubscription = SubscriptionPayment::where('id', auth()->user()->profile_id)->first();
+        // dd($payedSubscription);
+        if ($payedSubscription == null) {
+            return response()->json(['success' => false, "error" => "you are Already subscribed to another package "], 404);
+        }
+
+        $oldOwner = $user->oldOwner();
+        $price = $oldOwner ? $subscription->price_2 : $subscription->price_1;
         $SubscriptionPayment = SubscriptionPayment::create([
-            'profile_id' => auth()->user()->profile_id ,
+            'profile_id' => auth()->user()->profile_id,
             'package_id' => $request->packageId,
-            'user_id' => auth()->id() ?? 2,
+            'user_id' => auth()->id(),
             'sub_total' => $price,
             'days' => $dt->addDays(365),
-            'tax_amount' => $price*15/100,
-            'total' => ($price + ($price* 15 / 100)),
+            'tax_amount' => $price * 15 / 100,
+            'total' => ($price + ($price * 15 / 100)),
+            "status" => "Paid",
         ]);
         $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => json_encode($subscription->features, true)]);
 
-        return response()->json(['data' => $SubscriptionPayment], 200);
+        return response()->json(['data' => $SubscriptionPayment, "oldOwner" => $oldOwner], 200);
     }
 
 
 
     public function check_subscription_payment()
-{
-    $status = SubscriptionPayment::where('profile_id',auth()->user()->profile_id)->pluck('status')->first();
-    if($status){
-        return response()->json(['status' => $status], 200);
+    {
+        $status = SubscriptionPayment::where('profile_id', auth()->user()->profile_id)->pluck('status')->first();
+        if ($status) {
+            return response()->json(['status' => $status], 200);
+        } else {
+            return response()->json(['message' => 'error'], 500);
+        }
     }
-    else{
-        return response()->json(['message' => 'error'], 500);
-    }
-
-}
 }
