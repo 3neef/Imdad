@@ -18,11 +18,11 @@ class TruckControllerTest extends TestCase
         $response = $this->actingAs($user)->post('/trucks', [
             'name' => $this->faker->name,
             'type' => $this->faker->type,
-            'class' => $this->faker->type,
-            'color' => $this->faker->type,
-            'model' => $this->faker->type,
-            'size' => $this->faker->type,
-            'brand' => $this->faker->type,
+            'class' => $this->faker->class,
+            'color' => $this->faker->color,
+            'model' => $this->faker->model,
+            'size' => $this->faker->size,
+            'brand' => $this->faker->brand,
             'truck_id' => Truck::all()->random()->id,
             'image' => \Illuminate\Http\UploadedFile::fake()->image('avatar.jpg')
         ]);
