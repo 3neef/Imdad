@@ -71,7 +71,8 @@ class UserServices
                 [
                     'message' => 'New OTP has been sent.',
                     'otp' => $user->otp,
-                ]);
+                ]
+            );
         }
         if ($user) {
             return response()->json([
@@ -134,18 +135,27 @@ class UserServices
     public function activate($request)
     {
 
-        $user = User::where('id',$request->id)->orWhere('mobile',$request->mobile)->first();
+        $user = User::where('id', $request->id)->orWhere('mobile', $request->mobile)->first();
         if ($request->otp != $user->otp) {
             return response()->json(
                 [
                     "success" => false, "error" => "Invalid OTP"
-                ]
+                ],
+                500
             );
         } elseif ($user->otp_expires_at < now()) {
             return response()->json(
                 [
                     "success" => false, "error" => "Expired OTP"
-                ]
+                ],
+                500
+            );
+        } elseif ($user->is_verified == true) {
+            return response()->json(
+                [
+                    "success" => false, "error" => "Your Account Already Activated"
+                ],
+                400
             );
         }
 
@@ -155,7 +165,7 @@ class UserServices
             [
                 'message' => 'Your account has been activated successfully.',
                 'token' => $token->plainTextToken,
-            ]
+            ],200
         );
     }
 
