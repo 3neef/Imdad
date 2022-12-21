@@ -15,7 +15,7 @@ class SubscriptionPackageResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "pakcage_id"=>$this->id,
+            "packageId"=>$this->id,
             "packageNameAr"=>$this->package_name_ar,
             "packageNameEn"=>$this->package_name_en,
             "freeFirstTime"=>$this->free_first_time,
