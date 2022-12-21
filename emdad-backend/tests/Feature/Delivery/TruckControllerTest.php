@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Models\Driver;
-use App\Models\Truck;
+use App\Models\Accounts\Driver;
+use App\Models\Accounts\Truck;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
