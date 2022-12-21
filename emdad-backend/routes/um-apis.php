@@ -29,7 +29,6 @@ Route::middleware(['auth.apikey'])->prefix('auth')->group(function () {
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(function () {
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
     Route::get('index', [UserController::class, 'index']);
-
     Route::post('register', [UserController::class, 'store']);
     Route::put("Activate", [UserController::class, 'userActivate']);
     Route::put("disable", [UserController::class, 'disable']);
@@ -46,7 +45,6 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
 });
 
 Route::middleware(['auth.apikey'])->group(function () {
-
     Route::put('roles/restore/{roleId}', [RoleController::class, 'restoreByRoleId']);
     Route::get('roles/roles-for-reg', [RoleController::class, 'getRolesForReg']);
 });
