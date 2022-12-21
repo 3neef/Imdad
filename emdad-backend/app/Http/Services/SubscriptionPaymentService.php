@@ -20,7 +20,7 @@ class SubscriptionPaymentService
         $subscription = SubscriptionPackages::where('id', $request->packageId)->first();
         $subscription_info = json_decode($subscription->features, true);
         $oldOwner=$user->oldOwner();
-        $price = $oldOwner?$subscription_info->price_2:$subscription_info->price_1;
+        $price = $oldOwner?$subscription->price2:$subscription->price1;
         $SubscriptionPayment = SubscriptionPayment::create([
             'profile_id' => auth()->user()->profile_id ,
             'package_id' => $request->packageId,
