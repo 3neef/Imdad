@@ -39,6 +39,10 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
 });
 
 
+Route::put('users/update-owner-user/{id}', [UserController::class, 'UpdateOwnerUser'])->middleware(['auth.apikey']);
+
+
+
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::apiResource('permissions', PermissionsController::class);
     Route::put('permissions/restore/{permissionId}', [PermissionsController::class, 'restoreById']);

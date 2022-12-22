@@ -167,6 +167,75 @@ class UserController extends Controller
         return response()->json(["status" => "success", "data" => new UserResponse($user)], 200);
     }
 
+/**
+     * @OA\put(
+     * path="/api/v1_0/users/update-owner-user/{id}",
+     * operationId="updateUser",
+     * tags={"UM & Permissions"},
+     * summary="update User Before auth",
+     * description="update User Before auth Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="fullName", type="string"),
+     *               @OA\Property(property="password", type="string"),
+     *               @OA\Property(property="email", type="email"),
+     *               @OA\Property(property="mobile", type="string"),
+     *               @OA\Property(property="roleId", type="integer"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="User updated successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+
+
+
+     public function UpdateOwnerUser(UpdateRequest $request, UserServices $userServices,$id)
+     {
+         // dd(e);
+         return $userServices->update($request,$id);
+     }
+
+
     /**
      * @OA\put(
      * path="/api/v1_0/users/update/{id}",

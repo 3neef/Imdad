@@ -18,7 +18,10 @@ class UpdateRequest extends FormRequest
     {
         return true;
     }
-
+    protected function prepareForValidation()
+    {
+        $this->merge(['id' => $this->route('id')]);
+    }
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,6 +31,7 @@ class UpdateRequest extends FormRequest
     {
 // dd($this->id);
         return [
+            "id"=>'exists:users,id',
             "fullName" => "string|max:100",
             "password" => "string|min:8|max:50",
             "identityNumber"=>['string',Rule::unique('users',"identity_number")->ignore($this->id, 'id')],

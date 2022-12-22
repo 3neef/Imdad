@@ -11,7 +11,7 @@ Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
     Route::put('profiles/restore/{id}', [ProfileController::class, 'restoreByAccountId']);
 
 
-    Route::put('profiles/swap/{id}', [ProfileController::class, 'swapPOST_profile']);
+    Route::put('profiles/swap/{id}', [ProfileController::class, 'swap_profile']);
 
 
 
