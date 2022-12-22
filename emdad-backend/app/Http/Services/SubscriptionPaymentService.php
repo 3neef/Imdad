@@ -28,7 +28,8 @@ class SubscriptionPaymentService
 
             $oldOwner = $user->oldOwner();
 
-            $price = $oldOwner == false ? $subscription->price_2 : $subscription->price_1;
+            $price = $oldOwner == true ? $subscription->price_2 : $subscription->price_1;
+            // dd($subscription);
             $SubscriptionPayment = SubscriptionPayment::create([
                 'profile_id' => auth()->user()->profile_id,
                 'package_id' => $request->packageId,
