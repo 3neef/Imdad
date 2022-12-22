@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\CouponServices;
 
+use App\Http\Resources\Rssources\SubscriptionResource;
 use App\Models\Coupon\Coupon;
 use App\Models\Emdad\Unit_of_measures;
 use App\Models\SubscriptionPayment;
@@ -52,7 +53,7 @@ class CouponServices
                     'discount'=>$coupon->value,
                 ]);
             }
-            return response()->json(['data'=>$subscription,'message' => 'aproved successfully'], 200);
+            return response()->json(['data'=>new SubscriptionResource($subscription),'message' => 'aproved successfully'], 200);
         }
         else{
             return response()->json(['message' => 'can,t use coupon'], 301);

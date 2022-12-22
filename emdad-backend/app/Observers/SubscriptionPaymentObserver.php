@@ -29,6 +29,7 @@ class SubscriptionPaymentObserver
         $subscriptionPayment->sub_total=$subscriptionPayment->sub_total-$subscriptionPayment->discount;
         $subscriptionPayment->tax_amount=$subscriptionPayment->sub_total*15/100;
         $subscriptionPayment->total=$subscriptionPayment->sub_total+$subscriptionPayment->tax_amount;
+        $subscriptionPayment->save();
     }
 
     /**

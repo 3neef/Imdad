@@ -69,7 +69,6 @@ class SubscriptionPaymentService
     {
 
         $subscription = SubscriptionPayment::find($id)->first();
-
         $deleted = $subscription->delete();
         if ($deleted) {
             return response()->json(['message' => 'deleted successfully'], 301);
