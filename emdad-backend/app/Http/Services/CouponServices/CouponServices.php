@@ -37,7 +37,7 @@ class CouponServices
     {
         $coupon = Coupon::where('code',$request->code)->first();
         $subscription = SubscriptionPayment::where('id',$request->subscriptionpayment_id)->first();
-        if($coupon->end_date > Carbon::now() && $coupon->allowed > $coupon ->used){
+        if($coupon->end_date > Carbon::now() && $coupon->allowed > $coupon ->used && $subscription->coupon_id==null){
             $coupon->update(['used'=>$coupon->used + 1,
              'user_id'=>auth()->id()
         ]);
@@ -53,6 +53,7 @@ class CouponServices
                     'discount'=>$coupon->value,
                 ]);
             }
+            $subscription=$this->recalculate($subscription);
             return response()->json(['data'=>new SubscriptionResource($subscription),'message' => 'aproved successfully'], 200);
         }
         else{
@@ -60,6 +61,14 @@ class CouponServices
         }
     }
 
+    public function recalculate($subscriptionPayment)
+    {
+        $subscriptionPayment->sub_total=$subscriptionPayment->sub_total-$subscriptionPayment->discount;
+        $subscriptionPayment->tax_amount=$subscriptionPayment->sub_total*15/100;
+        $subscriptionPayment->total=$subscriptionPayment->sub_total+$subscriptionPayment->tax_amount;
+        $subscriptionPayment->save();
+        return $subscriptionPayment;
+    }
 
 
 
