@@ -30,7 +30,7 @@ class UsedCouponRequest extends FormRequest
     {
 
             $rules = [
-                'code' => 'required|string',
+                'code' => 'required|string|exists:coupons,code',
                 'subscriptionpayment_id'=>'required',
             ];
         return $rules;
