@@ -100,17 +100,23 @@ class AccountService
     public function swap_profile($id)
     {
         $user = RoleUserProfile::where('profile_id', $id)->where('user_id', auth()->id())->where('role_id', "!=", null)->first();
+        if($id==auth()->user()->profile_id)
+        {
+        return response()->json(['success' => false, 'error' => 'you are Already In this  profile'], 402);
+
+        }
         if ($user) {
             $payedSubscription = SubscriptionPayment::where('profile_id', $id)->first();
-
-            if (now() > $payedSubscription->expire_date && $payedSubscription->status == 'Paid') {
-                $user->update([
+            $profile = auth()->user();
+            // dd(now()  $payedSubscription->expire_date);
+            if (now() < $payedSubscription->expire_date && $payedSubscription->status == 'Paid') {
+                $profile->update([
                     'profile_id' => $id
                 ]);
-                return response()->json(['message' => 'swap successfully'], 200);
+                return response()->json([ "success"=>true,'message' => 'swaped successfully',"profile_id"=>$id], 200);
             }
         }
-        return response()->json(['success'=>false,'error' => 'Profile Not Founded'], 404);
+        return response()->json(['success' => false, 'error' => 'Profile Not Founded'], 404);
     }
 
 
