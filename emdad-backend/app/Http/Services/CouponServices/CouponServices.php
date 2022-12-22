@@ -40,7 +40,7 @@ class CouponServices
             $coupon->update(['used'=>$coupon->used + 1,
              'user_id'=>auth()->id()
         ]);
-            if($coupon->is_percentage==1){
+            if($coupon->is_percentage===1){
                 $subscription->update([
                     'coupon_id'=>$coupon->id,
                     'discount'=>$subscription->sub_total*$coupon->value/100,
