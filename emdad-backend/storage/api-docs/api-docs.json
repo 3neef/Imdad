@@ -1802,6 +1802,65 @@
                 }
             }
         },
+        "/api/v1_0/accounts/validate/{id}": {
+            "put": {
+                "tags": [
+                    "Profile Controller"
+                ],
+                "summary": "validatedAccount",
+                "description": "validatedAccount",
+                "operationId": "validatedAccount",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "validated successfully "
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
         "/api/v1_0/department": {
             "post": {
                 "tags": [
