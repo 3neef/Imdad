@@ -170,10 +170,10 @@ class UserController extends Controller
 /**
      * @OA\put(
      * path="/api/v1_0/users/update-owner-user/{id}",
-     * operationId="updateUser",
+     * operationId="updateOwner",
      * tags={"UM & Permissions"},
-     * summary="update User Before auth",
-     * description="update User Before auth Here",
+     * summary="update owner user",
+     * description="update update owner user Here",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -198,6 +198,7 @@ class UserController extends Controller
      *               type="object",
      *               @OA\Property(property="fullName", type="string"),
      *               @OA\Property(property="password", type="string"),
+     *               @OA\Property(property="identityNumber", type="string"),
      *               @OA\Property(property="email", type="email"),
      *               @OA\Property(property="mobile", type="string"),
      *               @OA\Property(property="roleId", type="integer"),
