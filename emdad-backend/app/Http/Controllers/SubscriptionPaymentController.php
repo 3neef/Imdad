@@ -164,4 +164,54 @@ class SubscriptionPaymentController extends Controller
     {
         return $this->subscriptionPaymentService->delete($id);
     }
+
+
+    
+
+/**
+     * @OA\delete(
+     *    path="/api/v1_0/profiles/pay",
+     *    operationId="pay-subscriptionPayment",
+     *    tags={"Profile Controller"},
+     *    summary="pay subscriptionPayment",
+     *    description="pay subscriptionPayment",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *  *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *            ),
+        *        ),
+        *    ),
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="status", type="string", example="{'status':'status'}")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
+    public function  pay()
+    {
+        return $this->subscriptionPaymentService->pay();
+    }
 }

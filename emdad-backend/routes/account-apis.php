@@ -14,6 +14,7 @@ Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
 
     Route::put('profiles/swap/{id}', [ProfileController::class, 'swap_profile']);
 
+    Route::get('profiles/pay',[SubscriptionPaymentController::class,"pay"]);
 
 
     Route::apiResource('profiles/subscriptionPayment',SubscriptionPaymentController::class);

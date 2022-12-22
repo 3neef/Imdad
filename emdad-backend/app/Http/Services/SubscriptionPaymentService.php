@@ -2,7 +2,9 @@
 
 namespace App\Http\Services;
 
+use App\Http\Resources\Rssources\SubscriptionResource;
 use App\Models\Accounts\SubscriptionPackages;
+use App\Models\Profile;
 use App\Models\SubscriptionPayment;
 use App\Models\User;
 use Carbon\Carbon;
@@ -42,7 +44,7 @@ class SubscriptionPaymentService
             ]);
             $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => json_encode($subscription->features, true)]);
 
-            return response()->json(['data' => $SubscriptionPayment, "oldOwner" => $oldOwner], 200);
+            return response()->json(['data' => new SubscriptionResource($SubscriptionPayment), "oldOwner" => $oldOwner], 200);
         } else {
 
             return response()->json(['success' => false, "error" => "you  have ALready  Active Subscriptions "], 404);
@@ -73,5 +75,15 @@ class SubscriptionPaymentService
             return response()->json(['message' => 'deleted successfully'], 301);
         }
         return response()->json(['error' => 'system error'], 500);
+    }
+
+    public function pay()
+    {
+        # code...
+        $user=User::where("id",auth()->user()->profile_id)->first();
+        $profile=Profile::where("id",$user->profile_id)->first();
+        $paymentRequest=SubscriptionPayment::where("profile_id",$profile->id)->where("status","Pending")->first();
+
+
     }
 }
