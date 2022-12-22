@@ -92,7 +92,7 @@ class UserServices
         if ($user) {
             return response()->json([
                 'message' => 'User updated successfully',
-                'data' => ['user' => $user]
+                'data' => ['user' => new UserResponse($user) ]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
