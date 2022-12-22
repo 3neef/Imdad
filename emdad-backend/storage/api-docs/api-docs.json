@@ -379,7 +379,7 @@
         "/api/v1_0/packages/restore/{id}'": {
             "put": {
                 "tags": [
-                    "packages"
+                    "Platform Settings"
                 ],
                 "summary": "restore package By Id",
                 "description": "restore package By Id Here",
@@ -1802,6 +1802,65 @@
                 }
             }
         },
+        "/api/v1_0/accounts/validate/{id}": {
+            "put": {
+                "tags": [
+                    "Profile Controller"
+                ],
+                "summary": "validatedAccount",
+                "description": "validatedAccount",
+                "operationId": "validatedAccount",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "validated successfully "
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "500": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
         "/api/v1_0/department": {
             "post": {
                 "tags": [
@@ -1949,7 +2008,7 @@
         "/api/v1_0/drivers": {
             "put": {
                 "tags": [
-                    "delivery"
+                    "Delivery"
                 ],
                 "summary": "update drivers",
                 "description": "update driver Here",
@@ -2097,7 +2156,7 @@
             },
             "delete": {
                 "tags": [
-                    "delivery"
+                    "Delivery"
                 ],
                 "summary": "Delete drivers",
                 "description": "delete driver here",
@@ -2157,7 +2216,7 @@
         "/api/v1_0/drivers/{id}'": {
             "get": {
                 "tags": [
-                    "delivery"
+                    "Delivery"
                 ],
                 "summary": "get driver By Id",
                 "description": "get driver By Id Here",
@@ -2217,7 +2276,7 @@
         "/api/v1_0/drivers/restore/{id}'": {
             "put": {
                 "tags": [
-                    "trucks"
+                    "Delivery"
                 ],
                 "summary": "restore driver By Id",
                 "description": "restore driver By Id Here",

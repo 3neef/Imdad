@@ -323,7 +323,7 @@ class SubscriptionController extends Controller
         * @OA\put(
         * path="/api/v1_0/packages/restore/{id}'",
         * operationId="restorepackageById",
-        * tags={"packages"},
+        * tags={"Platform Settings"},
         * summary="restore package By Id",
         * description="restore package By Id Here",
      *     @OA\Parameter(

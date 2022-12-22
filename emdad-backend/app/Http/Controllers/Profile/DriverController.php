@@ -75,7 +75,7 @@ class DriverController extends Controller
         * @OA\get(
         * path="/api/v1_0/drivers/{id}'",
         * operationId="getdriversById",
-        * tags={"delivery"},
+        * tags={"Delivery"},
         * summary="get driver By Id",
         * description="get driver By Id Here",
      *     @OA\Parameter(
@@ -139,7 +139,7 @@ class DriverController extends Controller
         * @OA\put(
         * path="/api/v1_0/drivers",
         * operationId="update-drivers",
-        * tags={"delivery"},
+        * tags={"Delivery"},
         * summary="update drivers",
         * description="update driver Here",
      *     @OA\Parameter(
@@ -199,7 +199,7 @@ class DriverController extends Controller
      * @OA\delete(
      * path="/api/v1_0/drivers",
      * operationId="delete-drivers",
-     * tags={"delivery"},
+     * tags={"Delivery"},
      * summary="Delete drivers",
      * description="delete driver here",
      *     @OA\Parameter(
@@ -248,7 +248,7 @@ class DriverController extends Controller
         * @OA\put(
         * path="/api/v1_0/drivers/restore/{id}'",
         * operationId="restoredriverkById",
-        * tags={"trucks"},
+        * tags={"Delivery"},
         * summary="restore driver By Id",
         * description="restore driver By Id Here",
      *     @OA\Parameter(
