@@ -121,10 +121,10 @@ class SubscriptionPaymentController extends Controller
 /**
      * @OA\delete(
      *    path="/api/v1_0/profiles/subscriptionPayment",
-     *    operationId="check-subscriptionPayment",
+     *    operationId="delete-subscriptionPayment",
      *    tags={"Profile Controller"},
-     *    summary="check subscriptionPayment status",
-     *    description="check subscriptionPayment status",
+     *    summary="delete subscriptionPayment",
+     *    description="delete subscriptionPayment",
 *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
