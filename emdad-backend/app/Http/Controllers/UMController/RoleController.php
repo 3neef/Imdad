@@ -60,10 +60,10 @@ class RoleController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-        public function index()
+        public function index(Request $request)
         {
 
-            return $this->roleServices->index();
+            return $this->roleServices->index($request);
         }
 
        /**

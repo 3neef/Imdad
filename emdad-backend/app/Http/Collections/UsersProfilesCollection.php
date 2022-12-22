@@ -10,7 +10,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class UsersProfilesCollection
 {
-    public static function collection()
+    public static function collection($request)
     {
 
         $defaultSort = '-created_at';
@@ -47,7 +47,7 @@ class UsersProfilesCollection
             'profiles',
         ];
 
-        $perPage =  100;
+        $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(RoleUserProfile::class)
             ->select($defaultSelect)

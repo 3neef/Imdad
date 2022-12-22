@@ -7,6 +7,7 @@ use App\Http\Controllers\SubscriptionPaymentController;
 
 Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
     Route::get('checkSubscriptionPayment', [SubscriptionPaymentController::class, 'check_subscription_payment']);
+    // Route::get('profiles/filter',[ProfileController::class,'filter']);
     Route::apiResource('profiles',ProfileController::class);
     Route::put('profiles/restore/{id}', [ProfileController::class, 'restoreByAccountId']);
 

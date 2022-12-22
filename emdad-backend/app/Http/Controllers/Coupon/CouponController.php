@@ -105,7 +105,7 @@ class CouponController extends Controller
      *  )
      */
 
-    public function index()
+    public function index(Request $request)
     {
         return $this->couponService->showCoupon();
     }

@@ -77,9 +77,9 @@ public function delete($id)
     }
 
 
-    public function index()
+    public function index($request)
     {
-        return  TruckCollection::collection();
+        return  TruckCollection::collection($request);
 
     }
 

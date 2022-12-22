@@ -8,7 +8,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class TruckCollection
 {
-    public static function collection()
+    public static function collection($request)
     {
 
         $defaultSort = '-created_at';
@@ -31,7 +31,7 @@ class TruckCollection
             'truckImage'
         ];
 
-        $perPage =  100;
+        $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(Truck::class)
             ->select($defaultSelect)

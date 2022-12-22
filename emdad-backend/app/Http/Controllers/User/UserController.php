@@ -19,9 +19,9 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return UserCollection::collection();
+        return UserCollection::collection($request);
     }
 
 

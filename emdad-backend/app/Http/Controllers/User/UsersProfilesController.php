@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 
 class UsersProfilesController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return UsersProfilesCollection::collection();
+        return UsersProfilesCollection::collection($request);
     }
 }

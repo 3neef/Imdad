@@ -9,7 +9,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class PermissionsCollection
 {
-    public static function collection()
+    public static function collection($request)
     {
 
         $defaultSort = '-created_at';
@@ -29,7 +29,7 @@ class PermissionsCollection
         ];
 
 
-        $perPage =  100;
+        $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(Permission::class)
             ->select($defaultSelect)

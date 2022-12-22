@@ -144,9 +144,9 @@ class CategoryController extends Controller
      *      )
      *  )
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->categoryService->index();
+        return $this->categoryService->index( $request);
     }
 
     /**

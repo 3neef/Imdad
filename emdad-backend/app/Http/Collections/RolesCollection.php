@@ -8,7 +8,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class RolesCollection
 {
-    public static function collection()
+    public static function collection($request)
     {
 
         $defaultSort = '-created_at';
@@ -26,9 +26,9 @@ class RolesCollection
             'created_at',
         ];
 
-    
 
-        $perPage =  100;
+
+        $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(Role::class)
             ->select($defaultSelect)

@@ -9,9 +9,9 @@ use App\Models\Emdad\Product;
 class ProductService
 {
 
-    public function index()
+    public function index($request)
     {
-        return ProductsCollection::collection();
+        return ProductsCollection::collection($request);
     }
 
 

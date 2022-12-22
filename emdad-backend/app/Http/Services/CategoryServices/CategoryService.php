@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\CategoryServices;
 
+use App\Http\Collections\CategoryCollection;
 use App\Http\Resources\CategoryResourses\category\CategoryResource;
 use App\Models\Emdad\Categories;
 
@@ -10,10 +11,9 @@ class CategoryService
 
 
 
-    public function index()
+    public function index( $request)
     {
-        $category = Categories::all();
-        return response()->json(['data' => CategoryResource::collection($category)], 200);
+        return CategoryCollection::collection($request);
     }
 
 
@@ -108,7 +108,7 @@ class CategoryService
 
 
 
- 
+
 
 
 

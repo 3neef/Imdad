@@ -6,14 +6,15 @@ use App\Http\Collections\WarehouseCollection;
 use App\Http\Resources\AccountResourses\warehouses\WarehouseResponse;
 use App\Models\Accounts\Warehouse;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class WarehouseService
 {
 
 
-    public function index()
+    public function index($request)
     {
-        return  WarehouseCollection::collection();
+        return  WarehouseCollection::collection($request);
     }
 
     public function store($request)

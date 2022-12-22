@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 class PermissionServices
 {
 
-    public function index()
+    public function index($request)
     {
-        return PermissionsCollection::collection();
+        return PermissionsCollection::collection($request);
     }
 
     public function store($request)

@@ -8,7 +8,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryCollection
 {
-    public static function collection()
+    public static function collection($request)
     {
 
         $defaultSort = '-created_at';
@@ -31,7 +31,7 @@ class CategoryCollection
             'Products'
         ];
 
-        $perPage =  100;
+        $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(Categories::class)
             ->select($defaultSelect)

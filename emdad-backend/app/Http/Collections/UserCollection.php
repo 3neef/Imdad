@@ -7,7 +7,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use App\Models\User;
 class UserCollection
 {
-    public static function collection () {
+    public static function collection ($request) {
 
         $defaultSort = '-created_at';
 
@@ -48,7 +48,7 @@ class UserCollection
             'profiles',
         ];
 
-        $perPage =  100;
+        $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(User::class)
             ->select($defaultSelect)

@@ -16,9 +16,9 @@ class DriverController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(DriverService $driverService)
+    public function index(Request $request)
     {
-        return DriverCollection::collection();
+        return DriverCollection::collection($request);
     }
 
    /**

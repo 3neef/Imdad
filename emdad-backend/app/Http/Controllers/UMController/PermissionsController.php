@@ -127,8 +127,8 @@ class PermissionsController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function index() {
-        return $this->PermissionService->index();
+    public function index(Request $request) {
+        return $this->PermissionService->index($request);
     }
        /**
         * @OA\get(
