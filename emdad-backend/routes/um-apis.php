@@ -39,7 +39,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
 });
 
 
-Route::put('update-users-info/{id}', [UserController::class, 'update'])->middleware(['auth.apikey']);
+Route::put('users/update-owner-user/{id}', [UserController::class, 'UpdateOwnerUser'])->middleware(['auth.apikey']);
 
 
 

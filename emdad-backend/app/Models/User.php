@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
 use App\Models\UM\Role;
+use App\Models\UM\RoleUserProfile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -134,9 +135,25 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function oldOwner()
     {
-        $count = SubscriptionPayment::where('user_id', auth()->id())->where('status',"Paid")->count();
+        $count = SubscriptionPayment::where('user_id', auth()->id())->where('status', "Paid")->count();
         if ($count > 0) {
             return true;
+        }
+        return false;
+    }
+
+
+    public function checkUserRole($user_id, $profile_id = null)
+    {
+
+        if ($profile_id != null) {
+            $count =  RoleUserProfile::where('user_id', $user_id)->where('profile_id', $profile_id)->count();
+            if ($count > 0)
+                return true;
+        } else {
+            $count =  RoleUserProfile::where('user_id', $user_id)->count();
+            if ($count > 0)
+                return true;
         }
         return false;
     }

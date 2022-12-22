@@ -49,6 +49,19 @@ class UserServices
 
 
 
+
+
+    public function UpdateOwnerUser($request, $user_id)
+    {
+      $user = User::where('id', $user_id)->first();
+      $user->checkUserRole($user_id);
+
+      if($user == true){
+        return response()->json(['message' => 'cano,t  updated User'], 500);
+      }
+      $this->update($request, $user_id);
+    }
+
     public function update($request, $id)
     {
         $user = User::where('id', $id)->first();

@@ -169,7 +169,7 @@ class UserController extends Controller
 
 /**
      * @OA\put(
-     * path="/api/v1_0/update-users-info/{id}",
+     * path="/api/v1_0/users/update-owner-user/{id}",
      * operationId="updateUser",
      * tags={"UM & Permissions"},
      * summary="update User Before auth",
@@ -229,7 +229,11 @@ class UserController extends Controller
 
 
 
-
+     public function UpdateOwnerUser(UpdateRequest $request, UserServices $userServices,$id)
+     {
+         // dd(e);
+         return $userServices->update($request,$id);
+     }
 
 
     /**
