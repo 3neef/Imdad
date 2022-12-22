@@ -59,4 +59,19 @@ class SubscriptionPaymentService
             return response()->json(['message' => 'error'], 500);
         }
     }
+
+
+
+
+    public function delete($id)
+    {
+
+        $subscription = SubscriptionPayment::find($id)->first();
+
+        $deleted = $subscription->delete();
+        if ($deleted) {
+            return response()->json(['message' => 'deleted successfully'], 301);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
 }
