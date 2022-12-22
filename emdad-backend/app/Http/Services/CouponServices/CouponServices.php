@@ -16,7 +16,7 @@ class CouponServices
     {
              Coupon::create([
                 'allowed' => $request->allowed,
-                'start_date' => $request->stratDate,
+                'start_date' => $request->startDate,
                 'end_date' => $request->endDate,
                 'value' => $request->value,
                 'is_percentage' => $request->isPercentage,
