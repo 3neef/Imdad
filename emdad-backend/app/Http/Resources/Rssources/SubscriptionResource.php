@@ -15,6 +15,7 @@ class SubscriptionResource extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
             'profileId'=>$this->profile_id,
             'packageId'=>$this->package_id,
             'userId'=>$this->user_id,
