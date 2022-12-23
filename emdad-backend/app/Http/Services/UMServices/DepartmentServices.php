@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\UMServices;
 
-use App\Http\Resources\UMResources\Department\DepartmentResource;
+use App\Http\Resources\UMResources\Department\DepartmentResponse;
 use App\Models\Department;
 
 class DepartmentServices

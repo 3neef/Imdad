@@ -2,7 +2,8 @@
 
 namespace App\Http\Services\CouponServices;
 
-use App\Http\Resources\Rssources\SubscriptionResource;
+use App\Http\Resources\subscription\SubscriptionResource;
+use App\Http\Resources\General\CouponResponse;
 use App\Models\Coupon\Coupon;
 use App\Models\Emdad\Unit_of_measures;
 use App\Models\SubscriptionPayment;
@@ -29,7 +30,7 @@ class CouponServices
 
     public function showCoupon(){
         $couponCode = Coupon::where('end_date','>',Carbon::now())->get();
-        return  response()->json(['data' => $couponCode],200);
+        return  response()->json(['data' => new CouponResponse($couponCode)],200);
     }
 
 
