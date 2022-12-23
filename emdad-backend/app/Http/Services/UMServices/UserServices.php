@@ -344,7 +344,7 @@ class UserServices
 
         return response()->json([
             'message' => 'Default company successfully',
-            'data' => ['user' => new UserResponse($user)]
+            'data' => ['user' => new UserrResponse($user)]
         ], 200);
     }
 
