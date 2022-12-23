@@ -36,7 +36,7 @@ class DepartmentServices
         if ($department) {
             return response()->json([
                 'message' => 'department updated successfully',
-                'data' => ['department' => $department]
+                'data' => ['department' => new DepartmentResource($department)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
