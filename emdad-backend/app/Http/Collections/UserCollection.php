@@ -23,7 +23,24 @@ class UserCollection
             'updated_at',
             'created_at',
         ];
+        function convertKeysToCamelCase($apiResponseArray)
+{
+    $arr = [];
+    foreach ($apiResponseArray as $key => $value) {
+        if (preg_match('/_/', $key)) {
+            preg_match('/[^_]*/', $key, $m);
+            preg_match('/(_)([a-zA-Z]*)/', $key, $v);
+            $key = $m[0] . ucfirst($v[2]);
+        }
 
+
+        if (is_array($value))
+            $value = $this->convertKeysToCamelCase($value);
+
+        $arr[$key] = $value;
+    }
+    return $arr;
+}
 
         $allowedFilters = [
             'id',
@@ -47,11 +64,11 @@ class UserCollection
             'roles',
             'profiles',
         ];
-
+dd(convertKeysToCamelCase($defaultSelect));
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(User::class)
-            ->select($defaultSelect)
+            ->select(convertKeysToCamelCase($defaultSelect))
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->allowedIncludes($allowedIncludes)

@@ -20,7 +20,7 @@ class StoreUserRequest extends FormRequest
         return true;
     }
 
-    
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -39,8 +39,10 @@ class StoreUserRequest extends FormRequest
             'expireDate'=>'required|date',
             'permissions'=>['array',new UniqeValues],
             'permissions.*'=>['string','exists:permissions,label'],
-            'is_learning'=>['boolean'],
-            'manager_user_Id'=>'required|integer|exists:users,id'
+            'isLearning'=>['boolean'],
+            'manageUserserId'=>'integer|exists:users,id',//
+            'WarahouseId'=>'integer|exists:warehouses,id',
+
 
         ];
         // dd($this->all());

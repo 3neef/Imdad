@@ -41,7 +41,7 @@ class CouponServices
         if($coupon->end_date > Carbon::now() && $coupon->allowed > $coupon ->used && $subscription->coupon_id==null){
             $coupon->update(['used'=>$coupon->used + 1,
              'user_id'=>auth()->id()
-        ]); 
+        ]);
             if($coupon->is_percentage===1){
                 $subscription->update([
                     'coupon_id'=>$coupon->id,
