@@ -614,3 +614,4 @@ public function userWarehouseStatus(UpdateUserWharehouseStatus $request,UserServ
 }
 
 }
+

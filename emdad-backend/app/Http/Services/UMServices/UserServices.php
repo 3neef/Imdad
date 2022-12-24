@@ -35,21 +35,28 @@ class UserServices
             $request['is_super_admin'] = true;
             $request['otp'] = strval(rand(1000, 9999));
             $user = User::create($request);
-            $role_id = $request['roleId'] ?? '';
+            $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
-            if ($role_id || $is_learning) {
-                $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id, $is_learning = $request['is_learning']]);
+
+            $manager_id = $request['manageUserserId'] ?? auth()->user()->profile_id;
+
+            if ($role_id || $is_learning|| $manager_id) {
+                $user->roleInProfile()->attach($user->id, ['role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning , 'manager_user_Id'=> $request['manageUserserId'] ?? auth()->user()->profile_id ]);
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
             $WarahouseId = $request['WarahouseId'] ?? null;
             if ($WarahouseId != null) {
-                $user->warehouse()->attach( $user->id,
-                    [
-                        'user_id' => $user->id,
-                        'warehouse_id' => $request['WarahouseId'],
-                    ]
-                );
+
+                try {
+                    $user->warehouse()->attach(
+                        $user->id,
+                        [
+                            'warehouse_id' => $request->WarahouseId,
+                        ]
+                    );
+                } catch (Exception $ex) {
+                }
             }
             return $user;
         });
@@ -100,11 +107,6 @@ class UserServices
             } catch (Exception $ex) {
             }
         }
-
-
-
-
-
 
 
         $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
