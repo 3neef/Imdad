@@ -13,7 +13,7 @@ class RolesCollection
 
         $defaultSort = '-created_at';
 
-        $defaultSelect = ['name','type','permissions_list','for_reg'
+        $defaultSelect = ['id','name','type','permissions_list','for_reg'
         ];
 
 
