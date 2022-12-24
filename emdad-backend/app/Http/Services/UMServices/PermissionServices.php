@@ -33,7 +33,7 @@ class PermissionServices
 
         $Permissions = Permission::where('id', $id)->first();
         if ($Permissions) {
-            return response()->json(['data' => $Permissions, 'message' => 'success'], 200);
+            return response()->json(['data' => new PermissionResponse($Permissions), 'message' => 'success'], 200);
         }
         return response()->json(['message' => 'permissions not found ', 'data' => []], 404);
     }

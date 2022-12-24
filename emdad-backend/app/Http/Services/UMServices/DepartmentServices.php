@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\UMServices;
 
+use App\Http\Resources\UMResources\Department\DepartmentResponse;
 use App\Models\Department;
 
 class DepartmentServices
@@ -13,7 +14,7 @@ class DepartmentServices
             "name"=>$request->name,
              "profile_id"=>auth()->user()->profile_id
         ]);
-        return response()->json(["success"=>true,"data"=>$department],201);
+        return response()->json(["success"=>true,"data"=>new DepartmentResource($department)],201);
     }
 
     public function AddDepartment($request)
@@ -35,7 +36,7 @@ class DepartmentServices
         if ($department) {
             return response()->json([
                 'message' => 'department updated successfully',
-                'data' => ['department' => $department]
+                'data' => ['department' => new DepartmentResource($department)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
