@@ -14,35 +14,37 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Exception;
+
 
 class UserServices
 {
 
     public function create($request)
     {
-        $request['full_name'] = $request['fullName'];
-        $request['expiry_date'] = $request['expireDate'];
-        $request['identity_number'] = $request['identityNumber'];
-        $request['identity_type'] = $request['identityType'] ?? 'nid';
-        $request['otp_expires_at'] = now()->addMinutes(5);
-        $request['is_super_admin'] = true;
-        $request['otp'] = strval(rand(1000, 9999));
-        $user = User::create($request);
-        $role_id = $request['roleId'] ?? '';
-        $is_learning = $request['is_learning'] ?? false;
-        if ($role_id || $is_learning) {
-            $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id, $is_learning = $request['is_learning']]);
+        try {
 
-            $user->update(['profile_id' => auth()->user()->profile_id]);
-        }
+            $user = DB::transaction(function () use ($request) {
+                $request['full_name'] = $request['fullName'];
+                $request['expiry_date'] = $request['expireDate'];
+                $request['identity_number'] = $request['identityNumber'];
+                $request['identity_type'] = $request['identityType'] ?? 'nid';
+                $request['otp_expires_at'] = now()->addMinutes(5);
+                $request['is_super_admin'] = true;
+                $request['otp'] = strval(rand(1000, 9999));
+                $user = User::create($request);
+                $role_id = $request['roleId'] ?? '';
+                $is_learning = $request['is_learning'] ?? false;
+                if ($role_id || $is_learning) {
+                    $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id, $is_learning = $request['is_learning']]);
 
-        if ($user) {
-            return response()->json([
-                'message' => 'User created successfully',
-                'data' => ['user' => new UserResponse($user)]
-            ], 200);
+                    $user->update(['profile_id' => auth()->user()->profile_id]);
+                }
+            });
+            return response()->json(['success' => true, 'data' => new UserResponse($user)], 200);
+        } catch (Exception $e) {
+            return response()->json(['success' => false, 'message' => "System Error"], 500);
         }
-        return response()->json(['error' => 'system error'], 500);
     }
 
 
@@ -50,20 +52,20 @@ class UserServices
 
     public function UpdateOwnerUser($request, $user_id)
     {
-      $user = User::where('id', $user_id)->first();
-      $user->checkUserRole($user_id);
+        $user = User::where('id', $user_id)->first();
+        $user->checkUserRole($user_id);
 
-      if($user == true){
-        return response()->json(['message' => 'cano,t  updated User'], 500);
-      }
-      $this->update($request, $user_id);
+        if ($user == true) {
+            return response()->json(['message' => 'cano,t  updated User'], 500);
+        }
+        $this->update($request, $user_id);
     }
 
     public function update($request, $id)
     {
         $user = User::where('id', $id)->first();
         $user->update([
-            "full_name" => $request->fullName??$user->full_name,
+            "full_name" => $request->fullName ?? $user->full_name,
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
@@ -89,7 +91,7 @@ class UserServices
         if ($user) {
             return response()->json([
                 'message' => 'User updated successfully',
-                'data' => ['user' => new UserResponse($user) ]
+                'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
@@ -113,20 +115,21 @@ class UserServices
             );
         }
 
-
-        if ($user->is_verified == 0) {
-            return response()->json(
-                [
-                    "success" => false, "error" => "verifiy your otp first"
-                ]
-            );
-        }
-        // dd($user);
         if (!($user->password === $request->password)) {
             return response()->json(
                 [
                     "success" => false, "error" => "Wrong credentials"
                 ]
+            );
+        }
+
+        if ($user->is_verified == 0) {
+            return response()->json(
+                [
+                    $data = $this->sendOtp($user),
+                    "success" => false, "error" => "Forbidden"
+                ],
+                403
             );
         }
         $token = $user->createToken('authtoken');
