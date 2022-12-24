@@ -31,7 +31,7 @@ class UpdateCategoryRequest extends FormRequest
             'parentId' => ['exists:categories,id'],
             'isleaf' => ['boolean'],
             "status" => [Rule::in(['aproved', 'pending', 'rejected'])],
-            'resone' => ['string', 'min:3', 'max:1000'],
+            'reason' => ['string', 'min:3', 'max:1000'],
         ];
     }
 
