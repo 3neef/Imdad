@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 
-class CouponServices
+class CouponResource
 {
 
     public function create($request)
