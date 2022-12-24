@@ -6,6 +6,8 @@ use App\Http\Collections\UserCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UMRequests\DeleteWarehouse;
+use App\Http\Requests\UMRequests\DeleteWarehouseRequest;
+use App\Http\Requests\UMRequests\UpdateUserWarehouseStatusRequest;
 use App\Http\Requests\UMRequests\UpdateUserWharehouseStatus;
 use App\Http\Requests\UMRequests\User\AssignRoleRequest;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
@@ -660,7 +662,8 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-public function detachWarehouse(DeleteWarehouse $request,UserServices $userServices) {
+
+public function detachWarehouse(DeleteWarehouseRequest $request,UserServices $userServices) {
     return $userServices->detachWarehouse($request);
 }
 
@@ -722,9 +725,8 @@ public function detachWarehouse(DeleteWarehouse $request,UserServices $userServi
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-public function userWarehouseStatus(UpdateUserWharehouseStatus $request,UserServices $userServices) {
+public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request,UserServices $userServices) {
     return $userServices->userWarehouseStatus($request);
 }
-
 }
 
