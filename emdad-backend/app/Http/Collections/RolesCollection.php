@@ -15,12 +15,7 @@ class RolesCollection
 
         $defaultSort = '-created_at';
 
-        $defaultSelect = [
-            'id',
-            'name',
-            'type',
-            'permissions_list',
-            'for_reg'
+        $defaultSelect = ['id','name','type','permissions_list','for_reg'
         ];
     function convertKeysToCamelCase($apiResponseArray) {
             $keys = array_map(function ($i) {

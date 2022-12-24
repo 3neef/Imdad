@@ -3,7 +3,7 @@
 namespace App\Http\Services\CouponServices;
 
 use App\Http\Resources\General\CouponResponse;
-use App\Http\Resources\Rssources\SubscriptionResource;
+use App\Http\Resources\Subscription\SubscriptionResource;
 use App\Models\Coupon\Coupon;
 use App\Models\Emdad\Unit_of_measures;
 use App\Models\SubscriptionPayment;
