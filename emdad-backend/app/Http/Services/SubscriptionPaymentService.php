@@ -2,7 +2,8 @@
 
 namespace App\Http\Services;
 
-use App\Http\Resources\Subscription\SubscriptionResource;
+use App\Http\Resources\Rssources\SubscriptionResource;
+use App\Http\Services\General\UrwayGateway;
 use App\Models\Accounts\SubscriptionPackages;
 use App\Models\Profile;
 use App\Models\SubscriptionPayment;
@@ -83,6 +84,7 @@ class SubscriptionPaymentService
         $profile=Profile::where("id",$user->profile_id)->first();
         $paymentRequest=SubscriptionPayment::where("profile_id",$profile->id)->where("status","Pending")->first();
 
+        $urway= new UrwayGateway();
 
     }
 }
