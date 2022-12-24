@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Collections\UserCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UMRequests\DeleteWarehouse;
+use App\Http\Requests\UMRequests\UpdateUserWharehouseStatus;
 use App\Http\Requests\UMRequests\User\AssignRoleRequest;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
@@ -596,10 +598,19 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function setDefaultCompany(
-        DefaultCompanyRequest $request,
-        UserServices $userServices
-    ) {
+    public function setDefaultCompany(DefaultCompanyRequest $request,UserServices $userServices) {
         return $userServices->setDefaultCompany($request);
     }
+
+
+    //////////////////////  doc
+public function detachWarehouse(DeleteWarehouse $request,UserServices $userServices) {
+    return $userServices->detachWarehouse($request);
+}
+
+/////////       doc
+public function userWarehouseStatus(UpdateUserWharehouseStatus $request,UserServices $userServices) {
+    return $userServices->userWarehouseStatus($request);
+}
+
 }

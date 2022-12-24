@@ -75,6 +75,6 @@ class Profile extends Model
         ;
     }
 
-  
+
 
 }

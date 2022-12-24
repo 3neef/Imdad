@@ -10,6 +10,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Models\UM\Permission;
 use App\Models\UM\RoleUserProfile;
+use App\Models\UserWarehousePivot;
+use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
@@ -20,22 +22,36 @@ class UserServices
 
     public function create($request)
     {
-        $request['full_name'] = $request['fullName'];
-        $request['expiry_date'] = $request['expireDate'];
-        $request['identity_number'] = $request['identityNumber'];
-        $request['identity_type'] = $request['identityType'] ?? 'nid';
-        $request['otp_expires_at'] = now()->addMinutes(5);
-        $request['is_super_admin'] = true;
-        $request['otp'] = strval(rand(1000, 9999));
-        $user = User::create($request);
-        $role_id = $request['roleId'] ?? '';
-        $is_learning = $request['is_learning'] ?? false;
-        if ($role_id || $is_learning) {
-            $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id, $is_learning = $request['is_learning']]);
 
-            $user->update(['profile_id' => auth()->user()->profile_id]);
-        }
 
+        $user = DB::transaction(function () use ($request) {
+            $request['full_name'] = $request['fullName'];
+            $request['expiry_date'] = $request['expireDate'];
+            $request['identity_number'] = $request['identityNumber'];
+            $request['identity_type'] = $request['identityType'] ?? 'nid';
+            $request['otp_expires_at'] = now()->addMinutes(5);
+            $request['is_super_admin'] = true;
+            $request['otp'] = strval(rand(1000, 9999));
+            $user = User::create($request);
+            $role_id = $request['roleId'] ?? '';
+            $is_learning = $request['is_learning'] ?? false;
+            if ($role_id || $is_learning) {
+                $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id, $is_learning = $request['is_learning']]);
+
+                $user->update(['profile_id' => auth()->user()->profile_id]);
+            }
+            $WarahouseId = $request['WarahouseId'] ?? null;
+            if ($WarahouseId != null) {
+                $user->warehouse()->attach(
+                    $user->id,
+                    [
+                        'user_id' => $user->id,
+                        'warehouse_id' => $request['WarahouseId'],
+                    ]
+                );
+            }
+            return $user;
+        });
         if ($user) {
             return response()->json([
                 'message' => 'User created successfully',
@@ -53,24 +69,45 @@ class UserServices
 
     public function UpdateOwnerUser($request, $user_id)
     {
-      $user = User::where('id', $user_id)->first();
-      $user->checkUserRole($user_id);
+        $user = User::where('id', $user_id)->first();
+        $user->checkUserRole($user_id);
 
-      if($user == true){
-        return response()->json(['message' => 'cano,t  updated User'], 500);
-      }
-      $this->update($request, $user_id);
+        if ($user == true) {
+            return response()->json(['message' => 'cano,t  updated User'], 500);
+        }
+        $this->update($request, $user_id);
     }
 
     public function update($request, $id)
     {
         $user = User::where('id', $id)->first();
         $user->update([
-            "full_name" => $request->fullName??$user->full_name,
+            "full_name" => $request->fullName ?? $user->full_name,
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
         ]);
+
+        $WarahouseId = $request->WarahouseId ?? null;
+        if ($WarahouseId != null) {
+            try{
+                $user->warehouse()->attach(
+                    $user->id,
+                    [
+                        'warehouse_id' => $request->WarahouseId,
+                    ]
+                );
+            }
+            catch(Exception $ex){
+
+            }
+
+        }
+
+
+
+
+
 
 
         $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
@@ -92,11 +129,33 @@ class UserServices
         if ($user) {
             return response()->json([
                 'message' => 'User updated successfully',
-                'data' => ['user' => new UserResponse($user) ]
+                'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
+
+    public function detachWarehouse($request)
+    {
+        $userWarehouse=UserWarehousePivot::where("user_id",$request->userId)->where("warehouse_id",$request->warehouseId)->first();
+        if($userWarehouse!=null){
+            $deleted =   $userWarehouse->delete();
+            return response()->json(['message' => 'User deleted successfully'], 301);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+    public function userWarehouseStatus($request)
+    {
+        $userWarehouse=UserWarehousePivot::where("user_id",$request->userId)->where("warehouse_id",$request->warehouseId)->first();
+        if($userWarehouse!=null){
+          $userWarehouse->update(['status'=>$request->status]);
+            return response()->json(['message' => 'status update successfully'], 201);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
+
+
 
 
     public function login(LoginRequest $request)

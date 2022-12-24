@@ -36,6 +36,16 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
     Route::delete('destroy/{id}', [UserController::class, 'delete']);
     Route::put("restore/{id}", [UserController::class, 'restoreUser']);
+
+
+
+
+    Route::delete('detachWarehouse', [UserController::class, 'detachWarehouse']);
+    Route::put("userWarehouseStatus", [UserController::class, 'userWarehouseStatus']);
+
+
+
+
 });
 
 
