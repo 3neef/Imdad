@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use Carbon\Carbon;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\UM\Permission;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -22,6 +21,10 @@ class RegRoleSeeder extends Seeder
             ["id" => 3, "name" => "OWNER", "type" => 'buyier', "for_reg" => 1],
         ];
 
+        $persomsions = Permission::pluck('label');
+
+        // dd($persomsions);
+
         foreach ($roles as $role) {
             # code...
             DB::table('roles')->insert([
@@ -29,7 +32,8 @@ class RegRoleSeeder extends Seeder
                 "name" => $role['name'],
                 "type" => $role['type'],
                 "for_reg" => $role['for_reg'],
-                "created_at" => Carbon::now()
+                'permissions_list' => $persomsions,
+                "created_at" => now(),
             ]);
         }
     }

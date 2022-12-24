@@ -35,10 +35,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SubscriptionPackagesSeeder::class,
+            PermissionSeeder::class,
+
             RegRoleSeeder::class,
             CategoriesSeeder::class,
             UOMSeeder::class,
-            PermissionSeeder::class,
             RelatedCompinesTableSeeder::class,
         ]);
     }
