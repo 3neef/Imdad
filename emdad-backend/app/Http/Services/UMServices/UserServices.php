@@ -44,7 +44,8 @@ class UserServices
             }
             $WarahouseId = $request['WarahouseId'] ?? null;
             if ($WarahouseId != null) {
-                $user->warehouse()->attach( $user->id,
+                $user->warehouse()->attach(
+                    $user->id,
                     [
                         'user_id' => $user->id,
                         'warehouse_id' => $request['WarahouseId'],
@@ -181,9 +182,11 @@ class UserServices
         }
 
         if ($user->is_verified == 0) {
+            $data = $this->sendOtp($user);
+
             return response()->json(
                 [
-                    $data = $this->sendOtp($user),
+                    "data" => $data,
                     "success" => false, "error" => "Forbidden"
                 ],
                 403
@@ -245,14 +248,13 @@ class UserServices
     public function resend($request)
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
-        $otp = rand(1000, 9999);
-        $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
+        $data = $this->sendOtp($user);
         // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
         // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
             [
                 'message' => 'New OTP has been sent.',
-                'otp' => $user->otp,
+                'otp' => $data,
             ]
         );
     }
@@ -437,13 +439,12 @@ class UserServices
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
         // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
         // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
-        return response()->json(
+        return
             [
                 'message' => 'New OTP has been sent.',
                 'otp' => $user->otp,
                 "id" => $user->id,
 
-            ]
-        );
+            ];
     }
 }

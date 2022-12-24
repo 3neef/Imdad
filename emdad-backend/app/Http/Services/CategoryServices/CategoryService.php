@@ -64,7 +64,7 @@ class CategoryService
                 'isleaf' => $request->isleaf ?? $category->isleaf,
                 'parent_id' => $request->parentId ?? $category->parent_id,
                 "status" => $request->status ?? $category->status,
-                "resone" => $request->resone ?? $category->resone,
+                "reason" => $request->reason ?? $category->reason,
             ]);
             return response()->json(['success' => 'Updated Successfly'], 201);
         }
