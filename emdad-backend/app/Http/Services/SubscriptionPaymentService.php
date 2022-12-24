@@ -2,7 +2,7 @@
 
 namespace App\Http\Services;
 
-use App\Http\Resources\Rssources\SubscriptionResource;
+use App\Http\Resources\Subscription\SubscriptionResource;
 use App\Http\Services\General\UrwayGateway;
 use App\Models\Accounts\SubscriptionPackages;
 use App\Models\Profile;
