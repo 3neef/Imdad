@@ -27,7 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'full_name',
         'identity_type', 'email', 'password', 'identity_number',
         'is_verified', 'profile_id', 'avatar', 'otp', 'is_super_admin',
-        'otp_expires_at', 'mobile',  'expiry_date', 'lang','manager_user_Id'
+        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'manager_user_Id'
     ];
 
     /**
@@ -72,11 +72,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function userStatus()
     {
-        return RoleUserProfile::where("profile_id", $this->profile_id)->where("user_id",$this->id)->first();
+        return RoleUserProfile::where("profile_id", auth()->user()->profile_id)->where("user_id", $this->id)->first();
     }
 
-    public function userRole(){
-        return RoleUserProfile::where('role_id',$this->role_id)->where("user_id",$this->id)->first();
+    public function userRole()
+    {
+        return RoleUserProfile::where('profile_id', auth()->id())->where("user_id", $this->id)->pluck('role_id')->first();
     }
 
     public function assignRole(Role $role)
