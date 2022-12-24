@@ -66,8 +66,9 @@ class UserController extends Controller
      *               @OA\Property(property="mobile", type="string"),
      *               @OA\Property(property="identityNumber", type="string"),
      *               @OA\Property(property="identityType", type="string"),
-     *               @OA\Property(property="is_learning", type="boolean"),
-     *               @OA\Property(property="manager_user_Id", type="integer")
+     *               @OA\Property(property="isLearning", type="boolean"),
+     *               @OA\Property(property="manageUserserId", type="integer"),
+     *               @OA\Property(property="WarahouseId", type="integer"),
      *            ),
      *        ),
      *    ),
@@ -603,6 +604,65 @@ class UserController extends Controller
     public function setDefaultCompany(DefaultCompanyRequest $request,UserServices $userServices) {
         return $userServices->setDefaultCompany($request);
     }
+  /**
+     * @OA\delete(
+     * path="/api/v1_0/users/detachWarehouse",
+     * operationId="detachWarehouse",
+     * tags={"UM & Permissions"},
+     * summary="detach Warehouse",
+     * description="detach Warehouse Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *
+     *               required={"userId","warehouseId"},
+     *               @OA\Property(property="userId", type="integer"),
+     *               @OA\Property(property="warehouseId", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Default company successfully'",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data",type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+public function detachWarehouse(DeleteWarehouse $request,UserServices $userServices) {
 
 
     //////////////////////  doc
@@ -610,9 +670,69 @@ public function detachWarehouse(DeleteWarehouseRequest $request,UserServices $us
     return $userServices->detachWarehouse($request);
 }
 
+/**
+     * @OA\put(
+     * path="/api/v1_0/users/userWarehouseStatus",
+     * operationId="userWarehouseStatus",
+     * tags={"UM & Permissions"},
+     * summary="user Warehouse Status",
+     * description="user Warehouse Status Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *
+     *               required={"userId","warehouseId"},
+     *               @OA\Property(property="userId", type="integer"),
+     *               @OA\Property(property="warehouseId", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Default company successfully'",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data",type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+public function userWarehouseStatus(UpdateUserWharehouseStatus $request,UserServices $userServices) {
 /////////       doc
 public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request,UserServices $userServices) {
     return $userServices->userWarehouseStatus($request);
 }
 
 }
+
