@@ -29,7 +29,7 @@ class UpdateProfileRequest extends FormRequest
         return [
             'nameAr' => ['string','max:100','unique:profiles,name_ar'],
             'iban' => ['string','max:25','unique:profiles,iban'],
-            'type' => ['integer',Rule::in('Buyer','suppiler')],
+            'type' => [Rule::in('Buyer','suppiler')],
             'vatNumber' => ['string','max:25','unique:profiles,vat_number'],
         ];
     }

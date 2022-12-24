@@ -10,11 +10,13 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Models\UM\Permission;
 use App\Models\UM\RoleUserProfile;
+use App\Models\UserWarehousePivot;
+use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
-use Exception;
+
 
 
 class UserServices
@@ -22,30 +24,45 @@ class UserServices
 
     public function create($request)
     {
-        try {
 
-            $user = DB::transaction(function () use ($request) {
-                $request['full_name'] = $request['fullName'];
-                $request['expiry_date'] = $request['expireDate'];
-                $request['identity_number'] = $request['identityNumber'];
-                $request['identity_type'] = $request['identityType'] ?? 'nid';
-                $request['otp_expires_at'] = now()->addMinutes(5);
-                $request['is_super_admin'] = true;
-                $request['otp'] = strval(rand(1000, 9999));
-                $user = User::create($request);
-                $role_id = $request['roleId'] ?? '';
-                $is_learning = $request['is_learning'] ?? false;
-                if ($role_id || $is_learning) {
-                    $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id, $is_learning = $request['is_learning']]);
 
-                    $user->update(['profile_id' => auth()->user()->profile_id]);
-                }
-            });
-            return response()->json(['success' => true, 'data' => new UserResponse($user)], 200);
-        } catch (Exception $e) {
-            return response()->json(['success' => false, 'message' => "System Error"], 500);
+        $user = DB::transaction(function () use ($request) {
+            $request['full_name'] = $request['fullName'];
+            $request['expiry_date'] = $request['expireDate'];
+            $request['identity_number'] = $request['identityNumber'];
+            $request['identity_type'] = $request['identityType'] ?? 'nid';
+            $request['otp_expires_at'] = now()->addMinutes(5);
+            $request['is_super_admin'] = true;
+            $request['otp'] = strval(rand(1000, 9999));
+            $user = User::create($request);
+            $role_id = $request['roleId'] ?? '';
+            $is_learning = $request['is_learning'] ?? false;
+            if ($role_id || $is_learning) {
+                $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id, $is_learning = $request['is_learning']]);
+
+                $user->update(['profile_id' => auth()->user()->profile_id]);
+            }
+            $WarahouseId = $request['WarahouseId'] ?? null;
+            if ($WarahouseId != null) {
+                $user->warehouse()->attach( $user->id,
+                    [
+                        'user_id' => $user->id,
+                        'warehouse_id' => $request['WarahouseId'],
+                    ]
+                );
+            }
+            return $user;
+        });
+        if ($user) {
+            return response()->json([
+                'message' => 'User created successfully',
+                'data' => ['user' => new UserResponse($user)]
+            ], 200);
         }
+        return response()->json(['success' => false, 'message' => "System Error"], 500);
     }
+
+
 
 
 
@@ -70,6 +87,24 @@ class UserServices
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
         ]);
+
+        $WarahouseId = $request->WarahouseId ?? null;
+        if ($WarahouseId != null) {
+            try {
+                $user->warehouse()->attach(
+                    $user->id,
+                    [
+                        'warehouse_id' => $request->WarahouseId,
+                    ]
+                );
+            } catch (Exception $ex) {
+            }
+        }
+
+
+
+
+
 
 
         $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
@@ -96,6 +131,28 @@ class UserServices
         }
         return response()->json(['error' => 'system error'], 500);
     }
+
+    public function detachWarehouse($request)
+    {
+        $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
+        if ($userWarehouse != null) {
+            $deleted =   $userWarehouse->delete();
+            return response()->json(['message' => 'User deleted successfully'], 301);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+    public function userWarehouseStatus($request)
+    {
+        $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
+        if ($userWarehouse != null) {
+            $userWarehouse->update(['status' => $request->status]);
+            return response()->json(['message' => 'status update successfully'], 201);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
+
+
 
 
     public function login(LoginRequest $request)
