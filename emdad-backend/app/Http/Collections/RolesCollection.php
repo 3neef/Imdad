@@ -4,6 +4,8 @@
 namespace App\Http\Collections;
 
 use App\Models\UM\Role;
+use Illuminate\Support\Str;
+
 use Spatie\QueryBuilder\QueryBuilder;
 
 class RolesCollection
@@ -15,15 +17,19 @@ class RolesCollection
 
         $defaultSelect = [
             'id',
-            'name', 
-            'type', 
-            'permissions_list', 
+            'name',
+            'type',
+            'permissions_list',
             'for_reg'
         ];
-
+        $lorem=(Str::camel('permissions_list'));
+        dd($lorem);
 
         $allowedFilters = [
-            'name', 'type', 'for_reg',
+            'id',
+            'name',
+            'type',
+            'for_reg',
         ];
 
         $allowedSorts = [
