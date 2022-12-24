@@ -2,8 +2,8 @@
 
 namespace App\Http\Services\CouponServices;
 
-use App\Http\Resources\subscription\SubscriptionResource;
 use App\Http\Resources\General\CouponResponse;
+use App\Http\Resources\Rssources\SubscriptionResource;
 use App\Models\Coupon\Coupon;
 use App\Models\Emdad\Unit_of_measures;
 use App\Models\SubscriptionPayment;
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 use Carbon\Carbon;
 
-class CouponResource
+class CouponServices
 {
 
     public function create($request)
@@ -30,7 +30,7 @@ class CouponResource
 
     public function showCoupon(){
         $couponCode = Coupon::where('end_date','>',Carbon::now())->get();
-        return  response()->json(['data' => new CouponResponse($couponCode)],200);
+        return  response()->json(['data' =>new CouponResponse( $couponCode)],200);
     }
 
 
@@ -41,7 +41,7 @@ class CouponResource
         if($coupon->end_date > Carbon::now() && $coupon->allowed > $coupon ->used && $subscription->coupon_id==null){
             $coupon->update(['used'=>$coupon->used + 1,
              'user_id'=>auth()->id()
-        ]);
+        ]); 
             if($coupon->is_percentage===1){
                 $subscription->update([
                     'coupon_id'=>$coupon->id,
