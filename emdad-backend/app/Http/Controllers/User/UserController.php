@@ -62,7 +62,8 @@ class UserController extends Controller
      *               @OA\Property(property="mobile", type="string"),
      *               @OA\Property(property="identityNumber", type="string"),
      *               @OA\Property(property="identityType", type="string"),
-     *               @OA\Property(property="is_learning", type="boolean")
+     *               @OA\Property(property="is_learning", type="boolean"),
+     *               @OA\Property(property="manager_user_Id", type="integer")
      *            ),
      *        ),
      *    ),
@@ -280,6 +281,7 @@ class UserController extends Controller
      *               @OA\Property(property="email", type="email"),
      *               @OA\Property(property="mobile", type="string"),
      *               @OA\Property(property="roleId", type="integer"),
+     *               @OA\Property(property="manager_user_Id", type="integer")
      *            ),
      *        ),
      *    ),

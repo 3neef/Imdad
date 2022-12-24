@@ -15,6 +15,7 @@ use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
 use App\Http\Requests\UMRequests\User\ResendOTPRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
+use App\Http\Requests\UMRequests\User\StoreAuthRequest;
 use App\Http\Requests\UMRequests\User\StoreUserRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
@@ -142,7 +143,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function store(StoreUserRequest $request, UserServices $userServices)
+    public function store(StoreAuthRequest $request, UserServices $userServices)
     {
         return $userServices->create($request->validated());
     }
