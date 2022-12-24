@@ -19,8 +19,8 @@ class CategoriesSeeder extends Seeder
     {
         $Categories = [
             ["id" => 1, 'name_ar' => 'طعام', 'name_en' => 'Food', 'parent_id' => rand(0, 1), 'isleaf' => rand(0, 1)],
-            ["id" => 2, 'name_ar' => 'أجهزه كهربائية', 'name_en' => 'electerc Device', 'aproved' => rand(0, 1), 'parent_id' => rand(0, 1), 'isleaf' => rand(0, 1)],
-            ["id" => 3, 'name_ar' => 'البناء والتشييد', 'name_en' => 'Building and Construction', 'aproved' => rand(0, 1), 'parent_id' => rand(0, 1), 'isleaf' => rand(0, 1)]
+            ["id" => 2, 'name_ar' => 'أجهزه كهربائية', 'name_en' => 'electerc Device',  'parent_id' => rand(0, 1), 'isleaf' => rand(0, 1)],
+            ["id" => 3, 'name_ar' => 'البناء والتشييد', 'name_en' => 'Building and Construction',  'parent_id' => rand(0, 1), 'isleaf' => rand(0, 1)]
         ];
         foreach ($Categories as $Category) {
             Categories::create([
