@@ -23,14 +23,26 @@ class UserCollection
             'updated_at',
             'created_at',
         ];
-        function convertKeysToCamelCase($apiResponseArray) {
-            $keys = array_map(function ($i) {
-                $parts = explode('_', $i);
-                return array_shift($parts). implode('', array_map('ucfirst', $parts));
-            }, array_keys($apiResponseArray));
-        
-            return array_combine($keys, $apiResponseArray);
+        function camelCaseKeys($array)
+{
+    foreach($array as $key => $value) {
+        if (is_array($value)) {
+            foreach($value as $x => $y) {
+                $camelCase = str_replace(' ', '', ucwords(str_replace('_', ' ', $x)));
+                $camelCase[0] = strtolower($camelCase[0]);
+                $array[$key][$camelCase] = $y;
+                unset($array[$key][$x]);
+            }
+        } else {
+            $keyCamelCase = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
+            $keyCamelCase[0] = strtolower($keyCamelCase[0]);
+            $array[$keyCamelCase] = $value;
+            unset($array[$key]);
         }
+    }
+
+    return $array;
+}
 
         $allowedFilters = [
             'id',
@@ -54,7 +66,7 @@ class UserCollection
             'roles',
             'profiles',
         ];
-dd(convertKeysToCamelCase($defaultSelect));
+dd(camelCaseKeys($defaultSelect));
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(User::class)
