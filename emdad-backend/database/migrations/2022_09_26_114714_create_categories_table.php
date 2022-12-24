@@ -17,11 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name_en');
             $table->string('name_ar');
-            $table->integer('aproved');
+            $table->enum('status', ['aproved', 'pending', 'rejected'])->default('pending');
             $table->integer('parent_id');
             $table->boolean('isleaf');
             $table->timestamps();
-            $table->softDeletes();       
+            $table->softDeletes();
         });
     }
 

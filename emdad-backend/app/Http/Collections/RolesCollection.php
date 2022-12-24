@@ -22,8 +22,8 @@ class RolesCollection
             'permissions_list',
             'for_reg'
         ];
-        $lorem=(Str::camel('permissions_list'));
-        dd($lorem);
+        // $lorem=(Str::camel('permissions_list'));
+        // dd($lorem);
 
         $allowedFilters = [
             'id',
