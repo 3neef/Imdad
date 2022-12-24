@@ -26,7 +26,8 @@ class UserResponse extends JsonResource
             "mobile" => $this->mobile,
             "otp" => $this->otp,
             "isSuperAdmin" => $this->is_super_admin,
-            "status"=>$this->userStatus()!=null?$this->userStatus()->status:"",
+            "status" => $this->userSuserRoletatus() != null ? $this->userStatus()->status : "",
+            "roleId" => $this->userRole()->role_id ?? '',
             "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null
         ];
     }

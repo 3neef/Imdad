@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
+
+
 class UserServices
 {
 
@@ -42,8 +44,7 @@ class UserServices
             }
             $WarahouseId = $request['WarahouseId'] ?? null;
             if ($WarahouseId != null) {
-                $user->warehouse()->attach(
-                    $user->id,
+                $user->warehouse()->attach( $user->id,
                     [
                         'user_id' => $user->id,
                         'warehouse_id' => $request['WarahouseId'],
@@ -58,9 +59,8 @@ class UserServices
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(['success' => false, 'message' => "System Error"], 500);
     }
-
 
 
 
@@ -90,18 +90,15 @@ class UserServices
 
         $WarahouseId = $request->WarahouseId ?? null;
         if ($WarahouseId != null) {
-            try{
+            try {
                 $user->warehouse()->attach(
                     $user->id,
                     [
                         'warehouse_id' => $request->WarahouseId,
                     ]
                 );
+            } catch (Exception $ex) {
             }
-            catch(Exception $ex){
-
-            }
-
         }
 
 
@@ -137,8 +134,8 @@ class UserServices
 
     public function detachWarehouse($request)
     {
-        $userWarehouse=UserWarehousePivot::where("user_id",$request->userId)->where("warehouse_id",$request->warehouseId)->first();
-        if($userWarehouse!=null){
+        $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
+        if ($userWarehouse != null) {
             $deleted =   $userWarehouse->delete();
             return response()->json(['message' => 'User deleted successfully'], 301);
         }
@@ -146,9 +143,9 @@ class UserServices
     }
     public function userWarehouseStatus($request)
     {
-        $userWarehouse=UserWarehousePivot::where("user_id",$request->userId)->where("warehouse_id",$request->warehouseId)->first();
-        if($userWarehouse!=null){
-          $userWarehouse->update(['status'=>$request->status]);
+        $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
+        if ($userWarehouse != null) {
+            $userWarehouse->update(['status' => $request->status]);
             return response()->json(['message' => 'status update successfully'], 201);
         }
         return response()->json(['error' => 'system error'], 500);
@@ -175,20 +172,21 @@ class UserServices
             );
         }
 
-
-        if ($user->is_verified == 0) {
-            return response()->json(
-                [
-                    "success" => false, "error" => "verifiy your otp first"
-                ]
-            );
-        }
-        // dd($user);
         if (!($user->password === $request->password)) {
             return response()->json(
                 [
                     "success" => false, "error" => "Wrong credentials"
                 ]
+            );
+        }
+
+        if ($user->is_verified == 0) {
+            return response()->json(
+                [
+                    $data = $this->sendOtp($user),
+                    "success" => false, "error" => "Forbidden"
+                ],
+                403
             );
         }
         $token = $user->createToken('authtoken');
