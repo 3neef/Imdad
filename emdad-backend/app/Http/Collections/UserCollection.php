@@ -23,7 +23,14 @@ class UserCollection
             'updated_at',
             'created_at',
         ];
-
+        function convertKeysToCamelCase($apiResponseArray) {
+            $keys = array_map(function ($i) {
+                $parts = explode('_', $i);
+                return array_shift($parts). implode('', array_map('ucfirst', $parts));
+            }, array_keys($apiResponseArray));
+        
+            return array_combine($keys, $apiResponseArray);
+        }
 
         $allowedFilters = [
             'id',
@@ -47,11 +54,11 @@ class UserCollection
             'roles',
             'profiles',
         ];
-
+dd(convertKeysToCamelCase($defaultSelect));
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(User::class)
-            ->select($defaultSelect)
+            ->select(convertKeysToCamelCase($defaultSelect))
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->allowedIncludes($allowedIncludes)
