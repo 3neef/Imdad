@@ -21,6 +21,7 @@ class SubscriptionResource extends JsonResource
             'userId'=>$this->user_id,
             'subTotal'=>$this->sub_total,
             'expireDate'=>$this->expire_date,
+            'discount'=>$this->discount,
             'taxAmount'=>$this->tax_amount,
             'total'=>$this->total,
             'status'=>$this->status,
