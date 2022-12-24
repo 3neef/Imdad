@@ -662,10 +662,7 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-public function detachWarehouse(DeleteWarehouse $request,UserServices $userServices) {
 
-
-    //////////////////////  doc
 public function detachWarehouse(DeleteWarehouseRequest $request,UserServices $userServices) {
     return $userServices->detachWarehouse($request);
 }
@@ -728,11 +725,8 @@ public function detachWarehouse(DeleteWarehouseRequest $request,UserServices $us
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-public function userWarehouseStatus(UpdateUserWharehouseStatus $request,UserServices $userServices) {
-/////////       doc
 public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request,UserServices $userServices) {
     return $userServices->userWarehouseStatus($request);
 }
-
 }
 
