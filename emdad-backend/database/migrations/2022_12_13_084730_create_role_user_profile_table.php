@@ -22,6 +22,7 @@ return new class extends Migration
             $table->json('permissions')->nullable();
             $table->boolean('is_learning')->default(false);
             $table->softDeletes();
+            $table->integer("manager_user_Id")->nullable();
             $table->enum("status",['active','inActive'])->default('active');
             $table->timestamps();
         });
