@@ -4535,10 +4535,13 @@
                                     "identityType": {
                                         "type": "string"
                                     },
-                                    "is_learning": {
+                                    "isLearning": {
                                         "type": "boolean"
                                     },
-                                    "manager_user_Id": {
+                                    "manageUserserId": {
+                                        "type": "integer"
+                                    },
+                                    "WarahouseId": {
                                         "type": "integer"
                                     }
                                 },

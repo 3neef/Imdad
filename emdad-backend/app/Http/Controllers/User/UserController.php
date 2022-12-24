@@ -64,8 +64,9 @@ class UserController extends Controller
      *               @OA\Property(property="mobile", type="string"),
      *               @OA\Property(property="identityNumber", type="string"),
      *               @OA\Property(property="identityType", type="string"),
-     *               @OA\Property(property="is_learning", type="boolean"),
-     *               @OA\Property(property="manager_user_Id", type="integer")
+     *               @OA\Property(property="isLearning", type="boolean"),
+     *               @OA\Property(property="manageUserserId", type="integer"),
+     *               @OA\Property(property="WarahouseId", type="integer"),
      *            ),
      *        ),
      *    ),
