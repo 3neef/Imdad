@@ -23,25 +23,23 @@ class UserCollection
             'updated_at',
             'created_at',
         ];
-        function camelCaseKeys($array)
+        function convertKeysToCamelCase($apiResponseArray)
 {
-    foreach($array as $key => $value) {
-        if (is_array($value)) {
-            foreach($value as $x => $y) {
-                $camelCase = str_replace(' ', '', ucwords(str_replace('_', ' ', $x)));
-                $camelCase[0] = strtolower($camelCase[0]);
-                $array[$key][$camelCase] = $y;
-                unset($array[$key][$x]);
-            }
-        } else {
-            $keyCamelCase = str_replace(' ', '', ucwords(str_replace('_', ' ', $key)));
-            $keyCamelCase[0] = strtolower($keyCamelCase[0]);
-            $array[$keyCamelCase] = $value;
-            unset($array[$key]);
+    $arr = [];
+    foreach ($apiResponseArray as $key => $value) {
+        if (preg_match('/_/', $key)) {
+            preg_match('/[^_]*/', $key, $m);
+            preg_match('/(_)([a-zA-Z]*)/', $key, $v);
+            $key = $m[0] . ucfirst($v[2]);
         }
-    }
 
-    return $array;
+
+        if (is_array($value))
+            $value = $this->convertKeysToCamelCase($value);
+
+        $arr[$key] = $value;
+    }
+    return $arr;
 }
 
         $allowedFilters = [
@@ -66,7 +64,7 @@ class UserCollection
             'roles',
             'profiles',
         ];
-dd(camelCaseKeys($defaultSelect));
+dd(convertKeysToCamelCase($defaultSelect));
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(User::class)
