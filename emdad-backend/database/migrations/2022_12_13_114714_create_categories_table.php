@@ -20,6 +20,7 @@ return new class extends Migration
             $table->enum('status', ['aproved', 'pending', 'rejected'])->default('pending');
             $table->integer('parent_id');
             $table->boolean('isleaf');
+            $table->foreignId('profile_id')->nullable();
             $table->text('reason')->nullable();
             $table->timestamps();
             $table->softDeletes();

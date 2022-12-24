@@ -28,7 +28,7 @@ class CategoryService
 
         ]);
         if (auth()->user()->profile_id) {
-            $category->update(['profile_id' => auth()->user()->profile_id]);
+            $category->update(['profile_id' => auth()->user()->profile_id??null ]);
         }
         if ($category) {
             return response()->json(['message' => 'created successfully'], 200);
@@ -57,6 +57,7 @@ class CategoryService
     public function update($request, $id)
     {
         $category = Categories::where('id', $id)->first();
+
         if ($category != null) {
             $category->update([
                 'name_en' => $request->nameEn ?? $category->name_en,
@@ -68,6 +69,8 @@ class CategoryService
             ]);
             return response()->json(['success' => 'Updated Successfly'], 201);
         }
+        return response()->json(['error' => false ,'message' => 'not found'], 404);
+
     }
 
     public function destroy($id)
@@ -92,16 +95,16 @@ class CategoryService
     }
 
 
-    public function approveCategory($id)
-    {
-        $category = Categories::find($id);
-        if ($category == null) {
-            return response()->json([
-                'error' => 'no category founded'
-            ]);
-        } else {
-            $category->update(['aproved' => 1]);
-            return response()->json(['message' => 'aproved successfully'], 200);
-        }
-    }
+    // public function approveCategory($id)
+    // {
+    //     $category = Categories::find($id);
+    //     if ($category == null) {
+    //         return response()->json([
+    //             'error' => 'no category founded'
+    //         ]);
+    //     } else {
+    //         $category->update(['status' => 'aproved']);
+    //         return response()->json(['message' => 'aproved successfully'], 200);
+    //     }
+    // }
 }
