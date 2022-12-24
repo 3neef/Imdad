@@ -48,9 +48,6 @@ class UserServices
 
 
 
-
-
-
     public function UpdateOwnerUser($request, $user_id)
     {
       $user = User::where('id', $user_id)->first();
