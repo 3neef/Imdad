@@ -5,6 +5,7 @@ namespace App\Http\Requests\CategroyRequests\Categroy;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class UpdateCategoryRequest extends FormRequest
 {
@@ -22,18 +23,20 @@ class UpdateCategoryRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-        public function rules()
-        {
-            return [
-                'nameEn' => ['string', 'max:255'],
-                'nameAr' => ['string', 'max:255'],
-                'parentId' => ['exists:categories,id'],
-                'isleaf' => ['boolean']
-            ];
-        }
+    public function rules()
+    {
+        return [
+            'nameEn' => ['string', 'max:255'],
+            'nameAr' => ['string', 'max:255'],
+            'parentId' => ['exists:categories,id'],
+            'isleaf' => ['boolean'],
+            "status" => [Rule::in(['aproved', 'pending', 'rejected'])],
+            'resone' => ['string', 'min:3', 'max:1000'],
+        ];
+    }
 
-        protected function failedValidation(Validator $validator): void
-        {
-            throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
-        }
+    protected function failedValidation(Validator $validator): void
+    {
+        throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors()], 422));
+    }
 }
