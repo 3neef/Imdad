@@ -4537,6 +4537,9 @@
                                     },
                                     "is_learning": {
                                         "type": "boolean"
+                                    },
+                                    "manager_user_Id": {
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -4817,6 +4820,9 @@
                                         "type": "string"
                                     },
                                     "roleId": {
+                                        "type": "integer"
+                                    },
+                                    "manager_user_Id": {
                                         "type": "integer"
                                     }
                                 },

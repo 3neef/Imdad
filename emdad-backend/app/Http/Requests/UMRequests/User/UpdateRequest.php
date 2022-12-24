@@ -38,6 +38,7 @@ class UpdateRequest extends FormRequest
             "email" => ["email", "string", "max:255"],
             "mobile" => ["min:9","max:14","string",Rule::unique('users')->ignore($this->id, 'id')],
             "roleId" => "integer|exists:roles,id",
+            'manager_user_Id'=>'required|integer|exists:users,id'
         ];
     }
 

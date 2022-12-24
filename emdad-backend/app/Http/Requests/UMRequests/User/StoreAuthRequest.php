@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class StoreAuthRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -40,7 +40,6 @@ class StoreUserRequest extends FormRequest
             'permissions'=>['array',new UniqeValues],
             'permissions.*'=>['string','exists:permissions,label'],
             'is_learning'=>['boolean'],
-            'manager_user_Id'=>'required|integer|exists:users,id'
 
         ];
         // dd($this->all());
