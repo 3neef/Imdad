@@ -28,8 +28,8 @@ class UserServices
 
         $user = DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
-            $request['expiry_date'] = $request['expireDate'];
-            $request['identity_number'] = $request['identityNumber'];
+            $request['expiry_date'] = $request['expireDate'] ?? null;
+            $request['identity_number'] = $request['identityNumber'] ?? "";
             $request['identity_type'] = $request['identityType'] ?? 'nid';
             $request['otp_expires_at'] = now()->addMinutes(5);
             $request['is_super_admin'] = true;
