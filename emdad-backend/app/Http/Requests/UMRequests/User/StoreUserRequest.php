@@ -30,18 +30,18 @@ class StoreUserRequest extends FormRequest
     {
         $rules = [
             'fullName' => ['required','string','max:100'],
-            'identityNumber' => ['unique:users,identity_number','required','string','max:25'],
+            'identityNumber' => ['unique:users,identity_number','string','max:25'],
             'identityType' => ['string'],
             'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
             'email' => ['unique:users,email','required','email','max:100',],
             "roleId"=> "|integer|exists:roles,id",
             'password'=>'required|string|min:8',
-            'expireDate'=>'required|date',
+            'expireDate'=>'date',
             'permissions'=>['array',new UniqeValues],
             'permissions.*'=>['string','exists:permissions,label'],
             'isLearning'=>['boolean'],
-            'manageUserserId'=>'integer|exists:users,id',//
-            'WarahouseId'=>'integer|exists:warehouses,id',
+            'managerUserId'=>'integer|exists:users,id',//
+            'warahouseId'=>'integer|exists:warehouses,id',
 
 
         ];
