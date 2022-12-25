@@ -14,21 +14,21 @@ class WarehouseCollection
         $defaultSort = '-created_at';
 
         $defaultSelect = [
-            'addressName',
-            'profileId',
-            'addressContactPhone',
+            'address_name',
+            'profile_id',
+            'address_contact_phone',
             'latitude',
             'longitude',
-            'addressContactName',
-            'addressType',
-            'gateType',
-            'confirmBy',
-            'createdBy'
+            'address_contact_name',
+            'address_type',
+            'gate_type',
+            'confirm_by',
+            'created_by'
         ];
 
 
         $allowedFilters = [
-            'addressName','addressContactPhone', 'addressType', 'gateType', 'created_by','confirm_by',
+            'address_name','address_contact_phone', 'address_type', 'gate_type', 'created_by','confirm_by',
         ];
 
         $allowedSorts = [
