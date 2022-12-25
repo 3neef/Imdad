@@ -45,7 +45,7 @@ class RolesCollection
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(Role::class)
-            ->select(($defaultSelect))
+            ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->defaultSort($defaultSort)
