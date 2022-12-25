@@ -20,6 +20,7 @@ use App\Http\Requests\UMRequests\User\UserAvtivateRerquest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\UserServices;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -28,6 +29,10 @@ class UserController extends Controller
         return UserCollection::collection($request);
     }
 
+    public function getProfileUsers(Request $request)
+    {
+        return DB::query("select u.full_name as fullName,u.id from users as u join role_user_profile as rup where rup.user_id=u.id and rup.profile_id=".auth()->user()->profile_id)->get();
+    }
 
     /**
      * @OA\Post(
