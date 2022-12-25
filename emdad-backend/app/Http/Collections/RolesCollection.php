@@ -17,12 +17,14 @@ class RolesCollection
 
         $defaultSelect = ['id','name','type','permissions_list','for_reg'
         ];
+        // $element =  [];
     function convertArrayToCamelCase($apiResponseArray) {
-        foreach($apiResponseArray as $element){
-            $element = Str::camel($element);
+        foreach($apiResponseArray as $ele){
+            $element = Str::camel($ele);
         }
-        
-            return $apiResponseArray;
+        return $element;
+
+            
         }
         // $lorem=(Str::camel('permissions_list'));
         // dd($lorem);
@@ -39,7 +41,7 @@ class RolesCollection
             'created_at',
         ];
 
-    dd(convertArrayToCamelCase($defaultSelect));
+    
 // dd(convertKeysToCamelCase($defaultSelect));
         $perPage =  $request->pageSize ?? 100;
 
