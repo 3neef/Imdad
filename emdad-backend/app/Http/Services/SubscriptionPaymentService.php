@@ -87,12 +87,31 @@ class SubscriptionPaymentService
         if ($paymentRequest == null) {
             return response()->json(['error' => 'system error'], 500);
         }
-        $request = ["transId" => $paymentRequest->id, "trackId" => 1, "amount" => $paymentRequest->total, 'email' => $user->email];
+        $request = ["transId" => $paymentRequest->id, "trackId" => $paymentRequest->id, "amount" => $paymentRequest->total, 'email' => $user->email];
         try {
             $response = UrwayGateway::initPayment($request);
             $json = json_decode($response, true);
-            $paymentRequest->update(['tx_id' => $json['payid'], 'status' => "Paid"]);
+            $paymentRequest->update(['tx_id' => $json['payid']]);
             return response()->json(['data' => new SubscriptionResource($paymentRequest)], 200);
+        } catch (Exception $e) {
+
+            return response()->json(['success' => $json['result'], 'message' => $json["reason"], 'statusCode' => $json['responseCode']], 402);
+        }
+    }
+
+    public function checkPaymentStatus()
+    {
+        $user = User::where("id", auth()->id())->first();
+        $profile = Profile::where("id", $user->profile_id)->first();
+        $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->where("status", "Pending")->first();
+        $request = ["transId" => $paymentRequest->tx_id, "trackId" => $paymentRequest->id, "amount" => $paymentRequest->total, 'email' => $user->email];
+        try {
+            $response = UrwayGateway::getPaymentStatus($request);
+            $json = json_decode($response, true);
+            if ($json['responseCode'] == 000 && $json['result'] == "Successful") {
+                $paymentRequest->update(['status' => 'Paid']);
+                return response()->json(['data' => new SubscriptionResource($paymentRequest)], 200);
+            }
         } catch (Exception $e) {
 
             return response()->json(['success' => $json['result'], 'message' => $json["reason"], 'statusCode' => $json['responseCode']], 402);

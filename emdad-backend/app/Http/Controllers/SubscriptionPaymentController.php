@@ -214,4 +214,10 @@ class SubscriptionPaymentController extends Controller
     {
         return $this->subscriptionPaymentService->pay();
     }
+
+    public function  checkPaymentStatus()
+    {
+        return $this->subscriptionPaymentService->checkPaymentStatus();
+    }
+
 }
