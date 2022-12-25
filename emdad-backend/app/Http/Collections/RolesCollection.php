@@ -17,13 +17,12 @@ class RolesCollection
 
         $defaultSelect = ['id','name','type','permissions_list','for_reg'
         ];
-    function convertKeysToCamelCase($apiResponseArray) {
-            $keys = array_map(function ($i) {
-                $parts = explode('_', $i);
-                return array_shift($parts). implode('', array_map('ucfirst', $parts));
-            }, array_keys($apiResponseArray));
+    function convertArrayToCamelCase($apiResponseArray) {
+        foreach($apiResponseArray as $element){
+            $element = Str::camel($element);
+        }
         
-            return array_combine($keys, $apiResponseArray);
+            return $apiResponseArray;
         }
         // $lorem=(Str::camel('permissions_list'));
         // dd($lorem);
@@ -40,7 +39,7 @@ class RolesCollection
             'created_at',
         ];
 
-
+    dd(convertArrayToCamelCase($defaultSelect));
 // dd(convertKeysToCamelCase($defaultSelect));
         $perPage =  $request->pageSize ?? 100;
 

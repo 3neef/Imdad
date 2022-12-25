@@ -28,7 +28,7 @@ class GetRoleRequest extends FormRequest
     {
         return [
             'name' => ['string','unique:roles,name'],
-            'type' => Rule::in(['emdad','supplier','buyier']),
+            'type' => Rule::in(['emdad','supplier','buyer']),
 
         ];
     }

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type',['emdad','buyier','supplier'])->default('emdad');
+            $table->enum('type',['emdad','buyer','supplier'])->default('emdad');
             $table->boolean('for_reg')->default(0);
             $table->json('permissions_list')->nullable();
             $table->softDeletes();

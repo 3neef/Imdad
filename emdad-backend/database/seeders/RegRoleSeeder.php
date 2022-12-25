@@ -18,7 +18,7 @@ class RegRoleSeeder extends Seeder
         $roles = [
             ["id" => 1, "name" => "GM", "type" => 'emdad', "for_reg" => 1],
             ["id" => 2, "name" => "CEO", "type" => 'supplier', "for_reg" => 1],
-            ["id" => 3, "name" => "OWNER", "type" => 'buyier', "for_reg" => 1],
+            ["id" => 3, "name" => "OWNER", "type" => 'buyer', "for_reg" => 1],
         ];
 
         $persomsions = Permission::pluck('label');
