@@ -15,7 +15,7 @@ return new class extends Migration
     {
         //
         Schema::table('categories', function (Blueprint $table) {
-            $table->rename('status', ['approved', 'pending', 'rejected'])->default('pending');
+            $table->renameColumn('status','status')->enum(['approved', 'pending', 'rejected'])->default('pending');
 
             $table->text('reason')->nullable();
 
@@ -29,6 +29,9 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('status', function (Blueprint $table) {
+            $table->rename('categories', ['approved', 'pending', 'rejected'])->default('pending');
+        });
+
     }
 };

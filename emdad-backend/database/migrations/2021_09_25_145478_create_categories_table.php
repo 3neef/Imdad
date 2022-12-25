@@ -17,13 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('name_en');
             $table->string('name_ar');
-            $table->enum('status', ['aproved', 'pending', 'rejected'])->default('pending');
+            $table->enum('status', ['approved', 'pending', 'rejected'])->default('pending');
             $table->integer('parent_id');
             $table->boolean('isleaf');
-            $table->foreignId('profile_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
+
+
     }
 
     /**
