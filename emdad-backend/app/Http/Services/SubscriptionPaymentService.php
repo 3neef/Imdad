@@ -84,7 +84,10 @@ class SubscriptionPaymentService
         $user = User::where("id", auth()->id())->first();
         $profile = Profile::where("id", $user->profile_id)->first();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->where("status", "Pending")->first();
-        $request = ["transId" => $paymentRequest->id, "trackId" => 2, "amount" => $paymentRequest->total, 'email' => $user->email];
+        if ($paymentRequest == null) {
+            return response()->json(['error' => 'system error'], 500);
+        }
+        $request = ["transId" => $paymentRequest->id, "trackId" => 1, "amount" => $paymentRequest->total, 'email' => $user->email];
         try {
             $response = UrwayGateway::initPayment($request);
             $json = json_decode($response, true);
@@ -92,7 +95,7 @@ class SubscriptionPaymentService
             return response()->json(['data' => new SubscriptionResource($paymentRequest)], 200);
         } catch (Exception $e) {
 
-            return response()->json(['success' => $json['result'], 'message' => $json["reason"],'statusCode'=>$json['responseCode']],402 );
+            return response()->json(['success' => $json['result'], 'message' => $json["reason"], 'statusCode' => $json['responseCode']], 402);
         }
     }
 }

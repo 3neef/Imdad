@@ -19,7 +19,7 @@ class UrwayGateway
     curl_setopt_array($curl, array(
       CURLOPT_URL => "https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest",
       CURLOPT_RETURNTRANSFER => true,
-      CURLOPT_ENCODING => '',
+      CURLOPT_ENCODING => '',p
       CURLOPT_MAXREDIRS => 10,
       CURLOPT_TIMEOUT => 0,
       CURLOPT_FOLLOWLOCATION => true,
