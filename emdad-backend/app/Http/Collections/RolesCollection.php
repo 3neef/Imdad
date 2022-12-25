@@ -3,6 +3,7 @@
 
 namespace App\Http\Collections;
 
+use App\Http\Resources\UMResources\Role\RoleResponse;
 use App\Models\UM\Role;
 use Illuminate\Support\Str;
 
@@ -18,14 +19,9 @@ class RolesCollection
         $defaultSelect = ['id','name','type','permissions_list','for_reg'
         ];
         // $element =  [];
-    function convertArrayToCamelCase($apiResponseArray) {
-        foreach($apiResponseArray as $ele){
-            $element = Str::camel($ele);
-        }
-        return $element;
-
+    
             
-        }
+    //     }
         // $lorem=(Str::camel('permissions_list'));
         // dd($lorem);
 
@@ -42,10 +38,10 @@ class RolesCollection
         ];
 
     
-// dd(convertKeysToCamelCase($defaultSelect));
+// dd(convertArrayToCamelCase($defaultSelect));
         $perPage =  $request->pageSize ?? 100;
 
-        return QueryBuilder::for(Role::class)
+        return  QueryBuilder::for(Role::class)
             ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)

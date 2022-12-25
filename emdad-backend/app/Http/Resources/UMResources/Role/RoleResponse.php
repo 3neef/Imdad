@@ -18,6 +18,7 @@ class RoleResponse extends JsonResource
             "id" =>$this->id,
             "name" =>$this->name,
             "type" =>$this->type,
+            "permissions" =>$this->permissions_list,
         ];
     }
 }
