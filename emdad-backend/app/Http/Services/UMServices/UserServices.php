@@ -37,7 +37,7 @@ class UserServices
             $user = User::create($request);
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
-            $re=$request['manageUserserId']??null;
+            $re=$request['managerUserId']??null;
             // dd();
             global $manager_id ;
             if($re)
@@ -53,18 +53,17 @@ class UserServices
             }
 
             if ($role_id || $is_learning|| $manager_id) {
-                $user->roleInProfile()->attach($user->id, ['role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning , 'manager_user_Id'=> $request['manageUserserId'] ?? auth()->user()->profile_id ]);
+                $user->roleInProfile()->attach($user->id, ['role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning , 'manager_user_Id'=> $request['managerUserId'] ?? auth()->user()->profile_id ]);
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
-            $WarahouseId = $request['WarahouseId'] ?? null;
-            if ($WarahouseId != null) {
+            if (isset($request->warahouseId)) {
 
                 try {
                     $user->warehouse()->attach(
                         $user->id,
                         [
-                            'warehouse_id' => $request->WarahouseId,
+                            'warehouse_id' => $request->warahouseId,
                         ]
                     );
                 } catch (Exception $ex) {
@@ -107,13 +106,13 @@ class UserServices
             "identity_number" => $request->identityNumber ?? $user->identity_number,
         ]);
 
-        $WarahouseId = $request->WarahouseId ?? null;
+        $WarahouseId = $request->warahouseId ?? null;
         if ($WarahouseId != null) {
             try {
                 $user->warehouse()->attach(
                     $user->id,
                     [
-                        'warehouse_id' => $request->WarahouseId,
+                        'warehouse_id' => $request->warahouseId,
                     ]
                 );
             } catch (Exception $ex) {
