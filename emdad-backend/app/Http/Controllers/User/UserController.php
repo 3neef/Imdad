@@ -35,7 +35,7 @@ class UserController extends Controller
         if(auth()->user()->profile_id==null){
             return response()->json(["error"=>"","code"=>"100","message"=>"user does not have profile"],200);
         }
-        $users =  DB::table('users')->select('users.id','users.full_name')
+        $users =  DB::table('users')->select('*')
         ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')
         ->where('role_user_profile.profile_id', auth()->user()->profile_id)
         ->get();
