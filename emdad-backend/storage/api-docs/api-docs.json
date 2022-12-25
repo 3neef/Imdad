@@ -4481,6 +4481,83 @@
                 }
             }
         },
+        "/api/v1_0/users/get-users": {
+            "get": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "get-users ",
+                "description": "get-users Here",
+                "operationId": "get-users",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User created successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/users/register": {
             "post": {
                 "tags": [
@@ -4515,10 +4592,7 @@
                                     "fullName",
                                     "password",
                                     "email",
-                                    "mobile",
-                                    "identityNumber",
-                                    "roleId",
-                                    "expireDate"
+                                    "mobile"
                                 ],
                                 "properties": {
                                     "fullName": {
@@ -4546,10 +4620,10 @@
                                     "isLearning": {
                                         "type": "boolean"
                                     },
-                                    "manageUserserId": {
+                                    "managerUserId": {
                                         "type": "integer"
                                     },
-                                    "WarahouseId": {
+                                    "warahouseId": {
                                         "type": "integer"
                                     }
                                 },
