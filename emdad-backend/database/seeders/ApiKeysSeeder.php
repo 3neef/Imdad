@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-class ApiKeySeeder extends Seeder
+use Illuminate\Support\Facades\DB;
+use App\Models\Accounts\SubscriptionPackages;
+use Carbon\Carbon;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+class ApiKeysSeeder extends Seeder
 {
     /**
      * Run the database seeds.

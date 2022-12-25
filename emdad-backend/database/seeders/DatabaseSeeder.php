@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call([
+            ApiKeysSeeder::class,
             SubscriptionPackagesSeeder::class,
             PermissionSeeder::class,
 
