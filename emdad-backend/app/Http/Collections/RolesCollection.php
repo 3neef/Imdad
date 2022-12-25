@@ -41,11 +41,11 @@ class RolesCollection
         ];
 
 
-dd(convertKeysToCamelCase($defaultSelect));
+// dd(convertKeysToCamelCase($defaultSelect));
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(Role::class)
-            ->select(convertKeysToCamelCase($defaultSelect))
+            ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->defaultSort($defaultSort)
