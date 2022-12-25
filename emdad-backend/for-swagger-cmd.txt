@@ -3,7 +3,8 @@ php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 php artisan l5-swagger:generate
 php artisan optimize
 
-
+apikey
+php artisan apikey:generate app1
 
 for column renaming
 composer require doctrine/dbal

@@ -23,6 +23,8 @@ class SubscriptionResource extends JsonResource
             'expireDate'=>$this->expire_date,
             'discount'=>$this->discount,
             'taxAmount'=>$this->tax_amount,
+            'paymentID'=>$this->tx_id,
+            "paymentUrl"=>"https://payments-dev.urway-tech.com/URWAYPGService/direct.jsp",
             'total'=>$this->total,
             'status'=>$this->status,
         ];

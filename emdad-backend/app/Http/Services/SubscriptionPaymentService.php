@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\SubscriptionPayment;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 
 class SubscriptionPaymentService
 {
@@ -80,11 +81,18 @@ class SubscriptionPaymentService
     public function pay()
     {
         # code...
-        $user=User::where("id",auth()->user()->profile_id)->first();
-        $profile=Profile::where("id",$user->profile_id)->first();
-        $paymentRequest=SubscriptionPayment::where("profile_id",$profile->id)->where("status","Pending")->first();
+        $user = User::where("id", auth()->id())->first();
+        $profile = Profile::where("id", $user->profile_id)->first();
+        $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->where("status", "Pending")->first();
+        $request = ["transId" => $paymentRequest->id, "trackId" => 2, "amount" => $paymentRequest->total, 'email' => $user->email];
+        try {
+            $response = UrwayGateway::initPayment($request);
+            $json = json_decode($response, true);
+            $paymentRequest->update(['tx_id' => $json['payid'], 'status' => "Paid"]);
+            return response()->json(['data' => new SubscriptionResource($paymentRequest)], 200);
+        } catch (Exception $e) {
 
-        $urway= new UrwayGateway();
-
+            return response()->json(['success' => $json['result'], 'message' => $json["reason"],'statusCode'=>$json['responseCode']],402 );
+        }
     }
 }
