@@ -39,7 +39,9 @@ class UserController extends Controller
         ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')
         ->where('role_user_profile.profile_id', auth()->user()->profile_id)
         ->get();
-        return $users;
+
+
+        return response()->json(["success"=>true,"code"=>"200","data"=>$users],200);
     }
 
     /**
