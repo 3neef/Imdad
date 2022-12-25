@@ -19,7 +19,7 @@ class SubscriptionPackagesSeeder extends Seeder
     {
 
         $subscriptionsDetails = [
-            ["id" => 1, "packageNameAr" => 'الأساسية', "packageNameEn"=>'Basic', "type" => 'Buyer',"price1" => "0", "price2" => "12250",
+            ["id" => 1, "packageNameAr" => 'الأساسية', "packageNameEn"=>'Basic', "type" => 'Buyer',"price1" => "1250", "price2" => "1250",
              "features" =>
              [["key"=>"delivery","titleEn"=>"Delivery Scheduling","titleAr"=>"التوصيل","systemValue"=>1,"text_en"=>"One Time Delivery","text_ar"=>"التوصيل لمرة واحدة","descriptionEn"=>"lorem epsom",
             "descriptionAr"=>"تفاصيل شرح الميزة"],
@@ -27,7 +27,7 @@ class SubscriptionPackagesSeeder extends Seeder
             "descriptionAr"=>"تفاصيل شرح الميزة"]]],
 
 
-            ["id" => 2, "packageNameAr" => 'الفضية', "packageNameEn"=>'silver', "type" => 'Buyer',"price2" => "1250", "price1" => "0",
+            ["id" => 2, "packageNameAr" => 'الفضية', "packageNameEn"=>'silver', "type" => 'Buyer',"price2" => "1250", "price1" => "1250",
              "features" =>
              [["titleEn"=>"Delivery Scheduling","systemValue"=>1,"text_en"=>"One Time Delivery","titleAr"=>"التوصيل","text_ar"=>"التوصيل لمرة واحدة","descriptionEn"=>"lorem epsom",
             "descriptionAr"=>"تفاصيل شرح الميزة","key"=>"delivery"],
