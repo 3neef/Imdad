@@ -42,6 +42,14 @@ class RoleController extends Controller
      *             type="string"
      *         )
      *     ),
+*     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="get all roles",
