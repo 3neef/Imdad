@@ -73,7 +73,7 @@ class UserController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"fullName","password","email","mobile","roleId"},
+     *               required={"fullName","password","email","mobile"},
      *               @OA\Property(property="fullName", type="string"),
      *               @OA\Property(property="expireDate", type="date"),
      *               @OA\Property(property="password", type="string"),
@@ -148,7 +148,7 @@ class UserController extends Controller
      *            ),
      *        ),
      *    ),
-     *      @OA\Response(
+     *      @OA\Response( 
      *          response=200,
      *          description="Success",
      *          @OA\JsonContent(),
