@@ -35,8 +35,9 @@ class RoleServices
 
     public function index($request)
     {
+        // dd('lk');
 
-        return RolesCollection::collection($request);
+        return RoleResponse::collection(RolesCollection::collection($request));
     }
 
     public function show($id)

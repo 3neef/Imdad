@@ -64,7 +64,7 @@ Route::middleware(['auth.apikey'])->group(function () {
 });
 
 
-Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+Route::middleware(['auth.apikey', ])->group(function () {
     Route::apiResource('roles', RoleController::class);
 });
 
