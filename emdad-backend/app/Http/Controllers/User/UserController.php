@@ -31,7 +31,15 @@ class UserController extends Controller
 
     public function getProfileUsers(Request $request)
     {
-        return DB::query("select u.full_name as fullName,u.id from users as u join role_user_profile as rup where rup.user_id=u.id and rup.profile_id=".auth()->user()->profile_id)->get();
+        // return DB::statement("select * from users");
+        if(auth()->user()->profile_id==null){
+            return response()->json(["error"=>"","code"=>"100","message"=>"user does not have profile"],200);
+        }
+        $users =  DB::table('users')->select('users.id','users.full_name')
+        ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')
+        ->where('role_user_profile.profile_id', auth()->user()->profile_id)
+        ->get();
+        return $users;
     }
 
     /**
