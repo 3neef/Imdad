@@ -21,9 +21,9 @@ class RolesCollection
     function convertArrayToCamelCase($apiResponseArray) {
         foreach($apiResponseArray as $ele){
             $element = Str::camel($ele);
-            return $element;
         }
-        
+        return $element;
+
             
         }
         // $lorem=(Str::camel('permissions_list'));
