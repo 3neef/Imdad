@@ -17,13 +17,14 @@ class RolesCollection
 
         $defaultSelect = ['id','name','type','permissions_list','for_reg'
         ];
+        // $element =  [];
     function convertArrayToCamelCase($apiResponseArray) {
-        foreach($apiResponseArray as $element){
-            $element = Str::camel($element);
-            return $apiResponseArray;
+        foreach($apiResponseArray as $ele){
+            $element = Str::camel($ele);
+            return $element;
         }
         
-           
+            
         }
         // $lorem=(Str::camel('permissions_list'));
         // dd($lorem);
