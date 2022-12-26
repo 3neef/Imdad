@@ -13,3 +13,13 @@ composer require doctrine/dbal
  #install QueryBuilder and publish it 
 composer install 
 php artisan vendor:publish --provider="Spatie\QueryBuilder\QueryBuilderServiceProvider" --tag="query-builder-config"
+
+
+MAIL_MAILER=smtp
+MAIL_HOST=mail.nctr.sd
+MAIL_PORT=465
+MAIL_USERNAME=emdad.dev@nctr.sd
+MAIL_PASSWORD=pa$$w0rd
+MAIL_ENCRYPTION=ssl
+MAIL_FROM_ADDRESS="info@emdadplatform.sa"
+MAIL_FROM_NAME="${APP_NAME}"
