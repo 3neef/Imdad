@@ -27,7 +27,6 @@ class UserServices
     public function create($request)
     {
 
-
         $user = DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
             $request['expiry_date'] = $request['expireDate'] ?? null;
@@ -35,9 +34,11 @@ class UserServices
             $request['identity_type'] = $request['identityType'] ?? 'nid';
             $request['otp_expires_at'] = now()->addMinutes(5);
             $request['is_super_admin'] = true;
-            $request['otp'] = strval(rand(1000, 9999));
+            // $request['otp'] = userOtp();
 
             $user = User::create($request);
+            $data = $this->UserOtp($user);
+            $user->update(['otp' => $data['otp']]);
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
             $manager_id = null;
@@ -147,8 +148,6 @@ class UserServices
         }
         return response()->json(['error' => 'system error'], 500);
     }
-
-
 
 
 
