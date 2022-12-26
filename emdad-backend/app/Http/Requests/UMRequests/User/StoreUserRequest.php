@@ -40,8 +40,8 @@ class   StoreUserRequest extends FormRequest
             'permissions'=>['array',new UniqeValues],
             'permissions.*'=>['string','exists:permissions,label'],
             'isLearning'=>['boolean'],
-            'managerUserId'=>'integer|exists:users,id',//
-            'warahouseId'=>'integer|exists:warehouses,id',
+            'managerUserId'=>'exists:users,id',//
+            'warahouseId'=>'exists:warehouses,id',
 
 
         ];
