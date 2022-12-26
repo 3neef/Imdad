@@ -31,6 +31,7 @@ class UrwayGateway
       "trackid": '.$request['trackId'].',
       "terminalId": "emdad",
       "action": "1",
+      "udf2":"https://172.21.1.116:8080/register",
       "customerEmail" : "'.$request['email'].'",
       "merchantIp": "10.10.10.101",
       "password": "Urway@123",
