@@ -29,7 +29,7 @@ class UpdateDriverRequest extends FormRequest
             'nameAr' => [ 'string', 'max:255'],
             'nameEn' => [ 'string', 'max:255'],
             'age' => [ 'intger'],
-            'phone' => ['unique:drivers,phone',  'string', 'max:14', 'min:14', 'regex:/^(00249)/',],
+            'phone' => ['unique:drivers,phone',  'string', 'max:14', 'min:14', 'regex:/^(00966)/',],
             'nationality' => [ 'string', 'max:255'],
         ];
     }

@@ -32,7 +32,7 @@ class StoreUserRequest extends FormRequest
             'fullName' => ['required','string','max:100'],
             'identityNumber' => ['unique:users,identity_number','string','max:25'],
             'identityType' => ['string'],
-            'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
+            'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00966)/',],
             'email' => ['unique:users,email','required','email','max:100',],
             "roleId"=> "|integer|exists:roles,id",
             'password'=>'required|string|min:8',

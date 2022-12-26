@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UM\Role;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
+use App\Models\Accounts\Warehouse;
 use App\Models\UM\Permission;
 use App\Models\UM\RoleUserProfile;
 use App\Models\UserWarehousePivot;
@@ -55,7 +56,7 @@ class UserServices
             }
             if (isset($request->warahouseId)) {
 
-                $user->warehouse()->attach( $user->id, ['warehouse_id' => $request->warahouseId, ]);
+                $user->warehouse()->attach($user->id, ['warehouse_id' => $request->warahouseId,]);
             }
         });
         if ($user) {
@@ -134,12 +135,9 @@ class UserServices
 
     public function detachWarehouse($request)
     {
-        $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
-        if ($userWarehouse != null) {
-            $deleted =   $userWarehouse->delete();
-            return response()->json(['message' => 'User deleted successfully'], 301);
-        }
-        return response()->json(['error' => 'system error'], 500);
+        $user = Warehouse::where("id", $request->warehouseId)->first();
+        $user->users()->detach($request->userId);
+        return response()->json(['message' => 'User deatched successfully'], 301);
     }
     public function userWarehouseStatus($request)
     {
