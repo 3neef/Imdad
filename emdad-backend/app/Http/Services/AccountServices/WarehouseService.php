@@ -14,7 +14,7 @@ class WarehouseService
 
     public function index($request)
     {
-        return  WarehouseCollection::collection($request);
+        return WarehouseResponse::collection(WarehouseCollection::collection($request));
     }
 
     public function store($request)
