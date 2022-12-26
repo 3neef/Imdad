@@ -2728,102 +2728,6 @@
                     }
                 }
             },
-            "put": {
-                "tags": [
-                    "warehouse"
-                ],
-                "summary": "update warehouse",
-                "description": "update warehouse Here",
-                "operationId": "updateWarehouse",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "warehouseName": {
-                                        "type": "string"
-                                    },
-                                    "warehouseType": {
-                                        "type": "string"
-                                    },
-                                    "latitude": {
-                                        "type": "string"
-                                    },
-                                    "longitude": {
-                                        "type": "string"
-                                    },
-                                    "gateType": {
-                                        "type": "string"
-                                    },
-                                    "receiverName": {
-                                        "type": "string"
-                                    },
-                                    "receiverPhone": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated Successfully",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "warehouse"
@@ -3019,6 +2923,104 @@
                 "responses": {
                     "200": {
                         "description": "delete warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/warehouses/{id}": {
+            "put": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "update warehouse",
+                "description": "update warehouse Here",
+                "operationId": "updateWarehouse",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "warehouseName": {
+                                        "type": "string"
+                                    },
+                                    "warehouseType": {
+                                        "type": "string"
+                                    },
+                                    "latitude": {
+                                        "type": "string"
+                                    },
+                                    "longitude": {
+                                        "type": "string"
+                                    },
+                                    "gateType": {
+                                        "type": "string"
+                                    },
+                                    "receiverName": {
+                                        "type": "string"
+                                    },
+                                    "receiverPhone": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
@@ -3421,13 +3423,71 @@
             }
         },
         "/api/v1_0/profiles/pay": {
-            "delete": {
+            "get": {
                 "tags": [
                     "Profile Controller"
                 ],
                 "summary": "pay subscriptionPayment",
-                "description": "pay subscriptionPayment",
+                "description": "You must have a Subscription to a package so you can pay",
                 "operationId": "pay-subscriptionPayment",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "{'status':'status'}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/profiles/checkPayment": {
+            "get": {
+                "tags": [
+                    "Profile Controller"
+                ],
+                "summary": "Check Subscription Payment",
+                "description": "In order to check the payment you must intially have a subscription and have paid for that subscription",
+                "operationId": "check-PaymentStatus",
                 "parameters": [
                     {
                         "name": "x-authorization",
