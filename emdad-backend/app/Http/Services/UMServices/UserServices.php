@@ -44,7 +44,7 @@ class UserServices
             if (isset($request['managerUserId'])) {
                 $manager_id = $request['managerUserId'];
             } else {
-                $manager_id = auth()->user()->profile_id;
+                $manager_id = auth()->user()->profile_id ?? null;
             }
             if ($role_id && $manager_id) {
                 $user->roleInProfile()->attach($user->id, ['role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'manager_user_Id' => $manager_id]);
@@ -245,7 +245,7 @@ class UserServices
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
         $data = $this->UserOtp($user);
-        // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        MailController::sendSignupEmail($user->name, $user->email, $user->otp);
         // $sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
             [
