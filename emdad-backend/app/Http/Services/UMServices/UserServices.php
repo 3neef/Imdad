@@ -8,43 +8,65 @@ use App\Models\User;
 use App\Models\UM\Role;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
+use App\Http\Services\General\SmsService;
+use App\Models\Accounts\Warehouse;
 use App\Models\UM\Permission;
 use App\Models\UM\RoleUserProfile;
+use App\Models\UserWarehousePivot;
+use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+
+
 
 class UserServices
 {
 
     public function create($request)
     {
-        $request['full_name'] = $request['fullName'];
-        $request['expiry_date'] = $request['expireDate'];
-        $request['identity_number'] = $request['identityNumber'];
-        $request['identity_type'] = $request['identityType'] ?? 'nid';
-        $request['otp_expires_at'] = now()->addMinutes(5);
-        $request['is_super_admin'] = true;
-        $request['otp'] = strval(rand(1000, 9999));
-        $user = User::create($request);
-        $role_id = $request['roleId'] ?? '';
-        $is_learning = $request['is_learning'] ?? false;
-        if ($role_id || $is_learning) {
-            $user->roleInProfile()->attach($user->id, ['roles_id' => $request['roleId'], 'profile_id' => auth()->user()->profile_id, $is_learning = $request['is_learning']]);
 
-            $user->update(['profile_id' => auth()->user()->profile_id]);
-        }
+        $user = DB::transaction(function () use ($request) {
+            $request['full_name'] = $request['fullName'];
+            $request['expiry_date'] = $request['expireDate'] ?? null;
+            $request['identity_number'] = $request['identityNumber'] ?? "";
+            $request['identity_type'] = $request['identityType'] ?? 'nid';
+            $request['otp_expires_at'] = now()->addMinutes(5);
+            $request['is_super_admin'] = true;
+            // $request['otp'] = userOtp();
 
+            $user = User::create($request);
+            $data = $this->UserOtp($user);
+            $user->update(['otp' => $data['otp']]);
+            $role_id = $request['roleId'] ?? null;
+            $is_learning = $request['is_learning'] ?? false;
+            $manager_id = null;
+            if (isset($request['managerUserId'])) {
+                $manager_id = $request['managerUserId'];
+            } else {
+                $manager_id = auth()->user()->profile_id ?? null;
+            }
+            if ($role_id && $manager_id) {
+                $user->roleInProfile()->attach($user->id, ['role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'manager_user_Id' => $manager_id]);
+
+                $user->update(['profile_id' => auth()->user()->profile_id]);
+            }
+            if (isset($request->warahouseId)) {
+
+                $user->warehouse()->attach($user->id, ['warehouse_id' => $request->warahouseId,]);
+            }
+            return $user;
+        });
+        // dd($user);
         if ($user) {
             return response()->json([
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(['success' => false, 'message' => "System Error"], 500);
     }
-
 
 
 
@@ -53,24 +75,37 @@ class UserServices
 
     public function UpdateOwnerUser($request, $user_id)
     {
-      $user = User::where('id', $user_id)->first();
-      $user->checkUserRole($user_id);
+        $user = User::where('id', $user_id)->first();
+        $user->checkUserRole($user_id);
 
-      if($user == true){
-        return response()->json(['message' => 'cano,t  updated User'], 500);
-      }
-      $this->update($request, $user_id);
+        if ($user == true) {
+            return response()->json(['message' => 'cano,t  updated User'], 500);
+        }
+        $this->update($request, $user_id);
     }
 
     public function update($request, $id)
     {
         $user = User::where('id', $id)->first();
         $user->update([
-            "full_name" => $request->fullName??$user->full_name,
+            "full_name" => $request->fullName ?? $user->full_name,
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
         ]);
+
+        $WarahouseId = $request->warahouseId ?? null;
+        if ($WarahouseId != null) {
+            try {
+                $user->warehouse()->attach(
+                    $user->id,
+                    [
+                        'warehouse_id' => $request->warahouseId,
+                    ]
+                );
+            } catch (Exception $ex) {
+            }
+        }
 
 
         $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
@@ -81,7 +116,7 @@ class UserServices
         }
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
-            $this->sendOtp($user);
+            $this->UserOtp($user);
             return response()->json(
                 [
                     'message' => 'New OTP has been sent.',
@@ -92,11 +127,28 @@ class UserServices
         if ($user) {
             return response()->json([
                 'message' => 'User updated successfully',
-                'data' => ['user' => new UserResponse($user) ]
+                'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
+
+    public function detachWarehouse($request)
+    {
+        $user = Warehouse::where("id", $request->warehouseId)->first();
+        $user->users()->detach($request->userId);
+        return response()->json(['message' => 'User deatched successfully'], 301);
+    }
+    public function userWarehouseStatus($request)
+    {
+        $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
+        if ($userWarehouse != null) {
+            $userWarehouse->update(['status' => $request->status]);
+            return response()->json(['message' => 'status update successfully'], 201);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
 
 
     public function login(LoginRequest $request)
@@ -107,7 +159,7 @@ class UserServices
         if (isset($request->mobile)) {
             $user = User::where('mobile', '=', $request->mobile)->first();
 
-            $data = $this->sendOtp($user);
+            $data = $this->UserOtp($user);
             return response()->json(
                 [
                     "success" => true, "message" => "verifiy your otp first",
@@ -116,20 +168,23 @@ class UserServices
             );
         }
 
-
-        if ($user->is_verified == 0) {
-            return response()->json(
-                [
-                    "success" => false, "error" => "verifiy your otp first"
-                ]
-            );
-        }
-        // dd($user);
         if (!($user->password === $request->password)) {
             return response()->json(
                 [
                     "success" => false, "error" => "Wrong credentials"
                 ]
+            );
+        }
+
+        if ($user->is_verified == 0) {
+            $data = $this->UserOtp($user);
+
+            return response()->json(
+                [
+                    "data" => $data,
+                    "success" => false, "error" => "Forbidden"
+                ],
+                403
             );
         }
         $token = $user->createToken('authtoken');
@@ -188,14 +243,13 @@ class UserServices
     public function resend($request)
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
-        $otp = rand(1000, 9999);
-        $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5)]);
-        // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-        // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
+        $data = $this->UserOtp($user);
+        MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        // $sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
             [
                 'message' => 'New OTP has been sent.',
-                'otp' => $user->otp,
+                'otp' => $data,
             ]
         );
     }
@@ -374,19 +428,20 @@ class UserServices
         return $permissions;
     }
 
-    protected  function sendOtp($user)
+    protected  function UserOtp($user)
+    // MailController::sOtp($user ,SmsService $smsService)
     {
+        $smsService = new SmsService;
         $otp = rand(1000, 9999);
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
-        // MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-        // $smsService->sendOtp($user->name, $user->mobile, $user->otp);
-        return response()->json(
+        MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        $smsService->sendOtp($user->name, $user->mobile, $user->otp);
+        return
             [
                 'message' => 'New OTP has been sent.',
                 'otp' => $user->otp,
                 "id" => $user->id,
 
-            ]
-        );
+            ];
     }
 }

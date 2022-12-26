@@ -34,11 +34,13 @@ class DatabaseSeeder extends Seeder
         }
 
         $this->call([
+            ApiKeysSeeder::class,
             SubscriptionPackagesSeeder::class,
+            PermissionSeeder::class,
+
             RegRoleSeeder::class,
             CategoriesSeeder::class,
             UOMSeeder::class,
-            PermissionSeeder::class,
             RelatedCompinesTableSeeder::class,
         ]);
     }

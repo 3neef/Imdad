@@ -20,13 +20,15 @@ class WarehouseResponse extends JsonResource
             "warehouseName" =>$this->address_name,
             "warehouseType" =>$this->address_type,
             "gateType" =>$this->gate_type,
-            "location" =>$this->latitude_longitude,
+            "latitude" =>$this->latitude,
+            "longitude"=>$this->longitude,
             "receiverName" =>$this->address_contact_name,
             "receiverPhone" =>$this->address_contact_phone,
             "otpVerfied" =>$this->otp_verfied,
             "otp"=>$this->otp_receiver,
             "confirmBy" =>$this->confirm_by,
             "CreatedBy"=>$this->created_by,
+            "createdAt"=>$this->created_at->format('y-m-d')
         ];
     }
 }

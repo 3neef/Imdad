@@ -112,4 +112,156 @@ class SubscriptionPaymentController extends Controller
     {
         return $this->subscriptionPaymentService->check_subscription_payment();
     }
+
+
+
+
+
+
+/**
+     * @OA\delete(
+     *    path="/api/v1_0/profiles/subscriptionPayment",
+     *    operationId="delete-subscriptionPayment",
+     *    tags={"Profile Controller"},
+     *    summary="delete subscriptionPayment",
+     *    description="delete subscriptionPayment",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *  *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *            ),
+        *        ),
+        *    ),
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="status", type="string", example="{'status':'status'}")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
+    public function  destroy($id)
+    {
+        return $this->subscriptionPaymentService->delete($id);
+    }
+
+
+    
+
+/**
+     * @OA\get(
+     *    path="/api/v1_0/profiles/pay",
+     *    operationId="pay-subscriptionPayment",
+     *    tags={"Profile Controller"},
+     *    summary="pay subscriptionPayment",
+     *    description="You must have a Subscription to a package so you can pay",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *  *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *            ),
+        *        ),
+        *    ),
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="status", type="string", example="{'status':'status'}")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
+    public function  pay()
+    {
+        return $this->subscriptionPaymentService->pay();
+    }
+
+/**
+     * @OA\get(
+     *    path="/api/v1_0/profiles/checkPayment",
+     *    operationId="check-PaymentStatus",
+     *    tags={"Profile Controller"},
+     *    summary="Check Subscription Payment",
+     *    description="In order to check the payment you must intially have a subscription and have paid for that subscription",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *  *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *
+        *            ),
+        *        ),
+        *    ),
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="status", type="string", example="{'status':'status'}")
+     *          ),
+     *       )
+     *      )
+     *  )
+     */
+
+    public function  checkPaymentStatus()
+    {
+        return $this->subscriptionPaymentService->checkPaymentStatus();
+    }
+
 }

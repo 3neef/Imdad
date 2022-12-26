@@ -8,7 +8,7 @@ use App\Models\Accounts\Driver;
 class DriverService
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $dirvers = Driver::all();
 

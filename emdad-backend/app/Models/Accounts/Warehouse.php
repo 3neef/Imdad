@@ -2,6 +2,7 @@
 
 namespace App\Models\Accounts;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -26,4 +27,10 @@ class Warehouse extends Model
         'confirm_by',
         'created_by'
     ];
+
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class,'user_warehouse_pivots')->withPivot('user_id')->withTimestamps();
+    }
 }

@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class   StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,7 +20,7 @@ class StoreUserRequest extends FormRequest
         return true;
     }
 
-    
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,16 +30,19 @@ class StoreUserRequest extends FormRequest
     {
         $rules = [
             'fullName' => ['required','string','max:100'],
-            'identityNumber' => ['unique:users,identity_number','required','string','max:25'],
+            'identityNumber' => ['unique:users,identity_number','string','max:25'],
             'identityType' => ['string'],
-            'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
+            'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00966)/',],
             'email' => ['unique:users,email','required','email','max:100',],
-            "roleId"=> "|integer|exists:roles,id",
+            "roleId"=> "required|integer|exists:roles,id",
             'password'=>'required|string|min:8',
-            'expireDate'=>'required|date',
+            'expireDate'=>'date',
             'permissions'=>['array',new UniqeValues],
             'permissions.*'=>['string','exists:permissions,label'],
-            'is_learning'=>['boolean']
+            'isLearning'=>['boolean'],
+            'managerUserId'=>'integer|exists:users,id',//
+            'warahouseId'=>'integer|exists:warehouses,id',
+
 
         ];
         // dd($this->all());

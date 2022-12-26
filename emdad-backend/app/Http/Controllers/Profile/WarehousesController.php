@@ -9,6 +9,7 @@ use App\Http\Requests\AccountRequests\Location\UpdateWarehousesRequest;
 use App\Http\Requests\AccountRequests\Location\VerfiedLocationRequest;
 use App\Http\Services\AccountServices\WarehouseService;
 use App\Models\Accounts\Warehouse;
+use Illuminate\Http\Request;
 
 class WarehousesController extends Controller
 {
@@ -66,9 +67,9 @@ class WarehousesController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-        public function index()
+        public function index(Request $request)
         {
-            return $this->warehouseService->index();
+            return $this->warehouseService->index($request);
         }
 /**
         * @OA\Post(
@@ -195,7 +196,7 @@ class WarehousesController extends Controller
         }
 /**
         * @OA\put(
-        * path="/api/v1_0/warehouses",
+        * path="/api/v1_0/warehouses/{id}",
         * operationId="updateWarehouse",
         * tags={"warehouse"},
         * summary="update warehouse",

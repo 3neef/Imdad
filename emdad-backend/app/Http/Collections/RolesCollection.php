@@ -3,22 +3,33 @@
 
 namespace App\Http\Collections;
 
+use App\Http\Resources\UMResources\Role\RoleResponse;
 use App\Models\UM\Role;
+use Illuminate\Support\Str;
+
 use Spatie\QueryBuilder\QueryBuilder;
 
 class RolesCollection
 {
-    public static function collection()
+    public static function collection($request)
     {
 
         $defaultSort = '-created_at';
 
-        $defaultSelect = ['name','type','permissions_list','for_reg'
+        $defaultSelect = ['id','name','type','permissions_list','for_reg'
         ];
-
+        // $element =  [];
+    
+            
+    //     }
+        // $lorem=(Str::camel('permissions_list'));
+        // dd($lorem);
 
         $allowedFilters = [
-            'name', 'type', 'for_reg',
+            'id',
+            'name',
+            'type',
+            'for_reg',
         ];
 
         $allowedSorts = [
@@ -27,10 +38,10 @@ class RolesCollection
         ];
 
     
+// dd(convertArrayToCamelCase($defaultSelect));
+        $perPage =  $request->pageSize ?? 100;
 
-        $perPage =  100;
-
-        return QueryBuilder::for(Role::class)
+        return  QueryBuilder::for(Role::class)
             ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)

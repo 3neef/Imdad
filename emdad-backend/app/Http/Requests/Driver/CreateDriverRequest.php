@@ -28,7 +28,7 @@ class CreateDriverRequest extends FormRequest
             'nameAr' => ['required', 'string', 'max:255'],
             'nameEn' => ['required', 'string', 'max:255'],
             'age' => ['required', 'numeric'],
-            'phone' => ['unique:drivers,phone', 'required', 'string', 'max:14', 'min:14', 'regex:/^(00249)/',],
+            'phone' => ['unique:drivers,phone', 'required', 'string', 'max:14', 'min:14', 'regex:/^(00966)/',],
             'nationality' => ['required', 'string', 'max:255'],
         ];
     }

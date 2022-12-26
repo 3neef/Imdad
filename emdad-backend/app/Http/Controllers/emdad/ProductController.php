@@ -172,9 +172,9 @@ class ProductController extends Controller
         */
 
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->productService->index();
+        return $this->productService->index($request);
     }
 
 

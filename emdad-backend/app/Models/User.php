@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Accounts\SubscriptionPackages;
+use App\Models\Accounts\Warehouse;
 use App\Models\UM\Role;
 use App\Models\UM\RoleUserProfile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -27,7 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'full_name',
         'identity_type', 'email', 'password', 'identity_number',
         'is_verified', 'profile_id', 'avatar', 'otp', 'is_super_admin',
-        'otp_expires_at', 'mobile',  'expiry_date', 'lang',
+        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'manager_user_Id'
     ];
 
     /**
@@ -70,6 +71,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return Profile::where("id", $this->profile_id)->select(["name_ar", 'active', 'subscription_details', 'cr_expire_data', 'type', 'id'])->first();
     }
 
+    public function userStatus()
+    {
+        return RoleUserProfile::where("profile_id", $this->profile_id)->where("user_id", $this->id)->first();
+    }
+
+    public function userRole()
+    {
+        return RoleUserProfile::where('profile_id', auth()->id())->where("user_id", $this->id)->pluck('role_id')->first();
+    }
+
     public function assignRole(Role $role)
     {
         return $this->roles()->save($role);
@@ -97,6 +108,14 @@ class User extends Authenticatable implements MustVerifyEmail
             ->wherePivot('profile_id', $profileId)
             ->first();
     }
+
+
+
+    public function warehouse()
+    {
+        return $this->belongsToMany(Warehouse::class, 'user_warehouse_pivots')->withPivot('warehouse_id')->get();
+    }
+
 
     // public function getRoleOfUserByCompanyId()
     // {

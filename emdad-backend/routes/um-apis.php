@@ -27,6 +27,7 @@ Route::middleware(['auth.apikey'])->prefix('auth')->group(function () {
 
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(function () {
+    Route::get('get-users', [UserController::class, 'getProfileUsers']);
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
     Route::get('index', [UserController::class, 'index']);
     Route::post('register', [UserController::class, 'store']);
@@ -36,12 +37,13 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);
     Route::delete('destroy/{id}', [UserController::class, 'delete']);
     Route::put("restore/{id}", [UserController::class, 'restoreUser']);
+    Route::delete('detachWarehouse', [UserController::class, 'detachWarehouse']);
+    Route::delete('detachWarehouse', [UserController::class, 'detachWarehouse']);
+    Route::put("userWarehouseStatus", [UserController::class, 'userWarehouseStatus']);
 });
 
 
 Route::put('users/update-owner-user/{id}', [UserController::class, 'UpdateOwnerUser'])->middleware(['auth.apikey']);
-
-
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::apiResource('permissions', PermissionsController::class);
@@ -54,7 +56,7 @@ Route::middleware(['auth.apikey'])->group(function () {
 });
 
 
-Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+Route::middleware(['auth.apikey', ])->group(function () {
     Route::apiResource('roles', RoleController::class);
 });
 

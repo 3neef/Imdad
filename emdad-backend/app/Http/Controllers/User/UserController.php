@@ -5,6 +5,10 @@ namespace App\Http\Controllers\User;
 use App\Http\Collections\UserCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UMRequests\DeleteWarehouse;
+use App\Http\Requests\UMRequests\DeleteWarehouseRequest;
+use App\Http\Requests\UMRequests\UpdateUserWarehouseStatusRequest;
+use App\Http\Requests\UMRequests\UpdateUserWharehouseStatus;
 use App\Http\Requests\UMRequests\User\AssignRoleRequest;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
@@ -16,14 +20,82 @@ use App\Http\Requests\UMRequests\User\UserAvtivateRerquest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\UserServices;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return UserCollection::collection();
+        return UserCollection::collection($request);
     }
+/**
+     * @OA\get(
+     * path="/api/v1_0/users/get-users",
+     * operationId="get-users",
+     * tags={"UM & Permissions"},
+     * summary="get-users ",
+     * description="get-users Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="User created successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type="object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
 
+    public function getProfileUsers(Request $request)
+    {
+        // return DB::statement("select * from users");
+        if(auth()->user()->profile_id==null){
+            return response()->json(["error"=>"","code"=>"100","message"=>"user does not have profile"],200);
+        }
+        $users =  DB::table('users')->select('*')
+        ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')->where('role_user_profile.profile_id', auth()->user()->profile_id)
+        ->get();
+
+
+        return response()->json(["success"=>true,"code"=>"200","data"=>$users],200);
+    }
 
     /**
      * @OA\Post(
@@ -54,14 +126,17 @@ class UserController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"fullName","password","email","mobile","identityNumber","roleId","expireDate"},
+     *               required={"fullName","password","email","mobile"},
      *               @OA\Property(property="fullName", type="string"),
      *               @OA\Property(property="expireDate", type="date"),
      *               @OA\Property(property="password", type="string"),
      *               @OA\Property(property="email", type="email"),
      *               @OA\Property(property="mobile", type="string"),
      *               @OA\Property(property="identityNumber", type="string"),
-     *               @OA\Property(property="identityType", type="string")
+     *               @OA\Property(property="identityType", type="string"),
+     *               @OA\Property(property="isLearning", type="boolean"),
+     *               @OA\Property(property="managerUserId", type="integer"),
+     *               @OA\Property(property="warahouseId", type="integer"),
      *            ),
      *        ),
      *    ),
@@ -279,6 +354,7 @@ class UserController extends Controller
      *               @OA\Property(property="email", type="email"),
      *               @OA\Property(property="mobile", type="string"),
      *               @OA\Property(property="roleId", type="integer"),
+     *               @OA\Property(property="manager_user_Id", type="integer")
      *            ),
      *        ),
      *    ),
@@ -593,10 +669,132 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function setDefaultCompany(
-        DefaultCompanyRequest $request,
-        UserServices $userServices
-    ) {
+    public function setDefaultCompany(DefaultCompanyRequest $request,UserServices $userServices) {
         return $userServices->setDefaultCompany($request);
     }
+  /**
+     * @OA\delete(
+     * path="/api/v1_0/users/detachWarehouse",
+     * operationId="detachWarehouse",
+     * tags={"UM & Permissions"},
+     * summary="detach Warehouse",
+     * description="detach Warehouse Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *
+     *               required={"userId","warehouseId"},
+     *               @OA\Property(property="userId", type="integer"),
+     *               @OA\Property(property="warehouseId", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Default company successfully'",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data",type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+
+public function detachWarehouse(DeleteWarehouseRequest $request,UserServices $userServices) {
+    return $userServices->detachWarehouse($request);
 }
+
+/**
+     * @OA\put(
+     * path="/api/v1_0/users/userWarehouseStatus",
+     * operationId="userWarehouseStatus",
+     * tags={"UM & Permissions"},
+     * summary="user Warehouse Status",
+     * description="user Warehouse Status Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *
+     *               required={"userId","warehouseId"},
+     *               @OA\Property(property="userId", type="integer"),
+     *               @OA\Property(property="warehouseId", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Default company successfully'",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data",type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request,UserServices $userServices) {
+    return $userServices->userWarehouseStatus($request);
+}
+}
+

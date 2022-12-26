@@ -42,6 +42,14 @@ class RoleController extends Controller
      *             type="string"
      *         )
      *     ),
+*     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
         *      @OA\Response(
         *          response=200,
         *          description="get all roles",
@@ -60,10 +68,10 @@ class RoleController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-        public function index()
+        public function index(Request $request)
         {
 
-            return $this->roleServices->index();
+            return $this->roleServices->index($request);
         }
 
        /**

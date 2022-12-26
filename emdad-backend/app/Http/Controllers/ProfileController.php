@@ -8,6 +8,7 @@ use App\Http\Requests\AccountRequests\Account\RestoreAccountRequest;
 use App\Http\Requests\Profile\StoreProfileRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
 use App\Http\Services\AccountServices\AccountService;
+use Illuminate\Http\Request;
 
 class ProfileController extends Controller
 {
@@ -71,10 +72,13 @@ class ProfileController extends Controller
 
 
 
-    public function index()
+    public function index(Request $request )
     {
-        return ProfileCollection::collection();
+
+        // dd($request);
+        return ProfileCollection::collection($request);
     }
+    
 
     /**
      * @OA\Post(
@@ -431,11 +435,11 @@ class ProfileController extends Controller
     {
         return $this->accountService->swap_profile($id);
     }
-    
 
 
 
-   
+
+
 }
 
 

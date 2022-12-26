@@ -29,7 +29,7 @@ class CreateRoleRequest extends FormRequest
     {
         return [
             'name' => 'required|string|unique:roles,name',
-            'type' => ['required', Rule::in(['emdad', 'supplier', 'buyier'])],
+            'type' => ['required', Rule::in(['emdad', 'supplier', 'buyer'])],
         ];
     }
 

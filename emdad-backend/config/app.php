@@ -30,6 +30,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    "TERMINAL_ID" => env('TERMINAL_ID', 'emdad'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -183,7 +185,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         L5Swagger\L5SwaggerServiceProvider::class,
-        
+
 
         /*
          * Package Service Providers...
