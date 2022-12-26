@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class   StoreUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,9 +32,9 @@ class StoreUserRequest extends FormRequest
             'fullName' => ['required','string','max:100'],
             'identityNumber' => ['unique:users,identity_number','string','max:25'],
             'identityType' => ['string'],
-            'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00249)/',],
+            'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00966)/',],
             'email' => ['unique:users,email','required','email','max:100',],
-            "roleId"=> "|integer|exists:roles,id",
+            "roleId"=> "required|integer|exists:roles,id",
             'password'=>'required|string|min:8',
             'expireDate'=>'date',
             'permissions'=>['array',new UniqeValues],

@@ -10,6 +10,8 @@ for column renaming
 composer require doctrine/dbal
 
 
- #install QueryBuilder and publish it 
-composer install 
+ #install QueryBuilder and publish it
+composer install
 php artisan vendor:publish --provider="Spatie\QueryBuilder\QueryBuilderServiceProvider" --tag="query-builder-config"
+
+

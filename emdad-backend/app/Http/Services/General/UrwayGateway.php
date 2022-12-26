@@ -10,12 +10,9 @@ class UrwayGateway
 {
   public  static function initPayment($request)
   {
-    //  dd($request);
     $curl = curl_init();
     $txn_details = $request['trackId'] . "|" . "emdad" . "|" . "Urway@123" . "|" . "82e729239a7f199ffe10ebf53c4ec41a59d34dc149f41a0d24776a9e4d3e1c38" . "|" . $request['amount'] . "|SAR";
-    // dd($txn_details);
     $hash = hash('sha256', $txn_details);
-    //  dd($hash);
     curl_setopt_array($curl, array(
       CURLOPT_URL => "https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest",
       CURLOPT_RETURNTRANSFER => true,
@@ -27,8 +24,8 @@ class UrwayGateway
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS => '
       {
-      "transid": '.$request['transId'].',
-      "trackid": '.$request['trackId'].',
+      "transid": ' . $request['transId'] . ',
+      "trackid": ' . $request['trackId'] . ',
       "terminalId": "emdad",
       "action": "1",
       "udf2":"https://172.21.1.116:8080/register",
@@ -37,8 +34,8 @@ class UrwayGateway
       "password": "Urway@123",
       "country":"Saudi Arabia",
       "currency": "SAR",
-      "amount": '.$request['amount'].',
-      "requestHash":"'.$hash.'"
+      "amount": ' . $request['amount'] . ',
+      "requestHash":"' . $hash . '"
       }',
       CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json',
@@ -46,6 +43,7 @@ class UrwayGateway
     ));
 
     $response = curl_exec($curl);
+    // dd($response);
 
     curl_close($curl);
 
@@ -54,12 +52,9 @@ class UrwayGateway
 
   public  static function getPaymentStatus($request)
   {
-    //  dd($request);
     $curl = curl_init();
     $txn_details = $request['trackId'] . "|" . "emdad" . "|" . "Urway@123" . "|" . "82e729239a7f199ffe10ebf53c4ec41a59d34dc149f41a0d24776a9e4d3e1c38" . "|" . $request['amount'] . "|SAR";
-    // dd($txn_details);
     $hash = hash('sha256', $txn_details);
-    //  dd($hash);
     curl_setopt_array($curl, array(
       CURLOPT_URL => "https://payments-dev.urway-tech.com/URWAYPGService/transaction/jsonProcess/JSONrequest",
       CURLOPT_RETURNTRANSFER => true,
@@ -71,18 +66,18 @@ class UrwayGateway
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS => '
       {
-      "transid": '.$request['transId'].',
-      "trackid": '.$request['trackId'].',
+      "transid": ' . $request['transId'] . ',
+      "trackid": ' . $request['trackId'] . ',
       "terminalId": "emdad",
       "action": "10",
-      "customerEmail" : "'.$request['email'].'",
+      "customerEmail" : "' . $request['email'] . '",
       "merchantIp": "10.10.10.101",
       "password": "Urway@123",
       "country":"Saudi Arabia",
       "currency": "SAR",
       "udf1": "1",
-      "amount": '.$request['amount'].',
-      "requestHash":"'.$hash.'"
+      "amount": ' . $request['amount'] . ',
+      "requestHash":"' . $hash . '"
       }',
       CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json',

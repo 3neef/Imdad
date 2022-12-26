@@ -14,6 +14,7 @@ class WarehouseCollection
         $defaultSort = '-created_at';
 
         $defaultSelect = [
+            'id',
             'address_name',
             'profile_id',
             'address_contact_phone',
@@ -23,7 +24,8 @@ class WarehouseCollection
             'address_type',
             'gate_type',
             'confirm_by',
-            'created_by'
+            'created_by',
+            'created_at',
         ];
 
 
