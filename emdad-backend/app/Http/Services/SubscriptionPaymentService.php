@@ -28,7 +28,7 @@ class SubscriptionPaymentService
 
         // dd($payedSubscription);
 
-        if ($payedSubscription == null ||  now() > $payedSubscription->expire_date) {
+        if ($payedSubscription == null ||  Carbon::now() > $payedSubscription->expire_date) {
 
             $oldOwner = $user->oldOwner();
 
@@ -42,7 +42,6 @@ class SubscriptionPaymentService
                 'expire_date' => $dt->addYear(),
                 'tax_amount' => $price * 15 / 100,
                 'total' => ($price + ($price * 15 / 100)),
-                "status" => "Paid",
             ]);
             $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => json_encode($subscription->features, true)]);
 
