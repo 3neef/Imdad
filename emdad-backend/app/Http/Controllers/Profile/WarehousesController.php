@@ -196,7 +196,7 @@ class WarehousesController extends Controller
         }
 /**
         * @OA\put(
-        * path="/api/v1_0/warehouses",
+        * path="/api/v1_0/warehouses/{id}",
         * operationId="updateWarehouse",
         * tags={"warehouse"},
         * summary="update warehouse",
