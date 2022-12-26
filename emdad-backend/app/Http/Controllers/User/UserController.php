@@ -91,8 +91,6 @@ class UserController extends Controller
         }
         $users =  DB::table('users')->select('*')
         ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')->where('role_user_profile.profile_id', auth()->user()->profile_id)
-        ->join('user_warehouse_pivots', 'user_warehouse_pivots.user_id', '=', 'users.id')->where('user_warehouse_pivots.user_id', auth()->user()->profile_id)
-
         ->get();
 
 
