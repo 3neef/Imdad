@@ -8,6 +8,8 @@ use App\Models\Accounts\Warehouse;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use function GuzzleHttp\Promise\all;
+
 class WarehouseService
 {
 
@@ -32,6 +34,11 @@ class WarehouseService
             'otp_expires_at' => now()->addMinutes(3),
             'otp_receiver' => strval(rand(1000, 9999)),
         ]);
+
+        if (isset($request->userId)) {
+
+            $warehouse->users()->attach( $warehouse->id, ['user_id' => $request->userId, ]);
+        }
 
         if ($warehouse) {
             return response()->json(['message' => 'created successfully'], 200);

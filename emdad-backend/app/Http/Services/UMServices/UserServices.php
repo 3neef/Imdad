@@ -37,39 +37,26 @@ class UserServices
             $user = User::create($request);
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
-            $re=$request['managerUserId']??null;
+            $re = $request['managerUserId'] ?? null;
             // dd();
-            global $manager_id ;
-            if($re)
-            {
-                $manager_id=$re;
-            }
-            elseif(isset(auth()->user()->profile_id)){
-                $manager_id=auth()->user()->profile_id;
-            }
-            else{
-                $manager_id=null;
-
+            global $manager_id;
+            if ($re) {
+                $manager_id = $re;
+            } elseif (isset(auth()->user()->profile_id)) {
+                $manager_id = auth()->user()->profile_id;
+            } else {
+                $manager_id = null;
             }
 
-            if ($role_id || $is_learning|| $manager_id) {
-                $user->roleInProfile()->attach($user->id, ['role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning , 'manager_user_Id'=> $request['managerUserId'] ?? auth()->user()->profile_id ]);
+            if ($role_id || $is_learning || $manager_id) {
+                $user->roleInProfile()->attach($user->id, ['role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'manager_user_Id' => $request['managerUserId'] ?? auth()->user()->profile_id]);
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
             if (isset($request->warahouseId)) {
 
-                try {
-                    $user->warehouse()->attach(
-                        $user->id,
-                        [
-                            'warehouse_id' => $request->warahouseId,
-                        ]
-                    );
-                } catch (Exception $ex) {
-                }
+                $user->warehouse()->attach( $user->id, ['warehouse_id' => $request->warahouseId, ]);
             }
-            return $user;
         });
         if ($user) {
             return response()->json([
