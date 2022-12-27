@@ -32,7 +32,7 @@ class AuthController extends Controller
      * operationId="resetPassword",
      * tags={"auth"},
      * summary="reset password",
-     * description="reset password Here",
+     * description="reset password of company user",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -93,7 +93,7 @@ class AuthController extends Controller
      * operationId="registerUser",
      * tags={"auth"},
      * summary="Register User",
-     * description="Register User Here",
+     * description="Register a User as an owner to company",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -155,7 +155,7 @@ class AuthController extends Controller
      * path="/api/v1_0/auth/login",
      * operationId="authLogin",
      * tags={"auth"},
-     * summary="User Login",
+     * summary="User Login for owner user",
      * description="Login User Here",
      *     @OA\Parameter(
      *         name="x-authorization",
@@ -344,12 +344,12 @@ class AuthController extends Controller
 
 
     /**
-     * @OA\put(
+     * @OA\post(
      * path="/api/v1_0/auth/forgot-password",
      * operationId="forgotPassword",
      * tags={"auth"},
      * summary="forgot password",
-     * description="forgot password Here",
+     * description="forgot password of the owner user ",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",

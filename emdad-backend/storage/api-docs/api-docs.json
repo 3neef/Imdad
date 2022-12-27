@@ -977,7 +977,7 @@
             }
         },
         "/api/v1_0/auth/forgot-password": {
-            "put": {
+            "post": {
                 "tags": [
                     "auth"
                 ],
