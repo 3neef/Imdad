@@ -27,12 +27,14 @@ class SubscriptionPaymentService
         // dd($payedSubscription);
 
         // dd($payedSubscription);
+        $oldOwner = $user->oldOwner();
+
+        $price = $oldOwner == true ? $subscription->price_2 : $subscription->price_1;
+
 
         if ($payedSubscription == null ||  Carbon::now() > $payedSubscription->expire_date) {
 
-            $oldOwner = $user->oldOwner();
 
-            $price = $oldOwner == true ? $subscription->price_2 : $subscription->price_1;
             // dd($subscription);
             $SubscriptionPayment = SubscriptionPayment::create([
                 'profile_id' => auth()->user()->profile_id,
@@ -48,8 +50,23 @@ class SubscriptionPaymentService
             return response()->json(['data' => new SubscriptionResource($SubscriptionPayment), "oldOwner" => $oldOwner], 200);
         } else {
 
-            return response()->json(['success' => false, "error" => "you  have ALready  Active Subscriptions "], 404);
+            if($payedSubscription->status==='Pending'){
+                $payedSubscription->update([
+                    'package_id' => $request->packageId,
+                    'user_id' => auth()->id(),
+                    'sub_total' => $price,
+                    'expire_date' => $dt->addYear(),
+                    'tax_amount' => $price * 15 / 100,
+                    'total' => ($price + ($price * 15 / 100)),
+                ]);
+                $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => json_encode($subscription->features, true)]);
+
+                return response()->json(['data' => new SubscriptionResource($payedSubscription), "oldOwner" => $oldOwner], 200);
+            }
+
         }
+        return response()->json(['success' => false, "error" => "you  have ALready  Active Subscriptions "], 404);
+
     }
 
 
