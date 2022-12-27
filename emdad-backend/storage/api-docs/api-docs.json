@@ -507,7 +507,7 @@
                     "auth"
                 ],
                 "summary": "reset password",
-                "description": "reset password Here",
+                "description": "reset password of company user",
                 "operationId": "resetPassword",
                 "parameters": [
                     {
@@ -597,7 +597,7 @@
                     "auth"
                 ],
                 "summary": "Register User",
-                "description": "Register User Here",
+                "description": "Register a User as an owner to company",
                 "operationId": "registerUser",
                 "parameters": [
                     {
@@ -700,7 +700,7 @@
                 "tags": [
                     "auth"
                 ],
-                "summary": "User Login",
+                "summary": "User Login for owner user",
                 "description": "Login User Here",
                 "operationId": "authLogin",
                 "parameters": [
@@ -982,7 +982,7 @@
                     "auth"
                 ],
                 "summary": "forgot password",
-                "description": "forgot password Here",
+                "description": "forgot password of the owner user ",
                 "operationId": "forgotPassword",
                 "parameters": [
                     {
