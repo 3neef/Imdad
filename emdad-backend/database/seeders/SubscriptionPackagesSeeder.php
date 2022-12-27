@@ -88,6 +88,33 @@ class SubscriptionPackagesSeeder extends Seeder
 
  ],
 
+
+["id" => 4, "packageNameAr" => 'الأساسية', "packageNameEn"=>'Basic', "type" => 'Supplier',"price1" => "0", "price2" => "4500",
+        "features" =>[
+            ["key"=>"owner","titleEn"=>"Business owner","titleAr"=>"المستخدم المالك/الرئيس التنفيذي","systemValue"=>1,"text_en"=>"1","text_ar"=>"1","descriptionEn"=>"The official account for the company, with full access to all pages and permissions.",
+            "descriptionAr"=>"هو حساب الرئيس التنفيذي للشركة الذي يمتلك جميع صالحيات الوصول"],
+            ["key"=>"user","titleEn"=>"User Management","titleAr"=>"ادارة المستخدمين","systemValue"=>1,"text_en"=>"15","text_ar"=>"15","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"الموظفين التابعين للشركة والمسؤولين عن أدوار وظيفية محددة بصالحيات محددة يحددها مالك 
+الشركة؛ على سبيل المثال: مسؤول مشتريات، مسؤول مالي..."],
+            ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"ادارة المستخدمين","systemValue"=>1,"text_en"=>"10","text_ar"=>"10","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "]
+ ]
+ 
+
+],
+
+["id" => 5, "packageNameAr" => 'الذهبية', "packageNameEn"=>'Gold', "type" => 'Supplier',"price1" => "10000", "price2" => "10000",
+        "features" =>[
+            ["key"=>"owner","titleEn"=>"Business owner","titleAr"=>"المستخدم المالك/الرئيس التنفيذي","systemValue"=>1,"text_en"=>"1","text_ar"=>"1","descriptionEn"=>"The official account for the company, with full access to all pages and permissions.",
+            "descriptionAr"=>"هو حساب الرئيس التنفيذي للشركة الذي يمتلك جميع صالحيات الوصول"],
+            ["key"=>"user","titleEn"=>"User Management","titleAr"=>"ادارة المستخدمين","systemValue"=>1,"text_en"=>"50","text_ar"=>"50","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"الموظفين التابعين للشركة والمسؤولين عن أدوار وظيفية محددة بصالحيات محددة يحددها مالك 
+الشركة؛ على سبيل المثال: مسؤول مشتريات، مسؤول مالي..."],
+            ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"ادارة المستخدمين","systemValue"=>1,"text_en"=>"50","text_ar"=>"50","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "]
+ ]
+ 
+
+],
+
+
+
 ];
 
 
