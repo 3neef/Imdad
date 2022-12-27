@@ -28,7 +28,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->timestamp('expiry_date')->nullable();
-            $table->string('otp');
+            $table->string('otp')->nullable();
             $table->timestamp('otp_expires_at')->nullable();
             $table->string('mobile')->unique()->nullable(false);
             $table->boolean("is_super_admin")->default(false);
