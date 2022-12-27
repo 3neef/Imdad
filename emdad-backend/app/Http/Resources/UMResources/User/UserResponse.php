@@ -28,7 +28,8 @@ class UserResponse extends JsonResource
             "isSuperAdmin" => $this->is_super_admin,
             "status" => $this->userStatus() != null ? $this->userStatus()->status : "",
             "roleId" => $this->userRole() ?? '',
-            "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null
+            "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null,
+            "expireDate"=>$this->expiry_date
         ];
     }
 }

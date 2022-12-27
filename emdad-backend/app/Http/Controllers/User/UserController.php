@@ -94,6 +94,7 @@ class UserController extends Controller
         ->get();
 
 
+
         return response()->json(["success"=>true,"code"=>"200","data"=>$users],200);
     }
 
