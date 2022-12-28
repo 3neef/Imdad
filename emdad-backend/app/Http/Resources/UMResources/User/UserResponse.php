@@ -29,7 +29,8 @@ class UserResponse extends JsonResource
             "status" => $this->userStatus() != null ? $this->userStatus()->status : "",
             "roleId" => $this->userRole() ?? '',
             "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null,
-            "expireDate"=>$this->expiry_date
+            "expireDate"=>$this->expiry_date,
+            "passwordChanged"=>$this->password_changed
         ];
     }
 }

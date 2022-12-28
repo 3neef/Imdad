@@ -34,6 +34,7 @@ return new class extends Migration
             $table->boolean("is_super_admin")->default(false);
             $table->boolean("is_verified")->default(false);
             $table->integer("manager_user_Id")->nullable();
+            $table->boolean('password_changed')->default(false);
 
             $table->softDeletes();
         });
