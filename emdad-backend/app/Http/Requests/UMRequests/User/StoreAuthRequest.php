@@ -7,6 +7,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
+
 
 class StoreAuthRequest extends FormRequest
 {
@@ -34,8 +36,8 @@ class StoreAuthRequest extends FormRequest
             'identityType' => ['string'],
             'mobile' => ['unique:users,mobile','required','string','max:14','min:14','regex:/^(00966)/',],
             'email' => ['unique:users,email','required','email','max:100',],
-            "roleId"=> "|integer|exists:roles,id",
-            'password'=>'required|string|min:8',
+            "roleId"=> "integer|exists:roles,id",
+            'password' => ['required','string',Password::min(8)->mixedCase()->numbers()->symbols()],
             'expireDate'=>'required|date',
             'permissions'=>['array',new UniqeValues],
             'permissions.*'=>['string','exists:permissions,label'],
