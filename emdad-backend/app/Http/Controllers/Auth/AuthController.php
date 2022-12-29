@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\RemoveUserRequets;
 use App\Http\Requests\UMRequests\User\ActivateRequest;
-use App\Http\Services\UMServices\UserServices;
 use App\Http\Requests\UMRequests\User\AssignRoleRequest;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
@@ -20,7 +19,7 @@ use App\Http\Requests\UMRequests\User\StoreUserRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\General\SmsService;
-
+use App\Http\Services\UMServices\AuthenticationServices;
 
 class AuthController extends Controller
 {
@@ -83,7 +82,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function resetPassword(ResetPasswordRequest $request,UserServices $userServices) {
+    public function resetPassword(ResetPasswordRequest $request,AuthenticationServices $userServices) {
         return $userServices->resetPassword($request);
     }
 
@@ -143,7 +142,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function store(StoreAuthRequest $request, UserServices $userServices)
+    public function store(StoreAuthRequest $request, AuthenticationServices $userServices)
     {
         return $userServices->create($request->validated());
     }
@@ -199,7 +198,7 @@ class AuthController extends Controller
      * )
      */
 
-    public function loginUser(LoginRequest $request, UserServices $userServices)
+    public function loginUser(LoginRequest $request, AuthenticationServices $userServices)
     {
         return $userServices->login($request);
     }
@@ -252,7 +251,7 @@ class AuthController extends Controller
      * )
      */
 
-    public function activateUser(ActivateRequest $request, UserServices $userServices)
+    public function activateUser(ActivateRequest $request, AuthenticationServices $userServices)
     {
         return $userServices->activate($request);
     }
@@ -296,7 +295,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function resendOTP(ResendOTPRequest $request, UserServices $userServices)
+    public function resendOTP(ResendOTPRequest $request, AuthenticationServices $userServices)
     {
         return $userServices->resend($request);
     }
@@ -337,7 +336,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function logoutUser(UserServices $userServices)
+    public function logoutUser(AuthenticationServices $userServices)
     {
         return $userServices->logout();
     }
@@ -400,7 +399,7 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function forgotPassword(ForgotPasswordRequest $request, UserServices $userServices)
+    public function forgotPassword(ForgotPasswordRequest $request, AuthenticationServices $userServices)
     {
         return $userServices->forgotPassword($request);
     }
@@ -448,7 +447,7 @@ class AuthController extends Controller
     public function removeUser(
         RemoveUserRequets $request,
         $id,
-        UserServices $userServices
+        AuthenticationServices $userServices
     ) {
         return $userServices->removeUser($id);
     }

@@ -56,6 +56,12 @@ class Profile extends Model
         return $this->morphMany(Subscription::class, 'subscribed');
     }
 
+
+    public function subscriptionPayments()
+    {
+        return $this->hasMany(SubscriptionPayment::class);
+    }
+
     public function users()
     {
         return $this->belongsToMany(

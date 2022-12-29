@@ -21,7 +21,7 @@ use Illuminate\Support\Str;
 
 
 
-class UserServices
+class AuthenticationServices
 {
 
     public function create($request)
@@ -34,6 +34,7 @@ class UserServices
             $request['identity_type'] = $request['identityType'] ?? 'nid';
             $request['otp_expires_at'] = now()->addMinutes(5);
             $request['is_super_admin'] = true;
+            $request['password_changed'] = true;
             // $request['otp'] = userOtp();
 
             $user = User::create($request);
@@ -439,8 +440,13 @@ class UserServices
      $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
         MailController::sendSignupEmail($user->name, $user->email, $user->otp);
 
-        $smsService->sendSms($user->mobile,$user->password,'password');
-        return response()->json(['success'=>true,'smsType'=>'password'],201);
-          
+        $smsService->sendSms($user->mobile,$user->otp);
+        return
+            [
+                'message' => 'New OTP has been sent.',
+                'otp' => $user->otp,
+                "id" => $user->id,
+
+            ];
     }
 }

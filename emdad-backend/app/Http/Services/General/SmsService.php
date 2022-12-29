@@ -15,10 +15,17 @@ class SmsService
     // $this->sendSms($user->mobile, $msgBody);
   }
 
-  public  function sendSms($mobile, $otp)
+  public  function sendSms($mobile, $var,$smsType='otp')
   {
 
-    $msgBody = 'Your verification code is ' . $otp.'';
+    if($smsType==='otp'){
+      $msgBody = 'Your verification code is ' . $var.'';
+
+    }
+    if($smsType=='password'){
+      $msgBody = 'Emdad account has been issued for you use this first time password ' . $var.'';
+
+    }
 
 
     // dd([$mobile,urlencode($msgBody)]);
