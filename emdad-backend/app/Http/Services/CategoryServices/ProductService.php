@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Services\CategoryServices;
+
 use App\Http\Collections\ProductsCollection;
 use App\Http\Resources\CategoryResourses\Product\ProductResponse;
 use App\Http\Services\AccountServices\UploadServices;
@@ -26,9 +27,9 @@ class ProductService
             "price" => $request->price,
             "measruing_unit" => $request->measruingUnit,
             "image" => $request->image,
-
         ]);
         if ($prodcut) {
+            $prodcut->companyProduct()->attach($prodcut->id, ['profile_id' => auth()->user()->profile_id]);
             return response()->json(['message' => 'created successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
