@@ -35,6 +35,23 @@ class SubscriptionPackagesSeeder extends Seeder
         فترات مختلفة"],
         ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"ادارة المستخدمين","systemValue"=>1,"text_en"=>"2","text_ar"=>"2","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "],
 
+        ["key"=>"Suppliers","titleEn"=>"Suppliers Management","titleAr"=>"إدارة المستخدمين","systemValue"=>1,"text_en"=>"30 ","text_ar"=>"30","descriptionEn"=>"The number of suppliers that can be added for direct dealing.","descriptionAr"=>"تمكن المنشأة من إضافة عدد من الموردين للتعامل المباشر، ويكون الحد األعلى حسب باقة 
+        االشتراك."],
+
+        ["key"=>"items","titleEn"=>"Number of items in a requestion","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>1,"text_en"=>"3","text_ar"=>"3","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد األعلى حسب باقة 
+        االشتراك."],
+
+        ["key"=>"Permissions Management","titleEn"=>"Permissions","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>1,"text_en"=>"Inactive","text_ar"=>"غير ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
+
+        ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+        operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
+        analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
+        محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
+        أوامر الشراء المعتمدة..."],
+
+        ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>1,"text_en"=>"3 Points","text_ar"=>"3 Points","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+        االشتراك."]
+
             ]
 
 
@@ -55,9 +72,25 @@ class SubscriptionPackagesSeeder extends Seeder
             دفعة واحدة للطلب كامال 
             التوريد المجزأ: في امر الشراء عند تحديد جدولة التوريد المجزأ، يتم تقسيم التوريدات لدفعات على 
             فترات مختلفة"],
-            ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"ادارة المستخدمين","systemValue"=>1,"text_en"=>"15","text_ar"=>"15","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "]
+            ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"ادارة المستخدمين","systemValue"=>1,"text_en"=>"15","text_ar"=>"15","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "],
             
-            
+            ["key"=>"Suppliers","titleEn"=>"Suppliers Management","titleAr"=>"إدارة المستخدمين","systemValue"=>1,"text_en"=>"50 ","text_ar"=>"50","descriptionEn"=>"The number of suppliers that can be added for direct dealing.","descriptionAr"=>"تمكن المنشأة من إضافة عدد من الموردين للتعامل المباشر، ويكون الحد األعلى حسب باقة 
+        االشتراك."],
+
+            ["key"=>"items","titleEn"=>"Number of items in a requestion","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>1,"text_en"=>"10","text_ar"=>"10","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد األعلى حسب باقة 
+            االشتراك."],
+
+            ["key"=>"Permissions Management","titleEn"=>"Permissions","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>1,"text_en"=>"Active","text_ar"=>"ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
+
+            ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+            operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
+            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
+            محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
+            أوامر الشراء المعتمدة..."],
+
+            ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>1,"text_en"=>"10 Points","text_ar"=>"نقطة 10","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+            االشتراك."]
+
             
              ]
 
@@ -78,7 +111,24 @@ class SubscriptionPackagesSeeder extends Seeder
             دفعة واحدة للطلب كامال 
             التوريد المجزأ: في امر الشراء عند تحديد جدولة التوريد المجزأ، يتم تقسيم التوريدات لدفعات على 
             فترات مختلفة"],
-            ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"ادارة المستخدمين","systemValue"=>1,"text_en"=>"30","text_ar"=>"15","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "]
+            ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"ادارة المستخدمين","systemValue"=>1,"text_en"=>"30","text_ar"=>"30","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "],
+
+            ["key"=>"Suppliers","titleEn"=>"Suppliers Management","titleAr"=>"إدارة الموردين","systemValue"=>1,"text_en"=>"80 ","text_ar"=>"80","descriptionEn"=>"The number of suppliers that can be added for direct dealing.","descriptionAr"=>"تمكن المنشأة من إضافة عدد من الموردين للتعامل المباشر، ويكون الحد األعلى حسب باقة 
+        االشتراك."],
+
+            ["key"=>"items","titleEn"=>"Number of items in a requestion","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>1,"text_en"=>"20","text_ar"=>"20","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد األعلى حسب باقة 
+            االشتراك."],
+
+            ["key"=>"Permissions Management","titleEn"=>"Permissions","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>1,"text_en"=>"Active","text_ar"=>"ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
+
+            ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+            operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
+            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
+            محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
+            أوامر الشراء المعتمدة..."],
+
+            ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>1,"text_en"=>"15 Points","text_ar"=>"نقطة 10","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+            االشتراك."]
             
             
             
