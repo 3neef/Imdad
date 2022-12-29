@@ -6,6 +6,7 @@ use App\Http\Collections\ProductsCollection;
 use App\Http\Resources\CategoryResourses\Product\ProductResponse;
 use App\Http\Services\AccountServices\UploadServices;
 use App\Models\Emdad\Product;
+use Exception;
 
 class ProductService
 {
@@ -86,4 +87,24 @@ class ProductService
         }
         return response()->json(['error' => 'system error'], 500);
     }
+
+
+
+    public function setcompanyproducts($request)
+    {
+
+        $product = Product::first();
+        if (isset($request['productList'])) {
+            foreach ($request['productList'] as $product_id) {
+         $product->companyProduct()->attach(['product_id' => $product_id, 'profile_id' => auth()->user()->profile_id]);
+            } 
+            
+        } else {
+            $products =  $product->companyProduct()->attach(['product_id' => $request, 'profile_id' => auth()->user()->profile_id]);
+                return response()->json(['message' => 'created successfully'], 200);
+            }
+            return response()->json(['error' => 'system error'], 500);
+        }
+       
+    
 }
