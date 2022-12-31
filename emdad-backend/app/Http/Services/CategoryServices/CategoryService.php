@@ -116,6 +116,14 @@ class CategoryService
 
     }
 
+    public function RetryApproval($id){
+        $category = Categories::where('id', $id)->first();
+        if (auth()->user()->profile_id && $category->status=="rejected") {
+            
+        }
+        
+    }
+
 
 // public function approveCategory($id)
     // {
