@@ -115,7 +115,7 @@ public function changeProductStatus($request)
         $category = ProfileProductsPivot::where('id',$request->product_id)->first();
         if ($category == null) {
             return response()->json([
-                'error' => 'no category founded'
+                'error' => 'No products founded'
             ]);
         } else {
             $category->update(['status' => 0]);
