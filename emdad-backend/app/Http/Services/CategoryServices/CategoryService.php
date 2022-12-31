@@ -5,6 +5,7 @@ namespace App\Http\Services\CategoryServices;
 use App\Http\Collections\CategoryCollection;
 use App\Http\Resources\CategoryResourses\category\CategoryResource;
 use App\Models\Emdad\Categories;
+use App\Models\ProfileCategoryPivot;
 use Exception;
 
 class CategoryService
@@ -114,6 +115,17 @@ class CategoryService
         }
         return response()->json(['message' => 'created successfully'], 200);
 
+    }
+
+    public function RetryApproval($request){
+        $category = ProfileCategoryPivot::where('category_id', $request->id)->where('Profile_id',auth()->user()->profile_id)->first();
+        if ($category->status=="rejected") {
+            $category->update([
+                "status" => "pending",
+                "reason" => $request->reason ?? $category->reason,
+            ]);
+        }
+        
     }
 
 

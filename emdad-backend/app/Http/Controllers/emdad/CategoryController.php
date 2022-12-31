@@ -5,6 +5,7 @@ namespace App\Http\Controllers\emdad;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategroyRequests\Category\ProfileCategoryRequest;
+use App\Http\Requests\CategroyRequests\Categroy\ApproveCategoryRequest;
 use App\Http\Services\CategoryServices\CategoryService;
 use App\Http\Requests\CategroyRequests\Categroy\CreateCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\UpdateCategoryRequest;
@@ -358,4 +359,7 @@ class CategoryController extends Controller
         return $this->categoryService->setCategories($request);
     }
 
+    public function RetryRejectedCategories(ApproveCategoryRequest $request){
+        return $this->categoryService->RetryApproval($request);
+    }
 }
