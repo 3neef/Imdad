@@ -6846,6 +6846,124 @@
                 }
             }
         },
+        "/api/v1_0/products/company-products": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "set company product",
+                "description": "company product Here",
+                "operationId": "companyproduct",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "productList"
+                                ],
+                                "properties": {
+                                    "productList": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "restored successfully"
+                    },
+                    "500": {
+                        "description": "Resource Not Found"
+                    },
+                    "404": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/products/change-Product-Status": {
+            "post": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "set change Product Status",
+                "description": "set change Product Status Here",
+                "operationId": "changeProductStatus",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "product_id"
+                                ],
+                                "properties": {
+                                    "product_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "restored successfully"
+                    },
+                    "500": {
+                        "description": "Resource Not Found"
+                    },
+                    "404": {
+                        "description": "system error"
+                    }
+                }
+            }
+        },
         "/api/v1_0/wathiq/relatedCr": {
             "get": {
                 "tags": [

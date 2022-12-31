@@ -106,8 +106,8 @@ class CategoryService
             foreach ($request['categoryList'] as $category_id) {
                 try {
                     $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
+                } catch (Exception $e) {
                 }
-                catch(Exception $e){}
             }
         } else {
             $category->companyCategory()->attach($category->id, ['category_id' => $request, 'profile_id' => auth()->user()->profile_id]);
@@ -127,9 +127,9 @@ class CategoryService
     }
 
     public function changeCategoryStatus($request)
-    {        
+    {
 
-        $category = ProfileCategoryPivot::where('id',$request->product_id)->first();
+        $category = ProfileCategoryPivot::where('id', $request->product_id)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'No categories founded'
@@ -158,7 +158,7 @@ class CategoryService
     public function rejectCategory($request)
     {
         $category = Categories::where('id', $request->category_id)->first();
-        if ($category == null ) {
+        if ($category == null) {
             return response()->json([
                 'error' => 'No category founded'
             ]);

@@ -328,12 +328,96 @@ class ProductController extends Controller
 
 
 
+/**
+        * @OA\post(
+        * path="/api/v1_0/products/company-products",
+        * operationId="companyproduct",
+        * tags={"Product"},
+        * summary="set company product",
+        * description="company product Here",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"productList"},
+        *               @OA\Property(property="productList", type="integer")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="restored successfully"
+        *       ),
+        *      @OA\Response(response=500, description="Resource Not Found"),
+        *      @OA\Response(response=404, description="system error"),
+        * )
+        */
     public function setCompanyProduct(CompanyProductRequest $request)
     {
         return $this->productService->setcompanyproducts($request);
     }
 
 
+    /**
+        * @OA\post(
+        * path="/api/v1_0/products/change-Product-Status",
+        * operationId="changeProductStatus",
+        * tags={"Product"},
+        * summary="set change Product Status",
+        * description="set change Product Status Here",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"product_id"},
+        *               @OA\Property(property="product_id", type="integer")
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="restored successfully"
+        *       ),
+        *      @OA\Response(response=500, description="Resource Not Found"),
+        *      @OA\Response(response=404, description="system error"),
+        * )
+        */
     public function changeProductStatus(StatusCompanyProductRequest $request)
     {
         return $this->productService->changeProductStatus($request);
