@@ -118,15 +118,31 @@ class CategoryService
     }
 
     public function RetryApproval($request){
-        $category = ProfileCategoryPivot::where('category_id', $request->id)->where('Profile_id',auth()->user()->profile_id)->first();
+        $category = Categories::where('category_id', $request->id)->where('Profile_id',auth()->user()->profile_id)->first();
         if ($category->status=="rejected") {
             $category->update([
                 "status" => "pending",
                 "reason" => $request->reason ?? $category->reason,
             ]);
+            return response()->json(['success' => 'Approved Successfly'], 201);
         }
+        return response()->json(['error' => false, 'message' => 'not found'], 404);
         
     }
+    public function changeCategoryStatus($request)
+    {        
+
+        $category = ProfileCategoryPivot::where('id',$request->product_id)->first();
+        if ($category == null) {
+            return response()->json([
+                'error' => 'No categories founded'
+            ]);
+        } else {
+            $category->update(['status' => 0]);
+            return response()->json(['message' => 'aproved successfully'], 200);
+        }
+    }
+
 
 
 // public function approveCategory($id)

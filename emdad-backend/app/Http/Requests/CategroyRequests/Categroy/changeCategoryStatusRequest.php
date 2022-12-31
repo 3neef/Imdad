@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Requests\CategroyRequests\Categroy;
-
-use Illuminate\Contracts\Validation\Validator;
+namespace App\Http\Requests\CategroyRequests\Product;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rule;
 
-class ApproveCategoryRequest extends FormRequest
+class changeCategoryStatusRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -18,6 +16,7 @@ class ApproveCategoryRequest extends FormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,8 +25,7 @@ class ApproveCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            "status" => [Rule::in(['aproved', 'pending', 'rejected'])],
-            'reason' => ['string', 'min:3', 'max:1000'],
+            'category_id' => 'exists:profile_category_pivots,id',
         ];
     }
 
