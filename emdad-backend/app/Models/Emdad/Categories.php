@@ -2,6 +2,7 @@
 
 namespace App\Models\Emdad;
 
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,4 +16,13 @@ class Categories extends Model
     {
         return $this->hasMany(Prodcuts::class);
     }
+
+    public function companyCategory()
+    {
+        return $this->belongsToMany(Profile::class, 'profile_category_pivots', 'profile_id', 'category_id')
+            ->withPivot('category_id')
+            ->withTimestamps();
+    }
+
+
 }

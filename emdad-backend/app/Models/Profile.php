@@ -3,13 +3,14 @@
 namespace App\Models;
 
 use App\Models\Accounts\SubscriptionPackages;
+use App\Models\Emdad\Categories;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Profile extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'created_by',
@@ -46,6 +47,12 @@ class Profile extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function categories()
+    {
+        return $this->hasMany(Categories::class);
+    }
+
     public function parent()
     {
         return $this->belongsTo(Profile::class, 'parent_id');
@@ -65,22 +72,17 @@ class Profile extends Model
     public function users()
     {
         return $this->belongsToMany(
-            User::class, 'profile_department_user'
+            User::class,
+            'profile_department_user'
         )->withPivot('department_id')
-        ->withTimestamps();
-
-        ;
+            ->withTimestamps();;
     }
     public function departments()
     {
         return $this->belongsToMany(
-            Department::class, 'profile_department_user'
+            Department::class,
+            'profile_department_user'
         )->withPivot('user_id')
-        ->withTimestamps();
-
-        ;
+            ->withTimestamps();;
     }
-
-
-
 }
