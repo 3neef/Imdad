@@ -34,14 +34,14 @@ class UserServices
             $request['identity_type'] = $request['identityType'] ?? 'nid';
             $request['otp_expires_at'] = now()->addMinutes(5);
             $request['is_super_admin'] = true;
+            $status = $request['status'];
+
             // $request['otp'] = userOtp();
 
             $user = User::create($request);
-            $data = $this->UserOtp($user);
-            $user->update(['otp' => $data['otp']]);
+             $this->UserOtp($user);
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
-            $status = $request['status'];
             $manager_id = null;
             if (isset($request['managerUserId'])) {
                 $manager_id = $request['managerUserId'];
@@ -164,7 +164,6 @@ class UserServices
             return response()->json(
                 [
                     "success" => true, "message" => "verifiy your otp first",
-                    "data" => $data,
                 ]
             );
         }
@@ -182,7 +181,6 @@ class UserServices
 
             return response()->json(
                 [
-                    "data" => $data,
                     "success" => false, "error" => "Forbidden"
                 ],
                 403
@@ -250,7 +248,6 @@ class UserServices
         return response()->json(
             [
                 'message' => 'New OTP has been sent.',
-                'otp' => $data,
             ]
         );
     }
@@ -441,7 +438,7 @@ class UserServices
         MailController::sendSignupEmail($user->name, $user->email, $user->otp);
 
         $smsService->sendSms($user->mobile,$user->password,'password');
-        return response()->json(['success'=>true,'smsType'=>'password'],201);
+        // return response()->json(['success'=>true,'smsType'=>'password'],201);
           
     }
 }
