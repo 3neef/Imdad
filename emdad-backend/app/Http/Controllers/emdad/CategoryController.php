@@ -23,7 +23,7 @@ class CategoryController extends Controller
      * operationId="addcatogry",
      * tags={"Catogry"},
      * summary="add catogry",
-     * description="add catogry Here",
+     * description="add category or a subcategory using parent id if it exists  by the company owner",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -46,8 +46,9 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"name","isleaf","companyId"},
-     *               @OA\Property(property="name", type="string"),
+     *               required={"nameEn","nameAr","isleaf","companyId"},
+     *               @OA\Property(property="nameEn", type="string"),
+     *               @OA\Property(property="nameAr", type="string"),
      *               @OA\Property(property="isleaf", type="boolean"),
      *               @OA\Property(property="companyId", type="integer")
      *            ),
@@ -64,59 +65,13 @@ class CategoryController extends Controller
     {
         return $this->categoryService->store($request);
     }
-    /**
-     * @OA\Post(
-     * path="/api/v1_0/categories/aproved-catogry/{id}",
-     * operationId="aprovedcatogre",
-     * tags={"Catogry"},
-     * summary="aproved catogry",
-     * description="aproved catogry Here",
-     *     @OA\Parameter(
-     *         name="x-authorization",
-     *         in="header",
-     *         description="Set x-authorization",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
-     *     @OA\RequestBody(
-     *         @OA\JsonContent(),
-     *         @OA\MediaType(
-     *            mediaType="multipart/form-data",
-     *            @OA\Schema(
-     *               type="object",
-     *               required={"id"},
-     *               @OA\Property(property="id", type="integer"),
-     *            ),
-     *        ),
-     *    ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="aproved Successfully"
-     *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     * )
-     */
-    // public function aprovedCatogry($id)
-    // {
-    //     return $this->categoryService->approveCategory($id);
-    // }
-
 
     /**
      * @OA\get(
      *    path="/api/v1_0/categories",
      *    operationId="showallcatogre",
      *    tags={"Catogry"},
-     *    summary="show all  catogry",
+     *    summary="show all catogries on the user profile",
      *    description="show all  catogry Here",
      *     @OA\Parameter(
      *         name="x-authorization",
@@ -148,14 +103,21 @@ class CategoryController extends Controller
     {
         return $this->categoryService->index( $request);
     }
-
-    /**
-     * @OA\Post(
-     * path="/api/v1_0/categories/save-sub-catogry",
-     * operationId="SavesubCatogre",
+/**
+     * @OA\delete(
+     * path="/api/v1_0/categories/{id}",
+     * operationId="deleteCatogry",
      * tags={"Catogry"},
-     * summary="save sub catogry",
-     * description="save sub catogry Here",
+     * summary="Delete Catogry",
+     * description="delete Category using Category id",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -175,34 +137,46 @@ class CategoryController extends Controller
      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
-     *            mediaType="multipart/form-data",
+     *            mediaType="application-json",
      *            @OA\Schema(
      *               type="object",
-     *               required={"name","parent_id","isleaf"},
-     *               @OA\Property(property="name", type="string"),
-     *               @OA\Property(property="parent_id", type="integer"),
-     *               @OA\Property(property="isleaf", type="boolean")
      *            ),
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=201,
-     *          description="created Successfully"
+     *          response=301,
+     *          description="Category deleted successfully",
+     *          @OA\JsonContent()
      *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
+
     public function destroy($id)
     {
         return $this->categoryService->destroy($id);
     }
-    /**
-     * @OA\get(
-     * path="/api/v1_0/categories/show-with-catogry-id",
-     * operationId="showwithcategoryid",
+   /**
+     * @OA\put(
+     * path="/api/v1_0/categories/{id}",
+     * operationId="updateCatogry",
      * tags={"Catogry"},
-     * summary="show with catogry id",
-     * description="show with catogry id Here",
+     * summary="update Catogry",
+     * description="update Catogry using id",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -225,15 +199,33 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={""},
-     *               @OA\Property(property="", type="")
+     *               @OA\Property(property="nameEn", type="string"),
+     *               @OA\Property(property="nameAr", type="string"),
+     *               @OA\Property(property="isleaf", type="boolean"),
+     *               @OA\Property(property="companyId", type="integer")
      *            ),
      *        ),
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="data as json "
+     *          description="Category updated successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -246,11 +238,19 @@ class CategoryController extends Controller
 
     /**
      * @OA\get(
-     * path="/api/v1_0/categories/get-by-company-id/{companyId}",
-     * operationId="getbycompanyid",
+     * path="/api/v1_0/categories/restore/{id}",
+     * operationId="restoreCategory",
      * tags={"Catogry"},
-     * summary="get with company id",
-     * description="get with company id Here",
+     * summary="restore category",
+     * description="restore deleted category",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -273,8 +273,6 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *                required={"companyId"},
-     *               @OA\Property(property="id", type="integer")
      *            ),
      *        ),
      *    ),
@@ -289,20 +287,26 @@ class CategoryController extends Controller
      * )
      */
 
-
-
     public function restore($id)
     {
         return $this->categoryService->restore($id);
     }
 /**
         * @OA\get(
-        * path="/api/v1_0/categories/get-By-Id/{id}",
+        * path="/api/v1_0/categories/{id}",
         * operationId="getBycategoryId",
-        * tags={"Product"},
+        * tags={"Catogry"},
         * summary="get By categoryId",
-        * description="get By categoryId Here",
-*     @OA\Parameter(
+        * description="show category with a specifc id",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -324,8 +328,6 @@ class CategoryController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"id"},
-        *               @OA\Property(property="id", type="integer")
         *            ),
         *        ),
         *    ),

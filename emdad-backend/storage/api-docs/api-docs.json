@@ -5582,7 +5582,7 @@
                 "tags": [
                     "Catogry"
                 ],
-                "summary": "show all  catogry",
+                "summary": "show all catogries on the user profile",
                 "description": "show all  catogry Here",
                 "operationId": "showallcatogre",
                 "parameters": [
@@ -5627,7 +5627,7 @@
                     "Catogry"
                 ],
                 "summary": "add catogry",
-                "description": "add catogry Here",
+                "description": "add category or a subcategory using parent id if it exists  by the company owner",
                 "operationId": "addcatogry",
                 "parameters": [
                     {
@@ -5652,12 +5652,16 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "name",
+                                    "nameEn",
+                                    "nameAr",
                                     "isleaf",
                                     "companyId"
                                 ],
                                 "properties": {
-                                    "name": {
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "nameAr": {
                                         "type": "string"
                                     },
                                     "isleaf": {
@@ -5685,202 +5689,24 @@
                 }
             }
         },
-        "/api/v1_0/categories/save-sub-catogry": {
-            "post": {
-                "tags": [
-                    "Catogry"
-                ],
-                "summary": "save sub catogry",
-                "description": "save sub catogry Here",
-                "operationId": "SavesubCatogre",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "name",
-                                    "parent_id",
-                                    "isleaf"
-                                ],
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "parent_id": {
-                                        "type": "integer"
-                                    },
-                                    "isleaf": {
-                                        "type": "boolean"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/categories/show-with-catogry-id": {
+        "/api/v1_0/categories/{id}": {
             "get": {
                 "tags": [
                     "Catogry"
-                ],
-                "summary": "show with catogry id",
-                "description": "show with catogry id Here",
-                "operationId": "showwithcategoryid",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    ""
-                                ],
-                                "properties": {
-                                    "": {
-                                        "type": ""
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "data as json "
-                    }
-                }
-            }
-        },
-        "/api/v1_0/categories/get-by-company-id/{companyId}": {
-            "get": {
-                "tags": [
-                    "Catogry"
-                ],
-                "summary": "get with company id",
-                "description": "get with company id Here",
-                "operationId": "getbycompanyid",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "companyId"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "Maincatogre": {
-                                            "type": "integer",
-                                            "example": "{'id': 2, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/categories/get-By-Id/{id}": {
-            "get": {
-                "tags": [
-                    "Product"
                 ],
                 "summary": "get By categoryId",
-                "description": "get By categoryId Here",
+                "description": "show category with a specifc id",
                 "operationId": "getBycategoryId",
                 "parameters": [
                     {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
                         "name": "x-authorization",
                         "in": "header",
                         "description": "Set x-authorization",
@@ -5901,14 +5727,6 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
                                 "type": "object"
                             }
                         },
@@ -5927,6 +5745,242 @@
                                         "categoryById": {
                                             "type": "integer",
                                             "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "update Catogry",
+                "description": "update Catogry using id",
+                "operationId": "updateCatogry",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "isleaf": {
+                                        "type": "boolean"
+                                    },
+                                    "companyId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category updated successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "Delete Catogry",
+                "description": "delete Category using Category id",
+                "operationId": "deleteCatogry",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application-json": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "301": {
+                        "description": "Category deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/restore/{id}": {
+            "get": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "restore category",
+                "description": "restore deleted category",
+                "operationId": "restoreCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Maincatogre": {
+                                            "type": "integer",
+                                            "example": "{'id': 2, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
                                         }
                                     },
                                     "type": "object"
