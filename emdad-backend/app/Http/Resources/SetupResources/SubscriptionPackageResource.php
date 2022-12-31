@@ -19,8 +19,7 @@ class SubscriptionPackageResource extends JsonResource
             "packageNameAr"=>$this->package_name_ar,
             "packageNameEn"=>$this->package_name_en,
             "freeFirstTime"=>$this->free_first_time,
-            "price1"=>$this->price_1,
-            "price2"=>$this->price_2,
+            "price"=>auth()->user()->oldOwner()? $this->price_1:$this->price_2,
             "features"=>json_decode($this->features),
         ];
     }
