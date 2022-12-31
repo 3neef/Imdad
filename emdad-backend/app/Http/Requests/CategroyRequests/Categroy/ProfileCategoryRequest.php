@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\CategroyRequests\Category;
+namespace App\Http\Requests\CategroyRequests\Categroy;
 
 use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\CategroyRequests\Product;
+namespace App\Http\Requests\CategroyRequests\Categroy;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;

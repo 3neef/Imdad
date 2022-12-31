@@ -4,13 +4,13 @@ namespace App\Http\Controllers\emdad;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategroyRequests\Category\ProfileCategoryRequest;
+use App\Http\Requests\CategroyRequests\Categroy\changeCategoryStatusRequest;
 use App\Http\Services\CategoryServices\CategoryService;
 use App\Http\Requests\CategroyRequests\Categroy\CreateCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\EmdadApproveCategoryRequest;
+use App\Http\Requests\CategroyRequests\Categroy\ProfileCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\RetryApprovalRequest;
 use App\Http\Requests\CategroyRequests\Categroy\UpdateCategoryRequest;
-use App\Http\Requests\CategroyRequests\Product\changeCategoryStatusRequest;
 
 class CategoryController extends Controller
 {
@@ -392,7 +392,7 @@ class CategoryController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               required={"categoryList"},
-     *               @OA\Property(property="categoryList", type="array"),
+     *               @OA\Property(property="categoryList", type="string"),
      *            ),
      *        ),
      *    ),
