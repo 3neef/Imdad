@@ -101,13 +101,13 @@ class CategoryService
 
     public function setCategories($request)
     {
-
         $category = Categories::first();
-
-
         if (isset($request['categoryList'])) {
             foreach ($request['categoryList'] as $category_id) {
-                $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
+                try {
+                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
+                }
+                catch(Exception $e){}
             }
         } else {
             $category->companyCategory()->attach($category->id, ['category_id' => $request, 'profile_id' => auth()->user()->profile_id]);

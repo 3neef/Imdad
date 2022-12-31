@@ -98,7 +98,10 @@ class ProductService
         $product = Product::first();
         if (isset($request['productList'])) {
             foreach ($request['productList'] as $product_id) {
-         $product->companyProduct()->attach(['product_id' => $product_id, 'profile_id' => auth()->user()->profile_id]);
+                try {
+                    $product->companyProduct()->attach(['product_id' => $product_id, 'profile_id' => auth()->user()->profile_id]);
+                }
+                catch(Exception $e){}
             } 
             
         } else {
