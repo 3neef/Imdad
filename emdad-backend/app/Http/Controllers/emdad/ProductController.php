@@ -4,6 +4,7 @@ namespace App\Http\Controllers\emdad;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategroyRequests\Product\CompanyProductRequest;
 use App\Http\Requests\CategroyRequests\Product\CreateProuductRequest;
 use App\Http\Requests\CategroyRequests\Product\GetProuductByIdRequest;
 use App\Http\Requests\CategroyRequests\Product\RestoreProuductRequest;
@@ -321,5 +322,15 @@ class ProductController extends Controller
     public function restore($id)
     {
         return $this->productService->restore($id);
+    }
+
+
+
+
+
+
+    public function setCompanyProduct(CompanyProductRequest $request)
+    {
+        return $this->productService->setcompanyproducts($request);
     }
 }
