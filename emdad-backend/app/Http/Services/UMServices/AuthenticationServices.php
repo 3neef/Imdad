@@ -441,6 +441,7 @@ class AuthenticationServices
         MailController::sendSignupEmail($user->name, $user->email, $user->otp);
 
         $smsService->sendSms($user->mobile,$user->otp);
+        
         return
             [
                 'message' => 'New OTP has been sent.',

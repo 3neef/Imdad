@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Requests\CategroyRequests\Product;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
+namespace App\Http\Requests\CategroyRequests\Categroy;
 
-class StatusCompanyProductRequest extends FormRequest
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
+
+class EmdadApproveCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +18,6 @@ class StatusCompanyProductRequest extends FormRequest
     {
         return true;
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -25,7 +26,8 @@ class StatusCompanyProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id' => ['required','exists:profile_products_pivots,id'],
+            'category_id' => ['required','exists:categories,id'],
+
         ];
     }
 

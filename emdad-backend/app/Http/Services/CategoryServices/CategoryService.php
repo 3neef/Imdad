@@ -109,39 +109,50 @@ class CategoryService
             foreach ($request['categoryList'] as $category_id) {
                 $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
             }
-
         } else {
             $category->companyCategory()->attach($category->id, ['category_id' => $request, 'profile_id' => auth()->user()->profile_id]);
         }
         return response()->json(['message' => 'created successfully'], 200);
-
     }
 
-    public function RetryApproval($request){
-        $category = ProfileCategoryPivot::where('category_id', $request->id)->where('Profile_id',auth()->user()->profile_id)->first();
-        if ($category->status=="rejected") {
+    public function RetryApproval($request)
+    {
+        $category = ProfileCategoryPivot::where('category_id', $request->id)->where('Profile_id', auth()->user()->profile_id)->first();
+        if ($category->status == "rejected") {
             $category->update([
                 "status" => "pending",
                 "reason" => $request->reason ?? $category->reason,
             ]);
         }
-        
     }
 
 
-// public function approveCategory($id)
-    // {
-    //     $category = Categories::find($id);
-    //     if ($category == null) {
-    //         return response()->json([
-    //             'error' => 'no category founded'
-    //         ]);
-    //     } else {
-    //         $category->update(['status' => 'aproved']);
-    //         return response()->json(['message' => 'aproved successfully'], 200);
-    //     }
-    // }
+    public function approveCategory($request)
+    {
+        $category = Categories::where('id', $request->category_id)->first();
+        if ($category == null) {
+            return response()->json([
+                'error' => 'No category founded'
+            ]);
+        } else {
+            $category->update(['status' => 'aproved']);
+            return response()->json(['message' => 'aproved successfully'], 200);
+        }
+    }
 
-    
-    
+
+    public function rejectCategory($request)
+    {
+        $category = Categories::where('id', $request->category_id)->first();
+        if ($category == null ) {
+            return response()->json([
+                'error' => 'No category founded'
+            ]);
+        } else {
+            $category->update([
+                'status' => 'rejected',
+            ]);
+            return response()->json(['message' => 'rejected successfully'], 200);
+        }
+    }
 }

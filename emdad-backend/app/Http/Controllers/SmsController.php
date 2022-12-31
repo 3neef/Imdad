@@ -43,9 +43,7 @@ class SmsController extends Controller
      */
     public static function sendSms(SendSmsRequest $request,SmsService $sms)
     {
-        $response=$sms->sendSms( $request->mobile, $request->msgBody);
-        if($response){
-                return response()->json(["success"=>true,"message"=>"sent successfully"],200);
-        }
+        $sms->sendSms( $request->mobile, $request->msgBody);
+            
     }
 }
