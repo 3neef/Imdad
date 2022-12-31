@@ -136,7 +136,7 @@ class CategoryService
             ]);
         } else {
             $category->update(['status' => 0]);
-            return response()->json(['message' => 'aproved successfully'], 200);
+            return response()->json(['message' => 'changed successfully'], 200);
         }
     }
 

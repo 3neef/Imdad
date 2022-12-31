@@ -5,7 +5,6 @@ namespace App\Http\Controllers\emdad;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategroyRequests\Category\ProfileCategoryRequest;
-use App\Http\Requests\CategroyRequests\Categroy\ApproveCategoryRequest;
 use App\Http\Services\CategoryServices\CategoryService;
 use App\Http\Requests\CategroyRequests\Categroy\CreateCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\EmdadApproveCategoryRequest;
@@ -355,6 +354,70 @@ class CategoryController extends Controller
     }
 
 
+/**
+     * @OA\put(
+     * path="/api/v1_0/categories/company-categories",
+     * operationId="setFivoritecompanyCategory",
+     * tags={"Catogry"},
+     * summary="Retry Catogry",
+     * description="set company Category",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"categoryList"},
+     *               @OA\Property(property="categoryList", type="array"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Category request sent successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
 
 
     public function setFavoriteCategories(ProfileCategoryRequest $request)
@@ -433,18 +496,209 @@ class CategoryController extends Controller
         return $this->categoryService->RetryApproval($request);
     }
 
+     /**
+     * @OA\put(
+     * path="/api/v1_0/categories/changeCategoryStatus/{id}",
+     * operationId="changeCategoryStatus",
+     * tags={"Catogry"},
+     * summary="change  Catogry status",
+     * description="Request change  Catogry status",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"category_id"},
+     *               @OA\Property(property="category_id", type="integer"),
+
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="changed successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function ChangeCategoryStatus(changeCategoryStatusRequest $request){
         return $this->categoryService->changeCategoryStatus($request);
     }
-
+ /**
+     * @OA\post(
+     * path="/api/v1_0/categories/approveCategory",
+     * operationId="approveCategory",
+     * tags={"Catogry"},
+     * summary="change  status approve Category",
+     * description="Request status approve Category",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"category_id"},
+     *               @OA\Property(property="category_id", type="integer"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="aproved successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
 
     public function approveCategory(EmdadApproveCategoryRequest $request){
         return $this->categoryService->approveCategory($request);
     }
+ /**
+     * @OA\post(
+     * path="/api/v1_0/categories/rejectCategory",
+     * operationId="rejectCategory",
+     * tags={"Catogry"},
+     * summary="change  status rejectCategory Category",
+     * description="Request status rejectCategory Category",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"category_id"},
+     *               @OA\Property(property="category_id", type="integer"),
 
-    public function rejectCategory(EmdadApproveCategoryRequest $request){
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="rejected successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function rejectCategory(EmdadApproveCategoryRequest $request)
+    {
         return $this->categoryService->rejectCategory($request);
     }
-    
-    // category_id
 }
