@@ -126,6 +126,20 @@ class CategoryService
         }
     }
 
+    public function changeCategoryStatus($request)
+    {        
+
+        $category = ProfileCategoryPivot::where('id',$request->product_id)->first();
+        if ($category == null) {
+            return response()->json([
+                'error' => 'No categories founded'
+            ]);
+        } else {
+            $category->update(['status' => 0]);
+            return response()->json(['message' => 'aproved successfully'], 200);
+        }
+    }
+
 
     public function approveCategory($request)
     {
