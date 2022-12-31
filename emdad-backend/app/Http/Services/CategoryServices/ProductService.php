@@ -6,6 +6,8 @@ use App\Http\Collections\ProductsCollection;
 use App\Http\Resources\CategoryResourses\Product\ProductResponse;
 use App\Http\Services\AccountServices\UploadServices;
 use App\Models\Emdad\Product;
+use App\Models\ProfileCategoryPivot;
+use App\Models\ProfileProductsPivot;
 use Exception;
 
 class ProductService
@@ -107,4 +109,20 @@ class ProductService
         }
        
     
+public function changeProductStatus($request)
+    {        
+
+        $category = ProfileProductsPivot::where('id',$request->product_id)->first();
+        if ($category == null) {
+            return response()->json([
+                'error' => 'no category founded'
+            ]);
+        } else {
+            $category->update(['status' => 0]);
+            return response()->json(['message' => 'aproved successfully'], 200);
+        }
+    }
+
+
+
 }

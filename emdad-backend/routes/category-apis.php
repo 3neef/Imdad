@@ -9,6 +9,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::apiResource('products', ProductController::class);
     Route::put('products/restore/{id}', [ProductController::class, 'restore']);
     Route::post('products/company-products', [ProductController::class, 'setCompanyProduct']);
+    Route::post('products/change-Product-Status', [ProductController::class, 'changeProductStatus']);
 });
 
 

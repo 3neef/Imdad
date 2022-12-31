@@ -6,8 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategroyRequests\Product\CompanyProductRequest;
 use App\Http\Requests\CategroyRequests\Product\CreateProuductRequest;
-use App\Http\Requests\CategroyRequests\Product\GetProuductByIdRequest;
-use App\Http\Requests\CategroyRequests\Product\RestoreProuductRequest;
+use App\Http\Requests\CategroyRequests\Product\StatusCompanyProductRequest;
 use App\Http\Requests\CategroyRequests\Product\UpdateProuductRequest;
 use App\Http\Services\CategoryServices\ProductService;
 
@@ -333,4 +332,11 @@ class ProductController extends Controller
     {
         return $this->productService->setcompanyproducts($request);
     }
+
+
+    public function changeProductStatus(StatusCompanyProductRequest $request)
+    {
+        return $this->productService->changeProductStatus($request);
+    }
+    
 }
