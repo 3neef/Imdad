@@ -100,10 +100,10 @@ class ProductService
             } 
             
         } else {
-            $products =  $product->companyProduct()->attach(['product_id' => $request, 'profile_id' => auth()->user()->profile_id]);
-                return response()->json(['message' => 'created successfully'], 200);
+          $product->companyProduct()->attach(['product_id' => $request, 'profile_id' => auth()->user()->profile_id]);
             }
-            return response()->json(['error' => 'system error'], 500);
+            return response()->json(['message' => 'created successfully'], 200);
+
         }
        
     

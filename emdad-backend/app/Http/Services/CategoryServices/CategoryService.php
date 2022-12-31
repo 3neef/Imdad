@@ -5,6 +5,7 @@ namespace App\Http\Services\CategoryServices;
 use App\Http\Collections\CategoryCollection;
 use App\Http\Resources\CategoryResourses\category\CategoryResource;
 use App\Models\Emdad\Categories;
+use Exception;
 
 class CategoryService
 {
@@ -19,19 +20,23 @@ class CategoryService
 
     public function store($request)
     {
-
-        $category = Categories::create([
-            'name_en' => $request->nameEn,
-            'name_ar' => $request->nameAr,
-            'isleaf' => $request->isleaf,
-            'parent_id' => $request->parentId ?? 0,
-
-        ]);
-        if (auth()->user()->profile_id) {
-            $category->update(['profile_id' => auth()->user()->profile_id??null ]);
-        }
-        if ($category) {
-            return response()->json(['message' => 'created successfully'], 200);
+        try {
+            $category = Categories::create([
+                'name_en' => $request->nameEn,
+                'name_ar' => $request->nameAr,
+                'isleaf' => $request->isleaf,
+                'parent_id' => $request->parentId ?? 0
+            ]);
+            if ($category) {
+                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
+            }
+            if (auth()->user()->profile_id) {
+                $category->update(['profile_id' => auth()->user()->profile_id ?? null]);
+            }
+            if ($category) {
+                return response()->json(['message' => 'created successfully'], 200);
+            }
+        } catch (Exception $e) {
         }
         return response()->json(['message' => 'error'], 501);
     }
@@ -69,8 +74,7 @@ class CategoryService
             ]);
             return response()->json(['success' => 'Updated Successfly'], 201);
         }
-        return response()->json(['error' => false ,'message' => 'not found'], 404);
-
+        return response()->json(['error' => false, 'message' => 'not found'], 404);
     }
 
     public function destroy($id)
@@ -94,8 +98,26 @@ class CategoryService
         return response()->json(['error' => 'system error'], 500);
     }
 
+    public function setCategories($request)
+    {
 
-    // public function approveCategory($id)
+        $category = Categories::first();
+
+
+        if (isset($request['categoryList'])) {
+            foreach ($request['categoryList'] as $category_id) {
+                $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
+            }
+
+        } else {
+            $category->companyCategory()->attach($category->id, ['category_id' => $request, 'profile_id' => auth()->user()->profile_id]);
+        }
+        return response()->json(['message' => 'created successfully'], 200);
+
+    }
+
+
+// public function approveCategory($id)
     // {
     //     $category = Categories::find($id);
     //     if ($category == null) {
@@ -107,4 +129,7 @@ class CategoryService
     //         return response()->json(['message' => 'aproved successfully'], 200);
     //     }
     // }
+
+    
+    
 }
