@@ -4,6 +4,7 @@ namespace App\Http\Controllers\emdad;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategroyRequests\Category\ProfileCategoryRequest;
 use App\Http\Services\CategoryServices\CategoryService;
 use App\Http\Requests\CategroyRequests\Categroy\CreateCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\UpdateCategoryRequest;
@@ -348,4 +349,13 @@ class CategoryController extends Controller
     {
         return $this->categoryService->show($id);
     }
+
+
+
+
+    public function setFavoriteCategories(ProfileCategoryRequest $request)
+    {
+        return $this->categoryService->setCategories($request);
+    }
+
 }

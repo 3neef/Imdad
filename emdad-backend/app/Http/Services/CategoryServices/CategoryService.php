@@ -28,7 +28,7 @@ class CategoryService
                 'parent_id' => $request->parentId ?? 0
             ]);
             if ($category) {
-                $category->companyCategory()->attach($category->id,['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
+                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
             }
             if (auth()->user()->profile_id) {
                 $category->update(['profile_id' => auth()->user()->profile_id ?? null]);
@@ -36,8 +36,7 @@ class CategoryService
             if ($category) {
                 return response()->json(['message' => 'created successfully'], 200);
             }
-        }
-        catch(Exception $e){
+        } catch (Exception $e) {
         }
         return response()->json(['message' => 'error'], 501);
     }
@@ -50,7 +49,7 @@ class CategoryService
     {
         $category = Categories::where('id', $id)->first();
         if ($category) {
-            return response()->json(['data' => new CategoryResource($category)], 200);  
+            return response()->json(['data' => new CategoryResource($category)], 200);
         }
         return response()->json(['error' => 'No data Founded'], 404);
     }
@@ -99,8 +98,26 @@ class CategoryService
         return response()->json(['error' => 'system error'], 500);
     }
 
+    public function setCategories($request)
+    {
 
-    // public function approveCategory($id)
+        $category = Categories::first();
+
+
+        if (isset($request['categoryList'])) {
+            foreach ($request['categoryList'] as $category_id) {
+                $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
+            }
+
+        } else {
+            $category->companyCategory()->attach($category->id, ['category_id' => $request, 'profile_id' => auth()->user()->profile_id]);
+        }
+        return response()->json(['message' => 'created successfully'], 200);
+
+    }
+
+
+// public function approveCategory($id)
     // {
     //     $category = Categories::find($id);
     //     if ($category == null) {
@@ -112,4 +129,7 @@ class CategoryService
     //         return response()->json(['message' => 'aproved successfully'], 200);
     //     }
     // }
+
+    
+    
 }
