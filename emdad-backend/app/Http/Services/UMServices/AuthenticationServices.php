@@ -208,23 +208,23 @@ class AuthenticationServices
         if ($request->otp != $user->otp) {
             return response()->json(
                 [
-                    "success" => false, "error" => "Invalid OTP"
+                    "success" => false, "error" => "Invalid OTP","errCode"=>"101"
                 ],
-                500
+                200
             );
         } elseif ($user->otp_expires_at < now()) {
             return response()->json(
                 [
-                    "success" => false, "error" => "Expired OTP"
+                    "success" => false, "error" => "Expired OTP","errCode"=>"102"
                 ],
-                500
+                200
             );
         } elseif ($user->is_verified == true) {
             return response()->json(
                 [
-                    "success" => false, "error" => "Your Account Already Activated"
+                    "success" => false, "error" => "Your Account Already Activated","errCode"=>"103"
                 ],
-                400
+                200
             );
         }
 
