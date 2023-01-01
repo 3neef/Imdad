@@ -7,6 +7,7 @@ use App\Http\Resources\CategoryResourses\category\CategoryResource;
 use App\Models\Emdad\Categories;
 use App\Models\ProfileCategoryPivot;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class CategoryService
 {
@@ -21,7 +22,7 @@ class CategoryService
 
     public function store($request)
     {
-        try {
+        $category = DB::transaction(function () use ($request) {
             $category = Categories::create([
                 'name_en' => $request->nameEn,
                 'name_ar' => $request->nameAr,
@@ -29,15 +30,24 @@ class CategoryService
                 'parent_id' => $request->parentId ?? 0
             ]);
             if ($category) {
-                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
+                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id ]);
             }
             if (auth()->user()->profile_id) {
                 $category->update(['profile_id' => auth()->user()->profile_id]);
             }
-            return response()->json(['message' => 'created successfully'], 200);
-        } catch (Exception $e) {
-            return response()->json(['message' => 'error'], 501);
+            return $category;
+        });
+        if ($category) {
+            return response()->json([
+                "statusCode" => "000",
+                'message' => 'User created successfully',
+                'data' => new CategoryResource($category)
+            ], 200);
         }
+        return response()->json([
+            "statusCode" => "999",
+            'success' => false, 'message' => "System Error"
+        ], 200);
     }
 
 
