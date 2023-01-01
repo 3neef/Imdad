@@ -250,6 +250,7 @@ class AuthenticationServices
         // $sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
             [
+                "statusCode"=>"000",
                 'message' => 'New OTP has been sent.',
                 'otp' => $data,
             ]
@@ -263,6 +264,9 @@ class AuthenticationServices
 
         return response()->json(
             [
+
+                "statusCode"=>"000",
+
                 'message' => 'Logged out', 'user' => $user
             ]
         );
@@ -273,7 +277,10 @@ class AuthenticationServices
 
         $user = User::find($id)->first();
         if ($user == null) {
-            return response()->json(['error' => 'user already deleted'], 403);
+            return response()->json(['error' => 'user already deleted',
+            "statusCode"=>"111",
+
+        ], 200);
         }
         // dd($user);
 
@@ -282,9 +289,15 @@ class AuthenticationServices
         $deleted = $user->delete();
 
         if ($deleted) {
-            return response()->json(['message' => 'User deleted successfully'], 301);
+            return response()->json([
+                "statusCode"=>"000",
+
+                'message' => 'User deleted successfully',], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(['error' => 'system error',
+        "statusCode"=>"999",
+
+    ], 200);
     }
 
 
@@ -295,7 +308,7 @@ class AuthenticationServices
         if ($restore) {
             return response()->json(['message' => 'User restored successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(['error' => 'system error',"statusCode"=>"999"], 200);
     }
 
 
@@ -308,6 +321,8 @@ class AuthenticationServices
 
         if ($status) {
             return response()->json([
+                "statusCode"=>"000",
+                
                 "success" => true,
                 "token" => $data->token,
                 'message' => ' Rest Link has been sended to your email id ',
@@ -315,9 +330,11 @@ class AuthenticationServices
             ], 200);
         }
         return response()->json([
+            "statusCode"=>"999",
+
             "success" => false,
             'message' => 'System error ',
-        ], 500);
+        ], 200);
     }
 
     // Todo  Need Code Again !
@@ -330,14 +347,18 @@ class AuthenticationServices
         event(new PasswordReset($user));
         if ($user) {
             return response()->json([
+                "statusCode"=>"000",
+
                 "success" => true,
                 'message' => 'password Reste successfly',
             ], 200);
         }
         return response()->json([
+            "statusCode"=>"999",
+
             "success" => false,
             'message' => 'system Error',
-        ], 500);
+        ], 200);
     }
 
     public function assignRole($request)
@@ -357,13 +378,23 @@ class AuthenticationServices
         $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
 
         if ($userRoleProfile == null) {
-            return response()->json(['error' => 'user doesn\'t belong to this company'], 500);
+            return response()->json([
+                "statusCode"=>"250",
+
+                'error' => 'user doesn\'t belong to this company'], 200);
         }
         $active = $userRoleProfile->update(['status' => 'active']);
         if ($active) {
-            return response()->json(['message' => 'user account has activated successfully'], 200);
+            return response()->json([
+                "statusCode"=>"000",
+
+                'message' => 'user account has activated successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json([
+            "statusCode"=>"999",
+
+            'error' => 'system error'
+    ], 200);
     }
 
 
@@ -374,7 +405,10 @@ class AuthenticationServices
         $active = $userRoleProfile->update(['status' => 'inActive']);
         // dd($userRoleProfile);
         if ($active) {
-            return response()->json(['message' => 'user account has disabled successfully'], 200);
+            return response()->json([
+                "statusCode"=>"000",
+
+                'message' => 'user account has disabled successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
@@ -383,9 +417,15 @@ class AuthenticationServices
     {
         $userRoleCompany = RoleUserProfile::where('user_id', '=', $request->userId)->where('profile_id', '=', $request->profile_id)->withTrashed()->first()->restore();
         if ($userRoleCompany) {
-            return response()->json(['message' => 'restored successfully'], 200);
+            return response()->json([
+                "statusCode"=>"000",
+
+                'message' => 'restored successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json([
+            "statusCode"=>"999",
+
+            'error' => 'system error'], 200);
     }
 
     public function setDefaultCompany($request)
@@ -399,6 +439,8 @@ class AuthenticationServices
         );
 
         return response()->json([
+            "statusCode"=>"000",
+
             'message' => 'Default company successfully',
             'data' => ['user' => new UserResponse($user)]
         ], 200);
@@ -419,9 +461,14 @@ class AuthenticationServices
 
         $user->forceDelete();
         if ($user) {
-            return response()->json(['message' => 'User delete form database successfully'], 200);
+            return response()->json([
+                "statusCode"=>"000",
+
+                'message' => 'User delete form database successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json([
+            "statusCode"=>"999",
+            'error' => 'system error'], 200);
     }
     protected function getAbilities()
     {
