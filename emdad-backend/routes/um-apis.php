@@ -26,6 +26,7 @@ Route::middleware(['auth.apikey'])->prefix('auth')->group(function () {
 
 
 
+
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(function () {
     Route::get('get-users', [UserController::class, 'getProfileUsers']);
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);

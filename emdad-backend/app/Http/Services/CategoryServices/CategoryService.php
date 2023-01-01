@@ -32,14 +32,12 @@ class CategoryService
                 $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
             }
             if (auth()->user()->profile_id) {
-                $category->update(['profile_id' => auth()->user()->profile_id ?? null]);
+                $category->update(['profile_id' => auth()->user()->profile_id]);
             }
-            if ($category) {
-                return response()->json(['message' => 'created successfully'], 200);
-            }
+            return response()->json(['message' => 'created successfully'], 200);
         } catch (Exception $e) {
+            return response()->json(['message' => 'error'], 501);
         }
-        return response()->json(['message' => 'error'], 501);
     }
 
 
