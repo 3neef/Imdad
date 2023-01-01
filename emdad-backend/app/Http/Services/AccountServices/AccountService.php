@@ -8,12 +8,14 @@ use App\Http\Services\General\WalletsService;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Profile;
 use App\Models\SubscriptionPayment;
+use App\Models\UM\Permission;
 use App\Models\UM\RoleUserProfile;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Mockery\Expectation;
 use PhpParser\Node\Stmt\Return_;
+use Illuminate\Support\Str;
 
 class AccountService
 {
@@ -33,9 +35,10 @@ class AccountService
                     "is_validated" => true,
                     "active" => 1,
                 ]);
-                WalletsService::create($profile);
+                 WalletsService::create($profile);
+                $permissions = $this->pluckPermissions($request->ProfileType);
 
-                $user->roleInProfile()->attach($user->id, ['role_id' => $request['roleId'], 'profile_id' => $profile->id, 'permissions' => $request->permissions]);
+                $user->roleInProfile()->attach($user->id, ['role_id' => $request['roleId'], 'profile_id' => $profile->id, 'permissions' => $permissions]);
 
                 $user->update(['profile_id' => $profile->id]);
 
@@ -100,10 +103,8 @@ class AccountService
     public function swap_profile($id)
     {
         $user = RoleUserProfile::where('profile_id', $id)->where('user_id', auth()->id())->where('role_id', "!=", null)->first();
-        if($id==auth()->user()->profile_id)
-        {
-        return response()->json(['success' => false, 'error' => 'you are Already In this  profile'], 402);
-
+        if ($id == auth()->user()->profile_id) {
+            return response()->json(['success' => false, 'error' => 'you are Already In this  profile'], 402);
         }
         if ($user) {
             $payedSubscription = SubscriptionPayment::where('profile_id', $id)->first();
@@ -113,7 +114,7 @@ class AccountService
                 $profile->update([
                     'profile_id' => $id
                 ]);
-                return response()->json([ "success"=>true,'message' => 'swaped successfully',"profile_id"=>$id], 200);
+                return response()->json(["success" => true, 'message' => 'swaped successfully', "profile_id" => $id], 200);
             }
         }
         return response()->json(['success' => false, 'error' => 'Profile Not Founded'], 404);
@@ -143,6 +144,12 @@ class AccountService
     //     return response()->json(['error' => 'system error'], 500);
     // }
 
-
-
+    public function pluckPermissions($type)
+    {
+        if ($type == "Buyer") {
+            return DB::table('permissions')->where("category", "LIKE", "B%")->pluck('label');
+        } elseif ($type == "Supplier") {
+            return DB::table('permissions')->where("category", 'LIKE', "S%")->pluck('label');
+        }
+    }
 }
