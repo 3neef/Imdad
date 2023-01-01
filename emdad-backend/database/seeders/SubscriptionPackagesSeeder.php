@@ -172,7 +172,7 @@ class SubscriptionPackagesSeeder extends Seeder
 
             ["key"=>"Customers","titleEn"=>"Customers Management","titleAr"=>"إدارة العملاء","systemValue"=>100,"text_en"=>"100","text_ar"=>"100","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"IOS","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>1,"text_en"=>"Available IOS","text_ar"=>"متاح
+            ["key"=>"IOS","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
             IOS","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
             ["key"=>"Android","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>1,"text_en"=>"Available Android","text_ar"=>"متاح
@@ -202,7 +202,7 @@ class SubscriptionPackagesSeeder extends Seeder
             
             ["key"=>"Customers","titleEn"=>"Customers Management","titleAr"=>"إدارة العملاء","systemValue"=>300,"text_en"=>"300","text_ar"=>"300","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"IOS","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>1,"text_en"=>"Available IOS","text_ar"=>"متاح
+            ["key"=>"IOS","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
             IOS","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
             ["key"=>"Android","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>1,"text_en"=>"Available Android","text_ar"=>"متاح
