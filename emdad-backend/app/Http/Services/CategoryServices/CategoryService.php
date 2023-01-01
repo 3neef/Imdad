@@ -115,7 +115,7 @@ class CategoryService
 
     public function RetryApproval($request)
     {
-        $category = ProfileCategoryPivot::where('category_id', $request->id)->where('Profile_id', auth()->user()->profile_id)->first();
+        $category = ProfileCategoryPivot::where('category_id', $request->id)->where('profile_id', auth()->user()->profile_id)->first();
         if ($category->status == "rejected") {
             $category->update([
                 "status" => "pending",
@@ -127,7 +127,7 @@ class CategoryService
     public function changeCategoryStatus($request)
     {
 
-        $category = ProfileCategoryPivot::where('id', $request->product_id)->first();
+        $category = Categories::where('id', $request->product_id)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'No categories founded'
