@@ -62,11 +62,16 @@ class AuthenticationServices
         // dd($user);
         if ($user) {
             return response()->json([
+            "statusCode"=>"000",
+
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
-        return response()->json(['success' => false, 'message' => "System Error"], 500);
+        return response()->json([
+            
+            "statusCode"=>"999",
+            'success' => false, 'message' => "System Error"], 200);
     }
 
 
@@ -80,7 +85,10 @@ class AuthenticationServices
         $user->checkUserRole($user_id);
 
         if ($user == true) {
-            return response()->json(['message' => 'cano,t  updated User'], 500);
+            return response()->json([
+            "statusCode"=>"999",
+
+                'message' => 'cano,t  updated User'], 200);
         }
         $this->update($request, $user_id);
     }
@@ -120,34 +128,50 @@ class AuthenticationServices
             $this->UserOtp($user);
             return response()->json(
                 [
+            "statusCode"=>"000",
+
                     'message' => 'New OTP has been sent.',
                     'otp' => $user->otp,
-                ]
+                ],200
             );
         }
         if ($user) {
             return response()->json([
+            "statusCode"=>"000",
+
                 'message' => 'User updated successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json([
+            "statusCode"=>"999",
+
+            'error' => 'system error'], 200);
     }
 
     public function detachWarehouse($request)
     {
         $user = Warehouse::where("id", $request->warehouseId)->first();
         $user->users()->detach($request->userId);
-        return response()->json(['message' => 'User deatched successfully'], 301);
+        return response()->json([
+            "statusCode"=>"000",
+
+            'message' => 'User deatched successfully'], 200);
     }
     public function userWarehouseStatus($request)
     {
         $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
         if ($userWarehouse != null) {
             $userWarehouse->update(['status' => $request->status]);
-            return response()->json(['message' => 'status update successfully'], 201);
+            return response()->json([
+            "statusCode"=>"000",
+
+                'message' => 'status update successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json([
+            "statusCode"=>"999",
+
+            'error' => 'system error'], 200);
     }
 
 
@@ -163,15 +187,19 @@ class AuthenticationServices
             $data = $this->UserOtp($user);
             return response()->json(
                 [
+            "statusCode"=>"105",
+
                     "success" => true, "message" => "verifiy your otp first",
                     "data" => $data,
-                ]
+                ],200
             );
         }
 
         if (!($user->password === $request->password)) {
             return response()->json(
                 [
+            "statusCode"=>"104",
+
                     "success" => false, "error" => "Wrong credentials"
                 ]
             );
@@ -182,16 +210,20 @@ class AuthenticationServices
 
             return response()->json(
                 [
+            "statusCode"=>"000",
+
                     "data" => $data,
                     "success" => false, "error" => "Forbidden"
                 ],
-                403
+                200
             );
         }
         $token = $user->createToken('authtoken');
 
         return response()->json(
             [
+            "statusCode"=>"000",
+                
                 'message' => 'Logged in',
                 'data' => [
                     'user' => new UserResponse($user),
@@ -253,7 +285,7 @@ class AuthenticationServices
                 "statusCode"=>"000",
                 'message' => 'New OTP has been sent.',
                 'otp' => $data,
-            ]
+            ],200
         );
     }
 
@@ -268,7 +300,7 @@ class AuthenticationServices
                 "statusCode"=>"000",
 
                 'message' => 'Logged out', 'user' => $user
-            ]
+            ],200
         );
     }
 
@@ -306,7 +338,10 @@ class AuthenticationServices
         $restore = User::where('id', $request->id)->withTrashed()->first()->restore();
 
         if ($restore) {
-            return response()->json(['message' => 'User restored successfully'], 200);
+            return response()->json([
+                "statusCode"=>"000",
+
+                'message' => 'User restored successfully'], 200);
         }
         return response()->json(['error' => 'system error',"statusCode"=>"999"], 200);
     }
@@ -410,7 +445,9 @@ class AuthenticationServices
 
                 'message' => 'user account has disabled successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(['error' => 'system error',
+        "statusCode"=>"999"
+    ], 200);
     }
 
     public function restoreOldRole($request)
