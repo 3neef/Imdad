@@ -20,6 +20,20 @@ class PackageConstraint
         return $features;
     }
 
+
+    public function packageLimitExceed($key, $value)
+    {
+        // admin user + warehouse + 
+        $features = $this->parsePackageFeatures();
+        foreach ($features as  $feature) {
+            if ($key == $feature['key'] && $feature['systemValue'] < $value) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public function checkPackageValidity()
     {
         $subscirptionPayment = null;
