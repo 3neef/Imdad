@@ -1,10 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
 use App\Models\Emdad\RelatedCompanies;
-use Database\Factories\RelatedCompanyFactory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class RelatedCompinesTableSeeder extends Seeder

@@ -26,13 +26,12 @@ class ForgotPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['required','email','exists:users,email'],
+            'email' => ['required', 'email', 'exists:users,email'],
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+        throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors()], 422));
     }
-
 }

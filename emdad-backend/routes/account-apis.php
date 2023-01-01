@@ -19,6 +19,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::apiResource('profiles', ProfileController::class);
     Route::put('profiles/restore/{id}', [ProfileController::class, 'restoreByAccountId']);
 });
+
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('warehouses')->group(function () {
     Route::put('verfied/{id}', [WarehousesController::class, 'verfiedLocation']);
     Route::put('restore/{id}', [WarehousesController::class, 'restoreByLocationId']);
