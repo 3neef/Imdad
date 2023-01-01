@@ -45,8 +45,8 @@ class CategoryService
             ], 200);
         }
         return response()->json([
-            "statusCode" => "999",
-            'success' => false, 'message' => "System Error"
+            "statusCode" => "264",
+            'success' => false, 'message' => "User Dosn't belong to any profile "
         ], 200);
     }
 
