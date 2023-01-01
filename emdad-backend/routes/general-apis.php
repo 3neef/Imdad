@@ -9,7 +9,7 @@ use App\Http\Controllers\Translatoin\TranslationController;
 use App\Models\SubscriptionPayment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
-
+use Spatie\Activitylog\Models\Activity;
 
 Route::get('sendSms', [SmsController::class, 'sendSms']);
 
@@ -18,7 +18,6 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::get('packages/get-buyer-packs', [SubscriptionController::class, 'getBuyerPackages']);
     Route::apiResource('packages', SubscriptionController::class);
     Route::put('packages/restore/{id}', [SubscriptionController::class, 'restore']);
-
 });
 
 // Route::apiResource('packages', SubscriptionController::class)->middleware('auth.apikey');
@@ -28,8 +27,8 @@ Route::group(['prefix' => 'installation'], function () {
     Route::get('migrate', [SubscriptionController::class, 'migration']);
     Route::get('seed', [SubscriptionController::class, 'seeder']);
     Route::get('fresh', [SubscriptionController::class, 'migrateFresh']);
-    Route::get('apiKey',[SubscriptionController::class,'apiKey']);
-    Route::get('key',[SubscriptionController::class,'key']);
+    Route::get('apiKey', [SubscriptionController::class, 'apiKey']);
+    Route::get('key', [SubscriptionController::class, 'key']);
 });
 
 
@@ -39,6 +38,9 @@ Route::middleware(['auth.apikey'])->prefix('wathiq')->group(function () {
 Route::get('optimize', function () {
     Artisan::call('optimize');
     dd("optimized successfully");
+});
+Route::get('Activity', function () {
+    return Activity::all();
 });
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {

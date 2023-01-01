@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Accounts\CompanyInfo;
-use App\Models\Accounts\SubscriptionPackages;
 use App\Models\Accounts\Warehouse;
 use App\Models\UM\Role;
 use App\Models\UM\RoleUserProfile;
@@ -12,11 +10,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use SanctumHasApiTokens, Notifiable, SoftDeletes;
+    use SanctumHasApiTokens, Notifiable, SoftDeletes, LogsActivity;
+
     protected $dates = ['deleted_at'];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +36,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'full_name',
         'identity_type', 'email', 'password', 'identity_number',
         'is_verified', 'profile_id', 'avatar', 'otp', 'is_super_admin',
-        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'manager_user_Id','password_changed'
+        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'manager_user_Id', 'password_changed'
     ];
 
     /**

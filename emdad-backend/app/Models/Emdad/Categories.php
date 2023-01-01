@@ -6,12 +6,22 @@ use App\Models\Profile;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Categories extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, LogsActivity;
 
-    protected $fillable = [ 'name_en', 'name_ar','status','parent_id','isleaf','profile_id','reason'];
+    protected $fillable = ['name_en', 'name_ar', 'status', 'parent_id', 'isleaf', 'profile_id', 'reason'];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()
+            ->logOnlyDirty();
+    }
+    
     public function Products()
     {
         return $this->hasMany(Prodcuts::class);
@@ -23,6 +33,4 @@ class Categories extends Model
             ->withPivot('category_id')
             ->withTimestamps();
     }
-
-
 }

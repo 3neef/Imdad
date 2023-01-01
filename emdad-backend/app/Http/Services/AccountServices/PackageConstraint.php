@@ -38,7 +38,7 @@ class PackageConstraint
     {
         $subscirptionPayment = null;
         try {
-            $subscirptionPayment = auth()->user()->currentProfile->subscriptionPayments()->lstat();
+            $subscirptionPayment = auth()->user()->currentProfile->subscriptionPayments()->latest();
             if ($subscirptionPayment->expire_date < Carbon::now()) {
                 // package subscription is valid return package with success true
                 return ["success" => true, "package" => auth()->user()->currentProfile->subscription_details];
