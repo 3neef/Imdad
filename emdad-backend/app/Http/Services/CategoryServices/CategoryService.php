@@ -30,7 +30,7 @@ class CategoryService
                 'parent_id' => $request->parentId ?? 0
             ]);
             if ($category) {
-                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id ]);
+                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
             }
             if (auth()->user()->profile_id) {
                 $category->update(['profile_id' => auth()->user()->profile_id]);
@@ -40,7 +40,7 @@ class CategoryService
         if ($category) {
             return response()->json([
                 "statusCode" => "000",
-                'message' => 'User created successfully',
+                'message' => 'created successfully',
                 'data' => new CategoryResource($category)
             ], 200);
         }
@@ -125,19 +125,24 @@ class CategoryService
 
     public function RetryApproval($request)
     {
-        $category = ProfileCategoryPivot::where('category_id', $request->id)->where('profile_id', auth()->user()->profile_id)->first();
+        $category = ProfileCategoryPivot::where('category_id', $request->categoryId)->where('profile_id', auth()->user()->profile_id)->first();
+
         if ($category->status == "rejected") {
             $category->update([
                 "status" => "pending",
                 "reason" => $request->reason ?? $category->reason,
             ]);
+            return response()->json(['message' => 'Approval  Requset sent successfully'], 200);
+
         }
+        return response()->json(['message' => 'Requset  not sent '], 403);
+
     }
 
     public function changeCategoryStatus($request)
     {
 
-        $category = Categories::where('id', $request->product_id)->first();
+        $category = Categories::where('id', $request->category_id)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'No categories founded'
