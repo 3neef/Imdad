@@ -208,21 +208,21 @@ class AuthenticationServices
         if ($request->otp != $user->otp) {
             return response()->json(
                 [
-                    "success" => false, "error" => "Invalid OTP","errCode"=>"101"
+                    "success" => false, "error" => "Invalid OTP","statusCode"=>"101"
                 ],
                 200
             );
         } elseif ($user->otp_expires_at < now()) {
             return response()->json(
                 [
-                    "success" => false, "error" => "Expired OTP","errCode"=>"102"
+                    "success" => false, "error" => "Expired OTP","statusCode"=>"102"
                 ],
                 200
             );
         } elseif ($user->is_verified == true) {
             return response()->json(
                 [
-                    "success" => false, "error" => "Your Account Already Activated","errCode"=>"103"
+                    "success" => false, "error" => "Your Account Already Activated","statusCode"=>"103"
                 ],
                 200
             );
@@ -232,6 +232,7 @@ class AuthenticationServices
         $token = $user->createToken('authtoken');
         return response()->json(
             [
+                "statusCode"=>"000",
                 'message' => 'Your account has been activated successfully.',
                 'token' => $token->plainTextToken,
                 "user" => new UserResponse($user),
