@@ -10,6 +10,7 @@ use App\Models\Emdad\RelatedCompanies;
 use App\Models\Emdad\Unit_of_measures;
 use App\Models\UM\Permission;
 use App\Models\UM\Role;
+use Ejarnutowski\LaravelApiKey\Models\ApiKey;
 use Exception;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Artisan;
@@ -25,23 +26,39 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        if (SubscriptionPackages::count() > 0 || Role::count() > 0 || Categories::count() > 0 || Unit_of_measures::count() > 0 || Permission::count() > 0) {
-            DB::table('roles')->delete();
-            DB::table('permissions')->delete();
-            DB::table('unit_of_measures')->delete();
-            DB::table('categories')->delete();
-            DB::table('subscription_packages')->delete();
+       
+        if(ApiKey::count()==0){
+            $this->call([
+                ApiKeysSeeder::class]);
         }
 
-        $this->call([
-            ApiKeysSeeder::class,
-            SubscriptionPackagesSeeder::class,
-            PermissionSeeder::class,
+        if(SubscriptionPackages::count()==0){
+            $this->call([
+                SubscriptionPackagesSeeder::class]);
+        }
 
-            RegRoleSeeder::class,
-            CategoriesSeeder::class,
-            UOMSeeder::class,
-            RelatedCompinesTableSeeder::class,
-        ]);
+        if(Permission::count()==0){
+            $this->call([
+                PermissionSeeder::class]);
+        }
+        if(Unit_of_measures::count()==0){
+            $this->call([
+                UOMSeeder::class]);
+        }
+
+        if(Role::count()==0){
+
+            $this->call([
+                RegRoleSeeder::class]);
+        }
+        if(Categories::count()==0){
+            $this->call([
+                CategoriesSeeder::class]);
+        }
+        if(RelatedCompanies::count()==0){
+            $this->call([
+                RelatedCompinesTableSeeder::class]);
+        }
+       
     }
 }
