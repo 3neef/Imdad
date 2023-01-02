@@ -121,10 +121,10 @@ class UserServices
 
         $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
-        // if ($request->has("roleId") && $userRoleProfile != null) {
+         if ($request->has("roleId") && $userRoleProfile != null) {
 
         $userRoleProfile->update(['user_id' => $user->id ?? $userRoleProfile->user_id, 'role_id' => $request['roleId']??$userRoleProfile->role_id, 'profile_id' => auth()->user()->profile_id, "manger_user_id" => $request['mangerUserId'] ?? $userRoleProfile->manger_user_id]);
-        // }
+         }
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
             $this->UserOtp($user);
