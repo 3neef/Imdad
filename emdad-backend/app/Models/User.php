@@ -189,7 +189,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function mangerUserId()
     {
         // CHECK MANGER FOR THE USER
-        $mangerId = DB::table('role_user_profile')->where('user_id', $this->id)->where('profile_id', auth()->user()->profile_id)->pluck('manager_user_Id')->first();
+        $mangerId = DB::table('role_user_profile')->where('user_id', $this->id)->where('profile_id', auth()->user()->profile_id??null)->pluck('manager_user_Id')->first();
 
         //send mangerId to Manger name 
         $mangerName = $this->mangerName($mangerId);
