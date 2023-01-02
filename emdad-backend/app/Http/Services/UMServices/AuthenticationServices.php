@@ -42,14 +42,14 @@ class AuthenticationServices
             $user->update(['otp' => $data['otp']]);
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
-            $manager_id = null;
-            if (isset($request['managerUserId'])) {
-                $manager_id = $request['managerUserId'];
-            } else {
-                $manager_id = auth()->user()->profile_id ?? null;
-            }
-            if ($role_id && $manager_id) {
-                $user->roleInProfile()->attach($user->id, ['role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'manager_user_Id' => $manager_id]);
+            // $manager_id = null;
+            // if (isset($request['managerUserId'])) {
+            //     $manager_id = $request['managerUserId'];
+            // } else {
+            //     $manager_id = auth()->user()->profile_id ?? null;
+            // }
+            if ($role_id) {
+                $user->roleInProfile()->attach($user->id, ['user_id'=>auth()->id, 'role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'manager_user_Id' => auth()->id()]);
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }

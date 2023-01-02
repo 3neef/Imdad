@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('role_id')->nullable()->references("id")->on("roles")->cascadeOnDelete();
             $table->foreignId('user_id')->nullable()->references("id")->on("users")->cascadeOnDelete();
+            $table->foreignId('created_by')->nullable()->references("id")->on("users")->cascadeOnDelete();
             $table->foreignId('profile_id')->nullable()->references("id")->on("profiles")->cascadeOnDelete();
             $table->unique(["role_id","user_id","profile_id","deleted_at"])->name("user_role_profile_deletedat");
             $table->json('permissions')->nullable();
