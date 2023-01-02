@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
+        // DB::table('roles')->delete();
        
         if(ApiKey::count()==0){
             $this->call([
