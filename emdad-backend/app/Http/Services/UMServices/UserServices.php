@@ -103,6 +103,8 @@ class UserServices
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
+            'expiry_date' => $request['expireDate'] ?? $user->expiry_date ,
+
         ]);
 
         $WarahouseId = $request->warahouseId ?? null;
