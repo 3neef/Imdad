@@ -26,8 +26,9 @@ class RetryApprovalRequest extends FormRequest
     public function rules()
     {
         return [
-            "status" => [Rule::in(['approved', 'pending', 'rejected'])],
             'reason' => ['string', 'min:3', 'max:1000'],
+            "categoryId" => 'required|exists:profile_category_pivots,category_id',
+
         ];
     }
 

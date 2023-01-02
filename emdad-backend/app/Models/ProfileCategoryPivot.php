@@ -10,7 +10,7 @@ class ProfileCategoryPivot extends Model
 {
 use SoftDeletes,HasFactory;
     protected $table = 'profile_category_pivots';
-    protected $fillable = ['profile_id','category_id','status','updated_at','deleted_at'];
+    protected $fillable = ['profile_id','category_id','status'];
 
     
 
