@@ -8,6 +8,7 @@ use App\Http\Requests\CategroyRequests\Categroy\changeCategoryStatusRequest;
 use App\Http\Services\CategoryServices\CategoryService;
 use App\Http\Requests\CategroyRequests\Categroy\CreateCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\EmdadApproveCategoryRequest;
+use App\Http\Requests\CategroyRequests\Categroy\FilterCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\ProfileCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\RetryApprovalRequest;
 use App\Http\Requests\CategroyRequests\Categroy\UpdateCategoryRequest;
@@ -702,5 +703,9 @@ class CategoryController extends Controller
     public function rejectCategory(EmdadApproveCategoryRequest $request)
     {
         return $this->categoryService->rejectCategory($request);
+    }
+
+    public function filterCategory(FilterCategoryRequest $request){
+        return $this->categoryService->filterCategory($request);
     }
 }

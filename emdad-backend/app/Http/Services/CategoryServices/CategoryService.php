@@ -185,4 +185,23 @@ class CategoryService
             return response()->json(['message' => 'rejected successfully'], 200);
         }
     }
+    public function filterCategory($request){
+        $category = Categories::where('id', $request->category_id)->first();
+        if($category->type == 'products'){
+            return response()->json([
+                'type' => 'products'
+            ]);
+            
+        }
+        elseif($category->type=='services'){
+            return response()->json([
+                'type'=>'services'
+            ]);
+        }
+        else {
+            return response()->json([
+                'error' => 'No type founded'
+            ]);
+        }
+    }
 }
