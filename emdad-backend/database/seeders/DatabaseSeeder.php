@@ -60,6 +60,9 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 RelatedCompinesTableSeeder::class]);
         }
+
+
+        //test again
        
     }
 }
