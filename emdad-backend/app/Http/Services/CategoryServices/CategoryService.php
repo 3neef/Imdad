@@ -145,13 +145,13 @@ class CategoryService
     public function changeCategoryStatus($request)
     {
 
-        $category = Categories::where('id', $request->category_id)->first();
+        $category = ProfileCategoryPivot::where('id', $request->category_id)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'No categories founded'
             ]);
         } else {
-            $category->update(['status' => 0]);
+            $category->update(['status' => 'inActive']);
             return response()->json(['message' => 'changed successfully'], 200);
         }
     }

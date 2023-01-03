@@ -14,12 +14,12 @@ class CategoryCollection
         $defaultSort = '-created_at';
 
         $defaultSelect = [
-            'name_en', 'name_ar','aproved','parent_id','isleaf'
+            'name_en', 'name_ar','parent_id','isleaf','type','status','profile_id','reason'
         ];
 
 
         $allowedFilters = [
-            'name_en', 'name_ar','aproved','parent_id','isleaf'
+            'name_en', 'name_ar','parent_id','isleaf','type','status','profile_id','reason'
         ];
 
         $allowedSorts = [
