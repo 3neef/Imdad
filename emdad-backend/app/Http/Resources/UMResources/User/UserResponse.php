@@ -16,7 +16,6 @@ class UserResponse extends JsonResource
     public function toArray($request)
     {
 
-
         return [
             "id" => $this->id,
             "fullName" => $this->full_name,
@@ -29,8 +28,10 @@ class UserResponse extends JsonResource
             "status" => $this->userStatus() != null ? $this->userStatus()->status : "",
             "roleId" => $this->userRole() ?? '',
             "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null,
-            "expireDate"=>$this->expiry_date,
-            "passwordChanged"=>$this->password_changed
+            "expireDate" => $this->expiry_date,
+            "passwordChanged" => $this->password_changed,
+            "MangerInfo" => $this->mangerUserId() ?? '',
+
         ];
     }
 }

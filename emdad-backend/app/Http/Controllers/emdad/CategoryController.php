@@ -55,6 +55,8 @@ class CategoryController extends Controller
      *               @OA\Property(property="nameAr", type="string"),
      *               @OA\Property(property="isleaf", type="boolean"),
      *               @OA\Property(property="companyId", type="integer")
+     *               @OA\Property(property="type", type="string")
+     *               @OA\Property(property="parentId", type="integer")
      *            ),
      *        ),
      *    ),

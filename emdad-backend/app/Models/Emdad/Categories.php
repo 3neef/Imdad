@@ -13,7 +13,7 @@ class Categories extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity;
 
-    protected $fillable = ['name_en', 'name_ar', 'status', 'parent_id', 'isleaf', 'profile_id', 'reason'];
+    protected $fillable = ['name_en', 'name_ar', 'status', 'parent_id', 'isleaf', 'profile_id', 'reason','type'];
 
     public function getActivitylogOptions(): LogOptions
     {

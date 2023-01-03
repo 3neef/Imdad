@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -36,7 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'full_name',
         'identity_type', 'email', 'password', 'identity_number',
         'is_verified', 'profile_id', 'avatar', 'otp', 'is_super_admin',
-        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'manager_user_Id', 'password_changed'
+        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'password_changed'
     ];
 
     /**
@@ -104,7 +105,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roleInProfile()
     {
-        return $this->belongsToMany(Role::class, 'role_user_profile', 'user_id', 'role_id')
+        return $this->belongsToMany(Role::class, 'role_user_profile', 'user_id', 'role_id', 'created_by')
             ->withPivot('profile_id')
             ->withTimestamps();
     }
@@ -183,5 +184,23 @@ class User extends Authenticatable implements MustVerifyEmail
                 return true;
         }
         return false;
+    }
+
+    public function mangerUserId()
+    {
+        // CHECK MANGER FOR THE USER
+        $mangerId = DB::table('role_user_profile')->where('user_id', $this->id)->where('profile_id', auth()->user()->profile_id??null)->pluck('manager_user_Id')->first();
+
+        //send mangerId to Manger name 
+        $mangerName = $this->mangerName($mangerId);
+
+        //return manger info
+        return ["mangerID" => $mangerId, "mangerName" => $mangerName];
+    }
+
+    //get manger name
+    public function mangerName($mangerId)
+    {
+        return DB::table('users')->where('id', $mangerId)->pluck('full_name')->first();
     }
 }
