@@ -741,8 +741,8 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"category_id"},
-     *               @OA\Property(property="category_id", type="integer"),
+     *               required={"type"},
+     *               @OA\Property(property="type", type="string"),
 
      *            ),
      *        ),

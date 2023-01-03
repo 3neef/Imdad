@@ -136,10 +136,8 @@ class CategoryService
                 "reason" => $request->reason ?? $category->reason,
             ]);
             return response()->json(['message' => 'Approval  Requset sent successfully'], 200);
-
         }
         return response()->json(['message' => 'Requset  not sent '], 403);
-
     }
 
     public function changeCategoryStatus($request)
@@ -185,23 +183,17 @@ class CategoryService
             return response()->json(['message' => 'rejected successfully'], 200);
         }
     }
-    public function filterCategory($request){
-        $category = Categories::where('id', $request->category_id)->first();
-        if($category->type == 'products'){
-            return response()->json([
-                'type' => 'products'
-            ]);
-            
+    public function filterCategory($request)
+    {
+        $category = Categories::where('type', $request->type)->get();
+
+
+        if ($category == null) {
+            return response()->json(['error' => 'No category founded']);
         }
-        elseif($category->type=='services'){
-            return response()->json([
-                'type'=>'services'
-            ]);
-        }
-        else {
-            return response()->json([
-                'error' => 'No type founded'
-            ]);
-        }
+        return response()->json([
+            "statusCode" => "000",
+            'data' => new CategoryResource($category)
+        ]);
     }
 }
