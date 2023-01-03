@@ -46,7 +46,6 @@ class CategoriesSeeder extends Seeder
                 'parent_id' => $Category['parent_id'],
                 'isleaf' => $Category['isleaf'],
                 'status' => $Category['status'],
-                'products' => $Category['products'],
                 'type' => $Category['type'],
             ]);
         }
