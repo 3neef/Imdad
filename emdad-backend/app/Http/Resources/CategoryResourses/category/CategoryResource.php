@@ -22,6 +22,8 @@ class CategoryResource extends JsonResource
             'parentId' => $this->parent_id,
             'profileId' => $this->profile_id,
             'isleaf' => $this->isleaf,
+            'type' => $this->type,
+            'note' =>$this->reason,
 
         ];
     }

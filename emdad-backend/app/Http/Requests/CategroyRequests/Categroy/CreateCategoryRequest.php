@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\CategroyRequests\Categroy;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -30,6 +31,9 @@ class CreateCategoryRequest extends FormRequest
                 'nameAr' => ['required', 'string', 'max:255','unique:categories,name_ar'],
                 'parentId' => ['exists:categories,id'],
                 'isleaf' => ['required', 'boolean'],
+                'note'  =>  ['required', 'string'],
+                'type' => ['string',Rule::in(['products','services'])],
+
             ];
         }
 

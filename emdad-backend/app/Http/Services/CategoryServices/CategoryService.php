@@ -27,7 +27,9 @@ class CategoryService
                 'name_en' => $request->nameEn,
                 'name_ar' => $request->nameAr,
                 'isleaf' => $request->isleaf,
-                'parent_id' => $request->parentId ?? 0
+                'parent_id' => $request->parentId ?? 0,
+                "reason" => $request->note,
+                'type' => $request->type ?? 'products',
             ]);
             if ($category) {
                 $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
@@ -80,6 +82,7 @@ class CategoryService
                 'parent_id' => $request->parentId ?? $category->parent_id,
                 "status" => $request->status ?? $category->status,
                 "reason" => $request->reason ?? $category->reason,
+                'type' => $request->type ?? $category->type,
             ]);
             return response()->json(['success' => 'Updated Successfly'], 201);
         }
