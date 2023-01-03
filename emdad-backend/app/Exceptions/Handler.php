@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -43,8 +44,19 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        // $this->renderable(function (Throwable $e) {
+        //     return response(['error' => !empty($e->getMessage())? $e->getMessage() : "page not found"], !empty($e->getCode()) ? $e->getCode(): 400);
+        // });
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        
+        if (!$request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
     }
 }

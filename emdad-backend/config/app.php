@@ -30,6 +30,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    "TERMINAL_ID" => env('TERMINAL_ID', 'emdad'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
@@ -69,7 +71,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Khartoum', // change to  Asia/Riyadh befor end test
 
     /*
     |--------------------------------------------------------------------------
@@ -159,6 +161,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Ejarnutowski\LaravelApiKey\Providers\ApiKeyServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -181,6 +184,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        L5Swagger\L5SwaggerServiceProvider::class,
+
 
         /*
          * Package Service Providers...

@@ -13,9 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('prodcuts', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->string('name');
+            $table->integer('price');
+            $table->string('image');
+            $table->string('measruing_unit');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

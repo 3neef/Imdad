@@ -3,7 +3,18 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Accounts\SubscriptionPackages;
+use App\Models\Emdad\Categories;
+use App\Models\Emdad\RelatedCompanies;
+use App\Models\Emdad\Unit_of_measures;
+use App\Models\UM\Permission;
+use App\Models\UM\Role;
+use Ejarnutowski\LaravelApiKey\Models\ApiKey;
+use Exception;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,13 +25,41 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // DB::table('roles')->delete();
+       
+        if(ApiKey::count()==0){
+            $this->call([
+                ApiKeysSeeder::class]);
+        }
 
-        //small change to test pipline
+        if(SubscriptionPackages::count()==0){
+            $this->call([
+                SubscriptionPackagesSeeder::class]);
+        }
+
+        if(Permission::count()==0){
+            $this->call([
+                PermissionSeeder::class]);
+        }
+        if(Unit_of_measures::count()==0){
+            $this->call([
+                UOMSeeder::class]);
+        }
+
+        if(Role::count()==0){
+
+            $this->call([
+                RegRoleSeeder::class]);
+        }
+        if(Categories::count()==0){
+            $this->call([
+                CategoriesSeeder::class]);
+        }
+        if(RelatedCompanies::count()==0){
+            $this->call([
+                RelatedCompinesTableSeeder::class]);
+        }
+       
     }
 }

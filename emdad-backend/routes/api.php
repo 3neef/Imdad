@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+require('um-apis.php');
+require('general-apis.php');
+require('po-apis.php');
+require('rfq-apis.php');
+require('delivery-apis.php');
+require('quotation-apis.php');
+require('account-apis.php');
+require('category-apis.php');

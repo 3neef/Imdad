@@ -2,17 +2,30 @@
 
 namespace App\Models;
 
-use App\Models\Accounts\CompanyInfo;
+use App\Models\Accounts\Warehouse;
 use App\Models\UM\Role;
+use App\Models\UM\RoleUserProfile;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use SanctumHasApiTokens, Notifiable;
+    use SanctumHasApiTokens, Notifiable, SoftDeletes, LogsActivity;
+
     protected $dates = ['deleted_at'];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll()
+            ->logOnlyDirty();
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +33,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'username', 'email', 'password', 'phone', 'status', 'avatar','type', 'role_id',
+
+        'full_name',
+        'identity_type', 'email', 'password', 'identity_number',
+        'is_verified', 'profile_id', 'avatar', 'otp', 'is_super_admin',
+        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'password_changed'
     ];
 
     /**
@@ -53,9 +70,24 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function company()
+    // public function company()
+    // {
+    //     return $this->belongsToMany(CompanyInfo::class);
+    // }
+
+    public function currentProfile()
     {
-        return $this->belongsToMany(CompanyInfo::class);
+        return Profile::where("id", $this->profile_id)->select(["name_ar", 'active', 'subscription_details', 'cr_expire_data', 'type', 'id'])->first();
+    }
+
+    public function userStatus()
+    {
+        return RoleUserProfile::where("profile_id", $this->profile_id)->where("user_id", $this->id)->first();
+    }
+
+    public function userRole()
+    {
+        return RoleUserProfile::where('profile_id', auth()->id())->where("user_id", $this->id)->pluck('role_id')->first();
     }
 
     public function assignRole(Role $role)
@@ -63,12 +95,112 @@ class User extends Authenticatable
         return $this->roles()->save($role);
     }
 
-    public function hasRole($role)
+    // public function hasRole($role)
+    // {
+    //     if (is_string($role)) {
+    //         return $this->roles->contains('name', $role);
+    //     }
+    //     return !!$role->intersect($this->roles)->count();
+    // }
+
+    public function roleInProfile()
     {
-        if (is_string($role)) {
-            return $this->roles->contains('name', $role);
-        }
-        return !!$role->intersect($this->roles)->count();
+        return $this->belongsToMany(Role::class, 'role_user_profile', 'user_id', 'role_id', 'created_by')
+            ->withPivot('profile_id')
+            ->withTimestamps();
     }
 
+    public function exists($roleId, $profileId)
+    {
+        return $this->belongsToMany(Role::class, 'role_user_profile', 'user_id', 'role_id')
+            ->wherePivot('role_id', $roleId)
+            ->wherePivot('profile_id', $profileId)
+            ->first();
+    }
+
+
+
+    public function warehouse()
+    {
+        return $this->belongsToMany(Warehouse::class, 'user_warehouse_pivots')->withPivot('warehouse_id')->get();
+    }
+
+
+    // public function getRoleOfUserByCompanyId()
+    // {
+    //     return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
+    //         ->wherePivot('company_info_id', $this->default_company)
+    //         ->first();
+    // }
+
+
+    public function profiles()
+    {
+        return $this->belongsToMany(
+            Profile::class,
+            'profile_department_user'
+        )->withPivot('department_id')
+            ->withTimestamps();
+    }
+    public function departments()
+    {
+        return $this->belongsToMany(
+            Department::class,
+            'profile_department_user'
+        )->withPivot('profile_id')
+            ->withTimestamps();
+    }
+
+    public function userable()
+    {
+        return $this->morphTo();
+    }
+
+    public function profile()
+    {
+        return $this->belongsTo(Profile::class);
+    }
+
+    public function oldOwner()
+    {
+        $count = SubscriptionPayment::where('user_id', auth()->id())->where('status', "Paid")->count();
+        if ($count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+
+    public function checkUserRole($user_id, $profile_id = null)
+    {
+
+        if ($profile_id != null) {
+            $count =  RoleUserProfile::where('user_id', $user_id)->where('profile_id', $profile_id)->count();
+            if ($count > 0)
+                return true;
+        } else {
+            $count =  RoleUserProfile::where('user_id', $user_id)->count();
+            if ($count > 0)
+                return true;
+        }
+        return false;
+    }
+
+    public function mangerUserId()
+    {
+        // CHECK MANGER FOR THE USER
+        $mangerId = DB::table('role_user_profile')->where('user_id', $this->id)->where('profile_id', auth()->user()->profile_id??null)->pluck('manager_user_Id')->first();
+
+        //send mangerId to Manger name 
+        $mangerName = $this->mangerName($mangerId);
+
+        //return manger info
+        return ["mangerID" => $mangerId, "mangerName" => $mangerName];
+    }
+
+    //get manger name
+    public function mangerName($mangerId)
+    {
+        return DB::table('users')->where('id', $mangerId)->pluck('full_name')->first();
+    }
 }
