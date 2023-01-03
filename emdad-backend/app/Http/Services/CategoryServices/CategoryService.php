@@ -145,13 +145,13 @@ class CategoryService
     public function changeCategoryStatus($request)
     {
 
-        $category = Categories::where('id', $request->category_id)->first();
+        $category = ProfileCategoryPivot::where('id', $request->category_id)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'No categories founded'
             ]);
         } else {
-            $category->update(['status' => 0]);
+            $category->update(['status' => 'inActive']);
             return response()->json(['message' => 'changed successfully'], 200);
         }
     }
@@ -183,6 +183,25 @@ class CategoryService
                 'status' => 'rejected',
             ]);
             return response()->json(['message' => 'rejected successfully'], 200);
+        }
+    }
+    public function filterCategory($request){
+        $category = Categories::where('id', $request->category_id)->first();
+        if($category->type == 'products'){
+            return response()->json([
+                'type' => 'products'
+            ]);
+            
+        }
+        elseif($category->type=='services'){
+            return response()->json([
+                'type'=>'services'
+            ]);
+        }
+        else {
+            return response()->json([
+                'error' => 'No type founded'
+            ]);
         }
     }
 }

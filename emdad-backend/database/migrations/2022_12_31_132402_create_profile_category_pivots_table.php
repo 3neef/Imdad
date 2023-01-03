@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('profile_id')->references("id")->on("profiles")->cascadeOnDelete();
             $table->foreignId('category_id')->references("id")->on("categories")->cascadeOnDelete();
-            $table->enum('status', ['approved', 'pending', 'rejected'])->default('pending');
+            $table->enum('status', ['active', 'inActive'])->default('active');
             $table->unique(['profile_id','category_id']);
             $table->softDeletes();
             $table->timestamps();

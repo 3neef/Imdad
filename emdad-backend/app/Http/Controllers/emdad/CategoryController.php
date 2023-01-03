@@ -8,6 +8,7 @@ use App\Http\Requests\CategroyRequests\Categroy\changeCategoryStatusRequest;
 use App\Http\Services\CategoryServices\CategoryService;
 use App\Http\Requests\CategroyRequests\Categroy\CreateCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\EmdadApproveCategoryRequest;
+use App\Http\Requests\CategroyRequests\Categroy\FilterCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\ProfileCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\RetryApprovalRequest;
 use App\Http\Requests\CategroyRequests\Categroy\UpdateCategoryRequest;
@@ -54,8 +55,8 @@ class CategoryController extends Controller
      *               @OA\Property(property="nameEn", type="string"),
      *               @OA\Property(property="nameAr", type="string"),
      *               @OA\Property(property="isleaf", type="boolean"),
-     *               @OA\Property(property="companyId", type="integer")
-     *               @OA\Property(property="type", type="string")
+     *               @OA\Property(property="companyId", type="integer"),
+     *               @OA\Property(property="type", type="string"),
      *               @OA\Property(property="parentId", type="integer")
      *            ),
      *        ),
@@ -702,5 +703,73 @@ class CategoryController extends Controller
     public function rejectCategory(EmdadApproveCategoryRequest $request)
     {
         return $this->categoryService->rejectCategory($request);
+    }
+/**
+     * @OA\get(
+     * path="/api/v1_0/categories/serviceOrproduct",
+     * operationId="filterCategory",
+     * tags={"Catogry"},
+     * summary="filter categories",
+     * description="Check if the category type is prouduct service",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"category_id"},
+     *               @OA\Property(property="category_id", type="integer"),
+
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="checked sucessfully successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function filterCategory(FilterCategoryRequest $request){
+        return $this->categoryService->filterCategory($request);
     }
 }
