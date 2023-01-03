@@ -20,7 +20,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
 
     Route::apiResource('categories', CategoryController::class);
     Route::put('categories/restore/{id}', [CategoryController::class, 'restore']);
-    Route::get('categories/serviceOrproduct/{id}', [CategoryController::class,'filterCategory']);
+    Route::get('categories/serviceOrproduct', [CategoryController::class,'filterCategory']);
     Route::put('categories/changeCategoryStatus/{id}', [CategoryController::class, 'changeCategoryStatus']);
     Route::post('categories/company-categories', [CategoryController::class, 'setFavoriteCategories']);
     Route::post('categories/approveCategory', [CategoryController::class, 'approveCategory']);
