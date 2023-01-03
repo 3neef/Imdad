@@ -1,3 +1,7 @@
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    
 variables:
     IMAGE_REG: hub.nctr.sd/emdad
     R_USER : emdad
