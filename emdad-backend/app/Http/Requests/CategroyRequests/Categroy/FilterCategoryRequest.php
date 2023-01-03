@@ -26,7 +26,7 @@ class FilterCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => ['required','exists:categories,id'],
+            "type" => [Rule::in(['products', 'services'])],
         ];
     }
 
