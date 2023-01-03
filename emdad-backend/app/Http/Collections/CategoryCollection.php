@@ -14,7 +14,7 @@ class CategoryCollection
         $defaultSort = '-created_at';
 
         $defaultSelect = [
-            'name_en', 'name_ar','parent_id','isleaf','type','status','profile_id','reason'
+            'name_en', 'name_ar','parent_id','isleaf','type','status','profile_id','reason','id'
         ];
 
 
