@@ -210,4 +210,5 @@ class CategoryService
             return response()->json(["success" => true, "code" => "200", "data" => $categories], 200);
         }
     }
+    
 }
