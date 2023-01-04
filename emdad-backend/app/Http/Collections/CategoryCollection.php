@@ -28,7 +28,7 @@ class CategoryCollection
         ];
 
         $allowedIncludes = [
-            'Products'
+            'Products',
         ];
 
         $perPage =  $request->pageSize ?? 100;

@@ -32,7 +32,7 @@ class CategoryService
                 'type' => $request->type ?? 'products',
             ]);
             if ($category) {
-                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id,'created_by'=>auth()->id()]);
+                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
             }
             if (auth()->user()->profile_id) {
                 $category->update(['profile_id' => auth()->user()->profile_id]);
@@ -116,12 +116,12 @@ class CategoryService
         if (isset($request['categoryList'])) {
             foreach ($request['categoryList'] as $category_id) {
                 try {
-                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id,'created_by'=>auth()->id()]);
+                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
                 } catch (Exception $e) {
                 }
             }
         } else {
-            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id,'created_by'=>auth()->id()]);
+            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id]);
         }
         return response()->json(['message' => 'created successfully'], 200);
     }
@@ -195,5 +195,19 @@ class CategoryService
             "statusCode" => "000",
             'data' => new CategoryResource($category)
         ]);
+    }
+
+    public function getCategoryProfile($request)
+    {
+       
+        if (auth()->user()->profile_id == null) {
+            return response()->json(["error" => "", "code" => "100", "message" => "category does not have profile"], 200);
+        } else {
+            
+            $categories = DB::table('categories')->select('*')
+                ->join('profile_category_pivots', 'profile_category_pivots.category_id', '=', 'categories.id')->where('profile_category_pivots.profile_id', auth()->user()->profile_id)
+                ->get();
+            return response()->json(["success" => true, "code" => "200", "data" => $categories], 200);
+        }
     }
 }

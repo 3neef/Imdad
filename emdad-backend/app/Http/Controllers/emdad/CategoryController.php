@@ -743,7 +743,6 @@ class CategoryController extends Controller
      *               type="object",
      *               required={"type"},
      *               @OA\Property(property="type", type="string"),
-
      *            ),
      *        ),
      *    ),
@@ -772,4 +771,71 @@ class CategoryController extends Controller
     public function filterCategory(FilterCategoryRequest $request){
         return $this->categoryService->filterCategory($request);
     }
+
+/**
+     * @OA\post(
+     * path="/api/v1_0/categories/getCategoryProfile",
+     * operationId="getCategoryProfile",
+     * tags={"Catogry"},
+     * summary="filter categories",
+     * description="Check if the category type is prouduct service",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="checked sucessfully successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function getCategoryProfile(Request $request){
+        return $this->categoryService->getCategoryProfile($request);
+    }
+    
 }
