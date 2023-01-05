@@ -14,9 +14,9 @@ class RoleServices
     {
         $role = Role::create($request->all());
         if ($role) {
-            return response()->json(['message' => 'created successfully'], 200);
+            return response()->json([ "statusCode"=>'000','message' => 'created successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
     }
 
     public function update($request,$id)
@@ -24,11 +24,11 @@ class RoleServices
         $role = Role::where('id',$id)->first();
         if($role==null)
         {
-        return response()->json(['error' => 'No data Founded', 'data'=>[]], 404);
+        return response()->json(["statusCode"=>'111','error' => 'No data Founded', 'data'=>[]], 404);
 
         }else{
             $result = $role->update($request->all());
-                return response()->json(['message' => 'updated successfully'], 200);
+                return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
         }
 
     }
@@ -54,18 +54,18 @@ class RoleServices
         $deleted = $role->delete();
 
         if ($deleted) {
-            return response()->json(['message' => 'deleted successfully'], 301);
+            return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'111','error' => 'system error'], 500);
     }
 
     public function restoreById($id)
     {
         $restore = Role::where('id', $id)->withTrashed()->restore();
         if ($restore) {
-            return response()->json(['message' => 'restored successfully'], 200);
+            return response()->json(["statusCode"=>'000','message' => 'restored successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
     }
 
 
