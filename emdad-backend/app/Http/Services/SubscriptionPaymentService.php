@@ -24,9 +24,6 @@ class SubscriptionPaymentService
         $subscription = SubscriptionPackages::where('id', $request->packageId)->first();
 
         $payedSubscription = SubscriptionPayment::where('profile_id', auth()->user()->profile_id)->first();
-        // dd($payedSubscription);
-
-        // dd($payedSubscription);
         $oldOwner = $user->oldOwner();
 
         $price = $oldOwner == true ? $subscription->price_2 : $subscription->price_1;
@@ -45,12 +42,12 @@ class SubscriptionPaymentService
                 'tax_amount' => $price * 15 / 100,
                 'total' => ($price + ($price * 15 / 100)),
             ]);
-            $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => json_encode($subscription->features, true)]);
+            $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
 
             return response()->json(['data' => new SubscriptionResource($SubscriptionPayment), "oldOwner" => $oldOwner], 200);
         } else {
 
-            if($payedSubscription->status==='Pending'){
+            if ($payedSubscription->status === 'Pending') {
                 $payedSubscription->update([
                     'package_id' => $request->packageId,
                     'user_id' => auth()->id(),
@@ -63,10 +60,8 @@ class SubscriptionPaymentService
 
                 return response()->json(['data' => new SubscriptionResource($payedSubscription), "oldOwner" => $oldOwner], 200);
             }
-
         }
         return response()->json(['success' => false, "error" => "you  have ALready  Active Subscriptions "], 404);
-
     }
 
 
@@ -85,9 +80,10 @@ class SubscriptionPaymentService
 
     public function delete($id)
     {
-
         $subscription = SubscriptionPayment::find($id)->first();
+
         $deleted = $subscription->delete();
+
         if ($deleted) {
             return response()->json(['message' => 'deleted successfully'], 301);
         }
