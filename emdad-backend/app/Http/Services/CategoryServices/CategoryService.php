@@ -26,7 +26,7 @@ class CategoryService
             $category = Categories::create([
                 'name_en' => $request->nameEn,
                 'name_ar' => $request->nameAr,
-                'isleaf' => $request->isleaf,
+                'isleaf' => $request->isleaf ?? 1,
                 'parent_id' => $request->parentId ?? 0,
                 "reason" => $request->note,
                 'type' => $request->type ?? 'products',

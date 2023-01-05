@@ -51,7 +51,7 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"nameEn","nameAr","isleaf","companyId"},
+     *               required={"nameEn","nameAr","companyId"},
      *               @OA\Property(property="nameEn", type="string"),
      *               @OA\Property(property="nameAr", type="string"),
      *               @OA\Property(property="isleaf", type="boolean"),

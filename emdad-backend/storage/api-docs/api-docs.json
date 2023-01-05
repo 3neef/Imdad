@@ -5654,7 +5654,6 @@
                                 "required": [
                                     "nameEn",
                                     "nameAr",
-                                    "isleaf",
                                     "companyId"
                                 ],
                                 "properties": {

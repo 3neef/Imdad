@@ -30,7 +30,7 @@ class CreateCategoryRequest extends FormRequest
                 'nameEn' => ['required', 'string', 'max:255','unique:categories,name_en'],
                 'nameAr' => ['required', 'string', 'max:255','unique:categories,name_ar'],
                 'parentId' => ['exists:categories,id'],
-                'isleaf' => ['required', 'boolean'],
+                'isleaf' => ['boolean'],
                 'note'  =>  ['required', 'string'],
                 'type' => ['string',Rule::in(['products','services'])],
 
