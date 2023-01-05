@@ -44,9 +44,9 @@ class AccountService
 
                 return $profile;
             });
-            return response()->json(['success' => true, 'data' => new ProfileResponse($profile)], 200);
+            return response()->json(["statusCode"=>'000','success' => true, 'data' => new ProfileResponse($profile)], 200);
         } catch (Exception $e) {
-            return response()->json(['success' => false, 'message' => "System Error"], 500);
+            return response()->json(["statusCode"=>'999','success' => false, 'message' => "System Error"], 500);
         }
     }
 
@@ -54,7 +54,7 @@ class AccountService
     {
         $profile = Profile::find($id);
         if ($profile == null) {
-            return response()->json(['error' => 'data  Not Found'], 404);
+            return response()->json(["statusCode"=>'111','error' => 'data  Not Found'], 404);
         } else {
             $update = $profile->update([
                 'name_ar' => $request->nameAr,
@@ -62,7 +62,7 @@ class AccountService
                 'iban' => $request->iban,
                 'vat_number' => $request->vatNumber,
             ]);
-            return response()->json(['message' => 'updated successfully'], 200);
+            return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
         }
     }
 
@@ -71,9 +71,9 @@ class AccountService
 
         $profile = Profile::where('id', $id)->first();
         if ($profile != null) {
-            return response()->json(['data' => new ProfileResponse($profile)], 200);
+            return response()->json(["statusCode"=>'000','data' => new ProfileResponse($profile)], 200);
         } else {
-            return response()->json(['error' => 'No data Founded'], 404);
+            return response()->json(["statusCode"=>'111','error' => 'No data Founded'], 404);
         }
     }
 
@@ -84,18 +84,18 @@ class AccountService
 
         $deleted = $profile->delete();
         if ($deleted) {
-            return response()->json(['message' => 'deleted successfully'], 301);
+            return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'111','error' => 'system error'], 500);
     }
 
     public function restore($id)
     {
         $profile = Profile::where('id', $id)->withTrashed()->restore();
         if ($profile != null) {
-            return response()->json(['message' => 'restored successfully'], 200);
+            return response()->json(["statusCode"=>'000','message' => 'restored successfully'], 200);
         } else {
-            return response()->json(['error' => 'No data Founded'], 404);
+            return response()->json(["statusCode"=>'111','error' => 'No data Founded'], 404);
         }
     }
 
@@ -104,7 +104,7 @@ class AccountService
     {
         $user = RoleUserProfile::where('profile_id', $id)->where('user_id', auth()->id())->where('role_id', "!=", null)->first();
         if ($id == auth()->user()->profile_id) {
-            return response()->json(['success' => false, 'error' => 'you are Already In this  profile'], 402);
+            return response()->json(["statusCode"=>'265','success' => false, 'error' => 'you are Already In this  profile'], 402);
         }
         if ($user) {
             $payedSubscription = SubscriptionPayment::where('profile_id', $id)->first();
@@ -114,7 +114,7 @@ class AccountService
                 $profile->update([
                     'profile_id' => $id
                 ]);
-                return response()->json(["success" => true, 'message' => 'swaped successfully', "profile_id" => $id], 200);
+                return response()->json(["statusCode"=>'000',"success" => true, 'message' => 'swaped successfully', "profile_id" => $id], 200);
             }
         }
         return response()->json(['success' => false, 'error' => 'Profile Not Founded'], 404);
