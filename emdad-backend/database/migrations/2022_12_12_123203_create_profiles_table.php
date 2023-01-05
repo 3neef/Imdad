@@ -34,17 +34,17 @@ return new class extends Migration
         });
 
         Schema::table('users', function (Blueprint $table) {
-            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
+            $table->foreign('profile_id')->references('id')->on('profiles')->restrictOnDelete();
         });
 
         Schema::table('categories', function (Blueprint $table) {
-            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
+            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->restrictOnDelete();
         });
         Schema::table('products', function (Blueprint $table) {
-            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
+            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->restrictOnDelete();
         });
         Schema::table('warehouses', function (Blueprint $table) {
-            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
+            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->restrictOnDelete();
         });
      
      
