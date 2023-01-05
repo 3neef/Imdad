@@ -6,9 +6,7 @@ use App\Http\Collections\WarehouseCollection;
 use App\Http\Resources\AccountResourses\warehouses\WarehouseResponse;
 use App\Models\Accounts\Warehouse;
 use App\Models\User;
-use Illuminate\Http\Request;
 
-use function GuzzleHttp\Promise\all;
 
 class WarehouseService
 {
@@ -21,6 +19,17 @@ class WarehouseService
 
     public function store($request)
     {
+        $packageLimit = new PackageConstraint;
+        $value = Warehouse::where('profile_id', auth()->user()->profile_id)->count();
+        $Limit = $packageLimit->packageLimitExceed("Warehouse", $value);
+        if ($Limit == false) {
+            return response()->json([
+                "statusCode" => "361",
+                'success' => false,
+                 'message' => "You have exceeded the allowed number of Warehouse to create it"
+            ], 200);
+        }
+
         $warehouse =  Warehouse::create([
             'profile_id' => auth()->user()->profile_id,
             'address_name' => $request->warehouseName,

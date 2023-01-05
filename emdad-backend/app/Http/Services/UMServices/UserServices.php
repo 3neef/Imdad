@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UM\Role;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
+use App\Http\Services\AccountServices\PackageConstraint;
 use App\Http\Services\General\SmsService;
 use App\Models\Accounts\Warehouse;
 use App\Models\UM\Permission;
@@ -17,7 +18,6 @@ use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 
 
 
@@ -26,6 +26,16 @@ class UserServices
 
     public function create($request)
     {
+        $packageLimit = new PackageConstraint;
+        $value = User::where('profile_id', auth()->user()->profile_id)->count();
+        $Limit = $packageLimit->packageLimitExceed("user", $value);
+        if ($Limit == false) {
+            return response()->json([
+                "statusCode" => "360",
+                'success' => false,
+                 'message' => "You have exceeded the allowed number of users to create it"
+            ], 200);
+        }
 
         $user = DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
@@ -35,8 +45,6 @@ class UserServices
             $request['otp_expires_at'] = now()->addMinutes(5);
             $request['is_super_admin'] = true;
             $status = $request['status'];
-
-            // $request['otp'] = userOtp();
 
             $user = User::create($request);
             $this->UserOtp($user);
@@ -103,7 +111,7 @@ class UserServices
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
-            'expiry_date' => $request['expireDate'] ?? $user->expiry_date ,
+            'expiry_date' => $request['expireDate'] ?? $user->expiry_date,
 
         ]);
 
@@ -123,10 +131,10 @@ class UserServices
 
         $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
-         if ($request->has("roleId") && $userRoleProfile != null) {
+        if ($request->has("roleId") && $userRoleProfile != null) {
 
-        $userRoleProfile->update(['user_id' => $user->id ?? $userRoleProfile->user_id, 'role_id' => $request['roleId']??$userRoleProfile->role_id, 'profile_id' => auth()->user()->profile_id, "manger_user_id" => $request['mangerUserId'] ?? $userRoleProfile->manger_user_id]);
-         }
+            $userRoleProfile->update(['user_id' => $user->id ?? $userRoleProfile->user_id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => auth()->user()->profile_id, "manger_user_id" => $request['mangerUserId'] ?? $userRoleProfile->manger_user_id]);
+        }
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
             $this->UserOtp($user);
@@ -479,7 +487,7 @@ class UserServices
 
     public function restoreOldRole($request)
     {
-        $userRoleCompany = RoleUserProfile::where('user_id', $request->userId)->where('profile_id',$request->profile_id)->withTrashed()->first()->restore();
+        $userRoleCompany = RoleUserProfile::where('user_id', $request->userId)->where('profile_id', $request->profile_id)->withTrashed()->first()->restore();
         if ($userRoleCompany) {
             return response()->json([
                 "statusCode" => "000",

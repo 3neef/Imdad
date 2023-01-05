@@ -13,18 +13,17 @@ class SubscriptionService
     {
 
         $subscription = SubscriptionPackages::create([
-            'price_1'=>$request->price1, 
-            'price_2'=>$request->price2, 
-            'free_first_time' => $request->freeFirstTime ,
-            'package_name_ar' => $request->packageNameAr ,
-            'package_name_en' => $request->packageNameEn ,
-         
+            'price_1' => $request->price1,
+            'price_2' => $request->price2,
+            'free_first_time' => $request->freeFirstTime,
+            'package_name_ar' => $request->packageNameAr,
+            'package_name_en' => $request->packageNameEn,
+
             "type" => $request->type,
             "features" => json_encode($request->features, true),
         ]);
         if ($subscription) {
-            return response()->json(['success'=>true,'data' => $subscription], 200);
-
+            return response()->json(['success' => true, 'data' => $subscription], 200);
         }
         return response()->json(['message' => 'system error'], 500);
     }
@@ -45,6 +44,7 @@ class SubscriptionService
     {
 
         $subscription = SubscriptionPackages::find($id);
+        
         $subscription->update([
             'price_1' => $request->price1 ?? $subscription->price_1,
             'price_2' => $request->price2 ?? $subscription->price_2,
@@ -54,11 +54,8 @@ class SubscriptionService
             "type" => $request->type ?? $subscription->type,
             "features" => json_encode($request->features, true) ?? $subscription->features,
         ]);
-
-        
-
         if ($subscription) {
-            return response()->json(['success'=>true,'data' => $subscription], 200);
+            return response()->json(['success' => true, 'data' => $subscription], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
@@ -77,7 +74,7 @@ class SubscriptionService
 
     public function restore($id)
     {
-        $subscription = SubscriptionPackages::where('id',$id)->where('deleted_at',"!=",null)->withTrashed()->restore();
+        $subscription = SubscriptionPackages::where('id', $id)->where('deleted_at', "!=", null)->withTrashed()->restore();
 
         if ($subscription) {
             return response()->json(['message' => 'restored successfully'], 200);
