@@ -37,7 +37,7 @@ class CategoryController extends Controller
      *             type="string"
      *         )
      *     ),
-     *         *     @OA\Parameter(
+     *              @OA\Parameter(
      *         name="token",
      *         in="header",
      *         description="Set user authentication token",
