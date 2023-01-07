@@ -32,7 +32,6 @@ class SubscriptionPaymentService
         if ($payedSubscription == null ||  Carbon::now() > $payedSubscription->expire_date) {
 
 
-            // dd($subscription);
             $SubscriptionPayment = SubscriptionPayment::create([
                 'profile_id' => auth()->user()->profile_id,
                 'package_id' => $request->packageId,
