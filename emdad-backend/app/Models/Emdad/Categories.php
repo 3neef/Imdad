@@ -27,6 +27,24 @@ class Categories extends Model
         return $this->hasMany(Prodcuts::class);
     }
 
+    public function sequence()
+    {
+        $current = $this;
+        $lang = auth()->user()->lang;
+        $sequence="";
+        while ($current != null && $current->parent_id != 0) {
+            if($lang=="en"){
+                $sequence=$current->name_en."/".$sequence;
+            }
+            else{
+                $sequence=$current->name_ar."/".$sequence;
+
+            }
+        }
+
+        return $sequence;
+    }
+
     public function companyCategory()
     {
         return $this->belongsToMany(Profile::class, 'profile_category_pivots', 'profile_id', 'category_id')
@@ -37,7 +55,7 @@ class Categories extends Model
 
     public function getCreatedByAttribute()
     {
-    $createdById = DB::table('profile_category_pivots')->where('profile_id', auth()->user()->profile_id ?? null)->pluck('created_by');
+        $createdById = DB::table('profile_category_pivots')->where('profile_id', auth()->user()->profile_id ?? null)->pluck('created_by');
         $createdByIdName = $this->createdByName($createdById);
 
         return ["mangerID" => $createdById, "mangerName" => $createdByIdName];
