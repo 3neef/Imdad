@@ -114,7 +114,7 @@ class SubscriptionPaymentService
     public function checkPaymentStatus()
     {
         $user = User::where("id", auth()->id())->first();
-        $profile = $user->currentProfile;
+        $profile = $user->currentProfile();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->first();
         if ($paymentRequest->status == "Paid") {
             return response()->json(['data' => new SubscriptionResource($paymentRequest),"statusCode"=>"000"], 200);
