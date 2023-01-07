@@ -104,7 +104,7 @@ class AccountService
     {
         $user = RoleUserProfile::where('profile_id', $id)->where('user_id', auth()->id())->where('role_id', "!=", null)->first();
         if ($id == auth()->user()->profile_id) {
-            return response()->json(["statusCode"=>'265','success' => false, 'error' => 'you are Already In this  profile'], 402);
+            return response()->json(["statusCode"=>'265','success' => false, 'error' => 'you are Already In this  profile'], 200);
         }
         if ($user) {
             $payedSubscription = SubscriptionPayment::where('profile_id', $id)->first();
@@ -117,7 +117,7 @@ class AccountService
                 return response()->json(["statusCode"=>'000',"success" => true, 'message' => 'swaped successfully', "profile_id" => $id], 200);
             }
         }
-        return response()->json(['success' => false, 'error' => 'Profile Not Founded'], 404);
+        return response()->json(['success' => false, 'error' => 'Profile Not Founded','statusCode'=>"111"], 200);
     }
 
 
