@@ -40,23 +40,7 @@ class AuthenticationServices
             $user = User::create($request);
             $data = $this->UserOtp($user);
             $user->update(['otp' => $data['otp']]);
-            $role_id = $request['roleId'] ?? null;
-            $is_learning = $request['is_learning'] ?? false;
-            // $manager_id = null;
-            // if (isset($request['managerUserId'])) {
-            //     $manager_id = $request['managerUserId'];
-            // } else {
-            //     $manager_id = auth()->user()->profile_id ?? null;
-            // }
-            if ($role_id) {
-                $user->roleInProfile()->attach($user->id, ['user_id'=>auth()->id, 'role_id' => $role_id, 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'manager_user_Id' => auth()->id()]);
-
-                $user->update(['profile_id' => auth()->user()->profile_id]);
-            }
-            if (isset($request->warahouseId)) {
-
-                $user->warehouse()->attach($user->id, ['warehouse_id' => $request->warahouseId,]);
-            }
+        
             return $user;
         });
         // dd($user);
@@ -304,47 +288,47 @@ class AuthenticationServices
         );
     }
 
-    public function delete($id)
-    {
+    // public function delete($id)
+    // {
 
-        $user = User::find($id)->first();
-        if ($user == null) {
-            return response()->json(['error' => 'user already deleted',
-            "statusCode"=>"111",
+    //     $user = User::find($id)->first();
+    //     if ($user == null) {
+    //         return response()->json(['error' => 'user already deleted',
+    //         "statusCode"=>"111",
 
-        ], 200);
-        }
-        // dd($user);
+    //     ], 200);
+    //     }
+    //     // dd($user);
 
-        $user->tokens()->delete();
+    //     $user->tokens()->delete();
 
-        $deleted = $user->delete();
+    //     $deleted = $user->delete();
 
-        if ($deleted) {
-            return response()->json([
-                "statusCode"=>"000",
+    //     if ($deleted) {
+    //         return response()->json([
+    //             "statusCode"=>"000",
 
-                'message' => 'User deleted successfully',], 200);
-        }
-        return response()->json(['error' => 'system error',
-        "statusCode"=>"999",
+    //             'message' => 'User deleted successfully',], 200);
+    //     }
+    //     return response()->json(['error' => 'system error',
+    //     "statusCode"=>"999",
 
-    ], 200);
-    }
+    // ], 200);
+    // }
 
 
-    public function restoreById($request)
-    {
-        $restore = User::where('id', $request->id)->withTrashed()->first()->restore();
+    // public function restoreById($request)
+    // {
+    //     $restore = User::where('id', $request->id)->withTrashed()->first()->restore();
 
-        if ($restore) {
-            return response()->json([
-                "statusCode"=>"000",
+    //     if ($restore) {
+    //         return response()->json([
+    //             "statusCode"=>"000",
 
-                'message' => 'User restored successfully'], 200);
-        }
-        return response()->json(['error' => 'system error',"statusCode"=>"999"], 200);
-    }
+    //             'message' => 'User restored successfully'], 200);
+    //     }
+    //     return response()->json(['error' => 'system error',"statusCode"=>"999"], 200);
+    // }
 
 
     public function forgotPassword($request)
@@ -396,16 +380,16 @@ class AuthenticationServices
         ], 200);
     }
 
-    public function assignRole($request)
-    {
-        $colmun = gettype($request->json()->get('role')) == 'integer' ? 'id' : 'name';
-        $role = Role::where($colmun, $request->json()->get('role'))->first();
-        $user = User::find($request->get('userId'));
-        $companyId = $request->get('companyId');
-        $userId = $request->get('userId');
-        $user->roleInCompany()->attach($userId, ['roles_id' => $role->id, 'company_info_id' => $companyId]);
-        return response()->json(['message' => 'assign role successfully'], 200);
-    }
+    // public function assignRole($request)
+    // {
+    //     $colmun = gettype($request->json()->get('role')) == 'integer' ? 'id' : 'name';
+    //     $role = Role::where($colmun, $request->json()->get('role'))->first();
+    //     $user = User::find($request->get('userId'));
+    //     $companyId = $request->get('companyId');
+    //     $userId = $request->get('userId');
+    //     $user->roleInCompany()->attach($userId, ['roles_id' => $role->id, 'company_info_id' => $companyId]);
+    //     return response()->json(['message' => 'assign role successfully'], 200);
+    // }
 
     public function userActivate($request)
     {
@@ -433,37 +417,37 @@ class AuthenticationServices
     }
 
 
-    public function disable($request)
-    {
-        $user = User::where('id', $request->userId)->first();
-        $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
-        $active = $userRoleProfile->update(['status' => 'inActive']);
-        // dd($userRoleProfile);
-        if ($active) {
-            return response()->json([
-                "statusCode"=>"000",
+    // public function disable($request)
+    // {
+    //     $user = User::where('id', $request->userId)->first();
+    //     $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+    //     $active = $userRoleProfile->update(['status' => 'inActive']);
+    //     // dd($userRoleProfile);
+    //     if ($active) {
+    //         return response()->json([
+    //             "statusCode"=>"000",
 
-                'message' => 'user account has disabled successfully'], 200);
-        }
-        return response()->json(['error' => 'system error',
-        "statusCode"=>"999"
-    ], 200);
-    }
+    //             'message' => 'user account has disabled successfully'], 200);
+    //     }
+    //     return response()->json(['error' => 'system error',
+    //     "statusCode"=>"999"
+    // ], 200);
+    // }
 
-    public function restoreOldRole($request)
-    {
-        $userRoleCompany = RoleUserProfile::where('user_id', '=', $request->userId)->where('profile_id', '=', $request->profile_id)->withTrashed()->first()->restore();
-        if ($userRoleCompany) {
-            return response()->json([
-                "statusCode"=>"000",
+    // public function restoreOldRole($request)
+    // {
+    //     $userRoleCompany = RoleUserProfile::where('user_id', '=', $request->userId)->where('profile_id', '=', $request->profile_id)->withTrashed()->first()->restore();
+    //     if ($userRoleCompany) {
+    //         return response()->json([
+    //             "statusCode"=>"000",
 
-                'message' => 'restored successfully'], 200);
-        }
-        return response()->json([
-            "statusCode"=>"999",
+    //             'message' => 'restored successfully'], 200);
+    //     }
+    //     return response()->json([
+    //         "statusCode"=>"999",
 
-            'error' => 'system error'], 200);
-    }
+    //         'error' => 'system error'], 200);
+    // }
 
     public function setDefaultCompany($request)
     {
@@ -485,10 +469,7 @@ class AuthenticationServices
 
 
 
-    public function showById($id)
-    {
-        #code...
-    }
+   
 
     public function removeUser($id)
     {
