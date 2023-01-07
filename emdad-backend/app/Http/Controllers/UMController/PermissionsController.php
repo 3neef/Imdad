@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UMRequests\Permission\AddPemissonToRoleRequest;
 use App\Http\Requests\UMRequests\Permission\GetPermissionRequest;
 use App\Http\Requests\UMRequests\Permission\CreatePermissionRequest;
+use App\Http\Requests\UMRequests\Permission\DeletePermissonRequest;
 use App\Http\Requests\UMRequests\Permission\UpdatePermissionRequest;
 use App\Http\Requests\UMRequests\Permission\RestorePermissionRequest;
 use App\Http\Services\UMServices\PermissionServices;
@@ -329,12 +330,68 @@ class PermissionsController extends Controller
     public function restoreById( $permissionId){
         return $this->PermissionService->restoreById($permissionId);
     }
+    /**
+        * @OA\Post(
+        * path="/api/v1_0/permissions/addPermissionToRole",
+        * operationId="AddPermissionToPermissions",
+        * tags={"Roles and Permissions"},
+        * summary="Add new permisssion",
+        * description="Add a new permission to the permissions list within a role",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"userId","roleId","label"},
+        *               @OA\Property(property="userId", type="string"),
+        *               @OA\Property(property="roleId", type="string"),
+        *               @OA\Property(property="label", type="string"),
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="created  new permission",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *        ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity"
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found")
+        * )
+        */
 
     public function PermissionToRole(AddPemissonToRoleRequest $request){
         return $this->PermissionService->addPermisson($request);
     }
 
-    public function DeletePermissionOnRole(AddPemissonToRoleRequest $request){
+    public function DeletePermissionOnRole(DeletePermissonRequest $request){
         return $this->PermissionService->removePermission($request);
     }
 }
