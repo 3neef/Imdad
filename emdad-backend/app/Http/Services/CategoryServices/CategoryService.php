@@ -111,8 +111,6 @@ class CategoryService
     {
         $category = Categories::first();
         if (isset($request['categoryList'])) {
-
-            dd($request['categoryList']);
             foreach ($request['categoryList'] as $category_id) {
 
                 try {
@@ -207,7 +205,6 @@ class CategoryService
             $categories = DB::table('categories')->select('*')
                 ->join('profile_category_pivots', 'profile_category_pivots.category_id', '=', 'categories.id')->where('profile_category_pivots.profile_id', auth()->user()->profile_id)
                 ->join('users', 'profile_category_pivots.created_by', '=', 'users.id')->where('users.profile_id', auth()->user()->profile_id)->get();
-            //   dd($categories);
                 return response()->json(["success" => true, "code" => "200", "data" =>   CategoryResource::collection($categories)], 200);
         }
     }
