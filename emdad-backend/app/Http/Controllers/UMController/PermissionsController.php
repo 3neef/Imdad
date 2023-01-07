@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UMController;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UMRequests\Permission\AddPemissonToRoleRequest;
 use App\Http\Requests\UMRequests\Permission\GetPermissionRequest;
 use App\Http\Requests\UMRequests\Permission\CreatePermissionRequest;
 use App\Http\Requests\UMRequests\Permission\UpdatePermissionRequest;
@@ -327,5 +328,13 @@ class PermissionsController extends Controller
         */
     public function restoreById( $permissionId){
         return $this->PermissionService->restoreById($permissionId);
+    }
+
+    public function PermissionToRole(AddPemissonToRoleRequest $request){
+        return $this->PermissionService->addPermisson($request);
+    }
+
+    public function DeletePermissionOnRole(AddPemissonToRoleRequest $request){
+        return $this->PermissionService->removePermission($request);
     }
 }

@@ -4,10 +4,15 @@ namespace App\Http\Services\UMServices;
 
 use App\Http\Collections\PermissionsCollection;
 use App\Http\Resources\UMResources\Permission\PermissionResponse;
+use App\Http\Resources\UMResources\User\UserResponse;
+use App\Models\Profile;
 use App\Models\UM\Permission;
 use App\Models\UM\RolePermission;
 use App\Models\UM\Role;
+use App\Models\UM\RoleUserProfile;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PermissionServices
 {
@@ -74,5 +79,29 @@ class PermissionServices
             return response()->json(['message' => 'restored successfully'], 200);
         }
         return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
+    }
+    public function addPermisson($request)
+    {
+        $permissions = RoleUserProfile::where('role_id',$request->roleId)->where('user_id',$request->userId )->where('profile_id',auth()->user()->profile_id)->first();
+
+        if($permissions){
+            $labels = json_decode($permissions->permissions);
+            // dd($labels);
+            // dd($json);
+            foreach($labels as $label){
+                if($label==$request->label){
+                    return response()->json(["statusCode"=>'111','error' => 'permission already exist'], 500);
+                }
+                
+            }
+            array_push($labels ,$request->label);
+        
+                $permissions->update(["permissions"=>$labels]);
+                return response()->json(["statusCode"=>'000','data'=>$permissions,'success' => 'Permission added successfully'], 200);
+        }
+    }
+    public function removePermission($request)
+    {
+
     }
 }
