@@ -85,6 +85,7 @@ class AuthenticationServices
             "email" => $request->email ?? $user->email,
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
+            'lang' =>  $request['lang'] ?? $user->lang,
         ]);
 
         $WarahouseId = $request->warahouseId ?? null;
