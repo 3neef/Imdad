@@ -24,6 +24,7 @@ class CategoryResource extends JsonResource
             'isleaf' => $this->isleaf,
             'type' => $this->type,
             'note' =>$this->reason,
+            'sequence'=>$this->sequence()
 
         ];
     }
