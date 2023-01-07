@@ -8,6 +8,7 @@ use App\Http\Controllers\UMController\PermissionsController;
 use App\Http\Controllers\UMController\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UsersProfilesController;
+use App\Models\UM\Permission;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -47,8 +48,11 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
 Route::put('users/update-owner-user/{id}', [UserController::class, 'UpdateOwnerUser'])->middleware(['auth.apikey']);
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    Route::Post('permissions/addPermissionToRole' , [PermissionsController::class,'PermissionToRole']);
+
     Route::apiResource('permissions', PermissionsController::class);
     Route::put('permissions/restore/{permissionId}', [PermissionsController::class, 'restoreById']);
+    Route::put('permissions/RemovePermission',[PermissionsController::class,'DeletePermissionOnRole']);
 });
 
 Route::middleware(['auth.apikey'])->group(function () {
