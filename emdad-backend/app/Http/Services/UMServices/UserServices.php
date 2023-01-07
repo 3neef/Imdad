@@ -112,6 +112,7 @@ class UserServices
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
             'expiry_date' => $request['expireDate'] ?? $user->expiry_date,
+            'lang' =>  $request['lang'] ?? $user->lang,
 
         ]);
 

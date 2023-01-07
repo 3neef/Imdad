@@ -41,6 +41,7 @@ class UpdateRequest extends FormRequest
             'manager_user_Id'=>'integer|exists:users,id',
             'WarahouseId'=>'integer|exists:warehouses,id',
             'status' => [Rule::in('Active','InActive')],
+            'lang'=>  [Rule::in('en','ar')],
         ];
     }
 

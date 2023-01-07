@@ -37,7 +37,7 @@ class AccountService
                 ]);
                  WalletsService::create($profile);
                 $permissions = $this->pluckPermissions($request->ProfileType);
-                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
+                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
 
 
                 $user->update(['profile_id' => $profile->id]);
