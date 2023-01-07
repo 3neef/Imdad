@@ -91,11 +91,11 @@ class UserController extends Controller
         }
         $users =  DB::table('users')->select('*')
         ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')->where('role_user_profile.profile_id', auth()->user()->profile_id)
-        ->get();
+        ->painate($request->pageSize??100);
 
 
 
-        return response()->json(["success"=>true,"code"=>"200","data"=>$users],200);
+        return response()->json(["success"=>true,"statusCode"=>"000","data"=>UserResponse::collection($users)],200);
     }
 
     /**
