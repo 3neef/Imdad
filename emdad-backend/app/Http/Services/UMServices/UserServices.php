@@ -563,7 +563,7 @@ class UserServices
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
         MailController::sendSignupEmail($user->name, $user->email, $user->otp);
 
-        $smsService->sendSms($user->mobile, $user->password, 'password');
+        $smsService->sendSms($user->mobile, $user->password, 'password');    
         // return response()->json(['success'=>true,'smsType'=>'password'],201);
 
     }
