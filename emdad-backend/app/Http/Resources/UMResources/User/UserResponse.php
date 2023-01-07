@@ -31,7 +31,7 @@ class UserResponse extends JsonResource
             "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null,
             "expireDate" => $this->expiry_date,
             "passwordChanged" => $this->password_changed,
-            "MangerInfo" => $this->mangerUserId() ?? '',
+            "mangerInfo" => $this->mangerUserId() ?? '',
             "allProfiles"=> RoleUserProfile::where("user_id",$this->id)->pluck("profile_id")->get()
 
         ];
