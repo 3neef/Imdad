@@ -33,7 +33,8 @@ class Categories extends Model
         $lang = auth()->user()->lang;
         $sequence="";
         while ($current != null && $current->parent_id != 0) {
-            if($lang=="en"){
+            $current = Categories::where("id", $current->parent_id)->first();
+            if($lang=="en"||$lang==null){
                 $sequence=$current->name_en."/".$sequence;
             }
             else{
