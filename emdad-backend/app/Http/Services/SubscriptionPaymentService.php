@@ -41,6 +41,8 @@ class SubscriptionPaymentService
                 'expire_date' => $dt->addYear(),
                 'tax_amount' => $price * 15 / 100,
                 'total' => ($price + ($price * 15 / 100)),
+                'status'=>$price>0?"Pending":"Paid"
+
             ]);
             $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features],200);
 
