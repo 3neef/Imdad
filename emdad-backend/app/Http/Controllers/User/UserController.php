@@ -91,7 +91,7 @@ class UserController extends Controller
         }
         $users =  DB::table('users')->select('*')
         ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')->where('role_user_profile.profile_id', auth()->user()->profile_id)
-        ->painate($request->pageSize??100);
+        ->paginate($request->pageSize??100);
 
 
 

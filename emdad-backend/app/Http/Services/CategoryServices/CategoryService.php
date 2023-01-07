@@ -128,13 +128,13 @@ class CategoryService
 
     public function RetryApproval($request)
     {
-        $category = ProfileCategoryPivot::where('category_id', $request->categoryId)->where('profile_id', auth()->user()->profile_id)->first();
-
+        $category = Categories::where('id', $request->categoryId)->where('profile_id', auth()->user()->profile_id)->first();
         if ($category->status == "rejected") {
             $category->update([
                 "status" => "pending",
                 "reason" => $request->reason ?? $category->reason,
             ]);
+
             return response()->json(['message' => 'Approval  Requset sent successfully'], 200);
         }
         return response()->json(['message' => 'Requset  not sent '], 403);
@@ -143,7 +143,7 @@ class CategoryService
     public function changeCategoryStatus($request)
     {
 
-        $category = ProfileCategoryPivot::where('id', $request->category_id)->first();
+        $category = ProfileCategoryPivot::where('category_id', $request->categoryId)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'No categories founded'
@@ -199,16 +199,15 @@ class CategoryService
 
     public function getCategoryProfile($request)
     {
-       
+
         if (auth()->user()->profile_id == null) {
             return response()->json(["error" => "", "code" => "100", "message" => "category does not have profile"], 200);
         } else {
-            
+
             $categories = DB::table('categories')->select('*')
                 ->join('profile_category_pivots', 'profile_category_pivots.category_id', '=', 'categories.id')->where('profile_category_pivots.profile_id', auth()->user()->profile_id)
                 ->join('users', 'profile_category_pivots.created_by', '=', 'users.id')->where('users.profile_id', auth()->user()->profile_id)->get();
             return response()->json(["success" => true, "code" => "200", "data" => $categories], 200);
         }
     }
-    
 }
