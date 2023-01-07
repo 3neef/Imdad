@@ -82,7 +82,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function userStatus()
     {
-        return RoleUserProfile::where("profile_id", $this->profile_id)->where("user_id", $this->id)->first();
+        return RoleUserProfile::wherePivot("profile_id", $this->profile_id)->wherePivot("user_id", $this->id)->first();
     }
 
     public function userRole()
