@@ -20,7 +20,8 @@ class TruckService
                 'color' => $request->color,
                 'model' => $request->model,
                 'size' => $request->size,
-                'brand' => $request->brand
+                'brand' => $request->brand,
+                'created_by'=> auth()->user()->profile_id
             ]);
             $request->merge(['image' => UploadServices::uploadFile($request->image, 'image', 'truck images')]);
             $truck->truckImage()->create(['name' => $request->image, 'truck_id' => $truck->id]);

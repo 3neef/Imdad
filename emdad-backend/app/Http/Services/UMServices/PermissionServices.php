@@ -22,9 +22,9 @@ class PermissionServices
         $Permission = Permission::create($request->all());
 
         if ($Permission) {
-            return response()->json(['message' => 'created successfully'], 200);
+            return response()->json(["statusCode"=>'000','message' => 'created successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
     }
 
 
@@ -33,9 +33,9 @@ class PermissionServices
 
         $Permissions = Permission::where('id', $id)->first();
         if ($Permissions) {
-            return response()->json(['data' => new PermissionResponse($Permissions), 'message' => 'success'], 200);
+            return response()->json(["statusCode"=>'000','data' => new PermissionResponse($Permissions), 'message' => 'success'], 200);
         }
-        return response()->json(['message' => 'permissions not found ', 'data' => []], 404);
+        return response()->json(["statusCode"=>'111','message' => 'permissions not found ', 'data' => []], 404);
     }
 
 
@@ -48,9 +48,9 @@ class PermissionServices
         $Permission = $Permission->update($request->all());
 
         if ($Permission) {
-            return response()->json(['message' => 'updated successfully'], 200);
+            return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'111','error' => 'system error'], 500);
     }
 
 
@@ -62,9 +62,9 @@ class PermissionServices
 
         $deleted = $Permissions->delete();
         if ($deleted) {
-            return response()->json(['message' => 'deleted successfully'], 301);
+            return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'111','error' => 'system error'], 500);
     }
 
     public function restoreById($permissionId)
@@ -73,6 +73,6 @@ class PermissionServices
         if ($restore) {
             return response()->json(['message' => 'restored successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
     }
 }
