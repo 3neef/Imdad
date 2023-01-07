@@ -67,9 +67,6 @@ class CategoryService
 
 
 
-
-
-
     public function update($request, $id)
     {
         $category = Categories::where('id', $id)->first();

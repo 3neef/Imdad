@@ -32,7 +32,6 @@ class SubscriptionPaymentService
         if ($payedSubscription == null ||  Carbon::now() > $payedSubscription->expire_date) {
 
 
-            // dd($subscription);
             $SubscriptionPayment = SubscriptionPayment::create([
                 'profile_id' => auth()->user()->profile_id,
                 'package_id' => $request->packageId,
@@ -41,6 +40,8 @@ class SubscriptionPaymentService
                 'expire_date' => $dt->addYear(),
                 'tax_amount' => $price * 15 / 100,
                 'total' => ($price + ($price * 15 / 100)),
+                'status'=>$price>0?"Pending":"Paid"
+
             ]);
             $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features],200);
 
