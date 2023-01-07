@@ -21,7 +21,7 @@ class SmsService
     if($smsType==='otp'){
       $msgBody = 'Your verification code is ' . $var.'';
 
-    }
+    } 
     if($smsType=='password'){
       $msgBody = 'Emdad account has been issued for you use this first time password ' . $var.'';
 
