@@ -27,7 +27,7 @@ class ProfileCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            "categoryList" => ['required_without:category_id'],
+            "categoryList" => ['required_without:category_id', 'array', new UniqeValues],
             "categoryList.*" => ['exists:categories,id'],
             'category_id' => ['exists:categories,id'],
         ];
