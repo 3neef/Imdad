@@ -111,7 +111,10 @@ class CategoryService
     {
         $category = Categories::first();
         if (isset($request['categoryList'])) {
+
+            dd($request['categoryList']);
             foreach ($request['categoryList'] as $category_id) {
+
                 try {
                     $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id,'created_by'=>auth()->id()]);
                 } catch (Exception $e) {
