@@ -28,6 +28,6 @@ class CategoryPivotResource extends JsonResource
             'CeatedBy'=>$this->created_by??null,
             'sequence'=>$this->category->sequence()
         
-        ]
+        ];
     }
 }
