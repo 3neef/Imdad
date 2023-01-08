@@ -16,7 +16,7 @@ use SoftDeletes,HasFactory;
 
     public function category()
     {
-        return $this->belongsToMany(Categories::class, 'id');
+        return $this->belongsToOne(Categories::class, 'category_id','id');
     }
 
 }
