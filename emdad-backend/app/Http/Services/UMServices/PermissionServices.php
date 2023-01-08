@@ -107,13 +107,12 @@ class PermissionServices
             $labels = json_decode($permissions->permissions);
             
                     if (($key = array_search($request->label, $labels)) !== false) {
-                        unset($array[$key]);
-                        dd($labels);
+                        unset($labels[$key]);
+                        // dd($labels);
+                        $permissions->update(["permissions"=>$labels]);
+                    return response()->json(["statusCode"=>'112','data'=>$permissions,'success' => 'Permission deleted successfully'], 200);
                     }
-
-                
-                $permissions->update(["permissions"=>$labels]);
-                return response()->json(["statusCode"=>'112','data'=>$permissions,'success' => 'Permission deleted successfully'], 200);
+                    else return response()->json(["statusCode"=>'111','error' => 'Record not Found'], 500);   
             }
            
     }
