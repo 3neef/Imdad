@@ -2,11 +2,12 @@
 
 namespace App\Policies;
 
+use App\Models\Emdad\Categories;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\DB;
 
-class UserPolicy
+class CategoriesPolicy
 {
     use HandlesAuthorization;
 
@@ -25,20 +26,13 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user, Categories $categories)
     {
-        if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('role_user_profile')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            $labels = json_decode($permissonis);
-            foreach ($labels as $label) {
-                if ($label == "BMU1" || $label == "SMU1") {
-                    return true;
-                }
-            }
-        }
+       return $this->checkPermission($user, $type1 = "BMCT1", $type2 = "SMCT1");
+        
     }
 
     /**
@@ -49,39 +43,30 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('role_user_profile')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            $labels = json_decode($permissonis);
-            foreach ($labels as $label) {
-                if ($label == "BMU2" || $label == "SMU2") {
-                    return true;
-                }
-            }
-        }
+       return $this->checkPermission($user, $type1 = "BMCT2", $type2 = "SMCT2");
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user)
+    public function update(User $user, Categories $categories)
     {
-        return $this->checkPermission($user);
+       return $this->checkPermission($user, $type1 = "BMCT2", $type2 = "SMCT2");
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user)
+    public function delete(User $user, Categories $categories)
     {
-        return $this->checkPermission($user);
         
     }
 
@@ -89,36 +74,36 @@ class UserPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user)
+    public function restore(User $user, Categories $categories)
     {
-        return $this->checkPermission($user);
+        //
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user)
+    public function forceDelete(User $user, Categories $categories)
     {
         //
     }
 
-    public function checkPermission($user)
+    public function checkPermission($user, $type1, $type2)
     {
         if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
             $permissonis = DB::table('role_user_profile')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
             $labels = json_decode($permissonis);
             foreach ($labels as $label) {
-                if ($label == "BMU3" || $label == "SMU3") {
+                if ($label == $type1 || $label == $type2) {
                     return true;
                 }
             }
-        } 
+        }
     }
 }
