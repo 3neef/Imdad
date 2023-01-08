@@ -52,13 +52,13 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"nameEn","nameAr","companyId"},
+     *               required={"nameEn","nameAr","note"},
      *               @OA\Property(property="nameEn", type="string"),
      *               @OA\Property(property="nameAr", type="string"),
+     *               @OA\Property(property="parentId", type="integer"),
      *               @OA\Property(property="isleaf", type="boolean"),
-     *               @OA\Property(property="companyId", type="integer"),
+     *               @OA\Property(property="note", type="string"),
      *               @OA\Property(property="type", type="string"),
-     *               @OA\Property(property="parentId", type="integer")
      *            ),
      *        ),
      *    ),

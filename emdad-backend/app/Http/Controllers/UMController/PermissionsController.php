@@ -390,7 +390,62 @@ class PermissionsController extends Controller
     public function PermissionToRole(AddPemissonToRoleRequest $request){
         return $this->PermissionService->addPermisson($request);
     }
-
+/**
+        * @OA\delete(
+        * path="/api/v1_0/permissions/RemovePermission",
+        * operationId="DeletePermissionFromPermissions",
+        * tags={"Roles and Permissions"},
+        * summary="Delete permisssion from list",
+        * description="Delete a permission label from the permissions list within a role",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"userId","roleId","label"},
+        *               @OA\Property(property="userId", type="string"),
+        *               @OA\Property(property="roleId", type="string"),
+        *               @OA\Property(property="label", type="string"),
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *          response=200,
+        *          description="Permission Deleted",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *        ),
+        *       ),
+        *      @OA\Response(
+        *          response=422,
+        *          description="Unprocessable Entity"
+        *       ),
+        *      @OA\Response(response=400, description="Bad request"),
+        *      @OA\Response(response=404, description="Resource Not Found")
+        * )
+        */
     public function DeletePermissionOnRole(DeletePermissonRequest $request){
         return $this->PermissionService->removePermission($request);
     }
