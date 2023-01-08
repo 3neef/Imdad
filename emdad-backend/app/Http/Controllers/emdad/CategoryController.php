@@ -12,6 +12,7 @@ use App\Http\Requests\CategroyRequests\Categroy\FilterCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\ProfileCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\RetryApprovalRequest;
 use App\Http\Requests\CategroyRequests\Categroy\UpdateCategoryRequest;
+use App\Models\Emdad\Categories;
 
 class CategoryController extends Controller
 {
@@ -69,7 +70,10 @@ class CategoryController extends Controller
      * )
      */
     public function store(CreateCategoryRequest $request)
+
     {
+        $this->authorize('create', Categories::class);
+
         return $this->categoryService->store($request);
     }
 
@@ -108,9 +112,9 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        return $this->categoryService->index( $request);
+        return $this->categoryService->index($request);
     }
-/**
+    /**
      * @OA\delete(
      * path="/api/v1_0/categories/{id}",
      * operationId="deleteCatogry",
@@ -169,7 +173,7 @@ class CategoryController extends Controller
     {
         return $this->categoryService->destroy($id);
     }
-   /**
+    /**
      * @OA\put(
      * path="/api/v1_0/categories/{id}",
      * operationId="updateCatogry",
@@ -298,13 +302,13 @@ class CategoryController extends Controller
     {
         return $this->categoryService->restore($id);
     }
-/**
-        * @OA\get(
-        * path="/api/v1_0/categories/{id}",
-        * operationId="getBycategoryId",
-        * tags={"Catogry"},
-        * summary="get By categoryId",
-        * description="show category with a specifc id",
+    /**
+     * @OA\get(
+     * path="/api/v1_0/categories/{id}",
+     * operationId="getBycategoryId",
+     * tags={"Catogry"},
+     * summary="get By categoryId",
+     * description="show category with a specifc id",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -329,26 +333,26 @@ class CategoryController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="",
-        *         @OA\JsonContent(
-        *         @OA\Property(property="categoryById", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
-        *          ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="categoryById", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
+     *          ),
 
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *       ),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
 
 
     public function show($id)
@@ -357,7 +361,7 @@ class CategoryController extends Controller
     }
 
 
-/**
+    /**
      * @OA\put(
      * path="/api/v1_0/categories/company-categories",
      * operationId="setFivoritecompanyCategory",
@@ -495,11 +499,12 @@ class CategoryController extends Controller
      * )
      */
 
-    public function RetryRejectedCategories(RetryApprovalRequest $request){
+    public function RetryRejectedCategories(RetryApprovalRequest $request)
+    {
         return $this->categoryService->RetryApproval($request);
     }
 
-     /**
+    /**
      * @OA\put(
      * path="/api/v1_0/categories/changeCategoryStatus/{id}",
      * operationId="changeCategoryStatus",
@@ -564,10 +569,11 @@ class CategoryController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function ChangeCategoryStatus(changeCategoryStatusRequest $request){
+    public function ChangeCategoryStatus(changeCategoryStatusRequest $request)
+    {
         return $this->categoryService->changeCategoryStatus($request);
     }
- /**
+    /**
      * @OA\post(
      * path="/api/v1_0/categories/approveCategory",
      * operationId="approveCategory",
@@ -632,10 +638,11 @@ class CategoryController extends Controller
      * )
      */
 
-    public function approveCategory(EmdadApproveCategoryRequest $request){
+    public function approveCategory(EmdadApproveCategoryRequest $request)
+    {
         return $this->categoryService->approveCategory($request);
     }
- /**
+    /**
      * @OA\post(
      * path="/api/v1_0/categories/rejectCategory",
      * operationId="rejectCategory",
@@ -704,7 +711,7 @@ class CategoryController extends Controller
     {
         return $this->categoryService->rejectCategory($request);
     }
-/**
+    /**
      * @OA\get(
      * path="/api/v1_0/categories/serviceOrproduct",
      * operationId="filterCategory",
@@ -768,11 +775,12 @@ class CategoryController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function filterCategory(FilterCategoryRequest $request){
+    public function filterCategory(FilterCategoryRequest $request)
+    {
         return $this->categoryService->filterCategory($request);
     }
 
-/**
+    /**
      * @OA\post(
      * path="/api/v1_0/categories/getCategoryProfile",
      * operationId="getCategoryProfile",
@@ -834,8 +842,8 @@ class CategoryController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function getCategoryProfile(Request $request){
+    public function getCategoryProfile(Request $request)
+    {
         return $this->categoryService->getCategoryProfile($request);
     }
-    
 }

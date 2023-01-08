@@ -119,6 +119,6 @@ class UserPolicy
                     return true;
                 }
             }
-        }
+        } 
     }
 }

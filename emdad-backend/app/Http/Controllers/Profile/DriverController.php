@@ -68,6 +68,7 @@ class DriverController extends Controller
         */
     public function store(CreateDriverRequest $request, DriverService $driverService)
     {
+        $this->authorize('create',Driver::class);
         return $driverService->store($request);
     }
 
@@ -192,6 +193,8 @@ class DriverController extends Controller
         */
     public function update(Request $request, $id, DriverService $driverService)
     {
+        $this->authorize('update',Driver::class);
+
         return $driverService->update($request, $id);
     }
 
