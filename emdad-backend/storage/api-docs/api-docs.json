@@ -4194,6 +4194,91 @@
                 }
             }
         },
+        "/api/v1_0/permissions/RemovePermission": {
+            "delete": {
+                "tags": [
+                    "Roles and Permissions"
+                ],
+                "summary": "Delete permisssion from list",
+                "description": "Delete a permission label from the permissions list within a role",
+                "operationId": "DeletePermissionFromPermissions",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "userId",
+                                    "roleId",
+                                    "label"
+                                ],
+                                "properties": {
+                                    "userId": {
+                                        "type": "string"
+                                    },
+                                    "roleId": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Permission Deleted",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/roles": {
             "get": {
                 "tags": [
@@ -5739,7 +5824,7 @@
                                 "required": [
                                     "nameEn",
                                     "nameAr",
-                                    "companyId"
+                                    "note"
                                 ],
                                 "properties": {
                                     "nameEn": {
@@ -5748,17 +5833,17 @@
                                     "nameAr": {
                                         "type": "string"
                                     },
+                                    "parentId": {
+                                        "type": "integer"
+                                    },
                                     "isleaf": {
                                         "type": "boolean"
                                     },
-                                    "companyId": {
-                                        "type": "integer"
+                                    "note": {
+                                        "type": "string"
                                     },
                                     "type": {
                                         "type": "string"
-                                    },
-                                    "parentId": {
-                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
