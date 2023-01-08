@@ -49,10 +49,10 @@ Route::put('users/update-owner-user/{id}', [UserController::class, 'UpdateOwnerU
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::Post('permissions/addPermissionToRole' , [PermissionsController::class,'PermissionToRole']);
+    Route::delete('permissions/RemovePermission',[PermissionsController::class,'DeletePermissionOnRole']);
 
     Route::apiResource('permissions', PermissionsController::class);
     Route::put('permissions/restore/{permissionId}', [PermissionsController::class, 'restoreById']);
-    Route::put('permissions/RemovePermission',[PermissionsController::class,'DeletePermissionOnRole']);
 });
 
 Route::middleware(['auth.apikey'])->group(function () {
