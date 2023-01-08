@@ -16,7 +16,7 @@ use SoftDeletes,HasFactory;
 
     public function category()
     {
-        return $this->belongsToMany(Categories::class, 'profile_category_pivots', 'category_id')->withTimestamps();
+        return $this->belongsToMany(Categories::class, 'category_id');
     }
 
 }
