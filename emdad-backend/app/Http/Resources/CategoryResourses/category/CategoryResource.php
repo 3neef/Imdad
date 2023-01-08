@@ -27,7 +27,6 @@ class CategoryResource extends JsonResource
             'note' =>$this->reason,
             'createdAt'=>$this->created_at??null,
             'CeatedBy'=>$this->created_by??null,
-            'categoryId'=>$this->category_id??null,
             'sequence'=>Categories::where("id",$this->id)->first()!=null?Categories::where("id",$this->id)->first()->sequence():"debug"
         ];
     }

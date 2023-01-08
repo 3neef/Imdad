@@ -202,7 +202,7 @@ class CategoryService
             return response()->json(["error" => "", "code" => "100", "message" => "category does not have profile"], 200);
         } else {
 
-            $categories = DB::table('categories')->select('*')
+            $categories = DB::table('categories')->select('categories.id','categories.name_en','categories.name_ar','profile_category_pivots.status','categories.parent_id','categories.profile_id','categories.isleaf','categories.type','profile_category_pivots.created_at','profile_category_pivots.created_by')
                 ->join('profile_category_pivots', 'profile_category_pivots.category_id', '=', 'categories.id')->where('profile_category_pivots.profile_id', auth()->user()->profile_id)
                 ->join('users', 'profile_category_pivots.created_by', '=', 'users.id')->where('users.profile_id', auth()->user()->profile_id)->get();
                 return response()->json(["success" => true, "code" => "200", "data" =>   CategoryResource::collection($categories)], 200);
