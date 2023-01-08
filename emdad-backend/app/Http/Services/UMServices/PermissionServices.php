@@ -90,7 +90,7 @@ class PermissionServices
             // dd($json);
             foreach($labels as $label){
                 if($label==$request->label){
-                    return response()->json(["statusCode"=>'111','error' => 'permission already exist'], 500);
+                    return response()->json(["statusCode"=>'362','error' => 'permission already exist'], 500);
                 }
                 
             }
@@ -102,6 +102,19 @@ class PermissionServices
     }
     public function removePermission($request)
     {
+        $permissions = RoleUserProfile::where('role_id',$request->roleId)->where('user_id',$request->userId )->where('profile_id',auth()->user()->profile_id)->first();
+        if($permissions){
+            $labels = json_decode($permissions->permissions);
+            
+                    if (($key = array_search($request->label, $labels)) !== false) {
+                        unset($array[$key]);
+                        dd($labels);
+                    }
 
+                
+                $permissions->update(["permissions"=>$labels]);
+                return response()->json(["statusCode"=>'112','data'=>$permissions,'success' => 'Permission deleted successfully'], 200);
+            }
+           
     }
 }
