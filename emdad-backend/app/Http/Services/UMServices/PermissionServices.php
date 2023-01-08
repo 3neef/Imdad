@@ -104,15 +104,21 @@ class PermissionServices
     {
         $permissions = RoleUserProfile::where('role_id',$request->roleId)->where('user_id',$request->userId )->where('profile_id',auth()->user()->profile_id)->first();
         if($permissions){
-            $labels = json_decode($permissions->permissions);
-            
-                    if (($key = array_search($request->label, $labels)) !== false) {
-                        unset($labels[$key]);
-                        // dd($labels);
+            $labels =(array) json_decode($permissions->permissions,true);
+            $index=0;
+            foreach($labels as $label){
+                if($label==$request->label){
+                     
+                    array_splice($labels,$index,1);
                         $permissions->update(["permissions"=>$labels]);
-                    return response()->json(["statusCode"=>'112','data'=>$permissions,'success' => 'Permission deleted successfully'], 200);
-                    }
-                    else return response()->json(["statusCode"=>'111','error' => 'Record not Found'], 500);   
+                    return response()->json(["statusCode"=>'000','data'=>$permissions,'message' => 'permission Deleted Successfully'], 200);
+                }
+
+                $index++;
+                
+            }
+
+             return response()->json(["statusCode"=>'111','data'=>$permissions,'error' => 'Record not Found'], 200);   
             }
            
     }
