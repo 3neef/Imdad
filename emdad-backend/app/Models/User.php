@@ -37,7 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'full_name',
         'identity_type', 'email', 'password', 'identity_number',
         'is_verified', 'profile_id', 'avatar', 'otp', 'is_super_admin',
-        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'password_changed','lang'
+        'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'password_changed', 'lang'
     ];
 
     /**
@@ -120,9 +120,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
-    public function warehouse()
+    public function warehouses()
     {
-        return $this->belongsToMany(Warehouse::class, 'user_warehouse_pivots')->withPivot('warehouse_id')->get();
+        return $this->hasMany(UserWarehousePivot::class,'user_id');
     }
 
 
@@ -189,7 +189,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function mangerUserId()
     {
         // CHECK MANGER FOR THE USER
-        $mangerId = DB::table('role_user_profile')->where('user_id', $this->id)->where('profile_id', auth()->user()->profile_id??null)->pluck('manager_user_Id')->first();
+        $mangerId = DB::table('role_user_profile')->where('user_id', $this->id)->where('profile_id', auth()->user()->profile_id ?? null)->pluck('manager_user_Id')->first();
 
         //send mangerId to Manger name 
         $mangerName = $this->mangerName($mangerId);

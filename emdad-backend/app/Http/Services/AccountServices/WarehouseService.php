@@ -21,24 +21,24 @@ class WarehouseService
 
     public function store($request)
     {
-        // $packageLimit = new PackageConstraint;
-        // $value = Warehouse::where('profile_id', auth()->user()->profile_id)->count();
-        // $Limit = $packageLimit->packageLimitExceed("Warehouse", $value);
-        // if ($Limit == false) {
-        //     return response()->json([
-        //         "statusCode" => "361",
-        //         'success' => false,
-        //         'message' => "You have exceeded the allowed number of Warehouse to create it"
-        //     ], 200);
-        // }
+        $packageLimit = new PackageConstraint;
+        $value = Warehouse::where('profile_id', auth()->user()->profile_id)->count();
+        $Limit = $packageLimit->packageLimitExceed("Warehouse", $value);
+        if ($Limit == false) {
+            return response()->json([
+                "statusCode" => "361",
+                'success' => false,
+                'message' => "You have exceeded the allowed number of Warehouse to create it"
+            ], 200);
+        }
         $warehouse = DB::transaction(function () use ($request) {
             $warehouse = Warehouse::create([
                 'profile_id' => auth()->user()->profile_id,
                 'address_name' => $request->warehouseName,
-                'address_contact_phone' => $request->receiverPhone,
+                'address_contact_phone' => $request->receiverPhone??null,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
-                'address_contact_name' => $request->receiverName,
+                'address_contact_name' => $request->receiverName??null,
                 'address_type' => $request->warehouseType,
                 'gate_type' => $request->gateType,
                 'created_by' => auth()->id(),
@@ -46,25 +46,24 @@ class WarehouseService
                 'manager_id' => $request->managerId ?? auth()->id(),
                 'otp_receiver' => strval(rand(1000, 9999)),
             ]);
-            foreach ($request['userList'] as $user_id) {
-                try {
-                    $warehouse->users()->attach($warehouse->id, ['user_id' => $user_id ?? auth()->user->id]);
-                } catch (Exception $e) {
+            if (isset($request['userList'])) {
+                foreach ($request['userList'] as $user_id) {
+                        UserWarehousePivot::create(["warehouse_id"=>$warehouse->id,'user_id' => $user_id ?? auth()->user->id]);
+                   
                 }
             }
-            return $warehouse;
-       
-});
-if ($warehouse) {
-    return response()->json(['message' => 'created successfully'], 200);
-}
 
-return response()->json(['error' => 'system error'], 500);
-   
+            return $warehouse;
+        });
+        if ($warehouse) {
+            return response()->json(['message' => 'created successfully'], 200);
+        }
+
+        return response()->json(['error' => 'system error'], 500);
     }
 
-   
-    
+
+
     public function update($request, $id)
     {
 
@@ -164,7 +163,5 @@ return response()->json(['error' => 'system error'], 500);
             $warehouses->delete();
             return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
         }
-
     }
-
 }
