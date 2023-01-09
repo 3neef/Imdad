@@ -11,7 +11,7 @@ class DefaultUsersFilter implements Filter
     public function __invoke(Builder $query, $value, string $property)
     {
         if ($value) {
-            if ($value->currentProfile()->type == 'Buyer' || $value->currentProfile()->type == "Supplier") {
+            if ($value->currentProfile()->type == "Buyer" || $value->currentProfile()->type == "Supplier") {
                 $query->where('profile_id', $value->profile_id);
             }
         }

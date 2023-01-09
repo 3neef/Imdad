@@ -26,7 +26,7 @@ class WarehouseService
             return response()->json([
                 "statusCode" => "361",
                 'success' => false,
-                 'message' => "You have exceeded the allowed number of Warehouse to create it"
+                'message' => "You have exceeded the allowed number of Warehouse to create it"
             ], 200);
         }
 
@@ -46,7 +46,7 @@ class WarehouseService
 
         if (isset($request->userId)) {
 
-            $warehouse->users()->attach( $warehouse->id, ['user_id' => $request->userId, ]);
+            $warehouse->users()->attach($warehouse->id, ['user_id' => $request->userId,]);
         }
 
         if ($warehouse) {
@@ -76,7 +76,7 @@ class WarehouseService
             return response()->json(['success' => 'Updated Successfly'], 201);
         }
 
-        return response()->json(["statusCode"=>'999','error' => 'No data Found'], 404);
+        return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
     }
 
 
@@ -86,19 +86,19 @@ class WarehouseService
         if ($warehouses != null) {
             return response()->json(['data' => new WarehouseResponse($warehouses)], 200);
         }
-        return response()->json(["statusCode"=>'999','error' => 'No data Found'], 404);
+        return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
     }
 
     public function showByUserId($id)
     {
         $userId = User::find($id)->id;
         $warehouses = Warehouse::where('confirm_by', $userId)->first();
-        return response()->json(["statusCode"=>'000','data' => new WarehouseResponse($warehouses)], 200);
+        return response()->json(["statusCode" => '000', 'data' => new WarehouseResponse($warehouses)], 200);
     }
     public function showByProfileId($id)
     {
         $warehouses = Warehouse::where('profile_id', $id);
-        return response()->json(["statusCode"=>'000','data' => WarehouseResponse::collection($warehouses)], 200);
+        return response()->json(["statusCode" => '000', 'data' => WarehouseResponse::collection($warehouses)], 200);
     }
 
 
@@ -106,10 +106,10 @@ class WarehouseService
     {
         $warehouses = Warehouse::find($id)->first();
         if ($warehouses == null) { // replace false by checking user permission
-            return response()->json(["statusCode"=>'111','success' => false, 'error' => 'not found'], 404);
+            return response()->json(["statusCode" => '111', 'success' => false, 'error' => 'not found'], 404);
         } else {
             $warehouses->delete();
-            return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
+            return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
         }
     }
 
@@ -119,17 +119,17 @@ class WarehouseService
     {
         $restore = Warehouse::where('id', $id)->withTrashed()->restore();
         if ($restore) {
-            return response()->json(["statusCode"=>'000','message' => 'restored successfully'], 200);
+            return response()->json(["statusCode" => '000', 'message' => 'restored successfully'], 200);
         }
-        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
+        return response()->json(["statusCode" => '999', 'error' => 'system error'], 500);
     }
 
     public function verfied($id)
     {
         $warehouses = Warehouse::where('id', $id)->first();
-        $verfied = $warehouses->update(['confirm_by' => auth()->id(), 'otp_receiver' => null, 'otp_expires_at' => null, 'otp_verfied' => true]);
+        $verfied = $warehouses->update(['confirm_by' => auth()->id(), 'otp_receiver' => null, 'otp_expires_at' => null, 'otp_verfied' => true, "status" => "Active"]);
         if ($verfied) {
-            return response()->json(["statusCode"=>'000','message' => 'verfied successfully'], 200);
+            return response()->json(["statusCode" => '000', 'message' => 'verfied successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
