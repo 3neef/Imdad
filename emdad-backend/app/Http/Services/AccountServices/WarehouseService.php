@@ -7,6 +7,8 @@ use App\Http\Resources\AccountResourses\warehouses\WarehouseResponse;
 use App\Models\Accounts\Warehouse;
 use App\Models\User;
 use App\Models\UserWarehousePivot;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class WarehouseService
 {
@@ -19,41 +21,50 @@ class WarehouseService
 
     public function store($request)
     {
-        $packageLimit = new PackageConstraint;
-        $value = Warehouse::where('profile_id', auth()->user()->profile_id)->count();
-        $Limit = $packageLimit->packageLimitExceed("Warehouse", $value);
-        if ($Limit == false) {
-            return response()->json([
-                "statusCode" => "361",
-                'success' => false,
-                'message' => "You have exceeded the allowed number of Warehouse to create it"
-            ], 200);
-        }
+        // $packageLimit = new PackageConstraint;
+        // $value = Warehouse::where('profile_id', auth()->user()->profile_id)->count();
+        // $Limit = $packageLimit->packageLimitExceed("Warehouse", $value);
+        // if ($Limit == false) {
+        //     return response()->json([
+        //         "statusCode" => "361",
+        //         'success' => false,
+        //         'message' => "You have exceeded the allowed number of Warehouse to create it"
+        //     ], 200);
+        // }
+        $warehouse = DB::transaction(function () use ($request) {
+            $warehouse = Warehouse::create([
+                'profile_id' => auth()->user()->profile_id,
+                'address_name' => $request->warehouseName,
+                'address_contact_phone' => $request->receiverPhone,
+                'latitude' => $request->latitude,
+                'longitude' => $request->longitude,
+                'address_contact_name' => $request->receiverName,
+                'address_type' => $request->warehouseType,
+                'gate_type' => $request->gateType,
+                'created_by' => auth()->id(),
+                'otp_expires_at' => now()->addMinutes(3),
+                'manager_id' => $request->managerId ?? auth()->id(),
+                'otp_receiver' => strval(rand(1000, 9999)),
+            ]);
+            foreach ($request['userList'] as $user_id) {
+                try {
+                    $warehouse->users()->attach($warehouse->id, ['user_id' => $user_id ?? auth()->user->id]);
+                } catch (Exception $e) {
+                }
+            }
+            return $warehouse;
+       
+});
+if ($warehouse) {
+    return response()->json(['message' => 'created successfully'], 200);
+}
 
-        $warehouse = Warehouse::create([
-            'profile_id' => auth()->user()->profile_id,
-            'address_name' => $request->warehouseName,
-            'address_contact_phone' => $request->receiverPhone,
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
-            'address_contact_name' => $request->receiverName,
-            'address_type' => $request->warehouseType,
-            'gate_type' => $request->gateType,
-            'created_by' => auth()->id(),
-            'otp_expires_at' => now()->addMinutes(3),
-            'otp_receiver' => strval(rand(1000, 9999)),
-        ]);
-
-        $warehouse->users()->attach($warehouse->id, ['user_id' => $request->managerId ?? auth()->id()]);
-
-        if ($warehouse) {
-            return response()->json(['message' => 'created successfully'], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
+return response()->json(['error' => 'system error'], 500);
+   
     }
 
-
-
+   
+    
     public function update($request, $id)
     {
 

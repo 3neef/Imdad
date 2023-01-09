@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests\AccountRequests\Location;
 
+use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 class CreateWarehouesesRequest extends FormRequest
 {
@@ -26,15 +29,16 @@ class CreateWarehouesesRequest extends FormRequest
     public function rules()
     {
         return [
-            "userId" => ['exists:users,id'],
-            'warehouseName' => ['required', 'string', 'max:100'],
+            "userList" => ['array', new UniqeValues],
+            "userList.*" => ['exists:users,id'],
+            'warehouseName' => ['required','string','max:100'],
             'warehouseType' => ['required', 'string'],
             'latitude' => ['required', 'string'],
             'longitude' => ['required', 'string'],
             'gateType' => ['required', 'string'],
             'receiverName' => ['required', 'string', 'max:25'],
             'receiverPhone' => ['required', 'string', 'max:15', 'min:15', 'regex:/^(00966)/'],
-            'managerId' => ['integer','exists:users,id']
+            'managerId' => ['integer', 'exists:users,id']
         ];
     }
 

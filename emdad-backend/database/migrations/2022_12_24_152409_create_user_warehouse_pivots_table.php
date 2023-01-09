@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum("status",['active','inActive'])->default('active');
             $table->softDeletes();
             $table->timestamps();
-            $table->unique(['user_id','warehouse_id']);
+            $table->unique('user_id','warehouse_id');
         });
     }
 
