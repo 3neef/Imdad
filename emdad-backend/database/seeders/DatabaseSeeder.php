@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        DB::table('categories')->delete();
+        // DB::table('categories')->delete();
        
         if(ApiKey::count()==0){
             $this->call([
@@ -60,6 +60,8 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 RelatedCompinesTableSeeder::class]);
         }
-       
+
+
+        //test again
     }
 }
