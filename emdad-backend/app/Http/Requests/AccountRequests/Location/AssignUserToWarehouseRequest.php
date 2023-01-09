@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\AccountRequests\Location;
 
+use App\Rules\IsCompositeUnique;
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -27,7 +28,7 @@ class AssignUserToWarehouseRequest extends FormRequest
     public function rules()
     {
         return [
-            'userId' => ['required','integer','exists:users,id'],
+            'userId' => ['required','integer','exists:users,id', new IsCompositeUnique('user_warehouse_pivots',['user_id'=>$this->userId,'warehouse_id'=>$this->warehouseId])],
             'warehouseId' => ['required','integer','exists:warehouses,id']
       
         ];
