@@ -1525,6 +1525,27 @@
                                 "properties": {
                                     "id": {
                                         "type": "integer"
+                                    },
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "swift": {
+                                        "type": "string"
+                                    },
+                                    "iban": {
+                                        "type": "string"
+                                    },
+                                    "subscriptionDetails": {
+                                        "type": "string"
+                                    },
+                                    "vatNumber": {
+                                        "type": "string"
+                                    },
+                                    "active": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"

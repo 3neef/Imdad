@@ -213,7 +213,14 @@ class ProfileController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               required={"id"},
-     *               @OA\Property(property="id", type="integer")
+     *               @OA\Property(property="id", type="integer"),
+     *               @OA\Property(property="nameAr", type="string"),
+     *               @OA\Property(property="nameEn", type="string"),
+     *               @OA\Property(property="swift", type="string"),
+     *               @OA\Property(property="iban", type="string"),
+     *               @OA\Property(property="subscriptionDetails", type="string"),
+     *               @OA\Property(property="vatNumber", type="string"),
+     *               @OA\Property(property="active", type="string")
      *             ),
      *        ),
      *    ),
@@ -229,9 +236,9 @@ class ProfileController extends Controller
      */
 
 
-    public function update(UpdateProfileRequest $request,$id)
+    public function update(UpdateProfileRequest $request)
     {
-        return $this->accountService->update($request,$id);
+        return $this->accountService->update($request);
     }
 
     /**
