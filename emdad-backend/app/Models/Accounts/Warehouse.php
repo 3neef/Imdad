@@ -27,7 +27,8 @@ class Warehouse extends Model
         'otp_expires_at',
         'otp_verfied',
         'confirm_by',
-        'created_by'
+        'created_by',
+        'status'
     ];
 
     public function getActivitylogOptions(): LogOptions
@@ -36,7 +37,7 @@ class Warehouse extends Model
             ->logAll()
             ->logOnlyDirty();
     }
-    public function users()
+    public function manager()
     {
         return $this->belongsToMany(User::class,'user_warehouse_pivots')->withPivot('user_id')->withTimestamps();
     }
