@@ -40,7 +40,7 @@ class WarehouseService
                 'longitude' => $request->longitude,
                 'address_contact_name' => $request->receiverName??null,
                 'address_type' => $request->warehouseType,
-                'gate_type' => $request->gateType??null,
+                'gate_type' => $request->gateType??"",
                 'created_by' => auth()->id(),
                 'otp_expires_at' => now()->addMinutes(3),
                 'manager_id' => $request->managerId ?? auth()->id(),
