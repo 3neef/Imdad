@@ -27,7 +27,8 @@ class Warehouse extends Model
         'otp_expires_at',
         'otp_verfied',
         'confirm_by',
-        'created_by'
+        'created_by',
+        'status'
     ];
 
     public function getActivitylogOptions(): LogOptions
