@@ -107,10 +107,13 @@ class AccountService
             return response()->json(["statusCode"=>'265','success' => false, 'error' => 'you are Already In this  profile'], 200);
         }
         if ($user) {
-            $payedSubscription = SubscriptionPayment::where('profile_id', $id)->first();
+            $payedSubscription = SubscriptionPayment::where('profile_id', $id)->where('status','Paid')->first();
             $profile = auth()->user();
             // dd(now()  $payedSubscription->expire_date);
-            if (now() < $payedSubscription->expire_date && $payedSubscription->status == 'Paid') {
+            if($payedSubscription == null){
+                return response()->json(['success' => false, 'error' => 'your Subscription expired','statusCode'=>"451"], 200);
+            }
+            if (now() < $payedSubscription->expire_date) {
                 $profile->update([
                     'profile_id' => $id
                 ]);
