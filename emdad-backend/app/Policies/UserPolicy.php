@@ -109,16 +109,18 @@ class UserPolicy
         //
     }
 
-    public function checkPermission($user)
+    public function checkPermission($user, $type1)
     {
         if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
             $permissonis = DB::table('role_user_profile')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            $labels = json_decode($permissonis);
-            foreach ($labels as $label) {
-                if ($label == "BMU3" || $label == "SMU3") {
-                    return true;
+            if ($permissonis) {
+                $labels = json_decode($permissonis);
+                foreach ($labels as $label) {
+                    if ($label == $type1) {
+                        return true;
+                    }
                 }
             }
-        } 
+        }
     }
 }
