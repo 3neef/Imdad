@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\CategroyRequests\Product;
 
+use App\Rules\IsCompositeUnique;
 use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -27,9 +28,10 @@ class CompanyProductRequest extends FormRequest
     public function rules()
     {
         return [
-            "productList" => ['required_without:product_id', 'array', new UniqeValues],
-            "productList.*" => ['exists:products,id'],
-            'product_id' => ['exists:products,id'],
+            'productId' => ['required_without:productList','exists:products,id', new IsCompositeUnique('profile_products_pivots',['profile_id'=>auth()->user()->profile_id,'product_id'=>$this->productId])],
+
+            "productList" => ['required_without:productId', 'array', new UniqeValues, new IsCompositeUnique('profile_products_pivots',['profile_id'=>auth()->user()->profile_id,'product_id'=>$this->productList])],
+            "productList.*" => ['required_with:productList','exists:products,id'],
         ];
     }
 

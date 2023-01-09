@@ -29,9 +29,9 @@ class TruckPolicy
      * @param  \App\Models\Truck  $truck
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Truck $truck)
+    public function view(User $user)
     {
-        $this->checkPermission($user,$type1="SMFL1");
+        return $this->checkPermission($user,$type1="SMFL1");
         
     }
 
@@ -43,7 +43,7 @@ class TruckPolicy
      */
     public function create(User $user)
     {
-        $this->checkPermission($user,$type1="SMFL2");
+      return  $this->checkPermission($user,$type1="SMFL2");
         
     }
 
@@ -54,9 +54,9 @@ class TruckPolicy
      * @param  \App\Models\Truck  $truck
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Truck $truck)
+    public function update(User $user)
     {
-        $this->checkPermission($user,$type1="SMFL3");
+      return  $this->checkPermission($user,$type1="SMFL3");
         
     }
 
@@ -67,7 +67,7 @@ class TruckPolicy
      * @param  \App\Models\Truck  $truck
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Truck $truck)
+    public function delete(User $user)
     {
         //
     }
@@ -79,7 +79,7 @@ class TruckPolicy
      * @param  \App\Models\Truck  $truck
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Truck $truck)
+    public function restore(User $user)
     {
         //
     }

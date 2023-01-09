@@ -11,7 +11,7 @@ class Driver extends Model
 {
     use HasFactory , SoftDeletes;
     protected $fillable = [
-        'name_ar','name_en', 'age', 'phone', 'nationality'
+        'name_ar','name_en', 'age', 'phone', 'nationality', 'status'
     ];
 
     public function manageable () {

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->boolean("otp_verfied")->default(false);
             $table->timestamp("otp_expires_at")->nullable();
             $table->string("otp_receiver",6)->nullable();
-            $table->enum('status',['Pending', 'Active'])->default('Pending');
+            $table->enum('status',['inActive', 'Active'])->default('Active');
             $table->foreignId('confirm_by')->nullable(true)->references("id")->on("users")->restrictOnDelete();
             $table->foreignId('created_by')->nullable(true)->references("id")->on("users")->restrictOnDelete();
             $table->softDeletes();

@@ -35,7 +35,7 @@ class ProductService
             $prodcut->companyProduct()->attach($prodcut->id, ['profile_id' => auth()->user()->profile_id]);
             return response()->json(['message' => 'created successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'000','error' => 'system error'], 500);
     }
 
 
@@ -56,7 +56,7 @@ class ProductService
         ]);
 
         if ($prodcut) {
-            return response()->json(['message' => 'updated successfully'], 200);
+            return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
@@ -65,9 +65,9 @@ class ProductService
     {
         $prodcut = Product::where('id', $id)->first();
         if ($prodcut) {
-            return response()->json(['data' => new ProductResponse($prodcut)], 200);
+            return response()->json(["statusCode"=>'000','data' => new ProductResponse($prodcut)], 200);
         }
-        return response()->json(['error' => 'No data Founded'], 404);
+        return response()->json(["statusCode"=>'111','error' => 'Record Not Founded'], 404);
     }
 
 
@@ -76,18 +76,18 @@ class ProductService
         $prodcut = Product::find($id);
         $deleted = $prodcut->delete();
         if ($deleted) {
-            return response()->json(['message' => 'deleted successfully'], 301);
+            return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'111','error' => 'Record Not Found'], 500);
     }
 
     public function restore($id)
     {
         $restore = Product::where('id', $id)->withTrashed()->restore();
         if ($restore) {
-            return response()->json(['message' => 'restored successfully'], 200);
+            return response()->json(["statusCode"=>'000','message' => 'restored successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'111','error' => 'Record Not Found'], 500);
     }
 
 
@@ -95,19 +95,23 @@ class ProductService
     public function setcompanyproducts($request)
     {
 
-        $product = Product::first();
+
+
         if (isset($request['productList'])) {
             foreach ($request['productList'] as $product_id) {
-                try {
-                    $product->companyProduct()->attach(['product_id' => $product_id, 'profile_id' => auth()->user()->profile_id]);
-                }
-                catch(Exception $e){}
+                    ProfileProductsPivot::create([
+                        'product_id' => $product_id, 'profile_id' => auth()->user()->profile_id
+                    ]);
+               
             } 
             
         } else {
-          $product->companyProduct()->attach(['product_id' => $request, 'profile_id' => auth()->user()->profile_id]);
-            }
-            return response()->json(['message' => 'created successfully'], 200);
+         
+            ProfileProductsPivot::create([
+                'product_id' => $request['productId'], 'profile_id' => auth()->user()->profile_id]
+            );
+        }
+            return response()->json(["statusCode"=>'000','message' => 'created successfully'], 200);
 
         }
        

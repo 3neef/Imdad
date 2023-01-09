@@ -37,7 +37,7 @@ class Warehouse extends Model
             ->logAll()
             ->logOnlyDirty();
     }
-    public function users()
+    public function manager()
     {
         return $this->belongsToMany(User::class,'user_warehouse_pivots')->withPivot('user_id')->withTimestamps();
     }
