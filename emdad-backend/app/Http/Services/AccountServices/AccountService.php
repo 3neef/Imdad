@@ -50,9 +50,9 @@ class AccountService
         }
     }
 
-    public function update($request, $id)
+    public function update($request)
     {
-        $profile = Profile::find($id);
+        $profile = auth()->user()->currentProfile();
         if ($profile == null) {
             return response()->json(["statusCode"=>'111','error' => 'data  Not Found'], 404);
         } else {
