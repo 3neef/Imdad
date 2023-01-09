@@ -15,20 +15,24 @@ class DriverCollection
         $defaultSort = '-created_at';
 
         $defaultSelect = [
+            'id',
             'name_ar',
             'name_en',
             'age',
             'phone',
-            'nationality'
+            'nationality',
+            'status'
         ];
 
 
         $allowedFilters = [
+            'id',
             'name_ar',
             'name_en',
             'age',
             'phone',
-            'nationality'
+            'nationality',
+            'status'
         ];
 
         $allowedSorts = [
