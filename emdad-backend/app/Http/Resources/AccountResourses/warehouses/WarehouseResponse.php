@@ -27,8 +27,9 @@ class WarehouseResponse extends JsonResource
             "otpVerfied" =>$this->otp_verfied,
             "otp"=>$this->otp_receiver,
             "confirmBy" =>$this->confirm_by,
-            "CreatedBy"=>$this->created_by,
-            "createdAt"=>$this->created_at->format('y-m-d')
+            "creatorName"=>$this->creatorName()->full_name,
+            "createdAt"=>$this->created_at->format('y-m-d'),
+            "managerName"=>$this->manager()->full_name,
         ];
     }
 }
