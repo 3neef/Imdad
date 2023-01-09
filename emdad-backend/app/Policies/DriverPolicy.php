@@ -29,7 +29,7 @@ class DriverPolicy
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Driver $driver)
+    public function view(User $user)
     {
         $this->checkPermission($user, $type1 = "SMFL1");
     }
@@ -42,7 +42,7 @@ class DriverPolicy
      */
     public function create(User $user)
     {
-        $this->checkPermission($user, $type1 = "SMFL2");
+        return $this->checkPermission($user, $type1 = "SMFL2");
     }
 
     /**
@@ -52,9 +52,9 @@ class DriverPolicy
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Driver $driver)
+    public function update(User $user)
     {
-        $this->checkPermission($user, $type1 = "SMFL3");
+       return $this->checkPermission($user, $type1 = "SMFL3");
     }
 
     /**
@@ -64,9 +64,9 @@ class DriverPolicy
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Driver $driver)
+    public function delete(User $user)
     {
-        $this->checkPermission($user, $type1 = "SMFL4");
+        return $this->checkPermission($user, $type1 = "SMFL4");
     }
 
     /**
@@ -76,7 +76,7 @@ class DriverPolicy
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Driver $driver)
+    public function restore(User $user)
     {
         //
     }
@@ -88,7 +88,7 @@ class DriverPolicy
      * @param  \App\Models\Driver  $driver
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Driver $driver)
+    public function forceDelete(User $user)
     {
         //
     }
