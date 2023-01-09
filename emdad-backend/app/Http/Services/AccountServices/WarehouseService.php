@@ -35,10 +35,10 @@ class WarehouseService
             $warehouse = Warehouse::create([
                 'profile_id' => auth()->user()->profile_id,
                 'address_name' => $request->warehouseName,
-                'address_contact_phone' => $request->receiverPhone,
+                'address_contact_phone' => $request->receiverPhone??null,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
-                'address_contact_name' => $request->receiverName,
+                'address_contact_name' => $request->receiverName??null,
                 'address_type' => $request->warehouseType,
                 'gate_type' => $request->gateType,
                 'created_by' => auth()->id(),
