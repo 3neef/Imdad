@@ -101,14 +101,15 @@ class WarehousesController extends Controller
         *            mediaType="multipart/form-data",
         *            @OA\Schema(
         *               type="object",
-        *               required={"warehouseName","warehouseType","latitude","longitude","gateType","receiverName","receiverPhone"},
+        *               required={"managerId","warehouseName","warehouseType","latitude","longitude","gateType","receiverName","receiverPhone"},
         *               @OA\Property(property="warehouseName", type="string"),
         *               @OA\Property(property="warehouseType", type="string"),
         *               @OA\Property(property="latitude", type="string"),
         *               @OA\Property(property="longitude", type="string"),
         *               @OA\Property(property="gateType", type="string"),
         *               @OA\Property(property="receiverName", type="string"),
-        *               @OA\Property(property="receiverPhone", type="string")
+        *               @OA\Property(property="receiverPhone", type="string"),
+           *               @OA\Property(property="managerId", type="integer"),
         *            ),
         *        ),
         *    ),

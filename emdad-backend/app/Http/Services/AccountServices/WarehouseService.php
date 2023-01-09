@@ -44,7 +44,7 @@ class WarehouseService
             'otp_receiver' => strval(rand(1000, 9999)),
         ]);
 
-        $warehouse->users()->attach($warehouse->id, ['user_id' => $request->userId ?? auth()->id()]);
+        $warehouse->users()->attach($warehouse->id, ['user_id' => $request->managerId ?? auth()->id()]);
 
         if ($warehouse) {
             return response()->json(['message' => 'created successfully'], 200);
