@@ -97,10 +97,12 @@ class DriverPolicy
     {
         if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
             $permissonis = DB::table('role_user_profile')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            $labels = json_decode($permissonis);
-            foreach ($labels as $label) {
-                if ($label == $type1) {
-                    return true;
+            if ($permissonis) {
+                $labels = json_decode($permissonis);
+                foreach ($labels as $label) {
+                    if ($label == $type1) {
+                        return true;
+                    }
                 }
             }
         }
