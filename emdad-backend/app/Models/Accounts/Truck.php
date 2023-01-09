@@ -12,7 +12,7 @@ class Truck extends Model
 {
     use HasFactory , SoftDeletes , LogsActivity;
     protected $fillable = [
-        'name','type', 'class', 'color', 'model','size', 'brand','created_by'
+        'name','type', 'class', 'color', 'model','size', 'brand','created_by', 'status'
     ];
     public function getActivitylogOptions(): LogOptions
     {

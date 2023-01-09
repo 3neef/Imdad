@@ -6,7 +6,7 @@ use App\Http\Collections\WarehouseCollection;
 use App\Http\Resources\AccountResourses\warehouses\WarehouseResponse;
 use App\Models\Accounts\Warehouse;
 use App\Models\User;
-
+use App\Models\UserWarehousePivot;
 
 class WarehouseService
 {
@@ -30,7 +30,7 @@ class WarehouseService
             ], 200);
         }
 
-        $warehouse =  Warehouse::create([
+        $warehouse = Warehouse::create([
             'profile_id' => auth()->user()->profile_id,
             'address_name' => $request->warehouseName,
             'address_contact_phone' => $request->receiverPhone,
@@ -44,10 +44,7 @@ class WarehouseService
             'otp_receiver' => strval(rand(1000, 9999)),
         ]);
 
-        if (isset($request->userId)) {
-
-            $warehouse->users()->attach($warehouse->id, ['user_id' => $request->userId,]);
-        }
+        $warehouse->users()->attach($warehouse->id, ['user_id' => $request->managerId ?? auth()->id()]);
 
         if ($warehouse) {
             return response()->json(['message' => 'created successfully'], 200);
@@ -133,4 +130,30 @@ class WarehouseService
         }
         return response()->json(['error' => 'system error'], 500);
     }
+
+
+    public function assignWarehouseToUser($request)
+    {
+        $assign = UserWarehousePivot::create([
+            'user_id' => $request->userId,
+            'warehouse_id' => $request->warehouseId
+        ]);
+        if ($assign) {
+            return response()->json(["statusCode" => '000', 'message' => 'assign user successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
+
+    public function unAssignWarehouseToUser($id)
+    {
+        $warehouses = UserWarehousePivot::find($id)->first();
+        if ($warehouses == null) {
+            return response()->json(["statusCode" => '111', 'success' => false, 'error' => 'not found'], 404);
+        } else {
+            $warehouses->delete();
+            return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
+        }
+
+    }
+
 }

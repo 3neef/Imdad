@@ -11,24 +11,24 @@ class DriverService
 
     public function index(Request $request)
     {
-        $dirvers = Driver::all();
+        $drivers = Driver::all();
 
-        if ($dirvers) {
-            return response()->json(['data' => DriverResources::collection($dirvers)], 201);
+        if ($drivers) {
+            return response()->json(['data' => DriverResources::collection($drivers)], 201);
         }
         return response()->json(['message' => "No data founded"], 404);
     }
 
     public function store($request)
     {
-        $dirvers = Driver::create([
+        $drivers = Driver::create([
             'name_ar' => $request->nameAr,
             'name_en' => $request->nameEn,
             'age' => $request->age,
             "nationality" => $request->nationality,
             "phone" => $request->phone
         ]);
-        if ($dirvers) {
+        if ($drivers) {
             return response()->json(['message' => "created Successfly"], 201);
         }
         return response()->json(['error' => "System Error"], 403);
@@ -36,23 +36,23 @@ class DriverService
 
     public function show($id)
     {
-        $dirver = Driver::find($id);
-        if ($dirver) {
-            return response()->json(['data' => $dirver], 201);
+        $driver = Driver::find($id);
+        if ($driver) {
+            return response()->json(['data' => $driver], 201);
         }
         return response()->json(['error' => "System Error"], 403);
     }
 
     public function update($request, $id)
     {
-        $dirver = Driver::find($id);
-        if ($dirver) {
-            $dirver->update([
-                'name_ar' => $request->nameAr ?? $dirver->name_ar,
-                'name_en' => $request->nameEn ?? $dirver->name_en,
-                'age' => $request->age ?? $dirver->age,
-                "nationality" => $request->nationality ?? $dirver->nationality,
-                "phone" => $request->phone ?? $dirver->phone
+        $driver = Driver::find($id);
+        if ($driver) {
+            $driver->update([
+                'name_ar' => $request->nameAr ?? $driver->name_ar,
+                'name_en' => $request->nameEn ?? $driver->name_en,
+                'age' => $request->age ?? $driver->age,
+                "nationality" => $request->nationality ?? $driver->nationality,
+                "phone" => $request->phone ?? $driver->phone
             ]);
             return response()->json(['message' => "updated Successfly"], 201);
         }
@@ -61,19 +61,39 @@ class DriverService
 
     public function destroy($id)
     {
-        $dirver = Driver::find($id);
+        $driver = Driver::find($id);
 
-        if ($dirver) {
-            $dirver->delete();
+        if ($driver) {
+            $driver->delete();
             return response()->json(['message' => "deleted Successfly"], 201);
+        }
+        return response()->json(['error' => "System Error"], 403);
+    }
+
+    public function suspend($request, $id)
+    {
+        $driver = Driver::find($id);
+
+        if ($driver) {
+            if ($request->status == 'inActive'){
+                $driver->update([
+                    'status' => $request->status
+                ]);
+                return response()->json(['message' => "Suspended Successfly"], 201);
+            }else{
+                $driver->update([
+                    'status' => $request->status
+                ]);
+                return response()->json(['message' => "Activated Successfly"], 201);
+            }
         }
         return response()->json(['error' => "System Error"], 403);
     }
 
     public function restore($id)
     {
-        $dirver = Driver::where('id', $id)->withTrashed()->restore();
-        if ($dirver) {
+        $driver = Driver::where('id', $id)->withTrashed()->restore();
+        if ($driver) {
             return response()->json(['message' => "restored Successfly"], 201);
         }
         return response()->json(['error' => "System Error"], 403);
