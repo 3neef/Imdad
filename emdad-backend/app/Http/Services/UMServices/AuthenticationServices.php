@@ -329,11 +329,7 @@ class AuthenticationServices
 
         $user = User::find($id)->first();
         if ($user == null) {
-            return response()->json([
-                'error' => 'user already deleted',
-                "statusCode" => "111",
-
-            ], 200);
+            return response()->json([ 'error' => 'user already deleted',  "statusCode" => "111" ], 200);
         }
         // dd($user);
 
