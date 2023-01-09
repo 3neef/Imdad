@@ -13,20 +13,6 @@ class UserCollection
     public static function collection($request)
     {
 
-        $defaultSort = '-created_at';
-
-        $defaultSelect = [
-            'id',
-            'full_name',
-            'mobile',
-            'expiry_date',
-            'identity_type',
-            'identity_number',
-            'profile_id',
-            'email',
-            'updated_at',
-            'created_at',
-        ];
 
         $allowedFilters = [
             'id',
@@ -39,7 +25,7 @@ class UserCollection
             'email',
             'updated_at',
             'created_at',
-            AllowedFilter::custom('default', new DefaultUsersFilter)->default(auth()->user())
+            AllowedFilter::custom('default', new DefaultUsersFilter)->default(auth()->user()),
         ];
 
         $allowedSorts = [
@@ -50,15 +36,16 @@ class UserCollection
         $allowedIncludes = [
             'roles',
             'profiles',
+            "mangerUserId",
+            "warehouse",
+
         ];
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(User::class)
-            ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->allowedIncludes($allowedIncludes)
-            ->defaultSort($defaultSort)
             ->paginate($perPage);
     }
 }
