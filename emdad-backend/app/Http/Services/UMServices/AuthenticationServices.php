@@ -333,8 +333,8 @@ class AuthenticationServices
     //     return response()->json(['error' => 'system error',
     //     "statusCode"=>"999",
 
-    ], 200);
-    }
+    // ], 200);
+    // }
 
 
     // public function restoreById($request)
