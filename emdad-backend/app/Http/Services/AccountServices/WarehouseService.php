@@ -46,25 +46,24 @@ class WarehouseService
                 'manager_id' => $request->managerId ?? auth()->id(),
                 'otp_receiver' => strval(rand(1000, 9999)),
             ]);
-            foreach ($request['userList'] as $user_id) {
-                try {
-                    $warehouse->users()->attach($warehouse->id, ['user_id' => $user_id ?? auth()->user->id]);
-                } catch (Exception $e) {
+            if (isset($request['userList'])) {
+                foreach ($request['userList'] as $user_id) {
+                        UserWarehousePivot::create(["warehouse_id"=>$warehouse->id,'user_id' => $user_id ?? auth()->user->id]);
+                   
                 }
             }
-            return $warehouse;
-       
-});
-if ($warehouse) {
-    return response()->json(['message' => 'created successfully'], 200);
-}
 
-return response()->json(['error' => 'system error'], 500);
-   
+            return $warehouse;
+        });
+        if ($warehouse) {
+            return response()->json(['message' => 'created successfully'], 200);
+        }
+
+        return response()->json(['error' => 'system error'], 500);
     }
 
-   
-    
+
+
     public function update($request, $id)
     {
 
@@ -164,7 +163,5 @@ return response()->json(['error' => 'system error'], 500);
             $warehouses->delete();
             return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
         }
-
     }
-
 }
