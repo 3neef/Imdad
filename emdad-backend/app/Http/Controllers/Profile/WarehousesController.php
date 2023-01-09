@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AccountRequests\Location\AssignUserToWarehouseRequest;
 use App\Http\Requests\AccountRequests\Location\CreateWarehouesesRequest;
 use App\Http\Requests\AccountRequests\Location\RestoreLocationRequest;
 use App\Http\Requests\AccountRequests\Location\UpdateWarehousesRequest;
@@ -365,7 +366,7 @@ class WarehousesController extends Controller
     }
 /**
         * @OA\put(
-        * path="/api/v1_0/warehouses/verfied'",
+        * path="/api/v1_0/warehouses/verfied",
         * operationId="verfiedWarehouse",
         * tags={"warehouse"},
         * summary="verfied warehouse",
@@ -420,4 +421,119 @@ class WarehousesController extends Controller
     {
         return $this->warehouseService->verfied($id);
     }
+
+/**
+        * @OA\post(
+        * path="/api/v1_0/assignwarehousetouser",
+        * operationId="assignwarehousetouser",
+        * tags={"warehouse"},
+        * summary="assign warehouse to user",
+        * description="assign warehouse to user",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"userId","warehouseId"},
+        *               @OA\Property(property="warehouseId", type="integer"),
+        *               @OA\Property(property="userId", type="integer"),
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *        response=200,
+        *          description="assign warehouse",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *         ),
+        *       ),
+        *      @OA\Response(response=500, description="system error"),
+        *      @OA\Response(response=422, description="Validate error"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+    public function assignWarehouseToUser(AssignUserToWarehouseRequest $request)
+    {
+        return $this->warehouseService->assignWarehouseToUser($request);
+    }
+
+    
+/**
+        * @OA\delete(
+        * path="/api/v1_0/unassignwarehousetouser/{id}",
+        * operationId="unAssignWarehouseToUser",
+        * tags={"warehouse"},
+        * summary="unassign warehouse to user",
+        * description="unassign warehouse to user",
+*     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+        *     @OA\RequestBody(
+        *         @OA\JsonContent(),
+        *         @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               required={"warehouseId"},
+        *               @OA\Property(property="warehouseId", type="integer"),
+        *            ),
+        *        ),
+        *    ),
+        *      @OA\Response(
+        *        response=200,
+        *          description="unassign warehouse",
+        *          @OA\JsonContent(),
+        *          @OA\MediaType(
+        *            mediaType="multipart/form-data",
+        *            @OA\Schema(
+        *               type="object",
+        *               @OA\Property(property="message", type="string")
+        *            ),
+        *         ),
+        *       ),
+        *      @OA\Response(response=500, description="system error"),
+        *      @OA\Response(response=422, description="Validate error"),
+        *      @OA\Response(response=404, description="Resource Not Found"),
+        * )
+        */
+    public function unAssignWarehouseToUser($id)
+    {
+        return $this->warehouseService->unAssignWarehouseToUser($id);
+    }
+    
 }

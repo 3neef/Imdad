@@ -3114,7 +3114,7 @@
                 }
             }
         },
-        "/api/v1_0/warehouses/verfied'": {
+        "/api/v1_0/warehouses/verfied": {
             "put": {
                 "tags": [
                     "warehouse"
@@ -3171,6 +3171,164 @@
                 "responses": {
                     "200": {
                         "description": "verfied warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/assignwarehousetouser": {
+            "post": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "assign warehouse to user",
+                "description": "assign warehouse to user",
+                "operationId": "assignwarehousetouser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "userId",
+                                    "warehouseId"
+                                ],
+                                "properties": {
+                                    "warehouseId": {
+                                        "type": "integer"
+                                    },
+                                    "userId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "assign warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/unassignwarehousetouser/{id}": {
+            "delete": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "unassign warehouse to user",
+                "description": "unassign warehouse to user",
+                "operationId": "unAssignWarehouseToUser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "warehouseId"
+                                ],
+                                "properties": {
+                                    "warehouseId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "unassign warehouse",
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
