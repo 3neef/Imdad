@@ -25,7 +25,6 @@ class CategoryCollection
             'profile_id',
             'reason',
             AllowedFilter::custom('default', new DefaultCategoryFilter)->default(auth()->user()),
-
         ];
 
         $allowedSorts = [

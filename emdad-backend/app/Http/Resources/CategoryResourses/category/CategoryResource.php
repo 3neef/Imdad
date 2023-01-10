@@ -26,7 +26,7 @@ class CategoryResource extends JsonResource
             'type' => $this->type,
             'note' => $this->reason,
             'createdAt' => $this->created_at->format('Y-m-d'),
-            'CreatorName' => $this->CreatorName()->full_name,
+            'CreatorName' => $this->CreatorName()->full_name??'',
             'sequence' => Categories::where("id", $this->id)->first() != null ? Categories::where("id", $this->id)->first()->sequence() : "debug"
         ];
     }
