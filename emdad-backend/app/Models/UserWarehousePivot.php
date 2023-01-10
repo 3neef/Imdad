@@ -13,7 +13,7 @@ class UserWarehousePivot extends Model
     protected $table = 'user_warehouse_pivots';
     protected $fillable = ['user_id','warehouse_id','status'];
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
