@@ -24,10 +24,10 @@ class CategoryResource extends JsonResource
             'profileId' => $this->profile_id,
             'isleaf' => $this->isleaf,
             'type' => $this->type,
-            'note' =>$this->reason,
-            'createdAt'=>$this->created_at??null,
-            'CeatedBy'=>$this->created_by??null,
-            'sequence'=>Categories::where("id",$this->id)->first()!=null?Categories::where("id",$this->id)->first()->sequence():"debug"
+            'note' => $this->reason,
+            'createdAt' => $this->created_at->format('Y-m-d'),
+            'CreatorName' => $this->CreatorName()->full_name,
+            'sequence' => Categories::where("id", $this->id)->first() != null ? Categories::where("id", $this->id)->first()->sequence() : "debug"
         ];
     }
 }

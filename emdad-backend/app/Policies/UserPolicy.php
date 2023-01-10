@@ -30,7 +30,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return $this->checkPermission($user,$type1="");
+        return $this->checkPermission($user, $type1 = "BMU1", $type2 = "SMU1");
     }
 
     /**
@@ -41,8 +41,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $this->checkPermission($user,$type1="");
-
+        return $this->checkPermission($user, $type1 = "BMU2", $type2 = "SMU2");
     }
 
     /**
@@ -54,8 +53,7 @@ class UserPolicy
      */
     public function update(User $user)
     {
-        return $this->checkPermission($user,$type1="");
-
+        return $this->checkPermission($user, $type1 = "BMU3", $type2 = "SMU3");
     }
 
     /**
@@ -67,7 +65,7 @@ class UserPolicy
      */
     public function delete(User $user)
     {
-        return $this->checkPermission($user, $type1="");
+        return $this->checkPermission($user, $type1 = "BMU3", $type2 = "SMU3");
     }
 
     /**
@@ -79,8 +77,7 @@ class UserPolicy
      */
     public function restore(User $user)
     {
-        return $this->checkPermission($user,$type1="");
-
+        return $this->checkPermission($user, $type1 = "BMU3", $type2 = "SMU3");
     }
 
     /**
@@ -95,14 +92,14 @@ class UserPolicy
         //
     }
 
-    public function checkPermission($user, $type1)
+    public function checkPermission($user, $type1,$type2)
     {
         if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
             $permissonis = DB::table('role_user_profile')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
             if ($permissonis != null) {
                 $labels = json_decode($permissonis);
                 foreach ($labels as $label) {
-                    if ($label == $type1) {
+                    if ($label == $type1 || $label == $type2) {
                         return true;
                     }
                 }

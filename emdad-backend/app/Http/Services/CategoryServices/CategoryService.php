@@ -17,7 +17,7 @@ class CategoryService
 
     public function index($request)
     {
-        return CategoryCollection::collection($request);
+        return CategoryResource::collection(CategoryCollection::collection($request));
     }
 
 
@@ -31,9 +31,10 @@ class CategoryService
                 'parent_id' => $request->parentId ?? 0,
                 "reason" => $request->note,
                 'type' => $request->type ?? 'products',
+                'created_by' => auth()->id()
             ]);
             if ($category) {
-                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id, 'created_by' => auth()->id()]);
+                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
             }
             if (auth()->user()->profile_id) {
                 $category->update(['profile_id' => auth()->user()->profile_id]);
@@ -115,12 +116,12 @@ class CategoryService
             foreach ($request['categoryList'] as $category_id) {
 
                 try {
-                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id, 'created_by' => auth()->id()]);
+                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
                 } catch (Exception $e) {
                 }
             }
         } else {
-            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id, 'created_by' => auth()->id()]);
+            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id]);
         }
         return response()->json(['message' => 'created successfully'], 200);
     }
