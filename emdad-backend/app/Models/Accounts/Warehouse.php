@@ -50,7 +50,7 @@ class Warehouse extends Model
 
     public function users()
     {
-         return UserWarehousePivot::where('warehouse_id',$this->id)->with('user');
+         return UserWarehousePivot::where('warehouse_id',$this->id)->with('user')->get();
     }
     
     public function creatorName()
