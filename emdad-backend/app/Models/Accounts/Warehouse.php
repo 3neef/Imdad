@@ -3,6 +3,7 @@
 namespace App\Models\Accounts;
 
 use App\Models\User;
+use App\Models\UserWarehousePivot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,6 +46,11 @@ class Warehouse extends Model
     public function manager()
     {
          return User::where('id',$this->manager_id)->first();
+    }
+
+    public function users()
+    {
+         return UserWarehousePivot::where('warehouse_id',$this->id)->with('user');
     }
     
     public function creatorName()

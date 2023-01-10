@@ -30,6 +30,7 @@ class WarehouseResponse extends JsonResource
             "creatorName"=>$this->creatorName()->full_name,
             "createdAt"=>$this->created_at->format('y-m-d'),
             "managerName"=>$this->manager()->full_name,
+            "users"=>$this->users(),
         ];
     }
 }

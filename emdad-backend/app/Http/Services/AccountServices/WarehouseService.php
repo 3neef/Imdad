@@ -55,7 +55,7 @@ class WarehouseService
 
             return $warehouse;
         });
-        if ($warehouse) {
+        if ($warehouse!=null) {
             return response()->json(['message' => 'created successfully'], 200);
         }
 
