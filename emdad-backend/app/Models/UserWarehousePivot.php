@@ -15,7 +15,7 @@ class UserWarehousePivot extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_warehouse_pivots', 'user_id')->withTimestamps()->withPivot("status");
+        return $this->belongsTo(User::class, 'user_id');
     }
 
 
