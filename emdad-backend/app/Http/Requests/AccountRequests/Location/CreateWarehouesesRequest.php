@@ -38,7 +38,7 @@ class CreateWarehouesesRequest extends FormRequest
             'longitude' => ['required', 'string'],
             'gateType' => [ 'string'],
             'receiverName' => ['required', 'string', 'max:25'],
-            'receiverPhone' => ['required', 'string', 'max:15', 'min:15', 'regex:/^(00966)/'],
+            'receiverPhone' => ['required', 'string', 'max:14', 'min:14', 'regex:/^(00966)/'],
             'managerId' => ['integer', 'exists:users,id']
         ];
     }
