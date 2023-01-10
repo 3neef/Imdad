@@ -29,7 +29,6 @@ return new class extends Migration
             $table->enum('status',['inActive', 'Active'])->default('Active');
             $table->foreignId('confirm_by')->nullable(true)->references("id")->on("users")->restrictOnDelete();
             $table->foreignId('created_by')->nullable(true)->references("id")->on("users")->restrictOnDelete();
-            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->restrictOnDelete();
             $table->softDeletes();
             $table->unique('address_name','profile_id');
 

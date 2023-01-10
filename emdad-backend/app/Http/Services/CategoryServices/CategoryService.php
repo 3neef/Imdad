@@ -17,7 +17,7 @@ class CategoryService
 
     public function index($request)
     {
-        return CategoryCollection::collection($request);
+        return CategoryResource::collection(CategoryCollection::collection($request));
     }
 
 
@@ -31,9 +31,10 @@ class CategoryService
                 'parent_id' => $request->parentId ?? 0,
                 "reason" => $request->note,
                 'type' => $request->type ?? 'products',
+                'created_by' => auth()->id()
             ]);
             if ($category) {
-                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id, 'created_by' => auth()->id()]);
+                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
             }
             if (auth()->user()->profile_id) {
                 $category->update(['profile_id' => auth()->user()->profile_id]);
@@ -115,12 +116,12 @@ class CategoryService
             foreach ($request['categoryList'] as $category_id) {
 
                 try {
-                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id, 'created_by' => auth()->id()]);
+                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
                 } catch (Exception $e) {
                 }
             }
         } else {
-            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id, 'created_by' => auth()->id()]);
+            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id]);
         }
         return response()->json(['message' => 'created successfully'], 200);
     }
@@ -199,11 +200,6 @@ class CategoryService
     public function getCategoryProfile($request)
     {
 
-        if (auth()->user()->profile_id == null) {
-            return response()->json(["error" => "", "code" => "100", "message" => "category does not have profile"], 200);
-        } else {
-            $categories = ProfileCategoryPivot::where("profile_id", auth()->user()->profile_id)->get();
-            return response()->json(["success" => true, "code" => "200", "data" =>   CategoryPivotResource::collection($categories)], 200);
-        }
+        return CategoryCollection::collection($request);
     }
 }
