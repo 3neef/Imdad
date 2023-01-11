@@ -299,7 +299,7 @@ class AuthenticationServices
         DB::table('password_resets')->insert([
             'token' => Str::uuid(),
             'email' => $request->email,
-            "created_at"=>now()
+            "created_at"=>now()->addHours(3),
         ]);
         $user=User::where("email",$request->email)->first();
         MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp, $user->lang);
@@ -407,4 +407,34 @@ class AuthenticationServices
 
             ];
     }
+
+    public function checkLink($request)
+    {
+        $created_at = DB::table('password_resets')->select('created_at')->where([
+            'email' => $request->email,
+            'token' => $request->token
+        ])->latest()->first();
+        if ($created_at == null) {
+            return response()->json([
+                'statusCode' => '108',
+
+                "error" => "token or email is invalid",
+            ],
+                200
+            );
+        }
+
+        if (now() < $created_at) {
+            return response()->json([
+                'statusCode' => '000',
+                'message' => 'token is valid'
+            ], 200);
+        } else {
+            return response()->json([
+                'statusCode' => '107',
+                'error' => 'token expired',
+            ], 200);
+        }
+    }
 }
+
