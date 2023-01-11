@@ -13,6 +13,7 @@ use App\Http\Requests\UMRequests\User\ResendOTPRequest;
 use App\Http\Requests\UMRequests\User\StoreAuthRequest;
 
 use App\Http\Services\UMServices\AuthenticationServices;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -445,5 +446,8 @@ class AuthController extends Controller
         return $userServices->removeUser($id);
     }
 
+    public function checkLink(Request $request,AuthenticationServices $userServices){
+        return $userServices->checkLink($request);
+    }
 
 }
