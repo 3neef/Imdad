@@ -79,7 +79,7 @@ class CategoryController extends Controller
 
     /**
      * @OA\get(
-     *    path="/api/v1_0/categories",
+     *    path="/api/v1_0/categories/{id}",
      *    operationId="showallcatogre",
      *    tags={"Catogry"},
      *    summary="show all catogries on the user profile",
@@ -92,7 +92,7 @@ class CategoryController extends Controller
      *             type="string"
      *         )
      *     ),
-     *         *     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="token",
      *         in="header",
      *         description="Set user authentication token",
@@ -304,7 +304,7 @@ class CategoryController extends Controller
     }
     /**
      * @OA\get(
-     * path="/api/v1_0/categories/{id}",
+     * path="/api/v1_0/categories/{Id}",
      * operationId="getBycategoryId",
      * tags={"Catogry"},
      * summary="get By categoryId",
@@ -781,7 +781,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @OA\post(
+     * @OA\Get(
      * path="/api/v1_0/categories/getCategoryProfile",
      * operationId="getCategoryProfile",
      * tags={"Catogry"},
@@ -846,4 +846,11 @@ class CategoryController extends Controller
     {
         return $this->categoryService->getCategoryProfile($request);
     }
+
+    public function setedCategoryProfile(Request $request)
+    {
+        return $this->categoryService->setedCategoryProfile($request);
+    }
+
+    
 }

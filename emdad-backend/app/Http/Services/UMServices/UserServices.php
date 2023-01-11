@@ -373,30 +373,7 @@ class UserServices
     }
 
 
-    public function forgotPassword($request)
-    {
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-        $data = DB::table('password_resets')->select('token')->where('email', $request->email)->first();
-
-        if ($status) {
-            return response()->json([
-                "statusCode" => "000",
-
-                "success" => true,
-                "token" => $data->token,
-                'message' => ' Rest Link has been sended to your email id ',
-                "email" => $request->email,
-            ], 200);
-        }
-        return response()->json([
-            "statusCode" => "999",
-
-            "success" => false,
-            'message' => 'System error ',
-        ], 200);
-    }
+  
 
     // Todo  Need Code Again !
     public function resetPassword($request)
