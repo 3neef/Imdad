@@ -54,10 +54,10 @@ class AuthController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"email","oldPassword","newPassword"},
+     *               required={"email","password","token"},
      *               @OA\Property(property="email", type="email"),
-     *               @OA\Property(property="oldPassword", type="string"),
-     *               @OA\Property(property="newPassword", type="string")
+     *               @OA\Property(property="password", type="string"),
+     *               @OA\Property(property="token", type="string")
      *            ),
      *        ),
      *    ),
