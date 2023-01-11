@@ -532,9 +532,6 @@ class WarehousesController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-    public function unAssignWarehouseToUser($id)
-    {
-        return $this->warehouseService->unAssignWarehouseToUser($id);
-    }
+   
     
 }

@@ -166,7 +166,7 @@ class UserServices
 
     public function detachWarehouse($request)
     {
-    UserWarehousePivot::where("user_id",$request->userId)->where("warehouse_id",$request->warehouseId)->get()->forceDelete();
+    UserWarehousePivot::where("user_id",$request->userId)->where("warehouse_id",$request->warehouseId)->first()->forceDelete();
         return response()->json([
             "statusCode" => "000",
 
