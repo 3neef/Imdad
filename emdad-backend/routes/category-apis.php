@@ -22,7 +22,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::post('categories/approveCategory', [CategoryController::class, 'approveCategory']);
     Route::post('categories/rejectCategory', [CategoryController::class, 'rejectCategory']);
     Route::get('categories/getCategoryProfile', [CategoryController::class, 'getCategoryProfile']);  
-      Route::get('categories/setedCategoryProfile', [CategoryController::class, 'setedCategoryProfile']);
+      Route::post('categories/setedCategoryProfile', [CategoryController::class, 'setedCategoryProfile']);
 
     
     Route::apiResource('categories', CategoryController::class);
