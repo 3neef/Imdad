@@ -230,21 +230,7 @@ class UserController extends Controller
      */
     public function getUserInfoByToken(Request $request)
     {
-        ///TODO
-        $user = auth()->user();
-
-        if ($request->has('dataset') && is_array($request->dataset)) {
-            if (
-                in_array(
-                    'default_company',
-                    array_map('strtolower', $request->dataset)
-                )
-            ) {
-            }
-        }
-
-
-        return response()->json(["status" => "success", "data" => new UserResponse($user)], 200);
+        return response()->json(["status" => "success", "data" => new UserResponse(auth()->user())], 200);
     }
 
     /**
