@@ -11,6 +11,7 @@ use App\Http\Services\General\SmsService;
 use App\Models\Accounts\Warehouse;
 use App\Models\UM\RoleUserProfile;
 use App\Models\UserWarehousePivot;
+use DateTime;
 use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
@@ -323,6 +324,16 @@ class AuthenticationServices
     // Todo  Need Code Again !
     public function resetPassword($request)
     {
+        $token = self::getResetToken($request);
+        if($token ==null || now()>DateTime::createFromFormat('Y-m-d H:i:s',$token->created_at) ){
+            return response()->json([
+                "statusCode" => "107",
+
+                "success" => false,
+               'message' => 'invalid token',
+            ], 200);
+        }
+        
         $user = User::where('email', $request->email)->first();
 
         $user->update(['password' => $request->password]);
@@ -408,13 +419,20 @@ class AuthenticationServices
             ];
     }
 
-    public function checkLink($request)
-    {
-        $created_at = DB::table('password_resets')->select('created_at')->where([
+    function getResetToken($request){
+        $token = DB::table('password_resets')->select('created_at')->where([
             'email' => $request->email,
             'token' => $request->token
         ])->latest()->first();
-        if ($created_at == null) {
+
+        return $token;
+    }
+
+    public function checkLink($request)
+    {
+        $token = $this->getResetToken($request);
+    
+        if ($token == null) {
             return response()->json([
                 'statusCode' => '108',
 
@@ -424,7 +442,7 @@ class AuthenticationServices
             );
         }
 
-        if (now() < $created_at) {
+        if (now()<DateTime::createFromFormat('Y-m-d H:i:s',$token->created_at)) {
             return response()->json([
                 'statusCode' => '000',
                 'message' => 'token is valid'

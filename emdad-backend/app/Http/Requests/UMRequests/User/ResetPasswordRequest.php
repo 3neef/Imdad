@@ -5,6 +5,7 @@ namespace App\Http\Requests\UMRequests\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rules\Password;
 
 class ResetPasswordRequest extends FormRequest
 {
@@ -27,7 +28,7 @@ class ResetPasswordRequest extends FormRequest
     {
         return [
             'email' => 'required|email',
-            'password' => 'required|string|max:50',
+            'password' => [Password::min(8)->mixedCase()->numbers()->symbols()],
             "token" => "required",
         ];
     }
