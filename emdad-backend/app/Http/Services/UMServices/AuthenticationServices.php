@@ -353,7 +353,11 @@ class AuthenticationServices
 
     public function forgotPassword($request)
     {
-      
+        DB::table('password_resets')->insert([
+            'token' => Str::uuid(),
+            'email' => $request->email,
+            "created_at"=>now()
+        ]);
         $user=User::where("email",$request->email)->first();
         MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp, $user->lang);
         if ($user) {

@@ -23,7 +23,7 @@ class MailController extends Controller
     }
     
     public static function forgetPasswordEmail($name, $email, $otp,$lang="en"){
-        $token = DB::table('password_resets')->select('token')->where('email', $email)->first();
+        $token = DB::table('password_resets')->select('token')->where('email', $email)->latest()->first();
         $data = [
             'name' => $name,
             'email' => $email,
