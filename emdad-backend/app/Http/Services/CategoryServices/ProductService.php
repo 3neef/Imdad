@@ -21,17 +21,22 @@ class ProductService
 
     public function store($request)
     {
-        $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
+        // $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
         $prodcut = Product::create([
             'category_id' => $request->categoryId,
             'name_en' => $request->nameEn,
-            'name_Ar' => $request->nameAr,
+            'name_ar' => $request->nameAr,
             'price' => $request->price,
             'measruing_unit' => $request->measruingUnit,
-            'image' => $request->image,
             'description_en' => $request->descriptionEn,
-            'description_ar' => $request->descriptionAr
+            'description_ar' => $request->descriptionAr,
+            'created_by' => auth()->id(),
+            'profile_id' => auth()->user()->profile_id
         ]);
+         $prodcut->addMultipleMediaFromRequest(['attachementFile'])
+        ->each(function ($fileAdder) {
+            $fileAdder->toMediaCollection('products');
+        });
         if ($prodcut) {
             $prodcut->companyProduct()->attach($prodcut->id, ['profile_id' => auth()->user()->profile_id]);
             return response()->json([
@@ -49,16 +54,19 @@ class ProductService
 
         $prodcut = Product::find($id);
         if ($request->has('attachementFile')) {
-            $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
+            $prodcut->addMultipleMediaFromRequest(['attachementFile'])
+            ->each(function ($fileAdder) {
+                $fileAdder->toMediaCollection('products');
+            });
+
         }
 
         $prodcut->update([
             'category_id' => $request->categoryId ?? $prodcut->category_id,
-            'name_Ar' => $request->nameAr ?? $prodcut->name_Ar,
+            'name_ar' => $request->nameAr ?? $prodcut->name_ar,
             'name_en' => $request->nameEn ?? $prodcut->name_en,
             "price" => $request->price ?? $prodcut->price,
             "measruing_unit" => $request->measruing_unit ?? $prodcut->measruing_unit,
-            'image' => $request->image ?? $prodcut->image,
             'description_en' => $request->descriptionEn??$prodcut->description_en,
             'description_ar' => $request->descriptionAr??$prodcut->description_ar
         ]);

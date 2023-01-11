@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->string('name');
             $table->integer('price');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('measruing_unit');
             $table->timestamps();
             $table->softDeletes();
