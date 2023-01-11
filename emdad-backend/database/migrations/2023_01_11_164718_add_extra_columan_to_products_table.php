@@ -18,6 +18,9 @@ return new class extends Migration
             $table->renameColumn('name','name_ar');
             $table->text('description_en');
             $table->text('description_ar');
+            $table->integer('created_by')->nullable();
+            $table->integer('profile_id')->nullable();
+
         });
     }
 
