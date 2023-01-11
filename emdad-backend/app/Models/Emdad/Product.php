@@ -27,7 +27,7 @@ class Product extends Model
 
     public function unit_measruing()
     {
-        return $this->hasMany(unit_measruing::class);
+        return $this->belongsTo(unit_measruing::class,'measruing_unit');
     }
 
     public function companyProduct()

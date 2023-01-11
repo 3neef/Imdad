@@ -15,8 +15,8 @@ class Unit_of_measures extends Model
         'created_at',
         'updated_at',
     ];
-    public function category()
+    public function products()
     {
-        return $this->belongsTo(Prodcuts::class);
+        return $this->hasMany(Prodcuts::class);
     }
 }
