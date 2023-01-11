@@ -24,8 +24,8 @@ class DeleteWarehouseRequest extends FormRequest
    public function rules()
     {
    return [
-    "userId"=>'required|exists:user_warehouse_pivots,user_id,null,warehouse_id,',$this->warehouseId,
-    "warehouseId"=>'required|exists:user_warehouse_pivots,warehouseId,null,user_id,',$this->userId,
+    "userId"=>'required|exists:user_warehouse_pivots,user_id,NULL,warehouse_id,'.$this->warehouseId,
+    "warehouseId"=>'required|exists:user_warehouse_pivots,warehouseId,NULL,user_id,'.$this->userId,
 ];
 }
 
