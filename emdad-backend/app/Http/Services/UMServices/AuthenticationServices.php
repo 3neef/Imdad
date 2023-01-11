@@ -280,7 +280,7 @@ class AuthenticationServices
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
         $data = $this->UserOtp($user);
-        MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
         // $sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
             [

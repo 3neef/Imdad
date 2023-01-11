@@ -25,6 +25,7 @@ class MailController extends Controller
         $data = [
             'name' => $name,
             'email' => $email,
+            'lang' => $lang,
             'link'=> "http://172.21.1.116:8080/reset-password?token=".PasswordReset::where("email",$email)->first()->token
         ];
         Mail::to($email)->send(new ForgetPassword($data));
