@@ -7131,6 +7131,83 @@
                 }
             }
         },
+        "/api/v1_0/categories/setedCategoryProfile": {
+            "get": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "Prodile Categories",
+                "description": "Get the setted categories by a certain profile using profile_id",
+                "operationId": "settedCategoryProfile",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "checked sucessfully successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "required": [
+                                        "profile_id"
+                                    ],
+                                    "properties": {
+                                        "profile_id": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/products": {
             "get": {
                 "tags": [
