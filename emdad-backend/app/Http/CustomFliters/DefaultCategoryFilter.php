@@ -16,9 +16,9 @@ class DefaultCategoryFilter implements Filter
             $query->where('status', "approved");
         } elseif (Route::current()->uri == "api/v1_0/categories/getCategoryProfile") {
             if ($value) {
-                $CategoriesId = ProfileCategoryPivot::where("profile_id", $value->profile_id)->pluck("category_id as CategoriesId");
-                if ($value->onlyRequested == true) {
-                    $query->whereIn('id', $CategoriesId)->where('profile_id', $value->profile_id);
+                $CategoriesId = ProfileCategoryPivot::where("profile_id", $value['profile_id'])->pluck("category_id as CategoriesId");
+                if ($value['onlyRequested'] == true) {
+                    $query->whereIn('id', $CategoriesId)->where('profile_id', $value['profile_id']);
                 } else {
                     $query->whereIn('id', $CategoriesId);
                 }
