@@ -22,7 +22,7 @@ class MailController extends Controller
         Mail::to($email)->send(new SignupEmail($data));
     }
     
-    public static function forgetPasswordEmail($name, $email, $otp, $lang){
+    public static function forgetPasswordEmail($name, $email, $otp,$lang="en"){
         $data = DB::table('password_resets')->select('token')->where('email', $email)->first();
 
         $data = [
