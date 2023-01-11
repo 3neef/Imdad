@@ -846,4 +846,11 @@ class CategoryController extends Controller
     {
         return $this->categoryService->getCategoryProfile($request);
     }
+
+    public function setedCategoryProfile(Request $request)
+    {
+        return $this->categoryService->setedCategoryProfile($request);
+    }
+
+    
 }

@@ -1,14 +1,13 @@
 Hello {{ $viewData["name"] }}
 <br><br>
 <br>
-Please click the below link or enter the otp to reset your password.
+Some one asked to reset your Emdad Account {{$viewData["email"]}} if it's you click the link below ,
+if it is not you no action is required
 <br><br>
-<h2>
-    {{ $viewData["otp"] }}
-</h2>
+
 <br><br>
-<a href="">CLICK HERE!</a>
+<a href="{{$viewData['url']}}">{{$viewData["url"]}}</a>
 <br><br>
-Thank you
+Thank you for using Emdad Platform
 <br>
-M.A
+<b>Emdad Support</b>
