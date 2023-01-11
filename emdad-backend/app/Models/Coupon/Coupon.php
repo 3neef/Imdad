@@ -12,6 +12,6 @@ class Coupon extends Model
     protected $table = 'coupons';
     protected $fillable = [
         'code', 'value', 'is_percentage',
-        'start_date', 'end_date', 'allowed', 'used', 'user_id', 'company_id'
+        'start_date', 'end_date', 'allowed', 'used', 'user_id', 'profile_id'
     ];
 }

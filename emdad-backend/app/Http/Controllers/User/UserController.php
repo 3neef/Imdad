@@ -9,7 +9,7 @@ use App\Http\Requests\UMRequests\DeleteWarehouse;
 use App\Http\Requests\UMRequests\DeleteWarehouseRequest;
 use App\Http\Requests\UMRequests\UpdateUserWarehouseStatusRequest;
 use App\Http\Requests\UMRequests\UpdateUserWharehouseStatus;
-use App\Http\Requests\UMRequests\User\AssignRoleRequest;
+use App\Http\Requests\UMRequests\User\Request;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
