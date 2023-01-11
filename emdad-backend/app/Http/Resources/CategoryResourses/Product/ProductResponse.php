@@ -16,9 +16,13 @@ class ProductResponse extends JsonResource
     {
         return [
             "id" =>$this->id,
-            "name" =>$this->name,
+            "nameEn" =>$this->name_en,
+            "nameAr" =>$this->name_ar,
             "price" =>$this->price,
-            'imags'=>$this->image
+            'imags'=>$this->image,
+            'descriptionEn'=>$this->description_en,
+            'descriptionAr'=>$this->description_ar,
+            'measruingUnit'=>$this->measruing_unit
         ];
     }
 }

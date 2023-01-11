@@ -21,21 +21,26 @@ class ProductService
 
     public function store($request)
     {
-        // dd($request->all());
         $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
-
         $prodcut = Product::create([
             'category_id' => $request->categoryId,
-            'name' => $request->name,
-            "price" => $request->price,
-            "measruing_unit" => $request->measruingUnit,
-            "image" => $request->image,
+            'name_en' => $request->nameEn,
+            'name_Ar' => $request->nameAr,
+            'price' => $request->price,
+            'measruing_unit' => $request->measruingUnit,
+            'image' => $request->image,
+            'description_en' => $request->descriptionEn,
+            'description_ar' => $request->descriptionAr
         ]);
         if ($prodcut) {
             $prodcut->companyProduct()->attach($prodcut->id, ['profile_id' => auth()->user()->profile_id]);
-            return response()->json(['message' => 'created successfully'], 200);
+            return response()->json([
+                "statusCode" => "000",
+                'message' => 'created successfully'
+            ], 200);
         }
-        return response()->json(["statusCode"=>'000','error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'999',
+        'error' => 'unkown error'], 500);
     }
 
 
@@ -49,16 +54,20 @@ class ProductService
 
         $prodcut->update([
             'category_id' => $request->categoryId ?? $prodcut->category_id,
-            'name' => $request->name ?? $prodcut->name,
+            'name_Ar' => $request->nameAr ?? $prodcut->name_Ar,
+            'name_en' => $request->nameEn ?? $prodcut->name_en,
             "price" => $request->price ?? $prodcut->price,
             "measruing_unit" => $request->measruing_unit ?? $prodcut->measruing_unit,
             'image' => $request->image ?? $prodcut->image,
+            'description_en' => $request->descriptionEn??$prodcut->description_en,
+            'description_ar' => $request->descriptionAr??$prodcut->description_ar
         ]);
 
         if ($prodcut) {
             return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
         }
-        return response()->json(['error' => 'system error'], 500);
+        return response()->json(["statusCode"=>'999',
+        'error' => 'unkown error'], 500);
     }
 
     public function show($id)
