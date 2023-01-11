@@ -280,7 +280,7 @@ class AuthenticationServices
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
         $data = $this->UserOtp($user);
-        MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
         // $sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
             [
@@ -357,7 +357,7 @@ class AuthenticationServices
             $request->only('email')
         );
         $user=User::where("email",$request->email)->first();
-        MailController::forgetPasswordEmail($user->name, $user->email, $user->otp);
+        MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp,"ar");
         if ($status) {
             return response()->json([
                 "statusCode" => "000",
