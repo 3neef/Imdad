@@ -15,7 +15,7 @@ class CategoryPivotResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "id" => $this->category->id,
+            "id" => $this->category->id??$this->category_id,
             "nameEn" => $this->category->name_en,
             "nameAr" => $this->category->name_ar,
             'status' => $this->status,
@@ -26,7 +26,7 @@ class CategoryPivotResource extends JsonResource
             'note' =>$this->category->reason,
             'createdAt'=>$this->created_at??null,
             'CeatedBy'=>$this->created_by??null,
-            'sequence'=>$this->category->sequence()
+            'sequence'=>$this->category->sequence()??''
         
         ];
     }

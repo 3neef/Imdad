@@ -204,15 +204,14 @@ class CategoryService
     }
 
 
-    public function setedCategoryProfile($request)
+    public function setedCategoryProfile()
     {
 
         if (auth()->user()->profile_id == null) {
             return response()->json(["error" => "", "code" => "100", "message" => "category does not have profile"], 200);
         } else {
-            $categories = ProfileCategoryPivot::where("profile_id", auth()->user()->profile_id)->get();
-            return response()->json(["success" => true, "code" => "200", "data" =>   CategoryPivotResource::collection($categories)], 200);
+            $categories = ProfileCategoryPivot::where("profile_id", auth()->user()->profile_id)->get('category_id as CategoryId');
+            return response()->json(["success" => true, "code" => "200", "data" =>  $categories], 200);
         }
     }
-
 }
