@@ -781,7 +781,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @OA\post(
+     * @OA\Get(
      * path="/api/v1_0/categories/getCategoryProfile",
      * operationId="getCategoryProfile",
      * tags={"Catogry"},
