@@ -48,7 +48,6 @@ class ProductService
         'error' => 'unkown error'], 500);
     }
 
-
     public function update($request, $id)
     {
 
