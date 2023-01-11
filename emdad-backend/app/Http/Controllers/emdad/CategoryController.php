@@ -858,64 +858,6 @@ class CategoryController extends Controller
     {
         return $this->categoryService->getCategoryProfile($request);
     }
-    /**
-    * @OA\Get(
-    * path="/api/v1_0/categories/setedCategoryProfile",
-    * operationId="settedCategoryProfile",
-    * tags={"Catogry"},
-    * summary="Prodile Categories",
-    * description="Get the setted categories by a certain profile using profile_id",
-    *     @OA\Parameter(
-    *         name="x-authorization",
-    *         in="header",
-    *         description="Set x-authorization",
-    *         @OA\Schema(
-    *             type="string"
-    *         )
-    *     ),
-    *         *     @OA\Parameter(
-    *         name="token",
-    *         in="header",
-    *         description="Set user authentication token",
-    *         @OA\Schema(
-    *             type="beraer"
-    *         )
-    *     ),
-    *     @OA\RequestBody(
-    *         @OA\JsonContent(),
-    *         @OA\MediaType(
-    *            mediaType="multipart/form-data",
-    *            @OA\Schema(
-    *               type="object",
-    *            ),
-    *        ),
-    *    ),
-    *      @OA\Response(
-    *          response=200,
-    *          description="checked sucessfully successfully",
-    *          @OA\JsonContent(),
-    *          @OA\MediaType(
-    *            mediaType="multipart/form-data",
-    *            @OA\Schema(
-    *               type="object",
-    *               required={"profile_id"},
-    *               @OA\Property(property="profile_id", type="string"),
-    *            ),
-    *          ),
-    *       ),
-    *      @OA\Response(
-    *          response=422,
-    *          description="Unprocessable Entity",
-    *          @OA\JsonContent()
-    *       ),
-    *      @OA\Response(response=400, description="Bad request"),
-    *      @OA\Response(response=404, description="Resource Not Found"),
-    * )
-    */
-    public function setedCategoryProfile(Request $request)
-    {
-        return $this->categoryService->setedCategoryProfile($request);
-    }
 
-    
+  
 }
