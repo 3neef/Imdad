@@ -357,7 +357,7 @@ class AuthenticationServices
             $request->only('email')
         );
         $user=User::where("email",$request->email)->first();
-        MailController::forgetPasswordEmail($user->name, $user->email, $user->otp);
+        MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp,"ar");
         if ($status) {
             return response()->json([
                 "statusCode" => "000",

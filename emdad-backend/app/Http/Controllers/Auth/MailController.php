@@ -23,13 +23,14 @@ class MailController extends Controller
     }
     
     public static function forgetPasswordEmail($name, $email, $otp,$lang="en"){
-        $data = DB::table('password_resets')->select('token')->where('email', $email)->first();
-
+        $token = DB::table('password_resets')->select('token')->where('email', $email)->first();
         $data = [
             'name' => $name,
             'email' => $email,
-            'link'=> "http://172.21.1.116:8080/reset-password?token=".$data->token
+            'link'=> "http://172.21.1.116:8080/reset-password?email=".$email."&token=".$token->token
         ];
+        // dd($data);
+
         Mail::to($email)->send(new ForgetPassword($data));
     }
 }
