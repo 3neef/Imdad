@@ -154,14 +154,14 @@ class WarehouseService
         return response()->json(['error' => 'system error'], 500);
     }
 
-    public function unAssignWarehouseToUser($id)
-    {
-        $warehouses = UserWarehousePivot::find($id)->first();
-        if ($warehouses == null) {
-            return response()->json(["statusCode" => '111', 'success' => false, 'error' => 'not found'], 404);
-        } else {
-            $warehouses->delete();
-            return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
-        }
-    }
+    // public function unAssignWarehouseToUser($id)
+    // {
+    //     $warehouses = UserWarehousePivot::find($id)->first();
+    //     if ($warehouses == null) {
+    //         return response()->json(["statusCode" => '111', 'success' => false, 'error' => 'not found'], 404);
+    //     } else {
+    //         $warehouses->delete();
+    //         return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
+    //     }
+    // }
 }
