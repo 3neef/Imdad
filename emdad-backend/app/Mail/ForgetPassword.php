@@ -30,8 +30,9 @@ class ForgetPassword extends Mailable implements ShouldQueue
 
     
     {
+        // dd($this->viewData);
         return $this->from(env('MAIL_USERNAME'), 'Emdad Platform')
                     ->subject('Forget Password')
-                    ->view('mail.forgetpass-email',["viewData"=>$this->viewData]);
+                    ->view($this->viewData['lang'] == 'en'?'mail.forget.en':'mail.forget.ar',["viewData"=>$this->viewData]);
     }
 }

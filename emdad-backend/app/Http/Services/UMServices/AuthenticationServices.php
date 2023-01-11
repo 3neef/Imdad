@@ -353,12 +353,10 @@ class AuthenticationServices
 
     public function forgotPassword($request)
     {
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+      
         $user=User::where("email",$request->email)->first();
-        MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp,"ar");
-        if ($status) {
+        MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp, $user->lang);
+        if ($user) {
             return response()->json([
                 "statusCode" => "000",
 
