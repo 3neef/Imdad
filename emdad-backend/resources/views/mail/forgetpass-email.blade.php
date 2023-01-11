@@ -6,7 +6,7 @@ if it is not you no action is required
 <br><br>
 
 <br><br>
-<a href="{{$viewData['url']}}">{{$viewData["url"]}}</a>
+<a href="{{$viewData['link']}}">{{$viewData["link"]}}</a>
 <br><br>
 Thank you for using Emdad Platform
 <br>
