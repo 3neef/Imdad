@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\UMServices\AuthenticationServices;
 use App\Mail\ForgetPassword;
 use App\Mail\SignupEmail;
 use Illuminate\Auth\Events\PasswordReset;

@@ -5,18 +5,15 @@ namespace App\Http\Services\UMServices;
 use App\Http\Controllers\Auth\MailController;
 
 use App\Models\User;
-use App\Models\UM\Role;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\General\SmsService;
 use App\Models\Accounts\Warehouse;
-use App\Models\UM\Permission;
 use App\Models\UM\RoleUserProfile;
 use App\Models\UserWarehousePivot;
 use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 
 
@@ -43,7 +40,6 @@ class AuthenticationServices
         
             return $user;
         });
-        // dd($user);
         if ($user) {
             return response()->json([
                 "statusCode" => "000",
@@ -59,25 +55,8 @@ class AuthenticationServices
         ], 200);
     }
 
+ 
 
-
-
-
-
-    public function UpdateOwnerUser($request, $user_id)
-    {
-        $user = User::where('id', $user_id)->first();
-        $user->checkUserRole($user_id);
-
-        if ($user == true) {
-            return response()->json([
-                "statusCode" => "999",
-
-                'message' => 'cano,t  updated User'
-            ], 200);
-        }
-        $this->update($request, $user_id);
-    }
 
     public function update($request, $id)
     {
@@ -116,7 +95,6 @@ class AuthenticationServices
             return response()->json(
                 [
                     "statusCode" => "000",
-
                     'message' => 'New OTP has been sent.',
                     'otp' => $user->otp,
                 ],
@@ -138,6 +116,8 @@ class AuthenticationServices
         ], 200);
     }
 
+
+
     public function detachWarehouse($request)
     {
         $user = Warehouse::where("id", $request->warehouseId)->first();
@@ -148,6 +128,9 @@ class AuthenticationServices
             'message' => 'User deatched successfully'
         ], 200);
     }
+
+
+
     public function userWarehouseStatus($request)
     {
         $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
@@ -235,6 +218,8 @@ class AuthenticationServices
         );
     }
 
+
+
     public function activate($request)
     {
 
@@ -276,12 +261,12 @@ class AuthenticationServices
         );
     }
 
+
     public function resend($request)
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
         $data = $this->UserOtp($user);
         MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
-        // $sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
             [
                 "statusCode" => "000",
@@ -308,55 +293,13 @@ class AuthenticationServices
         );
     }
 
-    // public function delete($id)
-    // {
-
-    //     $user = User::find($id)->first();
-    //     if ($user == null) {
-    //         return response()->json(['error' => 'user already deleted',
-    //         "statusCode"=>"111",
-
-    //     ], 200);
-    //     }
-    //     // dd($user);
-
-    //     $user->tokens()->delete();
-
-    //     $deleted = $user->delete();
-
-    //     if ($deleted) {
-    //         return response()->json([
-    //             "statusCode"=>"000",
-
-    //             'message' => 'User deleted successfully',], 200);
-    //     }
-    //     return response()->json(['error' => 'system error',
-    //     "statusCode"=>"999",
-
-    // ], 200);
-    // }
-
-
-    // public function restoreById($request)
-    // {
-    //     $restore = User::where('id', $request->id)->withTrashed()->first()->restore();
-
-    //     if ($restore) {
-    //         return response()->json([
-    //             "statusCode"=>"000",
-
-    //             'message' => 'User restored successfully'], 200);
-    //     }
-    //     return response()->json(['error' => 'system error',"statusCode"=>"999"], 200);
-    // }
-
 
     public function forgotPassword($request)
     {
         DB::table('password_resets')->insert([
             'token' => Str::uuid(),
             'email' => $request->email,
-            "created_at"=>now()
+            "created_at"=>now()->addHours(3),
         ]);
         $user=User::where("email",$request->email)->first();
         MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp, $user->lang);
@@ -400,77 +343,8 @@ class AuthenticationServices
             'message' => 'system Error',
         ], 200);
     }
+    
 
-    // public function assignRole($request)
-    // {
-    //     $colmun = gettype($request->json()->get('role')) == 'integer' ? 'id' : 'name';
-    //     $role = Role::where($colmun, $request->json()->get('role'))->first();
-    //     $user = User::find($request->get('userId'));
-    //     $companyId = $request->get('companyId');
-    //     $userId = $request->get('userId');
-    //     $user->roleInCompany()->attach($userId, ['roles_id' => $role->id, 'company_info_id' => $companyId]);
-    //     return response()->json(['message' => 'assign role successfully'], 200);
-    // }
-
-    public function userActivate($request)
-    {
-        $user = User::where('id', $request->userId)->first();
-        $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
-
-        if ($userRoleProfile == null) {
-            return response()->json([
-                "statusCode" => "250",
-
-                'error' => 'user doesn\'t belong to this company'
-            ], 200);
-        }
-        $active = $userRoleProfile->update(['status' => 'active']);
-        if ($active) {
-            return response()->json([
-                "statusCode" => "000",
-
-                'message' => 'user account has activated successfully'
-            ], 200);
-        }
-        return response()->json([
-            "statusCode" => "999",
-
-            'error' => 'system error'
-        ], 200);
-    }
-
-
-    // public function disable($request)
-    // {
-    //     $user = User::where('id', $request->userId)->first();
-    //     $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
-    //     $active = $userRoleProfile->update(['status' => 'inActive']);
-    //     // dd($userRoleProfile);
-    //     if ($active) {
-    //         return response()->json([
-    //             "statusCode"=>"000",
-
-    //             'message' => 'user account has disabled successfully'], 200);
-    //     }
-    //     return response()->json(['error' => 'system error',
-    //     "statusCode"=>"999"
-    // ], 200);
-    // }
-
-    // public function restoreOldRole($request)
-    // {
-    //     $userRoleCompany = RoleUserProfile::where('user_id', '=', $request->userId)->where('profile_id', '=', $request->profile_id)->withTrashed()->first()->restore();
-    //     if ($userRoleCompany) {
-    //         return response()->json([
-    //             "statusCode"=>"000",
-
-    //             'message' => 'restored successfully'], 200);
-    //     }
-    //     return response()->json([
-    //         "statusCode"=>"999",
-
-    //         'error' => 'system error'], 200);
-    // }
 
     public function setDefaultCompany($request)
     {
@@ -513,22 +387,13 @@ class AuthenticationServices
             'error' => 'system error'
         ], 200);
     }
-    protected function getAbilities()
-    {
-        $role_id = RoleUserProfile::where('user_id', auth()->id())->where('profile_id', auth()->user()->profile_id)->first();
-        $permissions = Permission::where('role_id', $role_id)->get();
-        return $permissions;
-    }
+
 
     protected  function UserOtp($user)
-    // MailController::sOtp($user ,SmsService $smsService)
     {
-        // dd($user);
 
         $smsService = new SmsService;
         $otp = rand(1000, 9999);
-        // dd($otp);
-
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
         MailController::sendSignupEmail($user->full_name, $user->email, $user->otp, $user->lang);
 
@@ -542,4 +407,34 @@ class AuthenticationServices
 
             ];
     }
+
+    public function checkLink($request)
+    {
+        $created_at = DB::table('password_resets')->select('created_at')->where([
+            'email' => $request->email,
+            'token' => $request->token
+        ])->latest()->first();
+        if ($created_at == null) {
+            return response()->json([
+                'statusCode' => '108',
+
+                "error" => "token or email is invalid",
+            ],
+                200
+            );
+        }
+
+        if (now() < $created_at) {
+            return response()->json([
+                'statusCode' => '000',
+                'message' => 'token is valid'
+            ], 200);
+        } else {
+            return response()->json([
+                'statusCode' => '107',
+                'error' => 'token expired',
+            ], 200);
+        }
+    }
 }
+

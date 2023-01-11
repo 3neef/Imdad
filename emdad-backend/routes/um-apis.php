@@ -21,6 +21,7 @@ Route::middleware(['auth.apikey'])->prefix('auth')->group(function () {
     Route::delete('remove-user/{id}', [AuthController::class, 'removeUser']);
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
     Route::post("forgot-password", [AuthController::class, 'forgotPassword']);
+    Route::post("check-reset-token", [AuthController::class, 'checkLink']);
     Route::post('logout', [AuthController::class, 'logoutUser'])->middleware('auth:sanctum');
     Route::post("reset-password", [AuthController::class, 'resetPassword'])->name('password.reset');
 });

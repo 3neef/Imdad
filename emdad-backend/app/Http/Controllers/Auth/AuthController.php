@@ -2,24 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Collections\UserCollection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\RemoveUserRequets;
 use App\Http\Requests\UMRequests\User\ActivateRequest;
-use App\Http\Requests\UMRequests\User\AssignRoleRequest;
-use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
-use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
+
 use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
 use App\Http\Requests\UMRequests\User\ResendOTPRequest;
-use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\StoreAuthRequest;
-use App\Http\Requests\UMRequests\User\StoreUserRequest;
-use App\Http\Requests\UMRequests\User\UpdateRequest;
-use App\Http\Resources\UMResources\User\UserResponse;
-use App\Http\Services\General\SmsService;
+
 use App\Http\Services\UMServices\AuthenticationServices;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -452,5 +446,8 @@ class AuthController extends Controller
         return $userServices->removeUser($id);
     }
 
+    public function checkLink(Request $request,AuthenticationServices $userServices){
+        return $userServices->checkLink($request);
+    }
 
 }

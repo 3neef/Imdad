@@ -57,7 +57,6 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
         'role_id' => 'integer',
-        'statut' => 'integer',
     ];
 
     public function oauthAccessToken()
@@ -67,13 +66,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(RoleUserProfile::class,'user_id');
     }
 
-    // public function company()
-    // {
-    //     return $this->belongsToMany(CompanyInfo::class);
-    // }
+    
 
     public function currentProfile()
     {
@@ -90,18 +86,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return RoleUserProfile::where('profile_id', auth()->id())->where("user_id", $this->id)->pluck('role_id')->first();
     }
 
-    public function assignRole(Role $role)
-    {
-        return $this->roles()->save($role);
-    }
-
-    // public function hasRole($role)
-    // {
-    //     if (is_string($role)) {
-    //         return $this->roles->contains('name', $role);
-    //     }
-    //     return !!$role->intersect($this->roles)->count();
-    // }
 
     public function roleInProfile()
     {
@@ -110,13 +94,13 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withTimestamps();
     }
 
-    public function exists($roleId, $profileId)
-    {
-        return $this->belongsToMany(Role::class, 'role_user_profile', 'user_id', 'role_id')
-            ->wherePivot('role_id', $roleId)
-            ->wherePivot('profile_id', $profileId)
-            ->first();
-    }
+    // public function exists($roleId, $profileId)
+    // {
+    //     return $this->belongsToMany(Role::class, 'role_user_profile', 'user_id', 'role_id')
+    //         ->wherePivot('role_id', $roleId)
+    //         ->wherePivot('profile_id', $profileId)
+    //         ->first();
+    // }
 
 
 
@@ -125,13 +109,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(UserWarehousePivot::class,'user_id');
     }
 
-
-    // public function getRoleOfUserByCompanyId()
-    // {
-    //     return $this->belongsToMany(Role::class, 'roles_users_company_info', 'users_id', 'roles_id')
-    //         ->wherePivot('company_info_id', $this->default_company)
-    //         ->first();
-    // }
 
 
     public function profiles()
@@ -151,10 +128,7 @@ class User extends Authenticatable implements MustVerifyEmail
             ->withTimestamps();
     }
 
-    public function userable()
-    {
-        return $this->morphTo();
-    }
+
 
     public function profile()
     {
