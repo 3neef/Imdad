@@ -7,7 +7,6 @@ use App\Models\ProfileCategoryPivot;
 use Spatie\QueryBuilder\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\URL;
 
 class DefaultCategoryFilter implements Filter
 {
@@ -15,11 +14,13 @@ class DefaultCategoryFilter implements Filter
     {
         if (Route::current()->uri == "api/v1_0/categories") {
             $query->where('status', "approved");
-        } elseif(Route::current()->uri == "api/v1_0/categories/getCategoryProfile") {
+        } elseif (Route::current()->uri == "api/v1_0/categories/getCategoryProfile") {
             if ($value) {
-                if ($value->currentProfile()->type == "Buyer" || $value->currentProfile()->type == "Supplier") {
-                    $categories = ProfileCategoryPivot::where("profile_id", $value->profile_id)->pluck("profile_id as profileId");
-                    $query->whereIn('profile_id', $categories);
+                $CategoriesId = ProfileCategoryPivot::where("profile_id", $value->profile_id)->pluck("category_id as CategoriesId");
+                if ($value->onlyRequested == true) {
+                    $query->whereIn('id', $CategoriesId)->where('profile_id', $value->profile_id);
+                } else {
+                    $query->whereIn('id', $CategoriesId);
                 }
             }
         }
