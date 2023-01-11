@@ -9,18 +9,20 @@ use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
-    public static function sendSignupEmail($name, $email, $otp){
+    public static function sendSignupEmail($name, $email, $otp, $lang){
         $data = [
             'name' => $name,
-            'otp' => $otp
+            'otp' => $otp,
+            'lang' => $lang,
         ];
         Mail::to($email)->send(new SignupEmail($data));
     }
     
-    public static function forgetPasswordEmail($name, $email, $otp){
+    public static function forgetPasswordEmail($name, $email, $otp, $lang){
         $data = [
             'name' => $name,
-            'otp' => $otp
+            'otp' => $otp,
+            'lang' => $lang,
         ];
         Mail::to($email)->send(new SignupEmail($data));
     }

@@ -42,6 +42,7 @@ class StoreAuthRequest extends FormRequest
             'permissions'=>['array',new UniqeValues],
             'permissions.*'=>['string','exists:permissions,label'],
             'is_learning'=>['boolean'],
+            'lang'=>  [Rule::in('en','ar')],
 
         ];
         // dd($this->all());

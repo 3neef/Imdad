@@ -35,7 +35,7 @@ class AuthenticationServices
             $request['otp_expires_at'] = now()->addMinutes(5);
             $request['is_super_admin'] = true;
             $request['password_changed'] = true;
-            // $request['otp'] = userOtp();
+            $request['lang'] = $request['lang'] ?? 'en';
 
             $user = User::create($request);
             $data = $this->UserOtp($user);
@@ -522,13 +522,14 @@ class AuthenticationServices
     protected  function UserOtp($user)
     // MailController::sOtp($user ,SmsService $smsService)
     {
+        // dd($user);
 
         $smsService = new SmsService;
         $otp = rand(1000, 9999);
         // dd($otp);
 
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
-        MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        MailController::sendSignupEmail($user->full_name, $user->email, $user->otp, $user->lang);
 
         $smsService->sendSms($user->mobile, $user->otp);
 
