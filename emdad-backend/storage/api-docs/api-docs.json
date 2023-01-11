@@ -6065,50 +6065,6 @@
                 "tags": [
                     "Catogry"
                 ],
-                "summary": "show all catogries on the user profile",
-                "description": "show all  catogry Here",
-                "operationId": "showallcatogre",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "Maincatogre": {
-                                            "type": "integer",
-                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Catogry"
-                ],
                 "summary": "add catogry",
                 "description": "add category or a subcategory using parent id if it exists  by the company owner",
                 "operationId": "addcatogry",
@@ -6182,18 +6138,10 @@
                 "tags": [
                     "Catogry"
                 ],
-                "summary": "get By categoryId",
-                "description": "show category with a specifc id",
-                "operationId": "getBycategoryId",
+                "summary": "show all catogries on the user profile",
+                "description": "show all  catogry Here",
+                "operationId": "showallcatogre",
                 "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "name": "x-authorization",
                         "in": "header",
@@ -6211,18 +6159,6 @@
                         }
                     }
                 ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "",
@@ -6230,18 +6166,15 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "categoryById": {
+                                        "Maincatogre": {
                                             "type": "integer",
-                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
+                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
                                         }
                                     },
                                     "type": "object"
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -6469,6 +6402,75 @@
                                         "Maincatogre": {
                                             "type": "integer",
                                             "example": "{'id': 2, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/{Id}": {
+            "get": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "get By categoryId",
+                "description": "show category with a specifc id",
+                "operationId": "getBycategoryId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "categoryById": {
+                                            "type": "integer",
+                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
                                         }
                                     },
                                     "type": "object"
@@ -7045,7 +7047,7 @@
             }
         },
         "/api/v1_0/categories/getCategoryProfile": {
-            "post": {
+            "get": {
                 "tags": [
                     "Catogry"
                 ],
