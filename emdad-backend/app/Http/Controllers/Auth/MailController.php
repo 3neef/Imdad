@@ -7,6 +7,7 @@ use App\Mail\ForgetPassword;
 use App\Mail\SignupEmail;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 
@@ -21,13 +22,15 @@ class MailController extends Controller
         Mail::to($email)->send(new SignupEmail($data));
     }
     
-    public static function forgetPasswordEmail($name, $email, $otp, $lang){
+    public static function forgetPasswordEmail($name, $email, $otp,$lang="en"){
+        $token = DB::table('password_resets')->select('token')->where('email', $email)->first();
         $data = [
             'name' => $name,
             'email' => $email,
-            'lang' => $lang,
-            'link'=> "http://172.21.1.116:8080/reset-password?token=".PasswordReset::where("email",$email)->first()->token
+            'link'=> "http://172.21.1.116:8080/reset-password?email=".$email."&token=".$token->token
         ];
+        // dd($data);
+
         Mail::to($email)->send(new ForgetPassword($data));
     }
 }

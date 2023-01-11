@@ -356,13 +356,14 @@ class AuthenticationServices
         $status = Password::sendResetLink(
             $request->only('email')
         );
-
+        $user=User::where("email",$request->email)->first();
+        MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp,"ar");
         if ($status) {
             return response()->json([
                 "statusCode" => "000",
 
                 "success" => true,
-                'message' => ' Rest Link has been sended to your email id ',
+                'message' => ' Rest Link has been sended to your email address ',
                 "email" => $request->email,
             ], 200);
         }

@@ -28,6 +28,7 @@ class ForgetPassword extends Mailable implements ShouldQueue
      */
     public function build()
 
+    
     {
         return $this->from(env('MAIL_USERNAME'), 'Emdad Platform')
                     ->subject('Forget Password')

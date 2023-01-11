@@ -6159,6 +6159,30 @@
                         }
                     }
                 ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "perPage",
+                                    "onlyRequested"
+                                ],
+                                "properties": {
+                                    "perPage": {
+                                        "type": "string"
+                                    },
+                                    "onlyRequested": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "",
