@@ -12,7 +12,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes , LogsActivity;
     protected $table = "products";
-    protected $fillable = ['name', 'measruing_unit', 'category_id', 'price','image'];public function getActivitylogOptions(): LogOptions
+    protected $fillable = ['name_en','name_ar','description_en','description_ar', 'measruing_unit', 'category_id', 'price','image'];
+    public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
             ->logAll()
