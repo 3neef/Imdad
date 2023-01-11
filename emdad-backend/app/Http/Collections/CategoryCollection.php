@@ -12,9 +12,11 @@ class CategoryCollection
 {
     public static function collection($request)
     {
+    
 
         $defaultSort = '-created_at';
 
+        $value = ["profile_id" => auth()->user()->profile_id, "onlyRequested" => isset($request->onlyRequested) ? true : false];
 
         $allowedFilters = [
             'name_en',
@@ -24,7 +26,7 @@ class CategoryCollection
             'status',
             'profile_id',
             'reason',
-            AllowedFilter::custom('default', new DefaultCategoryFilter)->default(auth()->user()),
+            AllowedFilter::custom('default', new DefaultCategoryFilter)->default($value),
         ];
 
         $allowedSorts = [
