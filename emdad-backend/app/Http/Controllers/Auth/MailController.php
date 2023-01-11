@@ -27,6 +27,7 @@ class MailController extends Controller
         $data = [
             'name' => $name,
             'email' => $email,
+            'lang' => $lang,
             'link'=> "http://172.21.1.116:8080/reset-password?email=".$email."&token=".$token->token
         ];
         // dd($data);
