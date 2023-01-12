@@ -29,7 +29,7 @@ class ProductService
                 'category_id' => $request->categoryId,
                 'name_en' => $request->nameEn,
                 'name_ar' => $request->nameAr,
-                'price' => $request->price,
+                'price' => $request->price??null,
                 'measruing_unit' => $request->measruingUnit,
                 'description_en' => $request->descriptionEn,
                 'description_ar' => $request->descriptionAr,

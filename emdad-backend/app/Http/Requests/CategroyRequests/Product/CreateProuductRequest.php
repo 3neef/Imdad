@@ -29,7 +29,7 @@ class CreateProuductRequest extends FormRequest
             'categoryId' => 'required|integer|exists:categories,id,isleaf,1',
             'nameEn'=>'required|string|unique:products,name_en',
             'nameAr'=>'required|string|unique:products,name_ar',
-            'price'=>'required|between:0,99.99',
+            'price'=>'nullable|between:0,99.99',
             'attachementFile'=>'nullable',
             'measruingUnit'=> ['string','required'],
             'descriptionEn'=>['required','string'],
