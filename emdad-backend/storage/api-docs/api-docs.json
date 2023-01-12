@@ -533,17 +533,17 @@
                             "schema": {
                                 "required": [
                                     "email",
-                                    "oldPassword",
-                                    "newPassword"
+                                    "password",
+                                    "token"
                                 ],
                                 "properties": {
                                     "email": {
                                         "type": "email"
                                     },
-                                    "oldPassword": {
+                                    "password": {
                                         "type": "string"
                                     },
-                                    "newPassword": {
+                                    "token": {
                                         "type": "string"
                                     }
                                 },
@@ -1098,6 +1098,97 @@
                     "301": {
                         "description": "User deleted successfully",
                         "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/auth/check-reset-token": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Check Reset Token",
+                "description": "check reset link validity",
+                "operationId": "checkResetToken",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "sended otp",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "OTP": {
+                                            "type": "integer"
+                                        },
+                                        "otpExpiresAt": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
@@ -3407,83 +3498,6 @@
                 "responses": {
                     "200": {
                         "description": "assign warehouse",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/unassignwarehousetouser/{id}": {
-            "delete": {
-                "tags": [
-                    "warehouse"
-                ],
-                "summary": "unassign warehouse to user",
-                "description": "unassign warehouse to user",
-                "operationId": "unAssignWarehouseToUser",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "warehouseId"
-                                ],
-                                "properties": {
-                                    "warehouseId": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "unassign warehouse",
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
@@ -7128,83 +7142,6 @@
                                         },
                                         "data": {
                                             "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/categories/setedCategoryProfile": {
-            "get": {
-                "tags": [
-                    "Catogry"
-                ],
-                "summary": "Prodile Categories",
-                "description": "Get the setted categories by a certain profile using profile_id",
-                "operationId": "settedCategoryProfile",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "checked sucessfully successfully",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "required": [
-                                        "profile_id"
-                                    ],
-                                    "properties": {
-                                        "profile_id": {
-                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
