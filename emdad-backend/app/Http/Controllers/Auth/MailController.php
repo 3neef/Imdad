@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Password;
 
 class MailController extends Controller
 {
-    public static function sendSignupEmail($name, $email, $otp, $lang=''){
+    public static function sendSignupEmail($name, $email, $otp, $lang = '')
+    {
         $data = [
             'name' => $name,
             'otp' => $otp,
@@ -22,14 +23,15 @@ class MailController extends Controller
         ];
         Mail::to($email)->send(new SignupEmail($data));
     }
-    
-    public static function forgetPasswordEmail($name, $email, $otp,$lang="en"){
+
+    public static function forgetPasswordEmail($name, $email, $otp, $lang = "en")
+    {
         $token = DB::table('password_resets')->select('token')->where('email', $email)->latest()->first();
         $data = [
             'name' => $name,
             'email' => $email,
             'lang' => $lang,
-            'link'=> "http://172.21.1.116:8080/reset-password?email=".$email."&token=".$token->token
+            'link' => "http://172.21.1.116:8080/reset-password?email=" . $email . "&token=" . $token->token
         ];
         // dd($data);
 
