@@ -11,6 +11,7 @@ use App\Http\Services\General\SmsService;
 use App\Models\Accounts\Warehouse;
 use App\Models\UM\RoleUserProfile;
 use App\Models\UserWarehousePivot;
+use DateTime;
 use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
@@ -296,6 +297,16 @@ class AuthenticationServices
 
     public function forgotPassword($request)
     {
+        $token = self::checkToken($request);
+
+        if($token != null){
+            return response()->json([
+                "statusCode" => "109",
+
+                "success" => false,
+                'message' => 'Rest Link has been already sent to your email',
+            ], 200);
+        }
         DB::table('password_resets')->insert([
             'token' => Str::uuid(),
             'email' => $request->email,
@@ -308,7 +319,7 @@ class AuthenticationServices
                 "statusCode" => "000",
 
                 "success" => true,
-                'message' => ' Rest Link has been sended to your email address ',
+                'message' => ' Rest Link has been sent to your email address ',
                 "email" => $request->email,
             ], 200);
         }
@@ -323,12 +334,40 @@ class AuthenticationServices
     // Todo  Need Code Again !
     public function resetPassword($request)
     {
+        $token = self::getResetToken($request);
+        if($token == null){
+            return response()->json([
+                "statusCode" => "107",
+
+                "success" => false,
+               'message' => 'invalid token',
+            ], 200);
+
+        }elseif($token != null && now()>DateTime::createFromFormat('Y-m-d H:i:s',$token->created_at)){
+            DB::table('password_resets')->where([
+                'email' => $token->email,
+                'token' => $token->token
+            ])->delete();
+
+            return response()->json([
+                "statusCode" => "107",
+
+                "success" => false,
+               'message' => 'invalid token',
+            ], 200);
+        }
+        
         $user = User::where('email', $request->email)->first();
 
         $user->update(['password' => $request->password]);
 
         event(new PasswordReset($user));
         if ($user) {
+            DB::table('password_resets')->where([
+                'email' => $token->email,
+                'token' => $token->token
+            ])->delete();
+
             return response()->json([
                 "statusCode" => "000",
 
@@ -408,13 +447,28 @@ class AuthenticationServices
             ];
     }
 
-    public function checkLink($request)
-    {
-        $created_at = DB::table('password_resets')->select('created_at')->where([
+    function getResetToken($request){
+        $token = DB::table('password_resets')->where([
             'email' => $request->email,
             'token' => $request->token
         ])->latest()->first();
-        if ($created_at == null) {
+
+        return $token;
+    }
+
+    function checkToken($request){
+        $token = DB::table('password_resets')->where([
+            'email' => $request->email,
+        ])->latest()->first();
+
+        return $token;
+    }
+
+    public function checkLink($request)
+    {
+        $token = $this->getResetToken($request);
+    
+        if ($token == null) {
             return response()->json([
                 'statusCode' => '108',
 
@@ -424,7 +478,7 @@ class AuthenticationServices
             );
         }
 
-        if (now() < $created_at) {
+        if (now()<DateTime::createFromFormat('Y-m-d H:i:s',$token->created_at)) {
             return response()->json([
                 'statusCode' => '000',
                 'message' => 'token is valid'
