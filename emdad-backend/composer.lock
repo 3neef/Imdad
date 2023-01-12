@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d985c8a1787099555687d1ef0607d230",
+    "content-hash": "ed22bcf9e4d48f2bbf345a5f5f395467",
     "packages": [
         {
             "name": "brick/math",
@@ -3947,27 +3947,27 @@
         },
         {
             "name": "spatie/laravel-medialibrary",
-            "version": "10.2.0",
+            "version": "10.7.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-medialibrary.git",
-                "reference": "06a0e949c9d9c64be208993be0f79a54cd8680cb"
+                "reference": "aae852a989cd40a3bacc4f9822a16b4f6a93ecef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/06a0e949c9d9c64be208993be0f79a54cd8680cb",
-                "reference": "06a0e949c9d9c64be208993be0f79a54cd8680cb",
+                "url": "https://api.github.com/repos/spatie/laravel-medialibrary/zipball/aae852a989cd40a3bacc4f9822a16b4f6a93ecef",
+                "reference": "aae852a989cd40a3bacc4f9822a16b4f6a93ecef",
                 "shasum": ""
             },
             "require": {
                 "ext-exif": "*",
                 "ext-fileinfo": "*",
                 "ext-json": "*",
-                "illuminate/bus": "^9.0",
-                "illuminate/console": "^9.0",
-                "illuminate/database": "^9.0",
-                "illuminate/pipeline": "^9.0",
-                "illuminate/support": "^9.0",
+                "illuminate/bus": "^9.18",
+                "illuminate/console": "^9.18",
+                "illuminate/database": "^9.18",
+                "illuminate/pipeline": "^9.18",
+                "illuminate/support": "^9.18",
                 "intervention/image": "^2.7",
                 "maennchen/zipstream-php": "^2.0",
                 "php": "^8.0",
@@ -3989,7 +3989,7 @@
                 "mockery/mockery": "^1.4",
                 "nunomaduro/larastan": "^2.0",
                 "orchestra/testbench": "7.*",
-                "pestphp/pest": "^1.20",
+                "pestphp/pest": "^1.21",
                 "phpstan/extension-installer": "^1.1",
                 "spatie/laravel-ray": "^1.28",
                 "spatie/pdf-to-image": "^2.1",
@@ -4039,7 +4039,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-medialibrary/issues",
-                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.2.0"
+                "source": "https://github.com/spatie/laravel-medialibrary/tree/10.7.8"
             },
             "funding": [
                 {
@@ -4051,7 +4051,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-17T15:42:26+00:00"
+            "time": "2023-01-05T11:07:58+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
