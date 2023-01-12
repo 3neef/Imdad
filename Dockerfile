@@ -10,6 +10,6 @@ COPY emdad-backend/.env.example2 emdad-backend/.env
 RUN rm -rf app && ln -s emdad-backend/ app
 
 COPY ./entrypoint.sh ./
-RUN chmod +x ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh &&  apk add php81-exif
 #ENTRYPOINT ["supervisord", "-c", "/etc/supervisord.conf"]
 ENTRYPOINT ["./entrypoint.sh"]
