@@ -2,16 +2,19 @@
 
 namespace App\Models\Emdad;
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
     
-    use HasFactory, SoftDeletes , LogsActivity;
+    use HasFactory, SoftDeletes , LogsActivity,InteractsWithMedia;
     protected $table = "products";
     protected $fillable = ['created_by','profile_id','name_en','name_ar','description_en','description_ar', 'measruing_unit', 'category_id', 'price','image'];
     public function getActivitylogOptions(): LogOptions
@@ -38,11 +41,19 @@ class Product extends Model
             ->withTimestamps();
     }
 
-    public function productattachment()
+    // public function productattachment()
+    // {
+    //     return $this->belongsToMany(Profile::class, 'products_attachment_pivot', 'product_id', 'image_path')
+    //         ->withPivot('product_id')
+    //         ->withTimestamps();
+    // }
+
+    public function CreatorName()
     {
-        return $this->belongsToMany(Profile::class, 'products_attachment_pivot', 'product_id', 'image_path')
-            ->withPivot('product_id')
-            ->withTimestamps();
+        return User::where('id',$this->created_by)->first();
+        
     }
+
+    
 
 }
