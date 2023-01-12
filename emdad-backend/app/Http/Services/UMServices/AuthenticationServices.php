@@ -301,7 +301,7 @@ class AuthenticationServices
 
         if($token != null){
             return response()->json([
-                "statusCode" => "",
+                "statusCode" => "109",
 
                 "success" => false,
                 'message' => 'Rest Link has been already sent to your email',
