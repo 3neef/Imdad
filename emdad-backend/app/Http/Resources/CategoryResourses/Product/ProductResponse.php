@@ -29,7 +29,7 @@ class ProductResponse extends JsonResource
             'creatorName' => $this->creatorName()->full_name,
             "ProductsImages" => $this->getMedia('products'),
             "CategorySequence" => $this->category->sequence(),
-
+            "createdAt" => $this->created_at->format("y-m-d"),
         ];
     }
 }
