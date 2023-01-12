@@ -12,6 +12,10 @@ class ProductsCollection
     {
 
         $defaultSort = '-created_at';
+        $defaultSelect = [
+            'name_en', 'measruing_unit', 'category_id', 'price', 'profile_id','name_ar','description_en','description_ar'
+        ];
+
         $allowedFilters = [
             'name_ar','name_en', 'measruing_unit', 'category_id', 'price','description_en','description_ar','profile_id',
         ];
@@ -22,15 +26,15 @@ class ProductsCollection
         ];
 
         $allowedIncludes = [
-            'unit_measruing', 'category','getFirstMedia'
+            'unit_measruing', 'category'
         ];
 
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(Product::class)
+             ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
-            ->with('media')
             ->allowedIncludes($allowedIncludes)
             ->defaultSort($defaultSort)
             ->paginate($perPage);

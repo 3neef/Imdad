@@ -7,13 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model implements HasMedia
+class Product extends Model
 {
     
-    use HasFactory, SoftDeletes , LogsActivity,InteractsWithMedia;
+    use HasFactory, SoftDeletes , LogsActivity;
     protected $table = "products";
     protected $fillable = ['created_by','profile_id','name_en','name_ar','description_en','description_ar', 'measruing_unit', 'category_id', 'price','image'];
     public function getActivitylogOptions(): LogOptions
@@ -36,6 +34,13 @@ class Product extends Model implements HasMedia
     public function companyProduct()
     {
         return $this->belongsToMany(Profile::class, 'profile_products_pivots', 'profile_id', 'product_id')
+            ->withPivot('product_id')
+            ->withTimestamps();
+    }
+
+    public function productattachment()
+    {
+        return $this->belongsToMany(Profile::class, 'products_attachment_pivot', 'product_id', 'image_path')
             ->withPivot('product_id')
             ->withTimestamps();
     }
