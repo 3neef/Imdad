@@ -10,7 +10,6 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\AccountServices\PackageConstraint;
 use App\Http\Services\General\SmsService;
-use App\Models\Accounts\Warehouse;
 use App\Models\UM\Permission;
 use App\Models\UM\RoleUserProfile;
 use App\Models\UserWarehousePivot;
@@ -26,7 +25,7 @@ class UserServices
     public function create($request)
     {
         $packageLimit = new PackageConstraint;
-        $value = User::where('profile_id', auth()->user()->profile_id)->count();
+        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin',false)->count();
         $Limit = $packageLimit->packageLimitExceed("user", $value);
         if ($Limit == false) {
             return response()->json([
@@ -42,7 +41,7 @@ class UserServices
             $request['identity_number'] = $request['identityNumber'] ?? "";
             $request['identity_type'] = $request['identityType'] ?? 'nid';
             $request['otp_expires_at'] = now()->addMinutes(5);
-            $request['is_super_admin'] = true;
+            $request['is_super_admin'] = false;
 
             $user = User::create($request);
             $this->UserOtp($user);
