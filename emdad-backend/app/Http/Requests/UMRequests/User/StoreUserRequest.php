@@ -42,7 +42,7 @@ class   StoreUserRequest extends FormRequest
             'isLearning'=>['boolean'],
             'managerUserId'=>'exists:users,id',//
             'warahouseId'=>'exists:warehouses,id',
-            "status" => ['required','string'],
+            "status" => ['required',Rule::in(['active','inActive'])],
 
 
         ];

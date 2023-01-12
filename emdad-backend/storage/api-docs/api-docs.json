@@ -6077,11 +6077,11 @@
         "/api/v1_0/categories": {
             "get": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "add catogry",
+                "summary": "add Category",
                 "description": "add category or a subcategory using parent id if it exists  by the company owner",
-                "operationId": "addcatogry",
+                "operationId": "addCategory",
                 "parameters": [
                     {
                         "name": "x-authorization",
@@ -6150,10 +6150,10 @@
         "/api/v1_0/categories/{id}": {
             "get": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "show all catogries on the user profile",
-                "description": "show all  catogry Here",
+                "description": "show all  Category Here",
                 "operationId": "showallcatogre",
                 "parameters": [
                     {
@@ -6218,11 +6218,11 @@
             },
             "put": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "update Catogry",
-                "description": "update Catogry using id",
-                "operationId": "updateCatogry",
+                "summary": "update Category",
+                "description": "update Category using id",
+                "operationId": "updateCategory",
                 "parameters": [
                     {
                         "name": "id",
@@ -6260,11 +6260,17 @@
                                     "nameAr": {
                                         "type": "string"
                                     },
+                                    "parentId": {
+                                        "type": "integer"
+                                    },
                                     "isleaf": {
                                         "type": "boolean"
                                     },
-                                    "companyId": {
-                                        "type": "integer"
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "reason": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -6315,11 +6321,11 @@
             },
             "delete": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "Delete Catogry",
+                "summary": "Delete Category",
                 "description": "delete Category using Category id",
-                "operationId": "deleteCatogry",
+                "operationId": "deleteCategory",
                 "parameters": [
                     {
                         "name": "id",
@@ -6387,7 +6393,7 @@
         "/api/v1_0/categories/restore/{id}": {
             "get": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "restore category",
                 "description": "restore deleted category",
@@ -6456,7 +6462,7 @@
         "/api/v1_0/categories/{Id}": {
             "get": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "get By categoryId",
                 "description": "show category with a specifc id",
@@ -6525,9 +6531,9 @@
         "/api/v1_0/categories/company-categories": {
             "put": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "Retry Catogry",
+                "summary": "Retry Category",
                 "description": "set company Category",
                 "operationId": "setFivoritecompanyCategory",
                 "parameters": [
@@ -6618,9 +6624,9 @@
         "/api/v1_0/categories/RetryApproval/{id}": {
             "put": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "Retry Catogry",
+                "summary": "Retry Category",
                 "description": "Request Category Approval",
                 "operationId": "RetryApproval",
                 "parameters": [
@@ -6654,14 +6660,14 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "status",
+                                    "categoryId",
                                     "reason"
                                 ],
                                 "properties": {
-                                    "status": {
+                                    "reason": {
                                         "type": "string"
                                     },
-                                    "reason": {
+                                    "categoryId": {
                                         "type": "string"
                                     }
                                 },
@@ -6715,10 +6721,10 @@
         "/api/v1_0/categories/changeCategoryStatus/{id}": {
             "put": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "change  Catogry status",
-                "description": "Request change  Catogry status",
+                "summary": "change  Category status",
+                "description": "Request change  Category status",
                 "operationId": "changeCategoryStatus",
                 "parameters": [
                     {
@@ -6808,7 +6814,7 @@
         "/api/v1_0/categories/approveCategory": {
             "post": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "change  status approve Category",
                 "description": "Request status approve Category",
@@ -6844,10 +6850,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "category_id"
+                                    "categoryId"
                                 ],
                                 "properties": {
-                                    "category_id": {
+                                    "categoryId": {
                                         "type": "integer"
                                     }
                                 },
@@ -6901,7 +6907,7 @@
         "/api/v1_0/categories/rejectCategory": {
             "post": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "change  status rejectCategory Category",
                 "description": "Request status rejectCategory Category",
@@ -6937,10 +6943,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "category_id"
+                                    "categoryId"
                                 ],
                                 "properties": {
-                                    "category_id": {
+                                    "categoryId": {
                                         "type": "integer"
                                     }
                                 },
@@ -6994,7 +7000,7 @@
         "/api/v1_0/categories/serviceOrproduct": {
             "get": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "filter categories",
                 "description": "Check if the category type is prouduct service",
@@ -7087,7 +7093,7 @@
         "/api/v1_0/categories/getCategoryProfile": {
             "get": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "filter categories",
                 "description": "Check if the category type is prouduct service",

@@ -26,7 +26,7 @@ class EmdadApproveCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => ['required','exists:categories,id'],
+            'categoryId' => ['required','exists:categories,id'],
 
         ];
     }
