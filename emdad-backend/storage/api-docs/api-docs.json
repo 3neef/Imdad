@@ -1525,6 +1525,27 @@
                                 "properties": {
                                     "id": {
                                         "type": "integer"
+                                    },
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "swift": {
+                                        "type": "string"
+                                    },
+                                    "iban": {
+                                        "type": "string"
+                                    },
+                                    "subscriptionDetails": {
+                                        "type": "string"
+                                    },
+                                    "vatNumber": {
+                                        "type": "string"
+                                    },
+                                    "active": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -2273,6 +2294,71 @@
                 }
             }
         },
+        "/api/v1_0/drivers/suspend": {
+            "post": {
+                "tags": [
+                    "Delivery"
+                ],
+                "summary": "suspend/activate drivers",
+                "description": "suspend or activate driver Here",
+                "operationId": "suspend-drivers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/drivers/restore/{id}'": {
             "put": {
                 "tags": [
@@ -2609,6 +2695,71 @@
                 }
             }
         },
+        "/api/v1_0/trucks/suspend/{id}": {
+            "put": {
+                "tags": [
+                    "trucks"
+                ],
+                "summary": "suspend/activate trucks",
+                "description": "suspend or activate trucks Here",
+                "operationId": "suspend-trucks",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/trucks/restore/{id}": {
             "put": {
                 "tags": [
@@ -2758,6 +2909,7 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
+                                    "managerId",
                                     "warehouseName",
                                     "warehouseType",
                                     "latitude",
@@ -2787,6 +2939,9 @@
                                     },
                                     "receiverPhone": {
                                         "type": "string"
+                                    },
+                                    "managerId": {
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -3114,7 +3269,7 @@
                 }
             }
         },
-        "/api/v1_0/warehouses/verfied'": {
+        "/api/v1_0/warehouses/verfied": {
             "put": {
                 "tags": [
                     "warehouse"
@@ -3171,6 +3326,164 @@
                 "responses": {
                     "200": {
                         "description": "verfied warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/assignwarehousetouser": {
+            "post": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "assign warehouse to user",
+                "description": "assign warehouse to user",
+                "operationId": "assignwarehousetouser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "userId",
+                                    "warehouseId"
+                                ],
+                                "properties": {
+                                    "warehouseId": {
+                                        "type": "integer"
+                                    },
+                                    "userId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "assign warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/unassignwarehousetouser/{id}": {
+            "delete": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "unassign warehouse to user",
+                "description": "unassign warehouse to user",
+                "operationId": "unAssignWarehouseToUser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "warehouseId"
+                                ],
+                                "properties": {
+                                    "warehouseId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "unassign warehouse",
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
@@ -4094,6 +4407,176 @@
                                     },
                                     "type": "object"
                                 }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/permissions/addPermissionToRole": {
+            "post": {
+                "tags": [
+                    "Roles and Permissions"
+                ],
+                "summary": "Add new permisssion",
+                "description": "Add a new permission to the permissions list within a role",
+                "operationId": "AddPermissionToPermissions",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "userId",
+                                    "roleId",
+                                    "label"
+                                ],
+                                "properties": {
+                                    "userId": {
+                                        "type": "string"
+                                    },
+                                    "roleId": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created  new permission",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/permissions/RemovePermission": {
+            "delete": {
+                "tags": [
+                    "Roles and Permissions"
+                ],
+                "summary": "Delete permisssion from list",
+                "description": "Delete a permission label from the permissions list within a role",
+                "operationId": "DeletePermissionFromPermissions",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "userId",
+                                    "roleId",
+                                    "label"
+                                ],
+                                "properties": {
+                                    "userId": {
+                                        "type": "string"
+                                    },
+                                    "roleId": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Permission Deleted",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     },
@@ -5582,50 +6065,6 @@
                 "tags": [
                     "Catogry"
                 ],
-                "summary": "show all catogries on the user profile",
-                "description": "show all  catogry Here",
-                "operationId": "showallcatogre",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "Maincatogre": {
-                                            "type": "integer",
-                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "Catogry"
-                ],
                 "summary": "add catogry",
                 "description": "add category or a subcategory using parent id if it exists  by the company owner",
                 "operationId": "addcatogry",
@@ -5654,7 +6093,7 @@
                                 "required": [
                                     "nameEn",
                                     "nameAr",
-                                    "companyId"
+                                    "note"
                                 ],
                                 "properties": {
                                     "nameEn": {
@@ -5663,17 +6102,17 @@
                                     "nameAr": {
                                         "type": "string"
                                     },
+                                    "parentId": {
+                                        "type": "integer"
+                                    },
                                     "isleaf": {
                                         "type": "boolean"
                                     },
-                                    "companyId": {
-                                        "type": "integer"
+                                    "note": {
+                                        "type": "string"
                                     },
                                     "type": {
                                         "type": "string"
-                                    },
-                                    "parentId": {
-                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -5699,18 +6138,10 @@
                 "tags": [
                     "Catogry"
                 ],
-                "summary": "get By categoryId",
-                "description": "show category with a specifc id",
-                "operationId": "getBycategoryId",
+                "summary": "show all catogries on the user profile",
+                "description": "show all  catogry Here",
+                "operationId": "showallcatogre",
                 "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
                     {
                         "name": "x-authorization",
                         "in": "header",
@@ -5732,6 +6163,18 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
+                                "required": [
+                                    "perPage",
+                                    "onlyRequested"
+                                ],
+                                "properties": {
+                                    "perPage": {
+                                        "type": "string"
+                                    },
+                                    "onlyRequested": {
+                                        "type": "boolean"
+                                    }
+                                },
                                 "type": "object"
                             }
                         },
@@ -5747,18 +6190,15 @@
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "categoryById": {
+                                        "Maincatogre": {
                                             "type": "integer",
-                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
+                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
                                         }
                                     },
                                     "type": "object"
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -5986,6 +6426,75 @@
                                         "Maincatogre": {
                                             "type": "integer",
                                             "example": "{'id': 2, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/{Id}": {
+            "get": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "get By categoryId",
+                "description": "show category with a specifc id",
+                "operationId": "getBycategoryId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "categoryById": {
+                                            "type": "integer",
+                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
                                         }
                                     },
                                     "type": "object"
@@ -6562,7 +7071,7 @@
             }
         },
         "/api/v1_0/categories/getCategoryProfile": {
-            "post": {
+            "get": {
                 "tags": [
                     "Catogry"
                 ],
@@ -6619,6 +7128,83 @@
                                         },
                                         "data": {
                                             "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/setedCategoryProfile": {
+            "get": {
+                "tags": [
+                    "Catogry"
+                ],
+                "summary": "Prodile Categories",
+                "description": "Get the setted categories by a certain profile using profile_id",
+                "operationId": "settedCategoryProfile",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "checked sucessfully successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "required": [
+                                        "profile_id"
+                                    ],
+                                    "properties": {
+                                        "profile_id": {
+                                            "type": "string"
                                         }
                                     },
                                     "type": "object"
@@ -7035,7 +7621,7 @@
                     "Product"
                 ],
                 "summary": "set company product",
-                "description": "company product Here",
+                "description": "Set Product or products list to a company profile",
                 "operationId": "companyproduct",
                 "parameters": [
                     {

@@ -8,6 +8,7 @@ use App\Http\Controllers\UMController\PermissionsController;
 use App\Http\Controllers\UMController\RoleController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UsersProfilesController;
+use App\Models\UM\Permission;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -20,6 +21,7 @@ Route::middleware(['auth.apikey'])->prefix('auth')->group(function () {
     Route::delete('remove-user/{id}', [AuthController::class, 'removeUser']);
     Route::post('resend-otp', [AuthController::class, 'resendOTP']);
     Route::post("forgot-password", [AuthController::class, 'forgotPassword']);
+    Route::post("check-reset-token", [AuthController::class, 'checkLink']);
     Route::post('logout', [AuthController::class, 'logoutUser'])->middleware('auth:sanctum');
     Route::post("reset-password", [AuthController::class, 'resetPassword'])->name('password.reset');
 });
@@ -39,7 +41,6 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
     Route::delete('destroy/{id}', [UserController::class, 'delete']);
     Route::put("restore/{id}", [UserController::class, 'restoreUser']);
     Route::delete('detachWarehouse', [UserController::class, 'detachWarehouse']);
-    Route::delete('detachWarehouse', [UserController::class, 'detachWarehouse']);
     Route::put("userWarehouseStatus", [UserController::class, 'userWarehouseStatus']);
 });
 
@@ -47,6 +48,9 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
 Route::put('users/update-owner-user/{id}', [UserController::class, 'UpdateOwnerUser'])->middleware(['auth.apikey']);
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    Route::Post('permissions/addPermissionToRole' , [PermissionsController::class,'PermissionToRole']);
+    Route::delete('permissions/RemovePermission',[PermissionsController::class,'DeletePermissionOnRole']);
+
     Route::apiResource('permissions', PermissionsController::class);
     Route::put('permissions/restore/{permissionId}', [PermissionsController::class, 'restoreById']);
 });

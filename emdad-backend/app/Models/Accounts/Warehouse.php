@@ -3,6 +3,7 @@
 namespace App\Models\Accounts;
 
 use App\Models\User;
+use App\Models\UserWarehousePivot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -27,7 +28,9 @@ class Warehouse extends Model
         'otp_expires_at',
         'otp_verfied',
         'confirm_by',
-        'created_by'
+        'created_by',
+        'status',
+        'manager_id'
     ];
 
     public function getActivitylogOptions(): LogOptions
@@ -36,8 +39,24 @@ class Warehouse extends Model
             ->logAll()
             ->logOnlyDirty();
     }
+    // public function users()
+    // {
+    //     return $this->belongsToMany(User::class,'user_warehouse_pivots')->withPivot('user_id')->withTimestamps();
+    // }
+    public function manager()
+    {
+         return User::where('id',$this->manager_id)->first();
+    }
+
     public function users()
     {
-        return $this->belongsToMany(User::class,'user_warehouse_pivots')->withPivot('user_id')->withTimestamps();
+         return UserWarehousePivot::where('warehouse_id',$this->id)->with('user')->get();
+    }
+
+    
+    public function creatorName()
+    {
+        return User::where('id',$this->created_by)->first();
+        
     }
 }

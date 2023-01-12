@@ -7,12 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes , LogsActivity;
+    
+    use HasFactory, SoftDeletes , LogsActivity,InteractsWithMedia;
     protected $table = "products";
-    protected $fillable = ['name', 'measruing_unit', 'category_id', 'price','image'];public function getActivitylogOptions(): LogOptions
+    protected $fillable = ['created_by','profile_id','name_en','name_ar','description_en','description_ar', 'measruing_unit', 'category_id', 'price','image'];
+    public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
             ->logAll()
@@ -26,7 +30,7 @@ class Product extends Model
 
     public function unit_measruing()
     {
-        return $this->hasMany(unit_measruing::class);
+        return $this->belongsTo(unit_measruing::class,'measruing_unit');
     }
 
     public function companyProduct()

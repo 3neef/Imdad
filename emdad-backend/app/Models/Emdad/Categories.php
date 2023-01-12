@@ -3,6 +3,7 @@
 namespace App\Models\Emdad;
 
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,7 +15,7 @@ class Categories extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity;
 
-    protected $fillable = ['name_en', 'name_ar', 'status', 'parent_id', 'isleaf', 'profile_id', 'reason', 'type'];
+    protected $fillable = ['name_en', 'name_ar', 'status', 'parent_id', 'isleaf', 'profile_id', 'created_by', 'reason', 'type'];
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -27,6 +28,23 @@ class Categories extends Model
         return $this->hasMany(Prodcuts::class);
     }
 
+    public function sequence()
+    {
+        $current = $this;
+        $lang = auth()->user()->lang;
+        $sequence = "";
+        while ($current != null && $current->parent_id != 0) {
+            $current = Categories::where("id", $current->parent_id)->first();
+            if ($lang == "en" || $lang == null) {
+                $sequence = $current->name_en . "/" . $sequence;
+            } else {
+                $sequence = $current->name_ar . "/" . $sequence;
+            }
+        }
+
+        return $sequence;
+    }
+
     public function companyCategory()
     {
         return $this->belongsToMany(Profile::class, 'profile_category_pivots', 'profile_id', 'category_id')
@@ -35,21 +53,10 @@ class Categories extends Model
     }
 
 
-    public function getCreatedByAttribute()
+    public function CreatorName()
     {
-    $createdById = DB::table('profile_category_pivots')->where('profile_id', auth()->user()->profile_id ?? null)->pluck('created_by');
-        $createdByIdName = $this->createdByName($createdById);
+        return User::where('id',$this->created_by)->first();
+        
+    }
 
-        return ["mangerID" => $createdById, "mangerName" => $createdByIdName];
-    }
-    public function createdByName($createdById)
-    {
-        if (count($createdById) > 1) {
-            foreach ($createdById as $createdBy) {
-                return DB::table('users')->where('id', $createdBy)->pluck('full_name');
-            }
-        } else {
-            return DB::table('users')->where('id', $createdById)->pluck('full_name');
-        }
-    }
 }

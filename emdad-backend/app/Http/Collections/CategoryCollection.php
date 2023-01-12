@@ -3,23 +3,30 @@
 
 namespace App\Http\Collections;
 
+use App\Http\CustomFliters\DefaultCategoryFilter;
 use App\Models\Emdad\Categories;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CategoryCollection
 {
     public static function collection($request)
     {
+    
 
         $defaultSort = '-created_at';
 
-        $defaultSelect = [
-            'name_en', 'name_ar','parent_id','isleaf','type','status','profile_id','reason','id'
-        ];
-
+        $value = ["profile_id" => auth()->user()->profile_id, "onlyRequested" => isset($request->onlyRequested) ? true : false];
 
         $allowedFilters = [
-            'name_en', 'name_ar','parent_id','isleaf','type','status','profile_id','reason'
+            'name_en',
+            'name_ar',
+            'parent_id',
+            'isleaf', 'type',
+            'status',
+            'profile_id',
+            'reason',
+            AllowedFilter::custom('default', new DefaultCategoryFilter)->default($value),
         ];
 
         $allowedSorts = [
@@ -34,7 +41,6 @@ class CategoryCollection
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(Categories::class)
-            ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->allowedIncludes($allowedIncludes)

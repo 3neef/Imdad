@@ -3,6 +3,7 @@
 namespace App\Http\Services\CategoryServices;
 
 use App\Http\Collections\CategoryCollection;
+use App\Http\Resources\CategoryPivotResource;
 use App\Http\Resources\CategoryResourses\category\CategoryResource;
 use App\Models\Emdad\Categories;
 use App\Models\ProfileCategoryPivot;
@@ -16,7 +17,7 @@ class CategoryService
 
     public function index($request)
     {
-        return CategoryCollection::collection($request);
+        return CategoryResource::collection(CategoryCollection::collection($request));
     }
 
 
@@ -30,9 +31,10 @@ class CategoryService
                 'parent_id' => $request->parentId ?? 0,
                 "reason" => $request->note,
                 'type' => $request->type ?? 'products',
+                'created_by' => auth()->id()
             ]);
             if ($category) {
-                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id,'created_by'=>auth()->id()]);
+                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
             }
             if (auth()->user()->profile_id) {
                 $category->update(['profile_id' => auth()->user()->profile_id]);
@@ -64,9 +66,6 @@ class CategoryService
         }
         return response()->json(['error' => 'No data Founded'], 404);
     }
-
-
-
 
 
 
@@ -115,27 +114,26 @@ class CategoryService
         $category = Categories::first();
         if (isset($request['categoryList'])) {
             foreach ($request['categoryList'] as $category_id) {
-      
                 try {
-                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id,'created_by'=>auth()->id()]);
+                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
                 } catch (Exception $e) {
                 }
             }
         } else {
-            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id,'created_by'=>auth()->id()]);
+            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id]);
         }
         return response()->json(['message' => 'created successfully'], 200);
     }
 
     public function RetryApproval($request)
     {
-        $category = ProfileCategoryPivot::where('category_id', $request->categoryId)->where('profile_id', auth()->user()->profile_id)->first();
-
+        $category = Categories::where('id', $request->categoryId)->where('profile_id', auth()->user()->profile_id)->first();
         if ($category->status == "rejected") {
             $category->update([
                 "status" => "pending",
                 "reason" => $request->reason ?? $category->reason,
             ]);
+
             return response()->json(['message' => 'Approval  Requset sent successfully'], 200);
         }
         return response()->json(['message' => 'Requset  not sent '], 403);
@@ -144,7 +142,7 @@ class CategoryService
     public function changeCategoryStatus($request)
     {
 
-        $category = ProfileCategoryPivot::where('id', $request->category_id)->first();
+        $category = ProfileCategoryPivot::where('category_id', $request->categoryId)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'No categories founded'
@@ -200,16 +198,21 @@ class CategoryService
 
     public function getCategoryProfile($request)
     {
-       
-        if (auth()->user()->profile_id == null) {
-            return response()->json(["error" => "", "code" => "100", "message" => "category does not have profile"], 200);
-        } else {
-            
-            $categories = DB::table('categories')->select('*')
-                ->join('profile_category_pivots', 'profile_category_pivots.category_id', '=', 'categories.id')->where('profile_category_pivots.profile_id', auth()->user()->profile_id)
-                ->join('users', 'profile_category_pivots.created_by', '=', 'users.id')->where('users.profile_id', auth()->user()->profile_id)->get();
-            return response()->json(["success" => true, "code" => "200", "data" => $categories], 200);
-        }
+
+        return CategoryResource::collection(CategoryCollection::collection($request));
+
     }
-    
+
+
+    // public function setedCategoryProfile()
+    // {
+
+    //     if (auth()->user()->profile_id == null) {
+    //         return response()->json(["error" => "", "code" => "100", "message" => "category does not have profile"], 200);
+    //     } else {
+    //         $categories = ProfileCategoryPivot::where("profile_id", auth()->user()->profile_id)->get();
+    //         return response()->json(["success" => true, "code" => "200", "data" =>  CategoryPivotResource::collection($categories)], 200);
+    //     }
+
+    // }
 }

@@ -9,6 +9,8 @@ use App\Http\Requests\CategroyRequests\Product\CreateProuductRequest;
 use App\Http\Requests\CategroyRequests\Product\StatusCompanyProductRequest;
 use App\Http\Requests\CategroyRequests\Product\UpdateProuductRequest;
 use App\Http\Services\CategoryServices\ProductService;
+use App\Models\Emdad\Categories;
+use App\Models\Emdad\Product;
 
 class ProductController extends Controller
 {
@@ -70,6 +72,7 @@ class ProductController extends Controller
         */
     public function store(CreateProuductRequest $request)
     {
+        $this->authorize('create',Product::class);
         return $this->productService->store($request);
     }
 
@@ -334,7 +337,7 @@ class ProductController extends Controller
         * operationId="companyproduct",
         * tags={"Product"},
         * summary="set company product",
-        * description="company product Here",
+        * description="Set Product or products list to a company profile",
 *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",

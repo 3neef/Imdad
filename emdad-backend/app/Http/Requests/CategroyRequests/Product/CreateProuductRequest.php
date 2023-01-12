@@ -27,15 +27,19 @@ class CreateProuductRequest extends FormRequest
     {
         return [
             'categoryId' => 'required|integer|exists:categories,id,isleaf,1',
-            'name'=>'required|string|unique:products,name',
+            'nameEn'=>'required|string|unique:products,name_en',
+            'nameAr'=>'required|string|unique:products,name_ar',
             'price'=>'required|between:0,99.99',
-            'attachementFile'=>'required|image',
-            'measruingUnit'=>'required',
+            'attachementFile'=>'nullable',
+            'measruingUnit'=> ['string','required'],
+            'descriptionEn'=>['required','string'],
+            'descriptionAr'=>['required','string']
+
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException(response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+        throw new HttpResponseException( response()->json(["success" => false, "errors" => $validator->errors(),"statusCode"=>"422"], 200));
     }
 }

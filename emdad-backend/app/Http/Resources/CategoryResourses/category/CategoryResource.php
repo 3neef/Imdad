@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\CategoryResourses\category;
 
+use App\Models\Emdad\Categories;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
@@ -18,13 +19,15 @@ class CategoryResource extends JsonResource
             "id" => $this->id,
             "nameEn" => $this->name_en,
             "nameAr" => $this->name_ar,
-            'aproved' => $this->aproved,
+            'status' => $this->status,
             'parentId' => $this->parent_id,
             'profileId' => $this->profile_id,
             'isleaf' => $this->isleaf,
             'type' => $this->type,
-            'note' =>$this->reason,
-
+            'note' => $this->reason,
+            'createdAt' => $this->created_at->format('Y-m-d'),
+            'CreatorName' => $this->CreatorName()->full_name??'',
+            'sequence' => Categories::where("id", $this->id)->first() != null ? Categories::where("id", $this->id)->first()->sequence() : "debug"
         ];
     }
 }

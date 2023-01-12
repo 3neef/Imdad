@@ -3,7 +3,9 @@
 namespace App\Http\Resources\UMResources\User;
 
 use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
+use App\Models\UM\RoleUserProfile;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class UserResponse extends JsonResource
 {
@@ -25,12 +27,13 @@ class UserResponse extends JsonResource
             "mobile" => $this->mobile,
             "otp" => $this->otp,
             "isSuperAdmin" => $this->is_super_admin,
-            "status" => $this->userStatus() != null ? $this->userStatus()->status : "",
+            "status" => $this->userStatus() != null ? $this->userStatus()->status : "inActive",
             "roleId" => $this->userRole() ?? '',
             "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null,
             "expireDate" => $this->expiry_date,
             "passwordChanged" => $this->password_changed,
-            "MangerInfo" => $this->mangerUserId() ?? '',
+            "mangerInfo" => $this->mangerUserId() ?? '',
+            "allProfiles" => DB::table("role_user_profile")->where("user_id", $this->id)->pluck("profile_id"),
 
         ];
     }

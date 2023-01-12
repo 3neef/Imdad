@@ -112,6 +112,7 @@ class UserServices
             "mobile" => $request->mobile ?? $user->mobile,
             "identity_number" => $request->identityNumber ?? $user->identity_number,
             'expiry_date' => $request['expireDate'] ?? $user->expiry_date,
+            'lang' =>  $request['lang'] ?? $user->lang,
 
         ]);
 
@@ -165,8 +166,7 @@ class UserServices
 
     public function detachWarehouse($request)
     {
-        $user = Warehouse::where("id", $request->warehouseId)->first();
-        $user->users()->detach($request->userId);
+    UserWarehousePivot::where("user_id",$request->userId)->where("warehouse_id",$request->warehouseId)->first()->forceDelete();
         return response()->json([
             "statusCode" => "000",
 
@@ -373,30 +373,7 @@ class UserServices
     }
 
 
-    public function forgotPassword($request)
-    {
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
-        $data = DB::table('password_resets')->select('token')->where('email', $request->email)->first();
-
-        if ($status) {
-            return response()->json([
-                "statusCode" => "000",
-
-                "success" => true,
-                "token" => $data->token,
-                'message' => ' Rest Link has been sended to your email id ',
-                "email" => $request->email,
-            ], 200);
-        }
-        return response()->json([
-            "statusCode" => "999",
-
-            "success" => false,
-            'message' => 'System error ',
-        ], 200);
-    }
+  
 
     // Todo  Need Code Again !
     public function resetPassword($request)
@@ -561,9 +538,9 @@ class UserServices
         // dd($otp);
 
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
-        MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
 
-        $smsService->sendSms($user->mobile, $user->password, 'password');
+        $smsService->sendSms($user->mobile, $user->password, 'password');    
         // return response()->json(['success'=>true,'smsType'=>'password'],201);
 
     }

@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('products_attachments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('file_type_id')->references('id')->on('file_types')->onDelete('cascade');
-            $table->foreignId('product_id')->nullable();
-            $table->string('path');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->enum('lang',['en','ar'])->default('en');
+
         });
     }
 
@@ -29,6 +26,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('products_attachments');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('lang');
+        });
     }
 };

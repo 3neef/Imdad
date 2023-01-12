@@ -13,8 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('profile_category_pivots', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
+            $table->string('name_en');
+            $table->renameColumn('name','name_ar');
+            $table->text('description_en');
+            $table->text('description_ar');
             $table->integer('created_by')->nullable();
+            $table->integer('profile_id')->nullable();
+
         });
     }
 
@@ -25,9 +31,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('profile_category_pivots', function (Blueprint $table) {
-            $table->dropColumn('created_by');
-            
+        Schema::table('products', function (Blueprint $table) {
+            //
         });
     }
 };

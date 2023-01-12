@@ -9,7 +9,6 @@ use App\Http\Requests\UMRequests\DeleteWarehouse;
 use App\Http\Requests\UMRequests\DeleteWarehouseRequest;
 use App\Http\Requests\UMRequests\UpdateUserWarehouseStatusRequest;
 use App\Http\Requests\UMRequests\UpdateUserWharehouseStatus;
-use App\Http\Requests\UMRequests\User\AssignRoleRequest;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
 use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
@@ -24,11 +23,13 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+
     public function index(Request $request)
     {
         return UserCollection::collection($request);
     }
-/**
+    /**
      * @OA\get(
      * path="/api/v1_0/users/get-users",
      * operationId="get-users",
@@ -86,16 +87,16 @@ class UserController extends Controller
     public function getProfileUsers(Request $request)
     {
         // return DB::statement("select * from users");
-        if(auth()->user()->profile_id==null){
-            return response()->json(["error"=>"","code"=>"100","message"=>"user does not have profile"],200);
+        if (auth()->user()->profile_id == null) {
+            return response()->json(["error" => "", "code" => "100", "message" => "user does not have profile"], 200);
         }
         $users =  DB::table('users')->select('*')
-        ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')->where('role_user_profile.profile_id', auth()->user()->profile_id)
-        ->get();
+            ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')->where('role_user_profile.profile_id', auth()->user()->profile_id)
+            ->paginate($request->pageSize ?? 100);
 
 
 
-        return response()->json(["success"=>true,"code"=>"200","data"=>$users],200);
+        return response()->json(["success" => true, "statusCode" => "000", "data" => UserResponse::collection($users)], 200);
     }
 
     /**
@@ -165,6 +166,8 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request, UserServices $userServices)
     {
+        $this->authorize('create', User::class);
+
         return $userServices->create($request->validated());
     }
 
@@ -226,24 +229,10 @@ class UserController extends Controller
      */
     public function getUserInfoByToken(Request $request)
     {
-        ///TODO
-        $user = auth()->user();
-
-        if ($request->has('dataset') && is_array($request->dataset)) {
-            if (
-                in_array(
-                    'default_company',
-                    array_map('strtolower', $request->dataset)
-                )
-            ) {
-            }
-        }
-
-
-        return response()->json(["status" => "success", "data" => new UserResponse($user)], 200);
+        return response()->json(["status" => "success", "data" => new UserResponse(auth()->user())], 200);
     }
 
-/**
+    /**
      * @OA\put(
      * path="/api/v1_0/users/update-owner-user/{id}",
      * operationId="updateOwner",
@@ -306,11 +295,11 @@ class UserController extends Controller
 
 
 
-     public function UpdateOwnerUser(UpdateRequest $request, UserServices $userServices,$id)
-     {
-         // dd(e);
-         return $userServices->update($request,$id);
-     }
+    public function UpdateOwnerUser(UpdateRequest $request, UserServices $userServices, $id)
+    {
+        // dd(e);
+        return $userServices->update($request, $id);
+    }
 
 
     /**
@@ -381,10 +370,11 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function update(UpdateRequest $request, UserServices $userServices,$id)
+    public function update(UpdateRequest $request, UserServices $userServices, $id)
     {
-        // dd(e);
-        return $userServices->update($request,$id);
+        $this->authorize('update', User::class);
+
+        return $userServices->update($request, $id);
     }
 
 
@@ -427,7 +417,8 @@ class UserController extends Controller
      */
     public function restoreUser(RestoreUserByIdRequest  $request, UserServices $userServices)
     {
-        // dd('p');
+        $this->authorize('restore', User::class);
+
         return $userServices->restoreById($request);
     }
 
@@ -489,8 +480,10 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function delete( GetUserRequest $id, UserServices $userServices)
+    public function delete(GetUserRequest $id, UserServices $userServices)
     {
+        $this->authorize('delete', User::class);
+
         return $userServices->delete($id);
     }
 
@@ -550,11 +543,12 @@ class UserController extends Controller
      * )
      */
 
-    public function userActivate(UserAvtivateRerquest $request,UserServices $userServices) {
+    public function userActivate(UserAvtivateRerquest $request, UserServices $userServices)
+    {
         return $userServices->userActivate($request);
     }
 
-     /**
+    /**
      * @OA\Put(
      * path="/api/v1_0/users/disable",
      * operationId=" disable",
@@ -608,7 +602,8 @@ class UserController extends Controller
      * )
      */
 
-    public function disable(UserAvtivateRerquest $request,UserServices $userServices) {
+    public function disable(UserAvtivateRerquest $request, UserServices $userServices)
+    {
         return $userServices->disable($request);
     }
 
@@ -670,10 +665,11 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function setDefaultCompany(DefaultCompanyRequest $request,UserServices $userServices) {
+    public function setDefaultCompany(DefaultCompanyRequest $request, UserServices $userServices)
+    {
         return $userServices->setDefaultCompany($request);
     }
-  /**
+    /**
      * @OA\delete(
      * path="/api/v1_0/users/detachWarehouse",
      * operationId="detachWarehouse",
@@ -732,11 +728,12 @@ class UserController extends Controller
      * )
      */
 
-public function detachWarehouse(DeleteWarehouseRequest $request,UserServices $userServices) {
-    return $userServices->detachWarehouse($request);
-}
+    public function detachWarehouse(DeleteWarehouseRequest $request, UserServices $userServices)
+    {
+        return $userServices->detachWarehouse($request);
+    }
 
-/**
+    /**
      * @OA\put(
      * path="/api/v1_0/users/userWarehouseStatus",
      * operationId="userWarehouseStatus",
@@ -794,8 +791,8 @@ public function detachWarehouse(DeleteWarehouseRequest $request,UserServices $us
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request,UserServices $userServices) {
-    return $userServices->userWarehouseStatus($request);
+    public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request, UserServices $userServices)
+    {
+        return $userServices->userWarehouseStatus($request);
+    }
 }
-}
-

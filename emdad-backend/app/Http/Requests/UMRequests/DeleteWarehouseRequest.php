@@ -24,13 +24,13 @@ class DeleteWarehouseRequest extends FormRequest
    public function rules()
     {
    return [
-    "userId"=>'required|exists:user_warehouse_pivots,user_id',
-    "warehouseId" => 'required|exists:warehouses,id',
+    "userId"=>'required|exists:user_warehouse_pivots,user_id,warehouse_id,'.$this['warehouseId'],
+    "warehouseId"=>'required|exists:user_warehouse_pivots,warehouse_id,user_id,'.$this['userId'],
 ];
 }
 
 protected function failedValidation(Validator $validator): void
 {
-throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors()], 422));
+throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors(),"statusCode"=>"422"], 200));
 }
 }

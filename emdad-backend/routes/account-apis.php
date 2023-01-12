@@ -13,7 +13,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::get('profiles/pay', [SubscriptionPaymentController::class, "pay"]);
     Route::get('profiles/checkPayment', [SubscriptionPaymentController::class, "checkPaymentStatus"]);
 
-    
+    Route::put('profiles', [ProfileController::class, 'update']);
     Route::apiResource('profiles/subscriptionPayment', SubscriptionPaymentController::class);
 
     Route::apiResource('profiles', ProfileController::class);
@@ -23,5 +23,9 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
 Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('warehouses')->group(function () {
     Route::put('verfied/{id}', [WarehousesController::class, 'verfiedLocation']);
     Route::put('restore/{id}', [WarehousesController::class, 'restoreByLocationId']);
+    Route::post('assignwarehousetouser', [WarehousesController::class, 'assignWarehouseToUser']);
+    Route::delete('unassignwarehousetouser/{id}', [WarehousesController::class, 'unAssignWarehouseToUser']);
+
+    
 });
 Route::apiResource('warehouses', WarehousesController::class)->middleware(['auth.apikey', 'auth:sanctum']);
