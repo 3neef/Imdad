@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Password;
 
 class MailController extends Controller
 {
-    public static function sendSignupEmail($name, $email, $otp, $lang){
+    public static function sendSignupEmail($name, $email, $otp, $lang=''){
         $data = [
             'name' => $name,
             'otp' => $otp,

@@ -17,7 +17,6 @@ use App\Models\UserWarehousePivot;
 use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Password;
 
 
 
@@ -44,7 +43,6 @@ class UserServices
             $request['identity_type'] = $request['identityType'] ?? 'nid';
             $request['otp_expires_at'] = now()->addMinutes(5);
             $request['is_super_admin'] = true;
-            $status = $request['status'];
 
             $user = User::create($request);
             $this->UserOtp($user);
@@ -57,7 +55,7 @@ class UserServices
                 $manager_id = auth()->id() ?? null;
             }
             if ($role_id && $manager_id) {
-                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $status, 'manager_user_Id' => $manager_id]);
+                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id]);
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
@@ -67,7 +65,6 @@ class UserServices
             }
             return $user;
         });
-        // dd($user);
         if ($user) {
             return response()->json([
                 "statusCode" => "000",
@@ -134,7 +131,7 @@ class UserServices
 
         if ($request->has("roleId") && $userRoleProfile != null) {
 
-            $userRoleProfile->update(['user_id' => $user->id ?? $userRoleProfile->user_id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => auth()->user()->profile_id, "manger_user_id" => $request['mangerUserId'] ?? $userRoleProfile->manger_user_id]);
+            $userRoleProfile->update(['user_id' => $user->id ?? $userRoleProfile->user_id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => auth()->user()->profile_id, 'status' => $request['status']??$userRoleProfile->status, "manger_user_id" => $request['mangerUserId'] ?? $userRoleProfile->manger_user_id]);
         }
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
@@ -301,9 +298,8 @@ class UserServices
     public function resend($request)
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
-        $data = $this->UserOtp($user);
+             $this->UserOtp($user);
         MailController::sendSignupEmail($user->name, $user->email, $user->otp);
-        // $sendOtp($user->name, $user->mobile, $user->otp);
         return response()->json(
             [
                 "statusCode" => "000",
@@ -530,18 +526,17 @@ class UserServices
     }
 
     protected  function UserOtp($user)
-    // MailController::sOtp($user ,SmsService $smsService)
     {
 
         $smsService = new SmsService;
+
         $otp = rand(1000, 9999);
-        // dd($otp);
 
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
+        
         MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
 
         $smsService->sendSms($user->mobile, $user->password, 'password');    
-        // return response()->json(['success'=>true,'smsType'=>'password'],201);
 
     }
 }
