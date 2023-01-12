@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->double('price')->nullable();
-            $table->string('image')->nullable();
             $table->string('measruing_unit');
             $table->string('name_en');
             $table->string('name_ar');

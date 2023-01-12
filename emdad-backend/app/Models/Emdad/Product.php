@@ -16,7 +16,7 @@ class Product extends Model implements HasMedia
     
     use HasFactory, SoftDeletes , LogsActivity,InteractsWithMedia;
     protected $table = "products";
-    protected $fillable = ['created_by','profile_id','name_en','name_ar','description_en','description_ar', 'measruing_unit', 'category_id', 'price','image'];
+    protected $fillable = ['created_by','profile_id','name_en','name_ar','description_en','description_ar', 'measruing_unit', 'category_id', 'price'];
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
