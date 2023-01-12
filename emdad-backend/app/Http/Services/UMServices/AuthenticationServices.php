@@ -25,9 +25,9 @@ class AuthenticationServices
 
     public function create($request)
     {
-        $packageLimit = new PackageConstraint;
-        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin',true)->count();
-        $Limit = $packageLimit->packageLimitExceed("owner", $value);
+        // $packageLimit = new PackageConstraint;
+        // $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin',true)->count();
+        // $packageLimit->packageLimitExceed("owner", $value);
 
         $user = DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
