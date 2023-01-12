@@ -297,6 +297,16 @@ class AuthenticationServices
 
     public function forgotPassword($request)
     {
+        $token = self::checkToken($request);
+
+        if($token != null){
+            return response()->json([
+                "statusCode" => "",
+
+                "success" => false,
+                'message' => 'Rest Link has been already sent to your email',
+            ], 200);
+        }
         DB::table('password_resets')->insert([
             'token' => Str::uuid(),
             'email' => $request->email,
@@ -309,7 +319,7 @@ class AuthenticationServices
                 "statusCode" => "000",
 
                 "success" => true,
-                'message' => ' Rest Link has been sended to your email address ',
+                'message' => ' Rest Link has been sent to your email address ',
                 "email" => $request->email,
             ], 200);
         }
@@ -325,7 +335,20 @@ class AuthenticationServices
     public function resetPassword($request)
     {
         $token = self::getResetToken($request);
-        if($token ==null || now()>DateTime::createFromFormat('Y-m-d H:i:s',$token->created_at) ){
+        if($token == null){
+            return response()->json([
+                "statusCode" => "107",
+
+                "success" => false,
+               'message' => 'invalid token',
+            ], 200);
+
+        }elseif($token != null && now()>DateTime::createFromFormat('Y-m-d H:i:s',$token->created_at)){
+            DB::table('password_resets')->where([
+                'email' => $token->email,
+                'token' => $token->token
+            ])->delete();
+
             return response()->json([
                 "statusCode" => "107",
 
@@ -340,6 +363,11 @@ class AuthenticationServices
 
         event(new PasswordReset($user));
         if ($user) {
+            DB::table('password_resets')->where([
+                'email' => $token->email,
+                'token' => $token->token
+            ])->delete();
+
             return response()->json([
                 "statusCode" => "000",
 
@@ -420,9 +448,17 @@ class AuthenticationServices
     }
 
     function getResetToken($request){
-        $token = DB::table('password_resets')->select('created_at')->where([
+        $token = DB::table('password_resets')->where([
             'email' => $request->email,
             'token' => $request->token
+        ])->latest()->first();
+
+        return $token;
+    }
+
+    function checkToken($request){
+        $token = DB::table('password_resets')->where([
+            'email' => $request->email,
         ])->latest()->first();
 
         return $token;
