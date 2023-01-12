@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\MailController;
 use App\Models\User;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
+use App\Http\Services\AccountServices\PackageConstraint;
 use App\Http\Services\General\SmsService;
 use App\Models\Accounts\Warehouse;
 use App\Models\UM\RoleUserProfile;
@@ -24,6 +25,9 @@ class AuthenticationServices
 
     public function create($request)
     {
+        $packageLimit = new PackageConstraint;
+        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin',true)->count();
+        $Limit = $packageLimit->packageLimitExceed("owner", $value);
 
         $user = DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
