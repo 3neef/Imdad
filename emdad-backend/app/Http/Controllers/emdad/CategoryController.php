@@ -26,9 +26,9 @@ class CategoryController extends Controller
     /**
      * @OA\get(
      * path="/api/v1_0/categories",
-     * operationId="addcatogry",
-     * tags={"Catogry"},
-     * summary="add catogry",
+     * operationId="addCategory",
+     * tags={"Category"},
+     * summary="add Category",
      * description="add category or a subcategory using parent id if it exists  by the company owner",
      *     @OA\Parameter(
      *         name="x-authorization",
@@ -81,9 +81,9 @@ class CategoryController extends Controller
      * @OA\get(
      *    path="/api/v1_0/categories/{id}",
      *    operationId="showallcatogre",
-     *    tags={"Catogry"},
+     *    tags={"Category"},
      *    summary="show all catogries on the user profile",
-     *    description="show all  catogry Here",
+     *    description="show all  Category Here",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -129,9 +129,9 @@ class CategoryController extends Controller
     /**
      * @OA\delete(
      * path="/api/v1_0/categories/{id}",
-     * operationId="deleteCatogry",
-     * tags={"Catogry"},
-     * summary="Delete Catogry",
+     * operationId="deleteCategory",
+     * tags={"Category"},
+     * summary="Delete Category",
      * description="delete Category using Category id",
      *     @OA\Parameter(
      *         name="id",
@@ -188,10 +188,10 @@ class CategoryController extends Controller
     /**
      * @OA\put(
      * path="/api/v1_0/categories/{id}",
-     * operationId="updateCatogry",
-     * tags={"Catogry"},
-     * summary="update Catogry",
-     * description="update Catogry using id",
+     * operationId="updateCategory",
+     * tags={"Category"},
+     * summary="update Category",
+     * description="update Category using id",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -224,8 +224,10 @@ class CategoryController extends Controller
      *               type="object",
      *               @OA\Property(property="nameEn", type="string"),
      *               @OA\Property(property="nameAr", type="string"),
+     *               @OA\Property(property="parentId", type="integer"),
      *               @OA\Property(property="isleaf", type="boolean"),
-     *               @OA\Property(property="companyId", type="integer")
+     *               @OA\Property(property="status", type="string"),
+     *               @OA\Property(property="reason", type="string"),
      *            ),
      *        ),
      *    ),
@@ -263,7 +265,7 @@ class CategoryController extends Controller
      * @OA\get(
      * path="/api/v1_0/categories/restore/{id}",
      * operationId="restoreCategory",
-     * tags={"Catogry"},
+     * tags={"Category"},
      * summary="restore category",
      * description="restore deleted category",
      *     @OA\Parameter(
@@ -318,7 +320,7 @@ class CategoryController extends Controller
      * @OA\get(
      * path="/api/v1_0/categories/{Id}",
      * operationId="getBycategoryId",
-     * tags={"Catogry"},
+     * tags={"Category"},
      * summary="get By categoryId",
      * description="show category with a specifc id",
      *     @OA\Parameter(
@@ -377,8 +379,8 @@ class CategoryController extends Controller
      * @OA\put(
      * path="/api/v1_0/categories/company-categories",
      * operationId="setFivoritecompanyCategory",
-     * tags={"Catogry"},
-     * summary="Retry Catogry",
+     * tags={"Category"},
+     * summary="Retry Category",
      * description="set company Category",
      *     @OA\Parameter(
      *         name="id",
@@ -448,8 +450,8 @@ class CategoryController extends Controller
      * @OA\put(
      * path="/api/v1_0/categories/RetryApproval/{id}",
      * operationId="RetryApproval",
-     * tags={"Catogry"},
-     * summary="Retry Catogry",
+     * tags={"Category"},
+     * summary="Retry Category",
      * description="Request Category Approval",
      *     @OA\Parameter(
      *         name="id",
@@ -481,10 +483,9 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"status" ,"reason"},
-     *               @OA\Property(property="status", type="string"),
+     *               required={"categoryId" ,"reason"},
      *               @OA\Property(property="reason", type="string"),
-
+     *               @OA\Property(property="categoryId", type="string"),
      *            ),
      *        ),
      *    ),
@@ -520,9 +521,9 @@ class CategoryController extends Controller
      * @OA\put(
      * path="/api/v1_0/categories/changeCategoryStatus/{id}",
      * operationId="changeCategoryStatus",
-     * tags={"Catogry"},
-     * summary="change  Catogry status",
-     * description="Request change  Catogry status",
+     * tags={"Category"},
+     * summary="change  Category status",
+     * description="Request change  Category status",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -589,7 +590,7 @@ class CategoryController extends Controller
      * @OA\post(
      * path="/api/v1_0/categories/approveCategory",
      * operationId="approveCategory",
-     * tags={"Catogry"},
+     * tags={"Category"},
      * summary="change  status approve Category",
      * description="Request status approve Category",
      *     @OA\Parameter(
@@ -622,8 +623,8 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"category_id"},
-     *               @OA\Property(property="category_id", type="integer"),
+     *               required={"categoryId"},
+     *               @OA\Property(property="categoryId", type="integer"),
      *            ),
      *        ),
      *    ),
@@ -658,7 +659,7 @@ class CategoryController extends Controller
      * @OA\post(
      * path="/api/v1_0/categories/rejectCategory",
      * operationId="rejectCategory",
-     * tags={"Catogry"},
+     * tags={"Category"},
      * summary="change  status rejectCategory Category",
      * description="Request status rejectCategory Category",
      *     @OA\Parameter(
@@ -691,8 +692,8 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"category_id"},
-     *               @OA\Property(property="category_id", type="integer"),
+     *               required={"categoryId"},
+     *               @OA\Property(property="categoryId", type="integer"),
 
      *            ),
      *        ),
@@ -727,7 +728,7 @@ class CategoryController extends Controller
      * @OA\get(
      * path="/api/v1_0/categories/serviceOrproduct",
      * operationId="filterCategory",
-     * tags={"Catogry"},
+     * tags={"Category"},
      * summary="filter categories",
      * description="Check if the category type is prouduct service",
      *     @OA\Parameter(
@@ -796,7 +797,7 @@ class CategoryController extends Controller
      * @OA\Get(
      * path="/api/v1_0/categories/getCategoryProfile",
      * operationId="getCategoryProfile",
-     * tags={"Catogry"},
+     * tags={"Category"},
      * summary="filter categories",
      * description="Check if the category type is prouduct service",
      *     @OA\Parameter(
