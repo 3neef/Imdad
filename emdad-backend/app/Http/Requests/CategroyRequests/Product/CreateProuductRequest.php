@@ -30,7 +30,7 @@ class CreateProuductRequest extends FormRequest
             'nameEn'=>'required|string|unique:products,name_en',
             'nameAr'=>'required|string|unique:products,name_ar',
             'price'=>'nullable|between:0,99.99',
-            'attachementFile'=>'nullable',
+            'attachementFile'=>'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'measruingUnit'=> ['string','required'],
             'descriptionEn'=>['required','string'],
             'descriptionAr'=>['required','string']
