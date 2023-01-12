@@ -10,9 +10,10 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Product extends Model
 {
+    
     use HasFactory, SoftDeletes , LogsActivity;
     protected $table = "products";
-    protected $fillable = ['name_en','name_ar','description_en','description_ar', 'measruing_unit', 'category_id', 'price','image'];
+    protected $fillable = ['created_by','profile_id','name_en','name_ar','description_en','description_ar', 'measruing_unit', 'category_id', 'price','image'];
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -33,6 +34,13 @@ class Product extends Model
     public function companyProduct()
     {
         return $this->belongsToMany(Profile::class, 'profile_products_pivots', 'profile_id', 'product_id')
+            ->withPivot('product_id')
+            ->withTimestamps();
+    }
+
+    public function productattachment()
+    {
+        return $this->belongsToMany(Profile::class, 'products_attachment_pivot', 'product_id', 'image_path')
             ->withPivot('product_id')
             ->withTimestamps();
     }

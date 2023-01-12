@@ -32,8 +32,8 @@ class UpdateProuductRequest extends FormRequest
             'price' => 'integer',
             'measruingUnit' => ['string','required'],
             'attachementFile' => 'image',
-            'descriptionEn'=>['required','string'],
-            'descriptionAr'=>['required','string']
+            'descriptionEn'=>['string'],
+            'descriptionAr'=>['string']
         ];
     }
 

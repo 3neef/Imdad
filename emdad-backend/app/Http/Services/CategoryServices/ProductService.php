@@ -6,9 +6,11 @@ use App\Http\Collections\ProductsCollection;
 use App\Http\Resources\CategoryResourses\Product\ProductResponse;
 use App\Http\Services\AccountServices\UploadServices;
 use App\Models\Emdad\Product;
+use App\Models\Emdad\ProductAttachmentFile;
 use App\Models\ProfileCategoryPivot;
 use App\Models\ProfileProductsPivot;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ProductService
 {
@@ -21,19 +23,25 @@ class ProductService
 
     public function store($request)
     {
-        $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
-        $prodcut = Product::create([
+         $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
+        
+         $product = DB::transaction(function () use ($request) {
+        $product = Product::create([
             'category_id' => $request->categoryId,
             'name_en' => $request->nameEn,
-            'name_Ar' => $request->nameAr,
+            'name_ar' => $request->nameAr,
             'price' => $request->price,
             'measruing_unit' => $request->measruingUnit,
-            'image' => $request->image,
             'description_en' => $request->descriptionEn,
-            'description_ar' => $request->descriptionAr
+            'description_ar' => $request->descriptionAr,
+            'created_by' => auth()->id(),
+            'profile_id' => auth()->user()->profile_id,
         ]);
-        if ($prodcut) {
-            $prodcut->companyProduct()->attach($prodcut->id, ['profile_id' => auth()->user()->profile_id]);
+            $product->productattachment()->attach($product->id, ['image_path'=>$request->image]);
+            return $product;
+        });
+        if ($product) {
+            $product->companyProduct()->attach($product->id, ['profile_id' => auth()->user()->profile_id]);
             return response()->json([
                 "statusCode" => "000",
                 'message' => 'created successfully'
@@ -47,23 +55,23 @@ class ProductService
     public function update($request, $id)
     {
 
-        $prodcut = Product::find($id);
+        $product = Product::find($id);
         if ($request->has('attachementFile')) {
-            $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
+            $product->productattachment()->attach($product->id, ['image_path'=>$request->image]);
+
         }
 
-        $prodcut->update([
-            'category_id' => $request->categoryId ?? $prodcut->category_id,
-            'name_Ar' => $request->nameAr ?? $prodcut->name_Ar,
-            'name_en' => $request->nameEn ?? $prodcut->name_en,
-            "price" => $request->price ?? $prodcut->price,
-            "measruing_unit" => $request->measruing_unit ?? $prodcut->measruing_unit,
-            'image' => $request->image ?? $prodcut->image,
-            'description_en' => $request->descriptionEn??$prodcut->description_en,
-            'description_ar' => $request->descriptionAr??$prodcut->description_ar
+        $product->update([
+            'category_id' => $request->categoryId ?? $product->category_id,
+            'name_ar' => $request->nameAr ?? $product->name_ar,
+            'name_en' => $request->nameEn ?? $product->name_en,
+            "price" => $request->price ?? $product->price,
+            "measruing_unit" => $request->measruing_unit ?? $product->measruing_unit,
+            'description_en' => $request->descriptionEn??$product->description_en,
+            'description_ar' => $request->descriptionAr??$product->description_ar
         ]);
 
-        if ($prodcut) {
+        if ($product) {
             return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
         }
         return response()->json(["statusCode"=>'999',
@@ -72,9 +80,9 @@ class ProductService
 
     public function show($id)
     {
-        $prodcut = Product::where('id', $id)->first();
-        if ($prodcut) {
-            return response()->json(["statusCode"=>'000','data' => new ProductResponse($prodcut)], 200);
+        $product = Product::where('id', $id)->first();
+        if ($product) {
+            return response()->json(["statusCode"=>'000','data' => new ProductResponse($product)], 200);
         }
         return response()->json(["statusCode"=>'111','error' => 'Record Not Founded'], 404);
     }
@@ -82,8 +90,8 @@ class ProductService
 
     public function delete($id)
     {
-        $prodcut = Product::find($id);
-        $deleted = $prodcut->delete();
+        $product = Product::find($id);
+        $deleted = $product->delete();
         if ($deleted) {
             return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
         }
