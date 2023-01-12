@@ -2,6 +2,7 @@
 
 namespace App\Models\Emdad;
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -39,5 +40,20 @@ class Product extends Model implements HasMedia
             ->withPivot('product_id')
             ->withTimestamps();
     }
+
+    // public function productattachment()
+    // {
+    //     return $this->belongsToMany(Profile::class, 'products_attachment_pivot', 'product_id', 'image_path')
+    //         ->withPivot('product_id')
+    //         ->withTimestamps();
+    // }
+
+    public function CreatorName()
+    {
+        return User::where('id',$this->created_by)->first();
+        
+    }
+
+    
 
 }
