@@ -36,10 +36,15 @@ class ProductService
                 'created_by' => auth()->id(),
                 'profile_id' => auth()->user()->profile_id,
             ]);
-            $product->addMultipleMediaFromRequest(['attachementFile'])
+
+            if(isset($request['attachementFile']))
+            {
+                $product->addMultipleMediaFromRequest(['attachementFile'])
                 ->each(function ($fileAdder) {
                     $fileAdder->toMediaCollection('products');
                 });
+            }
+        
             return $product;
         });
         if ($product) {
@@ -63,11 +68,12 @@ class ProductService
 
         // attach the  product to the  meida collection  and update  product 
 
-        
-        $product->addMultipleMediaFromRequest(['attachementFile'])
-            ->each(function ($fileAdder) {
-                $fileAdder->toMediaCollection('products');
-            });
+        if (isset($request['attachementFile'])) {
+            $product->addMultipleMediaFromRequest(['attachementFile'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('products');
+                });
+        }
 
         $product->update([
             'category_id' => $request->categoryId ?? $product->category_id,
