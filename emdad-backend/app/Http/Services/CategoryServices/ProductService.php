@@ -63,6 +63,7 @@ class ProductService
 
         // attach the  product to the  meida collection  and update  product 
 
+        
         $product->addMultipleMediaFromRequest(['attachementFile'])
             ->each(function ($fileAdder) {
                 $fileAdder->toMediaCollection('products');
