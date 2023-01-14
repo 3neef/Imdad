@@ -25,9 +25,16 @@ class AuthenticationServices
 
     public function create($request)
     {
-        // $packageLimit = new PackageConstraint;
-        // $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin',true)->count();
-        // $packageLimit->packageLimitExceed("owner", $value);
+        $packageLimit = new PackageConstraint;
+        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin', true)->count();
+        $Limit = $packageLimit->packageLimitExceed("user", $value);
+        if ($Limit == false) {
+            return response()->json([
+                "statusCode" => "363",
+                'success' => false,
+                'message' => "You have exceeded the allowed number of Admin to create it"
+            ], 200);
+        }
 
         $user = DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
@@ -42,7 +49,7 @@ class AuthenticationServices
             $user = User::create($request);
             $data = $this->UserOtp($user);
             $user->update(['otp' => $data['otp']]);
-        
+
             return $user;
         });
         if ($user) {
@@ -60,7 +67,7 @@ class AuthenticationServices
         ], 200);
     }
 
- 
+
 
 
     public function update($request, $id)
@@ -303,7 +310,7 @@ class AuthenticationServices
     {
         $token = self::checkToken($request);
 
-        if($token != null){
+        if ($token != null) {
             return response()->json([
                 "statusCode" => "109",
 
@@ -314,9 +321,9 @@ class AuthenticationServices
         DB::table('password_resets')->insert([
             'token' => Str::uuid(),
             'email' => $request->email,
-            "created_at"=>now()->addHours(3),
+            "created_at" => now()->addHours(3),
         ]);
-        $user=User::where("email",$request->email)->first();
+        $user = User::where("email", $request->email)->first();
         MailController::forgetPasswordEmail($user->full_name, $user->email, $user->otp, $user->lang);
         if ($user) {
             return response()->json([
@@ -339,15 +346,14 @@ class AuthenticationServices
     public function resetPassword($request)
     {
         $token = self::getResetToken($request);
-        if($token == null){
+        if ($token == null) {
             return response()->json([
                 "statusCode" => "107",
 
                 "success" => false,
-               'message' => 'invalid token',
+                'message' => 'invalid token',
             ], 200);
-
-        }elseif($token != null && now()>DateTime::createFromFormat('Y-m-d H:i:s',$token->created_at)){
+        } elseif ($token != null && now() > DateTime::createFromFormat('Y-m-d H:i:s', $token->created_at)) {
             DB::table('password_resets')->where([
                 'email' => $token->email,
                 'token' => $token->token
@@ -357,10 +363,10 @@ class AuthenticationServices
                 "statusCode" => "107",
 
                 "success" => false,
-               'message' => 'invalid token',
+                'message' => 'invalid token',
             ], 200);
         }
-        
+
         $user = User::where('email', $request->email)->first();
 
         $user->update(['password' => $request->password]);
@@ -386,7 +392,7 @@ class AuthenticationServices
             'message' => 'system Error',
         ], 200);
     }
-    
+
 
 
     public function setDefaultCompany($request)
@@ -409,7 +415,7 @@ class AuthenticationServices
 
 
 
-   
+
 
     public function removeUser($id)
     {
@@ -451,7 +457,8 @@ class AuthenticationServices
             ];
     }
 
-    function getResetToken($request){
+    function getResetToken($request)
+    {
         $token = DB::table('password_resets')->where([
             'email' => $request->email,
             'token' => $request->token
@@ -460,7 +467,8 @@ class AuthenticationServices
         return $token;
     }
 
-    function checkToken($request){
+    function checkToken($request)
+    {
         $token = DB::table('password_resets')->where([
             'email' => $request->email,
         ])->latest()->first();
@@ -471,18 +479,19 @@ class AuthenticationServices
     public function checkLink($request)
     {
         $token = $this->getResetToken($request);
-    
-        if ($token == null) {
-            return response()->json([
-                'statusCode' => '108',
 
-                "error" => "token or email is invalid",
-            ],
+        if ($token == null) {
+            return response()->json(
+                [
+                    'statusCode' => '108',
+
+                    "error" => "token or email is invalid",
+                ],
                 200
             );
         }
 
-        if (now()<DateTime::createFromFormat('Y-m-d H:i:s',$token->created_at)) {
+        if (now() < DateTime::createFromFormat('Y-m-d H:i:s', $token->created_at)) {
             return response()->json([
                 'statusCode' => '000',
                 'message' => 'token is valid'
@@ -495,4 +504,3 @@ class AuthenticationServices
         }
     }
 }
-
