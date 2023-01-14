@@ -10,7 +10,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class WarehouseCollection
 {
-    public static function collection($request)
+public static function collection($request)
     {
 
         $defaultSort = '-created_at';

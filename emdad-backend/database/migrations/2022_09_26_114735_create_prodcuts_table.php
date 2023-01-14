@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            $table->unique(['name_en','name_ar','measruing_unit']);
         });
     }
 

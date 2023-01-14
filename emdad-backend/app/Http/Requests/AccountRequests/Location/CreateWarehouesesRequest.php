@@ -8,7 +8,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Unique;
 
 class CreateWarehouesesRequest extends FormRequest
 {
@@ -37,8 +36,12 @@ class CreateWarehouesesRequest extends FormRequest
             'latitude' => ['required', 'string'],
             'longitude' => ['required', 'string'],
             'gateType' => [ 'string'],
-            'receiverName' => ['required', 'string', 'max:25'],
-            'receiverPhone' => ['required', 'string', 'max:14', 'min:14', 'regex:/^(00966)/'],
+            'receiverName' => Rule::requiredIf(function () {
+                return auth()->user()->currentProfile()->type== 'supplier';
+                }),
+            'receiverPhone' => Rule::requiredIf(function () {
+                return auth()->user()->currentProfile()->type== 'supplier';
+                }),
             'managerId' => ['integer', 'exists:users,id']
         ];
     }

@@ -40,7 +40,7 @@ class UpdateRequest extends FormRequest
             "roleId" => "integer|exists:roles,id",
             'manager_user_Id'=>'integer|exists:users,id',
             'WarahouseId'=>'integer|exists:warehouses,id',
-            'status' => [Rule::in('active','Inctive')],
+            'status' => [Rule::in('active','inActive')],
             'lang'=>  [Rule::in('en','ar')],
         ];
     }
