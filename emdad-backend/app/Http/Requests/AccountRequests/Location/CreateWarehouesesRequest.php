@@ -36,7 +36,7 @@ class CreateWarehouesesRequest extends FormRequest
             'warehouseType' => ['required', 'string'],
             'latitude' => ['required', 'string'],
             'longitude' => ['required', 'string'],
-            'gateType' => [ 'string'],
+            'gateType' => ['string'],
             'receiverName' => ['required', 'string', 'max:25'],
             'receiverPhone' => ['required', 'string', 'max:14', 'min:14', 'regex:/^(00966)/'],
             'managerId' => ['integer', 'exists:users,id']

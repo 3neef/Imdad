@@ -3,7 +3,6 @@
 namespace App\Http\Resources\UMResources\User;
 
 use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
-use App\Models\UM\RoleUserProfile;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +32,7 @@ class UserResponse extends JsonResource
             "expireDate" => $this->expiry_date,
             "passwordChanged" => $this->password_changed,
             "mangerInfo" => $this->mangerUserId() ?? '',
+            "createdAt"=> $this->created_at->format('y-m-d'),
             "allProfiles" => DB::table("role_user_profile")->where("user_id", $this->id)->pluck("profile_id"),
 
         ];
