@@ -12,7 +12,7 @@ class DefaultProfilesFilter implements Filter
     {
         if ($value) {
             if ($value->currentProfile()->type == "Buyer" || $value->currentProfile()->type == "Supplier") {
-                $query->where('profile_id', $value->profile_id);
+                $query->where('id', $value->profile_id);
             }
         }
     }

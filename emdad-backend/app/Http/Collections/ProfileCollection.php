@@ -3,8 +3,10 @@
 
 namespace App\Http\Collections;
 
+use App\Http\CustomFliters\DefaultProfilesFilter;
 use App\Models\Accounts\CompanyInfo;
 use App\Models\Profile;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProfileCollection
@@ -41,6 +43,9 @@ class ProfileCollection
             'updated_at',
             'created_at',
             'created_by',
+            AllowedFilter::custom('default', new DefaultProfilesFilter)->default(auth()->user()),
+
+
 
         ];
 
@@ -57,7 +62,6 @@ class ProfileCollection
         $perPage =  $request->pageSize ?? 100;
 
         return QueryBuilder::for(Profile::class)
-            ->select($defaultSelect)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->allowedIncludes($allowedIncludes)
