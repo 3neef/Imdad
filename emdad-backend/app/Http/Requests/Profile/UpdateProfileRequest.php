@@ -26,7 +26,10 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this);
         return [
+            'logo' =>'image|mimes:jpg,png,jpeg,gif,svg|max:5120',
+
             'nameAr' => ['string','max:100','unique:profiles,name_ar'],
             'nameEn' => ['string','max:100','unique:profiles,name_en'],
             'swift' => ['string','max:25','unique:profiles,swift'],

@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\CategroyRequests\Product;
 
-use App\Rules\IsCompositeUnique;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -28,19 +27,19 @@ class CreateProuductRequest extends FormRequest
     {
         return [
             'categoryId' => 'required|integer|exists:categories,id,isleaf,1',
-            'nameEn' => ['required', 'string', new IsCompositeUnique('products', ['name_ar' => $this->nameAr, 'measruing_unit' => $this->measruingUnit,"name_en"=>$this->nameEn])],
-            'nameAr' => ['required','string',new IsCompositeUnique('products', ['name_en' => $this->nameEn, 'measruing_unit' => $this->measruingUnit,"name_ar"=>$this->nameAr])],
-            'price' => 'nullable|between:0,99.99',
-            'attachementFile' => 'nullable|max:2048',
-            'measruingUnit' => ['string', 'required', new IsCompositeUnique('products', ['name_en' => $this->nameEn, 'name_ar' => $this->nameAr,'measruing_unit' => $this->measruingUnit,])],
-            'descriptionEn' => ['required', 'string'],
-            'descriptionAr' => ['required', 'string']
+            'nameEn'=>'required|string|unique:products,name_en',
+            'nameAr'=>'required|string|unique:products,name_ar',
+            'price'=>'nullable|between:0,99.99',
+            'attachementFile'=>'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:5120',
+            'measruingUnit'=> ['string','required'],
+            'descriptionEn'=>['required','string'],
+            'descriptionAr'=>['required','string']
 
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException(response()->json(["success" => false, "errors" => $validator->errors(), "statusCode" => "422"], 200));
+        throw new HttpResponseException( response()->json(["success" => false, "errors" => $validator->errors(),"statusCode"=>"422"], 200));
     }
 }

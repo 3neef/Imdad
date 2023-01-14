@@ -7,10 +7,12 @@ use App\Models\Emdad\Categories;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Profile extends Model
+class Profile extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes,InteractsWithMedia;
 
     protected $fillable = [
         'created_by',
@@ -25,7 +27,7 @@ class Profile extends Model
         'cr_expire_data',
         'subs_id',
         'subscription_details',
-        'active'
+        'active',
     ];
 
     public function wallet()
@@ -84,5 +86,10 @@ class Profile extends Model
             'profile_department_user'
         )->withPivot('user_id')
             ->withTimestamps();;
+    }
+    public function creatorName()
+    {
+        return User::where('id',$this->created_by)->first();
+        
     }
 }
