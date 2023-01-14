@@ -25,14 +25,14 @@ class UserServices
     public function create($request)
     {
         $packageLimit = new PackageConstraint;
-        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin',false)->count();
+        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin', false)->count();
         $Limit = $packageLimit->packageLimitExceed("user", $value);
 
         if ($Limit == false) {
             return response()->json([
                 "statusCode" => "360",
                 'success' => false,
-                 'message' => "You have exceeded the allowed number of users to create it"
+                'message' => "You have exceeded the allowed number of users to create it"
             ], 200);
         }
 
@@ -131,7 +131,7 @@ class UserServices
 
         if ($request->has("roleId") && $userRoleProfile != null) {
 
-            $userRoleProfile->update(['user_id' => $user->id ?? $userRoleProfile->user_id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => auth()->user()->profile_id, 'status' => $request['status']??$userRoleProfile->status, "manger_user_id" => $request['mangerUserId'] ?? $userRoleProfile->manger_user_id]);
+            $userRoleProfile->update(['user_id' => $user->id ?? $userRoleProfile->user_id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => auth()->user()->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manger_user_id" => $request['mangerUserId'] ?? $userRoleProfile->manger_user_id]);
         }
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
@@ -163,7 +163,7 @@ class UserServices
 
     public function detachWarehouse($request)
     {
-    UserWarehousePivot::where("user_id",$request->userId)->where("warehouse_id",$request->warehouseId)->first()->forceDelete();
+        UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first()->forceDelete();
         return response()->json([
             "statusCode" => "000",
 
@@ -299,7 +299,7 @@ class UserServices
     public function resend($request)
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
-             $this->UserOtp($user);
+        $this->UserOtp($user);
         MailController::sendSignupEmail($user->name, $user->email, $user->otp);
         return response()->json(
             [
@@ -357,8 +357,15 @@ class UserServices
     public function restoreById($request)
     {
         $packageLimit = new PackageConstraint;
-        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin',false)->count();
+        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin', false)->count();
         $Limit = $packageLimit->packageLimitExceed("user", $value);
+        if ($Limit == false) {
+            return response()->json([
+                "statusCode" => "360",
+                'success' => false,
+                'message' => "You have exceeded the allowed number of users to create it"
+            ], 200);
+        }
 
         $restore = User::where('id', $request->id)->withTrashed()->first()->restore();
 
@@ -373,7 +380,7 @@ class UserServices
     }
 
 
-  
+
 
     // Todo  Need Code Again !
     public function resetPassword($request)
@@ -537,10 +544,9 @@ class UserServices
         $otp = rand(1000, 9999);
 
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
-        
+
         MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
 
-        $smsService->sendSms($user->mobile, $user->password, 'password');    
-
+        $smsService->sendSms($user->mobile, $user->password, 'password');
     }
 }
