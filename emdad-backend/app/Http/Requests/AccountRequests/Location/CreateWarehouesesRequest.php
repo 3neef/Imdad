@@ -7,8 +7,7 @@ use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Unique;
+
 
 class CreateWarehouesesRequest extends FormRequest
 {

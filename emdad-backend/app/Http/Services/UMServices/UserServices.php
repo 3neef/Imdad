@@ -27,6 +27,7 @@ class UserServices
         $packageLimit = new PackageConstraint;
         $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin',false)->count();
         $Limit = $packageLimit->packageLimitExceed("user", $value);
+
         if ($Limit == false) {
             return response()->json([
                 "statusCode" => "360",
@@ -169,6 +170,7 @@ class UserServices
             'message' => 'User deatched successfully'
         ], 200);
     }
+
     public function userWarehouseStatus($request)
     {
         $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
@@ -333,7 +335,6 @@ class UserServices
                 'error' => 'user already deleted'
             ], 200);
         }
-        // dd($user);
 
         $user->tokens()->delete();
 
@@ -355,6 +356,10 @@ class UserServices
 
     public function restoreById($request)
     {
+        $packageLimit = new PackageConstraint;
+        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin',false)->count();
+        $Limit = $packageLimit->packageLimitExceed("user", $value);
+
         $restore = User::where('id', $request->id)->withTrashed()->first()->restore();
 
         if ($restore) {

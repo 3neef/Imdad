@@ -3,7 +3,6 @@
 namespace App\Http\Services\AccountServices;
 
 use App\Models\SubscriptionPayment;
-use Carbon\Carbon;
 use Exception;
 
 class PackageConstraint
@@ -46,7 +45,6 @@ class PackageConstraint
                 return ["success" => true, "package" => $subscirptionPayment];
             } else {
                 // package subscription is not valid return package with success false
-
                 return ["success" => false, "package" => auth()->user()->currentProfile->subscription_details];
             }
         } catch (Exception $ex) {
