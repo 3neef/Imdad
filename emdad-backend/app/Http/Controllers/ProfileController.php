@@ -7,6 +7,7 @@ use App\Http\Requests\AccountRequests\Account\GetByAccountIdRequest;
 use App\Http\Requests\AccountRequests\Account\RestoreAccountRequest;
 use App\Http\Requests\Profile\StoreProfileRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
 use App\Http\Services\AccountServices\AccountService;
 use Illuminate\Http\Request;
 
@@ -76,7 +77,7 @@ class ProfileController extends Controller
     {
 
         // dd($request);
-        return ProfileCollection::collection($request);
+        return  ProfileResponse::collection( ProfileCollection::collection($request));
     }
     
 
@@ -236,9 +237,9 @@ class ProfileController extends Controller
      */
 
 
-    public function update(UpdateProfileRequest $request)
+    public function update(UpdateProfileRequest $request,$id)
     {
-        return $this->accountService->update($request);
+        return $this->accountService->update($request,$id);
     }
 
     /**

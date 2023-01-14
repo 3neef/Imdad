@@ -33,6 +33,7 @@ class UserResponse extends JsonResource
             "passwordChanged" => $this->password_changed,
             "mangerInfo" => $this->mangerUserId() ?? '',
             "createdAt"=> $this->created_at->format('y-m-d'),
+            'warehouses'=>$this->warehouses(),
             "allProfiles" => DB::table("role_user_profile")->where("user_id", $this->id)->pluck("profile_id"),
 
         ];

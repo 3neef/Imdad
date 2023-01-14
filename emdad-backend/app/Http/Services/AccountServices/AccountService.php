@@ -50,18 +50,23 @@ class AccountService
         }
     }
 
-    public function update($request)
+    public function update($request,$id)
     {
-        $profile = auth()->user()->currentProfile();
+        //   dd($request->all());
+        $profile =Profile::where('id',$id)->first();
         if ($profile == null) {
             return response()->json(["statusCode"=>'111','error' => 'data  Not Found'], 404);
         } else {
-            $update = $profile->update([
-                'name_ar' => $request->nameAr,
-                'type' => $request->type,
-                'iban' => $request->iban,
-                'vat_number' => $request->vatNumber,
+             $profile->update([
+                'name_ar' => $request->nameAr??$profile->name_ar,
+                'type' => $request->type??$profile->type,
+                'iban' => $request->iban??$profile->iban,
+                'vat_number' => $request->vatNumber??$profile->vat_number, 
             ]);
+            if(isset($request['logo']))
+            {
+                $profile->addMedia($request->logo)->toMediaCollection('profileLogo');
+            }
             return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
         }
     }
