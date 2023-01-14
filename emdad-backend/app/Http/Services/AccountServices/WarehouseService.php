@@ -115,8 +115,10 @@ class WarehouseService
         if ($warehouses == null) { // replace false by checking user permission
             return response()->json(["statusCode" => '111', 'success' => false, 'error' => 'not found'], 404);
         } else {
-            $warehouses->delete();
+
+            $warehouses->forceDelete();
             return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
+
         }
     }
 
