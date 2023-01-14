@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string("address_name",255);
-            $table->string("address_contact_phone",15);
-            $table->string("address_contact_name",25);
+            $table->string("address_contact_phone",15)->nullable(true);
+            $table->string("address_contact_name",25)->nullable(true);
             $table->string("address_type");
             $table->string("gate_type");
             $table->string('latitude');

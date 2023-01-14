@@ -7,7 +7,7 @@ use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
-
+use Illuminate\Validation\Rule;
 
 class CreateWarehouesesRequest extends FormRequest
 {
@@ -35,9 +35,13 @@ class CreateWarehouesesRequest extends FormRequest
             'warehouseType' => ['required', 'string'],
             'latitude' => ['required', 'string'],
             'longitude' => ['required', 'string'],
-            'gateType' => ['string'],
-            'receiverName' => ['required', 'string', 'max:25'],
-            'receiverPhone' => ['required', 'string', 'max:14', 'min:14', 'regex:/^(00966)/'],
+            'gateType' => [ 'string'],
+            'receiverName' => Rule::requiredIf(function () {
+                return auth()->user()->currentProfile()->type== 'supplier';
+                }),
+            'receiverPhone' => Rule::requiredIf(function () {
+                return auth()->user()->currentProfile()->type== 'supplier';
+                }),
             'managerId' => ['integer', 'exists:users,id']
         ];
     }
