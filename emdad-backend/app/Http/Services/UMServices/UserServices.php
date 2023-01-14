@@ -131,7 +131,7 @@ class UserServices
 
         if ($request->has("roleId") && $userRoleProfile != null) {
 
-            $userRoleProfile->update(['user_id' => $user->id ?? $userRoleProfile->user_id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => auth()->user()->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manger_user_id" => $request['mangerUserId'] ?? $userRoleProfile->manger_user_id, 'is_learning' => $request['isLearning']??$userRoleProfile->is_learning]);
+            $userRoleProfile->update(['user_id' => $user->id ?? $userRoleProfile->user_id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => auth()->user()->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manger_user_id" => $request['mangerUserId'] ?? $userRoleProfile->manger_user_id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
         }
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
