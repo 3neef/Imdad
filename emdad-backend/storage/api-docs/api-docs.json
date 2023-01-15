@@ -1581,87 +1581,6 @@
             }
         },
         "/api/v1_0/profiles": {
-            "put": {
-                "tags": [
-                    "Profile Controller"
-                ],
-                "summary": "update Account",
-                "description": "update Account Here",
-                "operationId": "updateAccount",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "nameAr": {
-                                        "type": "string"
-                                    },
-                                    "nameEn": {
-                                        "type": "string"
-                                    },
-                                    "swift": {
-                                        "type": "string"
-                                    },
-                                    "iban": {
-                                        "type": "string"
-                                    },
-                                    "subscriptionDetails": {
-                                        "type": "string"
-                                    },
-                                    "vatNumber": {
-                                        "type": "string"
-                                    },
-                                    "active": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated Successfully"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "Profile Controller"
@@ -1910,6 +1829,89 @@
                     },
                     "500": {
                         "description": "system error"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/updateProfile/{id}": {
+            "post": {
+                "tags": [
+                    "Profile Controller"
+                ],
+                "summary": "update Account",
+                "description": "update Profile using current Profile Id",
+                "operationId": "updateAccount",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "swift": {
+                                        "type": "string"
+                                    },
+                                    "iban": {
+                                        "type": "string"
+                                    },
+                                    "subscriptionDetails": {
+                                        "type": "string"
+                                    },
+                                    "vatNumber": {
+                                        "type": "string"
+                                    },
+                                    "active": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully"
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
                     }
                 }
             }

@@ -184,13 +184,13 @@ class ProfileController extends Controller
     }
 
     /**
-     * @OA\put(
-     * path="/api/v1_0/profiles",
+     * @OA\post(
+     * path="/api/v1_0/updateProfile/{id}",
      * operationId="updateAccount",
      * tags={"Profile Controller"},
 
      * summary="update Account",
-     * description="update Account Here",
+     * description="update Profile using current Profile Id",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -213,8 +213,8 @@ class ProfileController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"profileId"},
-     *               @OA\Property(property="profileId", type="integer"),
+     *               required={"id"},
+     *               @OA\Property(property="id", type="integer"),
      *               @OA\Property(property="nameAr", type="string"),
      *               @OA\Property(property="nameEn", type="string"),
      *               @OA\Property(property="swift", type="string"),

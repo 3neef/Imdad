@@ -29,7 +29,6 @@ class UpdateProfileRequest extends FormRequest
         // dd($this);
         return [
             'logo' =>'image|mimes:jpg,png,jpeg,gif,svg|max:5120',
-            'ProfileId' => ['required','integer','exists:profiles,id'],
             'nameAr' => ['string','max:100','unique:profiles,name_ar'],
             'nameEn' => ['string','max:100','unique:profiles,name_en'],
             'swift' => ['string','max:25','unique:profiles,swift'],
