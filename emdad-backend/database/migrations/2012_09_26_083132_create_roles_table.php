@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name_en');
+            $table->string('name_ar');
             $table->enum('type',['emdad','buyer','supplier'])->default('emdad');
             $table->boolean('for_reg')->default(0);
             $table->json('permissions_list')->nullable();

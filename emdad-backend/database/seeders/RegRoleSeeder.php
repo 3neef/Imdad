@@ -29,7 +29,8 @@ class RegRoleSeeder extends Seeder
             # code...
             DB::table('roles')->insert([
                 "id" => $role['id'],
-                "name" => $role['name'],
+                "name_en" => $role['name_en'],
+                "name_ar" => $role['name_ar'],
                 "type" => $role['type'],
                 "for_reg" => $role['for_reg'],
                 'permissions_list' => $persomsions,
