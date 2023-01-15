@@ -124,6 +124,16 @@ class RegRoleSeeder extends Seeder
                 $this->insertRole($role,$persomsions);
                 continue;
             }
+            if($role['type']=='buyer' && $role['name_en']=='Finance manager'){
+                $persomsions=['BCPO1','BCIN2','BCDN1','BMCD','BMU1','BML1','BMCO2','BMNM1','BMNM2','BMDE1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='buyer' && $role['name_en']=='Procurement manager'){
+                $persomsions=['BCFQ3','BCQ2','BCPO3','BMCD3','BMU1','BML1','BMCO1','BMCT2','BMNM1','BMCT2','BMDE1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
             if($role['type']=='buyer' && $role['name_en']==''){
                 $persomsions=[''];
                 $this->insertRole($role,$persomsions);

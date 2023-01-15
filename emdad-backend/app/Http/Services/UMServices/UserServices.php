@@ -24,78 +24,67 @@ class UserServices
     public function create($request)
     {
         $packageLimit = new PackageConstraint;
-        $value = DB::table('role_user_profile')->where('profile_id', auth()->user()->profile_id)->whereNotIn('role_id', [1, 2, 3, 4, 12])->count();
-        $Limit = $packageLimit->packageLimitExceed("user", $value);
 
-        if ($Limit == false) {
-            return response()->json([
-                "statusCode" => "360",
-                'success' => false,
-                'message' => "You have exceeded the allowed number of users to create it"
-            ], 200);
-        }
-        $packageLimit = new PackageConstraint;
-        $value = DB::table('role_user_profile')->where('profile_id', auth()->user()->profile_id)->whereIn('role_id', [1, 2, 3, 4, 12])->count();
-        $newvalue = (--$value);
-        $Limit = $packageLimit->packageLimitExceed("owner", $newvalue);
+        $check = in_array($request['roleId'], [1, 2, 3, 4, 12]);
 
-        if ($Limit == false) {
-            return response()->json([
-                "statusCode" => "360",
-                'success' => false,
-                'message' => "You have exceeded the allowed number of Admin to create it"
-            ], 200);
-        }
+        if ($check == true) {
+            $value = DB::table('role_user_profile')->where('profile_id', auth()->user()->profile_id)->whereIn('role_id', [1, 2, 3, 4, 12])->count();
+            // $newvalue = (--$value);
+            $Limit = $packageLimit->packageLimitExceed("owner", $value);
 
-        $user = DB::transaction(function () use ($request) {
-            $request['full_name'] = $request['fullName'];
-            $request['expiry_date'] = $request['expireDate'] ?? null;
-            $request['identity_number'] = $request['identityNumber'] ?? "";
-            $request['identity_type'] = $request['identityType'] ?? 'nid';
-            $request['otp_expires_at'] = now()->addMinutes(5);
-            $request['is_super_admin'] = false;
+            if ($Limit == false) {
+                return response()->json([
+                    "statusCode" => "360",
+                    'success' => false,
+                    'message' => "You have exceeded the allowed number of Admin to create it"
+                ], 200);
+            }
+            $user = $this->createUser($request);
+            if ($user) {
+                return response()->json([
+                    "statusCode" => "000",
 
-            $user = User::create($request);
-            $this->UserOtp($user);
-            $role_id = $request['roleId'] ?? null;
-            $is_learning = $request['is_learning'] ?? false;
-            $manager_id = null;
-            if (isset($request['managerUserId'])) {
-                $manager_id = $request['managerUserId'];
+                    'message' => 'Admin created successfully',
+                    'data' => ['user' => new UserResponse($user)]
+                ], 200);
             } else {
-                $manager_id = auth()->id() ?? null;
-            }
-            if ($role_id && $manager_id) {
-                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id]);
+                return response()->json([
+                    "statusCode" => "999",
 
-                $user->update(['profile_id' => auth()->user()->profile_id]);
+                    'success' => false, 'message' => "Admin not created"
+                ], 200);
             }
-            if (isset($request->warahouseId)) {
+        } else {
+            $value = DB::table('role_user_profile')->where('profile_id', auth()->user()->profile_id)->whereNotIn('role_id', [1, 2, 3, 4, 12])->count();
+            $Limit = $packageLimit->packageLimitExceed("user", $value);
 
-                $user->warehouse()->attach($user->id, ['warehouse_id' => $request->warahouseId,]);
+            if ($Limit == false) {
+                return response()->json([
+                    "statusCode" => "360",
+                    'success' => false,
+                    'message' => "You have exceeded the allowed number of users to create it"
+                ], 200);
             }
-            return $user;
-        });
-        if ($user) {
-            return response()->json([
-                "statusCode" => "000",
+            $user = $this->createUser($request);
 
-                'message' => 'User created successfully',
-                'data' => ['user' => new UserResponse($user)]
-            ], 200);
+            if ($user) {
+                return response()->json([
+                    "statusCode" => "000",
+
+                    'message' => 'User created successfully',
+                    'data' => ['user' => new UserResponse($user)]
+                ], 200);
+            } else {
+                return response()->json([
+                    "statusCode" => "999",
+
+                    'success' => false, 'message' => "user not created"
+                ], 200);
+            }
         }
-        return response()->json([
-            "statusCode" => "999",
-
-            'success' => false, 'message' => "System Error"
-        ], 200);
     }
 
 
-
-
-
-    //to do 
     public function UpdateOwnerUser($request, $user_id)
     {
         $user = User::where('id', $user_id)->first();
@@ -560,5 +549,39 @@ class UserServices
         MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
 
         $smsService->sendSms($user->mobile, $user->password, 'password');
+    }
+
+    public function createUser($request)
+    {
+        return DB::transaction(function () use ($request) {
+            $request['full_name'] = $request['fullName'];
+            $request['expiry_date'] = $request['expireDate'] ?? null;
+            $request['identity_number'] = $request['identityNumber'] ?? "";
+            $request['identity_type'] = $request['identityType'] ?? 'nid';
+            $request['otp_expires_at'] = now()->addMinutes(5);
+            $request['is_super_admin'] = false;
+
+            $user = User::create($request);
+            $this->UserOtp($user);
+            $role_id = $request['roleId'] ?? null;
+            $is_learning = $request['is_learning'] ?? false;
+            $manager_id = null;
+            if (isset($request['managerUserId'])) {
+                $manager_id = $request['managerUserId'];
+            } else {
+                $manager_id = auth()->id() ?? null;
+            }
+            if ($role_id && $manager_id) {
+                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id]);
+
+                $user->update(['profile_id' => auth()->user()->profile_id]);
+            }
+            if (isset($request->warahouseId)) {
+
+                $user->warehouse()->attach($user->id, ['warehouse_id' => $request->warahouseId,]);
+            }
+        return $user;
+
+        });
     }
 }
