@@ -25,16 +25,16 @@ class AuthenticationServices
 
     public function create($request)
     {
-        $packageLimit = new PackageConstraint;
-        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin', true)->count();
-        $Limit = $packageLimit->packageLimitExceed("user", $value);
-        if ($Limit == false) {
-            return response()->json([
-                "statusCode" => "363",
-                'success' => false,
-                'message' => "You have exceeded the allowed number of Admin to create it"
-            ], 200);
-        }
+        // $packageLimit = new PackageConstraint;
+        // $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin', true)->count();
+        // $Limit = $packageLimit->packageLimitExceed("user", $value);
+        // if ($Limit == false) {
+        //     return response()->json([
+        //         "statusCode" => "363",
+        //         'success' => false,
+        //         'message' => "You have exceeded the allowed number of Admin to create it"
+        //     ], 200);
+        // }
 
         $user = DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
