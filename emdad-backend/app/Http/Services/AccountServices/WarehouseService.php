@@ -56,7 +56,7 @@ class WarehouseService
             return $warehouse;
         });
         if ($warehouse!=null) {
-            return response()->json(['message' => 'created successfully'], 200);
+            return response()->json(["statusCode" => '000','message' => 'created successfully'], 200);
         }
 
         return response()->json(['error' => 'system error'], 500);
