@@ -6,6 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
+use PhpParser\Node\NullableType;
 
 class UpdateRequest extends FormRequest
 {
@@ -42,6 +43,7 @@ class UpdateRequest extends FormRequest
             'WarahouseId'=>'integer|exists:warehouses,id',
             'status' => [Rule::in('active','inActive')],
             'lang'=>  [Rule::in('en','ar')],
+            'isLearning'=>'nullable'
         ];
     }
 

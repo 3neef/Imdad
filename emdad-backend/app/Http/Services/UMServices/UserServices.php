@@ -102,6 +102,7 @@ class UserServices
 
     public function update($request, $id)
     {
+        
         $user = User::where('id', $id)->first();
         $user->update([
             "full_name" => $request->fullName ?? $user->full_name,
