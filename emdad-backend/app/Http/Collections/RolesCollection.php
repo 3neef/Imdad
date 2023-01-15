@@ -16,7 +16,7 @@ class RolesCollection
 
         $defaultSort = '-created_at';
 
-        $defaultSelect = ['id','name','type','permissions_list','for_reg'
+        $defaultSelect = ['id','name_en','name_ar','type','permissions_list','for_reg'
         ];
         // $element =  [];
     
@@ -27,7 +27,8 @@ class RolesCollection
 
         $allowedFilters = [
             'id',
-            'name',
+            'name_en',
+            'name_ar',
             'type',
             'for_reg',
         ];
