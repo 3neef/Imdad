@@ -25,8 +25,10 @@ class CreateProuductRequest extends FormRequest
      */
     public function rules()
     {
+        // 'categoryId' => 'required|integer|exists:categories,id,isleaf,1',
+
         return [
-            'categoryId' => 'required|integer|exists:categories,id,isleaf,1',
+            'categoryId' => 'required|integer|exists:categories,id',
             'nameEn'=>'required|string|unique:products,name_en',
             'nameAr'=>'required|string|unique:products,name_ar',
             'price'=>'nullable|between:0,99.99',
