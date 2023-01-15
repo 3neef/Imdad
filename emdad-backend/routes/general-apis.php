@@ -39,6 +39,11 @@ Route::get('optimize', function () {
     Artisan::call('optimize');
     dd("optimized successfully");
 });
+
+Route::get('route', function () {
+    Artisan::call('route:list');
+});
+
 Route::get('Activity', function () {
     return Activity::all();
 });
