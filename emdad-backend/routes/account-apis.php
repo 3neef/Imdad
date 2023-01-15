@@ -13,7 +13,8 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::get('profiles/pay', [SubscriptionPaymentController::class, "pay"]);
     Route::get('profiles/checkPayment', [SubscriptionPaymentController::class, "checkPaymentStatus"]);
 
-    Route::post('profiles/{id}', [ProfileController::class, 'update']);
+    Route::post('updateProfile/{id}', [ProfileController::class, 'update']);
+
     Route::apiResource('profiles/subscriptionPayment', SubscriptionPaymentController::class);
 
     Route::apiResource('profiles', ProfileController::class);
