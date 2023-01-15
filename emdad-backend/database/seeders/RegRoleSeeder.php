@@ -45,16 +45,15 @@ class RegRoleSeeder extends Seeder
             
         ];
 
-
-        
-
+               
         // dd($persomsions);
 
         foreach ($roles as $role) {
+         
+    
 
             if($role['id']<4){
-                // $persomsions = Permission::pluck('label');
-                $persomsions = DB::table('permissions')->pluck('label')->first();
+                $persomsions = Permission::pluck('label');
                 $this->insertRole($role,$persomsions);
                 continue;
 
@@ -66,52 +65,52 @@ class RegRoleSeeder extends Seeder
                 continue;
             }
 
-            if($role['type']=='supplier' && $role['name_en']==''){
-                $persomsions=[''];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
+            // if($role['type']=='supplier' && $role['name_en']==''){
+            //     $persomsions=[''];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
 
-            if($role['type']=='supplier' && $role['name_en']==''){
-                $persomsions=[''];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
-            if($role['type']=='supplier' && $role['name_en']==''){
-                $persomsions=[''];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
-            if($role['type']=='supplier' && $role['name_en']==''){
-                $persomsions=[''];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
-            if($role['type']=='buyer' && $role['name_en']==''){
-                $persomsions=[''];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
-            if($role['type']=='buyer' && $role['name_en']==''){
-                $persomsions=[''];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
-            if($role['type']=='buyer' && $role['name_en']==''){
-                $persomsions=[''];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
-            if($role['type']=='buyer' && $role['name_en']==''){
-                $persomsions=[''];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
-            if($role['type']=='buyer' && $role['name_en']==''){
-                $persomsions=[''];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
+            // if($role['type']=='supplier' && $role['name_en']==''){
+            //     $persomsions=[''];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
+            // if($role['type']=='supplier' && $role['name_en']==''){
+            //     $persomsions=[''];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
+            // if($role['type']=='supplier' && $role['name_en']==''){
+            //     $persomsions=[''];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
+            // if($role['type']=='buyer' && $role['name_en']==''){
+            //     $persomsions=[''];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
+            // if($role['type']=='buyer' && $role['name_en']==''){
+            //     $persomsions=[''];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
+            // if($role['type']=='buyer' && $role['name_en']==''){
+            //     $persomsions=[''];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
+            // if($role['type']=='buyer' && $role['name_en']==''){
+            //     $persomsions=[''];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
+            // if($role['type']=='buyer' && $role['name_en']==''){
+            //     $persomsions=[''];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
            
         }
 
