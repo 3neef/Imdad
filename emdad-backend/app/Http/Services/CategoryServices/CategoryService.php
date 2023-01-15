@@ -10,6 +10,8 @@ use App\Models\ProfileCategoryPivot;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\at;
+
 class CategoryService
 {
 
@@ -116,12 +118,12 @@ class CategoryService
             foreach ($request['categoryList'] as $category_id) {
 
                 try {
-                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id]);
+                    $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id,'user_id'=>auth()->user()->id]);
                 } catch (Exception $e) {
                 }
             }
         } else {
-            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id]);
+            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id,'user_id'=>auth()->user()->id]);
         }
         return response()->json(['message' => 'created successfully'], 200);
     }

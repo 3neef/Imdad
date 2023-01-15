@@ -3,6 +3,7 @@
 namespace App\Models\Emdad;
 
 use App\Models\Profile;
+use App\Models\ProfileCategoryPivot;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -55,7 +56,7 @@ class Categories extends Model
 
     public function CreatorName()
     {
-        return User::where('id',$this->created_by)->first();
+        return ProfileCategoryPivot::where('profile_id',auth()->user()->profile_id)->where("user_id",$this->created_by)->first();
         
     }
 
