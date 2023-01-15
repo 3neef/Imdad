@@ -94,14 +94,14 @@ class CategoriesPolicy
         //
     }
 
-    public function checkPermission($user, $type1)
+    public function checkPermission($user, $type1,$type2)
     {
         if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
             $permissonis = DB::table('role_user_profile')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
             if ($permissonis!= null) {
                 $labels = json_decode($permissonis);
                 foreach ($labels as $label) {
-                    if ($label == $type1) {
+                    if ($label == $type1||$label==$type2) {
                         return true;
                     }
                 }
