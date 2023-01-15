@@ -184,13 +184,13 @@ class ProfileController extends Controller
     }
 
     /**
-     * @OA\put(
-     * path="/api/v1_0/profiles",
+     * @OA\post(
+     * path="/api/v1_0/updateProfile/{id}",
      * operationId="updateAccount",
      * tags={"Profile Controller"},
 
      * summary="update Account",
-     * description="update Account Here",
+     * description="update Profile using current Profile Id",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
