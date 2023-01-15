@@ -53,7 +53,8 @@ class RegRoleSeeder extends Seeder
         foreach ($roles as $role) {
 
             if($role['id']<4){
-                $persomsions = Permission::pluck('label');
+                // $persomsions = Permission::pluck('label');
+                $persomsions = DB::table('permissions')->pluck('label')->first();
                 $this->insertRole($role,$persomsions);
                 continue;
 
@@ -125,7 +126,7 @@ class RegRoleSeeder extends Seeder
             "name_en" => $role['name_en'],
             "type" => $role['type'],
             "for_reg" => $role['for_reg'],
-            'permissions_list' => $persomsions,
+            'permissions_list' => json_encode($persomsions,true),
             "created_at" => now(),
         ]);
     }
