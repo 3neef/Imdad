@@ -24,7 +24,7 @@ class UserServices
     public function create($request)
     {
         $packageLimit = new PackageConstraint;
-        $value = DB::table('role_user_profile')->where('profile_id',auth()->user()->profile_id)->whereNotIn('role_id',[1,2,3,4,12])->count();
+        $value = DB::table('role_user_profile')->where('profile_id', auth()->user()->profile_id)->whereNotIn('role_id', [1, 2, 3, 4, 12])->count();
         $Limit = $packageLimit->packageLimitExceed("user", $value);
 
         if ($Limit == false) {
@@ -35,8 +35,8 @@ class UserServices
             ], 200);
         }
         $packageLimit = new PackageConstraint;
-        $value = DB::table('role_user_profile')->where('profile_id',auth()->user()->profile_id)->whereIn('role_id',[1,2,3,4,12])->count();
-        $newvalue=(--$value );
+        $value = DB::table('role_user_profile')->where('profile_id', auth()->user()->profile_id)->whereIn('role_id', [1, 2, 3, 4, 12])->count();
+        $newvalue = (--$value);
         $Limit = $packageLimit->packageLimitExceed("owner", $newvalue);
 
         if ($Limit == false) {
@@ -113,7 +113,7 @@ class UserServices
 
     public function update($request, $id)
     {
-        
+
         $user = User::where('id', $id)->first();
         $user->update([
             "full_name" => $request->fullName ?? $user->full_name,
