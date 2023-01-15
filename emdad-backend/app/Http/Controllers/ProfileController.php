@@ -213,8 +213,8 @@ class ProfileController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"id"},
-     *               @OA\Property(property="id", type="integer"),
+     *               required={"profileId"},
+     *               @OA\Property(property="profileId", type="integer"),
      *               @OA\Property(property="nameAr", type="string"),
      *               @OA\Property(property="nameEn", type="string"),
      *               @OA\Property(property="swift", type="string"),
