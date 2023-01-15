@@ -56,7 +56,7 @@ class WarehouseService
             return $warehouse;
         });
         if ($warehouse!=null) {
-            return response()->json(['message' => 'created successfully'], 200);
+            return response()->json(["statusCode" => '000','message' => 'created successfully'], 200);
         }
 
         return response()->json(['error' => 'system error'], 500);
@@ -80,7 +80,7 @@ class WarehouseService
                 "longitude" => $request->longitude ?? $warehouse->longitude,
 
             ]);
-            return response()->json(["statusCode" => '000','success' => 'created Successfly'], 200);
+            return response()->json(["statusCode" => '000','success' => 'Updated Successfly'], 200);
         }
 
         return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
