@@ -16,8 +16,7 @@ use App\Models\UserWarehousePivot;
 use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
-
-
+use Illuminate\Validation\Rules\NotIn;
 
 class UserServices
 {
@@ -25,7 +24,7 @@ class UserServices
     public function create($request)
     {
         $packageLimit = new PackageConstraint;
-        $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin', false)->count();
+        $value = DB::table('role_user_profile')->where('profile_id',auth()->user()->profile_id)->whereNotIn('role_id',[1,2,3,4,12])->count();
         $Limit = $packageLimit->packageLimitExceed("user", $value);
 
         if ($Limit == false) {
@@ -33,6 +32,18 @@ class UserServices
                 "statusCode" => "360",
                 'success' => false,
                 'message' => "You have exceeded the allowed number of users to create it"
+            ], 200);
+        }
+        $packageLimit = new PackageConstraint;
+        $value = DB::table('role_user_profile')->where('profile_id',auth()->user()->profile_id)->whereIn('role_id',[1,2,3,4,12])->count();
+        $newvalue=(--$value );
+        $Limit = $packageLimit->packageLimitExceed("owner", $newvalue);
+
+        if ($Limit == false) {
+            return response()->json([
+                "statusCode" => "360",
+                'success' => false,
+                'message' => "You have exceeded the allowed number of Admin to create it"
             ], 200);
         }
 
