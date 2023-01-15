@@ -37,7 +37,7 @@ class UpdateRequest extends FormRequest
             "password" => "string|min:8|max:50",
             "identityNumber"=>['string',Rule::unique('users',"identity_number")->ignore($this->id, 'id')],
             "email" => ["email", "string", "max:255"],
-            "mobile" => ["min:9","max:14","string",Rule::unique('users')->ignore($this->id, 'id')],
+            "mobile" => ["min:14","max:14","string",Rule::unique('users')->ignore($this->id, 'id')],
             "roleId" => "integer|exists:roles,id",
             'manager_user_Id'=>'integer|exists:users,id',
             'WarahouseId'=>'integer|exists:warehouses,id',
