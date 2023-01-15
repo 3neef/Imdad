@@ -39,7 +39,7 @@ class CategoryService
                 $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id]);
             }
             if (auth()->user()->profile_id) {
-                $category->update(['profile_id' => auth()->user()->profile_id]);
+                $category->update(['profile_id' => auth()->user()->profile_id,'user_id'=>auth()->id()]);
             }
             return $category;
         });
