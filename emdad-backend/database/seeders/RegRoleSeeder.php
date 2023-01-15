@@ -59,8 +59,8 @@ class RegRoleSeeder extends Seeder
 
             }
             
-            if($role['type']=='supplier' && $role['name_en']==''){
-                $persomsions=['SDF','sds'];
+            if($role['type']=='supplier' && $role['name_en']=='Wharehouse officer'){
+                $persomsions=['SDD3','SMUP1'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
