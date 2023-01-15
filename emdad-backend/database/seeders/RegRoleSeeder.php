@@ -52,69 +52,84 @@ class RegRoleSeeder extends Seeder
          
     
 
-            if($role['id']<4){
-                $persomsions = Permission::pluck('label');
+             if($role['id']<4){
+                // $persomsions = Permission::pluck('label');
+                $persomsions = DB::table('permissions')->pluck('label')->first();
                 $this->insertRole($role,$persomsions);
                 continue;
 
             }
             
             if($role['type']=='supplier' && $role['name_en']=='Wharehouse officer'){
-                $persomsions=['SDD3','SMUP1'];
+                $persomsions=['SDD3','SMUP1','SMAP1'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
 
-            // if($role['type']=='supplier' && $role['name_en']==''){
-            //     $persomsions=[''];
-            //     $this->insertRole($role,$persomsions);
-            //     continue;
-            // }
+            if($role['type']=='supplier' && $role['name_en']=='Driver'){
+                $persomsions=['SAP3'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
 
-            // if($role['type']=='supplier' && $role['name_en']==''){
-            //     $persomsions=[''];
-            //     $this->insertRole($role,$persomsions);
-            //     continue;
-            // }
-            // if($role['type']=='supplier' && $role['name_en']==''){
-            //     $persomsions=[''];
-            //     $this->insertRole($role,$persomsions);
-            //     continue;
-            // }
-            // if($role['type']=='supplier' && $role['name_en']==''){
-            //     $persomsions=[''];
-            //     $this->insertRole($role,$persomsions);
-            //     continue;
-            // }
-            // if($role['type']=='buyer' && $role['name_en']==''){
-            //     $persomsions=[''];
-            //     $this->insertRole($role,$persomsions);
-            //     continue;
-            // }
-            // if($role['type']=='buyer' && $role['name_en']==''){
-            //     $persomsions=[''];
-            //     $this->insertRole($role,$persomsions);
-            //     continue;
-            // }
-            // if($role['type']=='buyer' && $role['name_en']==''){
-            //     $persomsions=[''];
-            //     $this->insertRole($role,$persomsions);
-            //     continue;
-            // }
-            // if($role['type']=='buyer' && $role['name_en']==''){
-            //     $persomsions=[''];
-            //     $this->insertRole($role,$persomsions);
-            //     continue;
-            // }
-            // if($role['type']=='buyer' && $role['name_en']==''){
-            //     $persomsions=[''];
-            //     $this->insertRole($role,$persomsions);
-            //     continue;
-            // }
-           
+            if($role['type']=='supplier' && $role['name_en']=='Finance officer'){
+                $persomsions=['SPO1','SCL1','SCR1','SML1','SMC1','SMUP1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='supplier' && $role['name_en']=='Sales officer'){
+                $persomsions=['SRFQ2','SQ2','SPO1','SML1','SMC1','SMUP1','SMAP1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='supplier' && $role['name_en']=='Wharehouse manager'){
+                $persomsions=['SDD4','SMCS1','SMU1','SML1','SMCT2','SMUP1','SMAP1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='supplier' && $role['name_en']=='Finance manager'){
+                $persomsions=['SPO1','SCL1','SCR3','SDD1','SMCS3','SMU1','SML1','SMC1','SMUP1','SMAP1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='supplier' && $role['name_en']=='Sales manager'){
+                $persomsions=['SRFQ3','SQ3','SPO1','SDD1','SMCS3','SMU1','SML1','SMC1','SMUP1','SMAP1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='supplier' && $role['name_en']=='bussnies owner'){
+                $persomsions=['SRFQ3','SRFQ2','SRFQ1','SQ3','SQ2','SQ1','SPO3','SPO2','SPO1','SDD1','SCL1','SCR3','SCR2','SCR1','SDD4','SDD3',
+                'SDD2','SDD1','SAP3','SAP2','SAP1','SMCS3','SMCS2','SMCS1','SMU3','SMU2','SMU1','SML3','SML2',
+                'SML1','SMC3','SMC2','SMC1','SMCT2','SMCT1','SMUP2','SMUP1','SMCD1','SMAL1','SMMB3','SMMB2','SMMB1','SMFL4','SMFL3','SMFL2','SMFL1','SMAP1','SMAP2'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='buyer' && $role['name_en']=='Wharehouse officer'){
+                $persomsions=['BCDN3','BML1','BMCO1','BMNM1','BMDE1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='buyer' && $role['name_en']=='Finance officer'){
+                $persomsions=['BCPO','BCIN2','BMCD1','BML1','BMCO1','BMNM2','BMDE1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='buyer' && $role['name_en']==''){
+                $persomsions=[];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='buyer' && $role['name_en']==''){
+                $persomsions=[];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='buyer' && $role['name_en']==''){
+                $persomsions=[''];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
         }
-
-
       
     }
 
