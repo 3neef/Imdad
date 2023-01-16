@@ -11,5 +11,6 @@ RUN rm -rf app && ln -s emdad-backend/ app
 
 COPY ./entrypoint.sh ./
 RUN chmod +x ./entrypoint.sh &&  apk add php81-exif
+#sed -i "/;extension=exif*/c\extension=exif" /etc/php81/php.ini && sed -i "/;extension=mbstring*/c\extension=mbstring" /etc/php81/php.ini
 #ENTRYPOINT ["supervisord", "-c", "/etc/supervisord.conf"]
 ENTRYPOINT ["./entrypoint.sh"]
