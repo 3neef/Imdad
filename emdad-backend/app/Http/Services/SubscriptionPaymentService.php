@@ -82,12 +82,14 @@ class SubscriptionPaymentService
     public function delete($id)
     {
         $subscription = SubscriptionPayment::find($id)->first();
-
-        $deleted = $subscription->delete();
-
-        if ($deleted) {
-            return response()->json(['message' => 'deleted successfully','statusCode'=>'112'], 200);
+        if($subscription!=null){
+            $deleted = $subscription->delete();
+            if ($deleted) {
+                return response()->json(['message' => 'deleted successfully','statusCode'=>'112'], 200);
+            }
         }
+
+       
         return response()->json(['error' => 'system error','statusCode'=>'999'], 200);
     }
 
