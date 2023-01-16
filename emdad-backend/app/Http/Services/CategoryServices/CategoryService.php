@@ -116,6 +116,7 @@ class CategoryService
         $category = Categories::first();
         if (isset($request['categoryList'])) {
             foreach ($request['categoryList'] as $category_id) {
+
                 try {
                     $category->companyCategory()->attach($category->id, ['category_id' => $category_id, 'profile_id' => auth()->user()->profile_id,'user_id'=>auth()->user()->id]);
                 } catch (Exception $e) {

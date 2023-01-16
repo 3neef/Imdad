@@ -36,8 +36,6 @@ class AuthenticationServices
         //     ], 200);
         // }
 
-
-
         $user = DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
             $request['expiry_date'] = $request['expireDate'] ?? null;

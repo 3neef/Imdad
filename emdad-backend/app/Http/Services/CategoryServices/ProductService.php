@@ -60,6 +60,7 @@ class ProductService
         ], 500);
     }
 
+
     public function update($request, $id)
     {
 
