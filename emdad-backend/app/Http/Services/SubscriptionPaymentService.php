@@ -118,7 +118,6 @@ class SubscriptionPaymentService
         $profile = $user->currentProfile();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->first();
         if($paymentRequest==null){
-            dd('sdssdd');
             return response()->json(['message' =>"you have not selected any package yet","statusCode"=>"111"], 200);
 
         }
