@@ -26,7 +26,6 @@ class AccountService
             $profile = DB::transaction(function () use ($request) {
 
                 $company = RelatedCompanies::where("cr_number", $request->crNo)->first();
-                $user = User::where('id', auth()->user()->id)->first();
                 $profile = Profile::create([
                     "type" => $request->ProfileType,
                     "name_ar" => $company->cr_name,
@@ -37,10 +36,12 @@ class AccountService
                 ]);
                  WalletsService::create($profile);
                 $permissions = $this->pluckPermissions($request->ProfileType);
-                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
+                RoleUserProfile::create(
+                    ['user_id' => auth()->id(), 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]
+                );
 
 
-                $user->update(['profile_id' => $profile->id]);
+                auth()->user->update(['profile_id' => $profile->id]);
 
                 return $profile;
             });
