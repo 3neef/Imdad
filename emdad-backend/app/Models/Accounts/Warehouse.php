@@ -39,19 +39,20 @@ class Warehouse extends Model
             ->logAll()
             ->logOnlyDirty();
     }
-    // public function users()
-    // {
-    //     return $this->belongsToMany(User::class,'user_warehouse_pivots')->withPivot('user_id')->withTimestamps();
-    // }
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+    
     public function manager()
     {
          return User::where('id',$this->manager_id)->first();
     }
 
-    public function users()
-    {
-         return UserWarehousePivot::where('warehouse_id',$this->id)->with('user')->get();
-    }
+    // public function users()
+    // {
+    //      return UserWarehousePivot::where('warehouse_id',$this->id)->with('user')->get();
+    // }
 
     
     public function creatorName()

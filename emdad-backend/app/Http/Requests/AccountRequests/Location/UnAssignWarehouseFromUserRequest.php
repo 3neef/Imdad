@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class AssignUserToWarehouseRequest extends FormRequest
+class UnAssignWarehouseFromUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,8 @@ class AssignUserToWarehouseRequest extends FormRequest
     public function rules()
     {
         return [
-            'userId' => ['required','integer','exists:users,id', new IsCompositeUnique('user_warehouse',['user_id'=>$this->userId,'warehouse_id'=>$this->warehouseId])],
-            'warehouseId' => ['required','integer','exists:warehouses,id']
+            'userId' => ['required','integer','exists:users,id','exists:user_warehouse,user_id'],
+            'warehouseId' => ['required','integer','exists:warehouses,id', 'exists:user_warehouse,warehouse_id'],
       
         ];
     }

@@ -25,7 +25,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('warehouses')->group(
     Route::put('verfied/{id}', [WarehousesController::class, 'verfiedLocation']);
     Route::put('restore/{id}', [WarehousesController::class, 'restoreByLocationId']);
     Route::post('assignwarehousetouser', [WarehousesController::class, 'assignWarehouseToUser']);
-    Route::delete('unassignwarehousetouser/{id}', [WarehousesController::class, 'unAssignWarehouseToUser']);
+    Route::post('unassignwarehousefromuser', [WarehousesController::class, 'unAssignWarehouseFromUser']);
 
     
 });

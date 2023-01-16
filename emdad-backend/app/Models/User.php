@@ -106,7 +106,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function warehouses()
     {
-        return $this->hasMany(UserWarehousePivot::class,'user_id');
+        return $this->belongsToMany(Warehouse::class);
     }
 
 
