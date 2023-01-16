@@ -114,13 +114,23 @@ class RegRoleSeeder extends Seeder
                 $this->insertRole($role,$persomsions);
                 continue;
             }
-            if($role['type']=='buyer' && $role['name_en']==''){
-                $persomsions=[];
+            if($role['type']=='buyer' && $role['name_en']=='Procurement officer'){
+                $persomsions=['BCFQ2','BCQ2','BCPO2','BMCD2','BML1','BML1','BMCO1','BMCT2','BMNM1','BMCT1','BMDE1'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
-            if($role['type']=='buyer' && $role['name_en']==''){
-                $persomsions=[];
+            if($role['type']=='buyer' && $role['name_en']==' Warehouse manager'){
+                $persomsions=['BCPO1','BCDN3','BMCD2','BMU1','BML1','BMCO1','BMCT2','BMNM1','BMDE1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='buyer' && $role['name_en']=='Finance manager'){
+                $persomsions=['BCPO1','BCIN2','BCDN1','BMCD','BMU1','BML1','BMCO2','BMNM1','BMNM2','BMDE1'];
+                $this->insertRole($role,$persomsions);
+                continue;
+            }
+            if($role['type']=='buyer' && $role['name_en']=='Procurement manager'){
+                $persomsions=['BCFQ3','BCQ2','BCPO3','BMCD3','BMU1','BML1','BMCO1','BMCT2','BMNM1','BMCT2','BMDE1'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }

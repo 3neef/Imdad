@@ -166,7 +166,7 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request, UserServices $userServices)
     {
-        $this->authorize('create', User::class);
+        // $this->authorize('create', User::class);
 
         return $userServices->create($request->validated());
     }
