@@ -117,6 +117,10 @@ class SubscriptionPaymentService
         $user = User::where("id", auth()->id())->first();
         $profile = $user->currentProfile();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->first();
+        if($paymentRequest==null){
+            return response()->json(['message' =>"you have not selected any package yet","statusCode"=>"111"], 200);
+
+        }
         if ($paymentRequest->status == "Paid") {
             return response()->json(['data' => new SubscriptionResource($paymentRequest),"statusCode"=>"000"], 200);
         }
