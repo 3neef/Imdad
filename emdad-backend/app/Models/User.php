@@ -73,7 +73,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function currentProfile()
     {
-        return Profile::where("id", $this->profile_id)->select(["name_ar", 'active', 'subscription_details', 'cr_expire_data', 'type', 'id'])->first();
+        return Profile::where("id", $this->profile_id)->select(["name_ar", 'active', 'subscription_details', 'cr_expire_data','subs_id','iban','swift','created_by', 'type', 'id'])->first();
     }
 
     public function userStatus()
