@@ -71,14 +71,14 @@ class Profile extends Model implements HasMedia
         return $this->hasMany(SubscriptionPayment::class);
     }
 
-    public function users()
-    {
-        return $this->belongsToMany(
-            User::class,
-            'profile_department_user'
-        )->withPivot('department_id')
-            ->withTimestamps();;
-    }
+    // public function users()
+    // {
+    //     return $this->belongsToMany(
+    //         User::class,
+    //         'profile_department_user'
+    //     )->withPivot('department_id')
+    //         ->withTimestamps();;
+    // }
     public function departments()
     {
         return $this->belongsToMany(
@@ -91,5 +91,21 @@ class Profile extends Model implements HasMedia
     {
         return User::where('id',$this->created_by)->first();
         
+    }
+
+    //profile users
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'profile_role_user')
+        ->withPivot(['user_id', 'status'])
+        ->as('user');
+    }
+
+    //profile roles
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'profile_role_user')
+        ->withPivot(['role_id', 'status'])
+        ->as('role');
     }
 }

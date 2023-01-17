@@ -64,10 +64,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('\App\Models\UM\OauthAccessToken');
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(RoleUserProfile::class,'user_id');
-    }
+    // public function roles()
+    // {
+    //     return $this->belongsToMany(RoleUserProfile::class,'user_id');
+    // }
 
     
 
@@ -111,14 +111,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
-    public function profiles()
-    {
-        return $this->belongsToMany(
-            Profile::class,
-            'profile_department_user'
-        )->withPivot('department_id')
-            ->withTimestamps();
-    }
+    // public function profiles()
+    // {
+    //     return $this->belongsToMany(
+    //         Profile::class,
+    //         'profile_department_user'
+    //     )->withPivot('department_id')
+    //         ->withTimestamps();
+    // }
     public function departments()
     {
         return $this->belongsToMany(
@@ -177,4 +177,20 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return DB::table('users')->where('id', $mangerId)->pluck('full_name')->first();
     }
+
+     // user roles
+     public function roles()
+     {
+        return $this->belongsToMany(Role::class, 'profile_role_user')
+        ->withPivot(['role_id', 'status'])
+        ->as('role');
+     }
+ 
+     //user profiles
+     public function profiles()
+     {
+         return $this->belongsToMany(Profile::class, 'profile_role_user')
+         ->withPivot(['profile_id', 'status'])
+         ->as('profile');;
+     }
 }
