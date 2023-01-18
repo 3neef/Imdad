@@ -28,14 +28,14 @@ class CreateProuductRequest extends FormRequest
         // 'categoryId' => 'required|integer|exists:categories,id,isleaf,1',
 
         return [
-            'categoryId' => 'required|integer|exists:categories,id',
-            'nameEn'=>'required|string|unique:products,name_en',
-            'nameAr'=>'required|string|unique:products,name_ar',
-            'price'=>'nullable|between:0,99.99',
-            'attachementFile'=>'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:5120',
+            'categoryId' =>[ 'required','integer','exists:categories,id'],
+            'nameEn'=>['required','string','unique:products,name_en','max:50'],
+            'nameAr'=>['required','string','unique:products,name_ar','max:50'],
+            'price'=>['nullable','between:0,99.99'],
+            'attachementFile'=>['nullable','image','mimes:jpg,png,jpeg,gif,svg','max:5120'],
             'measruingUnit'=> ['string','required'],
-            'descriptionEn'=>['required','string'],
-            'descriptionAr'=>['required','string']
+            'descriptionEn'=>['required','string','max:120'],
+            'descriptionAr'=>['required','string','max:120']
 
         ];
     }

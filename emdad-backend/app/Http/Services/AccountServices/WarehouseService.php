@@ -48,7 +48,13 @@ class WarehouseService
             ]);
             if (isset($request['userList'])) {
                 foreach ($request['userList'] as $user_id) {
+                    try{
                         UserWarehousePivot::create(["warehouse_id"=>$warehouse->id,'user_id' => $user_id ?? auth()->user->id]);
+
+                    }
+                    catch(Exception $ex){
+
+                    }
                    
                 }
             }
