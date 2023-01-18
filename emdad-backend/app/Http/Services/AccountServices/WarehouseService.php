@@ -58,7 +58,6 @@ class WarehouseService
                    
                 }
             }
-
             return $warehouse;
         });
         if ($warehouse!=null) {
