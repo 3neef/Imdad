@@ -18,7 +18,8 @@ class Cors
     {
         // ## This is custom code for remove cors issue ##
         $request->header('Access-Control-Allow-Origin', '*');
-        // header('Access-Control-Allow-Origin:  http://localhost:4200');
+        $request->header('Access-Control-Allow-Origin:  http://localhost:5173');
+        $request->header('Access-Control-Allow-Origin:  http://172.21.1.116:9090');
         $request->header('Access-Control-Allow-Headers:  Content-Type, X-Auth-Token, Authorization, Origin');
         $request->header('Access-Control-Allow-Methods:  GET, POST, PUT, DELETE, OPTIONS');
         return $next($request);
