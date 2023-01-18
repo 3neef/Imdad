@@ -27,8 +27,9 @@ class WathiqService
             ),
         ));
 
-        $response = curl_exec($curl);
+        
 
+        $response = curl_exec($curl);
         curl_close($curl);
         if (is_array(json_decode($response))) {
             foreach (json_decode($response) as $relatedCompany) {

@@ -67,6 +67,8 @@ class WathiqController extends Controller
             return response()->json(["status" => true, "data" => RelatedCompaiesResource::collection($related)], 200);
         } else {
             $service->getRelatedCompanies($request->identityNumber, $request->type);
+            
+
             $related = RelatedCompanies::where("identity", $request->identityNumber)->where("identity_type", $request->type)->get();
             return response()->json(["status" => true, "data" => RelatedCompaiesResource::collection($related)], 200);
         }
