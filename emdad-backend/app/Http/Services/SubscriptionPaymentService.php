@@ -43,7 +43,7 @@ class SubscriptionPaymentService
                 'status'=>$price>0?"Pending":"Paid"
 
             ]);
-            $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features],200);
+            $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
 
             return response()->json(['data' => new SubscriptionResource($SubscriptionPayment), "oldOwner" => $oldOwner,"statusCode"=>"000"], 200);
         } else {
@@ -57,7 +57,7 @@ class SubscriptionPaymentService
                     'tax_amount' => $price * 15 / 100,
                     'total' => ($price + ($price * 15 / 100)),
                 ]);
-                $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => json_encode($subscription->features, true)]);
+                $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
 
                 return response()->json(['data' => new SubscriptionResource($payedSubscription), "oldOwner" => $oldOwner,'statusCode'=>"000"], 200);
             }
