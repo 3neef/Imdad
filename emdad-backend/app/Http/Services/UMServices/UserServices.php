@@ -164,12 +164,26 @@ class UserServices
 
     public function detachWarehouse($request)
     {
-        UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first()->forceDelete();
-        return response()->json([
-            "statusCode" => "000",
+        $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
+        if($userWarehouse==null){
+            return response()->json([
+                "statusCode" => "111",
+    
+                'message' => 'User not attached to warehouse'
+            ], 200);
+        }
+      
+        if($userWarehouse!=null){
+            $userWarehouse->forceDelete();
 
-            'message' => 'User deatched successfully'
-        ], 200);
+            return response()->json([
+                "statusCode" => "000",
+    
+                'message' => 'User deatched successfully'
+            ], 200);
+        }
+
+     
     }
 
     public function userWarehouseStatus($request)
@@ -454,7 +468,8 @@ class UserServices
     {
         $user = User::where('id', $request->userId)->first();
         $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
-        $active = $userRoleProfile->update(['status' => 'inActive']);
+
+        $active = $userRoleProfile->update(['status' => $userRoleProfile->status == "inActive" ? "active" : "inActive"]);
         // dd($userRoleProfile);
         if ($active) {
             return response()->json([
