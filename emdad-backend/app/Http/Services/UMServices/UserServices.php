@@ -468,7 +468,8 @@ class UserServices
     {
         $user = User::where('id', $request->userId)->first();
         $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
-        $active = $userRoleProfile->update(['status' => 'inActive']);
+
+        $active = $userRoleProfile->update(['status' => $userRoleProfile->status == "inActive" ? "active" : "inActive"]);
         // dd($userRoleProfile);
         if ($active) {
             return response()->json([

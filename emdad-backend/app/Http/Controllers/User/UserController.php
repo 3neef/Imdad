@@ -550,7 +550,7 @@ class UserController extends Controller
 
     /**
      * @OA\Put(
-     * path="/api/v1_0/users/disable",
+     * path="/api/v1_0/users/change-status",
      * operationId=" disable",
      * tags={"UM & Permissions"},
      * summary="disable user",
