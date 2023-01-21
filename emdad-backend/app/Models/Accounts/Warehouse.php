@@ -41,9 +41,9 @@ class Warehouse extends Model
     }
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
-    
+
     public function manager()
     {
          return User::where('id',$this->manager_id)->first();

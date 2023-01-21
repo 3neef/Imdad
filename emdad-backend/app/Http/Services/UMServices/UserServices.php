@@ -23,6 +23,7 @@ class UserServices
 
     public function create($request)
     {
+        // dd($request);
         $packageLimit = new PackageConstraint;
 
         $check = in_array($request['roleId'], [1, 2, 3, 4, 12]);
@@ -114,15 +115,17 @@ class UserServices
 
         ]);
 
-        $WarahouseId = $request->warahouseId ?? null;
-        if ($WarahouseId != null) {
+        $Warehouses = $request['warehouseId'] ?? null;
+        if ($Warehouses != null) {
             try {
-                $user->warehouse()->attach(
+                foreach ($Warehouses as $warehouse) {
+                $user->warehouses()->attach(
                     $user->id,
                     [
-                        'warehouse_id' => $request->warahouseId,
+                        'warehouse_id' => $warehouse,
                     ]
                 );
+            }
             } catch (Exception $ex) {
             }
         }
@@ -568,6 +571,7 @@ class UserServices
 
     public function createUser($request)
     {
+        // dd($request);
         return DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
             $request['expiry_date'] = $request['expireDate'] ?? null;
@@ -577,6 +581,7 @@ class UserServices
             $request['is_super_admin'] = false;
 
             $user = User::create($request);
+            // dd($user->warehouses());
             $this->UserOtp($user);
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
@@ -592,9 +597,11 @@ class UserServices
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
-            if (isset($request->warahouseId)) {
-
-                $user->warehouse()->attach($user->id, ['warehouse_id' => $request->warahouseId,]);
+            if (isset($request['warehouseId'])) {
+                // dd('hey');
+                foreach ($request['warehouseId'] as $warehouse_id) {
+                $user->warehouses()->attach($user, ['warehouse_id' => $warehouse_id]); 
+                }
             }
         return $user;
 

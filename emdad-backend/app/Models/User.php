@@ -106,7 +106,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function warehouses()
     {
-        return $this->belongsToMany(Warehouse::class);
+        return $this->belongsToMany(Warehouse::class)->withTimestamps();
     }
 
 

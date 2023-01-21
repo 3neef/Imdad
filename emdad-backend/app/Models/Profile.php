@@ -46,9 +46,14 @@ class Profile extends Model implements HasMedia
         return $this->morphMany(Driver::class, 'manageable');
     }
 
+    // public function products()
+    // {
+    //     return $this->hasMany(Product::class);
+    // }
+
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 
     public function categories()

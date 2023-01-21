@@ -49,7 +49,7 @@ class WarehouseService
             if (isset($request['userList'])) {
                 foreach ($request['userList'] as $user_id) {
                     try{
-                        UserWarehousePivot::create(["warehouse_id"=>$warehouse->id,'user_id' => $user_id ?? auth()->user->id]);
+                        $warehouse->users()->attach(["warehouse_id"=>$warehouse->id,'user_id' => $user_id ?? auth()->user->id]);
 
                     }
                     catch(Exception $ex){
@@ -61,7 +61,7 @@ class WarehouseService
             return $warehouse;
         });
         if ($warehouse!=null) {
-            return response()->json(["statusCode" => '000','message' => 'created successfully'], 200);
+            return response()->json(["statusCode" => '000','message' => 'created successfully', 'data'=> WarehouseResponse::collection($warehouse) ], 200);
         }
 
         return response()->json(['error' => 'system error'], 500);
