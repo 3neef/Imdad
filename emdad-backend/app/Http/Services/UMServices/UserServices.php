@@ -29,8 +29,8 @@ class UserServices
 
         if ($check == true) {
             $value = DB::table('role_user_profile')->where('profile_id', auth()->user()->profile_id)->whereIn('role_id', [1, 2, 3, 4, 12])->count();
-            // $newvalue = (--$value);
-            $Limit = $packageLimit->packageLimitExceed("owner", $value);
+            $newvalue = (--$value);
+            $Limit = $packageLimit->packageLimitExceed("owner", $newvalue);
 
             if ($Limit == false) {
                 return response()->json([
