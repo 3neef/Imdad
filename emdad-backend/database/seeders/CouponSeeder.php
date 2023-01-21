@@ -17,26 +17,24 @@ class CouponSeeder extends Seeder
     public function run()
     {
         $coupons = [
-            'code' => rand(100, 99),
-            'value' => rand(100, 99),
-            'is_percentage' => 1,
-            'start_date' => '2025-1-1',
-            'end_date' => '2026-1-1',
-            'allowed' => 100,
-            'used'=>0,
-
-        ];
+             ['code'=>rand(100,99),'value'=>rand(100,99), 'is_percentage'=>0, 'start_date'=>'2025-1-1', 'end_date'=>'2026-1-1','allowed'=>100,'used'=>0] ,
+             ['code'=>rand(1000,999),'value'=>rand(1000,999), 'is_percentage'=>0, 'start_date'=>'2025-1-1', 'end_date'=>'2026-1-1','allowed'=>100,'used'=>0] ,
+             ['code'=>rand(10000,9999),'value'=>rand(10000,9999), 'is_percentage'=>0, 'start_date'=>'2025-1-1', 'end_date'=>'2026-1-1','allowed'=>100,'used'=>0] 
+       
+            ];
+        
+        foreach ($coupons as $coupon) {
             
             DB::table('coupons')->insert([
-                "code" => $coupons['code'],
-                "value" => $coupons['value'],
-                "is_percentage" => $coupons['is_percentage'],
-                "start_date" => $coupons['start_date'],
-                "end_date" => $coupons['end_date'],
-                "allowed" => $coupons['allowed'],
-                "used" => $coupons['used']
+                "code" => $coupon['code'],
+                "value" => $coupon['value'],
+                "is_percentage" => $coupon['is_percentage'],
+                "start_date" => $coupon['start_date'],
+                "end_date" => $coupon['end_date'],
+                "allowed" => $coupon['allowed'],
+                "used" => $coupon['used']
             ]);
-        
+        }
     }
     
 }

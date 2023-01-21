@@ -171,4 +171,14 @@ class WarehouseService
     //         return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
     //     }
     // }
+
+
+public function checkDefernet($request)
+{
+    # code...
+}
+
+
+
+
 }
