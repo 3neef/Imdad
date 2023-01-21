@@ -10,6 +10,7 @@ use App\Models\Emdad\RelatedCompanies;
 use App\Models\Emdad\Unit_of_measures;
 use App\Models\UM\Permission;
 use App\Models\UM\Role;
+use App\Models\User;
 use Ejarnutowski\LaravelApiKey\Models\ApiKey;
 use Exception;
 use Illuminate\Database\Seeder;
@@ -27,40 +28,52 @@ class DatabaseSeeder extends Seeder
     {
 
         // DB::table('categories')->delete();
-       
-        if(ApiKey::count()==0){
+
+        if (ApiKey::count() == 0) {
             $this->call([
-                ApiKeysSeeder::class]);
+                ApiKeysSeeder::class
+            ]);
         }
 
-        if(SubscriptionPackages::count()==0){
+        if (SubscriptionPackages::count() == 0) {
             $this->call([
-                SubscriptionPackagesSeeder::class]);
+                SubscriptionPackagesSeeder::class
+            ]);
         }
 
-        if(Permission::count()==0){
+        if (Permission::count() == 0) {
             $this->call([
-                PermissionSeeder::class]);
+                PermissionSeeder::class
+            ]);
         }
-        if(Unit_of_measures::count()==0){
+        if (Unit_of_measures::count() == 0) {
             $this->call([
-                UOMSeeder::class]);
-        }
-
-        if(Role::count()==0){
-
-            $this->call([
-                RegRoleSeeder::class]);
-        }
-        if(Categories::count()==0){
-            $this->call([
-                CategoriesSeeder::class]);
-        }
-        if(RelatedCompanies::count()==0){
-            $this->call([
-                RelatedCompinesTableSeeder::class]);
+                UOMSeeder::class
+            ]);
         }
 
+        if (Role::count() == 0) {
+
+            $this->call([
+                RegRoleSeeder::class
+            ]);
+        }
+        if (Categories::count() == 0) {
+            $this->call([
+                CategoriesSeeder::class
+            ]);
+        }
+        if (RelatedCompanies::count() == 0) {
+            $this->call([
+                RelatedCompinesTableSeeder::class
+            ]);
+        }
+
+        if (User::count() == 0) {
+            $this->call([
+                UserSeeder::class
+            ]);
+        }
 
         //test again
     }
