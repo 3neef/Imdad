@@ -151,24 +151,32 @@ class WarehouseService
 
     public function assignWarehouseToUser($request)
     {
-        $assign = UserWarehousePivot::create([
-            'user_id' => $request->userId,
-            'warehouse_id' => $request->warehouseId
-        ]);
-        if ($assign) {
-            return response()->json(["statusCode" => '000', 'message' => 'assign user successfully'], 200);
+        // $assign = UserWarehousePivot::create([
+        //     'user_id' => $request->userId,
+        //     'warehouse_id' => $request->warehouseId
+        // ]);
+
+        $user = User::find($request->userId);
+        $warehouse = Warehouse::find($request->warehouseId);
+
+        if ($user!= null && $warehouse!= null) {
+            $warehouse->users()->attach($user);
+            return response()->json(["statusCode" => '000', 'message' => 'user assigned successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
     }
 
-    // public function unAssignWarehouseToUser($id)
-    // {
-    //     $warehouses = UserWarehousePivot::find($id)->first();
-    //     if ($warehouses == null) {
-    //         return response()->json(["statusCode" => '111', 'success' => false, 'error' => 'not found'], 404);
-    //     } else {
-    //         $warehouses->delete();
-    //         return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
-    //     }
-    // }
+    public function unAssignWarehouseFromUser($request)
+    {
+        $user = User::find($request->userId);
+        $warehouse = Warehouse::find($request->warehouseId);
+
+        dd($user->warehouses);
+
+        if ($user!= null && $warehouse!= null) {
+            $warehouse->users()->detach($user);
+            return response()->json(["statusCode" => '000', 'message' => 'user unassigned successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+    }
 }

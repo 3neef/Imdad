@@ -12,7 +12,8 @@ use App\Http\Requests\CategroyRequests\Categroy\FilterCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\ProfileCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\RetryApprovalRequest;
 use App\Http\Requests\CategroyRequests\Categroy\UpdateCategoryRequest;
-use App\Models\Emdad\Categories;
+// use App\Models\Emdad\Categories;
+use App\Models\Emdad\Category;
 
 class CategoryController extends Controller
 {
@@ -72,7 +73,7 @@ class CategoryController extends Controller
     public function store(CreateCategoryRequest $request)
 
     {
-        $this->authorize('create', Categories::class);
+        $this->authorize('create', Category::class);
 
         return $this->categoryService->store($request);
     }

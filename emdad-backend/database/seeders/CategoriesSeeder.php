@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Emdad\Categories;
+// use App\Models\Emdad\Categories;
+use App\Models\Emdad\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -39,7 +40,7 @@ class CategoriesSeeder extends Seeder
 
         ];
         foreach ($Categories as $Category) {
-            Categories::create([
+            Category::create([
                 'id' => $Category['id'],
                 'name_ar' => $Category['name_ar'],
                 'name_en' => $Category['name_en'],
