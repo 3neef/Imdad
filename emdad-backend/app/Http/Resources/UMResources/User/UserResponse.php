@@ -16,6 +16,7 @@ class UserResponse extends JsonResource
      */
     public function toArray($request)
     {
+        $warehouses = $this->warehouses()->where('user_id', $this->id)->pluck('warehouse_id') ?? null;
 
         return [
             "id" => $this->id,
@@ -34,8 +35,8 @@ class UserResponse extends JsonResource
             "expireDate" => $this->expiry_date,
             "passwordChanged" => $this->password_changed,
             "mangerInfo" => $this->mangerUserId() ?? '',
-            "createdAt"=> $this->created_at->format('y-m-d'),
-            'warehouses'=>$this->warehouses(),
+            "createdAt"=> $this->created_at->format('y-m-d') ?? null,
+            'warehouses'=>$warehouses,
             "allProfiles" => DB::table("role_user_profile")->where("user_id", $this->id)->pluck("profile_id"),
 
         ];
