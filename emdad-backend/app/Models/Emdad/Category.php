@@ -56,9 +56,7 @@ class Category extends Model
 
     public function CreatorName()
     {
-
         return   DB::table('category_profile')->where('profile_id',auth()->user()->profile_id)->where("user_id",$this->created_by)->first();
-        
     }
 
     public function profiles()
