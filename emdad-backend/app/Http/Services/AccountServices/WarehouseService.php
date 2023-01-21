@@ -35,12 +35,12 @@ class WarehouseService
             $warehouse = Warehouse::create([
                 'profile_id' => auth()->user()->profile_id,
                 'address_name' => $request->warehouseName,
-                'address_contact_phone' => $request->receiverPhone??null,
+                'address_contact_phone' => $request->receiverPhone ?? null,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
-                'address_contact_name' => $request->receiverName??null,
+                'address_contact_name' => $request->receiverName ?? null,
                 'address_type' => $request->warehouseType,
-                'gate_type' => $request->gateType??"",
+                'gate_type' => $request->gateType ?? "",
                 'created_by' => auth()->id(),
                 'otp_expires_at' => now()->addMinutes(3),
                 'manager_id' => $request->managerId ?? auth()->id(),
@@ -48,20 +48,16 @@ class WarehouseService
             ]);
             if (isset($request['userList'])) {
                 foreach ($request['userList'] as $user_id) {
-                    try{
-                        UserWarehousePivot::create(["warehouse_id"=>$warehouse->id,'user_id' => $user_id ?? auth()->user->id]);
-
+                    try {
+                        UserWarehousePivot::create(["warehouse_id" => $warehouse->id, 'user_id' => $user_id ?? auth()->user->id]);
+                    } catch (Exception $ex) {
                     }
-                    catch(Exception $ex){
-
-                    }
-                   
                 }
             }
             return $warehouse;
         });
-        if ($warehouse!=null) {
-            return response()->json(["statusCode" => '000','message' => 'created successfully'], 200);
+        if ($warehouse != null) {
+            return response()->json(["statusCode" => '000', 'message' => 'created successfully'], 200);
         }
 
         return response()->json(['error' => 'system error'], 500);
@@ -85,7 +81,7 @@ class WarehouseService
                 "longitude" => $request->longitude ?? $warehouse->longitude,
 
             ]);
-            return response()->json(["statusCode" => '000','success' => 'Updated Successfly'], 200);
+            return response()->json(["statusCode" => '000', 'success' => 'Updated Successfly'], 200);
         }
 
         return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
@@ -123,7 +119,6 @@ class WarehouseService
 
             $warehouses->forceDelete();
             return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
-
         }
     }
 
@@ -173,12 +168,5 @@ class WarehouseService
     // }
 
 
-public function checkDefernet($request)
-{
-    # code...
-}
-
-
-
-
+   
 }

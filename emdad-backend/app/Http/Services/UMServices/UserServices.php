@@ -103,103 +103,98 @@ class UserServices
     public function update($request, $id)
     {
 
-if($id == auth()->id()){
 
-    return response()->json(
-        [
-            "statusCode" => "110",
-            'message' => 'you cannot  update your self'
-        ],
-        200
-    );
+        $user = User::where('id', $id)->first();
+        $user->update([
+            "full_name" => $request->fullName ?? $user->full_name,
+            "email" => $request->email ?? $user->email,
+            "mobile" => $request->mobile ?? $user->mobile,
+            "identity_number" => $request->identityNumber ?? $user->identity_number,
+            'expiry_date' => $request['expireDate'] ?? $user->expiry_date,
+            'lang' =>  $request['lang'] ?? $user->lang,
 
-}
-else{
-    
-    $user = User::where('id', $id)->first();
-    $user->update([
-        "full_name" => $request->fullName ?? $user->full_name,
-        "email" => $request->email ?? $user->email,
-        "mobile" => $request->mobile ?? $user->mobile,
-        "identity_number" => $request->identityNumber ?? $user->identity_number,
-        'expiry_date' => $request['expireDate'] ?? $user->expiry_date,
-        'lang' =>  $request['lang'] ?? $user->lang,
+        ]);
 
-    ]);
-
-    $WarahouseId = $request->warahouseId ?? null;
-    if ($WarahouseId != null) {
-        try {
-            $user->warehouse()->attach(
-                $user->id,
-                [
-                    'warehouse_id' => $request->warahouseId,
-                ]
-            );
-        } catch (Exception $ex) {
+        $WarahouseId = $request->warahouseId ?? null;
+        if ($WarahouseId != null) {
+            try {
+                $user->warehouse()->attach(
+                    $user->id,
+                    [
+                        'warehouse_id' => $request->warahouseId,
+                    ]
+                );
+            } catch (Exception $ex) {
+            }
         }
-    }
 
 
-    $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
+        $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
-    if ($request->has("roleId") && $userRoleProfile != null) {
+        if ($request->has("roleId") && $userRoleProfile != null) {
 
-        $userRoleProfile->update(['user_id' => $user->id , 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['manager_user_Id'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
-    }
-    if ($user->wasChanged('mobile')) {
-        $user->update(['is_verified' => 0]);
-        $this->UserOtp($user);
-        return response()->json(
-            [
+            if($id == auth()->id()&& $request->status!=$userRoleProfile->status){
+
+                return response()->json(
+                    [
+                        "statusCode" => "110",
+                        'message' => 'you cannot  disable your self'
+                    ],
+                    200
+                );
+            
+            }
+
+            $userRoleProfile->update(['user_id' => $user->id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['manager_user_Id'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
+        }
+        if ($user->wasChanged('mobile')) {
+            $user->update(['is_verified' => 0]);
+            $this->UserOtp($user);
+            return response()->json(
+                [
+                    "statusCode" => "000",
+
+                    'message' => 'New OTP has been sent.',
+                    'otp' => $user->otp,
+                ],
+                200
+            );
+        }
+        if ($user) {
+            return response()->json([
                 "statusCode" => "000",
 
-                'message' => 'New OTP has been sent.',
-                'otp' => $user->otp,
-            ],
-            200
-        );
-    }
-    if ($user) {
+                'message' => 'User updated successfully',
+                'data' => ['user' => new UserResponse($user)]
+            ], 200);
+        }
         return response()->json([
-            "statusCode" => "000",
+            "statusCode" => "999",
 
-            'message' => 'User updated successfully',
-            'data' => ['user' => new UserResponse($user)]
+            'error' => 'system error'
         ], 200);
     }
-    return response()->json([
-        "statusCode" => "999",
-
-        'error' => 'system error'
-    ], 200);
-}
-
-
-}
 
     public function detachWarehouse($request)
     {
         $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
-        if($userWarehouse==null){
+        if ($userWarehouse == null) {
             return response()->json([
                 "statusCode" => "111",
-    
+
                 'message' => 'User not attached to warehouse'
             ], 200);
         }
-      
-        if($userWarehouse!=null){
+
+        if ($userWarehouse != null) {
             $userWarehouse->forceDelete();
 
             return response()->json([
                 "statusCode" => "000",
-    
+
                 'message' => 'User deatched successfully'
             ], 200);
         }
-
-     
     }
 
     public function userWarehouseStatus($request)
@@ -491,7 +486,6 @@ else{
                 ],
                 200
             );
-
         } else {
 
             $user = User::where('id', $request->userId)->first();
@@ -615,8 +609,8 @@ else{
                 $manager_id = auth()->id() ?? null;
             }
             if ($role_id && $manager_id) {
-                $permissions=Role::where("id",$role_id)->first()->permissions_list;
-                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id,'permissions' => $permissions]);
+                $permissions = Role::where("id", $role_id)->first()->permissions_list;
+                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id, 'permissions' => $permissions]);
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
@@ -624,8 +618,30 @@ else{
 
                 $user->warehouse()->attach($user->id, ['warehouse_id' => $request->warahouseId,]);
             }
-        return $user;
-
+            return $user;
         });
+    }
+
+
+    public function addPermissionToUser($request)
+    {
+
+        # code...
+        // seearch in profile-role-user where user_id and auth->profile
+        // get permissions list and add permission to the list
+        // if the new list after adding equals to another role permission list from roles table
+        // suggest change user role 
+        
+        $roles = Role::where("type", auth()->user()->currentProfile()->type)->get();
+    }
+
+    public function checkTheRole($arrayOne,$arrayTwo)
+    {
+        $result =  array_diff($arrayOne, $arrayTwo);
+        if (count($result) != 0)
+            return false;
+        else {
+            return true;
+        }
     }
 }
