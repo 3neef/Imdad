@@ -28,7 +28,7 @@ class AssignUserToWarehouseRequest extends FormRequest
     public function rules()
     {
         return [
-            'userId' => ['required','integer','exists:users,id', new IsCompositeUnique('user_warehouse_pivots',['user_id'=>$this->userId,'warehouse_id'=>$this->warehouseId])],
+            'userId' => ['required','integer','exists:users,id', new IsCompositeUnique('user_warehouse',['user_id'=>$this->userId,'warehouse_id'=>$this->warehouseId])],
             'warehouseId' => ['required','integer','exists:warehouses,id']
       
         ];

@@ -9,7 +9,7 @@ use App\Http\Requests\CategroyRequests\Product\CreateProuductRequest;
 use App\Http\Requests\CategroyRequests\Product\StatusCompanyProductRequest;
 use App\Http\Requests\CategroyRequests\Product\UpdateProuductRequest;
 use App\Http\Services\CategoryServices\ProductService;
-use App\Models\Emdad\Categories;
+// use App\Models\Emdad\Categories;
 use App\Models\Emdad\Product;
 
 class ProductController extends Controller

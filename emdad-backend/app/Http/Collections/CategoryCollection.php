@@ -4,7 +4,7 @@
 namespace App\Http\Collections;
 
 use App\Http\CustomFliters\DefaultCategoryFilter;
-use App\Models\Emdad\Categories;
+use App\Models\Emdad\Category;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -40,7 +40,7 @@ class CategoryCollection
 
         $perPage =  $request->pageSize ?? 100;
 
-        return QueryBuilder::for(Categories::class)
+        return QueryBuilder::for(Category::class)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->allowedIncludes($allowedIncludes)

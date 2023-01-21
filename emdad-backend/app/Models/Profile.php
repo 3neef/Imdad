@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use App\Models\Accounts\SubscriptionPackages;
-use App\Models\Emdad\Categories;
+// use App\Models\Emdad\Categories;
+use App\Models\Emdad\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -45,14 +46,19 @@ class Profile extends Model implements HasMedia
         return $this->morphMany(Driver::class, 'manageable');
     }
 
+    // public function products()
+    // {
+    //     return $this->hasMany(Product::class);
+    // }
+
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsToMany(Product::class);
     }
 
     public function categories()
     {
-        return $this->hasMany(Categories::class);
+        return $this->hasMany(Category::class);
     }
 
     public function parent()
@@ -71,14 +77,14 @@ class Profile extends Model implements HasMedia
         return $this->hasMany(SubscriptionPayment::class);
     }
 
-    public function users()
-    {
-        return $this->belongsToMany(
-            User::class,
-            'profile_department_user'
-        )->withPivot('department_id')
-            ->withTimestamps();;
-    }
+    // public function users()
+    // {
+    //     return $this->belongsToMany(
+    //         User::class,
+    //         'profile_department_user'
+    //     )->withPivot('department_id')
+    //         ->withTimestamps();;
+    // }
     public function departments()
     {
         return $this->belongsToMany(
@@ -91,5 +97,21 @@ class Profile extends Model implements HasMedia
     {
         return User::where('id',$this->created_by)->first();
         
+    }
+
+    //profile users
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'profile_role_user')
+        ->withPivot(['user_id', 'status'])
+        ->as('user');
+    }
+
+    //profile roles
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'profile_role_user')
+        ->withPivot(['role_id', 'status'])
+        ->as('role');
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources\CategoryResourses\category;
 
-use App\Models\Emdad\Categories;
+use App\Models\Emdad\Category;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class CategoryResource extends JsonResource
 {
@@ -16,6 +17,9 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
+        // $user = DB::table('category_profile')->where('profile_id',auth()->user()->profile_id)->where("user_id",$this->created_by)->first();
+        // $user = $this->profiles()->where('profile_id',auth()->user()->profile_id)->where("user_id",$this->created_by)->first()->profile;
+        // dd($user);
         return [
             "id" => $this->id,
             "nameEn" => $this->name_en,
@@ -28,7 +32,8 @@ class CategoryResource extends JsonResource
             'note' => $this->reason,
             'createdAt' => $this->created_at->format('Y-m-d'),
             'CreatorName' => $this->CreatorName()!=null?User::where("id", $this->CreatorName()->user_id)->first()->full_name:'Created By Emdad',
-            'sequence' => Categories::where("id", $this->id)->first() != null ? Categories::where("id", $this->id)->first()->sequence() : "debug"
+            // 'CreatorName' => $this->CreatorName()!=null?User::where("id", $this->CreatorName()->user_id)->first()->full_name:'',
+            'sequence' => Category::where("id", $this->id)->first() != null ? Category::where("id", $this->id)->first()->sequence() : "debug"
         ];
     }
 }

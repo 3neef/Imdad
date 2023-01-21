@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\UMRequests\User;
 
+use App\Rules\UniqeValues;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -40,7 +41,8 @@ class UpdateRequest extends FormRequest
             "mobile" => ["min:14","max:14","string",Rule::unique('users')->ignore($this->id, 'id')],
             "roleId" => "integer|exists:roles,id",
             'manager_user_Id'=>'integer|exists:users,id',
-            'WarahouseId'=>'integer|exists:warehouses,id',
+            'warehouseId'=>['array', 'nullable', new UniqeValues],
+            'warehouseId.*'=>'exists:warehouses,id',
             'status' => [Rule::in('active','inActive')],
             'lang'=>  [Rule::in('en','ar')],
             'isLearning'=>'nullable'

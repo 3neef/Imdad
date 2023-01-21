@@ -26,6 +26,8 @@ class AccountService
             $profile = DB::transaction(function () use ($request) {
 
                 $company = RelatedCompanies::where("cr_number", $request->crNo)->first();
+                $user = User::where('id', auth()->user()->id)->first();
+                // dd($user->profiles);
                 $profile = Profile::create([
                     "type" => $request->ProfileType,
                     "name_ar" => $company->cr_name,
@@ -36,9 +38,10 @@ class AccountService
                 ]);
                  WalletsService::create($profile);
                 $permissions = $this->pluckPermissions($request->ProfileType);
-                RoleUserProfile::create(
-                    ['user_id' => auth()->id(), 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]
-                );
+                // $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
+                // 
+                $user->profiles()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
+
 
                 $user=User::where("id",auth()->user()->id)->first();
                 $user->update(['profile_id' => $profile->id]);
@@ -108,7 +111,12 @@ class AccountService
 
     public function swap_profile($id)
     {
-        $user = RoleUserProfile::where('profile_id', $id)->where('user_id', auth()->id())->where('role_id', "!=", null)->first();
+        // $user = RoleUserProfile::where('profile_id', $id)->where('user_id', auth()->id())->where('role_id', "!=", null)->first();
+
+        //fith pivot table with relation
+        $company = Profile::find($id);
+        $user = $company->users()->where('user_id', auth()->id())->first();
+ 
         if ($id == auth()->user()->profile_id) {
             return response()->json(["statusCode"=>'265','success' => false, 'error' => 'you are Already In this  profile'], 200);
         }

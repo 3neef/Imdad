@@ -5,8 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Accounts\SubscriptionPackages;
-use App\Models\Coupon\Coupon;
-use App\Models\Emdad\Categories;
+use App\Models\Emdad\Category;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Emdad\Unit_of_measures;
 use App\Models\UM\Permission;
@@ -59,7 +58,7 @@ class DatabaseSeeder extends Seeder
                 RegRoleSeeder::class
             ]);
         }
-        if (Categories::count() == 0) {
+        if(Category::count()==0){
             $this->call([
                 CategoriesSeeder::class
             ]);

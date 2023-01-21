@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountRequests\Location\AssignUserToWarehouseRequest;
 use App\Http\Requests\AccountRequests\Location\CreateWarehouesesRequest;
 use App\Http\Requests\AccountRequests\Location\RestoreLocationRequest;
+use App\Http\Requests\AccountRequests\Location\UnAssignWarehouseFromUserRequest;
 use App\Http\Requests\AccountRequests\Location\UpdateWarehousesRequest;
 use App\Http\Requests\AccountRequests\Location\VerfiedLocationRequest;
 use App\Http\Services\AccountServices\WarehouseService;
@@ -532,13 +533,9 @@ class WarehousesController extends Controller
         *      @OA\Response(response=404, description="Resource Not Found"),
         * )
         */
-   
-
-
-
-
-
-
-        
+    public function unAssignWarehouseFromUser(UnAssignWarehouseFromUserRequest $request)
+    {
+        return $this->warehouseService->unAssignWarehouseFromUser($request);
+    }
     
 }

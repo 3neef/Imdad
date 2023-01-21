@@ -25,7 +25,8 @@ class Product extends Model implements HasMedia
     }
     public function category()
     {
-        return $this->belongsTo(Categories::class);
+        // return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Category::class);
     }
 
 
@@ -41,6 +42,10 @@ class Product extends Model implements HasMedia
             ->withTimestamps();
     }
 
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class);
+    }
     // public function productattachment()
     // {
     //     return $this->belongsToMany(Profile::class, 'products_attachment_pivot', 'product_id', 'image_path')

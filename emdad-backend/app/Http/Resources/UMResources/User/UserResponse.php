@@ -16,6 +16,7 @@ class UserResponse extends JsonResource
      */
     public function toArray($request)
     {
+        $warehouses = $this->warehouses()->where('user_id', $this->id)->pluck('warehouse_id') ?? null;
 
         return [
             "id" => $this->id,
@@ -26,14 +27,16 @@ class UserResponse extends JsonResource
             "mobile" => $this->mobile,
             "otp" => $this->otp,
             "isSuperAdmin" => $this->is_super_admin,
-            "status" => $this->userStatus() != null ? $this->userStatus()->status : "",
-            "roleId" => $this->userRole() ?? '',
+            // "status" => $this->userStatus() != null ? $this->userStatus()->status : "",
+            "status" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->status ?? '',
+            // "roleId" => $this->userRole() ?? '',
+            "roleId" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->role_id ?? '',
             "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null,
             "expireDate" => $this->expiry_date,
             "passwordChanged" => $this->password_changed,
             "mangerInfo" => $this->mangerUserId() ?? '',
-            "createdAt"=> $this->created_at->format('y-m-d'),
-            'warehouses'=>$this->warehouses(),
+            "createdAt"=> $this->created_at->format('y-m-d') ?? null,
+            'warehouses'=>$warehouses,
             "allProfiles" => DB::table("role_user_profile")->where("user_id", $this->id)->pluck("profile_id"),
 
         ];
