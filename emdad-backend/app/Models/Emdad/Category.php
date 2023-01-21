@@ -56,7 +56,8 @@ class Category extends Model
 
     public function CreatorName()
     {
-        return ProfileCategoryPivot::where('profile_id',auth()->user()->profile_id)->where("user_id",$this->created_by)->first();
+
+        return   DB::table('category_profile')->where('profile_id',auth()->user()->profile_id)->where("user_id",$this->created_by)->first();
         
     }
 
