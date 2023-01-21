@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Accounts\SubscriptionPackages;
+use App\Models\Coupon\Coupon;
 use App\Models\Emdad\Category;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Emdad\Unit_of_measures;
