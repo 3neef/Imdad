@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Accounts\SubscriptionPackages;
+use App\Models\Coupon\Coupon;
 use App\Models\Emdad\Categories;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Emdad\Unit_of_measures;
@@ -74,6 +75,11 @@ class DatabaseSeeder extends Seeder
                 UserSeeder::class
             ]);
         }
+        if(Coupon::count()==0){
+            $this->call([
+                CouponSeeder::class]);
+        }
+
 
         //test again
     }

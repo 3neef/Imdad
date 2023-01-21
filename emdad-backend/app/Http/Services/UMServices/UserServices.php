@@ -103,6 +103,7 @@ class UserServices
     public function update($request, $id)
     {
 
+
         $user = User::where('id', $id)->first();
         $user->update([
             "full_name" => $request->fullName ?? $user->full_name,
@@ -132,7 +133,19 @@ class UserServices
 
         if ($request->has("roleId") && $userRoleProfile != null) {
 
-            $userRoleProfile->update(['user_id' => $user->id , 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['manager_user_Id'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
+            if($id == auth()->id()&& $request->status!=$userRoleProfile->status){
+
+                return response()->json(
+                    [
+                        "statusCode" => "110",
+                        'message' => 'you cannot  disable your self'
+                    ],
+                    200
+                );
+            
+            }
+
+            $userRoleProfile->update(['user_id' => $user->id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['manager_user_Id'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
         }
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
@@ -165,25 +178,23 @@ class UserServices
     public function detachWarehouse($request)
     {
         $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
-        if($userWarehouse==null){
+        if ($userWarehouse == null) {
             return response()->json([
                 "statusCode" => "111",
-    
+
                 'message' => 'User not attached to warehouse'
             ], 200);
         }
-      
-        if($userWarehouse!=null){
+
+        if ($userWarehouse != null) {
             $userWarehouse->forceDelete();
 
             return response()->json([
                 "statusCode" => "000",
-    
+
                 'message' => 'User deatched successfully'
             ], 200);
         }
-
-     
     }
 
     public function userWarehouseStatus($request)
@@ -466,25 +477,36 @@ class UserServices
 
     public function disable($request)
     {
-        $user = User::where('id', $request->userId)->first();
-        $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+        if ($request->userId == auth()->id()) {
 
-        $active = $userRoleProfile->update(['status' => $userRoleProfile->status == "inActive" ? "active" : "inActive"]);
-        // dd($userRoleProfile);
-        if ($active) {
+            return response()->json(
+                [
+                    "statusCode" => "110",
+                    'message' => 'you cannot  update your self'
+                ],
+                200
+            );
+        } else {
+
+            $user = User::where('id', $request->userId)->first();
+            $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+
+            $active = $userRoleProfile->update(['status' => $userRoleProfile->status == "inActive" ? "active" : "inActive"]);
+            // dd($userRoleProfile);
+            if ($active) {
+                return response()->json([
+                    "statusCode" => "000",
+
+                    'message' => 'user account has disabled successfully'
+                ], 200);
+            }
             return response()->json([
-                "statusCode" => "000",
+                "statusCode" => "999",
 
-                'message' => 'user account has disabled successfully'
+                'error' => 'system error'
             ], 200);
         }
-        return response()->json([
-            "statusCode" => "999",
-
-            'error' => 'system error'
-        ], 200);
     }
-
     public function restoreOldRole($request)
     {
         $userRoleCompany = RoleUserProfile::where('user_id', $request->userId)->where('profile_id', $request->profile_id)->withTrashed()->first()->restore();
@@ -587,8 +609,8 @@ class UserServices
                 $manager_id = auth()->id() ?? null;
             }
             if ($role_id && $manager_id) {
-                $permissions=Role::where("id",$role_id)->first()->permissions_list;
-                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id,'permissions' => $permissions]);
+                $permissions = Role::where("id", $role_id)->first()->permissions_list;
+                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id, 'permissions' => $permissions]);
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
@@ -596,8 +618,30 @@ class UserServices
 
                 $user->warehouse()->attach($user->id, ['warehouse_id' => $request->warahouseId,]);
             }
-        return $user;
-
+            return $user;
         });
+    }
+
+
+    public function addPermissionToUser($request)
+    {
+
+        # code...
+        // seearch in profile-role-user where user_id and auth->profile
+        // get permissions list and add permission to the list
+        // if the new list after adding equals to another role permission list from roles table
+        // suggest change user role 
+        
+        $roles = Role::where("type", auth()->user()->currentProfile()->type)->get();
+    }
+
+    public function checkTheRole($arrayOne,$arrayTwo)
+    {
+        $result =  array_diff($arrayOne, $arrayTwo);
+        if (count($result) != 0)
+            return false;
+        else {
+            return true;
+        }
     }
 }

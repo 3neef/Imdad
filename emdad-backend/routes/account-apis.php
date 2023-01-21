@@ -30,3 +30,8 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('warehouses')->group(
     
 });
 Route::apiResource('warehouses', WarehousesController::class)->middleware(['auth.apikey', 'auth:sanctum']);
+
+
+
+
+// Route::post('checkTheRole', [WarehousesController::class, 'checkTheRole']);
