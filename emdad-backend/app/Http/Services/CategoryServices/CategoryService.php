@@ -5,7 +5,7 @@ namespace App\Http\Services\CategoryServices;
 use App\Http\Collections\CategoryCollection;
 use App\Http\Resources\CategoryPivotResource;
 use App\Http\Resources\CategoryResourses\category\CategoryResource;
-use App\Models\Emdad\Categories;
+use App\Models\Emdad\Category;
 use App\Models\ProfileCategoryPivot;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -26,7 +26,7 @@ class CategoryService
     public function store($request)
     {
         $category = DB::transaction(function () use ($request) {
-            $category = Categories::create([
+            $category = Category::create([
                 'name_en' => $request->nameEn,
                 'name_ar' => $request->nameAr,
                 'isleaf' => $request->isleaf ?? 0,
@@ -36,7 +36,8 @@ class CategoryService
                 'created_by' => auth()->id()
             ]);
             if ($category) {
-                $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id,'user_id'=>auth()->id()]);
+                // $category->companyCategory()->attach($category->id, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id,'user_id'=>auth()->id()]);
+                $category->profiles()->attach($category, ['category_id' => $category->id, 'profile_id' => auth()->user()->profile_id,'user_id'=>auth()->id()]);
             }
             if (auth()->user()->profile_id) {
                 $category->update(['profile_id' => auth()->user()->profile_id]);
@@ -62,7 +63,7 @@ class CategoryService
 
     public function show($id)
     {
-        $category = Categories::where('id', $id)->first();
+        $category = Category::where('id', $id)->first();
         if ($category) {
             return response()->json(['data' => new CategoryResource($category)], 200);
         }
@@ -73,7 +74,7 @@ class CategoryService
 
     public function update($request, $id)
     {
-        $category = Categories::where('id', $id)->first();
+        $category = Category::where('id', $id)->first();
 
         if ($category != null) {
             $category->update([
@@ -92,7 +93,7 @@ class CategoryService
 
     public function destroy($id)
     {
-        $category = Categories::find($id);
+        $category = Category::find($id);
         if ($category == null) {
             return response()->json(['success' => false, 'error' => 'not found'], 404);
         } else {
@@ -104,7 +105,7 @@ class CategoryService
 
     public function restore($id)
     {
-        $restore = Categories::where('id', $id)->where('deleted_at', '!=', null)->withTrashed()->restore();
+        $restore = Category::where('id', $id)->where('deleted_at', '!=', null)->withTrashed()->restore();
         if ($restore) {
             return response()->json(['message' => 'restored successfully'], 200);
         }
@@ -113,7 +114,7 @@ class CategoryService
 
     public function setCategories($request)
     {
-        $category = Categories::first();
+        $category = Category::first();
         if (isset($request['categoryList'])) {
             foreach ($request['categoryList'] as $category_id) {
 
@@ -130,7 +131,7 @@ class CategoryService
 
     public function RetryApproval($request)
     {
-        $category = Categories::where('id', $request->categoryId)->where('profile_id', auth()->user()->profile_id)->first();
+        $category = Category::where('id', $request->categoryId)->where('profile_id', auth()->user()->profile_id)->first();
         if ($category->status == "rejected") {
             $category->update([
                 "status" => "pending",
@@ -159,7 +160,7 @@ class CategoryService
 
     public function approveCategory($request)
     {
-        $category = Categories::where('id', $request->category_id)->first();
+        $category = Category::where('id', $request->category_id)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'No category founded'
@@ -173,7 +174,7 @@ class CategoryService
 
     public function rejectCategory($request)
     {
-        $category = Categories::where('id', $request->category_id)->first();
+        $category = Category::where('id', $request->category_id)->first();
         if ($category == null) {
             return response()->json([
                 'error' => 'No category founded'
@@ -187,7 +188,7 @@ class CategoryService
     }
     public function filterCategory($request)
     {
-        $category = Categories::where('type', $request->type)->get();
+        $category = Category::where('type', $request->type)->get();
 
 
         if ($category == null) {

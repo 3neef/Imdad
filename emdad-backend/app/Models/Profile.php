@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use App\Models\Accounts\SubscriptionPackages;
-use App\Models\Emdad\Categories;
+// use App\Models\Emdad\Categories;
+use App\Models\Emdad\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -52,7 +53,7 @@ class Profile extends Model implements HasMedia
 
     public function categories()
     {
-        return $this->hasMany(Categories::class);
+        return $this->hasMany(Category::class);
     }
 
     public function parent()
