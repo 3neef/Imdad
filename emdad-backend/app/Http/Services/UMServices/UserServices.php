@@ -29,7 +29,7 @@ class UserServices
         $check = in_array($request['roleId'], [1, 2, 3, 4, 12]);
 
         if ($check == true) {
-            $value = DB::table('role_user_profile')->where('profile_id', auth()->user()->profile_id)->whereIn('role_id', [1, 2, 3, 4, 12])->count();
+            $value = DB::table('profile_role_user')->where('profile_id', auth()->user()->profile_id)->whereIn('role_id', [1, 2, 3, 4, 12])->count();
             $newvalue = (--$value);
             $Limit = $packageLimit->packageLimitExceed("owner", $newvalue);
 
@@ -56,7 +56,7 @@ class UserServices
                 ], 200);
             }
         } else {
-            $value = DB::table('role_user_profile')->where('profile_id', auth()->user()->profile_id)->whereNotIn('role_id', [1, 2, 3, 4, 12])->count();
+            $value = DB::table('profile_role_user')->where('profile_id', auth()->user()->profile_id)->whereNotIn('role_id', [1, 2, 3, 4, 12])->count();
             $Limit = $packageLimit->packageLimitExceed("user", $value);
 
             if ($Limit == false) {

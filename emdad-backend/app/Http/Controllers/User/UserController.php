@@ -91,7 +91,7 @@ class UserController extends Controller
             return response()->json(["error" => "", "code" => "100", "message" => "user does not have profile"], 200);
         }
         $users =  DB::table('users')->select('*')
-            ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')->where('role_user_profile.profile_id', auth()->user()->profile_id)
+            ->join('profile_role_user', 'profile_role_user.user_id', '=', 'users.id')->where('profile_role_user.profile_id', auth()->user()->profile_id)
             ->paginate($request->pageSize ?? 100);
 
 

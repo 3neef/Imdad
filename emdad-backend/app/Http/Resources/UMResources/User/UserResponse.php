@@ -37,7 +37,7 @@ class UserResponse extends JsonResource
             "mangerInfo" => $this->mangerUserId() ?? '',
             "createdAt"=> $this->created_at->format('y-m-d') ?? null,
             'warehouses'=>$warehouses,
-            "allProfiles" => DB::table("role_user_profile")->where("user_id", $this->id)->pluck("profile_id"),
+            "allProfiles" => DB::table("profile_role_user")->where("user_id", $this->id)->pluck("profile_id"),
 
         ];
     }
