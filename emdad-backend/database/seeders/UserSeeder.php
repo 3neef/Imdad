@@ -23,12 +23,12 @@ class UserSeeder extends Seeder
                 'email' => 'ahmed1@email.com',
                 'password' => "Passw0rd!",
                 'created_at' => now(),
-                'is_verified' => true,,'created_at'=>now()
-                'is_admin' => true,,'created_at'=>now()
+                'is_verified' => true,
+                'is_admin' => true,
                 'full_name' => 'ahmed alkhatim',
                 'identity_number' => '1234567891',
                 'identity_type' => 'nid',
-                'password_changed' => true,,'created_at'=>now()
+                'password_changed' => true,
                 'mobile' => '00966123456789',
                 'profile_id' => 1
             ],
@@ -37,12 +37,12 @@ class UserSeeder extends Seeder
                 'email' => 'ahmed2@email.com',
                 'password' => "Passw0rd!",
                 'created_at' => now(),
-                'is_verified' => true,,'created_at'=>now()
-                'is_admin' => true,,'created_at'=>now()
+                'is_verified' => true,
+                'is_admin' => true,
                 'full_name' => 'ahmed alkhatim 2',
                 'identity_number' => '1234567892',
                 'identity_type' => 'nid',
-                'password_changed' => true,,'created_at'=>now()
+                'password_changed' => true,
                 'mobile' => '00966123456782',
                 'profile_id' => 2
             ],
@@ -51,12 +51,12 @@ class UserSeeder extends Seeder
                 'email' => 'ahmed3@email.com',
                 'password' => "Passw0rd!",
                 'created_at' => now(),
-                'is_verified' => true,,'created_at'=>now()
-                'is_admin' => true,,'created_at'=>now()
+                'is_verified' => true,
+                'is_admin' => true,
                 'full_name' => 'ahmed alkhatim 3',
                 'identity_number' => '1234567893',
                 'identity_type' => 'nid',
-                'password_changed' => true,,'created_at'=>now()
+                'password_changed' => true,
                 'mobile' => '00966123456783',
                 'profile_id' => 3
 
@@ -66,12 +66,12 @@ class UserSeeder extends Seeder
                 'email' => 'ahmed4@email.com',
                 'password' => "Passw0rd!",
                 'created_at' => now(),
-                'is_verified' => true,,'created_at'=>now()
-                'is_admin' => true,,'created_at'=>now()
+                'is_verified' => true,
+                'is_admin' => true,
                 'full_name' => 'ahmed alkhatim 4',
                 'identity_number' => '1234567894',
                 'identity_type' => 'nid',
-                'password_changed' => true,,'created_at'=>now()
+                'password_changed' => true,
                 'mobile' => '00966123456784',
                 'profile_id' => 4
 
@@ -80,13 +80,13 @@ class UserSeeder extends Seeder
                 'id' => 5,
                 'email' => 'ahmed5@email.com',
                 'password' => "Passw0rd!",
-                'created_at' => now(),
-                'is_verified' => true,,'created_at'=>now()
-                'is_admin' => true,,'created_at'=>now()
+                'is_verified' => true,
+                'is_admin' => true,
+                'created_at'=>now(),
                 'full_name' => 'ahmed alkhatim 5',
                 'identity_number' => '1234567895',
                 'identity_type' => 'nid',
-                'password_changed' => true,,'created_at'=>now()
+                'password_changed' => true,
                 'mobile' => '00966123456785',
                 'profile_id' => 5
             ],   [
@@ -94,12 +94,12 @@ class UserSeeder extends Seeder
                 'email' => 'ahmed6@email.com',
                 'password' => "Passw0rd!",
                 'created_at' => now(),
-                'is_verified' => true,,'created_at'=>now()
-                'is_admin' => true,,'created_at'=>now()
+                'is_verified' => true,
+                'is_admin' => true,
                 'full_name' => 'ahmed alkhatim 6',
                 'identity_number' => '1234567896',
                 'identity_type' => 'nid',
-                'password_changed' => true,,'created_at'=>now()
+                'password_changed' => true,
                 'mobile' => '00966123456786',
                 'profile_id' => 6
 
@@ -122,7 +122,8 @@ class UserSeeder extends Seeder
                 'cr_expire_data' => '2025-1-1',
                 'subs_id' => 1,
                 'subscription_details',
-                'active' => true,,'created_at'=>now()
+                'active' => true,
+                'created_at'=>now(),
             ],
             [
                 'id' => 2,
@@ -138,7 +139,8 @@ class UserSeeder extends Seeder
                 'cr_expire_data' => '2025-1-1',
                 'subs_id' => 2,
                 'subscription_details',
-                'active' => true,,'created_at'=>now()
+                'active' => true,
+                'created_at'=>now()
             ],
             [
                 'id' => 3,
@@ -154,7 +156,8 @@ class UserSeeder extends Seeder
                 'cr_expire_data' => '2025-1-1',
                 'subs_id' => 3,
                 'subscription_details',
-                'active' => true,,'created_at'=>now()
+                'active' => true,
+                'created_at'=>now()
             ],
             [
                 'id' => 4,
@@ -170,7 +173,8 @@ class UserSeeder extends Seeder
                 'cr_expire_data' => '2025-1-1',
                 'subs_id' => 4,
                 'subscription_details',
-                'active' => true,,'created_at'=>now()
+                'active' => true,
+                'created_at'=>now()
             ],
             [
                 'id' => 5,
@@ -186,7 +190,8 @@ class UserSeeder extends Seeder
                 'cr_expire_data' => '2025-1-1',
                 'subs_id' => 5,
                 'subscription_details',
-                'active' => true,,'created_at'=>now()
+                'active' => true,
+                'created_at'=>now()
             ],
             [
                 'id' => 6,
@@ -202,7 +207,8 @@ class UserSeeder extends Seeder
                 'cr_expire_data' => '2025-1-1',
                 'subs_id' => 6,
                 'subscription_details',
-                'active' => true,,'created_at'=>now()
+                'active' => true,
+                'created_at'=>now()
             ],
         ];
 
@@ -341,15 +347,16 @@ class UserSeeder extends Seeder
                 case 6:
                     $permssions = $allSupplierPermissions;
                     break;
-                    DB::table('role_user_profile')->insert([
+                }
+                    DB::table('profile_role_user')->insert([
                         'id' => $rolesUsersProfile['id'],
                         'role_id' => $rolesUsersProfile['role_id'],
                         'user_id' => $rolesUsersProfile['user_id'],
                         'profile_id' => $rolesUsersProfile['profile_id'],
                         'created_by' => $rolesUsersProfile['created_by'],
                         'permissions' => $permssions,
+
                     ]);
             }
         }
-    }
 }
