@@ -103,64 +103,80 @@ class UserServices
     public function update($request, $id)
     {
 
-        $user = User::where('id', $id)->first();
-        $user->update([
-            "full_name" => $request->fullName ?? $user->full_name,
-            "email" => $request->email ?? $user->email,
-            "mobile" => $request->mobile ?? $user->mobile,
-            "identity_number" => $request->identityNumber ?? $user->identity_number,
-            'expiry_date' => $request['expireDate'] ?? $user->expiry_date,
-            'lang' =>  $request['lang'] ?? $user->lang,
+if($id == auth()->id()){
 
-        ]);
+    return response()->json(
+        [
+            "statusCode" => "110",
+            'message' => 'you cannot  update your self'
+        ],
+        200
+    );
 
-        $WarahouseId = $request->warahouseId ?? null;
-        if ($WarahouseId != null) {
-            try {
-                $user->warehouse()->attach(
-                    $user->id,
-                    [
-                        'warehouse_id' => $request->warahouseId,
-                    ]
-                );
-            } catch (Exception $ex) {
-            }
-        }
+}
+else{
+    
+    $user = User::where('id', $id)->first();
+    $user->update([
+        "full_name" => $request->fullName ?? $user->full_name,
+        "email" => $request->email ?? $user->email,
+        "mobile" => $request->mobile ?? $user->mobile,
+        "identity_number" => $request->identityNumber ?? $user->identity_number,
+        'expiry_date' => $request['expireDate'] ?? $user->expiry_date,
+        'lang' =>  $request['lang'] ?? $user->lang,
 
+    ]);
 
-        $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
-
-        if ($request->has("roleId") && $userRoleProfile != null) {
-
-            $userRoleProfile->update(['user_id' => $user->id , 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['manager_user_Id'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
-        }
-        if ($user->wasChanged('mobile')) {
-            $user->update(['is_verified' => 0]);
-            $this->UserOtp($user);
-            return response()->json(
+    $WarahouseId = $request->warahouseId ?? null;
+    if ($WarahouseId != null) {
+        try {
+            $user->warehouse()->attach(
+                $user->id,
                 [
-                    "statusCode" => "000",
-
-                    'message' => 'New OTP has been sent.',
-                    'otp' => $user->otp,
-                ],
-                200
+                    'warehouse_id' => $request->warahouseId,
+                ]
             );
+        } catch (Exception $ex) {
         }
-        if ($user) {
-            return response()->json([
+    }
+
+
+    $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
+
+    if ($request->has("roleId") && $userRoleProfile != null) {
+
+        $userRoleProfile->update(['user_id' => $user->id , 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['manager_user_Id'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
+    }
+    if ($user->wasChanged('mobile')) {
+        $user->update(['is_verified' => 0]);
+        $this->UserOtp($user);
+        return response()->json(
+            [
                 "statusCode" => "000",
 
-                'message' => 'User updated successfully',
-                'data' => ['user' => new UserResponse($user)]
-            ], 200);
-        }
+                'message' => 'New OTP has been sent.',
+                'otp' => $user->otp,
+            ],
+            200
+        );
+    }
+    if ($user) {
         return response()->json([
-            "statusCode" => "999",
+            "statusCode" => "000",
 
-            'error' => 'system error'
+            'message' => 'User updated successfully',
+            'data' => ['user' => new UserResponse($user)]
         ], 200);
     }
+    return response()->json([
+        "statusCode" => "999",
+
+        'error' => 'system error'
+    ], 200);
+}
+
+
+}
 
     public function detachWarehouse($request)
     {
@@ -466,25 +482,37 @@ class UserServices
 
     public function disable($request)
     {
-        $user = User::where('id', $request->userId)->first();
-        $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+        if ($request->userId == auth()->id()) {
 
-        $active = $userRoleProfile->update(['status' => $userRoleProfile->status == "inActive" ? "active" : "inActive"]);
-        // dd($userRoleProfile);
-        if ($active) {
+            return response()->json(
+                [
+                    "statusCode" => "110",
+                    'message' => 'you cannot  update your self'
+                ],
+                200
+            );
+
+        } else {
+
+            $user = User::where('id', $request->userId)->first();
+            $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+
+            $active = $userRoleProfile->update(['status' => $userRoleProfile->status == "inActive" ? "active" : "inActive"]);
+            // dd($userRoleProfile);
+            if ($active) {
+                return response()->json([
+                    "statusCode" => "000",
+
+                    'message' => 'user account has disabled successfully'
+                ], 200);
+            }
             return response()->json([
-                "statusCode" => "000",
+                "statusCode" => "999",
 
-                'message' => 'user account has disabled successfully'
+                'error' => 'system error'
             ], 200);
         }
-        return response()->json([
-            "statusCode" => "999",
-
-            'error' => 'system error'
-        ], 200);
     }
-
     public function restoreOldRole($request)
     {
         $userRoleCompany = RoleUserProfile::where('user_id', $request->userId)->where('profile_id', $request->profile_id)->withTrashed()->first()->restore();
