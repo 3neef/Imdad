@@ -98,7 +98,7 @@ class TruckPolicy
     public function checkPermission($user, $type1)
     {
         if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('role_user_profile')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
+            $permissonis = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
             if ($permissonis!= null) {
                 $labels = json_decode($permissonis);
                 foreach ($labels as $label) {

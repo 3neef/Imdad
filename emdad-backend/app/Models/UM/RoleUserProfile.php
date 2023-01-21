@@ -12,20 +12,20 @@ class RoleUserProfile extends Pivot
     use SoftDeletes;
     protected $fillable = ['permissions','status','is_learning','user_id','created_by','role_id','profile_id','manager_user_Id'];
 
-    protected $table = 'role_user_profile';
+    protected $table = 'profile_role_user';
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'role_user_profile', 'user_id')->withTimestamps()->withPivot("status");
+        return $this->belongsToMany(User::class, 'profile_role_user', 'user_id')->withTimestamps()->withPivot("status");
     }
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class, 'role_user_profile', 'role_id')->withTimestamps()->withPivot("status");
+        return $this->belongsToMany(Role::class, 'profile_role_user', 'role_id')->withTimestamps()->withPivot("status");
     }
 
     public function profiles()
     {
-        return $this->belongsToMany(Profile::class, 'role_user_profile', 'profile_id')->withTimestamps()->withPivot("status");
+        return $this->belongsToMany(Profile::class, 'profile_role_user', 'profile_id')->withTimestamps()->withPivot("status");
     }
 }

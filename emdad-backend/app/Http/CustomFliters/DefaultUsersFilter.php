@@ -12,7 +12,7 @@ class DefaultUsersFilter implements Filter
     {
         if ($value) {
             if ($value->currentProfile()->type == "Buyer" || $value->currentProfile()->type == "Supplier") {
-                 $query->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')->where('role_user_profile.profile_id', $value->profile_id);
+                 $query->join('profile_role_user', 'profile_role_user.user_id', '=', 'users.id')->where('profile_role_user.profile_id', $value->profile_id);
             }
         }
     }
