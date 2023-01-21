@@ -25,25 +25,26 @@ class SubscriptionPackagesSeeder extends Seeder
 		["key"=>"owner","titleEn"=>"Business owner","titleAr"=>"المستخدم المالك/الرئيس التنفيذي","systemValue"=>1,"text_en"=>"1","text_ar"=>"1","descriptionEn"=>"The official account for the company, with full access to all pages and permissions.",
             "descriptionAr"=>"هو حساب الرئيس التنفيذي للشركة الذي يمتلك جميع صالحيات الوصول"],
 
-        ["key"=>"user","titleEn"=>"User Management","titleAr"=>"ادارة المستخدمين","systemValue"=>3,"text_en"=>"3","text_ar"=>"3","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"الموظفين التابعين للشركة والمسؤولين عن أدوار وظيفية محددة بصالحيات محددة يحددها مالك 
+        ["key"=>"user","titleEn"=>"User Management","titleAr"=>"ادارة المستخدمين","systemValue"=>3,"text_en"=>"3","text_ar"=>"3","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"الموظفين التابعين للشركة والمسؤولين عن أدوار وظيفية محددة بصلاحيات محددة يحددها مالك 
             الشركة؛ على سبيل المثال: مسؤول مشتريات، مسؤول مالي..."],
 
-        ["key"=>"Cash","titleEn"=>"Cash Payment","titleAr"=>"دفع نقدا","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستالم الطلب."],
+        ["key"=>"Cash","titleEn"=>"Cash Payment","titleAr"=>"دفع نقدا","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستلام الطلب."],
 
-        ["key"=>"Delivery","titleEn"=>"Delivery Scheduling ","titleAr"=>"جدولة التوريد","systemValue"=>1,"text_en"=>"One-Time Delivery","text_ar"=>"التوريد لمرة واحدة ","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"التوريد لمرة واحدة: في امر شراء عند تحديد جدولة التوريد لمرة واحدة، يكون توريد الطلب على 
+        ["key"=>"Delivery","titleEn"=>"Delivery Scheduling ","titleAr"=>"جدولة التوريد","systemValue"=>1,"text_en"=>"One-Time Delivery","text_ar"=>"التوريد لمرة واحدة ","descriptionEn"=>"One-Time Delivery: a type of delivery in which the requisition is requested to be received one time on
+a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في امر شراء عند تحديد جدولة التوريد لمرة واحدة، يكون توريد الطلب على 
         .
         دفعة واحدة للطلب كامال 
         التوريد المجزأ: في امر الشراء عند تحديد جدولة التوريد المجزأ، يتم تقسيم التوريدات لدفعات على 
         فترات مختلفة"],
-        ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"ادارة المستخدمين","systemValue"=>2,"text_en"=>"2","text_ar"=>"2","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "],
+        ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"ادارة المخازن والفروع","systemValue"=>2,"text_en"=>"2","text_ar"=>"2","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "],
 
-        ["key"=>"Suppliers","titleEn"=>"Suppliers Management","titleAr"=>"إدارة المستخدمين","systemValue"=>30,"text_en"=>"30 ","text_ar"=>"30","descriptionEn"=>"The number of suppliers that can be added for direct dealing.","descriptionAr"=>"تمكن المنشأة من إضافة عدد من الموردين للتعامل المباشر، ويكون الحد األعلى حسب باقة 
+        ["key"=>"Suppliers","titleEn"=>"Suppliers Management","titleAr"=>"إدارة الموردين","systemValue"=>30,"text_en"=>"30 ","text_ar"=>"30","descriptionEn"=>"The number of suppliers that can be added for direct dealing.","descriptionAr"=>"تمكن المنشأة من إضافة عدد من الموردين للتعامل المباشر، ويكون الحد األعلى حسب باقة 
         االشتراك."],
 
         ["key"=>"items","titleEn"=>"Number of items in a requestion","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3","text_ar"=>"3","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد األعلى حسب باقة 
         االشتراك."],
 
-        ["key"=>"Permissions","titleEn"=>"Permissions Management","titleAr"=>"إدارة الصالحيات","systemValue"=>0,"text_en"=>"Inactive","text_ar"=>"غير ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
+        ["key"=>"Permissions","titleEn"=>"Permissions Management","titleAr"=>"إدارة الصلاحيات","systemValue"=>0,"text_en"=>"Inactive","text_ar"=>"غير ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
         ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
         operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
@@ -51,7 +52,7 @@ class SubscriptionPackagesSeeder extends Seeder
         محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
         أوامر الشراء المعتمدة..."],
 
-        ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3 Points","text_ar"=>"3 Points","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+        ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3 Points","text_ar"=>"ثلاثه نقاط ","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
         االشتراك."]
 
             ]
@@ -77,7 +78,7 @@ class SubscriptionPackagesSeeder extends Seeder
             • الدفع الآجل - خلال 
             فترة لا تزيد عن 60
             يوما","descriptionEn"=>"Credit: In the purchase order, when the payment method is credit and the receiving period is 
-        specified, the payment will be after the agreed period expired and after receiving the requisition.","descriptionAr"=>"الدفع الآجل: في امر شراء عند تحديد ألية الدفع اآلجلة وتحديد فترة معينة، يمكن إستالم الطلب 
+        specified, the payment will be after the agreed period expired and after receiving the requisition.","descriptionAr"=>"الدفع الآجل: في امر شراء عند تحديد ألية الدفع الآجلة وتحديد فترة معينة، يمكن إستلام الطلب 
         والدفع بعد انقضاء الفترة المحددة."],
                 
             ["key"=>"Delivery","titleEn"=>"Delivery Scheduling ","titleAr"=>"جدولة التوريد","systemValue"=>6,"text_en"=>"Standing Order – 6 Times","text_ar"=>"التوريد المجزأ – 6 فترات","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"التوريد لمرة واحدة: في امر شراء عند تحديد جدولة التوريد لمرة واحدة، يكون توريد الطلب على 

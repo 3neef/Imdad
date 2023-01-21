@@ -43,6 +43,7 @@ class AccountService
                 $user->profiles()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
 
 
+                $user=User::where("id",auth()->user()->id)->first();
                 $user->update(['profile_id' => $profile->id]);
 
                 return $profile;
