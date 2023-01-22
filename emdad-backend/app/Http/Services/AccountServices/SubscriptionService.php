@@ -22,53 +22,44 @@ class SubscriptionService
             "type" => $request->type,
             "features" => json_encode($request->features, true),
         ]);
-        if ($subscription) {
-            return response()->json(['success' => true, 'data' => $subscription], 200);
-        }
-        return response()->json(['message' => 'system error'], 500);
+
+        return $subscription;
     }
 
 
     public function show($id)
     {
         $subscription = SubscriptionPackages::find($id);
-        if ($subscription) {
 
-            return response()->json(['data' => $subscription], 200);
-        }
-        return response()->json(['message' => 'system error'], 500);
+        return $subscription;
     }
-
-
-    public function update($request, $id)
+    
+    public static function update($request, $id)
     {
 
         $subscription = SubscriptionPackages::find($id);
-        
-        $subscription->update([
-            'price_1' => $request->price1 ?? $subscription->price_1,
-            'price_2' => $request->price2 ?? $subscription->price_2,
-            'free_first_time' => $request->freeFirstTime ?? $subscription->free_first_time,
-            'package_name_ar' => $request->packageNameAr ?? $subscription->package_name_ar,
-            'package_name_en' => $request->packageNameEn ?? $subscription->package_name_en,
-            "type" => $request->type ?? $subscription->type,
-            "features" => json_encode($request->features, true) ?? $subscription->features,
-        ]);
-        if ($subscription) {
-            return response()->json(['success' => true, 'data' => $subscription], 200);
+        if($subscription != null){
+            $subscription->update([
+                'price_1' => $request->price1 ?? $subscription->price_1,
+                'price_2' => $request->price2 ?? $subscription->price_2,
+                'free_first_time' => $request->freeFirstTime ?? $subscription->free_first_time,
+                'package_name_ar' => $request->packageNameAr ?? $subscription->package_name_ar,
+                'package_name_en' => $request->packageNameEn ?? $subscription->package_name_en,
+                "type" => $request->type ?? $subscription->type,
+                "features" => json_encode($request->features, true) ?? $subscription->features,
+            ]);
+        }else{
+            $subscription = null;
         }
-        return response()->json(['error' => 'system error'], 500);
+        return $subscription;
     }
 
 
     public function destroy($id)
     {
-        $subscription = SubscriptionPackages::find($id);
-        $sub = $subscription->delete();
-        if ($sub) {
-            return response()->json(['message' => 'deleted successfully'], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
+        $subscription = SubscriptionPackages::find($id)->delete();
+
+        return $subscription;
     }
 
 
@@ -76,9 +67,6 @@ class SubscriptionService
     {
         $subscription = SubscriptionPackages::where('id', $id)->where('deleted_at', "!=", null)->withTrashed()->restore();
 
-        if ($subscription) {
-            return response()->json(['message' => 'restored successfully'], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
+        return $subscription;
     }
 }
