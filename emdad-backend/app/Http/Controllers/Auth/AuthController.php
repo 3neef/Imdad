@@ -11,7 +11,7 @@ use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
 use App\Http\Requests\UMRequests\User\ResendOTPRequest;
 use App\Http\Requests\UMRequests\User\StoreAuthRequest;
-
+use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\AuthenticationServices;
 use Illuminate\Http\Request;
 
@@ -138,7 +138,21 @@ class AuthController extends Controller
      */
     public function store(StoreAuthRequest $request, AuthenticationServices $userServices)
     {
-        return $userServices->create($request->validated());
+        $user = $userServices->create($request->validated());
+
+        if ($user) {
+            return response()->json([
+                "statusCode" => "000",
+
+                'message' => 'User created successfully',
+                'data' => ['user' => new UserResponse($user)]
+            ], 200);
+        }
+        return response()->json([
+
+            "statusCode" => "999",
+            'success' => false, 'message' => "System Error"
+        ], 200);
     }
 
 
@@ -291,7 +305,26 @@ class AuthController extends Controller
      */
     public function resendOTP(ResendOTPRequest $request, AuthenticationServices $userServices)
     {
-        return $userServices->resend($request);
+        $data = $userServices->resend($request);
+        if ($data == null) {
+            return response()->json(
+                [
+                    "statusCode" => "999",
+                    'message' => 'System error ',
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    "statusCode" => "000",
+                    'message' => 'New OTP has been sent.',
+                    'otp' => $data,
+                ],
+                200
+            );
+
+        }
     }
     /**
      * @OA\Post(
@@ -443,7 +476,19 @@ class AuthController extends Controller
         $id,
         AuthenticationServices $userServices
     ) {
-        return $userServices->removeUser($id);
+        $user = $userServices->removeUser($id);
+
+        if ($user) {
+            return response()->json([
+                "statusCode" => "000",
+
+                'message' => 'User delete form database successfully'
+            ], 200);
+        }
+        return response()->json([
+            "statusCode" => "999",
+            'error' => 'system error'
+        ], 200);
     }
 
     /**
