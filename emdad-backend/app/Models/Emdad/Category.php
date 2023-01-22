@@ -62,7 +62,7 @@ class Category extends Model
     public function profiles()
     {
         return $this->belongsToMany(Profile::class)
-        ->withPivot(['user_id'])
+        ->withPivot(['user_id','status'])
         ->withTimestamps()
         ->as('profile');
     }

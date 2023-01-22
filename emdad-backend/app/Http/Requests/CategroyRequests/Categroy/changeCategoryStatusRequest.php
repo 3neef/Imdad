@@ -25,7 +25,7 @@ class changeCategoryStatusRequest extends FormRequest
     public function rules()
     {
         return [
-            'categoryId' => ['required','exists:profile_category_pivots,category_id'],
+            'categoryId' => ['required','exists:category_profile,category_id'],
         ];
     }
 

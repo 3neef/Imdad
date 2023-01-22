@@ -58,7 +58,7 @@ class Profile extends Model implements HasMedia
 
     public function categories()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function parent()

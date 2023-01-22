@@ -27,7 +27,7 @@ class RetryApprovalRequest extends FormRequest
     {
         return [
             'reason' => ['string', 'min:3', 'max:1000'],
-            "categoryId" => 'required|exists:profile_category_pivots,category_id',
+            "categoryId" => 'required|exists:category_profile,category_id',
 
         ];
     }
