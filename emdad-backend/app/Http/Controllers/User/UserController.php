@@ -15,6 +15,7 @@ use App\Http\Requests\UMRequests\User\GetUserRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\StoreUserRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
+use App\Http\Requests\UMRequests\User\UploadAvaterRequest;
 use App\Http\Requests\UMRequests\User\UserAvtivateRerquest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\UserServices;
@@ -375,6 +376,8 @@ class UserController extends Controller
         $this->authorize('update', User::class);
 
         return $userServices->update($request, $id);
+
+        
     }
 
 
@@ -794,5 +797,8 @@ class UserController extends Controller
     public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request, UserServices $userServices)
     {
         return $userServices->userWarehouseStatus($request);
+    }
+    public function upload(UploadAvaterRequest $request,UserServices $userServices){
+        return $userServices->uploadAvatar($request);
     }
 }
