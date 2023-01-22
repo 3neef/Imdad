@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Accounts;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Artisan;
@@ -13,6 +13,9 @@ use App\Http\Services\AccountServices\SubscriptionService;
 use App\Http\Resources\SetupResources\SubscriptionPackageResource;
 use App\Http\Requests\AccountRequests\Subscription\UpdateSubscriptionRequest;
 use App\Http\Requests\General\CreateSubPackageRequest as GeneralCreateSubPackageRequest;
+use App\Http\Resources\Subscription\SubscriptionResource;
+use Illuminate\Http\Request;
+// use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller
@@ -78,7 +81,12 @@ class SubscriptionController extends Controller
      */
     public function store(GeneralCreateSubPackageRequest $request)
     {
-        return $this->subscriptionService->store($request);
+        $subscription = $this->subscriptionService->store($request);
+
+        if ($subscription) {
+            return response()->json(['success' => true, 'data' => $subscription], 200);
+        }
+        return response()->json(['message' => 'system error'], 500);
     }
     /**
      * @OA\put(
@@ -125,7 +133,12 @@ class SubscriptionController extends Controller
      */
     public function update(UpdateSubscriptionRequest $request, $id)
     {
-        return $this->subscriptionService->update($request, $id);
+        $subscription = $this->subscriptionService->update($request, $id);
+        
+        if ($subscription) {
+            return response()->json(['success' => true, 'data' => new SubscriptionResource($subscription) ], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
     }
 
 
@@ -273,7 +286,13 @@ class SubscriptionController extends Controller
         */
     public function show($id)
     {
-        return $this->subscriptionService->show($id);
+        $subscription = $this->subscriptionService->show($id);
+
+        if ($subscription) {
+
+            return response()->json(['data' => new SubscriptionResource($subscription) ], 200);
+        }
+        return response()->json(['message' => 'system error'], 500);
     }
 /**
         * @OA\delete(
@@ -317,7 +336,12 @@ class SubscriptionController extends Controller
         */
     public function destroy($id)
     {
-        return $this->subscriptionService->destroy($id);
+        $subscription = $this->subscriptionService->destroy($id);
+
+        if ($subscription) {
+            return response()->json(['message' => 'deleted successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
     }
 /**
         * @OA\put(
@@ -370,7 +394,12 @@ class SubscriptionController extends Controller
 
     public function restore($id)
     {
-        return $this->subscriptionService->restore($id);
+        $subscription = $this->subscriptionService->restore($id);
+
+        if ($subscription) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
     }
 
     /**
