@@ -43,6 +43,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
     Route::delete('detachWarehouse', [UserController::class, 'detachWarehouse']);
     Route::put("userWarehouseStatus", [UserController::class, 'userWarehouseStatus']);
     Route::post("upload-avatar",[UserController::class, 'upload']);
+    Route::post("update-avatar",[UserController::class,'updateAV']);
 });
 
 

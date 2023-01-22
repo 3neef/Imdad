@@ -14,6 +14,7 @@ use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\StoreUserRequest;
+use App\Http\Requests\UMRequests\User\UpdateAvaterRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
 use App\Http\Requests\UMRequests\User\UploadAvaterRequest;
 use App\Http\Requests\UMRequests\User\UserAvtivateRerquest;
@@ -800,5 +801,8 @@ class UserController extends Controller
     }
     public function upload(UploadAvaterRequest $request,UserServices $userServices){
         return $userServices->uploadAvatar($request);
+    }
+    public function updateAV(UpdateAvaterRequest $request , UserServices $userServices){
+        return $userServices->updateAvater($request);
     }
 }
