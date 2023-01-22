@@ -6,17 +6,21 @@ use App\Models\Accounts\Warehouse;
 use App\Models\UM\Role;
 use App\Models\UM\RoleUserProfile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends  Authenticatable implements HasMedia , MustVerifyEmail
 {
-    use SanctumHasApiTokens, Notifiable, SoftDeletes, LogsActivity;
+    use SanctumHasApiTokens,Notifiable ,HasFactory, SoftDeletes , LogsActivity,InteractsWithMedia;
 
     protected $dates = ['deleted_at'];
 
