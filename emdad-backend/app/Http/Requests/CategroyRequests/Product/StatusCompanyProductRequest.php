@@ -25,7 +25,7 @@ class StatusCompanyProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'product_id' => ['required','exists:profile_products_pivots,id'],
+            'productId' => ['required','exists:product_profile,id'],
         ];
     }
 

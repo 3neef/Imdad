@@ -37,7 +37,7 @@ class Product extends Model implements HasMedia
 
     public function companyProduct()
     {
-        return $this->belongsToMany(Profile::class, 'profile_products_pivots', 'profile_id', 'product_id')
+        return $this->belongsToMany(Profile::class, 'product_profile', 'profile_id', 'product_id')
             ->withPivot('product_id')
             ->withTimestamps();
     }

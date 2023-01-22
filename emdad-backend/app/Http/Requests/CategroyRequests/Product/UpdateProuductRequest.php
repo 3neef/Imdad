@@ -30,7 +30,7 @@ class UpdateProuductRequest extends FormRequest
             'nameEn' => 'string|unique:products,name_en',
             'nameAr' => 'string|unique:products,name_ar',
             'price' => 'integer',
-            'measruingUnit' => ['string', 'required'],
+            'measruingUnit' => ['string'],
             'attachementFile' => 'nullable',
             'descriptionEn' => ['string'],
             'descriptionAr' => ['string']

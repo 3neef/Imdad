@@ -74,7 +74,7 @@ class CategoryController extends Controller
     public function store(CreateCategoryRequest $request)
 
     {
-        // $this->authorize('create', Category::class);
+         $this->authorize('create', Category::class);
 
         $category = $this->categoryService->store($request);
         // dd($category);
