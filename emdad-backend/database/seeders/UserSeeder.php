@@ -349,7 +349,7 @@ class UserSeeder extends Seeder
                         'user_id' => $rolesUsersProfile['user_id'],
                         'profile_id' => $rolesUsersProfile['profile_id'],
                         'created_by' => $rolesUsersProfile['created_by'],
-                        'permissions' => $permssions,
+                        'permissions' =>json_encode($permssions),
 
                     ]);
             }
