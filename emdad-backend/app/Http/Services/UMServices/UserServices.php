@@ -17,6 +17,7 @@ use Exception;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\NotIn;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class UserServices
 {
@@ -655,15 +656,30 @@ class UserServices
         $user = User::where('id', auth()->id())->first();
         if(isset($request['attachementFile']))
             {
-                $user->addMultipleMediaFromRequest(['attachementFile'])
-                ->each(function ($fileAdder) {
-                    $fileAdder->toMediaCollection('users');
-                });
+                $user->addMedia($request['attachementFile'])->toMediaCollection('users');
+               
             }
             return response()->json([
                 "statusCode" => "000",
                 'message' => 'Avater uploaded Successfully'
             ], 200);;
             
+    }
+    
+    public function updateAvater($request){
+        $user = User::where('id', auth()->id())->first();
+      
+        if (isset($request['attachementFile'])) {
+            {
+                $user->clearMediaCollection('users');
+                $user->addMedia($request['attachementFile'])->toMediaCollection('users');
+               
+            }
+
+    }
+            return response()->json([
+                "statusCode" => "000",
+                'message' => 'Avater updated Successfully'
+            ], 200);;
     }
 }

@@ -28,19 +28,13 @@ class DriverService
             "nationality" => $request->nationality,
             "phone" => $request->phone
         ]);
-        if ($drivers) {
-            return response()->json(['message' => "created Successfly"], 201);
-        }
-        return response()->json(['error' => "System Error"], 403);
+        return $drivers;
     }
 
     public function show($id)
     {
         $driver = Driver::find($id);
-        if ($driver) {
-            return response()->json(['data' => $driver], 201);
-        }
-        return response()->json(['error' => "System Error"], 403);
+        return $driver;
     }
 
     public function update($request, $id)
@@ -54,20 +48,17 @@ class DriverService
                 "nationality" => $request->nationality ?? $driver->nationality,
                 "phone" => $request->phone ?? $driver->phone
             ]);
-            return response()->json(['message' => "updated Successfly"], 201);
+            return $driver;
         }
-        return response()->json(['error' => "System Error"], 403);
     }
 
     public function destroy($id)
     {
         $driver = Driver::find($id);
-
         if ($driver) {
             $driver->delete();
-            return response()->json(['message' => "deleted Successfly"], 201);
         }
-        return response()->json(['error' => "System Error"], 403);
+        return $driver;
     }
 
     public function suspend($request, $id)
@@ -94,8 +85,7 @@ class DriverService
     {
         $driver = Driver::where('id', $id)->withTrashed()->restore();
         if ($driver) {
-            return response()->json(['message' => "restored Successfly"], 201);
+            return $driver;
         }
-        return response()->json(['error' => "System Error"], 403);
     }
 }
