@@ -23,12 +23,12 @@ class UserSeeder extends Seeder
                 'email' => 'ahmed1@email.com',
                 'password' => "Passw0rd!",
                 'created_at' => now(),
-                'is_verified' => true, 'created_at' => now(),
-                'is_admin' => true, 'created_at' => now(),
+                'is_verified' => true,
+                'is_admin' => true,
                 'full_name' => 'ahmed alkhatim',
                 'identity_number' => '1234567891',
                 'identity_type' => 'nid',
-                'password_changed' => true, 'created_at' => now(),
+                'password_changed' => true,
                 'mobile' => '00966123456789',
                 'profile_id' => 1
             ],
@@ -170,7 +170,8 @@ class UserSeeder extends Seeder
                 'cr_expire_data' => '2025-1-1',
                 'subs_id' => 4,
                 'subscription_details',
-                'active' => true, 'created_at' => now()
+                'active' => true,
+                'created_at'=>now()
             ],
             [
                 'id' => 5,
@@ -341,15 +342,16 @@ class UserSeeder extends Seeder
                 case 6:
                     $permssions = $allSupplierPermissions;
                     break;
-                    DB::table('role_user_profile')->insert([
+                }
+                    DB::table('profile_role_user')->insert([
                         'id' => $rolesUsersProfile['id'],
                         'role_id' => $rolesUsersProfile['role_id'],
                         'user_id' => $rolesUsersProfile['user_id'],
                         'profile_id' => $rolesUsersProfile['profile_id'],
                         'created_by' => $rolesUsersProfile['created_by'],
                         'permissions' => $permssions,
+
                     ]);
             }
         }
-    }
 }
