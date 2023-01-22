@@ -281,7 +281,8 @@ class UserSeeder extends Seeder
                 'cr_number' => $profile['cr_number'],
                 'cr_expire_data' => $profile['cr_expire_data'],
                 'subs_id' => $profile['subs_id'],
-                'subscription_details' => json_encode($details, true), 'created_at' => now(),
+                'subscription_details' => $details,
+                 'created_at' => now(),
                 'active' => $profile['active'],
             ]);
         }
