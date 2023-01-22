@@ -19,19 +19,19 @@ class WarehouseService
         return WarehouseResponse::collection(WarehouseCollection::collection($request));
     }
 
-    public function store($request)
+    public static function store($request)
     {
-        $packageLimit = new PackageConstraint;
-        $value = Warehouse::where('profile_id', auth()->user()->profile_id)->count();
-        $Limit = $packageLimit->packageLimitExceed("Warehouse", $value);
-        if ($Limit == false) {
-            return response()->json([
-                "statusCode" => "361",
-                'success' => false,
-                'message' => "You have exceeded the allowed number of Warehouse to create it"
-            ], 200);
-        }
-        $warehouse = DB::transaction(function () use ($request) {
+        // $packageLimit = new PackageConstraint;
+        // $value = Warehouse::where('profile_id', auth()->user()->profile_id)->count();
+        // $Limit = $packageLimit->packageLimitExceed("Warehouse", $value);
+        // if ($Limit == false) {
+        //     return response()->json([
+        //         "statusCode" => "361",
+        //         'success' => false,
+        //         'message' => "You have exceeded the allowed number of Warehouse to create it"
+        //     ], 200);
+        // }
+        return DB::transaction(function () use ($request) {
             $warehouse = Warehouse::create([
                 'profile_id' => auth()->user()->profile_id,
                 'address_name' => $request->warehouseName,
@@ -48,29 +48,22 @@ class WarehouseService
             ]);
             if (isset($request['userList'])) {
                 foreach ($request['userList'] as $user_id) {
-                    try{
-                        $warehouse->users()->attach(["warehouse_id"=>$warehouse->id,'user_id' => $user_id ?? auth()->user->id]);
-
+                    try {
+                        $warehouse->users()->attach($warehouse->id, ['user_id' => $user_id ?? auth()->user->id]);
+                    } catch (Exception $ex) {
                     }
-                    catch (Exception $ex) {}
                 }
             }
             return $warehouse;
         });
-        if ($warehouse!=null) {
-            return response()->json(["statusCode" => '000','message' => 'created successfully', 'data'=> WarehouseResponse::collection($warehouse) ], 200);
-        }
-
-        return response()->json(['error' => 'system error'], 500);
     }
 
 
 
-    public function update($request, $id)
+    public static function update($request, $id)
     {
 
         $warehouse = Warehouse::where('id', $id)->first();
-        // dd($warehouse);
         if ($warehouse != null) {
             $warehouse->update([
                 'address_name' => $request->warehouseName ?? $warehouse->address_name,
@@ -82,20 +75,14 @@ class WarehouseService
                 "longitude" => $request->longitude ?? $warehouse->longitude,
 
             ]);
-            return response()->json(["statusCode" => '000', 'success' => 'Updated Successfly'], 200);
+            return $warehouse;
         }
 
-        return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
     }
-
-
-    public function show($id)
+    public static function show($id)
     {
         $warehouses = Warehouse::where('id', $id)->first();
-        if ($warehouses != null) {
-            return response()->json(['data' => new WarehouseResponse($warehouses)], 200);
-        }
-        return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
+        return $warehouses;
     }
 
     public function showByUserId($id)
@@ -114,65 +101,52 @@ class WarehouseService
     public function delete($id)
     {
         $warehouses = Warehouse::find($id)->first();
-        if ($warehouses == null) { // replace false by checking user permission
-            return response()->json(["statusCode" => '111', 'success' => false, 'error' => 'not found'], 404);
-        } else {
-
+        if ($warehouses != null) { // replace false by checking user permission
             $warehouses->forceDelete();
-            return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
+            return $warehouses;
         }
     }
 
 
 
-    public function restore($id)
-    {
-        $restore = Warehouse::where('id', $id)->withTrashed()->restore();
-        if ($restore) {
-            return response()->json(["statusCode" => '000', 'message' => 'restored successfully'], 200);
-        }
-        return response()->json(["statusCode" => '999', 'error' => 'system error'], 500);
-    }
+    // public function restore($id)
+    // {
+    //     $restore = Warehouse::where('id', $id)->withTrashed()->restore();
+    //     if ($restore) {
+    //         return response()->json(["statusCode" => '000', 'message' => 'restored successfully'], 200);
+    //     }
+    //     return response()->json(["statusCode" => '999', 'error' => 'system error'], 500);
+    // }
 
-    public function verfied($id)
+    public static function verfied($id)
     {
         $warehouses = Warehouse::where('id', $id)->first();
         $verfied = $warehouses->update(['confirm_by' => auth()->id(), 'otp_receiver' => null, 'otp_expires_at' => null, 'otp_verfied' => true, "status" => "Active"]);
         if ($verfied) {
-            return response()->json(["statusCode" => '000', 'message' => 'verfied successfully'], 200);
+            return true;
         }
-        return response()->json(['error' => 'system error'], 500);
+        
     }
 
 
-    public function assignWarehouseToUser($request)
+    public static  function assignWarehouseToUser($request)
     {
-        // $assign = UserWarehousePivot::create([
-        //     'user_id' => $request->userId,
-        //     'warehouse_id' => $request->warehouseId
-        // ]);
-
         $user = User::find($request->userId);
         $warehouse = Warehouse::find($request->warehouseId);
-
-        if ($user!= null && $warehouse!= null) {
-            $warehouse->users()->attach($user);
-            return response()->json(["statusCode" => '000', 'message' => 'user assigned successfully'], 200);
+        if ($user != null && $warehouse != null) {
+             $warehouse->users()->attach($user);
+            return $warehouse;
         }
-        return response()->json(['error' => 'system error'], 500);
+       
     }
 
-    public function unAssignWarehouseFromUser($request)
+    public static  function unAssignWarehouseFromUser($request)
     {
         $user = User::find($request->userId);
         $warehouse = Warehouse::find($request->warehouseId);
-
-        dd($user->warehouses);
-
-        if ($user!= null && $warehouse!= null) {
-            $warehouse->users()->detach($user);
-            return response()->json(["statusCode" => '000', 'message' => 'user unassigned successfully'], 200);
+        if ($user != null && $warehouse != null) {
+            $unAssign = $warehouse->users()->detach($user);
+            return $unAssign;
         }
-        return response()->json(['error' => 'system error'], 500);
     }
 }
