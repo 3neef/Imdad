@@ -277,16 +277,13 @@ class AuthenticationServices
     public function resend($request)
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
-        $data = $this->UserOtp($user);
-        MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
-        return response()->json(
-            [
-                "statusCode" => "000",
-                'message' => 'New OTP has been sent.',
-                'otp' => $data,
-            ],
-            200
-        );
+        if($user){
+            $data = $this->UserOtp($user);
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
+        }else{
+            $data = null;
+        }
+        return $data;
     }
 
     public function logout()
