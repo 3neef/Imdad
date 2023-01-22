@@ -28,9 +28,9 @@ class CompanyProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'productId' => ['required_without:productList','exists:products,id', new IsCompositeUnique('profile_products_pivots',['profile_id'=>auth()->user()->profile_id,'product_id'=>$this->productId])],
+            'productId' => ['required_without:productList','exists:products,id', new IsCompositeUnique('product_profile',['profile_id'=>auth()->user()->profile_id,'product_id'=>$this->productId])],
 
-            "productList" => ['required_without:productId', 'array', new UniqeValues, new IsCompositeUnique('profile_products_pivots',['profile_id'=>auth()->user()->profile_id,'product_id'=>$this->productList])],
+            "productList" => ['required_without:productId', 'array', new UniqeValues, new IsCompositeUnique('product_profile',['profile_id'=>auth()->user()->profile_id,'product_id'=>$this->productList])],
             "productList.*" => ['required_with:productList','exists:products,id'],
         ];
     }

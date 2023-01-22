@@ -7,6 +7,7 @@ use App\Http\Resources\CategoryResourses\Product\ProductResponse;
 use App\Http\Services\AccountServices\UploadServices;
 use App\Models\Emdad\Product;
 use App\Models\Emdad\ProductAttachmentFile;
+use App\Models\Profile;
 use App\Models\ProfileCategoryPivot;
 use App\Models\ProfileProductsPivot;
 use Exception;
@@ -21,10 +22,10 @@ class ProductService
     }
 
 
-    public function store($request)
+    public static function store($request)
     {
 
-        $product = DB::transaction(function () use ($request) {
+       return DB::transaction(function () use ($request) {
             $product = Product::create([
                 'category_id' => $request->categoryId,
                 'name_en' => $request->nameEn,
@@ -32,7 +33,7 @@ class ProductService
                 'price' => $request->price??null,
                 'measruing_unit' => $request->measruingUnit,
                 'description_en' => $request->descriptionEn,
-                'description_ar' => $request->descriptionAr,
+                'description_ar' => $request->descriptionr,
                 'created_by' => auth()->id(),
                 'profile_id' => auth()->user()->profile_id,
             ]);
@@ -44,24 +45,14 @@ class ProductService
                     $fileAdder->toMediaCollection('products');
                 });
             }
-        
+            $product->companyProduct()->attach($product->id, ['profile_id' => auth()->user()->profile_id]);
             return $product;
         });
-        if ($product) {
-            $product->companyProduct()->attach($product->id, ['profile_id' => auth()->user()->profile_id]);
-            return response()->json([
-                "statusCode" => "000",
-                'message' => 'created successfully'
-            ], 200);
-        }
-        return response()->json([
-            "statusCode" => '999',
-            'error' => 'unkown error'
-        ], 500);
+       
     }
 
 
-    public function update($request, $id)
+    public static  function update($request, $id)
     {
 
         $product = Product::find($id);
@@ -85,80 +76,56 @@ class ProductService
             'description_ar' => $request->descriptionAr ?? $product->description_ar
         ]);
 
-        if ($product) {
-            return response()->json(["statusCode" => '000', 'message' => 'updated successfully'], 200);
-        }
-        return response()->json([
-            "statusCode" => '999',
-            'error' => 'unkown error'
-        ], 500);
+        return $product;
     }
 
-    public function show($id)
+    public static function show($id)
     {
         $product = Product::where('id', $id)->first();
-        if ($product) {
-            return response()->json(["statusCode" => '000', 'data' => new ProductResponse($product)], 200);
-        }
-        return response()->json(["statusCode" => '111', 'error' => 'Record Not Founded'], 404);
+        return $product;
     }
 
 
-    public function delete($id)
+    public  static function delete($id)
     {
         $product = Product::find($id);
         $deleted = $product->delete();
-        if ($deleted) {
-            return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
-        }
-        return response()->json(["statusCode" => '111', 'error' => 'Record Not Found'], 500);
+        return $deleted;
     }
 
-    public function restore($id)
+    public  static function restore($id)
     {
         $restore = Product::where('id', $id)->withTrashed()->restore();
-        if ($restore) {
-            return response()->json(["statusCode" => '000', 'message' => 'restored successfully'], 200);
-        }
-        return response()->json(["statusCode" => '111', 'error' => 'Record Not Found'], 500);
+
+        return $restore;
     }
 
 
 
-    public function setcompanyproducts($request)
+    public static function setcompanyproducts($request)
     {
-
-
-
+        $profile = Profile::find(auth()->user()->profile_id);
         if (isset($request['productList'])) {
             foreach ($request['productList'] as $product_id) {
-                ProfileProductsPivot::create([
-                    'product_id' => $product_id, 'profile_id' => auth()->user()->profile_id
-                ]);
+                $profile->products()->attach($product_id,['profile_id' => auth()->user()->profile_id,'created_at'=>now()]);
             }
         } else {
-
-            ProfileProductsPivot::create(
-                [
-                    'product_id' => $request['productId'], 'profile_id' => auth()->user()->profile_id
-                ]
-            );
+                $profile->products()->attach($request['productId'],[ 'profile_id' => auth()->user()->profile_id,'created_at'=>now()]);
         }
-        return response()->json(["statusCode" => '000', 'message' => 'created successfully'], 200);
+        return true;
     }
 
 
-    public function changeProductStatus($request)
+    public  static function changeProductStatus($request)
     {
 
-        $category = ProfileProductsPivot::where('id', $request->product_id)->first();
-        if ($category == null) {
-            return response()->json([
-                'error' => 'No products founded'
-            ]);
-        } else {
-            $category->update(['status' => 0]);
-            return response()->json(['message' => 'aproved successfully'], 200);
+
+
+        $profile = Profile::where('id', auth()->user()->profile_id)->first();
+        Product::where('id', $request->productId)->first();
+             if ($profile != null) {
+             $result = $profile->products()->updateExistingPivot($request->productId,['status' => 0]);
+            return $result;
         }
     }
 }

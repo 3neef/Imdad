@@ -12,6 +12,7 @@ use App\Http\Requests\CategroyRequests\Categroy\FilterCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\ProfileCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\RetryApprovalRequest;
 use App\Http\Requests\CategroyRequests\Categroy\UpdateCategoryRequest;
+use App\Http\Resources\CategoryResourses\category\CategoryResource;
 // use App\Models\Emdad\Categories;
 use App\Models\Emdad\Category;
 
@@ -73,9 +74,21 @@ class CategoryController extends Controller
     public function store(CreateCategoryRequest $request)
 
     {
-        $this->authorize('create', Category::class);
+         $this->authorize('create', Category::class);
 
-        return $this->categoryService->store($request);
+        $category = $this->categoryService->store($request);
+        // dd($category);
+        if ($category) {
+            return response()->json([
+                "statusCode" => "000",
+                'message' => 'created successfully',
+                'data' => new CategoryResource($category)
+            ], 200);
+        }
+        return response()->json([
+            "statusCode" => "264",
+            'success' => false, 'message' => "User Dosn't belong to any profile "
+        ], 200);
     }
 
     /**
@@ -184,7 +197,13 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        return $this->categoryService->destroy($id);
+        $category =  $this->categoryService->destroy($id);
+
+        if ($category) {
+            return response()->json(['message' => 'deleted successfully'], 301);
+        } else {
+            return response()->json(['success' => false, 'error' => 'not found'], 404);
+        }
     }
     /**
      * @OA\put(
@@ -257,7 +276,11 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request, $id)
     {
-        return $this->categoryService->update($request, $id);
+        $category =  $this->categoryService->update($request, $id);
+        if ($category) {
+            return response()->json(['success' => 'Updated Successfly'], 201);
+        }
+        return response()->json(['error' => false, 'message' => 'not found'], 404);
     }
 
 
@@ -315,7 +338,12 @@ class CategoryController extends Controller
 
     public function restore($id)
     {
-        return $this->categoryService->restore($id);
+        $restore =  $this->categoryService->restore($id);
+
+        if ($restore) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
     }
     /**
      * @OA\get(
@@ -372,7 +400,11 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        return $this->categoryService->show($id);
+        $category =  $this->categoryService->show($id);
+        if ($category) {
+            return response()->json(['data' => new CategoryResource($category)], 200);
+        }
+        return response()->json(['error' => 'No data Founded'], 404);
     }
 
 
@@ -515,7 +547,13 @@ class CategoryController extends Controller
 
     public function RetryRejectedCategories(RetryApprovalRequest $request)
     {
-        return $this->categoryService->RetryApproval($request);
+        $category = $this->categoryService->RetryApproval($request);
+
+        // dd($category);
+        if ($category) {
+            return response()->json(['message' => 'Approval  Requset sent successfully'], 200);
+        }
+        return response()->json(['message' => 'Requset  not sent '], 403);
     }
 
     /**
@@ -585,7 +623,12 @@ class CategoryController extends Controller
      */
     public function ChangeCategoryStatus(changeCategoryStatusRequest $request)
     {
-        return $this->categoryService->changeCategoryStatus($request);
+        $category =  $this->categoryService->changeCategoryStatus($request);
+        if ($category) {
+            return response()->json(['message' => 'changed successfully'], 200);
+        } else {
+            return response()->json(['error' => 'No categories founded']);
+        }
     }
     /**
      * @OA\post(
@@ -654,7 +697,12 @@ class CategoryController extends Controller
 
     public function approveCategory(EmdadApproveCategoryRequest $request)
     {
-        return $this->categoryService->approveCategory($request);
+        $category = $this->categoryService->approveCategory($request);
+        if ($category) {
+            return response()->json(['message' => 'aproved successfully'], 200);
+        } else {
+            return response()->json(['error' => 'No category founded']);
+        }
     }
     /**
      * @OA\post(
@@ -723,7 +771,13 @@ class CategoryController extends Controller
      */
     public function rejectCategory(EmdadApproveCategoryRequest $request)
     {
-        return $this->categoryService->rejectCategory($request);
+        $category =  $this->categoryService->rejectCategory($request);
+
+        if ($category) {
+            return response()->json(['message' => 'rejected successfully'], 200);
+        } else {
+            return response()->json(['error' => 'No category founded']);
+        }
     }
     /**
      * @OA\get(
@@ -791,7 +845,17 @@ class CategoryController extends Controller
      */
     public function filterCategory(FilterCategoryRequest $request)
     {
-        return $this->categoryService->filterCategory($request);
+        $category = $this->categoryService->filterCategory($request);
+
+        // dd($category);
+
+        if ($category == null) {
+            return response()->json(['error' => 'No category founded']);
+        }
+        return response()->json([
+            "statusCode" => "000",
+            'data' => new CategoryResource($category)
+        ]);
     }
 
     /**
@@ -860,6 +924,4 @@ class CategoryController extends Controller
     {
         return $this->categoryService->getCategoryProfile($request);
     }
-
-  
 }

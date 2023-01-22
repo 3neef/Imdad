@@ -651,4 +651,19 @@ class UserServices
             return true;
         }
     }
+    public function uploadAvatar($request){
+        $user = User::where('id', auth()->id())->first();
+        if(isset($request['attachementFile']))
+            {
+                $user->addMultipleMediaFromRequest(['attachementFile'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('users');
+                });
+            }
+            return response()->json([
+                "statusCode" => "000",
+                'message' => 'Avater uploaded Successfully'
+            ], 200);;
+            
+    }
 }
