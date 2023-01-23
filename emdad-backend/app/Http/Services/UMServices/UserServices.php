@@ -24,10 +24,12 @@ class UserServices
 
     public function create($request)
     {
-        // dd($request);
-        $packageLimit = new PackageConstraint;
 
+        $packageLimit = new PackageConstraint;
+        $output = [];
         $check = in_array($request['roleId'], [1, 2, 3, 4, 12]);
+        $user = null;
+
 
         if ($check == true) {
             $value = DB::table('profile_role_user')->where('profile_id', auth()->user()->profile_id)->whereIn('role_id', [1, 2, 3, 4, 12])->count();
@@ -35,54 +37,35 @@ class UserServices
             $Limit = $packageLimit->packageLimitExceed("owner", $newvalue);
 
             if ($Limit == false) {
-                return response()->json([
+                $output = [
                     "statusCode" => "360",
                     'success' => false,
-                    'message' => "You have exceeded the allowed number of Admin to create it"
-                ], 200);
+                    'message' => "You have exceeded the allowed number of users to create it"
+                ];
+                return $output;
             }
             $user = $this->createUser($request);
-            if ($user) {
-                return response()->json([
-                    "statusCode" => "000",
-
-                    'message' => 'Admin created successfully',
-                    'data' => ['user' => new UserResponse($user)]
-                ], 200);
-            } else {
-                return response()->json([
-                    "statusCode" => "999",
-
-                    'success' => false, 'message' => "Admin not created"
-                ], 200);
-            }
         } else {
             $value = DB::table('profile_role_user')->where('profile_id', auth()->user()->profile_id)->whereNotIn('role_id', [1, 2, 3, 4, 12])->count();
             $Limit = $packageLimit->packageLimitExceed("user", $value);
 
             if ($Limit == false) {
-                return response()->json([
+                $output = [
                     "statusCode" => "360",
                     'success' => false,
                     'message' => "You have exceeded the allowed number of users to create it"
-                ], 200);
+                ];
+                return $output;
             }
             $user = $this->createUser($request);
+        }
 
-            if ($user) {
-                return response()->json([
-                    "statusCode" => "000",
-
-                    'message' => 'User created successfully',
-                    'data' => ['user' => new UserResponse($user)]
-                ], 200);
-            } else {
-                return response()->json([
-                    "statusCode" => "999",
-
-                    'success' => false, 'message' => "user not created"
-                ], 200);
-            }
+        if ($user != null) {
+            $output = ["data" => $user, "message" => "user Created successfully", "statusCode" => "000"];
+            return $output;
+        } else {
+            $output = ["data" => null, 'message' => "user not created", "statusCode" => "999"];
+            return $output;
         }
     }
 
@@ -139,13 +122,12 @@ class UserServices
 
             if($id == auth()->id()&& $request->status!=$userRoleProfile->status){
 
-                return response()->json(
-                    [
-                        "statusCode" => "110",
-                        'message' => 'you cannot  disable your self'
-                    ],
-                    200
-                );
+                $output = [
+                    "statusCode" => "110",
+                    'success' => false,
+                    'message' => "you cannot  disable your self"
+                ];
+                return $output;
             
             }
 
@@ -154,69 +136,50 @@ class UserServices
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
             $this->UserOtp($user);
-            return response()->json(
-                [
-                    "statusCode" => "000",
 
-                    'message' => 'New OTP has been sent.',
-                    'otp' => $user->otp,
-                ],
-                200
-            );
+            $output = ["otp" => $user->otp, "message" => "New OTP has been sent.", "statusCode" => "000"];
+            return $output;
         }
         if ($user) {
-            return response()->json([
-                "statusCode" => "000",
-
-                'message' => 'User updated successfully',
-                'data' => ['user' => new UserResponse($user)]
-            ], 200);
+            $output = ["data" => $user, "message" => "user updated successfully", "statusCode" => "000"];
+            return $output;
+        }else{
+            $output = ["data" => null, 'message' => "user not updated", "statusCode" => "999"];
+            return $output;
         }
-        return response()->json([
-            "statusCode" => "999",
-
-            'error' => 'system error'
-        ], 200);
+        
     }
 
     public function detachWarehouse($request)
     {
-        $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
-        if ($userWarehouse == null) {
-            return response()->json([
-                "statusCode" => "111",
+        $user = User::find($request->userId);
 
-                'message' => 'User not attached to warehouse'
-            ], 200);
+        $warehouse = $user->warehouses()->where('warehouse_id', $request->warehouseId)->first();
+
+        if ($warehouse == null) {
+            $output = ['message' => "the user is not attached to this warehouse", "statusCode" => "111"];
+            return $output;
         }
+        if ($warehouse != null) {
+           $user->warehouses()->detach($request->warehouseId);
 
-        if ($userWarehouse != null) {
-            $userWarehouse->forceDelete();
-
-            return response()->json([
-                "statusCode" => "000",
-
-                'message' => 'User deatched successfully'
-            ], 200);
+           $output = ['message' => "warehouse has been detached successfully", "statusCode" => "000"];
+           return $output;
         }
     }
 
     public function userWarehouseStatus($request)
     {
-        $userWarehouse = UserWarehousePivot::where("user_id", $request->userId)->where("warehouse_id", $request->warehouseId)->first();
-        if ($userWarehouse != null) {
-            $userWarehouse->update(['status' => $request->status]);
-            return response()->json([
-                "statusCode" => "000",
+        $user = User::find($request->userId);
 
-                'message' => 'status update successfully'
-            ], 200);
+        if ($user != null) {
+            $user->warehouses()->updateExistingPivot($request->warehouseId, ['status' => $request->status]);
+            $output = ["message" => "status update successfully", "statusCode" => "000"];
+            return $output;
+        }else{
+            $output = ["message" => "system error", "statusCode" => "999"];
+            return $output;
         }
-        return response()->json([
-            "statusCode" => "999",
-
-            'error' => 'system error'
-        ], 200);
     }
 
 
@@ -360,10 +323,8 @@ class UserServices
 
         $user = User::find($id)->first();
         if ($user == null) {
-            return response()->json([
-                "statusCode" => "000",
-                'error' => 'user already deleted'
-            ], 200);
+            $output = ['statusCode'=>'000','message' => 'user already deleted'];
+            return $output;
         }
 
         $user->tokens()->delete();
@@ -371,16 +332,11 @@ class UserServices
         $deleted = $user->delete();
 
         if ($deleted) {
-            return response()->json([
-                "statusCode" => "000",
-
-                'message' => 'User deleted successfully'
-            ], 200);
+            $output = ['statusCode'=>'000','message' => 'User deleted successfully'];
+            return $output;
         }
-        return response()->json([
-            "statusCode" => "999",
-            'error' => 'system error'
-        ], 200);
+        $output = ['statusCode'=>'999','error' => 'system error'];
+        return $output;
     }
 
 
@@ -390,23 +346,22 @@ class UserServices
         $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin', false)->count();
         $Limit = $packageLimit->packageLimitExceed("user", $value);
         if ($Limit == false) {
-            return response()->json([
+            $output = [
                 "statusCode" => "360",
                 'success' => false,
                 'message' => "You have exceeded the allowed number of users to create it"
-            ], 200);
+            ];
+            return $output;
         }
 
         $restore = User::where('id', $request->id)->withTrashed()->first()->restore();
 
         if ($restore) {
-            return response()->json(['message' => 'User restored successfully'], 200);
+            $output = ['statusCode'=>'000','message' => 'User restored successfully'];
+            return $output;
         }
-        return response()->json([
-            "statusCode" => "999",
-
-            'error' => 'system error'
-        ], 200);
+        $output = ['statusCode'=>'999','error' => 'system error'];
+        return $output;
     }
 
 
@@ -457,25 +412,16 @@ class UserServices
         $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
 
         if ($userRoleProfile == null) {
-            return response()->json([
-                "statusCode" => "263",
-
-                'error' => 'user doesn\'t belong to this company'
-            ], 200);
+            $output = ['statusCode'=>'263','error' => 'user doesn\'t belong to this company'];
+            return $output;
         }
         $active = $userRoleProfile->update(['status' => 'active']);
         if ($active) {
-            return response()->json([
-                "statusCode" => "000",
-
-                'message' => 'user account has activated successfully'
-            ], 200);
+            $output = ['statusCode'=>'000','message' => 'user account has been activated successfully'];
+            return $output;
         }
-        return response()->json([
-            "statusCode" => "999",
-
-            'error' => 'system error'
-        ], 200);
+        $output = ['statusCode'=>'999','error' => 'system error'];
+        return $output;
     }
 
 
@@ -483,34 +429,25 @@ class UserServices
     {
         if ($request->userId == auth()->id()) {
 
-            return response()->json(
-                [
-                    "statusCode" => "110",
-                    'message' => 'you cannot  update your self'
-                ],
-                200
-            );
+            $output = ['statusCode'=>'110','message' => 'you cannot update your self'];
+            return $output;
         } else {
 
-            $user = User::where('id', $request->userId)->first();
-            $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+            $user = User::find($request->userId);
+            
+            // $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+            $profile = $user->profiles()->where('profile_id', $user->profile_id)->first();
 
-            $active = $userRoleProfile->update(['status' => $userRoleProfile->status == "inActive" ? "active" : "inActive"]);
-            // dd($userRoleProfile);
+            $active = $user->profiles()->updateExistingPivot($user->profile, ['status' => $profile->profile->status == "inActive" ? "active" : "inActive"]);
             if ($active) {
-                return response()->json([
-                    "statusCode" => "000",
-
-                    'message' => 'user account has disabled successfully'
-                ], 200);
+                $output = ['statusCode'=>'000','message' => 'user account has disabled successfully'];
+                return $output;
             }
-            return response()->json([
-                "statusCode" => "999",
-
-                'error' => 'system error'
-            ], 200);
+            $output = ['statusCode'=>'999','message' => 'system error'];
+            return $output;
         }
     }
+
     public function restoreOldRole($request)
     {
         $userRoleCompany = RoleUserProfile::where('user_id', $request->userId)->where('profile_id', $request->profile_id)->withTrashed()->first()->restore();
@@ -537,12 +474,8 @@ class UserServices
             ]
         );
 
-        return response()->json([
-            "statusCode" => "000",
-
-            'message' => 'Default company successfully',
-            'data' => ['user' => new UserResponse($user)]
-        ], 200);
+        $output = ["data" => $user, "message" => "Default company successfully", "statusCode" => "000"];
+        return $output;
     }
 
 
@@ -594,7 +527,7 @@ class UserServices
 
     public function createUser($request)
     {
-        // dd($request);
+
         return DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
             $request['expiry_date'] = $request['expireDate'] ?? null;
@@ -604,7 +537,6 @@ class UserServices
             $request['is_super_admin'] = false;
 
             $user = User::create($request);
-            // dd($user->warehouses());
             $this->UserOtp($user);
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
@@ -621,7 +553,6 @@ class UserServices
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
             if (isset($request['warehouseId'])) {
-                // dd('hey');
                 foreach ($request['warehouseId'] as $warehouse_id) {
                 $user->warehouses()->attach($user, ['warehouse_id' => $warehouse_id]); 
                 }
@@ -657,29 +588,29 @@ class UserServices
         if(isset($request['attachementFile']))
             {
                 $user->addMedia($request['attachementFile'])->toMediaCollection('users');
+                $output = ["message" => "Avater uploaded Successfully", "statusCode" => "000"];
+                return $output;
                
+            }else{
+                $output = ["message" => "system error", "statusCode" => "999"];
+                return $output;
             }
-            return response()->json([
-                "statusCode" => "000",
-                'message' => 'Avater uploaded Successfully'
-            ], 200);;
             
     }
-    
-    public function updateAvater($request){
+
+    public function updateAvater($request)
+    {
         $user = User::where('id', auth()->id())->first();
-      
-        if (isset($request['attachementFile'])) {
-            {
+
+        if (isset($request['attachementFile'])) { {
                 $user->clearMediaCollection('users');
                 $user->addMedia($request['attachementFile'])->toMediaCollection('users');
-               
+                $output = ["message" => "Avater updated Successfully", "statusCode" => "000"];
+                return $output;
             }
-
-    }
-            return response()->json([
-                "statusCode" => "000",
-                'message' => 'Avater updated Successfully'
-            ], 200);;
+        } else {
+            $output = ["message" => "system error", "statusCode" => "999"];
+            return $output;
+        }
     }
 }
