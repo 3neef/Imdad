@@ -118,7 +118,7 @@ class TruckController extends Controller
      */
     public function store(CreateTruckRequest $request)
     {
-        // $this->authorize('create', Truck::class);
+        $this->authorize('create', Truck::class);
         $truck = $this->truckservice->store($request); 
         if ($truck !=null) {
             return  response()->json(['statusCode' => 000, 'message' => 'created successfully', 'data' => new TruckResponse($truck)], 201);
@@ -245,7 +245,7 @@ class TruckController extends Controller
 
     public function update(UpdateTruckRequest $request, $id)
     {
-        // $this->authorize('update', Truck::class);
+        $this->authorize('update', Truck::class);
 
         $truck =  $this->truckservice->update($request, $id);
         if ($truck != null) {
@@ -308,7 +308,7 @@ class TruckController extends Controller
 
     public function suspend(SuspendRequest $request, $id)
     {
-        // $this->authorize('update', Truck::class);
+        $this->authorize('update', Truck::class);
 
         return $this->truckservice->suspend($request, $id);
     }
@@ -360,7 +360,7 @@ class TruckController extends Controller
      */
     public function destroy($id)
     {
-        // $this->authorize('delete', Truck::class);
+        $this->authorize('delete', Truck::class);
         $truck =  $this->truckservice->delete($id);
         if ($truck) {
             return response()->json(['statusCode' => 112, 'message' => 'deleted successfully'], 301);
