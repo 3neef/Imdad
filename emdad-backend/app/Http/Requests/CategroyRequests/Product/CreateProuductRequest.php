@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\CategroyRequests\Product;
 
+use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -35,8 +36,8 @@ class CreateProuductRequest extends FormRequest
             'attachementFile'=>['nullable','image','mimes:jpg,png,jpeg,gif,svg','max:5120'],
             'measruingUnit'=> ['string','required'],
             'descriptionEn'=>['required','string','max:120'],
-            'descriptionAr'=>['required','string','max:120']
-
+            'descriptionAr'=>['required','string','max:120'],
+           
         ];
     }
 

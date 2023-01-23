@@ -60,4 +60,9 @@ class Warehouse extends Model
         return User::where('id',$this->created_by)->first();
         
     }
+
+    public function trucks()
+    {
+        return $this->belongsToMany(Truck::class)->withTimestamps();
+    }
 }

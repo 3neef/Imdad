@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountRequests\Truck\CreateTruckRequest;
+use App\Http\Requests\AccountRequests\Truck\UpdateTruckRequest;
 use App\Http\Requests\Driver\SuspendRequest;
+use App\Http\Resources\AccountResourses\warehouses\TruckResponse;
 use App\Http\Services\AccountServices\TruckService;
 use App\Models\Accounts\Truck;
 use Illuminate\Http\Request;
@@ -12,7 +14,7 @@ use Illuminate\Http\Request;
 class TruckController extends Controller
 {
     protected TruckService $truckservice;
-    
+
 
     public function __construct(TruckService $truckservice)
     {
@@ -116,19 +118,70 @@ class TruckController extends Controller
      */
     public function store(CreateTruckRequest $request)
     {
-        $this->authorize('create', Truck::class);
-        return $this->truckservice->store($request);
+        // $this->authorize('create', Truck::class);
+        $truck = $this->truckservice->store($request); 
+        if ($truck !=null) {
+            return  response()->json(['statusCode' => 000, 'message' => 'created successfully', 'data' => new TruckResponse($truck)], 201);
+        } else {
+            return  response()->json(['statusCode' => 400, 'message' => 'Not created '], 111);
+        }
     }
 
-    /**
-     * Display the specified resource.
+        /**
+     * @OA\get(
+     * path="/api/v1_0/trucks/{id}'",
+     * operationId="gettrucksById",
+     * tags={"trucks"},
+     * summary="get trucks By Id",
+     * description="get trucks By Id Here",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *      @OA\Response(
+     *        response=200,
+     *          description="get trucks By Id",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object"
+     *            ),
+     *        ),
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *       ),
+     *      @OA\Response(response=500, description="system error"),
+     *      @OA\Response(response=422, description="Validate error"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
      */
     public function show($id)
-    {
-        //
+    { 
+        $truck = $this->truckservice->show($id);
+        if ($truck != null) {
+            return response()->json(['data' => new TruckResponse($truck)], 200);
+        }
+        return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
     }
 
     /**
@@ -190,11 +243,16 @@ class TruckController extends Controller
      * )
      */
 
-    public function update(Request $request, $id)
+    public function update(UpdateTruckRequest $request, $id)
     {
-        $this->authorize('update', Truck::class);
+        // $this->authorize('update', Truck::class);
 
-        return $this->truckservice->update($request, $id);
+        $truck =  $this->truckservice->update($request, $id);
+        if ($truck != null) {
+            return response()->json(['statusCode' => 401, 'success' => 'Updated Successfly', 'data' => new TruckResponse($truck)], 201);
+        } else {
+            return response()->json(['statusCode' => 402, 'error' => 'canot Updated truck'], 201);
+        }
     }
 
     /**
@@ -250,7 +308,7 @@ class TruckController extends Controller
 
     public function suspend(SuspendRequest $request, $id)
     {
-        $this->authorize('update', Truck::class);
+        // $this->authorize('update', Truck::class);
 
         return $this->truckservice->suspend($request, $id);
     }
@@ -302,8 +360,13 @@ class TruckController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete', Truck::class);
-        return $this->truckservice->delete($id);
+        // $this->authorize('delete', Truck::class);
+        $truck =  $this->truckservice->delete($id);
+        if ($truck) {
+            return response()->json(['statusCode' => 112, 'message' => 'deleted successfully'], 301);
+        } else {
+            return response()->json(['statusCode' => 111, 'error' => 'not found'], 404);
+        }
     }
 
     /**
@@ -357,6 +420,11 @@ class TruckController extends Controller
 
     public function restoretruck($id)
     {
-        return $this->truckservice->restore($id);
+        $restore =  $this->truckservice->restore($id);
+
+        if ($restore) {
+            return response()->json(['statusCode' => 113, 'message' => 'restored successfully'], 200);
+        }
+        return response()->json(['statusCode' => 500, 'error' => 'system error'], 500);
     }
 }

@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Requests\AccountRequests\Truck;
+
+use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule;
 
 class CreateTruckRequest extends FormRequest
 {
@@ -37,7 +40,12 @@ class CreateTruckRequest extends FormRequest
             'model'=>['required','string'],
             'size'=>['required','string'],
             'brand'=>['required','string'],
-            'image'=>['required','image'],
+            "plateNumber"=>['required','string'],
+            'status'=>['required',Rule::in(['active','inActive'])],
+            'attachementFile'=>['nullable','image','mimes:jpg,png,jpeg,gif,svg','max:5120'],
+            "warehouseList" => ['array', new UniqeValues],
+            "warehouseList.*" => ['exists:warehouses,id'],
+            'warehouseId'=>['exists:warehouses,id']
         ];
 
     }
