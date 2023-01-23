@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('truck_id')->references("id")->on("trucks")->cascadeOnDelete();
             $table->foreignId('warehouse_id')->references("id")->on("warehouses")->cascadeOnDelete();
+            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
             $table->enum('status', ['active', 'inActive'])->default('active');
             $table->unique(['truck_id','warehouse_id']);
             $table->softDeletes();

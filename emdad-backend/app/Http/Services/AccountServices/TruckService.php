@@ -22,11 +22,12 @@ class TruckService
                 'brand' => $request->brand,
                 'created_by' => auth()->id(),
                 'status' => $request->status,
-                'plate_number' => $request->plateNumber
+                'plate_number' => $request->plateNumber,
+                'profile_id'=>auth()->user()->profile_id
             ]);
             if (isset($request['warehouseList'])) {
                 foreach ($request['warehouseList'] as $list) {
-                    $truck->warehouses()->attach($truck->id, ['warehouse_id' => $list]);
+                    $truck->warehouses()->attach($truck->id, ['warehouse_id' => $list,'profile_id'=>auth()->user()->profile_id]);
                 }
             }
             if (isset($request['attachementFile'])) {

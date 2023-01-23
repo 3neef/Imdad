@@ -14,7 +14,7 @@ class Truck extends Model  implements HasMedia
 {
     use HasFactory, SoftDeletes, LogsActivity, InteractsWithMedia;
     protected $fillable = [
-        'name', 'type', 'class', 'color', 'model', 'size', 'brand', 'created_by', 'status', 'plate_number'
+        'name', 'type', 'class', 'color', 'model', 'size', 'brand', 'created_by', 'status', 'plate_number','profile_id'
     ];
     public function getActivitylogOptions(): LogOptions
     {
