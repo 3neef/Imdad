@@ -9,6 +9,7 @@ use App\Http\Requests\UMRequests\Permission\CreatePermissionRequest;
 use App\Http\Requests\UMRequests\Permission\DeletePermissonRequest;
 use App\Http\Requests\UMRequests\Permission\UpdatePermissionRequest;
 use App\Http\Requests\UMRequests\Permission\RestorePermissionRequest;
+use App\Http\Resources\UMResources\Permission\PermissionResponse;
 use App\Http\Services\UMServices\PermissionServices;
 use Illuminate\Http\Request;
 
@@ -85,7 +86,11 @@ class PermissionsController extends Controller
         * )
         */
     public function store(CreatePermissionRequest $request) {
-        return $this->PermissionService->store($request);
+        $permission = $this->PermissionService->store($request);
+        if ($permission != null) {
+            return response()->json(["statusCode"=>'000','message' => 'created successfully'], 200);
+        }
+        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
     }
        /**
         * @OA\get(
@@ -176,7 +181,12 @@ class PermissionsController extends Controller
         * )
         */
     public function show($id) {
-        return $this->PermissionService->show($id);
+        $permission = $this->PermissionService->show($id);
+
+        if ($permission != null) {
+            return response()->json(['data' => new PermissionResponse($permission)], 200);
+        }
+        return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
     }
        /**
         * @OA\Put(
@@ -237,7 +247,13 @@ class PermissionsController extends Controller
         * )
         */
     public function update(UpdatePermissionRequest $request,$id){
-        return $this->PermissionService->update($request,$id);
+        $update = $this->PermissionService->update($request, $id);
+        if ($update != null) {
+            return response()->json(["statusCode" => '000', 'success' => 'Updated Successfly', 'data' => PermissionResponse::make($update)], 200);
+        } else {
+
+            return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
+        }
     }
        /**
         * @OA\delete(
@@ -283,7 +299,12 @@ class PermissionsController extends Controller
         */
     public function destroy($id)
     {
-        return $this->PermissionService->delete($id);
+        $permission =  $this->PermissionService->delete($id);
+        if ($permission != null) {
+            return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
+        } else {
+            return response()->json(["statusCode" => '111', 'success' => false, 'error' => 'not found'], 404);
+        }
     }
        /**
         * @OA\delete(
@@ -328,7 +349,11 @@ class PermissionsController extends Controller
         * )
         */
     public function restoreById( $permissionId){
-        return $this->PermissionService->restoreById($permissionId);
+        $permission=  $this->PermissionService->restoreById($permissionId);
+        if ($permission) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
     }
     /**
         * @OA\Post(
@@ -388,7 +413,12 @@ class PermissionsController extends Controller
         */
 
     public function PermissionToRole(AddPemissonToRoleRequest $request){
-        return $this->PermissionService->addPermisson($request);
+        $permission= $this->PermissionService->addPermisson($request);
+        if($permission){
+        return response()->json(["statusCode"=>'000','data'=>$permission,'success' => 'Permission added successfully'], 200);
+        }
+        return response()->json(["statusCode"=>'362','error' => 'permission already exist'], 500);
+
     }
 /**
         * @OA\delete(
@@ -447,6 +477,11 @@ class PermissionsController extends Controller
         * )
         */
     public function DeletePermissionOnRole(DeletePermissonRequest $request){
-        return $this->PermissionService->removePermission($request);
+        $permission =  $this->PermissionService->removePermission($request);
+        if($permission){
+            return response()->json(["statusCode"=>'000','data'=>$permission,'message' => 'permission Deleted Successfully'], 200);
+        }
+        return response()->json(["statusCode"=>'111','data'=>$permission,'error' => 'Record not Found'], 200);   
+
     }
 }
