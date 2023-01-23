@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests\Driver;
 
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Validation\Rule as ValidationRule;
+
 class CreateDriverRequest extends FormRequest
 {
     /**
@@ -30,6 +33,9 @@ class CreateDriverRequest extends FormRequest
             'age' => ['required', 'numeric'],
             'phone' => ['unique:drivers,phone', 'required', 'string', 'max:14', 'min:14', 'regex:/^(00966)/',],
             'nationality' => ['required', 'string', 'max:255'],
+            'status' => ['string',ValidationRule::in(['active','inActive'])],
+            'user_id'=>[ 'required','integer','exists:users,id'],
+
         ];
     }
 

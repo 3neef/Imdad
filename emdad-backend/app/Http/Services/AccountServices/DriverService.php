@@ -5,6 +5,7 @@ namespace App\Http\Services\AccountServices;
 use App\Http\Resources\Delviery\DriverResources;
 use App\Models\Accounts\Driver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DriverService
 {
@@ -21,14 +22,24 @@ class DriverService
 
     public function store($request)
     {
-        $drivers = Driver::create([
-            'name_ar' => $request->nameAr,
-            'name_en' => $request->nameEn,
-            'age' => $request->age,
-            "nationality" => $request->nationality,
-            "phone" => $request->phone
-        ]);
-        return $drivers;
+        return  DB::transaction(function () use ($request) {
+            $drivers = Driver::create([
+                'name_ar' => $request->nameAr,
+                'name_en' => $request->nameEn,
+                'age' => $request->age,
+                'phone' => $request->phone,
+                'nationality' => $request->nationality,
+                'status' => $request->size,
+                'user_id' => $request->brand,
+                'profile_id' => auth()->id(),
+            ]);
+            if (isset($request['warehouseList'])) {
+                foreach ($request['warehouseList'] as $list) {
+                    $drivers->warehouses()->attach($drivers->id, ['warehouse_id' => $list,'profile_id'=>auth()->user()->profile_id]);
+                }
+            }
+            return $drivers;
+        });
     }
 
     public function show($id)

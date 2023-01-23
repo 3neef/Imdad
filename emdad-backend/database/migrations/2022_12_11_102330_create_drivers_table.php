@@ -25,6 +25,8 @@ return new class extends Migration
             $table->foreignId('profile_id')->nullable()->references("id")->on("profiles")->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique('name_ar','profile_id');
+
         });
     }
 
