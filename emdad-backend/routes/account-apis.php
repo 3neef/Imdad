@@ -15,7 +15,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
 
     Route::post('updateProfile/{id}', [ProfileController::class, 'update']);
 
-    Route::apiResource('profiles/   ', SubscriptionPaymentController::class);
+    Route::apiResource('profiles/subscriptionPayment', SubscriptionPaymentController::class);
 
     Route::apiResource('profiles', ProfileController::class);
     Route::put('profiles/restore/{id}', [ProfileController::class, 'restoreByAccountId']);
