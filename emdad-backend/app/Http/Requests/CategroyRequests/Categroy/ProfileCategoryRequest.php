@@ -28,9 +28,9 @@ class ProfileCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => ['required_without:categoryList','exists:categories,id', new IsCompositeUnique('category_profile',['profile_id'=>auth()->user()->profile_id,'category_id'=>$this->category_id])],
+            'categoryId' => ['required_without:categoryList','exists:categories,id', new IsCompositeUnique('category_profile',['profile_id'=>auth()->user()->profile_id,'category_id'=>$this->categoryId])],
 
-            "categoryList" => ['required_without:category_id', 'array', new UniqeValues, new IsCompositeUnique('category_profile',['profile_id'=>auth()->user()->profile_id,'category_id'=>$this->categoryList])],
+            "categoryList" => ['required_without:categoryId', 'array', new UniqeValues, new IsCompositeUnique('category_profile',['profile_id'=>auth()->user()->profile_id,'category_id'=>$this->categoryList])],
             "categoryList.*" => ['required_with:categoryList','exists:categories,id'],
 
         ];

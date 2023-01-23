@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name_en');
             $table->string('age');
             $table->string('phone');
+            $table->enum("status",['active','inActive'])->default('active');
             $table->string('nationality');
             $table->foreignId('user_id')->nullable()->references("id")->on("users")->cascadeOnDelete();
             $table->foreignId('profile_id')->nullable()->references("id")->on("profiles")->cascadeOnDelete();

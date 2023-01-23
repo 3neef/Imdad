@@ -36,7 +36,7 @@ class AuthenticationServices
         //     ], 200);
         // }
 
-        $user = DB::transaction(function () use ($request) {
+        return DB::transaction(function () use ($request) {
             $request['full_name'] = $request['fullName'];
             $request['expiry_date'] = $request['expireDate'] ?? null;
             $request['identity_number'] = $request['identityNumber'] ?? "";
@@ -52,19 +52,7 @@ class AuthenticationServices
 
             return $user;
         });
-        if ($user) {
-            return response()->json([
-                "statusCode" => "000",
-
-                'message' => 'User created successfully',
-                'data' => ['user' => new UserResponse($user)]
-            ], 200);
-        }
-        return response()->json([
-
-            "statusCode" => "999",
-            'success' => false, 'message' => "System Error"
-        ], 200);
+    
     }
 
 

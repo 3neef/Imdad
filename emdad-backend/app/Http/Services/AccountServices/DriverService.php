@@ -29,9 +29,9 @@ class DriverService
                 'age' => $request->age,
                 'phone' => $request->phone,
                 'nationality' => $request->nationality,
-                'status' => $request->size,
-                'user_id' => $request->brand,
-                'profile_id' => auth()->id(),
+                'status' => $request->status,
+                'user_id' => $request->user_id,
+                'profile_id' => auth()->user()->profile_id,
             ]);
             if (isset($request['warehouseList'])) {
                 foreach ($request['warehouseList'] as $list) {
