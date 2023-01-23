@@ -170,7 +170,19 @@ class UserController extends Controller
     {
         // $this->authorize('create', User::class);
 
-        return $userServices->create($request->validated());
+        $output = $userServices->create($request->validated());
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json([ 'data' => ['user' => new UserResponse($output['data']),'statusCode'=> $output['statusCode'], "message"=>$output['message'] ]],200);
+                break;
+                case '999':
+                    return response()->json(['data' => ['user' => null,'statusCode'=> $output['statusCode'], "message"=>$output['message'] ]],200);
+                    break;
+                    case '360':
+                        return response()->json(['data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'], "success"=>$output['success']]],200);
+                        break;
+
+        }
     }
 
     /**
@@ -299,8 +311,19 @@ class UserController extends Controller
 
     public function UpdateOwnerUser(UpdateRequest $request, UserServices $userServices, $id)
     {
-        // dd(e);
-        return $userServices->update($request, $id);
+        $output = $userServices->update($request, $id);
+
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json([ 'data' => ['user' => $output['otp'] ?? new UserResponse($output['data']),'statusCode'=> $output['statusCode'], "message"=>$output['message'] ]],200);
+                break;
+                case '999':
+                    return response()->json(['data' => ['user' => null,'statusCode'=> $output['statusCode'], "message"=>$output['message'] ]],200);
+                    break;
+                    case '110':
+                        return response()->json(['data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'], "success"=>$output['success']]],200);
+                        break;
+        }
     }
 
 
@@ -376,7 +399,19 @@ class UserController extends Controller
     {
         $this->authorize('update', User::class);
 
-        return $userServices->update($request, $id);
+        $output = $userServices->update($request, $id);
+
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json([ 'data' => ['user' => $output['otp'] ?? new UserResponse($output['data']),'statusCode'=> $output['statusCode'], "message"=>$output['message'] ]],200);
+                break;
+                case '999':
+                    return response()->json(['data' => ['user' => null,'statusCode'=> $output['statusCode'], "message"=>$output['message'] ]],200);
+                    break;
+                    case '110':
+                        return response()->json(['data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'], "success"=>$output['success']]],200);
+                        break;
+        }
 
         
     }
@@ -423,7 +458,19 @@ class UserController extends Controller
     {
         $this->authorize('restore', User::class);
 
-        return $userServices->restoreById($request);
+        $output = $userServices->restoreById($request);
+
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'] ]],200);
+                break;
+                case '999':
+                    return response()->json(['data' => ['statusCode'=> $output['statusCode'], "error"=>$output['error'] ]],200);
+                    break;
+                    case '360':
+                        return response()->json(['data' => ['statusCode'=> $output['statusCode'], "error"=>$output['error'], "success"=>$output['success']]],200);
+                        break;
+        }
     }
 
 
@@ -488,7 +535,16 @@ class UserController extends Controller
     {
         $this->authorize('delete', User::class);
 
-        return $userServices->delete($id);
+        $output = $userServices->delete($id);
+
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'] ]],200);
+                break;
+                case '999':
+                    return response()->json(['data' => ['statusCode'=> $output['statusCode'], "error"=>$output['error'] ]],200);
+                    break;
+        }
     }
 
 
@@ -549,7 +605,14 @@ class UserController extends Controller
 
     public function userActivate(UserAvtivateRerquest $request, UserServices $userServices)
     {
-        return $userServices->userActivate($request);
+        $output = $userServices->userActivate($request);
+
+        if($output['statusCode'] == "000"){
+            return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'] ]],200);
+        }elseif($output['statusCode'] == "999" || $output['statusCode'] == "263"){
+            return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "error"=>$output['error'] ]],200);
+        }
+
     }
 
     /**
@@ -608,7 +671,9 @@ class UserController extends Controller
 
     public function disable(UserAvtivateRerquest $request, UserServices $userServices)
     {
-        return $userServices->disable($request);
+        $output = $userServices->disable($request);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
 
 
@@ -671,7 +736,9 @@ class UserController extends Controller
      */
     public function setDefaultCompany(DefaultCompanyRequest $request, UserServices $userServices)
     {
-        return $userServices->setDefaultCompany($request);
+        $output = $userServices->setDefaultCompany($request);
+
+        return response()->json([ 'data' => ['user' => new UserResponse($output['data']),'statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
     /**
      * @OA\delete(
@@ -734,7 +801,9 @@ class UserController extends Controller
 
     public function detachWarehouse(DeleteWarehouseRequest $request, UserServices $userServices)
     {
-        return $userServices->detachWarehouse($request);
+        $output = $userServices->detachWarehouse($request);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
 
     /**
@@ -797,12 +866,19 @@ class UserController extends Controller
      */
     public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request, UserServices $userServices)
     {
-        return $userServices->userWarehouseStatus($request);
+        $output = $userServices->userWarehouseStatus($request);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
     public function upload(UploadAvaterRequest $request,UserServices $userServices){
-        return $userServices->uploadAvatar($request);
+        $output = $userServices->uploadAvatar($request);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
     public function updateAV(UpdateAvaterRequest $request , UserServices $userServices){
-        return $userServices->updateAvater($request);
+        $output = $userServices->updateAvater($request);
+        
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
+
     }
 }

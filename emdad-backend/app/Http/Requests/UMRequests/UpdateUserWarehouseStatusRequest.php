@@ -25,7 +25,7 @@ class UpdateUserWarehouseStatusRequest extends FormRequest
    public function rules()
     {
    return [
-    "userId"=>'required|exists:user_warehouse_pivots,user_id',
+    "userId"=>'required|exists:user_warehouse,user_id',
     "warehouseId" => 'required|exists:warehouses,id',
 ];
 }
