@@ -133,7 +133,11 @@ class RoleController extends Controller
         */
     public function store(CreateRoleRequest $request)
     {
-        return $this->roleServices->store($request);
+        $role=  $this->roleServices->store($request);
+        if ($role) {
+            return response()->json([ "statusCode"=>'000','message' => 'created successfully'], 200);
+        }
+        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
     }
        /**
         * @OA\put(
@@ -191,7 +195,12 @@ class RoleController extends Controller
         */
     public function update(GetRoleRequest $request,$id)
     {
-        return $this->roleServices->update($request,$id);
+        $role =  $this->roleServices->update($request,$id);
+        if($role)
+        {
+        return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
+        }
+        return response()->json(["statusCode"=>'111','error' => 'No data Founded', 'data'=>[]], 404);
     }
        /**
         * @OA\delete(
@@ -238,7 +247,11 @@ class RoleController extends Controller
         */
     public function destroy($id)
     {
-        return $this->roleServices->delete($id);
+        $role =  $this->roleServices->delete($id);
+        if ($role) {
+            return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
+        }
+        return response()->json(["statusCode"=>'111','error' => 'system error'], 500);
     }
 
        /**
@@ -285,7 +298,10 @@ class RoleController extends Controller
         */
     public function show($id)
     {
-        return $this->roleServices->show($id);
+        $role = $this->roleServices->show($id);
+        if($role){
+            return response()->json(['data' => new RoleResponse($role)], 200);
+        }
     }
        /**
         * @OA\get(
@@ -377,7 +393,11 @@ class RoleController extends Controller
         */
     public function restoreByRoleId($id)
     {
-        return $this->roleServices->restoreById($id);
+        $role =  $this->roleServices->restoreById($id);
+        if ($role) {
+            return response()->json(["statusCode"=>'000','message' => 'restored successfully'], 200);
+        }
+        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
     }
 
 }
