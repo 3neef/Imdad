@@ -48,7 +48,7 @@ class Category extends Model
 
     public function companyCategory()
     {
-        return $this->belongsToMany(Profile::class, 'profile_category_pivots', 'profile_id', 'category_id')
+        return $this->belongsToMany(Profile::class, 'category_profile', 'profile_id', 'category_id')
             ->withPivot('category_id')
             ->withTimestamps();
     }

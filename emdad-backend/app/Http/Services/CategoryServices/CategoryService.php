@@ -110,7 +110,7 @@ class CategoryService
                 }
             }
         } else {
-            $category->companyCategory()->attach($category->id, ['category_id' => $request->category_id, 'profile_id' => auth()->user()->profile_id, 'user_id' => auth()->user()->id]);
+            $category->companyCategory()->attach($category->id, ['category_id' => $request->categoryId, 'profile_id' => auth()->user()->profile_id, 'user_id' => auth()->user()->id]);
         }
         return response()->json(['message' => 'created successfully'], 200);
     }

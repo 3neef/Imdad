@@ -5,6 +5,7 @@ namespace App\Http\Services\AccountServices;
 use App\Http\Resources\Delviery\DriverResources;
 use App\Models\Accounts\Driver;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DriverService
 {
@@ -12,7 +13,6 @@ class DriverService
     public function index(Request $request)
     {
         $drivers = Driver::all();
-
         if ($drivers) {
             return response()->json(['data' => DriverResources::collection($drivers)], 201);
         }
@@ -21,14 +21,24 @@ class DriverService
 
     public function store($request)
     {
-        $drivers = Driver::create([
-            'name_ar' => $request->nameAr,
-            'name_en' => $request->nameEn,
-            'age' => $request->age,
-            "nationality" => $request->nationality,
-            "phone" => $request->phone
-        ]);
-        return $drivers;
+        return  DB::transaction(function () use ($request) {
+            $drivers = Driver::create([
+                'name_ar' => $request->nameAr,
+                'name_en' => $request->nameEn,
+                'age' => $request->age,
+                'phone' => $request->phone,
+                'nationality' => $request->nationality,
+                'status' => $request->status,
+                'user_id' => $request->user_id,
+                'profile_id' => auth()->user()->profile_id,
+            ]);
+            if (isset($request['warehouseList'])) {
+                foreach ($request['warehouseList'] as $list) {
+                    $drivers->warehouses()->attach($drivers->id, ['warehouse_id' => $list,'profile_id'=>auth()->user()->profile_id]);
+                }
+            }
+            return $drivers;
+        });
     }
 
     public function show($id)
@@ -42,16 +52,23 @@ class DriverService
         $driver = Driver::find($id);
         if ($driver) {
             $driver->update([
-                'name_ar' => $request->nameAr ?? $driver->name_ar,
-                'name_en' => $request->nameEn ?? $driver->name_en,
-                'age' => $request->age ?? $driver->age,
-                "nationality" => $request->nationality ?? $driver->nationality,
-                "phone" => $request->phone ?? $driver->phone
+                'name_ar' => $request->nameAr??$driver->name_ar,
+                'name_en' => $request->nameEn??$driver->name_en,
+                'age' => $request->age??$driver->age,
+                'phone' => $request->phone??$driver->phone,
+                'nationality' => $request->nationality??$driver->nationality,
+                'status' => $request->status??$driver->status,
+                'user_id' => $request->user_id??$driver->user_id,
+                'profile_id' => auth()->user()->profile_id??$driver->profile_id,
             ]);
+            if (isset($request['warehouseList'])) {
+                foreach ($request['warehouseList'] as $list) {
+                    $driver->warehouses()->attach($driver->id, ['warehouse_id' => $list, 'profile_id' => auth()->user()->profile_id]);
+                }
+            }
             return $driver;
         }
     }
-
     public function destroy($id)
     {
         $driver = Driver::find($id);

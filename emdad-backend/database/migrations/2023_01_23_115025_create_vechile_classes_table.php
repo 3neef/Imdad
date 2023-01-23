@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('drivers', function (Blueprint $table) {
-            $table->enum("status",['active','inActive'])->default('active')->after('nationality');
+        Schema::create('vechile_classes', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('drivers', function (Blueprint $table) {
-            $table->dropColumn('status');
-        });
+        Schema::dropIfExists('vechile_classes');
     }
 };

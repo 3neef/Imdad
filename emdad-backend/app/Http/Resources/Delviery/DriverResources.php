@@ -21,6 +21,7 @@ class DriverResources extends JsonResource
             "age" => $this->age,
             "phone" => $this->phone,
             "nationality" => $this->nationality,
+            "profileId"=>$this->profile_id,
         ];
     }
 }

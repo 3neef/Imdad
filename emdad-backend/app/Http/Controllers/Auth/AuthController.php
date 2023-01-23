@@ -136,9 +136,9 @@ class AuthController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function store(StoreAuthRequest $request, AuthenticationServices $userServices)
+    public function store(StoreAuthRequest $request, AuthenticationServices $authenticationServices)
     {
-        $user = $userServices->create($request->validated());
+        $user = $authenticationServices->create($request->validated());
 
         if ($user) {
             return response()->json([
@@ -147,12 +147,14 @@ class AuthController extends Controller
                 'message' => 'User created successfully',
                 'data' => ['user' => new UserResponse($user)]
             ], 200);
-        }
-        return response()->json([
+        }else{
+            return response()->json([
 
-            "statusCode" => "999",
-            'success' => false, 'message' => "System Error"
-        ], 200);
+                "statusCode" => "999",
+                'success' => false, 'message' => "System Error"
+            ], 200);
+        }
+      
     }
 
 

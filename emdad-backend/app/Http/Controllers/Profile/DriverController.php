@@ -70,7 +70,7 @@ class DriverController extends Controller
      */
     public function store(CreateDriverRequest $request, DriverService $driverService)
     {
-        $this->authorize('create', Driver::class);
+        // $this->authorize('create', Driver::class);
         $drivers = $driverService->store($request);
         if ($drivers != null) {
             return response()->json(['message' => "created Successfly", "data" => new DriverResources($drivers)], 201);

@@ -110,7 +110,7 @@ class User extends  Authenticatable implements HasMedia , MustVerifyEmail
 
     public function warehouses()
     {
-        return $this->belongsToMany(Warehouse::class)->withTimestamps();
+        return $this->belongsToMany(Warehouse::class);
     }
 
 

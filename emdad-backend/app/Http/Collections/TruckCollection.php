@@ -14,12 +14,12 @@ class TruckCollection
         $defaultSort = '-created_at';
 
         $defaultSelect = [
-            'id', 'name','type', 'class', 'color', 'model','size', 'brand', 'status'
+            'id', 'name','type', 'class', 'color', 'model','size', 'brand', 'status', 'created_by', 'status', 'plate_number'
         ];
 
 
         $allowedFilters = [
-            'id', 'name','type', 'class', 'color', 'model','size', 'brand', 'status'
+            'id', 'name','type', 'class', 'color', 'model','size', 'brand', 'status', 'created_by', 'status', 'plate_number'
         ];
 
         $allowedSorts = [

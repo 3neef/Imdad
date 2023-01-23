@@ -23,8 +23,9 @@ class TruckResponse extends JsonResource
               'model'=>$this->model,
               'size'=>$this->size,
               'brand'=>$this->brand,
-              "truckImage"=>$this->truckImage,
-
+              "status"=>$this->status,
+              "plateNumber"=>$this->plate_number,
+            //   "createdBy"=>$this->'',
         ];
     }
 }

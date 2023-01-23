@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('trucks', function (Blueprint $table) {
-            $table->integer('created_by')->nullable();
+        Schema::create('vechile_sizes', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('trucks', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('vechile_sizes');
     }
 };
