@@ -25,7 +25,6 @@ return new class extends Migration
             $table->string('plate_number');
             $table->foreignId('created_by');
             $table->string('status');
-            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });

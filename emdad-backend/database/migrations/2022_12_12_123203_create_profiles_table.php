@@ -46,7 +46,12 @@ return new class extends Migration
         Schema::table('warehouses', function (Blueprint $table) {
             $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->restrictOnDelete();
         });
-     
+        Schema::table('trucks', function (Blueprint $table) {
+            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->restrictOnDelete();
+        });
+        Schema::table('drivers', function (Blueprint $table) {
+            $table->foreignId('profile_id')->nullable(true)->references("id")->on("profiles")->restrictOnDelete();
+        });
      
     }
 

@@ -23,7 +23,6 @@ return new class extends Migration
             $table->enum("status",['active','inActive'])->default('active');
             $table->string('nationality');
             $table->foreignId('user_id')->nullable()->references("id")->on("users")->cascadeOnDelete();
-            $table->foreignId('profile_id')->nullable()->references("id")->on("profiles")->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
             $table->unique('name_ar','profile_id');
