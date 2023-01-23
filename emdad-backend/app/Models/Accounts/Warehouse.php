@@ -65,4 +65,9 @@ class Warehouse extends Model
     {
         return $this->belongsToMany(Truck::class)->withTimestamps();
     }
+
+    public function drivers()
+    {
+        return $this->belongsToMany(Driver::class)->withTimestamps();
+    }
 }

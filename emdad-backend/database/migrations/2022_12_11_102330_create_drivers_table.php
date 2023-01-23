@@ -21,6 +21,8 @@ return new class extends Migration
             $table->string('age');
             $table->string('phone');
             $table->string('nationality');
+            $table->foreignId('user_id')->nullable()->references("id")->on("users")->cascadeOnDelete();
+            $table->foreignId('profile_id')->nullable()->references("id")->on("profiles")->cascadeOnDelete();
             $table->softDeletes();
             $table->timestamps();
         });
