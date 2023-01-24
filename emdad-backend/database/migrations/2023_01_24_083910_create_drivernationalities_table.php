@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vechile_classes', function (Blueprint $table) {
+        Schema::create('drivernationalities', function (Blueprint $table) {
             $table->id();
-            $table->string('name_en');
-            $table->string('name_ar');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vechile_classes');
+        Schema::dropIfExists('drivernationalities');
     }
 };
