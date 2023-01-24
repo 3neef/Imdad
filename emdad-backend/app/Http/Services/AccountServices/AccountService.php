@@ -56,10 +56,10 @@ class AccountService
 
     public function update($request,$id)
     {
-        //   dd($request->all());
         $profile =Profile::where('id',$id)->first();
         if ($profile == null) {
-            return response()->json(["statusCode"=>'111','error' => 'data  Not Found'], 404);
+            $output = ['message' => "data Not Found", "statusCode" => "111"];
+            return $output;
         } else {
              $profile->update([
                 'name_ar' => $request->nameAr??$profile->name_ar,
@@ -71,7 +71,8 @@ class AccountService
             {
                 $profile->addMedia($request->logo)->toMediaCollection('profileLogo');
             }
-            return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
+            $output = ['message' => "Profile has been updated successfully", "statusCode" => "000"];
+            return $output;
         }
     }
 
@@ -111,30 +112,31 @@ class AccountService
 
     public function swap_profile($id)
     {
-        // $user = RoleUserProfile::where('profile_id', $id)->where('user_id', auth()->id())->where('role_id', "!=", null)->first();
-
-        //fith pivot table with relation
         $company = Profile::find($id);
         $user = $company->users()->where('user_id', auth()->id())->first();
  
         if ($id == auth()->user()->profile_id) {
-            return response()->json(["statusCode"=>'265','success' => false, 'error' => 'you are Already In this  profile'], 200);
+            $output = ["profile_id" => null, 'message' => "you are Already In this  profile", "statusCode" => "265"];
+            return $output;
         }
         if ($user) {
             $payedSubscription = SubscriptionPayment::where('profile_id', $id)->where('status','Paid')->first();
             $profile = auth()->user();
-            // dd(now()  $payedSubscription->expire_date);
+
             if($payedSubscription == null){
-                return response()->json(['success' => false, 'error' => 'your Subscription expired','statusCode'=>"451"], 200);
+                $output = ["profile_id" => null, 'message' => "your Subscription expired", "statusCode" => "451"];
+                return $output;
             }
             if (now() < $payedSubscription->expire_date) {
                 $profile->update([
                     'profile_id' => $id
                 ]);
-                return response()->json(["statusCode"=>'000',"success" => true, 'message' => 'swaped successfully', "profile_id" => $id], 200);
+                $output = ["profile_id" => $id, 'message' => "swaped successfully", "statusCode" => "000"];
+                return $output;
             }
         }
-        return response()->json(['success' => false, 'error' => 'Profile Not Founded','statusCode'=>"111"], 200);
+        $output = ["profile_id" => null, 'message' => "Profile Not Founded", "statusCode" => "111"];
+        return $output;
     }
 
 

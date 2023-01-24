@@ -239,7 +239,9 @@ class ProfileController extends Controller
 
     public function update(UpdateProfileRequest $request,$id)
     {
-        return $this->accountService->update($request,$id);
+        $output = $this->accountService->update($request,$id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
 
     /**
@@ -441,7 +443,9 @@ class ProfileController extends Controller
 
     public function swap_profile($id)
     {
-        return $this->accountService->swap_profile($id);
+        $output = $this->accountService->swap_profile($id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'], "profileId"=> $output['profile_id'] ]],200);
     }
 
 

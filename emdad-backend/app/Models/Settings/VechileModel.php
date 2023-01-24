@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class VechileModel extends Model
 {
     use HasFactory;
+    protected $fillable = ['name_en', 'name_ar'];
+
 }
