@@ -24,7 +24,7 @@ class ModelController extends Controller
         if($model){
             return response()->json(["statusCode" => "000",'message' => 'created successfully', ], 200);
         }
-        return response()->json([ "statusCode" => "264",'success' => false, 'message' => "User Dosn't belong to any profile "], 200);
+        return response()->json([ "statusCode" => "264",'success' => false, 'message' => "Model Canot create "], 200);
     }
     
 
@@ -36,6 +36,6 @@ class ModelController extends Controller
             ], 200);
         }
         return response()->json([
-            "statusCode" => "264",'success' => false, 'message' => "User Dosn't belong to any profile "], 200);
+            "statusCode" => "264",'success' => false, 'message' => "Model Canot create "], 200);
     }
 }

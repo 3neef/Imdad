@@ -23,7 +23,7 @@ class BrandController extends Controller
         if($brand){
             return response()->json(["statusCode" => "000",'message' => 'created successfully', ], 200);
         }
-        return response()->json([ "statusCode" => "264",'success' => false, 'message' => "User Dosn't belong to any profile "], 200);
+        return response()->json([ "statusCode" => "264",'success' => false, 'message' => "Brand Canot create "], 200);
     }
     
 
@@ -35,7 +35,7 @@ class BrandController extends Controller
             ], 200);
         }
         return response()->json([
-            "statusCode" => "264",'success' => false, 'message' => "User Dosn't belong to any profile "], 200);
+            "statusCode" => "264",'success' => false, 'message' => "Brand Canot create "], 200);
     }
 
 
