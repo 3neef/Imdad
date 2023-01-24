@@ -136,6 +136,7 @@ class UserServices
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
             $this->UserOtp($user);
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp,$user->lang,"otp");
 
             $output = ["otp" => $user->otp, "message" => "New OTP has been sent.", "statusCode" => "000"];
             return $output;
@@ -193,6 +194,8 @@ class UserServices
             $user = User::where('mobile', '=', $request->mobile)->first();
 
             $data = $this->UserOtp($user);
+        MailController::sendSignupEmail($user->name, $user->email, $user->otp,$user->lang,"otp");
+
             return response()->json(
                 [
                     "statusCode" => "105",
@@ -216,12 +219,13 @@ class UserServices
 
         if ($user->is_verified == 0) {
             $data = $this->UserOtp($user);
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp,$user->lang,"otp");
 
             return response()->json(
-                [
-                    "statusCode" => "105",
+                [   
+                     "statusCode" => "105",
 
-                    "success" => false, "error" => "Forbidden"
+                "success" => true, "message" => "verifiy your otp first",
                 ],
                 200
             );
@@ -293,7 +297,7 @@ class UserServices
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
         $this->UserOtp($user);
-        MailController::sendSignupEmail($user->name, $user->email, $user->otp);
+        MailController::sendSignupEmail($user->name, $user->email, $user->otp,$user->lang,"otp");
         return response()->json(
             [
                 "statusCode" => "000",
@@ -520,7 +524,6 @@ class UserServices
 
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
 
-        MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang);
 
         $smsService->sendSms($user->mobile, $user->password, 'password');
     }
@@ -538,6 +541,9 @@ class UserServices
 
             $user = User::create($request);
             $this->UserOtp($user);
+
+            MailController::sendSignupEmail($user->name, $user->email, ["admin"=>auth()->user()->full_name,"password"=>$user->password], "en","password");
+
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
             $manager_id = null;
