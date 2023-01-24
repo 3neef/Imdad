@@ -118,7 +118,7 @@ class TruckController extends Controller
      */
     public function store(CreateTruckRequest $request)
     {
-        // $this->authorize('create', Truck::class);
+        $this->authorize('create', Truck::class);
         $truck = $this->truckservice->store($request); 
         if ($truck !=null) {
             return  response()->json(['statusCode' => 000, 'message' => 'created successfully', 'data' => new TruckResponse($truck)], 201);

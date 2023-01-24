@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\UMController;
+
 use App\Http\Resources\UMResources\Role\RoleResponse;
 
 use App\Http\Controllers\Controller;
@@ -27,14 +28,14 @@ class RoleController extends Controller
         $this->roleServices = $roleServices;
     }
 
-           /**
-        * @OA\get(
-        * path="/api/v1_0/roles",
-        * operationId="getAllRoles",
-        * tags={"Roles and Permissions"},
-        * summary="get roles",
-        * description="get all roles Here",
-*     @OA\Parameter(
+    /**
+     * @OA\get(
+     * path="/api/v1_0/roles",
+     * operationId="getAllRoles",
+     * tags={"Roles and Permissions"},
+     * summary="get roles",
+     * description="get all roles Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -42,7 +43,7 @@ class RoleController extends Controller
      *             type="string"
      *         )
      *     ),
-*     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="token",
      *         in="header",
      *         description="Set user authentication token",
@@ -50,38 +51,38 @@ class RoleController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="get all roles",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *            ),
-        *        ),
-        *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity",
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
-        public function index(Request $request)
-        {
+     *      @OA\Response(
+     *          response=200,
+     *          description="get all roles",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *            ),
+     *        ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function index(Request $request)
+    {
 
-            return $this->roleServices->index($request);
-        }
+        return $this->roleServices->index($request);
+    }
 
-       /**
-        * @OA\post(
-        * path="/api/v1_0/roles",
-        * operationId="saveNewRole",
-        * tags={"Roles and Permissions"},
-        * summary="create role",
-        * description="create new role Here",
-*     @OA\Parameter(
+    /**
+     * @OA\post(
+     * path="/api/v1_0/roles",
+     * operationId="saveNewRole",
+     * tags={"Roles and Permissions"},
+     * summary="create role",
+     * description="create new role Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -97,56 +98,56 @@ class RoleController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"name", "type"},
-        *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="type",  type = "string")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="created role successfully",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="message", type="string"),
-        *               @OA\Property(property="data", type="string")
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"name", "type"},
+     *               @OA\Property(property="name", type="string"),
+     *               @OA\Property(property="type",  type = "string")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="created role successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type="string")
 
-        *            ),
-        *        ),
-        *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity",
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *            ),
+     *        ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function store(CreateRoleRequest $request)
     {
-        $role=  $this->roleServices->store($request);
+        $role =  $this->roleServices->store($request);
         if ($role) {
-            return response()->json([ "statusCode"=>'000','message' => 'created successfully'], 200);
+            return response()->json(["statusCode" => '000', 'message' => 'created successfully'], 200);
         }
-        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
+        return response()->json(["statusCode" => '999', 'error' => 'system error'], 500);
     }
-       /**
-        * @OA\put(
-        * path="/api/v1_0/roles/{id}",
-        * operationId="updateRole",
-        * tags={"Roles and Permissions"},
-        * summary="update role",
-        * description="update role Here",
-*     @OA\Parameter(
+    /**
+     * @OA\put(
+     * path="/api/v1_0/roles/{id}",
+     * operationId="updateRole",
+     * tags={"Roles and Permissions"},
+     * summary="update role",
+     * description="update role Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -162,54 +163,53 @@ class RoleController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="type",  type = "integer")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="updated role successfully",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="message", type="string"),
-        *            ),
-        *        ),
-        *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity",
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
-    public function update(GetRoleRequest $request,$id)
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="name", type="string"),
+     *               @OA\Property(property="type",  type = "integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="updated role successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *            ),
+     *        ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function update(GetRoleRequest $request, $id)
     {
-        $role =  $this->roleServices->update($request,$id);
-        if($role)
-        {
-        return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
+        $role =  $this->roleServices->update($request, $id);
+        if ($role) {
+            return response()->json(["statusCode" => '000', 'message' => 'updated successfully'], 200);
         }
-        return response()->json(["statusCode"=>'111','error' => 'No data Founded', 'data'=>[]], 404);
+        return response()->json(["statusCode" => '111', 'error' => 'No data Founded', 'data' => []], 404);
     }
-       /**
-        * @OA\delete(
-        * path="/api/v1_0/roles/{id}",
-        * operationId="deleteRole",
-        * tags={"Roles and Permissions"},
-        * summary="delete roles",
-        * description="delete roles Here",
-*     @OA\Parameter(
+    /**
+     * @OA\delete(
+     * path="/api/v1_0/roles/{id}",
+     * operationId="deleteRole",
+     * tags={"Roles and Permissions"},
+     * summary="delete roles",
+     * description="delete roles Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -225,43 +225,52 @@ class RoleController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="deleted role successfully",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="message", type="string")
-        *            ),
-        *        ),
-        *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity"
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *      @OA\Response(
+     *          response=200,
+     *          description="deleted role successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string")
+     *            ),
+     *        ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function destroy($id)
     {
-        $role =  $this->roleServices->delete($id);
-        if ($role) {
-            return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
+        $output =  $this->roleServices->delete($id);
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 200);
+                # code...
+                break;
+            case '111':
+                return response()->json(["statusCode" => '111', 'message' => 'not found'], 200);
+
+
+            default:
+                # code...
+                break;
         }
-        return response()->json(["statusCode"=>'111','error' => 'system error'], 500);
     }
 
-       /**
-        * @OA\get(
-        * path="/api/v1_0/roles/{id}",
-        * operationId="getRole",
-        * tags={"Roles and Permissions"},
-        * summary="get role by id",
-        * description="get role Here",
-*     @OA\Parameter(
+    /**
+     * @OA\get(
+     * path="/api/v1_0/roles/{id}",
+     * operationId="getRole",
+     * tags={"Roles and Permissions"},
+     * summary="get role by id",
+     * description="get role Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -277,40 +286,40 @@ class RoleController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="get role",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object"
-        *            ),
-        *        ),
-        *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity"
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *      @OA\Response(
+     *          response=200,
+     *          description="get role",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object"
+     *            ),
+     *        ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function show($id)
     {
         $role = $this->roleServices->show($id);
-        if($role){
+        if ($role) {
             return response()->json(['data' => new RoleResponse($role)], 200);
         }
     }
-       /**
-        * @OA\get(
-        * path="/api/v1_0/roles/roles-for-reg",
-        * operationId="getRoleRegister",
-        * tags={"Roles and Permissions"},
-        * summary="get roles register",
-        * description="get roles register Here",
-*     @OA\Parameter(
+    /**
+     * @OA\get(
+     * path="/api/v1_0/roles/roles-for-reg",
+     * operationId="getRoleRegister",
+     * tags={"Roles and Permissions"},
+     * summary="get roles register",
+     * description="get roles register Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -336,26 +345,26 @@ class RoleController extends Controller
      *          , example="[{'id': 1, 'name': 'GM'}]")
      *          ),
      *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity"
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function getRolesForReg(Request $request)
     {
-        return response()->json(["success"=>true,"data"=>RoleResponse::collection(Role::where("for_reg",1)->get())],200);
+        return response()->json(["success" => true, "data" => RoleResponse::collection(Role::where("for_reg", 1)->get())], 200);
     }
-        /**
-        * @OA\put(
-        * path="/api/v1_0/roles/restore/{roleId}",
-        * operationId="restoreRole",
-        * tags={"Roles and Permissions"},
-        * summary="restore role by id",
-        * description="restore role Here",
-*     @OA\Parameter(
+    /**
+     * @OA\put(
+     * path="/api/v1_0/roles/restore/{roleId}",
+     * operationId="restoreRole",
+     * tags={"Roles and Permissions"},
+     * summary="restore role by id",
+     * description="restore role Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -371,33 +380,32 @@ class RoleController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="restore role successfully",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="message", type="string")
-        *            ),
-        *        ),
-        *       ),
-        *      @OA\Response(
-        *          response=422,
-        *          description="Unprocessable Entity"
-        *       ),
-        *      @OA\Response(response=400, description="Bad request"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *      @OA\Response(
+     *          response=200,
+     *          description="restore role successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string")
+     *            ),
+     *        ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity"
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function restoreByRoleId($id)
     {
         $role =  $this->roleServices->restoreById($id);
         if ($role) {
-            return response()->json(["statusCode"=>'000','message' => 'restored successfully'], 200);
+            return response()->json(["statusCode" => '000', 'message' => 'restored successfully'], 200);
         }
-        return response()->json(["statusCode"=>'999','error' => 'system error'], 500);
+        return response()->json(["statusCode" => '999', 'error' => 'system error'], 500);
     }
-
 }

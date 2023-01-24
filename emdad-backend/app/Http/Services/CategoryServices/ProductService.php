@@ -33,7 +33,7 @@ class ProductService
                 'price' => $request->price??null,
                 'measruing_unit' => $request->measruingUnit,
                 'description_en' => $request->descriptionEn,
-                'description_ar' => $request->descriptionr,
+                'description_ar' => $request->descriptionAr,
                 'created_by' => auth()->id(),
                 'profile_id' => auth()->user()->profile_id,
             ]);
