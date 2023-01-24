@@ -441,7 +441,9 @@ class ProfileController extends Controller
 
     public function swap_profile($id)
     {
-        return $this->accountService->swap_profile($id);
+        $output = $this->accountService->swap_profile($id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'], "profileId"=> $output['profile_id'] ]],200);
     }
 
 
