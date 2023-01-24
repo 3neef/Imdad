@@ -44,7 +44,7 @@ class RoleServices
     {
         $role = Role::where('id', $id)->first();
 
-        return response()->json(['data' => new RoleResponse($role)], 200);
+        return $role;
     }
 
     public function delete($id)
@@ -53,10 +53,14 @@ class RoleServices
 
         $deleted = $role->delete();
 
+        
+
         if ($deleted) {
-            return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
+            return ["statusCode"=>'000','message' => 'deleted  from  successfully'];
+
         }
-        return response()->json(["statusCode"=>'111','error' => 'system error'], 500);
+        return ["statusCode"=>'111','message' => 'not found'];
+
     }
 
     public function restoreById($id)
