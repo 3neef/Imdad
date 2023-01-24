@@ -239,7 +239,9 @@ class ProfileController extends Controller
 
     public function update(UpdateProfileRequest $request,$id)
     {
-        return $this->accountService->update($request,$id);
+        $output = $this->accountService->update($request,$id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
 
     /**

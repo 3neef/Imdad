@@ -56,10 +56,10 @@ class AccountService
 
     public function update($request,$id)
     {
-        //   dd($request->all());
         $profile =Profile::where('id',$id)->first();
         if ($profile == null) {
-            return response()->json(["statusCode"=>'111','error' => 'data  Not Found'], 404);
+            $output = ['message' => "data Not Found", "statusCode" => "111"];
+            return $output;
         } else {
              $profile->update([
                 'name_ar' => $request->nameAr??$profile->name_ar,
@@ -71,7 +71,8 @@ class AccountService
             {
                 $profile->addMedia($request->logo)->toMediaCollection('profileLogo');
             }
-            return response()->json(["statusCode"=>'000','message' => 'updated successfully'], 200);
+            $output = ['message' => "Profile has been updated successfully", "statusCode" => "000"];
+            return $output;
         }
     }
 
