@@ -18,9 +18,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends  Authenticatable implements HasMedia , MustVerifyEmail
+class User extends  Authenticatable implements HasMedia, MustVerifyEmail
 {
-    use SanctumHasApiTokens,Notifiable ,HasFactory, SoftDeletes , LogsActivity,InteractsWithMedia;
+    use SanctumHasApiTokens, Notifiable, HasFactory, SoftDeletes, LogsActivity, InteractsWithMedia;
 
     protected $dates = ['deleted_at'];
 
@@ -73,11 +73,11 @@ class User extends  Authenticatable implements HasMedia , MustVerifyEmail
     //     return $this->belongsToMany(RoleUserProfile::class,'user_id');
     // }
 
-    
+
 
     public function currentProfile()
     {
-        return Profile::where("id", $this->profile_id)->select(["name_ar", 'active', 'subscription_details', 'cr_expire_data','subs_id','iban','swift','created_by', 'type', 'id'])->first();
+        return Profile::where("id", $this->profile_id)->select(["name_ar", 'active', 'subscription_details', 'cr_expire_data', 'subs_id', 'iban', 'swift', 'created_by', 'type', 'id'])->first();
     }
 
     public function userStatus()
@@ -182,19 +182,31 @@ class User extends  Authenticatable implements HasMedia , MustVerifyEmail
         return DB::table('users')->where('id', $mangerId)->pluck('full_name')->first();
     }
 
-     // user roles
-     public function roles()
-     {
+    // user roles
+    public function roles()
+    {
         return $this->belongsToMany(Role::class, 'profile_role_user')
-        ->withPivot(['role_id', 'status'])
-        ->as('role');
-     }
- 
-     //user profiles
-     public function profiles()
-     {
-         return $this->belongsToMany(Profile::class, 'profile_role_user')
-         ->withPivot(['profile_id', 'status'])
-         ->as('profile');;
-     }
+            ->withPivot(['role_id', 'status'])
+            ->as('role');
+    }
+
+    //user profiles
+    public function profiles()
+    {
+        return $this->belongsToMany(Profile::class, 'profile_role_user')
+            ->withPivot(['profile_id', 'status'])
+            ->as('profile');;
+    }
+
+    public  function crNumbersList()
+    {
+        $profileIds = DB::table('profile_role_user')->where('user_id', $this->id)->pluck('profile_id');
+        for($i=0;$i<count($profileIds);$i++)
+        {
+            $profile = Profile::find($profileIds[$i]);
+            $crNumbersList[$profile->id] = intval($profile->cr_number);
+        }
+
+        return $crNumbersList;
+    }
 }
