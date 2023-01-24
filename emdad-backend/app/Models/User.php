@@ -201,6 +201,7 @@ class User extends  Authenticatable implements HasMedia, MustVerifyEmail
     public  function crNumbersList()
     {
         $profileIds = DB::table('profile_role_user')->where('user_id', $this->id)->pluck('profile_id');
+        $crNumbersList=[];
         for($i=0;$i<count($profileIds);$i++)
         {
             $profile = Profile::find($profileIds[$i]);
