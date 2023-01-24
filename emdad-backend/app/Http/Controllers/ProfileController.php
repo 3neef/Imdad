@@ -75,8 +75,6 @@ class ProfileController extends Controller
 
     public function index(Request $request )
     {
-
-        // dd($request);
         return  ProfileResponse::collection( ProfileCollection::collection($request));
     }
     
@@ -129,7 +127,9 @@ class ProfileController extends Controller
      */
     public function store(StoreProfileRequest $request)
     {
-        return $this->accountService->store($request);
+        $output = $this->accountService->store($request);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'], "success"=> $output['success'], "profile"=> $output['data'] ]],200);
     }
 
 
@@ -289,7 +289,9 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        return $this->accountService->delete($id);
+        $output = $this->accountService->delete($id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
     /**
      * @OA\put(
@@ -336,7 +338,9 @@ class ProfileController extends Controller
      */
     public function restoreByAccountId($id)
     {
-        return $this->accountService->restore($id);
+        $output = $this->accountService->restore($id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
 
     /**
