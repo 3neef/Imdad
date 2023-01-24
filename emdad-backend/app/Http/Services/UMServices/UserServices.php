@@ -40,7 +40,7 @@ class UserServices
                 $output = [
                     "statusCode" => "360",
                     'success' => false,
-                    'message' => "You have exceeded the allowed number of users to create it"
+                    'message' => "You have exceeded the allowed number of Admins to create it"
                 ];
                 return $output;
             }

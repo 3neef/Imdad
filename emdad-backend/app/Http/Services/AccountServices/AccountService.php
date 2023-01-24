@@ -27,7 +27,6 @@ class AccountService
 
                 $company = RelatedCompanies::where("cr_number", $request->crNo)->first();
                 $user = User::where('id', auth()->user()->id)->first();
-                // dd($user->profiles);
                 $profile = Profile::create([
                     "type" => $request->ProfileType,
                     "name_ar" => $company->cr_name,
@@ -38,19 +37,17 @@ class AccountService
                 ]);
                  WalletsService::create($profile);
                 $permissions = $this->pluckPermissions($request->ProfileType);
-                // $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
-                // 
                 $user->profiles()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
-
-
                 $user=User::where("id",auth()->user()->id)->first();
                 $user->update(['profile_id' => $profile->id]);
 
                 return $profile;
             });
-            return response()->json(["statusCode"=>'000','success' => true, 'data' => new ProfileResponse($profile)], 200);
+            $output = ["statusCode" => "000", 'success' => true, "message"=>"Profile created successfully", 'data' => new ProfileResponse($profile)];
+            return $output;
         } catch (Exception $e) {
-            return response()->json(["statusCode"=>'999','success' => false, 'message' => "System Error"], 500);
+            $output = ["statusCode"=>'999','success' => false, 'message' => "System Error", 'data' => null];
+            return $output;
         }
     }
 
@@ -94,18 +91,23 @@ class AccountService
 
         $deleted = $profile->delete();
         if ($deleted) {
-            return response()->json(["statusCode"=>'000','message' => 'deleted successfully'], 301);
+            $output = ["statusCode"=>'000','message' => 'deleted successfully'];
+            return $output;
         }
-        return response()->json(["statusCode"=>'111','error' => 'system error'], 500);
+        $output = ["statusCode"=>'111','error' => 'system error'];
+        return $output;
     }
 
     public function restore($id)
     {
         $profile = Profile::where('id', $id)->withTrashed()->restore();
-        if ($profile != null) {
-            return response()->json(["statusCode"=>'000','message' => 'restored successfully'], 200);
-        } else {
-            return response()->json(["statusCode"=>'111','error' => 'No data Founded'], 404);
+
+        if ($profile) {
+            $output = ["statusCode"=>'000','message' => 'restored successfully'];
+            return $output;
+        }else{
+            $output = ["statusCode"=>'111','error' => 'system error'];
+            return $output;
         }
     }
 
