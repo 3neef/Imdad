@@ -38,6 +38,7 @@ class UserResponse extends JsonResource
             "createdAt"=> $this->created_at->format('y-m-d') ?? null,
             'warehouses'=>$this->warehouses()->where('user_id', $this->id)->pluck('warehouse_id')??'',
             "allProfiles" => DB::table("profile_role_user")->where("user_id", $this->id)->pluck("profile_id"),
+            "lang" => $this->lang,
 
         ];
     }

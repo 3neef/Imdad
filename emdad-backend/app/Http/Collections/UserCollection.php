@@ -25,6 +25,7 @@ class UserCollection
             'email',
             'updated_at',
             'created_at',
+            'lang',
             AllowedFilter::custom('default', new DefaultUsersFilter)->default(auth()->user()),
         ];
 
