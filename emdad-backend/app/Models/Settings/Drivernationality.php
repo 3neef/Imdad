@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Drivernationality extends Model
 {
     use HasFactory;
+    protected $fillables = ['name_en' , 'name_ar'];
 }
