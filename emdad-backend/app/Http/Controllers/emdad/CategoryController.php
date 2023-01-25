@@ -65,7 +65,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=201,
+     *          response=200,
      *          description="created Successfully",
      *       ),
      *      @OA\Response(response=404, description="Resource Not Found"),

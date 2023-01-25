@@ -87,8 +87,9 @@ class CategoryService
         $category = Category::find($id);
         if ($category != null) {
             $category->delete();
-            return  $category;
+            
         }
+        return  $category;
     }
 
 
