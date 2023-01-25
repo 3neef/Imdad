@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('drivernationalities', function (Blueprint $table) {
             $table->id();
+            $table->string('name_en');
+            $table->string('name_ar');
             $table->timestamps();
         });
     }
