@@ -3,7 +3,6 @@
 namespace App\Http\Services\Settings;
 
 use App\Models\Settings\VechileModel;
-use App\Models\Settings\VehicleBrand;
 
 class ModelService
 {

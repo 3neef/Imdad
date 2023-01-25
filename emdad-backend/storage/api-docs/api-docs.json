@@ -2641,6 +2641,66 @@
                 }
             }
         },
+        "/api/v1_0/trucks/{id}'": {
+            "get": {
+                "tags": [
+                    "trucks"
+                ],
+                "summary": "get trucks By Id",
+                "description": "get trucks By Id Here",
+                "operationId": "gettrucksById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get trucks By Id",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/trucks/{id}": {
             "put": {
                 "tags": [
@@ -3297,71 +3357,6 @@
                 }
             }
         },
-        "/api/v1_0/warehouses/restore/{id}'": {
-            "put": {
-                "tags": [
-                    "warehouse"
-                ],
-                "summary": "restore warehouse By Id",
-                "description": "restore warehouse By Id Here",
-                "operationId": "restoreWarehouseById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "restore warehouse By Id",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
         "/api/v1_0/warehouses/verfied": {
             "put": {
                 "tags": [
@@ -3500,6 +3495,83 @@
                 "responses": {
                     "200": {
                         "description": "assign warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/unassignwarehousetouser/{id}": {
+            "delete": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "unassign warehouse to user",
+                "description": "unassign warehouse to user",
+                "operationId": "unAssignWarehouseToUser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "warehouseId"
+                                ],
+                                "properties": {
+                                    "warehouseId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "unassign warehouse",
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
@@ -5729,7 +5801,7 @@
                 }
             }
         },
-        "/api/v1_0/users/disable": {
+        "/api/v1_0/users/change-status": {
             "put": {
                 "tags": [
                     "UM & Permissions"

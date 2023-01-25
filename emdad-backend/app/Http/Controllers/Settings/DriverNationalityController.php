@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Settings\AddBrandRequest;
-use App\Http\Services\Settings\BrandService;
+use App\Http\Requests\Settings\AddNationalityRequest;
 use App\Http\Services\Settings\DriverNationalityService;
 use Illuminate\Http\Request;
 
@@ -18,7 +17,7 @@ class DriverNationalityController extends Controller
     }
 
 
-    public function store(AddBrandRequest $request)
+    public function store(AddNationalityRequest $request)
     {
         $nationality = $this->driverNationalityServices->store($request);
         if($nationality){

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\AddModelRequest;
-use App\Http\Services\Settings\Modelervice;
 use App\Http\Services\Settings\ModelService;
 use Illuminate\Http\Request;
 
