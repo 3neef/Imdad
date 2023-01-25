@@ -6652,7 +6652,7 @@
                     }
                 },
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "created Successfully"
                     },
                     "404": {
