@@ -10,6 +10,7 @@ use App\Models\SubscriptionPayment;
 use App\Models\User;
 use Carbon\Carbon;
 use Exception;
+use GrahamCampbell\ResultType\Success;
 
 class SubscriptionPaymentService
 {
@@ -40,12 +41,12 @@ class SubscriptionPaymentService
                 'expire_date' => $dt->addYear(),
                 'tax_amount' => $price * 15 / 100,
                 'total' => ($price + ($price * 15 / 100)),
-                'status'=>$price>0?"Pending":"Paid"
+                'status' => $price > 0 ? "Pending" : "Paid"
 
             ]);
             $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
 
-            return response()->json(['data' => new SubscriptionResource($SubscriptionPayment), "oldOwner" => $oldOwner,"statusCode"=>"000"], 200);
+            return response()->json(['data' => new SubscriptionResource($SubscriptionPayment), "oldOwner" => $oldOwner, "statusCode" => "000"], 200);
         } else {
 
             if ($payedSubscription->status === 'Pending') {
@@ -59,10 +60,10 @@ class SubscriptionPaymentService
                 ]);
                 $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
 
-                return response()->json(['data' => new SubscriptionResource($payedSubscription), "oldOwner" => $oldOwner,'statusCode'=>"000"], 200);
+                return response()->json(['data' => new SubscriptionResource($payedSubscription), "oldOwner" => $oldOwner, 'statusCode' => "000"], 200);
             }
         }
-        return response()->json(['success' => false, "error" => "you  have ALready  Active Subscriptions ",'statusCode'=>'511'], 200);
+        return response()->json(['success' => false, "error" => "you  have ALready  Active Subscriptions ", 'statusCode' => '511'], 200);
     }
 
 
@@ -72,7 +73,7 @@ class SubscriptionPaymentService
         if ($status) {
             return response()->json(['status' => $status], 200);
         } else {
-            return response()->json(['message' => 'error','statusCode'=>'999'], 200);
+            return response()->json(['message' => 'error', 'statusCode' => '999'], 200);
         }
     }
 
@@ -82,15 +83,15 @@ class SubscriptionPaymentService
     public function delete($id)
     {
         $subscription = SubscriptionPayment::find($id)->first();
-        if($subscription!=null){
+        if ($subscription != null) {
             $deleted = $subscription->delete();
             if ($deleted) {
-                return response()->json(['message' => 'deleted successfully','statusCode'=>'112'], 200);
+                return response()->json(['message' => 'deleted successfully', 'statusCode' => '112'], 200);
             }
         }
 
-       
-        return response()->json(['error' => 'system error','statusCode'=>'999'], 200);
+
+        return response()->json(['error' => 'system error', 'statusCode' => '999'], 200);
     }
 
     public function pay()
@@ -100,14 +101,14 @@ class SubscriptionPaymentService
         $profile = Profile::where("id", $user->profile_id)->first();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->where("status", "Pending")->first();
         if ($paymentRequest == null) {
-            return response()->json(['error' => 'system error','statusCode'=>'111'], 200);
+            return response()->json(['error' => 'system error', 'statusCode' => '111'], 200);
         }
         $request = ["transId" => $paymentRequest->id, "trackId" => $paymentRequest->id, "amount" => $paymentRequest->total, 'email' => $user->email];
         try {
             $response = UrwayGateway::initPayment($request);
             $json = json_decode($response, true);
             $paymentRequest->update(['tx_id' => $json['payid']]);
-            return response()->json(['data' => new SubscriptionResource($paymentRequest),'statusCode'=>"000"], 200);
+            return response()->json(['data' => new SubscriptionResource($paymentRequest), 'statusCode' => "000"], 200);
         } catch (Exception $e) {
 
             return response()->json(['success' => $json['result'], 'message' => $json["reason"], 'statusCode' => $json['responseCode']], 402);
@@ -119,12 +120,11 @@ class SubscriptionPaymentService
         $user = User::where("id", auth()->id())->first();
         $profile = $user->currentProfile();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->first();
-        if($paymentRequest==null){
-            return response()->json(['message' =>"you have not selected any package yet","statusCode"=>"111"], 200);
-
+        if ($paymentRequest == null) {
+            return response()->json(['message' => "you have not selected any package yet", "statusCode" => "111"], 200);
         }
         if ($paymentRequest->status == "Paid") {
-            return response()->json(['data' => new SubscriptionResource($paymentRequest),"statusCode"=>"000"], 200);
+            return response()->json(['data' => new SubscriptionResource($paymentRequest), "statusCode" => "000"], 200);
         }
         if ($paymentRequest->status == "Pending") {
             $request = ["transId" => $paymentRequest->tx_id, "trackId" => $paymentRequest->id, "amount" => $paymentRequest->total, 'email' => $user->email];
@@ -133,10 +133,11 @@ class SubscriptionPaymentService
                 $json = json_decode($response, true);
                 if ($json['responseCode'] == 000 && $json['result'] == "Successful") {
                     $paymentRequest->update(['status' => 'Paid']);
-                    return response()->json(['data' => new SubscriptionResource($paymentRequest),"statusCode"=>"000"], 200);
+                    return response()->json(['data' => new SubscriptionResource($paymentRequest), "statusCode" => "000"], 200);
+                } elseif ($json['responseCode'] == 601 && $json['result'] == "UnSuccessful") {
+                    return response()->json(['Success' => $json['result'], 'data' => new SubscriptionResource($paymentRequest), "statusCode" => "601"], 200);
                 }
             } catch (Exception $e) {
-
                 return response()->json(['success' => $json['result'], 'message' => $json["reason"], 'statusCode' => $json['responseCode']], 200);
             }
         }
