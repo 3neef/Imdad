@@ -195,7 +195,8 @@ class User extends  Authenticatable implements HasMedia, MustVerifyEmail
     {
         return $this->belongsToMany(Profile::class, 'profile_role_user')
             ->withPivot(['profile_id', 'status'])
-            ->as('profile');;
+            ->as('profile')
+            ->withTimestamps();
     }
 
     public  function crNumbersList()
