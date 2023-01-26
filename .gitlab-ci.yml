@@ -62,11 +62,13 @@ deploy_to_prod:
     script:
         - ssh -o StrictHostKeyChecking=no -i $SSH_KEY root@172.21.1.97 "
             docker login -u $R_USER -p $R_PASS $NCTR_REG &&
-            if [ $(docker ps -a | grep -w $CON_NAME | wc -l ) -gt 0 ]; then 
-            docker pull $IMAGE_REG/$IMAGE_NAME:latest && 
-            docker stop $CON_NAME &&  
-            docker rmi $(docker images | grep $IMAGE_REG/$IMAGE_NAME | awk '{print $3}') -f &&
-            docker rm $(docker ps -f name=$CON_NAME -aq) && 
-            echo "From IF " &&
+            CON_EXIST=$(docker ps -a | grep -w $CON_NAME | wc -l ) &&
+            echo $CON_EXIST &&
+            if [ $CON_EXIST -gt 0 ]; then 
+            docker pull $IMAGE_REG/$IMAGE_NAME:latest ; 
+            docker stop $CON_NAME ;  
+            docker rmi $(docker images | grep $IMAGE_REG/$IMAGE_NAME | awk '{print $3}') -f ;
+            docker rm $(docker ps -f name=$CON_NAME -aq) ; 
+            echo "From IF " ;
             fi &&
            docker run -d -p 9000:8000 -p 90:80 -p 4443:443 --name $CON_NAME --restart=always $IMAGE_REG/$IMAGE_NAME:latest "
