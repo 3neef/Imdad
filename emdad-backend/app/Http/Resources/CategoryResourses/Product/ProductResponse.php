@@ -25,10 +25,10 @@ class ProductResponse extends JsonResource
             'measruingUnit' => $this->measruing_unit,
             'profileId' => $this->profile_id,
             'categoryId' => $this->category_id,
-            "categoryType" => $this->category->type??'',
+            "categoryType" => $this->category->type ?? '',
             'creatorName' => $this->creatorName()->full_name,
             "ProductsImages" => $this->getMedia('products'),
-            "CategorySequence" => $this->category->sequence(),
+            "CategorySequence" => $this->category->sequence() ?? null,
             "createdAt" => $this->created_at->format("y-m-d"),
         ];
     }
