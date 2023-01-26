@@ -69,4 +69,4 @@ deploy_to_prod:
             docker rm $(docker ps -f name=$CON_NAME -aq); 
             echo "From IF ";
             fi &&
-           docker run -d -p 9000:8000 -p 90:80 -p 4443:443 --name $CON_NAME --restart=always $IMAGE_REG/$IMAGE_NAME:latest
+           docker run -d -p 9000:8000 -p 90:80 -p 4443:443 --name $CON_NAME --restart=always $IMAGE_REG/$IMAGE_NAME:latest "
