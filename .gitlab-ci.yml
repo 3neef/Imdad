@@ -56,7 +56,7 @@ deploy:
 deploy_to_prod:
     stage: deploy
     tags:
-        - prod_shell
+        - emdad_shell
     before_script: 
         - chmod 400 $SSH_KEY
     script:
