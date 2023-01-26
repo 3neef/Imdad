@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        return UserCollection::collection($request);
+        return UserResponse::collection(UserCollection::collection($request));
     }
     /**
      * @OA\get(
