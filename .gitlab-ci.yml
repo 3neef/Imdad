@@ -51,3 +51,22 @@ deploy:
         #docker stop $(docker ps -f name=$CON_NAME -aq); \ ** rmove container using the id
         -  docker run -d -p 9000:8000 -p 90:80 -p 4443:443 --name $CON_NAME --network $NETWORK --restart=always $IMAGE_REG/$IMAGE_NAME:latest
 #        -  docker run -d -p 7000:8000 -p 9000:80 -p 4443:443 --name $Test_CON_NAME --network $NETWORK $IMAGE_REG/$IMAGE_NAME:latest
+
+
+deploy_to_prod:
+    stage: deploy
+    tags:
+        - prod_shell
+    before_script: 
+        - chmod 400 $SSH_KEY
+    script:
+        - ssh -o StrictHostKeyChecking=no -i $SSH_KEY root@172.21.1.97 "
+            docker login -u $R_USER -p $R_PASS $NCTR_REG &&
+            if [ $(docker ps -a | grep -w $CON_NAME | wc -l ) -gt 0 ]; then 
+            docker pull $IMAGE_REG/$IMAGE_NAME:latest; 
+            docker stop $CON_NAME;  
+            docker rmi $(docker images | grep $IMAGE_REG/$IMAGE_NAME | awk '{print $3}') -f; 
+            docker rm $(docker ps -f name=$CON_NAME -aq); 
+            echo "From IF ";
+            fi &&
+           docker run -d -p 9000:8000 -p 90:80 -p 4443:443 --name $CON_NAME --restart=always $IMAGE_REG/$IMAGE_NAME:latest
