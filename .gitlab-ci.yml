@@ -10,6 +10,7 @@ variables:
     IMAGE_NAME : test-be
     CON_NAME : test-be
     NETWORK : emdad_network
+    COMPOSE_DIR : /opt/emdad-be
 stages:
     - build
     - deploy
@@ -63,7 +64,7 @@ deploy_to_prod:
         - ssh -o StrictHostKeyChecking=no -i $SSH_KEY root@172.21.1.97 "
             docker login -u $R_USER -p $R_PASS $NCTR_REG &&
             docker pull $IMAGE_REG/$IMAGE_NAME:latest && 
-            cd ${CI_PROJECT_DIR} &&
+            cd $COMPOSE_DIR &&
             docker-compose down &&
             docker-compose up -d" 
 
