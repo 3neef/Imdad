@@ -16,8 +16,6 @@ class UserResponse extends JsonResource
      */
     public function toArray($request)
     {
-
-
         return [
             "id" => $this->id,
             "fullName" => $this->full_name,
@@ -25,6 +23,7 @@ class UserResponse extends JsonResource
             "identityType" => $this->identity_type,
             "email" => $this->email,
             "mobile" => $this->mobile,
+            "createdAt" => $this->created_at->format('y-m-d') ?? null,
             "otp" => $this->otp,
             "isSuperAdmin" => $this->is_super_admin,
             "status" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->status ?? '',
@@ -33,7 +32,6 @@ class UserResponse extends JsonResource
             "expireDate" => $this->expiry_date,
             "passwordChanged" => $this->password_changed,
             "mangerInfo" => $this->mangerUserId() ?? '',
-            "createdAt" => $this->created_at->format('y-m-d') ?? null,
             'warehouses' => $this->warehouses()->where('user_id', $this->id)->pluck('warehouse_id') ?? '',
             "allProfiles" => DB::table("profile_role_user")->where("user_id", $this->id)->pluck("profile_id"),
             "lang" => $this->lang,
