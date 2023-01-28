@@ -46,8 +46,9 @@ class UserCollection
         return QueryBuilder::for(User::class)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
-            ->with(['warehouses'])
             ->allowedIncludes($allowedIncludes)
+            ->with('warehouses')
+
             ->paginate($perPage);
     }
 }

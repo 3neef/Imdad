@@ -32,7 +32,7 @@ class UserResponse extends JsonResource
             "expireDate" => $this->expiry_date,
             "passwordChanged" => $this->password_changed,
             "mangerInfo" => $this->mangerUserId() ?? '',
-            'warehouses' => $this->warehouses()->where('user_id', $this->id)->pluck('warehouse_id') ?? '',
+            'warehouses' => $this->warehouses,
             "allProfiles" => DB::table("profile_role_user")->where("user_id", $this->id)->pluck("profile_id"),
             "lang" => $this->lang,
             "userCrNumbers" => $this->crNumbersList() ?? '',
