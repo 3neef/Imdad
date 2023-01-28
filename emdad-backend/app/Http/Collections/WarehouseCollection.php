@@ -39,7 +39,7 @@ public static function collection($request)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->allowedIncludes($allowedIncludes)
-            ->with('users')
+            ->with('users.roles')
             ->paginate($perPage);
     }
 }
