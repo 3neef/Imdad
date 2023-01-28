@@ -15,21 +15,6 @@ public static function collection($request)
 
         $defaultSort = '-created_at';
 
-        $defaultSelect = [
-            'id',
-            'address_name',
-            'profile_id',
-            'address_contact_phone',
-            'latitude',
-            'address_contact_name',
-            'address_type',
-            'longitude',
-            'gate_type',
-            'confirm_by',
-            'created_by',
-            'created_at',
-            "manager_id"
-        ];
 
 
         $allowedFilters = [
@@ -54,7 +39,7 @@ public static function collection($request)
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->allowedIncludes($allowedIncludes)
-            
+            ->with('users')
             ->paginate($perPage);
     }
 }

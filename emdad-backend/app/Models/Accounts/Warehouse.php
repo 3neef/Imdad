@@ -41,7 +41,7 @@ class Warehouse extends Model
     }
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('warehouse_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(User::class);
     }
 
     public function manager()
