@@ -96,11 +96,9 @@ class PermissionSeeder extends Seeder
             ["name" => "buyer_supplier_Partenership_freeze", "label" => "BMCD7", "category" => "BMCD", "description" => ""],
             ["name" => "buyer_supplier_Accepting", "label" => "BMCD6", "category" => "BMCD", "description" => ""],
             ["name" => "buyer_supplier_Rejecting", "label" => "BMCD5", "category" => "BMCD", "description" => ""],
-
             ["name" => "buyer_supplier_Adding", "label" => "BMCD4", "category" => "BMCD", "description" => ""],
             ["name" => "buyer_supplier_request_to_join", "label" => "BMCD3", "category" => "BMCD", "description" => ""],
             ["name" => "buyer_Adding_More_Company_Adding", "label" => "BMCD2", "category" => "BMCD", "description" => ""],
-
             ["name" => "buyer_supplier_Viewing_suppliers_profile", "label" => "BMCD1", "category" => "BMCD", "description" => ""],
             ["name" => "buyer_User_Management_Entering_to_users_account", "label" => "BMU5", "category" => "BMU", "description" => ""],
             ["name" => "buyer_User_Management_activating", "label" => "BMU4", "category" => "BMU", "description" => ""],
@@ -118,7 +116,6 @@ class PermissionSeeder extends Seeder
             ["name" => "buyer_Credit_Agreements_rejecting", "label" => "BMCT4", "category" => "BMCT", "description" => ""],
             ["name" => "buyer_Credit_Agreements_accepting", "label" => "BMCT3", "category" => "BMCT", "description" => ""],
             ["name" => "buyer_Credit_Agreements_Viewing", "label" => "BMCT2", "category" => "BMCT", "description" => ""],
-
             ["name" => "buyer_Category_and_Products_Management_Viewing", "label" => "BMCT1", "category" => "BMCT", "description" => ""],
             ["name" => "buyer_Notifications_All_company_notifications", "label" => "BMNM2", "category" => "BMNM", "description" => ""],
             ["name" => "buyer_Notifications_User's_own_notifications", "label" => "BMNM1", "category" => "BMNM", "description" => ""],
