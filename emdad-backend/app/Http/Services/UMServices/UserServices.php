@@ -560,7 +560,10 @@ class UserServices
             }
             if (isset($request['warehouseId'])) {
                 foreach ($request['warehouseId'] as $warehouse_id) {
-                $user->warehouses()->attach($user, ['warehouse_id' => $warehouse_id]); 
+                    try{
+                        $user->warehouses()->attach($user, ['warehouse_id' => $warehouse_id]); 
+                    }
+                    catch(Exception $e){}
                 }
             }
             return $user;
