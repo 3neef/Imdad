@@ -22,11 +22,16 @@ class CategoryCollection
             'name_en',
             'name_ar',
             'parent_id',
-            'isleaf', 'type',
+            'isleaf', 
+            'type',
             'status',
             'profile_id',
             'reason',
             AllowedFilter::custom('default', new DefaultCategoryFilter)->default($value),
+            AllowedFilter::exact('parent_id'),
+            AllowedFilter::exact('profile_id'),
+            AllowedFilter::exact('name_en'),
+            AllowedFilter::exact('type'),
         ];
 
         $allowedSorts = [
