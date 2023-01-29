@@ -32,8 +32,6 @@ class CategoryCollection
             AllowedFilter::exact('profile_id'),
             AllowedFilter::exact('name_en'),
             AllowedFilter::exact('type'),
-
-
         ];
 
         $allowedSorts = [
