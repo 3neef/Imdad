@@ -116,7 +116,7 @@ class UserServices
         }
 
 
-        $userRoleProfile = RoleUserProfile::where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
+        $userRoleProfile = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
         if ($request->has("roleId") && $userRoleProfile != null) {
 
@@ -130,8 +130,7 @@ class UserServices
                 return $output;
             
             }
-
-            $userRoleProfile->update(['user_id' => $user->id, 'role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['manager_user_Id'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
+        $user->roles()->updateExistingPivot($request['roleId'],[ 'user_id' => $user->id ?? $userRoleProfile->user_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['managerUserId'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
         }
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);

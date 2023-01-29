@@ -40,7 +40,7 @@ class UpdateRequest extends FormRequest
             "email" => ["email", "string", "max:255"],
             "mobile" => ["min:14","max:14","string",Rule::unique('users')->ignore($this->id, 'id')],
             "roleId" => "integer|exists:roles,id",
-            'manager_user_Id'=>'integer|exists:users,id',
+            'managerUserId'=>'integer|exists:users,id',
             'warehouseId'=>['array', 'nullable', new UniqeValues],
             'warehouseId.*'=>'exists:warehouses,id',
             'status' => [Rule::in('active','inActive')],
