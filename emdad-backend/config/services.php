@@ -31,4 +31,13 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'urway' => [
+        'url' => env('PAYMENT_URL'),
+        'id' => env('TERMINAL_ID'),
+        'pass' => env('TERMINAL_PASS'),
+        'key' => env('TERMINAL_KEY'),
+        'country' => env('TERMINAL_COUNTRY'),
+        'currency' => env('TERMINAL_CURRENCY'),
+    ],
+
 ];
