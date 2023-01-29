@@ -18,7 +18,7 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return $this->checkPermission($user, $type1 = "BMU4", $type2 = "SMU4");
     }
 
     /**
@@ -30,7 +30,7 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        return $this->checkPermission($user, $type1 = "BMU1", $type2 = "SMU1");
+        return $this->checkPermission($user, $type1 = "BMU4", $type2 = "SMU4");
     }
 
     /**
@@ -41,7 +41,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $this->checkPermission($user, $type1 = "BMU2", $type2 = "SMU2");
+        return $this->checkPermission($user, $type1 = "BMU1", $type2 = "SMU1");
     }
 
     /**
@@ -53,7 +53,7 @@ class UserPolicy
      */
     public function update(User $user)
     {
-        return $this->checkPermission($user, $type1 = "BMU3", $type2 = "SMU3");
+        return $this->checkPermission($user, $type1 = "BMU2", $type2 = "SMU2");
     }
 
     /**
@@ -77,7 +77,7 @@ class UserPolicy
      */
     public function restore(User $user)
     {
-        return $this->checkPermission($user, $type1 = "BMU3", $type2 = "SMU3");
+        return $this->checkPermission($user, $type1 = "BMU47", $type2 = "SMU47");
     }
 
     /**

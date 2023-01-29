@@ -31,7 +31,7 @@ class ProductPolicy
      */
     public function view(User $user, Product $Product)
     {
-        return $this->checkPermission($user,$type1="BMCT1" ,$type2="SMCT1");
+        return $this->checkPermission($user,$type1="BMCT4" ,$type2="SMCT4");
     }
 
     /**
@@ -42,7 +42,7 @@ class ProductPolicy
      */
     public function create(User $user)
     {
-        return $this->checkPermission($user,$type1="BMCT2" ,$type2="SMCT2");
+        return $this->checkPermission($user,$type1="BMCT1" ,$type2="SMCT1");
         
     }
 
