@@ -68,7 +68,7 @@ class WarehousePolicy
      */
     public function delete(User $user, Warehouse $warehouse)
     {
-        return $this->checkPermission($user, $type1 = "BMW3", $type2 = "SMW3");
+        // return $this->checkPermission($user, $type1 = "BMW3", $type2 = "SMW3");
         
     }
 
@@ -81,7 +81,7 @@ class WarehousePolicy
      */
     public function restore(User $user, Warehouse $warehouse)
     {
-        return $this->checkPermission($user, $type1 = "BMW47", $type2 = "SMW47");
+        // return $this->checkPermission($user, $type1 = "BMW47", $type2 = "SMW47");
         
     }
 

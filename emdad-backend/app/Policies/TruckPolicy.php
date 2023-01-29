@@ -19,7 +19,7 @@ class TruckPolicy
      */
     public function viewAny(User $user)
     {
-        return $this->checkPermission($user,$type1="SMFL4"); 
+        // return $this->checkPermission($user,$type1="SMFLT4"); 
     }
 
     /**
@@ -31,7 +31,7 @@ class TruckPolicy
      */
     public function view(User $user)
     {
-        return $this->checkPermission($user,$type1="SMFL4");
+        return $this->checkPermission($user,$type1="SMFLT4");
         
     }
 
@@ -43,7 +43,7 @@ class TruckPolicy
      */
     public function create(User $user)
     {
-      return  $this->checkPermission($user,$type1="SMFL1");
+      return  $this->checkPermission($user,$type1="SMFLT1");
         
     }
 
@@ -56,7 +56,7 @@ class TruckPolicy
      */
     public function update(User $user)
     {
-      return  $this->checkPermission($user,$type1="SMFL2");
+      return  $this->checkPermission($user,$type1="SMFLT2");
         
     }
 
@@ -69,7 +69,7 @@ class TruckPolicy
      */
     public function delete(User $user)
     {
-      return  $this->checkPermission($user,$type1="SMFL3");
+      return  $this->checkPermission($user,$type1="SMFLT3");
         
     }
 
@@ -82,7 +82,7 @@ class TruckPolicy
      */
     public function restore(User $user)
     {
-      return  $this->checkPermission($user,$type1="SMFL47");
+    //   return  $this->checkPermission($user,$type1="SMFL47");
         
     }
 

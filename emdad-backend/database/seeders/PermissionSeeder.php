@@ -24,8 +24,8 @@ class PermissionSeeder extends Seeder
             ["name" => "buyer_User_Management_Viewing", "label" => "BMU4", "category" => "BMU", "description" => ""],
             // Buyer Category 
             ["name" => "buyer_Category_Management_smart_link", "label" => "BMT48", "category" => "BMT", "description" => ""],
-            ["name" => "buyer_Category_Management_active_deActive", "label" => "T5", "category" => "BMT", "description" => ""],
-            ["name" => "buyer_Category_Management_adding", "label" => "BMCT", "category" => "BMT", "description" => ""],
+            ["name" => "buyer_Category_Management_active_deActive", "label" => "BMT5", "category" => "BMT", "description" => ""],
+            ["name" => "buyer_Category_Management_adding", "label" => "BMT1", "category" => "BMT", "description" => ""],
             ["name" => "buyer_Category_Management_Requesting", "label" => "BMT12", "category" => "BMT", "description" => ""],
             ["name" => "buyer_Category_Management_view", "label" => "BMT4", "category" => "BMT", "description" => ""],
             //Buyer Product
@@ -48,11 +48,16 @@ class PermissionSeeder extends Seeder
             ["name" => "supplier_Product_Management_smart_link", "label" => "SMP48", "category" => "SMP", "description" => ""],
             ["name" => "supplier_Product_Management_adding", "label" => "SMP1", "category" => "SMP", "description" => ""],
             ["name" => "supplier_Product_Management_view", "label" => "SMP4", "category" => "SMP", "description" => ""],
-            //supplier fleat management 
-            ["name" => "supplier_Fleet_edit", "label" => "SMFL2", "category" => "SMFL", "description" => ""],
-            ["name" => "supplier_Fleet_add", "label" => "SMFL1", "category" => "SMFL", "description" => ""],
-            ["name" => "supplier_Fleet_view", "label" => "SMFL4", "category" => "SMFL", "description" => ""],
-            ["name" => "supplier_Fleet_delete", "label" => "SMFL3", "category" => "SMFL", "description" => ""],
+            //supplier driver management 
+            ["name" => "supplier_driver_edit", "label" => "SMFLD2", "category" => "SMFLD", "description" => ""],
+            ["name" => "supplier_driver_add", "label" => "SMFLD1", "category" => "SMFLD", "description" => ""],
+            ["name" => "supplier_driver_view", "label" => "SMFLD4", "category" => "SMFLD", "description" => ""],
+            ["name" => "supplier_driver_delete", "label" => "SMFLD3", "category" => "SMFLD", "description" => ""],
+            //supplier truck management 
+            ["name" => "supplier_truck_edit", "label" => "SMFLT2", "category" => "SMFLT", "description" => ""],
+            ["name" => "supplier_truck_add", "label" => "SMFLT1", "category" => "SMFLT", "description" => ""],
+            ["name" => "supplier_truck_view", "label" => "SMFLT4", "category" => "SMFLT", "description" => ""],
+            ["name" => "supplier_truck_delete", "label" => "SMFLT3", "category" => "SMFLT", "description" => ""],
             //supplier profile management 
             ["name" => "supplier_add_profiles", "label" => "SMC1", "category" => "SMC", "description" => ""],
             ["name" => "supplier_view_profiles", "label" => "SMC4", "category" => "SMC", "description" => ""],
