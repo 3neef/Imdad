@@ -30,10 +30,10 @@ class CategoryResource extends JsonResource
             'isleaf' => $this->isleaf,
             'type' => $this->type,
             'note' => $this->reason,
-            'createdAt' => $this->created_at->format('Y-m-d'),
-            'CreatorName' => $this->CreatorName()!=null?User::where("id", $this->CreatorName()->user_id)->first()->full_name:'Created By Emdad',
+            'createdAt' => $this->created_at != null ? $this->created_at->format('Y-m-d') : null,
+            'CreatorName' => $this->CreatorName() != null ? User::where("id", $this->CreatorName()->user_id)->first()->full_name : 'Created By Emdad',
             // 'CreatorName' => $this->CreatorName()!=null?User::where("id", $this->CreatorName()->user_id)->first()->full_name:'',
-            'sequence' => Category::where("id", $this->id)->first() != null ? Category::where("id", $this->id)->first()->sequence() : "debug"
+            'sequence' => $this->sequence() ?? "debug"
         ];
     }
 }
