@@ -61,51 +61,44 @@ class RegRoleSeeder extends Seeder
             }
             
             if($role['type']=='supplier' && $role['name_en']=='Wharehouse officer'){
-                $persomsions=['SDD13','SMCS4','SML14','SMC4','SMAP14'];
+                $persomsions=['SMC4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
 
-            if($role['type']=='supplier' && $role['name_en']=='Driver'){
-                $persomsions=['SAP8','SAP15','SMCS4'];
-                $this->insertRole($role,$persomsions);
-                continue;
-            }
+            // if($role['type']=='supplier' && $role['name_en']=='Driver'){
+            //     $persomsions=['SAP8','SAP15','SMCS4'];
+            //     $this->insertRole($role,$persomsions);
+            //     continue;
+            // }
 
-            if($role['type']=='supplier' && $role['name_en']=='Finance officer'){
-                $persomsions=['SPO4','SCL4','SCR4','SMCS4','SML14','SMC4','SMUP14','SMAP14'];
+            if($role['type']=='supplier' && $role['name_en']=='Finance officer'){//موظف مالي
+                $persomsions=['SMC4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='supplier' && $role['name_en']=='Sales officer'){
-                $persomsions=['SRFQ8','SQ2','SQ1','SPO4','SMCS1','SMCS17','SML1','SMC1','SMUP1','SMAP1'];
+                $persomsions=['SMC4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='supplier' && $role['name_en']=='Wharehouse manager'){
-                $persomsions=['SDD4','SMCS1','SMU1','SML14','SMUP4','SMAP14'];
+                $persomsions=['SMW48','SMW1','SMW2','SMW4','SMFLD2','SMFLD1','SMFLD4','SMFLD3','SMFLT2','SMFLT1','SMFLT4','SMFLT3','SMCO50','SMU4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='supplier' && $role['name_en']=='Finance manager'){
-                $persomsions=['SPO4','SCL4','SCR16','SDD4','SMCS8','SMCS9','SMU4','SML14','SMC4','SMUP14','SMAP14'];
+                $persomsions=['SMU4','SMCO31','SMCO30','SMCO49','SMCO50','SMC4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='supplier' && $role['name_en']=='Sales manager'){
-                $persomsions=['SRFQ9','SQ18','SPO4','SCR19','SCR9','SCR8','SMCS9','SMCS8',
-                'SMU4','SML14','SMC4','SMCT1','SMCT20',
-                'SMUP14','SMAP14'];
+                $persomsions=['SMU4','SMT48','SMT5','SMT1','SMT12','SMT4','SMP48','SMP1','SMP4','SMC4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='supplier' && $role['name_en']=='bussnies owner'){
-                $persomsions=['SRFQ4','SRFQ9','SRFQ8','SQ1','SQ4','SQ2','SQ18','SPO4','SPO21',
-                'SDD4','SDD13','SDD22','SDD23','SAP24','SAP25','SAP9',
-                'SMCS4','SMCS1','SMCS8','SMCS9','SMCS26','SMCS27',
-                'SMU1','SMU2','SMU4','SMU9','SMU8','SMU28','SMU5',
-                'SML14','SML29','SMC4','SMC30','SMC31','SMUP14','SMUP29',
-                'SMCD1','SMAL4','SMMB1','SMMB4','SMFL1','SMFL4','SMFL2','SMFL5','SMFL6','SMAP14','SMAP29'];
+                $persomsions= DB::table('permissions')->where("category", 'LIKE', "S%")->pluck('label');
                 $this->insertRole($role,$persomsions);
                 continue;
             }
@@ -114,42 +107,37 @@ class RegRoleSeeder extends Seeder
 
 
             if($role['type']=='buyer' && $role['name_en']=='Warehouse officer'){
-                $persomsions=['BCDN4','BCDN32','BCDN33','BCDN34','BMCD4','BML14','BMCO4','BMNM14','BMDE14'];
+                $persomsions=['BMC4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Finance officer'){
-                $persomsions=['BCPO4','BCIN35','BMCD4','BML14','BMCO4','BMNM14','BMCT8','BMCT9','BMCT20','BMDE14'];
+                $persomsions=['BMC4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Procurement officer'){
-                $persomsions=['BCFQ1','BCFQ2','BCQ36','BCPO1','BMCD36','BML14','BMCO4','BMCT37','BMNM14','BMCT4','BMDE14'];
+                $persomsions=['BMT48','BMT5','BMT1','BMT12','BMT4','BMP48','BMP1','BMP4','BMC4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']==' Warehouse manager'){
-                $persomsions=['BCPO4','BCDN34','BMCD37','BMU4','BML14','BMCO4','BMCT14','BMCT37','BMNM14','BMDE14'];
+                $persomsions=['BMU4','BMW48','BMW1','BMW4','BMW2','BMT48','BMT5','BMT1','BMT12','BMT4','BMP48','BMP1','BMP4','BMC4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Finance manager'){
-                $persomsions=['BCPO4','BCIN35','BCDN4','BMCD37','BMU4','BML14','BMCO14','BMNM14','BMCT20','BMCT8','BMCT9','BMDE14'];
+                $persomsions=['BMU4','BMCO50','BMC4','BMCO30','BMCO31','BMCO49'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Procurement manager'){
-                $persomsions=['BCFQ39','BCQ36','BCPO40','BMCD8','BMCD9','BMU4','BML14','BMCO14','BMCT20','BMCT1','BMNM14','BMCT20','BMCT20','BMCT8','BMCT9','BMDE14'];
+                $persomsions=['BMT48','BMT5','BMT1','BMT12','BMT4','BMP48','BMP1','BMP4','BMC4','BMU4'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Business owner'){
-                $persomsions=['BCFQ1','BCFQ2','BCFQ39','BCFQ41',
-                'BCQ4','BCQ9','BCQ36','BCPO4','BCPO42','BCPO43','BCIN4','BCIN35','BCDN4',
-                'BCDN34','BCDN33','BCDN32','BMCD4','BMCD37','BMCD8','BMCD9','BMCD26',
-                'BMU4','BMU1','BMU2','BMU8','BMU9','BMU28',
-                'BMCO4','BMCO44','BMCO45','BMCT4','BMCT2','BMCT20','BMNM29','BMNM14',
-                'BMCA4','BMMB46','BMMB4','BMCD1','BMCT4','BMCT20','BMCT8','BMCT9','BMDE29','BMDE14'];
+                $persomsions= DB::table('permissions')->where("category", "LIKE", "B%")->pluck('label');
                 $this->insertRole($role,$persomsions);
                 continue;
             }
