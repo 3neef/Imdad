@@ -109,41 +109,47 @@ class RegRoleSeeder extends Seeder
                 $this->insertRole($role,$persomsions);
                 continue;
             }
-            if($role['type']=='buyer' && $role['name_en']=='Wharehouse officer'){
-                $persomsions=['BCDN3','BML1','BMCO1','BMNM1','BMDE1'];
+
+
+
+
+            if($role['type']=='buyer' && $role['name_en']=='Warehouse officer'){
+                $persomsions=['BCDN4','BCDN32','BCDN33','BCDN34','BMCD4','BML14','BMCO4','BMNM14','BMDE14'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Finance officer'){
-                $persomsions=['BCPO','BCIN2','BMCD1','BML1','BMCO1','BMNM2','BMDE1'];
+                $persomsions=['BCPO4','BCIN35','BMCD4','BML14','BMCO4','BMNM14','BMCT8','BMCT9','BMCT20','BMDE14'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Procurement officer'){
-                $persomsions=['BCFQ2','BCQ2','BCPO2','BMCD2','BML1','BML1','BMCO1','BMCT2','BMNM1','BMCT1','BMDE1'];
+                $persomsions=['BCFQ1','BCFQ2','BCQ36','BCPO1','BMCD36','BML14','BMCO4','BMCT37','BMNM14','BMCT4','BMDE14'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']==' Warehouse manager'){
-                $persomsions=['BCPO1','BCDN3','BMCD2','BMU1','BML1','BMCO1','BMCT2','BMNM1','BMDE1'];
+                $persomsions=['BCPO4','BCDN34','BMCD37','BMU4','BML14','BMCO4','BMCT14','BMCT37','BMNM14','BMDE14'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Finance manager'){
-                $persomsions=['BCPO1','BCIN2','BCDN1','BMCD','BMU1','BML1','BMCO2','BMNM1','BMNM2','BMDE1'];
+                $persomsions=['BCPO4','BCIN35','BCDN4','BMCD37','BMU4','BML14','BMCO14','BMNM14','BMCT20','BMCT8','BMCT9','BMDE14'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Procurement manager'){
-                $persomsions=['BCFQ3','BCQ2','BCPO3','BMCD3','BMU1','BML1','BMCO1','BMCT2','BMNM1','BMCT2','BMDE1'];
+                $persomsions=['BCFQ39','BCQ36','BCPO40','BMCD8','BMCD9','BMU4','BML14','BMCO14','BMCT20','BMCT1','BMNM14','BMCT20','BMCT20','BMCT8','BMCT9','BMDE14'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
             if($role['type']=='buyer' && $role['name_en']=='Business owner'){
-                $persomsions=['BCFQ4','BCFQ3','BCFQ2','BCFQ1','BCQ3','BCQ2',
-                'BCQ1','BCPO3','BCPO2','BCPO1','BCIN2','BCIN1','BCDN4',
-                'BCDN3','BCDN2','BCDN1','BMCD4','BMCD3','BMCD2','BMCD1','BMU4','BMU3','BMU2','BMU1',
-            'BMCO3','BMCO2','BMCO1','BMCT2','BMCT1','BMNM2','BMNM1','BMCA1','BMMB3','BMMB1','BMCD1','BMCT2','BMCT1','BMDE2','BMDE1'];
+                $persomsions=['BCFQ1','BCFQ2','BCFQ39','BCFQ41',
+                'BCQ4','BCQ9','BCQ36','BCPO4','BCPO42','BCPO43','BCIN4','BCIN35','BCDN4',
+                'BCDN34','BCDN33','BCDN32','BMCD4','BMCD37','BMCD8','BMCD9','BMCD26',
+                'BMU4','BMU1','BMU2','BMU8','BMU9','BMU28',
+                'BMCO4','BMCO44','BMCO45','BMCT4','BMCT2','BMCT20','BMNM29','BMNM14',
+                'BMCA4','BMMB46','BMMB4','BMCD1','BMCT4','BMCT20','BMCT8','BMCT9','BMDE29','BMDE14'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
