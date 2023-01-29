@@ -36,7 +36,7 @@ class UserResponse extends JsonResource
             "allProfiles" => DB::table("profile_role_user")->where("user_id", $this->id)->pluck("profile_id"),
             "lang" => $this->lang,
             "userCrNumbers" => $this->crNumbersList() ?? '',
-            'isLearning'=>$this->roles()->where('profile_id', $this->profile_id)->where('user_id',$this->id)->first()->role->is_learning 
+            'isLearning' => $this->roles()->where('profile_id', $this->profile_id)->where('user_id', $this->id)->first()->role->is_learning ?? null
 
         ];
     }
