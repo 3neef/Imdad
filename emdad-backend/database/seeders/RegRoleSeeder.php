@@ -101,9 +101,11 @@ class RegRoleSeeder extends Seeder
             }
             if($role['type']=='supplier' && $role['name_en']=='bussnies owner'){
                 $persomsions=['SRFQ4','SRFQ9','SRFQ8','SQ1','SQ4','SQ2','SQ18','SPO4','SPO21',
-                'SDD1','SCL4','SCR4','SCR2','SCR1','SDD4','SDD3',
-                'SDD2','SDD1','SAP3','SAP2','SAP1','SMCS3','SMCS2','SMCS1','SMU3','SMU2','SMU1','SML3','SML2',
-                'SML1','SMC3','SMC2','SMC1','SMCT2','SMCT1','SMUP2','SMUP1','SMCD1','SMAL1','SMMB3','SMMB2','SMMB1','SMFL4','SMFL3','SMFL2','SMFL1','SMAP1','SMAP2'];
+                'SDD4','SDD13','SDD22','SDD23','SAP24','SAP25','SAP9',
+                'SMCS4','SMCS1','SMCS8','SMCS9','SMCS26','SMCS27',
+                'SMU1','SMU2','SMU4','SMU9','SMU8','SMU28','SMU5',
+                'SML14','SML29','SMC4','SMC30','SMC31','SMUP14','SMUP29',
+                'SMCD1','SMAL4','SMMB1','SMMB4','SMFL1','SMFL4','SMFL2','SMFL5','SMFL6','SMAP14','SMAP29'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
