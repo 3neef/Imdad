@@ -186,7 +186,7 @@ class User extends  Authenticatable implements HasMedia, MustVerifyEmail
     public function roles()
     {
         return $this->belongsToMany(Role::class, 'profile_role_user')
-            ->withPivot(['role_id', 'status','is_learning'])
+            ->withPivot(['role_id', 'status','is_learning','permissions'])
             ->as('role');
     }
 
