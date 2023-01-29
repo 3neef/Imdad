@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
+use function Symfony\Component\String\b;
+
 class Category extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity;
@@ -32,17 +34,18 @@ class Category extends Model
     public function sequence()
     {
         $current = $this;
-        $lang = auth()->user()->lang;
+        $lang = auth()->user()->lang ?? 'en';
         $sequence = "";
+
         while ($current != null && $current->parent_id != 0) {
             $current = Category::where("id", $current->parent_id)->first();
-            if ($lang == "en" || $lang == null) {
+
+            if ($lang == "en" && $current != null) {
                 $sequence = $current->name_en . "/" . $sequence;
-            } else {
+            } else if ($lang == "ar" && $current != null) {
                 $sequence = $current->name_ar . "/" . $sequence;
             }
         }
-
         return $sequence;
     }
 
@@ -56,15 +59,14 @@ class Category extends Model
 
     public function CreatorName()
     {
-        return   DB::table('category_profile')->where('profile_id',auth()->user()->profile_id)->where("user_id",$this->created_by)->first();
+        return   DB::table('category_profile')->where('profile_id', auth()->user()->profile_id)->where("user_id", $this->created_by)->first();
     }
 
     public function profiles()
     {
         return $this->belongsToMany(Profile::class)
-        ->withPivot(['user_id','status'])
-        ->withTimestamps()
-        ->as('profile');
+            ->withPivot(['user_id', 'status'])
+            ->withTimestamps()
+            ->as('profile');
     }
-
 }
