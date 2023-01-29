@@ -145,9 +145,11 @@ class RegRoleSeeder extends Seeder
             }
             if($role['type']=='buyer' && $role['name_en']=='Business owner'){
                 $persomsions=['BCFQ1','BCFQ2','BCFQ39','BCFQ41',
-                'BCQ4','BCQ9','BCQ36','BCPO3','BCPO2','BCPO1','BCIN2','BCIN1','BCDN4',
-                'BCDN3','BCDN2','BCDN1','BMCD4','BMCD3','BMCD2','BMCD1','BMU4','BMU3','BMU2','BMU1',
-            'BMCO3','BMCO2','BMCO1','BMCT2','BMCT1','BMNM2','BMNM1','BMCA1','BMMB3','BMMB1','BMCD1','BMCT2','BMCT1','BMDE2','BMDE1'];
+                'BCQ4','BCQ9','BCQ36','BCPO4','BCPO42','BCPO43','BCIN4','BCIN35','BCDN4',
+                'BCDN34','BCDN33','BCDN32','BMCD4','BMCD37','BMCD8','BMCD9','BMCD26',
+                'BMU4','BMU1','BMU2','BMU8','BMU9','BMU28',
+                'BMCO4','BMCO44','BMCO45','BMCT4','BMCT2','BMCT20','BMNM29','BMNM14',
+                'BMCA4','BMMB46','BMMB4','BMCD1','BMCT4','BMCT20','BMCT8','BMCT9','BMDE29','BMDE14'];
                 $this->insertRole($role,$persomsions);
                 continue;
             }
