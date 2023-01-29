@@ -135,6 +135,7 @@ class WarehousesController extends Controller
      */
     public function store(CreateWarehouesesRequest $request)
     {
+        $this->authorize('create',Warehouse::class);
         $warehouse = $this->warehouseService->store($request);
         if ($warehouse != null) {
             return response()->json(["statusCode" => '000', 'message' => 'created successfully', 'data' => WarehouseResponse::make($warehouse)], 200);
@@ -195,6 +196,8 @@ class WarehousesController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view',Warehouse::class);
+
         $warehouses = $this->warehouseService->show($id);
 
         if ($warehouses != null) {
@@ -263,6 +266,8 @@ class WarehousesController extends Controller
      */
     public function update(UpdateWarehousesRequest $request, $id)
     {
+        $this->authorize('update',Warehouse::class);
+
         $update = $this->warehouseService->update($request, $id);
         if ($update != null) {
             return response()->json(["statusCode" => '000', 'success' => 'Updated Successfly', 'data' => WarehouseResponse::make($update)], 200);
@@ -322,6 +327,8 @@ class WarehousesController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',Warehouse::class);
+
 
         $warehouses =  $this->warehouseService->delete($id);
         if ($warehouses != null) {
