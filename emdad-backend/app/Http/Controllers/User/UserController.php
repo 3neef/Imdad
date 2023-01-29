@@ -456,7 +456,6 @@ class UserController extends Controller
      */
     public function restoreUser(RestoreUserByIdRequest  $request, UserServices $userServices)
     {
-        $this->authorize('restore', User::class);
 
         $output = $userServices->restoreById($request);
 
@@ -533,7 +532,6 @@ class UserController extends Controller
      */
     public function delete(GetUserRequest $id, UserServices $userServices)
     {
-        $this->authorize('delete', User::class);
 
         $output = $userServices->delete($id);
 

@@ -400,6 +400,8 @@ class CategoryController extends Controller
 
     public function show($id)
     {
+        $this->authorize('view', Category::class);
+
         $category =  $this->categoryService->show($id);
         if ($category) {
             return response()->json(['data' => new CategoryResource($category)], 200);

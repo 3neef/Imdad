@@ -327,7 +327,6 @@ class WarehousesController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete',Warehouse::class);
 
 
         $warehouses =  $this->warehouseService->delete($id);
