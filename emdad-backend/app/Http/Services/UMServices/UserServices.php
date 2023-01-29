@@ -104,13 +104,13 @@ class UserServices
         if ($Warehouses != null) {
             try {
                 foreach ($Warehouses as $warehouse) {
-                $user->warehouses()->attach(
-                    $user->id,
-                    [
-                        'warehouse_id' => $warehouse,
-                    ]
-                );
-            }
+                    $user->warehouses()->attach(
+                        $user->id,
+                        [
+                            'warehouse_id' => $warehouse,
+                        ]
+                    );
+                }
             } catch (Exception $ex) {
             }
         }
@@ -120,7 +120,7 @@ class UserServices
 
         if ($request->has("roleId") && $userRoleProfile != null) {
 
-            if($id == auth()->id()&& $request->status!=$userRoleProfile->status){
+            if ($id == auth()->id() && $request->status != $userRoleProfile->status) {
 
                 $output = [
                     "statusCode" => "110",
@@ -128,14 +128,18 @@ class UserServices
                     'message' => "you cannot  disable your self"
                 ];
                 return $output;
-            
             }
-        $user->roles()->updateExistingPivot($request['roleId'],[ 'user_id' => $user->id ?? $userRoleProfile->user_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['managerUserId'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning]);
+            $permissions = null;
+            if ($userRoleProfile->role_id != $request['roleId']) {
+
+                $permissions = Role::where('id', $request->roleId)->first();
+            }
+            $user->profiles()->updateExistingPivot($user->profile_id, ['role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'user_id' => $user->id ?? $userRoleProfile->user_id, 'profile_id' => $user->profile_id, 'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['managerUserId'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning, 'permissions' => $permissions != null ? $permissions->permissions_list : $userRoleProfile->permissions]);
         }
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
             $this->UserOtp($user);
-            MailController::sendSignupEmail($user->name, $user->email, $user->otp,$user->lang,"otp");
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang, "otp");
 
             $output = ["otp" => $user->otp, "message" => "New OTP has been sent.", "statusCode" => "000"];
             return $output;
@@ -143,11 +147,10 @@ class UserServices
         if ($user) {
             $output = ["data" => $user, "message" => "user updated successfully", "statusCode" => "000"];
             return $output;
-        }else{
+        } else {
             $output = ["data" => null, 'message' => "user not updated", "statusCode" => "999"];
             return $output;
         }
-        
     }
 
     public function detachWarehouse($request)
@@ -161,10 +164,10 @@ class UserServices
             return $output;
         }
         if ($warehouse != null) {
-           $user->warehouses()->detach($request->warehouseId);
+            $user->warehouses()->detach($request->warehouseId);
 
-           $output = ['message' => "warehouse has been detached successfully", "statusCode" => "000"];
-           return $output;
+            $output = ['message' => "warehouse has been detached successfully", "statusCode" => "000"];
+            return $output;
         }
     }
 
@@ -176,7 +179,7 @@ class UserServices
             $user->warehouses()->updateExistingPivot($request->warehouseId, ['status' => $request->status]);
             $output = ["message" => "status update successfully", "statusCode" => "000"];
             return $output;
-        }else{
+        } else {
             $output = ["message" => "system error", "statusCode" => "999"];
             return $output;
         }
@@ -193,7 +196,7 @@ class UserServices
             $user = User::where('mobile', '=', $request->mobile)->first();
 
             $data = $this->UserOtp($user);
-        MailController::sendSignupEmail($user->name, $user->email, $user->otp,$user->lang,"otp");
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang, "otp");
 
             return response()->json(
                 [
@@ -218,13 +221,13 @@ class UserServices
 
         if ($user->is_verified == 0) {
             $data = $this->UserOtp($user);
-            MailController::sendSignupEmail($user->name, $user->email, $user->otp,$user->lang,"otp");
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang, "otp");
 
             return response()->json(
-                [   
-                     "statusCode" => "105",
+                [
+                    "statusCode" => "105",
 
-                "success" => true, "message" => "verifiy your otp first",
+                    "success" => true, "message" => "verifiy your otp first",
                 ],
                 200
             );
@@ -296,7 +299,7 @@ class UserServices
     {
         $user = isset($request->mobile) ? User::where('mobile', '=', $request->mobile)->first() : User::where('email', '=', $request->email)->first();
         $this->UserOtp($user);
-        MailController::sendSignupEmail($user->name, $user->email, $user->otp,$user->lang,"otp");
+        MailController::sendSignupEmail($user->name, $user->email, $user->otp, $user->lang, "otp");
         return response()->json(
             [
                 "statusCode" => "000",
@@ -326,7 +329,7 @@ class UserServices
 
         $user = User::find($id)->first();
         if ($user == null) {
-            $output = ['statusCode'=>'000','message' => 'user already deleted'];
+            $output = ['statusCode' => '000', 'message' => 'user already deleted'];
             return $output;
         }
 
@@ -335,10 +338,10 @@ class UserServices
         $deleted = $user->delete();
 
         if ($deleted) {
-            $output = ['statusCode'=>'000','message' => 'User deleted successfully'];
+            $output = ['statusCode' => '000', 'message' => 'User deleted successfully'];
             return $output;
         }
-        $output = ['statusCode'=>'999','error' => 'system error'];
+        $output = ['statusCode' => '999', 'error' => 'system error'];
         return $output;
     }
 
@@ -360,10 +363,10 @@ class UserServices
         $restore = User::where('id', $request->id)->withTrashed()->first()->restore();
 
         if ($restore) {
-            $output = ['statusCode'=>'000','message' => 'User restored successfully'];
+            $output = ['statusCode' => '000', 'message' => 'User restored successfully'];
             return $output;
         }
-        $output = ['statusCode'=>'999','error' => 'system error'];
+        $output = ['statusCode' => '999', 'error' => 'system error'];
         return $output;
     }
 
@@ -415,15 +418,15 @@ class UserServices
         $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
 
         if ($userRoleProfile == null) {
-            $output = ['statusCode'=>'263','error' => 'user doesn\'t belong to this company'];
+            $output = ['statusCode' => '263', 'error' => 'user doesn\'t belong to this company'];
             return $output;
         }
         $active = $userRoleProfile->update(['status' => 'active']);
         if ($active) {
-            $output = ['statusCode'=>'000','message' => 'user account has been activated successfully'];
+            $output = ['statusCode' => '000', 'message' => 'user account has been activated successfully'];
             return $output;
         }
-        $output = ['statusCode'=>'999','error' => 'system error'];
+        $output = ['statusCode' => '999', 'error' => 'system error'];
         return $output;
     }
 
@@ -432,21 +435,21 @@ class UserServices
     {
         if ($request->userId == auth()->id()) {
 
-            $output = ['statusCode'=>'110','message' => 'you cannot update your self'];
+            $output = ['statusCode' => '110', 'message' => 'you cannot update your self'];
             return $output;
         } else {
 
             $user = User::find($request->userId);
-            
+
             // $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
             $profile = $user->profiles()->where('profile_id', $user->profile_id)->first();
 
             $active = $user->profiles()->updateExistingPivot($user->profile, ['status' => $profile->profile->status == "inActive" ? "active" : "inActive"]);
             if ($active) {
-                $output = ['statusCode'=>'000','message' => 'user account has disabled successfully'];
+                $output = ['statusCode' => '000', 'message' => 'user account has disabled successfully'];
                 return $output;
             }
-            $output = ['statusCode'=>'999','message' => 'system error'];
+            $output = ['statusCode' => '999', 'message' => 'system error'];
             return $output;
         }
     }
@@ -541,7 +544,7 @@ class UserServices
             $user = User::create($request);
             $this->UserOtp($user);
 
-            MailController::sendSignupEmail($user->name, $user->email, ["admin"=>auth()->user()->full_name,"password"=>$user->password], "en","password");
+            MailController::sendSignupEmail($user->name, $user->email, ["admin" => auth()->user()->full_name, "password" => $user->password], "en", "password");
 
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
@@ -559,10 +562,10 @@ class UserServices
             }
             if (isset($request['warehouseId'])) {
                 foreach ($request['warehouseId'] as $warehouse_id) {
-                    try{
-                        $user->warehouses()->attach($user, ['warehouse_id' => $warehouse_id]); 
+                    try {
+                        $user->warehouses()->attach($user, ['warehouse_id' => $warehouse_id]);
+                    } catch (Exception $e) {
                     }
-                    catch(Exception $e){}
                 }
             }
             return $user;
@@ -578,11 +581,11 @@ class UserServices
         // get permissions list and add permission to the list
         // if the new list after adding equals to another role permission list from roles table
         // suggest change user role 
-        
+
         $roles = Role::where("type", auth()->user()->currentProfile()->type)->get();
     }
 
-    public function checkTheRole($arrayOne,$arrayTwo)
+    public function checkTheRole($arrayOne, $arrayTwo)
     {
         $result =  array_diff($arrayOne, $arrayTwo);
         if (count($result) != 0)
@@ -591,19 +594,17 @@ class UserServices
             return true;
         }
     }
-    public function uploadAvatar($request){
+    public function uploadAvatar($request)
+    {
         $user = User::where('id', auth()->id())->first();
-        if(isset($request['attachementFile']))
-            {
-                $user->addMedia($request['attachementFile'])->toMediaCollection('users');
-                $output = ["message" => "Avater uploaded Successfully", "statusCode" => "000"];
-                return $output;
-               
-            }else{
-                $output = ["message" => "system error", "statusCode" => "999"];
-                return $output;
-            }
-            
+        if (isset($request['attachementFile'])) {
+            $user->addMedia($request['attachementFile'])->toMediaCollection('users');
+            $output = ["message" => "Avater uploaded Successfully", "statusCode" => "000"];
+            return $output;
+        } else {
+            $output = ["message" => "system error", "statusCode" => "999"];
+            return $output;
+        }
     }
 
     public function updateAvater($request)
