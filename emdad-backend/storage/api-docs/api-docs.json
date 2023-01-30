@@ -1870,6 +1870,9 @@
                                     "id": {
                                         "type": "integer"
                                     },
+                                    "logo": {
+                                        "type": "file"
+                                    },
                                     "nameAr": {
                                         "type": "string"
                                     },
@@ -1880,6 +1883,12 @@
                                         "type": "string"
                                     },
                                     "iban": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "bank": {
                                         "type": "string"
                                     },
                                     "subscriptionDetails": {
