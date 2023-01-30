@@ -598,8 +598,9 @@ class UserServices
     {
         $user = User::where('id', auth()->id())->first();
         if (isset($request['attachementFile'])) {
+            $user->clearMediaCollection('users');
             $user->addMedia($request['attachementFile'])->toMediaCollection('users');
-            $output = ["message" => "Avater uploaded Successfully", "statusCode" => "000"];
+            $output = ["message" => "Avater updated Successfully", "statusCode" => "000"];
             return $output;
         } else {
             $output = ["message" => "system error", "statusCode" => "999"];
@@ -607,19 +608,5 @@ class UserServices
         }
     }
 
-    public function updateAvater($request)
-    {
-        $user = User::where('id', auth()->id())->first();
-
-        if (isset($request['attachementFile'])) { {
-                $user->clearMediaCollection('users');
-                $user->addMedia($request['attachementFile'])->toMediaCollection('users');
-                $output = ["message" => "Avater updated Successfully", "statusCode" => "000"];
-                return $output;
-            }
-        } else {
-            $output = ["message" => "system error", "statusCode" => "999"];
-            return $output;
-        }
-    }
+ 
 }
