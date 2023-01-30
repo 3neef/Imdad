@@ -29,6 +29,7 @@ class SubscriptionPaymentService
 
         $price = $oldOwner == true ? $subscription->price_2 : $subscription->price_1;
 
+        $status = $price == 0 ? "Paid" : "Pending";
 
         if ($payedSubscription == null ||  Carbon::now() > $payedSubscription->expire_date) {
 
@@ -41,7 +42,8 @@ class SubscriptionPaymentService
                 'expire_date' => $dt->addYear(),
                 'tax_amount' => $price * 15 / 100,
                 'total' => ($price + ($price * 15 / 100)),
-                'status' => $price > 0 ? "Pending" : "Paid"
+                'status' => $status
+
 
             ]);
             $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
@@ -57,6 +59,8 @@ class SubscriptionPaymentService
                     'expire_date' => $dt->addYear(),
                     'tax_amount' => $price * 15 / 100,
                     'total' => ($price + ($price * 15 / 100)),
+                    'status' => $status
+
                 ]);
                 $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
 
