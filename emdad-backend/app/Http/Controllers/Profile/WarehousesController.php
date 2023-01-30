@@ -135,10 +135,15 @@ class WarehousesController extends Controller
      */
     public function store(CreateWarehouesesRequest $request)
     {
-        $this->authorize('create',Warehouse::class);
-        $warehouse = $this->warehouseService->store($request);
-        if ($warehouse != null) {
-            return response()->json(["statusCode" => '000', 'message' => 'created successfully', 'data' => WarehouseResponse::make($warehouse)], 200);
+        // $this->authorize('create',Warehouse::class);
+        $output = $this->warehouseService->store($request);
+        
+        if($output['statusCode'] == "000"){
+            return response()->json(['statusCode'=> $output['statusCode'], "message"=>$output['message'], 'data' => WarehouseResponse::make($output['data']) ],200);
+        }elseif($output['statusCode'] == "361") {
+            return response()->json(['statusCode'=> $output['statusCode'], "message"=>$output['message'], 'data' => $output['success'] ],200);
+        }elseif($output['statusCode'] == "364") {
+            return response()->json(['statusCode'=> $output['statusCode'], "message"=>$output['message'], 'data' => $output['success'] ],200);
         }
         return response()->json(['error' => 'system error'], 500);
     }

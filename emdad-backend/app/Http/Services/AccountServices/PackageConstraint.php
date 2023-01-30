@@ -23,6 +23,9 @@ class PackageConstraint
     {
         // admin user + warehouse + 
         $features = $this->parsePackageFeatures();
+        if($features == null){
+            return "package null";
+        }
         foreach ($features  as $feature) {
             if ($feature->key==$key && $feature->systemValue > $value) {
                 return true;
