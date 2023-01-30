@@ -598,8 +598,8 @@ class UserServices
     {
         $user = User::where('id', auth()->id())->first();
         if (isset($request['attachementFile'])) {
-            $user->clearMediaCollection('users');
-            $user->addMedia($request['attachementFile'])->toMediaCollection('users');
+            $user->clearMediaCollection('avatars');
+            $user->addMedia($request['attachementFile'])->toMediaCollection('avatars');
             $output = ["message" => "Avater updated Successfully", "statusCode" => "000"];
             return $output;
         } else {
