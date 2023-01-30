@@ -28,7 +28,7 @@ class CategoryController extends Controller
         $this->categoryService = $categoryService;
     }
     /**
-     * @OA\get(
+     * @OA\post(
      * path="/api/v1_0/categories",
      * operationId="addCategory",
      * tags={"Category"},

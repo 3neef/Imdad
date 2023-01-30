@@ -44,9 +44,8 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
         ["key"=>"items","titleEn"=>"Number of items in a requestion","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3","text_ar"=>"3","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد الأعلى حسب باقة 
         الاشتراك."],
 
-        ["key"=>"Permissions","titleEn"=>"Permissions Management","titleAr"=>"إدارة الصلاحيات","systemValue"=>0,"text_en"=>"Inactive","text_ar"=>"غير ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-        ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+        ["key"=>"Digital","titleEn"=>"Digital Statistics  App","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
         operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
         analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
         محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
@@ -94,9 +93,8 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             ["key"=>"items","titleEn"=>"Number of items in a requestion","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>10,"text_en"=>"10","text_ar"=>"10","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد الأعلى حسب باقة 
             الاشتراك."],
 
-            ["key"=>"Permissions","titleEn"=>"Permissions Management","titleAr"=>"إدارة الصالحيات","systemValue"=>1,"text_en"=>"Active","text_ar"=>"ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+            ["key"=>"Digital","titleEn"=>"Digital Statistics  App","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
             analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
             محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
@@ -143,9 +141,8 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             ["key"=>"items","titleEn"=>"Number of items in a requestion","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>20,"text_en"=>"20","text_ar"=>"20","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد الأعلى حسب باقة 
             الاشتراك."],
 
-            ["key"=>"Permissions","titleEn"=>"Permissions Management","titleAr"=>"إدارة الصالحيات","systemValue"=>1,"text_en"=>"Active","text_ar"=>"ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+            ["key"=>"Digital","titleEn"=>"Digital Statistics  App","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
             analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
             محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
@@ -173,13 +170,12 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
 
             ["key"=>"Customers","titleEn"=>"Customers Management","titleAr"=>"إدارة العملاء","systemValue"=>100,"text_en"=>"100","text_ar"=>"100","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"IOS","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
+            ["key"=>"IOS","titleEn"=>"Digital Statistics  App","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
             IOS","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
             ["key"=>"Android","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>1,"text_en"=>"Available Android","text_ar"=>"متاح
             Android","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
-            ["key"=>"Permissions","titleEn"=>"Permissions Management","titleAr"=>"إدارة الصالحيات","systemValue"=>0,"text_en"=>"Inactive","text_ar"=>"ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
             ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
             analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
@@ -203,15 +199,11 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             
             ["key"=>"Customers","titleEn"=>"Customers Management","titleAr"=>"إدارة العملاء","systemValue"=>300,"text_en"=>"300","text_ar"=>"300","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"IOS","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
+            ["key"=>"IOS","titleEn"=>"Digital Statistics  App","titleAr"=>"الإحصائيات الرقمية  ","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
             IOS","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
-            ["key"=>"Android","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>1,"text_en"=>"Available Android","text_ar"=>"متاح
-            Android","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
-
-            ["key"=>"Permissions","titleEn"=>"Permissions Management","titleAr"=>"إدارة الصالحيات","systemValue"=>1,"text_en"=>"Active","text_ar"=>"ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
-
-            ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+          
+            ["key"=>"Digital","titleEn"=>"Digital Statistics Points","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
             analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
             محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
@@ -229,24 +221,6 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
 ];
 
 
-        // $subscriptionsDetails = [
-        //     ["id" => 1, "packageNameAr" => 'الأساسية', "packageNameEn"=>'Basic', "type" => 'Buyer',"price1" => "1250", "price2" => "1250",
-        //      "features" =>
-        //      [["key"=>"delivery","titleEn"=>"Delivery Scheduling","titleAr"=>"التوصيل","systemValue"=>1,"text_en"=>"One Time Delivery","text_ar"=>"التوصيل لمرة واحدة","descriptionEn"=>"lorem epsom",
-        //     "descriptionAr"=>"تفاصيل شرح الميزة"],
-        //     ["key"=>"users","titleEn"=>"Users Scheduling","titleAr"=>"المستخدمين","systemValue"=>1,"text_en"=>"10 users","text_ar"=>"  عشرة مستخدمين","descriptionEn"=>"lorem epsom",
-        //     "descriptionAr"=>"تفاصيل شرح الميزة"]]],
-
-
-        //     ["id" => 2, "packageNameAr" => 'الفضية', "packageNameEn"=>'silver', "type" => 'Buyer',"price2" => "1250", "price1" => "1250",
-        //      "features" =>
-        //      [["titleEn"=>"Delivery Scheduling","systemValue"=>1,"text_en"=>"One Time Delivery","titleAr"=>"التوصيل","text_ar"=>"التوصيل لمرة واحدة","descriptionEn"=>"lorem epsom",
-        //     "descriptionAr"=>"تفاصيل شرح الميزة","key"=>"delivery"],
-        //     ["titleEn"=>"Users Scheduling","key"=>"users","titleAr"=>"المستخدمين","text_en"=>"10 users","text_ar"=>"  عشرة مستخدمين","descriptionEn"=>"lorem epsom",
-        //     "systemValue"=>1,"descriptionAr"=>"تفاصيل شرح الميزة"] ] ],
-
-        //     ["id"=> 2, ""]
-        // ];
 
         foreach ($subscriptionsDetails as $subscriptionsDetail) {
             DB::table('subscription_packages')->insert([

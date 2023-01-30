@@ -47,8 +47,7 @@ class UserCollection
             ->allowedFilters($allowedFilters)
             ->allowedSorts($allowedSorts)
             ->allowedIncludes($allowedIncludes)
-            ->with('warehouses')
-
+            ->with(['warehouses','media'])
             ->paginate($perPage);
     }
 }
