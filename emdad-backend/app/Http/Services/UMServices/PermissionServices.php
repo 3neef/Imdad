@@ -19,7 +19,8 @@ class PermissionServices
 
     public function index($request)
     {
-        return PermissionsCollection::collection($request);
+        // return PermissionsCollection::collection($request);
+        return Permission::all([ 'name', 'label','category','description'])->groupBy('category');
     }
 
     public function store($request)

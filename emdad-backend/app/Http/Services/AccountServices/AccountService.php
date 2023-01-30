@@ -8,14 +8,10 @@ use App\Http\Services\General\WalletsService;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Profile;
 use App\Models\SubscriptionPayment;
-use App\Models\UM\Permission;
-use App\Models\UM\RoleUserProfile;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Mockery\Expectation;
-use PhpParser\Node\Stmt\Return_;
-use Illuminate\Support\Str;
+
 
 class AccountService
 {
@@ -37,6 +33,7 @@ class AccountService
                 ]);
                  WalletsService::create($profile);
                 $permissions = $this->pluckPermissions($request->ProfileType);
+                // dd($permissions);
                 $user->profiles()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
                 $user=User::where("id",auth()->user()->id)->first();
                 $user->update(['profile_id' => $profile->id]);
@@ -140,7 +137,6 @@ class AccountService
         $output = ["profile_id" => null, 'message' => "Profile Not Founded", "statusCode" => "111"];
         return $output;
     }
-
 
 
 
