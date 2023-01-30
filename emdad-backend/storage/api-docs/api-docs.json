@@ -7086,6 +7086,9 @@
                                 "properties": {
                                     "categoryList": {
                                         "type": "string"
+                                    },
+                                    "categoryId": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -7727,6 +7730,9 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
+                                "required": [
+                                    "status"
+                                ],
                                 "properties": {
                                     "status": {
                                         "type": "string"
@@ -7876,20 +7882,30 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "id",
-                                    "name",
-                                    "price"
-                                ],
                                 "properties": {
-                                    "id": {
+                                    "categoryId": {
                                         "type": "integer"
                                     },
-                                    "name": {
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "nameAr": {
                                         "type": "string"
                                     },
                                     "price": {
                                         "type": "integer"
+                                    },
+                                    "attachementFile": {
+                                        "type": "file"
+                                    },
+                                    "measruingUnit": {
+                                        "type": "string"
+                                    },
+                                    "descriptionEn": {
+                                        "type": "string"
+                                    },
+                                    "descriptionAr": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -7943,18 +7959,37 @@
                             "schema": {
                                 "required": [
                                     "categoryId",
-                                    "name",
-                                    "price"
+                                    "nameEn",
+                                    "nameAr",
+                                    "price",
+                                    "measruingUnit",
+                                    "descriptionEn",
+                                    "descriptionAr"
                                 ],
                                 "properties": {
                                     "categoryId": {
                                         "type": "integer"
                                     },
-                                    "name": {
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "nameAr": {
                                         "type": "string"
                                     },
                                     "price": {
                                         "type": "integer"
+                                    },
+                                    "attachementFile": {
+                                        "type": "file"
+                                    },
+                                    "measruingUnit": {
+                                        "type": "string"
+                                    },
+                                    "descriptionEn": {
+                                        "type": "string"
+                                    },
+                                    "descriptionAr": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -8197,6 +8232,9 @@
                                 ],
                                 "properties": {
                                     "productList": {
+                                        "type": "integer"
+                                    },
+                                    "productId": {
                                         "type": "integer"
                                     }
                                 },

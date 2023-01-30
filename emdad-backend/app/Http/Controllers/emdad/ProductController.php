@@ -56,10 +56,15 @@ class ProductController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"categoryId","name","price"},
+     *               required={"categoryId","nameEn","nameAr","price","measruingUnit","descriptionEn","descriptionAr"},
      *               @OA\Property(property="categoryId", type="integer"),
-     *               @OA\Property(property="name", type="string"),
-     *               @OA\Property(property="price", type="integer")
+     *               @OA\Property(property="nameEn", type="string"),
+     *               @OA\Property(property="nameAr", type="string"),
+     *               @OA\Property(property="price", type="integer"),
+     *               @OA\Property(property="attachementFile", type="file"),
+     *               @OA\Property(property="measruingUnit", type="string"),
+     *               @OA\Property(property="descriptionEn", type="string"),
+     *               @OA\Property(property="descriptionAr", type="string"),
      *            ),
      *        ),
      *    ),
@@ -110,10 +115,14 @@ class ProductController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"id","name","price"},
-     *               @OA\Property(property="id", type="integer"),
-     *               @OA\Property(property="name", type="string"),
-     *               @OA\Property(property="price", type="integer")
+     *               @OA\Property(property="categoryId", type="integer"),
+     *               @OA\Property(property="nameEn", type="string"),
+     *               @OA\Property(property="nameAr", type="string"),
+     *               @OA\Property(property="price", type="integer"),
+     *               @OA\Property(property="attachementFile", type="file"),
+     *               @OA\Property(property="measruingUnit", type="string"),
+     *               @OA\Property(property="descriptionEn", type="string"),
+     *               @OA\Property(property="descriptionAr", type="string"),
      *            ),
      *        ),
      *    ),
@@ -388,7 +397,8 @@ class ProductController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               required={"productList"},
-     *               @OA\Property(property="productList", type="integer")
+     *               @OA\Property(property="productList", type="integer"),
+     *               @OA\Property(property="productId", type="integer")
      *            ),
      *        ),
      *    ),

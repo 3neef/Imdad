@@ -451,6 +451,7 @@ class CategoryController extends Controller
      *               type="object",
      *               required={"categoryList"},
      *               @OA\Property(property="categoryList", type="string"),
+     *               @OA\Property(property="categoryId", type="string")
      *            ),
      *        ),
      *    ),
@@ -965,8 +966,8 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
+     *               required={"status"},
      *               @OA\Property(property="status", type="string"),
-
      *            ),
      *        ),
      *    ),
