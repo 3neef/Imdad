@@ -175,6 +175,15 @@ class CategoryService
         return CategoryResource::collection(CategoryCollection::collection($request));
     }
 
+    public function activation($request , $id){
+        $category =Category::where('id',$id)->where('profile_id', auth()->user()->profile_id)->first();
+        if ($category != null) {
+            $category->profiles()->updateExistingPivot(auth()->user()->profile_id,[
+                "status" => $request->status]);
+            }
+        return $category;
+    }
+
 
     // public function setedCategoryProfile()
     // {

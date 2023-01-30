@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('category_profile', function (Blueprint $table) {
-            $table->id();
+        $table->id();
             $table->foreignId('profile_id')->references("id")->on("profiles")->cascadeOnDelete();
             $table->foreignId('user_id')->references("id")->on("users")->cascadeOnDelete();
             $table->foreignId('category_id')->references("id")->on("categories")->cascadeOnDelete();

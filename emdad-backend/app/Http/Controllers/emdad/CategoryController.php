@@ -4,6 +4,7 @@ namespace App\Http\Controllers\emdad;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategroyRequests\Categroy\ActivateCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\changeCategoryStatusRequest;
 use App\Http\Services\CategoryServices\CategoryService;
 use App\Http\Requests\CategroyRequests\Categroy\CreateCategoryRequest;
@@ -12,6 +13,7 @@ use App\Http\Requests\CategroyRequests\Categroy\FilterCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\ProfileCategoryRequest;
 use App\Http\Requests\CategroyRequests\Categroy\RetryApprovalRequest;
 use App\Http\Requests\CategroyRequests\Categroy\UpdateCategoryRequest;
+use App\Http\Requests\UMRequests\User\ActivateRequest;
 use App\Http\Resources\CategoryResourses\category\CategoryResource;
 // use App\Models\Emdad\Categories;
 use App\Models\Emdad\Category;
@@ -925,5 +927,76 @@ class CategoryController extends Controller
     public function getCategoryProfile(Request $request)
     {
         return $this->categoryService->getCategoryProfile($request);
+    }
+    /**
+     * @OA\put(
+     * path="/api/v1_0/categories/activation/{id}",
+     * operationId="updateCategoryStatus",
+     * tags={"Category"},
+     * summary="update Category Status",
+     * description="update Category Status using id",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="status", type="string"),
+
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Category Status updated successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function activate(ActivateCategoryRequest $request , $id){
+        $category =  $this->categoryService->activation($request, $id);
+        if ($category) {
+            return response()->json(['success' => 'Status Updated Successfly'], 201);
+        }
+        return response()->json(['error' => false, 'message' => 'not found'], 404);
     }
 }
