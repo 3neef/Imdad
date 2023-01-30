@@ -215,10 +215,13 @@ class ProfileController extends Controller
      *               type="object",
      *               required={"id"},
      *               @OA\Property(property="id", type="integer"),
+     *               @OA\Property(property="logo", type="file"),
      *               @OA\Property(property="nameAr", type="string"),
      *               @OA\Property(property="nameEn", type="string"),
      *               @OA\Property(property="swift", type="string"),
      *               @OA\Property(property="iban", type="string"),
+     *               @OA\Property(property="type", type="string"),
+     *               @OA\Property(property="bank", type="string"),
      *               @OA\Property(property="subscriptionDetails", type="string"),
      *               @OA\Property(property="vatNumber", type="string"),
      *               @OA\Property(property="active", type="string")
