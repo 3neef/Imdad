@@ -34,6 +34,8 @@ if [ -d "vendor" ]; then
                 php artisan l5-swagger:generate
                 touch Done.txt
         fi
+        rm -f  public/storage
+        php artisan storage:link
         php artisan optimize
         php artisan view:cache
         php artisan queue:work &
