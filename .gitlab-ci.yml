@@ -6,9 +6,8 @@ variables:
     R_USER : emdad
     R_PASS : Emdad@123
     NCTR_REG : https://hub.nctr.sd
-    IMAGE_NAME : emdad-be
-    CON_NAME : emdad-be
-    Test_CON_NAME : test-be
+    IMAGE_NAME : emdad-dev-be
+    CON_NAME : emdad-dev-be
     NETWORK : emdad_network
 stages:
     - build
@@ -46,8 +45,5 @@ deploy:
             docker rm $(docker ps -f name=$CON_NAME -aq); 
             echo "From IF ";
             fi
-            #    docker stop $Test_CON_NAME; 
-        #    docker rm $(docker ps -f name=$Test_CON_NAME -aq);
-        #docker stop $(docker ps -f name=$CON_NAME -aq); \ ** rmove container using the id
         -  docker run -d -p 8000:8000 -p 80:80 -p 443:443 --name $CON_NAME --network $NETWORK --restart=always $IMAGE_REG/$IMAGE_NAME:latest
-#        -  docker run -d -p 7000:8000 -p 9000:80 -p 4443:443 --name $Test_CON_NAME --network $NETWORK $IMAGE_REG/$IMAGE_NAME:latest
+
