@@ -36,6 +36,7 @@ if [ -d "vendor" ]; then
         fi
         php artisan optimize
         php artisan view:cache
+        php artisan storage:link
         php artisan queue:work &
 fi
 
