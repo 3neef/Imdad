@@ -44,7 +44,6 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
         ["key"=>"items","titleEn"=>"Number of items in a requestion","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3","text_ar"=>"3","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد الأعلى حسب باقة 
         الاشتراك."],
 
-        ["key"=>"Permissions","titleEn"=>"Permissions Management","titleAr"=>"إدارة الصلاحيات","systemValue"=>0,"text_en"=>"Inactive","text_ar"=>"غير ممكن","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
         ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
         operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
