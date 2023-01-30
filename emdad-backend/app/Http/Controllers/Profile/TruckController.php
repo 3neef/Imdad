@@ -308,7 +308,6 @@ class TruckController extends Controller
 
     public function suspend(SuspendRequest $request, $id)
     {
-        $this->authorize('update', Truck::class);
 
         return $this->truckservice->suspend($request, $id);
     }

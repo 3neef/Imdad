@@ -2,14 +2,12 @@
 
 namespace App\Policies;
 
-// use App\Models\Emdad\Categories;
-
-use App\Models\Emdad\Category;
+use App\Models\Profile;
 use App\Models\User;
-use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
-class CategoryPolicy
+class ProfilePolicy
 {
     use HandlesAuthorization;
 
@@ -28,12 +26,12 @@ class CategoryPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $categories
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Category $category)
+    public function view(User $user, Profile $profile)
     {
-       return $this->checkPermission($user, $type1 = "BMCT4", $type2 = "SMCT4");
+        return $this->checkPermission($user,$type1="BMC4" ,$type2="SMC4");
         
     }
 
@@ -45,41 +43,42 @@ class CategoryPolicy
      */
     public function create(User $user)
     {
-       return $this->checkPermission($user, $type1 = "BMCT1", $type2 = "SMCT1");
+        return $this->checkPermission($user,$type1="BMC1" ,$type2="SMC1");
+        
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Category $category)
+    public function update(User $user, Profile $profile)
     {
-    //    return $this->checkPermission($user, $type1 = "BMCT2", $type2 = "SMCT2");
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Category $category)
+    public function delete(User $user, Profile $profile)
     {
-        
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Category $category)
+    public function restore(User $user, Profile $profile)
     {
         //
     }
@@ -88,23 +87,21 @@ class CategoryPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Categories  $categories
+     * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Category $category)
+    public function forceDelete(User $user, Profile $profile)
     {
         //
     }
-
-    public function checkPermission($user, $type1,$type2)
+    public function checkPermission($user, $type1)
     {
-        // dd($user);
         if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
             $permissonis = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
             if ($permissonis!= null) {
                 $labels = json_decode($permissonis);
                 foreach ($labels as $label) {
-                    if ($label == $type1||$label==$type2) {
+                    if ($label == $type1) {
                         return true;
                     }
                 }

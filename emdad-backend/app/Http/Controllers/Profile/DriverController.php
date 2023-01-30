@@ -70,7 +70,7 @@ class DriverController extends Controller
      */
     public function store(CreateDriverRequest $request, DriverService $driverService)
     {
-        // $this->authorize('create', Driver::class);
+        $this->authorize('create', Driver::class);
         $drivers = $driverService->store($request);
         if ($drivers != null) {
             return response()->json(['message' => "created Successfly", "data" => new DriverResources($drivers)], 201);
@@ -128,6 +128,9 @@ class DriverController extends Controller
      */
     public function show(DriverService $driverService, $id)
     {
+        $this->authorize('view', Driver::class);
+
+
         $driver = $driverService->show($id);
         if ($driver != null) {
             return response()->json(["data" => new DriverResources($driver)], 201);
@@ -202,7 +205,7 @@ class DriverController extends Controller
     */
     public function update(Request $request, $id, DriverService $driverService)
     {
-        // $this->authorize('update',Driver::class);
+         $this->authorize('update',Driver::class);
 
         $driver = $driverService->update($request, $id);
         if ($driver) {
@@ -263,7 +266,6 @@ class DriverController extends Controller
 
     public function suspend(SuspendRequest $request, $id, DriverService $driverService)
     {
-        // $this->authorize('update',Driver::class);
 
         return $driverService->suspend($request, $id);
     }
@@ -315,6 +317,8 @@ class DriverController extends Controller
      */
     public function destroy($id, DriverService $driverService)
     {
+        $this->authorize('delete',Driver::class);
+
         $driver = $driverService->destroy($id);
         if ($driver)
             return response()->json(['message' => "deleted Successfly"], 201);

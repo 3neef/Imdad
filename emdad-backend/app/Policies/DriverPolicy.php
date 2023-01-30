@@ -31,7 +31,7 @@ class DriverPolicy
      */
     public function view(User $user)
     {
-        $this->checkPermission($user, $type1 = "SMFL1");
+        $this->checkPermission($user, $type1 = "SMFLD4");
     }
 
     /**
@@ -42,7 +42,7 @@ class DriverPolicy
      */
     public function create(User $user)
     {
-        return $this->checkPermission($user, $type1 = "SMFL2");
+        return $this->checkPermission($user, $type1 = "SMFLD1");
     }
 
     /**
@@ -54,7 +54,7 @@ class DriverPolicy
      */
     public function update(User $user)
     {
-       return $this->checkPermission($user, $type1 = "SMFL3");
+       return $this->checkPermission($user, $type1 = "SMFLD2");
     }
 
     /**
@@ -66,7 +66,7 @@ class DriverPolicy
      */
     public function delete(User $user)
     {
-        return $this->checkPermission($user, $type1 = "SMFL4");
+        return $this->checkPermission($user, $type1 = "SMFLD3");
     }
 
     /**
@@ -78,7 +78,8 @@ class DriverPolicy
      */
     public function restore(User $user)
     {
-        //
+        // return $this->checkPermission($user, $type1 = "SMFL47");
+        
     }
 
     /**

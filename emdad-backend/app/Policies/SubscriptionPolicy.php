@@ -2,12 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\Emdad\Product;
+use App\Models\SubscriptionPayment;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
-use Illuminate\Support\Facades\DB;
 
-class ProductPolicy
+class SubscriptionPolicy
 {
     use HandlesAuthorization;
 
@@ -26,12 +25,12 @@ class ProductPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Product $Product)
+    public function view(User $user, SubscriptionPayment $subscriptionPayment)
     {
-        return $this->checkPermission($user,$type1="BMP4" ,$type2="SMP4");
+        //
     }
 
     /**
@@ -42,18 +41,17 @@ class ProductPolicy
      */
     public function create(User $user)
     {
-        return $this->checkPermission($user,$type1="BMP1" ,$type2="SMP1");
-        
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Product $Product)
+    public function update(User $user, SubscriptionPayment $subscriptionPayment)
     {
         //
     }
@@ -62,10 +60,10 @@ class ProductPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Product $Product)
+    public function delete(User $user, SubscriptionPayment $subscriptionPayment)
     {
         //
     }
@@ -74,10 +72,10 @@ class ProductPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Product $Product)
+    public function restore(User $user, SubscriptionPayment $subscriptionPayment)
     {
         //
     }
@@ -86,26 +84,11 @@ class ProductPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Product  $Product
+     * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Product $Product)
+    public function forceDelete(User $user, SubscriptionPayment $subscriptionPayment)
     {
         //
-    }
-
-    public function checkPermission($user, $type1)
-    {
-        if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            if ($permissonis!= null) {
-                $labels = json_decode($permissonis);
-                foreach ($labels as $label) {
-                    if ($label == $type1) {
-                        return true;
-                    }
-                }
-            }
-        }
     }
 }

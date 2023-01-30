@@ -138,6 +138,8 @@ class AuthController extends Controller
      */
     public function store(StoreAuthRequest $request, AuthenticationServices $authenticationServices)
     {
+
+
         $user = $authenticationServices->create($request->validated());
 
         if ($user) {
