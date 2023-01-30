@@ -221,24 +221,6 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
 ];
 
 
-        // $subscriptionsDetails = [
-        //     ["id" => 1, "packageNameAr" => 'الأساسية', "packageNameEn"=>'Basic', "type" => 'Buyer',"price1" => "1250", "price2" => "1250",
-        //      "features" =>
-        //      [["key"=>"delivery","titleEn"=>"Delivery Scheduling","titleAr"=>"التوصيل","systemValue"=>1,"text_en"=>"One Time Delivery","text_ar"=>"التوصيل لمرة واحدة","descriptionEn"=>"lorem epsom",
-        //     "descriptionAr"=>"تفاصيل شرح الميزة"],
-        //     ["key"=>"users","titleEn"=>"Users Scheduling","titleAr"=>"المستخدمين","systemValue"=>1,"text_en"=>"10 users","text_ar"=>"  عشرة مستخدمين","descriptionEn"=>"lorem epsom",
-        //     "descriptionAr"=>"تفاصيل شرح الميزة"]]],
-
-
-        //     ["id" => 2, "packageNameAr" => 'الفضية', "packageNameEn"=>'silver', "type" => 'Buyer',"price2" => "1250", "price1" => "1250",
-        //      "features" =>
-        //      [["titleEn"=>"Delivery Scheduling","systemValue"=>1,"text_en"=>"One Time Delivery","titleAr"=>"التوصيل","text_ar"=>"التوصيل لمرة واحدة","descriptionEn"=>"lorem epsom",
-        //     "descriptionAr"=>"تفاصيل شرح الميزة","key"=>"delivery"],
-        //     ["titleEn"=>"Users Scheduling","key"=>"users","titleAr"=>"المستخدمين","text_en"=>"10 users","text_ar"=>"  عشرة مستخدمين","descriptionEn"=>"lorem epsom",
-        //     "systemValue"=>1,"descriptionAr"=>"تفاصيل شرح الميزة"] ] ],
-
-        //     ["id"=> 2, ""]
-        // ];
 
         foreach ($subscriptionsDetails as $subscriptionsDetail) {
             DB::table('subscription_packages')->insert([
