@@ -29,7 +29,7 @@ class ProfilePolicy
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Profile $profile)
+    public function view(User $user)
     {
         return $this->checkPermission($user,$type1="BMC4" ,$type2="SMC4");
         
@@ -54,7 +54,7 @@ class ProfilePolicy
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Profile $profile)
+    public function update(User $user)
     {
         //
     }
@@ -66,7 +66,7 @@ class ProfilePolicy
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Profile $profile)
+    public function delete(User $user)
     {
         //
     }
@@ -78,7 +78,7 @@ class ProfilePolicy
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Profile $profile)
+    public function restore(User $user)
     {
         //
     }
@@ -90,7 +90,7 @@ class ProfilePolicy
      * @param  \App\Models\Profile  $profile
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Profile $profile)
+    public function forceDelete(User $user)
     {
         //
     }

@@ -28,7 +28,7 @@ class SubscriptionPolicy
      * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, SubscriptionPayment $subscriptionPayment)
+    public function view(User $user)
     {
         //
     }
@@ -51,7 +51,7 @@ class SubscriptionPolicy
      * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, SubscriptionPayment $subscriptionPayment)
+    public function update(User $user)
     {
         //
     }
@@ -63,7 +63,7 @@ class SubscriptionPolicy
      * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, SubscriptionPayment $subscriptionPayment)
+    public function delete(User $user)
     {
         //
     }
@@ -75,7 +75,7 @@ class SubscriptionPolicy
      * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, SubscriptionPayment $subscriptionPayment)
+    public function restore(User $user)
     {
         //
     }
@@ -87,7 +87,7 @@ class SubscriptionPolicy
      * @param  \App\Models\SubscriptionPayment  $subscriptionPayment
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, SubscriptionPayment $subscriptionPayment)
+    public function forceDelete(User $user)
     {
         //
     }

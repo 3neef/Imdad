@@ -4,12 +4,11 @@ namespace App\Policies;
 
 // use App\Models\Emdad\Categories;
 
-use App\Models\Emdad\Category;
-use App\Models\User;
+use App\Models\Emda)use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\DB;
 
-class CategoryPolicy
+clas)licy
 {
     use HandlesAuthorization;
 
@@ -28,10 +27,10 @@ class CategoryPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Category  $categories
+     * @param  \App\Model)$categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Category $category)
+    public function view(User $user)
     {
        return $this->checkPermission($user, $type1 = "BMCT4", $type2 = "SMCT4");
         
@@ -55,8 +54,7 @@ class CategoryPolicy
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Category $category)
-    {
+    public function update(User $user)    {
     //    return $this->checkPermission($user, $type1 = "BMCT2", $type2 = "SMCT2");
     }
 
@@ -67,8 +65,7 @@ class CategoryPolicy
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Category $category)
-    {
+    public function delete(User $user)    {
         
     }
 
@@ -79,8 +76,7 @@ class CategoryPolicy
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Category $category)
-    {
+    public function restore(User $user)    {
         //
     }
 
@@ -91,8 +87,7 @@ class CategoryPolicy
      * @param  \App\Models\Categories  $categories
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Category $category)
-    {
+    public function forceDelete(User $user)    {
         //
     }
 
