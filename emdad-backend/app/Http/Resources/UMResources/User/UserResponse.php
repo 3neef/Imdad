@@ -37,8 +37,8 @@ class UserResponse extends JsonResource
             "lang" => $this->lang,
             "userCrNumbers" => $this->crNumbersList() ?? '',
             'isLearning' => $this->roles()->where('profile_id', $this->profile_id)->where('user_id', $this->id)->first()->role->is_learning ?? null,
-            'avatar' => $this->media()
-            
+            "avatar" => $this->getMedia('avatars'),
+
 
         ];
     }

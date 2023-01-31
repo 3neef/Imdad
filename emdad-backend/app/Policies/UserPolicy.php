@@ -28,7 +28,7 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user)
     {
         return $this->checkPermission($user, $type1 = "BMU4", $type2 = "SMU4");
     }

@@ -181,6 +181,9 @@ class UserController extends Controller
                     case '360':
                         return response()->json(['data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'], "success"=>$output['success']]],200);
                         break;
+                        case '364':
+                            return response()->json(['data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'], "success"=>$output['success']]],200);
+                            break;
 
         }
     }
@@ -467,8 +470,11 @@ class UserController extends Controller
                     return response()->json(['data' => ['statusCode'=> $output['statusCode'], "error"=>$output['error'] ]],200);
                     break;
                     case '360':
-                        return response()->json(['data' => ['statusCode'=> $output['statusCode'], "error"=>$output['error'], "success"=>$output['success']]],200);
+                        return response()->json(['data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'], "success"=>$output['success']]],200);
                         break;
+                        case '364':
+                            return response()->json(['data' => ['statusCode'=> $output['statusCode'], "message"=>$output['message'], "success"=>$output['success']]],200);
+                            break;
         }
     }
 

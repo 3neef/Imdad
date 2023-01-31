@@ -23,14 +23,24 @@ class WarehouseService
     {
         $packageLimit = new PackageConstraint;
         $value = Warehouse::where('profile_id', auth()->user()->profile_id)->count();
-        $Limit = $packageLimit->packageLimitExceed("Warehouse", $value);
-        if ($Limit == false) {
-            return response()->json([
+        $limit = $packageLimit->packageLimitExceed("Warehouse", $value);
+        
+        if ($limit == false) {
+            $output = [
                 "statusCode" => "361",
                 'success' => false,
                 'message' => "You have exceeded the allowed number of Warehouse to create it"
-            ], 200);
+            ];
+            return $output;
+        }elseif($limit != true && $limit == "package null"){
+            $output = [
+                "statusCode" => "364",
+                'success' => false,
+                'message' => "You have not specified a package"
+            ];
+            return $output;
         }
+
         return DB::transaction(function () use ($request) {
             $warehouse = Warehouse::create([
                 'profile_id' => auth()->user()->profile_id,
@@ -54,7 +64,12 @@ class WarehouseService
                     }
                 }
             }
-            return $warehouse;
+            $output = [
+                "statusCode" => "000",
+                'data' => $warehouse,
+                'message' => "Warehouse Created Successfully"
+            ];
+            return $output;
         });
     }
 

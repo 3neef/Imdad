@@ -29,7 +29,7 @@ class WarehousePolicy
      * @param  \App\Models\Warehouse  $warehouse
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Warehouse $warehouse)
+    public function view(User $user)
     {
         return $this->checkPermission($user, $type1 = "BMW4", $type2 = "SMW4");
     }
@@ -53,7 +53,7 @@ class WarehousePolicy
      * @param  \App\Models\Warehouse  $warehouse
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Warehouse $warehouse)
+    public function update(User $user)
     {
         return $this->checkPermission($user, $type1 = "BMW2", $type2 = "SMW2");
         
@@ -66,7 +66,7 @@ class WarehousePolicy
      * @param  \App\Models\Warehouse  $warehouse
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Warehouse $warehouse)
+    public function delete(User $user)
     {
         // return $this->checkPermission($user, $type1 = "BMW3", $type2 = "SMW3");
         

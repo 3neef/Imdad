@@ -29,7 +29,7 @@ class ProductPolicy
      * @param  \App\Models\Product  $Product
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Product $Product)
+    public function view(User $user)
     {
         return $this->checkPermission($user,$type1="BMP4" ,$type2="SMP4");
     }

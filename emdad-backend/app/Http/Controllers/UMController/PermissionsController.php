@@ -96,7 +96,7 @@ class PermissionsController extends Controller
         * @OA\get(
         * path="/api/v1_0/permissions/getAll",
         * operationId="getAllPermissions",
-        * tags={"UM & Permissions"},
+        * tags={"Roles and Permissions"},
         * summary="get permisssions",
         * description="get all permisssions Here",
 *     @OA\Parameter(
@@ -141,7 +141,7 @@ class PermissionsController extends Controller
         * @OA\get(
         * path="/api/v1_0/permissions/getById/{id}",
         * operationId="get-permissions",
-        * tags={"UM & Permissions"},
+        * tags={"Roles and Permissions"},
         * summary="get permisssion",
         * description="get permission by id Here",
 *     @OA\Parameter(
@@ -259,7 +259,7 @@ class PermissionsController extends Controller
         * @OA\delete(
         * path="/api/v1_0/permissions/delete/{id}",
         * operationId="delete-permission-from-specific-role",
-        * tags={"UM & Permissions"},
+        * tags={"Roles and Permissions"},
         * summary="update permisssion",
         * description="update permission to specific role Here",
 *     @OA\Parameter(
@@ -310,7 +310,7 @@ class PermissionsController extends Controller
         * @OA\delete(
         * path="/api/v1_0/permissions/restore/{id}",
         * operationId="restore-permission-to-specific-role",
-        * tags={"UM & Permissions"},
+        * tags={"Roles and Permissions"},
         * summary="restore permisssion",
         * description="restore permission to specific role Here",
 *     @OA\Parameter(

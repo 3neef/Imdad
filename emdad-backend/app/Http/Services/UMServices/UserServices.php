@@ -34,26 +34,41 @@ class UserServices
         if ($check == true) {
             $value = DB::table('profile_role_user')->where('profile_id', auth()->user()->profile_id)->whereIn('role_id', [1, 2, 3, 4, 12])->count();
             $newvalue = (--$value);
-            $Limit = $packageLimit->packageLimitExceed("owner", $newvalue);
+            $limit = $packageLimit->packageLimitExceed("owner", $newvalue);
+            
 
-            if ($Limit == false) {
+            if ($limit == false) {
                 $output = [
                     "statusCode" => "360",
                     'success' => false,
                     'message' => "You have exceeded the allowed number of Admins to create it"
                 ];
                 return $output;
+            }elseif($limit != true && $limit == "package null"){
+                DD($limit == "j");
+                $output = [
+                    "statusCode" => "364",
+                    'success' => false,
+                    'message' => "You have not specified a package"
+                ];
+                return $output;
             }
             $user = $this->createUser($request);
         } else {
             $value = DB::table('profile_role_user')->where('profile_id', auth()->user()->profile_id)->whereNotIn('role_id', [1, 2, 3, 4, 12])->count();
-            $Limit = $packageLimit->packageLimitExceed("user", $value);
-
-            if ($Limit == false) {
+            $limit = $packageLimit->packageLimitExceed("user", $value);
+            if ($limit == false) {
                 $output = [
                     "statusCode" => "360",
                     'success' => false,
-                    'message' => "You have exceeded the allowed number of users to create it"
+                    'message' => "You have exceeded the allowed number of Users to create it"
+                ];
+                return $output;
+            }elseif($limit != true && $limit == "package null"){
+                $output = [
+                    "statusCode" => "364",
+                    'success' => false,
+                    'message' => "You have not specified a package"
                 ];
                 return $output;
             }
@@ -350,12 +365,19 @@ class UserServices
     {
         $packageLimit = new PackageConstraint;
         $value = User::where('profile_id', auth()->user()->profile_id)->where('is_super_admin', false)->count();
-        $Limit = $packageLimit->packageLimitExceed("user", $value);
-        if ($Limit == false) {
+        $limit = $packageLimit->packageLimitExceed("user", $value);
+        if ($limit == false) {
             $output = [
                 "statusCode" => "360",
                 'success' => false,
                 'message' => "You have exceeded the allowed number of users to create it"
+            ];
+            return $output;
+        }elseif($limit != true && $limit == "package null"){
+            $output = [
+                "statusCode" => "364",
+                'success' => false,
+                'message' => "You have not specified a package"
             ];
             return $output;
         }
@@ -598,8 +620,8 @@ class UserServices
     {
         $user = User::where('id', auth()->id())->first();
         if (isset($request['attachementFile'])) {
-            $user->clearMediaCollection('users');
-            $user->addMedia($request['attachementFile'])->toMediaCollection('users');
+            $user->clearMediaCollection('avatars');
+            $user->addMedia($request['attachementFile'])->toMediaCollection('avatars');
             $output = ["message" => "Avater updated Successfully", "statusCode" => "000"];
             return $output;
         } else {

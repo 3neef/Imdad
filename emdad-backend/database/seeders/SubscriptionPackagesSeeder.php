@@ -28,7 +28,7 @@ class SubscriptionPackagesSeeder extends Seeder
         ["key"=>"user","titleEn"=>"User Management","titleAr"=>"إدارة المستخدمين","systemValue"=>3,"text_en"=>"3","text_ar"=>"3","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"الموظفين التابعين للشركة والمسؤولين عن أدوار وظيفية محددة بصلاحيات محددة يحددها مالك 
             الشركة؛ على سبيل المثال: مسؤول مشتريات، مسؤول مالي..."],
 
-        ["key"=>"Cash","titleEn"=>"Cash Payment","titleAr"=>"دفع نقدا","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستلام الطلب."],
+        ["key"=>"Cash","titleEn"=>"Payment Method ","titleAr"=>"آلية الدفع","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستلام الطلب."],
 
         ["key"=>"Delivery","titleEn"=>"Delivery Scheduling ","titleAr"=>"جدولة التوريد","systemValue"=>1,"text_en"=>"One-Time Delivery","text_ar"=>"التوريد لمرة واحدة ","descriptionEn"=>"One-Time Delivery: a type of delivery in which the requisition is requested to be received one time on
 a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في امر شراء عند تحديد جدولة التوريد لمرة واحدة، يكون توريد الطلب على 
@@ -36,7 +36,7 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
         دفعة واحدة للطلب كاملا 
         التوريد المجزأ: في امر الشراء عند تحديد جدولة التوريد المجزأ، يتم تقسيم التوريدات لدفعات على 
         فترات مختلفة"],
-        ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"إدارة المخازن والفروع","systemValue"=>2,"text_en"=>"2","text_ar"=>"2","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "],
+        ["key"=>"Warehouse","titleEn"=>"Branch and Warehouse Management","titleAr"=>"إدارة الفروع والمستودعات","systemValue"=>2,"text_en"=>"2","text_ar"=>"2","descriptionEn"=>"The place to which the requisition is delivered.","descriptionAr"=>"في أمر شراء يتم تحديد الفرع او المستودع الذي سيتم توريد الطلب إليه. "],
 
         ["key"=>"Suppliers","titleEn"=>"Suppliers Management","titleAr"=>"إدارة الموردين","systemValue"=>30,"text_en"=>"30 ","text_ar"=>"30","descriptionEn"=>"The number of suppliers that can be added for direct dealing.","descriptionAr"=>"تمكن المنشأة من إضافة عدد من الموردين للتعامل المباشر، ويكون الحد الأعلى حسب باقة 
         الاشتراك."],
@@ -45,13 +45,13 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
         الاشتراك."],
 
 
-        ["key"=>"Digital","titleEn"=>"Digital Statistics  App","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+        ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"التقارير الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Statistics App: Offer a comprehensive overview to monitor your operations or your companies’ 
         operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
-        analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
+        analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه الإحصائيات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
         محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
         أوامر الشراء المعتمدة..."],
 
-        ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3 Points","text_ar"=>"ثلاثه نقاط ","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+        ["key"=>"Points","titleEn"=>"Points of Digital Statistics Report ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3 Points","text_ar"=>"ثلاثه نقاط ","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء التقارير الإحصائية الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
         الاشتراك."]
 
             ]
@@ -70,7 +70,7 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
     الشركة؛ على سبيل المثال: مسؤول مشتريات، مسؤول مالي..."],
     
 
-    ["key"=>"Cash","titleEn"=>"Cash Payment","titleAr"=>"دفع نقدا","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستالم الطلب."],
+    ["key"=>"Cash","titleEn"=>"Payment Method","titleAr"=>"آلية الدفع","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستالم الطلب."],
             
             ["key"=>"Credit","titleEn"=>"Credit Agreement","titleAr"=>"اتفاق الائتمان","systemValue"=>60,"text_en"=>"Credit – with period of 
             60 days","text_ar"=>"
@@ -94,14 +94,14 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             الاشتراك."],
 
 
-            ["key"=>"Digital","titleEn"=>"Digital Statistics  App","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+            ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
-            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
-            محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
-            أوامر الشراء المعتمدة..."],
+            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه الإحصائيات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
+        محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
+        أوامر الشراء المعتمدة..."],
 
-            ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>10,"text_en"=>"10 Points","text_ar"=>"نقطة 10","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
-            الاشتراك."]
+            ["key"=>"Points","titleEn"=>"Points of Digital Statistics Report ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>10,"text_en"=>"10 Points","text_ar"=>"نقطة 10","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء التقارير الإحصائية الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+        الاشتراك."]
 
             
              ]
@@ -118,7 +118,7 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             ["key"=>"user","titleEn"=>"User Management","titleAr"=>"إدارة المستخدمين","systemValue"=>30,"text_en"=>"30","text_ar"=>"30","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"الموظفين التابعين للشركة والمسؤولين عن أدوار وظيفية محددة بصالحيات محددة يحددها مالك 
     الشركة؛ على سبيل المثال: مسؤول مشتريات، مسؤول مالي..."],
     
-    ["key"=>"Cash","titleEn"=>"Cash Payment","titleAr"=>"دفع نقدا","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستالم الطلب."],            
+    ["key"=>"Cash","titleEn"=>"Payment Method","titleAr"=>"دفع نقدا","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستالم الطلب."],            
             ["key"=>"Credit","titleEn"=>"Credit Agreement","titleAr"=>"اتفاق الائتمان","systemValue"=>120,"text_en"=>"Credit – with period of 
             60 to 120 days","text_ar"=>" 
             • الدفع الآجل - خلال فترة 
@@ -142,14 +142,14 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             الاشتراك."],
 
 
-            ["key"=>"Digital","titleEn"=>"Digital Statistics  App","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+            ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
-            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
-            محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
-            أوامر الشراء المعتمدة..."],
+            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه الإحصائيات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
+        محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
+        أوامر الشراء المعتمدة..."],
 
-            ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>15,"text_en"=>"15 Points","text_ar"=>"نقطة 10","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
-            الاشتراك."]
+            ["key"=>"Points","titleEn"=>"Points of Digital Statistics Report ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>15,"text_en"=>"15 Points","text_ar"=>"نقطة 10","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء التقارير الإحصائية الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+        الاشتراك."]
             
             
             
@@ -170,20 +170,20 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
 
             ["key"=>"Customers","titleEn"=>"Customers Management","titleAr"=>"إدارة العملاء","systemValue"=>100,"text_en"=>"100","text_ar"=>"100","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"IOS","titleEn"=>"Digital Statistics  App","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
+            ["key"=>"IOS","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
             IOS","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
             ["key"=>"Android","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>1,"text_en"=>"Available Android","text_ar"=>"متاح
             Android","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
-            ["key"=>"Digital","titleEn"=>"Digital Engines Apps","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+            ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
-            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
-            محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
-            أوامر الشراء المعتمدة..."],
+            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه الإحصائيات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
+        محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
+        أوامر الشراء المعتمدة..."],
     
-            ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3 Points","text_ar"=>"3 Points","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
-            الاشتراك."]
+            ["key"=>"Points","titleEn"=>"Points of Digital Statistics Report ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3 Points","text_ar"=>"3 Points","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء التقارير الإحصائية الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+        الاشتراك."]
  ]
  
 
@@ -199,18 +199,18 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             
             ["key"=>"Customers","titleEn"=>"Customers Management","titleAr"=>"إدارة العملاء","systemValue"=>300,"text_en"=>"300","text_ar"=>"300","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"IOS","titleEn"=>"Digital Statistics  App","titleAr"=>"الإحصائيات الرقمية  ","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
+            ["key"=>"IOS","titleEn"=>"Digital Statistics Report","titleAr"=>"الإحصائيات الرقمية  ","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
             IOS","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
           
-            ["key"=>"Digital","titleEn"=>"Digital Statistics Points","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Engines apps: Offer a comprehensive overview to monitor your operations or your companies’ 
+            ["key"=>"Digital","titleEn"=>"Digital Statistics Points","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
-            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه المحركات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
-            محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
-            أوامر الشراء المعتمدة..."],
+            analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه الإحصائيات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
+        محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
+        أوامر الشراء المعتمدة..."],
 
-            ["key"=>"Points","titleEn"=>"Points of Digital Engines Apps ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>15,"text_en"=>"15 Points","text_ar"=>"نقطة 10","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء المحركات الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
-            الاشتراك."]
+            ["key"=>"Points","titleEn"=>"Points of Digital Statistics Report ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>15,"text_en"=>"15 Points","text_ar"=>"نقطة 10","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء التقارير الإحصائية الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+        الاشتراك."]
  ]
  
 
@@ -221,24 +221,6 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
 ];
 
 
-        // $subscriptionsDetails = [
-        //     ["id" => 1, "packageNameAr" => 'الأساسية', "packageNameEn"=>'Basic', "type" => 'Buyer',"price1" => "1250", "price2" => "1250",
-        //      "features" =>
-        //      [["key"=>"delivery","titleEn"=>"Delivery Scheduling","titleAr"=>"التوصيل","systemValue"=>1,"text_en"=>"One Time Delivery","text_ar"=>"التوصيل لمرة واحدة","descriptionEn"=>"lorem epsom",
-        //     "descriptionAr"=>"تفاصيل شرح الميزة"],
-        //     ["key"=>"users","titleEn"=>"Users Scheduling","titleAr"=>"المستخدمين","systemValue"=>1,"text_en"=>"10 users","text_ar"=>"  عشرة مستخدمين","descriptionEn"=>"lorem epsom",
-        //     "descriptionAr"=>"تفاصيل شرح الميزة"]]],
-
-
-        //     ["id" => 2, "packageNameAr" => 'الفضية', "packageNameEn"=>'silver', "type" => 'Buyer',"price2" => "1250", "price1" => "1250",
-        //      "features" =>
-        //      [["titleEn"=>"Delivery Scheduling","systemValue"=>1,"text_en"=>"One Time Delivery","titleAr"=>"التوصيل","text_ar"=>"التوصيل لمرة واحدة","descriptionEn"=>"lorem epsom",
-        //     "descriptionAr"=>"تفاصيل شرح الميزة","key"=>"delivery"],
-        //     ["titleEn"=>"Users Scheduling","key"=>"users","titleAr"=>"المستخدمين","text_en"=>"10 users","text_ar"=>"  عشرة مستخدمين","descriptionEn"=>"lorem epsom",
-        //     "systemValue"=>1,"descriptionAr"=>"تفاصيل شرح الميزة"] ] ],
-
-        //     ["id"=> 2, ""]
-        // ];
 
         foreach ($subscriptionsDetails as $subscriptionsDetail) {
             DB::table('subscription_packages')->insert([
