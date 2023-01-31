@@ -61,10 +61,6 @@ class AccountService
                 'iban' => $request->iban??$profile->iban,
                 'vat_number' => $request->vatNumber??$profile->vat_number, 
             ]);
-            if(isset($request['logo']))
-            {
-                $profile->addMedia($request->logo)->toMediaCollection('profileLogo');
-            }
             $output = ['message' => "Profile has been updated successfully", "statusCode" => "000"];
             return $output;
         }
@@ -167,6 +163,19 @@ class AccountService
             return DB::table('permissions')->where("category", "LIKE", "B%")->pluck('label');
         } elseif ($type == "Supplier") {
             return DB::table('permissions')->where("category", 'LIKE', "S%")->pluck('label');
+        }
+    }
+
+    public function uploadlogo($request){
+        $user = User::where('id', auth()->id())->first();
+        if (isset($request['logo'])) {
+            $user->clearMediaCollection('profileLogo');
+            $user->addMedia($request['logo'])->toMediaCollection('profileLogo');
+            $output = ["message" => "Logo uploaded Successfully", "statusCode" => "000"];
+            return $output;
+        } else {
+            $output = ["message" => "system error", "statusCode" => "999"];
+            return $output;
         }
     }
 }

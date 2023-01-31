@@ -11,8 +11,11 @@ use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
 use App\Http\Requests\UMRequests\User\ResendOTPRequest;
 use App\Http\Requests\UMRequests\User\StoreAuthRequest;
+use App\Http\Requests\UMRequests\User\UploadAvaterRequest;
+use App\Http\Requests\UMRequests\User\UploadlogoRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\AuthenticationServices;
+use App\Http\Services\UMServices\UserServices;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -558,4 +561,5 @@ class AuthController extends Controller
         return $userServices->checkLink($request);
     }
 
+    
 }

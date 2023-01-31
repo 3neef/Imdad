@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Profile\WarehousesController;
 use App\Http\Controllers\ProfileController;
@@ -13,7 +14,8 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::get('profiles/pay', [SubscriptionPaymentController::class, "pay"]);
     Route::get('profiles/checkPayment', [SubscriptionPaymentController::class, "checkPaymentStatus"]);
 
-    Route::post('updateProfile/{id}', [ProfileController::class, 'update']);
+    Route::put('updateProfile/{id}', [ProfileController::class, 'update']);
+    Route::post('profiles/upload-logo',[ProfileController::class,'upload']);
 
     Route::apiResource('profiles/subscriptionPayment', SubscriptionPaymentController::class);
 

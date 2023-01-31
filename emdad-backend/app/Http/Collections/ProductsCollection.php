@@ -3,7 +3,9 @@
 
 namespace App\Http\Collections;
 
+use App\Http\CustomFliters\DefaultProductFilter;
 use App\Models\Emdad\Product;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class ProductsCollection
@@ -15,7 +17,16 @@ class ProductsCollection
 
 
         $allowedFilters = [
-            'name_ar', 'name_en', 'measruing_unit', 'category_id', 'price', 'description_en', 'description_ar', 'profile_id',
+            'name_ar',
+            'name_en',
+            'measruing_unit',
+            'category_id',
+            'price',
+            'description_en',
+            'description_ar',
+            'profile_id',
+            AllowedFilter::custom('default', new DefaultProductFilter)->default(auth()->user()),
+
         ];
 
         $allowedSorts = [

@@ -88,7 +88,7 @@ class ProductController extends Controller
 
     /**
      * @OA\put(
-     * path="/api/v1_0/products",
+     * path="/api/v1_0/products/{id}",
      * operationId="updateProduct",
      * tags={"Product"},
      * summary="update Product",
@@ -202,7 +202,7 @@ class ProductController extends Controller
 
     /**
      * @OA\get(
-     * path="/api/v1_0/products/get-By-Id/{id}",
+     * path="/api/v1_0/products/{id}",
      * operationId="getByProductId",
      * tags={"Product"},
      * summary="get By ProductId",
@@ -260,7 +260,7 @@ class ProductController extends Controller
 
     /**
      * @OA\delete(
-     * path="/api/v1_0/products/delete/{id}",
+     * path="/api/v1_0/products/{id}",
      * operationId="deleteProduct",
      * tags={"Product"},
      * summary="delete Product",
