@@ -52,7 +52,6 @@ class UrwayGateway
 
   public  static function getPaymentStatus($request)
   {
-    dd(config('services.urway.url'));
     $curl = curl_init();
     $txn_details = $request['trackId'] . "|" . config('services.urway.id') . "|" . config('services.urway.pass') . "|" . config('services.urway.key') . "|" . $request['amount'] . "|".config('services.urway.currency');
     $hash = hash('sha256', $txn_details);
