@@ -69,7 +69,7 @@ class ProductController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *        response=200,
+     *        response=000,
      *          description="created Successfully"
      *       ),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -127,7 +127,7 @@ class ProductController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=200,
+     *          response=000,
      *          description="updated Successfully"
      *       ),
      *      @OA\Response(response=500, description="error"),
@@ -183,7 +183,7 @@ class ProductController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=200,
+     *          response=000,
      *          description="",
      *         @OA\JsonContent(
      *         @OA\Property(property="MainProduct", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
@@ -235,7 +235,7 @@ class ProductController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=200,
+     *          response=000,
      *          description="",
      *         @OA\JsonContent(
      *         @OA\Property(property="ProductById", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
@@ -293,8 +293,8 @@ class ProductController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=301,
-     *          description="deleted successfully"
+     *          response=112,
+     *          description="Deleted Successfully"
      *       ),
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
@@ -344,7 +344,7 @@ class ProductController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=200,
+     *          response=113,
      *          description="restored successfully"
      *       ),
      *      @OA\Response(response=500, description="Resource Not Found"),
@@ -403,8 +403,8 @@ class ProductController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=200,
-     *          description="restored successfully"
+     *          response=000,
+     *          description="created successfully"
      *       ),
      *      @OA\Response(response=500, description="Resource Not Found"),
      *      @OA\Response(response=404, description="system error"),
@@ -454,8 +454,8 @@ class ProductController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=200,
-     *          description="restored successfully"
+     *          response=000,
+     *          description="change product status successfully"
      *       ),
      *      @OA\Response(response=500, description="Resource Not Found"),
      *      @OA\Response(response=404, description="system error"),
