@@ -4739,7 +4739,7 @@
         "/api/v1_0/permissions/getAll": {
             "get": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "get permisssions",
                 "description": "get all permisssions Here",
@@ -4794,7 +4794,7 @@
         "/api/v1_0/permissions/getById/{id}": {
             "get": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "get permisssion",
                 "description": "get permission by id Here",
@@ -4854,7 +4854,7 @@
         "/api/v1_0/permissions/delete/{id}": {
             "delete": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "update permisssion",
                 "description": "update permission to specific role Here",
@@ -4908,7 +4908,7 @@
         "/api/v1_0/permissions/restore/{id}": {
             "delete": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "restore permisssion",
                 "description": "restore permission to specific role Here",
