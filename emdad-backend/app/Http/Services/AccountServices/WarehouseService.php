@@ -32,7 +32,7 @@ class WarehouseService
                 'message' => "You have exceeded the allowed number of Warehouse to create it"
             ];
             return $output;
-        }elseif($limit == "package null"){
+        }elseif($limit != true && $limit == "package null"){
             $output = [
                 "statusCode" => "364",
                 'success' => false,
