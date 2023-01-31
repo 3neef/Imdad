@@ -53,16 +53,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "updated successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
+                        "description": "updated successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             },
@@ -127,16 +139,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "created successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
+                        "description": "created successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -174,11 +198,14 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
                                         },
                                         "data": {
-                                            "type": "string"
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -188,15 +215,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
                     }
                 }
             }
@@ -234,11 +252,14 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
                                         },
                                         "data": {
-                                            "type": "string"
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -248,15 +269,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
                     }
                 }
             }
@@ -301,6 +313,17 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
                                     "type": "object"
                                 }
                             },
@@ -308,15 +331,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -354,6 +368,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -363,15 +383,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -419,6 +430,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -428,15 +445,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -577,16 +585,26 @@
                     "422": {
                         "description": "Unprocessable Entity",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -681,16 +699,26 @@
                     "422": {
                         "description": "Unprocessable Entity",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -758,24 +786,26 @@
                     "200": {
                         "description": "Login Successfully",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -838,24 +868,26 @@
                     "200": {
                         "description": "Login Successfully",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -902,24 +934,26 @@
                     "200": {
                         "description": "resent new otp",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -954,24 +988,26 @@
                     "200": {
                         "description": "Logged out",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -1032,11 +1068,11 @@
                                         "message": {
                                             "type": "string"
                                         },
-                                        "OTP": {
-                                            "type": "integer"
-                                        },
-                                        "otpExpiresAt": {
+                                        "statusCode": {
                                             "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -1046,20 +1082,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -1098,24 +1120,26 @@
                     "301": {
                         "description": "User deleted successfully",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -1179,11 +1203,11 @@
                                         "message": {
                                             "type": "string"
                                         },
-                                        "OTP": {
-                                            "type": "integer"
-                                        },
-                                        "otpExpiresAt": {
+                                        "statusCode": {
                                             "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -1193,20 +1217,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -1387,23 +1397,26 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "subscriptionPayment": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
                                             "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "301": {
-                        "description": "can,t use coupon"
                     }
                 }
             }
@@ -1438,15 +1451,24 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "example": "{message => deleted successfully}"
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }
@@ -1483,15 +1505,24 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "example": "{message => deleted successfully}"
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }
@@ -1510,16 +1541,24 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
-                                            "type": "object",
-                                            "example": "{'id': 1, 'name':'kg'}"
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }
@@ -2032,10 +2071,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "department created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "department created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -2101,11 +2158,14 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -2115,15 +2175,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -2270,10 +2321,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "driver created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "driver created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             },
@@ -2557,13 +2626,28 @@
                         }
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "sstring"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             },
@@ -2642,10 +2726,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "department created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "department created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -2690,6 +2792,17 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
                                     "type": "object"
                                 }
                             },
@@ -2697,15 +2810,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -2909,15 +3013,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -2974,15 +3069,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -3019,25 +3105,24 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object"
-                                    }
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -3123,6 +3208,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -3132,15 +3223,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -3185,6 +3267,17 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
                                     "type": "object"
                                 }
                             },
@@ -3192,15 +3285,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -3246,6 +3330,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -3255,15 +3345,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -3344,6 +3425,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -3353,15 +3440,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -3510,6 +3588,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -3519,15 +3603,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -3587,6 +3662,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -3596,15 +3677,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4627,6 +4699,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -4636,15 +4714,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -4714,6 +4783,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -4723,15 +4798,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4768,25 +4834,24 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4824,11 +4889,14 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "privileges": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -4838,15 +4906,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4886,21 +4945,21 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4940,21 +4999,21 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -5022,6 +5081,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -5031,15 +5096,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -5107,6 +5163,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -5116,15 +5178,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -5160,21 +5213,25 @@
                         "description": "get all roles",
                         "content": {
                             "multipart/form-data": {
-                                "schema": {}
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
                             },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -5237,8 +5294,11 @@
                                         "message": {
                                             "type": "string"
                                         },
-                                        "data": {
+                                        "statusCode": {
                                             "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -5248,15 +5308,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -5293,6 +5344,17 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
                                     "type": "object"
                                 }
                             },
@@ -5300,15 +5362,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -5366,6 +5419,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -5375,15 +5434,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -5421,6 +5471,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -5430,15 +5486,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -5473,33 +5520,26 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
-                                            "type": "string",
-                                            "example": "[{'id': 1, 'name': 'GM'}]"
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -5539,6 +5579,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -5548,15 +5594,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -6747,10 +6784,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -6899,6 +6954,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -6910,20 +6968,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -6976,24 +7020,26 @@
                     "301": {
                         "description": "Category deleted successfully",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -7486,6 +7532,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -7497,20 +7546,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -7579,6 +7614,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -7590,20 +7628,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -7670,6 +7694,9 @@
                                 "schema": {
                                     "properties": {
                                         "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
                                             "type": "string"
                                         },
                                         "data": {
@@ -7757,6 +7784,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -7768,20 +7798,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -7850,6 +7866,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -7861,20 +7880,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -7941,9 +7946,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -8021,13 +8023,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
+                        "description": "created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -8094,9 +8111,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -8165,13 +8179,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "updated Successfully"
-                    },
-                    "500": {
-                        "description": "error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             },
@@ -8222,10 +8251,28 @@
                 },
                 "responses": {
                     "301": {
-                        "description": "deleted successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "deleted successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -8278,13 +8325,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "restored successfully"
-                    },
-                    "500": {
-                        "description": "Resource Not Found"
-                    },
-                    "404": {
-                        "description": "system error"
+                        "description": "restored successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -8340,13 +8402,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "restored successfully"
-                    },
-                    "500": {
-                        "description": "Resource Not Found"
-                    },
-                    "404": {
-                        "description": "system error"
+                        "description": "restored successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -8399,13 +8476,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "restored successfully"
-                    },
-                    "500": {
-                        "description": "Resource Not Found"
-                    },
-                    "404": {
-                        "description": "system error"
+                        "description": "restored successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }

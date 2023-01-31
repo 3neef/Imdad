@@ -115,7 +115,7 @@ class SubscriptionPaymentService
             return response()->json(['data' => new SubscriptionResource($paymentRequest), 'statusCode' => "000"], 200);
         } catch (Exception $e) {
 
-            return response()->json(['success' => $json['result'], 'message' => $json["reason"], 'statusCode' => $json['responseCode']], 402);
+            return response()->json(['success' => $json['result'], 'message' => $json["reason"], 'statusCode' => $json['responseCode']], 200);
         }
     }
 

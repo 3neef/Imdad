@@ -58,15 +58,13 @@ class RoleController extends Controller
      *          @OA\MediaType(
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function index(Request $request)
@@ -119,17 +117,11 @@ class RoleController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               @OA\Property(property="message", type="string"),
-     *               @OA\Property(property="data", type="string")
-
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function store(CreateRoleRequest $request)
@@ -183,15 +175,11 @@ class RoleController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function update(GetRoleRequest $request, $id)
@@ -233,16 +221,12 @@ class RoleController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="message", type="string")
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function destroy($id)
@@ -293,16 +277,13 @@ class RoleController extends Controller
      *          @OA\MediaType(
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
-     *               type="object"
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function show($id)
@@ -338,19 +319,17 @@ class RoleController extends Controller
      *    @OA\Response(
      *         response=200,
      *         description="",
-     *         @OA\JsonContent(
-     *  @OA\Property(property="success", type="boolean"),
-     *  @OA\Property(property="message", type="string"),
-     *         @OA\Property(property="data", type="string"
-     *          , example="[{'id': 1, 'name': 'GM'}]")
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
      *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function getRolesForReg(Request $request)
@@ -388,16 +367,12 @@ class RoleController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="message", type="string")
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity"
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function restoreByRoleId($id)

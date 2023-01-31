@@ -73,11 +73,18 @@ class SubscriptionController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="created successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=422, description="Validation error"),
-     *      @OA\Response(response=500, description="system error")
-     * )
+     *       ),
      */
     public function store(GeneralCreateSubPackageRequest $request)
     {
@@ -125,10 +132,18 @@ class SubscriptionController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="updated successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=422, description="Validation error"),
-     *      @OA\Response(response=500, description="system error")
+     *       ),
      * )
      */
     public function update(UpdateSubscriptionRequest $request, $id)
@@ -173,14 +188,13 @@ class SubscriptionController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="success", type="boolean"),
-     *               @OA\Property(property="data", type="string")
-     *        ),
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     * ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=422, description="Validation error"),
-     *      @OA\Response(response=500, description="system error")
+
      * )
      */
     public function getBuyerPackages()
@@ -222,14 +236,12 @@ class SubscriptionController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="success", type="boolean"),
-     *               @OA\Property(property="data", type="string"),
-     *        ),
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     * ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=422, description="Validation error"),
-     *      @OA\Response(response=500, description="system error")
      * )
      */
     public function getSupplierPackages()
@@ -270,18 +282,17 @@ class SubscriptionController extends Controller
         *      @OA\Response(
         *        response=200,
         *          description="get package By Id",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object"
-        *            ),
-        *        ),
-        *
-        *       ),
-        *      @OA\Response(response=500, description="system error"),
-        *      @OA\Response(response=422, description="Validate error"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
         * )
         */
     public function show($id)
@@ -320,18 +331,18 @@ class SubscriptionController extends Controller
         *      @OA\Response(
         *        response=200,
         *        description="delete package",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="message", type="string")
-        *            ),
-        *         ),
-        *       ),
-        *      @OA\Response(response=500, description="system error"),
-        *      @OA\Response(response=422, description="Validate error"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+
         * )
         */
     public function destroy($id)
@@ -377,18 +388,18 @@ class SubscriptionController extends Controller
         *      @OA\Response(
         *        response=200,
         *          description="restore package By Id",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="message", type="string")
-        *            ),
-        *          ),
-        *       ),
-        *      @OA\Response(response=500, description="system error"),
-        *      @OA\Response(response=422, description="Validate error"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+
         * )
         */
 

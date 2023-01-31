@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Accounts\Warehouse;
+use App\Models\Settings\Setting;
 use App\Models\UM\Role;
 use App\Models\UM\RoleUserProfile;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -211,4 +212,6 @@ class User extends  Authenticatable implements HasMedia, MustVerifyEmail
 
         return $crNumbersList;
     }
+
+   
 }

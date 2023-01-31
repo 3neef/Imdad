@@ -63,9 +63,18 @@ class DriverController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="driver created Successfully"
+     *          description="driver created Successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function store(CreateDriverRequest $request, DriverService $driverService)

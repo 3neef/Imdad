@@ -28,8 +28,10 @@ class SubscriptionPackagesSeeder extends Seeder
         ["key"=>"user","titleEn"=>"User Management","titleAr"=>"إدارة المستخدمين","systemValue"=>3,"text_en"=>"3","text_ar"=>"3","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"الموظفين التابعين للشركة والمسؤولين عن أدوار وظيفية محددة بصلاحيات محددة يحددها مالك 
             الشركة؛ على سبيل المثال: مسؤول مشتريات، مسؤول مالي..."],
 
-        ["key"=>"Cash","titleEn"=>"Payment Method ","titleAr"=>"آلية الدفع","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستلام الطلب."],
-
+        ["key"=>"Cash","titleEn"=>"Cash Payment","titleAr"=>" الدفع بالكاش","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستلام الطلب."],
+   ["key"=>"Credit","titleEn"=>"Credit Agreement","titleAr"=>"اتفاق الائتمان","systemValue"=>0,"text_en"=>"Not Available","text_ar"=>"غير متاح","descriptionEn"=>"Credit: In the purchase order, when the payment method is credit and the receiving period is 
+        specified, the payment will be after the agreed period expired and after receiving the requisition.","descriptionAr"=>"الدفع الآجل: في امر شراء عند تحديد ألية الدفع الآجلة وتحديد فترة معينة، يمكن إستلام الطلب 
+        والدفع بعد انقضاء الفترة المحددة."],
         ["key"=>"Delivery","titleEn"=>"Delivery Scheduling ","titleAr"=>"جدولة التوريد","systemValue"=>1,"text_en"=>"One-Time Delivery","text_ar"=>"التوريد لمرة واحدة ","descriptionEn"=>"One-Time Delivery: a type of delivery in which the requisition is requested to be received one time on
 a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في امر شراء عند تحديد جدولة التوريد لمرة واحدة، يكون توريد الطلب على 
         .
@@ -70,8 +72,8 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
     الشركة؛ على سبيل المثال: مسؤول مشتريات، مسؤول مالي..."],
     
 
-    ["key"=>"Cash","titleEn"=>"Payment Method","titleAr"=>"آلية الدفع","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستالم الطلب."],
-            
+         ["key"=>"Cash","titleEn"=>"Cash Payment","titleAr"=>" الدفع بالكاش","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستلام الطلب."],
+      
             ["key"=>"Credit","titleEn"=>"Credit Agreement","titleAr"=>"اتفاق الائتمان","systemValue"=>60,"text_en"=>"Credit – with period of 
             60 days","text_ar"=>"
             • الدفع الآجل - خلال 
@@ -118,8 +120,9 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             ["key"=>"user","titleEn"=>"User Management","titleAr"=>"إدارة المستخدمين","systemValue"=>30,"text_en"=>"30","text_ar"=>"30","descriptionEn"=>"The additional accounts with multiple roles and permissions assigned by the business owner, e.g.,Procurement Manager, Finance Officer…","descriptionAr"=>"الموظفين التابعين للشركة والمسؤولين عن أدوار وظيفية محددة بصالحيات محددة يحددها مالك 
     الشركة؛ على سبيل المثال: مسؤول مشتريات، مسؤول مالي..."],
     
-    ["key"=>"Cash","titleEn"=>"Payment Method","titleAr"=>"دفع نقدا","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"Cash: In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستالم الطلب."],            
-            ["key"=>"Credit","titleEn"=>"Credit Agreement","titleAr"=>"اتفاق الائتمان","systemValue"=>120,"text_en"=>"Credit – with period of 
+        ["key"=>"Cash","titleEn"=>"Cash Payment","titleAr"=>" الدفع بالكاش","systemValue"=>1,"text_en"=>"Cash","text_ar"=>"• الدفع المقدم","descriptionEn"=>"In the purchase order, when the payment method is cash, the buyer should pay before receiving the requisition. (Payment in advance).","descriptionAr"=>"الدفع المقدم: في امر شراء عند تحديد ألية الدفع المقدم، يُلزم الدفع قبل إستلام الطلب."],
+   
+    ["key"=>"Credit","titleEn"=>"Credit Agreement","titleAr"=>"اتفاق الائتمان","systemValue"=>120,"text_en"=>"Credit – with period of 
             60 to 120 days","text_ar"=>" 
             • الدفع الآجل - خلال فترة 
             تتراوح ما بين 60 إلى 
@@ -170,11 +173,8 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
 
             ["key"=>"Customers","titleEn"=>"Customers Management","titleAr"=>"إدارة العملاء","systemValue"=>100,"text_en"=>"100","text_ar"=>"100","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"IOS","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
-            IOS","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
-
-            ["key"=>"Android","titleEn"=>"Tracking Engine App","titleAr"=>"Tracking Engine تطبيق","systemValue"=>1,"text_en"=>"Available Android","text_ar"=>"متاح
-            Android","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
+            ["key"=>"IOS","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>0,"text_en"=>"Available IOS/Android","text_ar"=>"متاح
+            IOS/Android","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
             ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
@@ -199,8 +199,8 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             
             ["key"=>"Customers","titleEn"=>"Customers Management","titleAr"=>"إدارة العملاء","systemValue"=>300,"text_en"=>"300","text_ar"=>"300","descriptionEn"=>"The ability to create new roles, for the users, in addition to the existing roles","descriptionAr"=>"مكانية إنشاء أدوار وظيفية جديد ة عند إضافة المستخدمين."],
 
-            ["key"=>"IOS","titleEn"=>"Digital Statistics Report","titleAr"=>"الإحصائيات الرقمية  ","systemValue"=>0,"text_en"=>"Available IOS","text_ar"=>"متاح
-            IOS","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
+              ["key"=>"IOS","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available IOS/Android","text_ar"=>"متاح
+            IOS/Android","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
           
             ["key"=>"Digital","titleEn"=>"Digital Statistics Points","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
