@@ -67,9 +67,19 @@ class DepartmentController extends Controller
         *    ),
         *      @OA\Response(
         *          response=200,
-        *          description="department created Successfully"
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
+        *          description="department created Successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+
         * )
         */
     public function store(DepartmentRequest $request)
@@ -135,20 +145,18 @@ class DepartmentController extends Controller
         *      @OA\Response(
         *        response=200,
         *          description="updated Successfully",
-        *          @OA\JsonContent(),
-        *          @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="message", type="string")
-        *            ),
-        *        ),
-        *
-        *       ),
-        *      @OA\Response(response=500, description="system error"),
-        *      @OA\Response(response=422, description="Validate error"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+
         * )
         */
     public function update(UpdateDepartmentRequest $request, $id)

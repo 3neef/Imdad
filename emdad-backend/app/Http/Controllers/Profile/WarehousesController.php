@@ -60,14 +60,13 @@ class WarehousesController extends Controller
      *          @OA\MediaType(
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
-     *               type="array",@OA\Items(type = "object")
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
-     *
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function index(Request $request)
@@ -123,14 +122,12 @@ class WarehousesController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="message", type="string")
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
-     *
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function store(CreateWarehouesesRequest $request)
@@ -189,14 +186,13 @@ class WarehousesController extends Controller
      *          @OA\MediaType(
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
-     *               type="object"
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
-     *
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function show($id)
@@ -259,14 +255,12 @@ class WarehousesController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="message", type="string")
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
-     *
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function update(UpdateWarehousesRequest $request, $id)
@@ -321,13 +315,12 @@ class WarehousesController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="message", type="string")
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *         ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function destroy($id)
@@ -380,14 +373,12 @@ class WarehousesController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="message", type="string")
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
      *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     * )
      */
     // public function restoreByLocationId($id)
     // {
@@ -499,13 +490,12 @@ if($result){
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="message", type="string")
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *         ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function assignWarehouseToUser(AssignUserToWarehouseRequest $request)
@@ -561,13 +551,12 @@ if($result){
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               @OA\Property(property="message", type="string")
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *         ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function unAssignWarehouseFromUser(UnAssignWarehouseFromUserRequest $request)
