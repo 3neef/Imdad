@@ -167,10 +167,10 @@ class AccountService
     }
 
     public function uploadlogo($request){
-        $user = User::where('id', auth()->id())->first();
+        $profile = Profile::where('id', auth()->user()->profile_id)->first();
         if (isset($request['logo'])) {
-            $user->clearMediaCollection('profileLogo');
-            $user->addMedia($request['logo'])->toMediaCollection('profileLogo');
+            $profile->clearMediaCollection('profileLogo');
+            $profile->addMedia($request['logo'])->toMediaCollection('profileLogo');
             $output = ["message" => "Logo uploaded Successfully", "statusCode" => "000"];
             return $output;
         } else {

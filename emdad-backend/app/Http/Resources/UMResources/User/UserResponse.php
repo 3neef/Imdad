@@ -39,7 +39,6 @@ class UserResponse extends JsonResource
             'isLearning' => $this->roles()->where('profile_id', $this->profile_id)->where('user_id', $this->id)->first()->role->is_learning ?? null,
             "avatar" => $this->getMedia('avatars'),
 
-
         ];
     }
 }
