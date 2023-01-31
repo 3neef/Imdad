@@ -5,7 +5,7 @@ namespace App\Http\Requests\UMRequests\User;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-class UpdateAvaterRequest extends FormRequest
+class UploadlogoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class UpdateAvaterRequest extends FormRequest
    public function rules()
     {
    return [
-    'attachementFile'=>['nullable','image','mimes:jpg,png,jpeg,gif,svg','max:5120','required']
+    'logo'=>['nullable','image','mimes:jpg,png,jpeg,gif,svg','max:5120','required'  ]
 ];
 }
 

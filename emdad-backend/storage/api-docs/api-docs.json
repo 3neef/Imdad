@@ -4739,7 +4739,7 @@
         "/api/v1_0/permissions/getAll": {
             "get": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "get permisssions",
                 "description": "get all permisssions Here",
@@ -4794,7 +4794,7 @@
         "/api/v1_0/permissions/getById/{id}": {
             "get": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "get permisssion",
                 "description": "get permission by id Here",
@@ -4854,7 +4854,7 @@
         "/api/v1_0/permissions/delete/{id}": {
             "delete": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "update permisssion",
                 "description": "update permission to specific role Here",
@@ -4908,7 +4908,7 @@
         "/api/v1_0/permissions/restore/{id}": {
             "delete": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "restore permisssion",
                 "description": "restore permission to specific role Here",
@@ -7947,81 +7947,6 @@
                     }
                 }
             },
-            "put": {
-                "tags": [
-                    "Product"
-                ],
-                "summary": "update Product",
-                "description": "update Product Here",
-                "operationId": "updateProduct",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "properties": {
-                                    "categoryId": {
-                                        "type": "integer"
-                                    },
-                                    "nameEn": {
-                                        "type": "string"
-                                    },
-                                    "nameAr": {
-                                        "type": "string"
-                                    },
-                                    "price": {
-                                        "type": "integer"
-                                    },
-                                    "attachementFile": {
-                                        "type": "file"
-                                    },
-                                    "measruingUnit": {
-                                        "type": "string"
-                                    },
-                                    "descriptionEn": {
-                                        "type": "string"
-                                    },
-                                    "descriptionAr": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated Successfully"
-                    },
-                    "500": {
-                        "description": "error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "Product"
@@ -8107,7 +8032,7 @@
                 }
             }
         },
-        "/api/v1_0/products/get-By-Id/{id}": {
+        "/api/v1_0/products/{id}": {
             "get": {
                 "tags": [
                     "Product"
@@ -8174,9 +8099,82 @@
                         "description": "Resource Not Found"
                     }
                 }
-            }
-        },
-        "/api/v1_0/products/delete/{id}": {
+            },
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "update Product",
+                "description": "update Product Here",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "categoryId": {
+                                        "type": "integer"
+                                    },
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "integer"
+                                    },
+                                    "attachementFile": {
+                                        "type": "file"
+                                    },
+                                    "measruingUnit": {
+                                        "type": "string"
+                                    },
+                                    "descriptionEn": {
+                                        "type": "string"
+                                    },
+                                    "descriptionAr": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully"
+                    },
+                    "500": {
+                        "description": "error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            },
             "delete": {
                 "tags": [
                     "Product"
