@@ -5,6 +5,7 @@ use App\Http\Controllers\Settings\BrandController;
 use App\Http\Controllers\Settings\ColorController;
 use App\Http\Controllers\Settings\DriverNationalityController;
 use App\Http\Controllers\Settings\ModelController;
+use App\Http\Controllers\Settings\SettingsController;
 use App\Http\Controllers\Settings\SizeController;
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
@@ -28,4 +29,8 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::apiResource('nationality', DriverNationalityController::class);
+});
+
+Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    Route::apiResource('preferences', SettingsController::class);
 });

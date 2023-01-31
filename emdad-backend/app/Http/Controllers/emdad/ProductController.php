@@ -70,10 +70,19 @@ class ProductController extends Controller
      *    ),
      *      @OA\Response(
      *        response=200,
-     *          description="created Successfully"
+     *          description="created Successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=500, description="system error")
+     *       ),
      * )
      */
     public function store(CreateProuductRequest $request)
@@ -128,11 +137,19 @@ class ProductController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="updated Successfully"
+     *          description="updated Successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-
+     *       ),
      * )
      */
 
@@ -189,7 +206,6 @@ class ProductController extends Controller
      *         @OA\Property(property="MainProduct", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
      *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -242,7 +258,7 @@ class ProductController extends Controller
      *          ),
 
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+
      * )
      */
     public function show($id)
@@ -294,9 +310,20 @@ class ProductController extends Controller
      *    ),
      *      @OA\Response(
      *          response=301,
-     *          description="deleted successfully"
+     *          description="deleted successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *       ),
+
      * )
      */
 
@@ -345,10 +372,20 @@ class ProductController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="restored successfully"
+     *          description="restored successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="Resource Not Found"),
-     *      @OA\Response(response=404, description="system error"),
+     *       ),
+
      * )
      */
 
@@ -404,10 +441,20 @@ class ProductController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="restored successfully"
+     *          description="restored successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="Resource Not Found"),
-     *      @OA\Response(response=404, description="system error"),
+     *       ),
+
      * )
      */
     public function setCompanyProduct(CompanyProductRequest $request)
@@ -455,10 +502,19 @@ class ProductController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="restored successfully"
+     *          description="restored successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="Resource Not Found"),
-     *      @OA\Response(response=404, description="system error"),
+
      * )
      */
     public function changeProductStatus(StatusCompanyProductRequest $request)

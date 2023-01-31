@@ -3,6 +3,7 @@
 namespace App\Http\Resources\UMResources\User;
 
 use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
+use App\Models\Settings\Setting;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
 
@@ -38,7 +39,7 @@ class UserResponse extends JsonResource
             "userCrNumbers" => $this->crNumbersList() ?? '',
             'isLearning' => $this->roles()->where('profile_id', $this->profile_id)->where('user_id', $this->id)->first()->role->is_learning ?? null,
             "avatar" => $this->getMedia('avatars'),
-
+            "prefrence"=>DB::table('settings_models')->where('user_id',auth()->id())->where('profile_id',auth()->user()->profile_id??null)->first()->preferences??null
         ];
     }
 }

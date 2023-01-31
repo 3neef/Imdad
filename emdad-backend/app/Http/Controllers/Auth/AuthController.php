@@ -73,10 +73,18 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=422,
      *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+
      * )
      */
     public function resetPassword(ResetPasswordRequest $request,AuthenticationServices $userServices) {
@@ -133,10 +141,18 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=422,
      *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *       ),
      * )
      */
     public function store(StoreAuthRequest $request, AuthenticationServices $authenticationServices)
@@ -201,15 +217,18 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Login Successfully",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -254,15 +273,18 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Login Successfully",
-     *          @OA\JsonContent()
+     *              *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -299,15 +321,17 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="resent new otp",
-     *          @OA\JsonContent()
+     *               *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function resendOTP(ResendOTPRequest $request, AuthenticationServices $userServices)
@@ -359,15 +383,17 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Logged out",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function logoutUser(AuthenticationServices $userServices)
@@ -419,18 +445,12 @@ class AuthController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               @OA\Property(property="message", type="string"),
-     *               @OA\Property(property="OTP", type="integer"),
-     *               @OA\Property(property="otpExpiresAt", type="string")
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
      *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+
      * )
      */
     public function forgotPassword(ForgotPasswordRequest $request, AuthenticationServices $userServices)
@@ -466,15 +486,17 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=301,
      *          description="User deleted successfully",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -542,18 +564,11 @@ class AuthController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               @OA\Property(property="message", type="string"),
-     *               @OA\Property(property="OTP", type="integer"),
-     *               @OA\Property(property="otpExpiresAt", type="string")
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
      *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
