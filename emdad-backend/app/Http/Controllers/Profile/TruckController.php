@@ -57,9 +57,17 @@ class TruckController extends Controller
      *      @OA\Response(
      *          response=422,
      *          description="Unprocessable Entity",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="sstring"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -111,9 +119,18 @@ class TruckController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="department created Successfully"
+     *          description="department created Successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function store(CreateTruckRequest $request)
@@ -165,14 +182,13 @@ class TruckController extends Controller
      *          @OA\MediaType(
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
-     *               type="object"
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
-     *        ),
-     *
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function show($id)
@@ -300,9 +316,7 @@ class TruckController extends Controller
      *        ),
      *
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+
      * )
      */
 
@@ -411,9 +425,6 @@ class TruckController extends Controller
      *            ),
      *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
