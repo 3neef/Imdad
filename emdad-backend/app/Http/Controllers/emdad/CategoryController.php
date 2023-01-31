@@ -132,7 +132,7 @@ class CategoryController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               required={},
-     *               @OA\Property(property="perPage", type="string"),
+     *               @OA\Property(property="perPage", type="integer"),
      *               @OA\Property(property="onlyRequested", type="boolean"),
      *            ),
      *        ),
