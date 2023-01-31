@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreSettingsRequest;
+use App\Http\Services\Settings\SettingsService;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -23,9 +25,16 @@ class SettingsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSettingsRequest $request, SettingsService $settingService)
     {
-        //
+        $output = $settingService->store($request->all());
+        if ($output) {
+            return response()->json(["statusCode" => "000", 'success' => true, "message" => "Settings created successfully"]);
+        }
+        return response()->json([
+            "statusCode" => "999",
+            'success' => false, 'message' => "System Error"
+        ]);
     }
 
     /**
