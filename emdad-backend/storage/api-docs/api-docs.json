@@ -6752,7 +6752,7 @@
                                 "required": [],
                                 "properties": {
                                     "perPage": {
-                                        "type": "string"
+                                        "type": "integer"
                                     },
                                     "onlyRequested": {
                                         "type": "boolean"
