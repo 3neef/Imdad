@@ -67,7 +67,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
+     *          response=200,
      *          description="created Successfully",
      *       ),
      *      @OA\Response(response=404, description="Resource Not Found"),
@@ -129,7 +129,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *    @OA\Response(
-     *         response=000,
+     *         response=200,
      *         description="",
      *         @OA\JsonContent(
      *         @OA\Property(property="Maincatogre", type="integer", example="{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}")
@@ -183,7 +183,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=112,
+     *          response=301,
      *          description="Category deleted successfully",
      *          @OA\JsonContent()
      *       ),
@@ -254,7 +254,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
+     *          response=200,
      *          description="Category updated successfully",
      *          @OA\JsonContent(),
      *          @OA\MediaType(
@@ -328,7 +328,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=113,
+     *          response=200,
      *          description="",
      *         @OA\JsonContent(
      *         @OA\Property(property="Maincatogre", type="integer", example="{'id': 2, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}")
@@ -388,7 +388,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
+     *          response=200,
      *          description="",
      *         @OA\JsonContent(
      *         @OA\Property(property="categoryById", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
@@ -528,7 +528,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
+     *          response=200,
      *          description="Category Approval request sent successfully",
      *          @OA\JsonContent(),
      *          @OA\MediaType(
@@ -605,7 +605,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
+     *          response=200,
      *          description="changed successfully",
      *          @OA\JsonContent(),
      *          @OA\MediaType(
@@ -678,8 +678,8 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
-     *          description="approved successfully",
+     *          response=200,
+     *          description="aproved successfully",
      *          @OA\JsonContent(),
      *          @OA\MediaType(
      *            mediaType="multipart/form-data",
@@ -704,7 +704,7 @@ class CategoryController extends Controller
     {
         $category = $this->categoryService->approveCategory($request);
         if ($category) {
-            return response()->json(['message' => 'approved successfully'], 200);
+            return response()->json(['message' => 'aproved successfully'], 200);
         } else {
             return response()->json(['error' => 'No category founded']);
         }
@@ -753,7 +753,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
+     *          response=200,
      *          description="rejected successfully",
      *          @OA\JsonContent(),
      *          @OA\MediaType(
@@ -827,7 +827,7 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
+     *          response=200,
      *          description="checked sucessfully successfully",
      *          @OA\JsonContent(),
      *          @OA\MediaType(
@@ -904,8 +904,8 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
-     *          description="checked sucessfully",
+     *          response=200,
+     *          description="checked sucessfully successfully",
      *          @OA\JsonContent(),
      *          @OA\MediaType(
      *            mediaType="multipart/form-data",
@@ -972,8 +972,8 @@ class CategoryController extends Controller
      *        ),
      *    ),
      *      @OA\Response(
-     *          response=000,
-     *          description="",
+     *          response=200,
+     *          description="Category Status updated successfully",
      *          @OA\JsonContent(),
      *          @OA\MediaType(
      *            mediaType="multipart/form-data",
