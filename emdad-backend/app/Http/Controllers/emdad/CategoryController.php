@@ -104,7 +104,7 @@ class CategoryController extends Controller
 
     /**
      * @OA\get(
-     *    path="/api/v1_0/categories/{id}",
+     *    path="/api/v1_0/categories",
      *    operationId="showallcatogre",
      *    tags={"Category"},
      *    summary="show all catogries on the user profile",
@@ -131,7 +131,7 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"perPage","onlyRequested"},
+     *               required={},
      *               @OA\Property(property="perPage", type="string"),
      *               @OA\Property(property="onlyRequested", type="boolean"),
      *            ),
