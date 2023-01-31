@@ -577,8 +577,9 @@ class UserServices
                 $manager_id = auth()->id() ?? null;
             }
             if ($role_id && $manager_id) {
-                // $permissions = Role::where("id", $role_id)->first()->permissions_list;
-                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id, 'permissions' => json_encode($request['permissions'],true)]);
+                //TODO change the way to create permissions from get it back form db to requet  
+                 $permissions = Role::where("id", $role_id)->first()->permissions_list;
+                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id, 'permissions' => isset($request['permissions'])?json_encode($request['permissions'],true):$permissions]);
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
