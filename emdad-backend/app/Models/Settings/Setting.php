@@ -10,7 +10,7 @@ class Setting extends Model
 {
     use HasFactory;
     protected $table="settings_models";
-    protected $fillable = ['user_id','profile_id','preferences'];
+    protected $fillable = ['user_id','preferences'];
 
  
 }

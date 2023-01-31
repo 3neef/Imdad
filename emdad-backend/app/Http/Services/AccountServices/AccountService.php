@@ -72,7 +72,7 @@ class AccountService
         if ($profile != null) {
             return response()->json(["statusCode"=>'000','data' => new ProfileResponse($profile)], 200);
         } else {
-            return response()->json(["statusCode"=>'111','error' => 'No data Founded'], 404);
+            return response()->json(["statusCode"=>'111','error' => 'No data Founded'], 200);
         }
     }
 
