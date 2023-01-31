@@ -104,7 +104,7 @@ class CategoryController extends Controller
 
     /**
      * @OA\get(
-     *    path="/api/v1_0/categories/{id}",
+     *    path="/api/v1_0/categories",
      *    operationId="showallcatogre",
      *    tags={"Category"},
      *    summary="show all catogries on the user profile",
@@ -131,8 +131,8 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"perPage","onlyRequested"},
-     *               @OA\Property(property="perPage", type="string"),
+     *               required={},
+     *               @OA\Property(property="perPage", type="integer"),
      *               @OA\Property(property="onlyRequested", type="boolean"),
      *            ),
      *        ),
@@ -214,9 +214,9 @@ class CategoryController extends Controller
         $category =  $this->categoryService->destroy($id);
 
         if ($category) {
-            return response()->json(['message' => 'deleted successfully'], 301);
+            return response()->json(['message' => 'Deleted Successfully', 'statusCode'=>112], 301);
         } else {
-            return response()->json(['success' => false, 'error' => 'not found'], 404);
+            return response()->json(['success' => false, 'error' => 'not found', 'statusCode'=>111], 404);
         }
     }
     /**
@@ -286,9 +286,9 @@ class CategoryController extends Controller
     {
         $category =  $this->categoryService->update($request, $id);
         if ($category) {
-            return response()->json(['success' => 'Updated Successfly'], 201);
+            return response()->json(['message' => 'Updated Successfully' ,'statusCode'=>401], 201);
         }
-        return response()->json(['error' => false, 'message' => 'not found'], 404);
+        return response()->json(['error' => false, 'message' => 'not found','statusCode'=>402], 404);
     }
 
 
@@ -419,7 +419,7 @@ class CategoryController extends Controller
 
 
     /**
-     * @OA\put(
+     * @OA\post(
      * path="/api/v1_0/categories/company-categories",
      * operationId="setFivoritecompanyCategory",
      * tags={"Category"},
