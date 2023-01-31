@@ -56,11 +56,10 @@ class ProductController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"categoryId","nameEn","nameAr","price","measruingUnit","descriptionEn","descriptionAr"},
+     *               required={"categoryId","nameEn","nameAr","measruingUnit","descriptionEn","descriptionAr"},
      *               @OA\Property(property="categoryId", type="integer"),
      *               @OA\Property(property="nameEn", type="string"),
      *               @OA\Property(property="nameAr", type="string"),
-     *               @OA\Property(property="price", type="integer"),
      *               @OA\Property(property="attachementFile", type="file"),
      *               @OA\Property(property="measruingUnit", type="string"),
      *               @OA\Property(property="descriptionEn", type="string"),
@@ -158,7 +157,7 @@ class ProductController extends Controller
         $product =  $this->productService->update($request, $id);
 
         if ($product != null) {
-            return response()->json(["statusCode" => '000', 'message' => 'updated successfully', 'data' => new ProductResponse($product)], 200);
+            return response()->json(["statusCode" => '111', 'message' => 'updated successfully', 'data' => new ProductResponse($product)], 200);
         }
         return response()->json(["statusCode" => '999', 'error' => 'unkown error'], 500);
     }
@@ -331,7 +330,7 @@ class ProductController extends Controller
     {
         $deleted = $this->productService->delete($id);
         if ($deleted) {
-            return response()->json(["statusCode" => '000', 'message' => 'deleted successfully'], 301);
+            return response()->json(["statusCode" => '000', 'message' => 'Deleted Successfully'], 301);
         }
         return response()->json(["statusCode" => '111', 'error' => 'Record Not Found'], 500);
     }
