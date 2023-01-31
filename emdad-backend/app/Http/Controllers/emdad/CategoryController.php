@@ -214,9 +214,9 @@ class CategoryController extends Controller
         $category =  $this->categoryService->destroy($id);
 
         if ($category) {
-            return response()->json(['message' => 'deleted successfully'], 301);
+            return response()->json(['message' => 'deleted successfully', 'statusCode'=>112], 301);
         } else {
-            return response()->json(['success' => false, 'error' => 'not found'], 404);
+            return response()->json(['success' => false, 'error' => 'not found', 'statusCode'=>111], 404);
         }
     }
     /**
