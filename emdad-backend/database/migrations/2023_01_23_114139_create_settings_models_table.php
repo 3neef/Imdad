@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('settings_models', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('profile_id')->constrained()->onDelete('cascade');
             $table->json('preferences')->nullable();
             $table->timestamps();
         });

@@ -39,7 +39,7 @@ class UserResponse extends JsonResource
             "userCrNumbers" => $this->crNumbersList() ?? '',
             'isLearning' => $this->roles()->where('profile_id', $this->profile_id)->where('user_id', $this->id)->first()->role->is_learning ?? null,
             "avatar" => $this->getMedia('avatars'),
-            "prefrence"=>DB::table('settings_models')->where('user_id',auth()->id())->where('profile_id',auth()->user()->profile_id??null)->first()->preferences??null
+            "prefrence"=>DB::table('settings_models')->where('user_id',auth()->id())->first()->preferences??null
         ];
     }
 }
