@@ -561,9 +561,5 @@ class AuthController extends Controller
         return $userServices->checkLink($request);
     }
 
-    public function upload(UploadlogoRequest $request,AuthenticationServices $AuthServices){
-        $output = $AuthServices->uploadlogo($request);
-
-        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
-    }
+    
 }

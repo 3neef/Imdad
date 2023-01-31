@@ -165,4 +165,17 @@ class AccountService
             return DB::table('permissions')->where("category", 'LIKE', "S%")->pluck('label');
         }
     }
+
+    public function uploadlogo($request){
+        $user = User::where('id', auth()->id())->first();
+        if (isset($request['logo'])) {
+            $user->clearMediaCollection('profileLogo');
+            $user->addMedia($request['logo'])->toMediaCollection('profileLogo');
+            $output = ["message" => "Logo uploaded Successfully", "statusCode" => "000"];
+            return $output;
+        } else {
+            $output = ["message" => "system error", "statusCode" => "999"];
+            return $output;
+        }
+    }
 }

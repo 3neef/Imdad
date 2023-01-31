@@ -7,8 +7,10 @@ use App\Http\Requests\AccountRequests\Account\GetByAccountIdRequest;
 use App\Http\Requests\AccountRequests\Account\RestoreAccountRequest;
 use App\Http\Requests\Profile\StoreProfileRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Http\Requests\UMRequests\User\UploadlogoRequest;
 use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
 use App\Http\Services\AccountServices\AccountService;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -455,8 +457,12 @@ class ProfileController extends Controller
         return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'], "profileId"=> $output['profile_id'] ]],200);
     }
 
+    public function upload(UploadlogoRequest $request,AccountService $AccountServices){
+        $output = $AccountServices->uploadlogo($request);
 
-
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
+    }
+    
 
 
 }
