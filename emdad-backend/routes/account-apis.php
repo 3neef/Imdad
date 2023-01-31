@@ -15,7 +15,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::get('profiles/checkPayment', [SubscriptionPaymentController::class, "checkPaymentStatus"]);
 
     Route::put('updateProfile/{id}', [ProfileController::class, 'update']);
-    Route::post('profiles/upload-logo',[AuthController::class,'upload']);
+    Route::post('profiles/upload-logo',[ProfileController::class,'upload']);
 
     Route::apiResource('profiles/subscriptionPayment', SubscriptionPaymentController::class);
 
