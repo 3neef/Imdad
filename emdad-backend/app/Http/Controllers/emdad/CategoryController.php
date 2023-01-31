@@ -419,7 +419,7 @@ class CategoryController extends Controller
 
 
     /**
-     * @OA\put(
+     * @OA\post(
      * path="/api/v1_0/categories/company-categories",
      * operationId="setFivoritecompanyCategory",
      * tags={"Category"},
