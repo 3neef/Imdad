@@ -4,11 +4,11 @@ namespace App\Policies;
 
 // use App\Models\Emdad\Categories;
 
-use App\Models\Emda)use App\Models\User;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\DB;
 
-clas)licy
+class  CategoryPolicy
 {
     use HandlesAuthorization;
 
