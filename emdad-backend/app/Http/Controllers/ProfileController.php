@@ -143,7 +143,7 @@ class ProfileController extends Controller
     {
         $output = $this->accountService->store($request);
 
-        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'], "success"=> $output['success'], "profile"=> $output['data'] ]],200);
+        return response()->json([ 'statusCode'=> $output['statusCode'], "success"=> $output['success'], "data"=> $output['data'] ],200);
     }
 
 
@@ -200,7 +200,12 @@ class ProfileController extends Controller
      */
     public function show($id)
     {
-        return $this->accountService->show($id);
+        $output = $this->accountService->show($id);
+        if($output['statusCode'] == "000"){
+            return response()->json(['statusCode'=> $output['statusCode'], 'data' => $output['data'] ],200);
+        }elseif($output['statusCode'] == "111") {
+            return response()->json(['statusCode'=> $output['statusCode'], 'error' => $output['error'] ],200);
+        }
     }
 
     /**

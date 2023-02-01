@@ -33,7 +33,6 @@ class AccountService
                 ]);
                  WalletsService::create($profile);
                 $permissions = $this->pluckPermissions($request->ProfileType);
-                // dd($permissions);
                 $user->profiles()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
                 $user=User::where("id",auth()->user()->id)->first();
                 $user->update(['profile_id' => $profile->id]);
@@ -71,9 +70,11 @@ class AccountService
 
         $profile = Profile::where('id', $id)->first();
         if ($profile != null) {
-            return response()->json(["statusCode"=>'000','data' => new ProfileResponse($profile)], 200);
+            $output = ["statusCode"=>'000','data' => new ProfileResponse($profile)];
+            return $output;
         } else {
-            return response()->json(["statusCode"=>'111','error' => 'No data Founded'], 404);
+            $output =["statusCode"=>"111", "error"=>"No Data Founded"];
+            return $output;
         }
     }
 

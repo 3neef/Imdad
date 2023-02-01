@@ -38,7 +38,7 @@ class StoreAuthRequest extends FormRequest
             'email' => ['unique:users,email','required','email','max:100',],
             "roleId"=> "integer|exists:roles,id",
             'password' => ['required','string',Password::min(8)->mixedCase()->numbers()->symbols()],
-            'expireDate'=>'required|date',
+            'expireDate'=>['required','date'],
             'permissions'=>['array',new UniqeValues],
             'permissions.*'=>['string','exists:permissions,label'],
             'is_learning'=>['boolean'],
