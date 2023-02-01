@@ -7243,9 +7243,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -7314,6 +7311,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -7325,20 +7325,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -7411,6 +7397,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -7422,20 +7411,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -7504,6 +7479,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -7515,20 +7493,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -8033,7 +7997,6 @@
                                     "categoryId",
                                     "nameEn",
                                     "nameAr",
-                                    "price",
                                     "measruingUnit",
                                     "descriptionEn",
                                     "descriptionAr"
@@ -8047,9 +8010,6 @@
                                     },
                                     "nameAr": {
                                         "type": "string"
-                                    },
-                                    "price": {
-                                        "type": "integer"
                                     },
                                     "attachementFile": {
                                         "type": "file"
