@@ -948,6 +948,7 @@ class UserController extends Controller
             'expiry_date' => $request['expireDate'] ?? $user->expiry_date,
             'lang' =>  $request['lang'] ?? $user->lang,
             'password' => $request->password,
+            "password_changed" => 1,
         ]);
 
         return response()->json(['statusCode' => "000", "message" => "password changed successfully"], 200);
