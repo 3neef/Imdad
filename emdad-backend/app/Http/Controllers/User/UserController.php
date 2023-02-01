@@ -909,7 +909,7 @@ class UserController extends Controller
      *    ),
      *      @OA\Response(
      *          response=200,
-     *          description="User created successfully",
+     *          description="Avatar created successfully",
      *          @OA\JsonContent(),
      *          @OA\MediaType(
      *            mediaType="multipart/form-data",
@@ -935,7 +935,67 @@ class UserController extends Controller
 
         return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
     }
-
+    /**
+     * @OA\put(
+     * path="/api/v1_0/users/change-password",
+     * operationId="ChangePassword",
+     * tags={"UM & Permissions"},
+     * summary="change password",
+     * description="change password Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="fullName", type="string"),
+     *               @OA\Property(property="email", type="email"),
+     *               @OA\Property(property="mobile", type="string"),
+     *               @OA\Property(property="identityNumber", type="integer"),
+     *               @OA\Property(property="expiry_date", type="string"),
+     *               @OA\Property(property="lang", type="string"),
+     *               @OA\Property(property="password", type="string"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Password changed successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent(),
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
     public function changePassword(Request $request)
     {
         // if(auth()->user()->password)
