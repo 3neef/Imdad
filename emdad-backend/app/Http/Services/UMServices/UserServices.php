@@ -45,7 +45,6 @@ class UserServices
                 ];
                 return $output;
             }elseif($limit != true && $limit == "package null"){
-                DD($limit == "j");
                 $output = [
                     "statusCode" => "364",
                     'success' => false,

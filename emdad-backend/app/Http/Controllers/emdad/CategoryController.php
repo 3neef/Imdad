@@ -88,7 +88,6 @@ class CategoryController extends Controller
          $this->authorize('create', Category::class);
 
         $category = $this->categoryService->store($request);
-        // dd($category);
         if ($category) {
             return response()->json([
                 "statusCode" => "000",
