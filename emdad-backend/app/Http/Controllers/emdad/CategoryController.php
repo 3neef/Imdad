@@ -288,7 +288,7 @@ class CategoryController extends Controller
         if ($category) {
             return response()->json(['success' => 'Updated Successfly'], 201);
         }
-        return response()->json(['error' => false, 'message' => 'not found'], 404);
+        return response()->json(['error' => false, 'message' => 'not found','statusCode'=>'111'], 200);
     }
 
 
@@ -412,7 +412,7 @@ class CategoryController extends Controller
 
         $category =  $this->categoryService->show($id);
         if ($category) {
-            return response()->json(['data' => new CategoryResource($category)], 200);
+            return response()->json(['success' => 'Status Updated Successfly','statusCode'=>'000'], 200);
         }
         return response()->json(['error' => 'No data Founded'], 404);
     }
@@ -423,8 +423,8 @@ class CategoryController extends Controller
      * path="/api/v1_0/categories/company-categories",
      * operationId="setFivoritecompanyCategory",
      * tags={"Category"},
-     * summary="Retry Category",
-     * description="set company Category",
+     * summary="Set Category",
+     * description="set company favorite Categories using only category or categorylists ",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -455,7 +455,6 @@ class CategoryController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"categoryList"},
      *               @OA\Property(property="categoryList", type="string"),
      *               @OA\Property(property="categoryId", type="string")
      *            ),
@@ -562,7 +561,7 @@ class CategoryController extends Controller
 
         // dd($category);
         if ($category) {
-            return response()->json(['message' => 'Approval  Requset sent successfully'], 200);
+            return response()->json(['success' => 'Status Updated Successfly','statusCode'=>'000'], 200);
         }
         return response()->json(['message' => 'Requset  not sent '], 403);
     }
@@ -636,7 +635,7 @@ class CategoryController extends Controller
     {
         $category =  $this->categoryService->changeCategoryStatus($request);
         if ($category) {
-            return response()->json(['message' => 'changed successfully'], 200);
+            return response()->json(['success' => 'Status Updated Successfly','statusCode'=>'000'], 200);
         } else {
             return response()->json(['error' => 'No categories founded']);
         }
@@ -835,13 +834,7 @@ class CategoryController extends Controller
      *            ),
      *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+
      * )
      */
     public function filterCategory(FilterCategoryRequest $request)

@@ -65,11 +65,17 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="collection",
-     *
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -120,11 +126,17 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="created Successfully",
-     *
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function store(StoreProfileRequest $request)
@@ -173,11 +185,17 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="",
-     *         @OA\JsonContent(
-     *         @OA\Property(property="AccountById", type="integer", example="{'id': 2}")
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
      *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function show($id)
@@ -233,11 +251,17 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="updated Successfully",
-     *
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -287,9 +311,17 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=301,
      *          description="deleted successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=500, description="system error"),
      * )
      */
     public function destroy($id)
@@ -336,9 +368,17 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="restored successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=500, description="system error"),
      * )
      */
     public function restoreByAccountId($id)
