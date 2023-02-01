@@ -70,9 +70,11 @@ class AccountService
 
         $profile = Profile::where('id', $id)->first();
         if ($profile != null) {
-            return response()->json(["statusCode"=>'000','data' => new ProfileResponse($profile)], 200);
+            $output = ["statusCode"=>'000','data' => new ProfileResponse($profile)];
+            return $output;
         } else {
-            return response()->json(["statusCode"=>'111','error' => 'No data Founded'], 404);
+            $output =["statusCode"=>"111", "error"=>"No Data Founded"];
+            return $output;
         }
     }
 
