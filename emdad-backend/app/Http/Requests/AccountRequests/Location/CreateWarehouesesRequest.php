@@ -36,12 +36,12 @@ class CreateWarehouesesRequest extends FormRequest
             'latitude' => ['required', 'string'],
             'longitude' => ['required', 'string'],
             'gateType' => [ 'string'],
-            'receiverName' => Rule::requiredIf(function () {
+            'receiverName' => [Rule::requiredIf(function () {
                 return auth()->user()->currentProfile()->type== 'supplier';
                 }),
-            'receiverPhone' => Rule::requiredIf(function () {
+            'receiverPhone' => [Rule::requiredIf(function () {
                 return auth()->user()->currentProfile()->type== 'supplier';
-                }),
+                }),"max:14","min:14"],
             'managerId' => ['integer', 'exists:users,id']
         ];
     }

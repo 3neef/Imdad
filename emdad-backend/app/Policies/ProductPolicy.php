@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Http\Services\General\CheckService;
 use App\Models\Emdad\Product;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -31,7 +32,7 @@ class ProductPolicy
      */
     public function view(User $user)
     {
-        return $this->checkPermission($user, $type1 = "BMP4", $type2 = "SMP4");
+        return CheckService::checkTwoTypes($user, $type1 = "BMP4", $type2 = "SMP4");
     }
 
     /**
@@ -42,7 +43,7 @@ class ProductPolicy
      */
     public function create(User $user)
     {
-        return $this->checkPermission($user, $type1 = "BMP1", $type2 = "SMP1");
+        return CheckService::checkTwoTypes($user, $type1 = "BMP1", $type2 = "SMP1");
     }
 
     /**
@@ -91,20 +92,5 @@ class ProductPolicy
     public function forceDelete(User $user, Product $Product)
     {
         //
-    }
-
-    public function checkPermission($user, $type1,$type2)
-    {
-        if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            if ($permissonis != null) {
-                $labels = json_decode($permissonis);
-                foreach ($labels as $label) {
-                    if ($label == $type1 || $label == $type2) {
-                        return true;
-                    }
-                }
-            }
-        }
     }
 }

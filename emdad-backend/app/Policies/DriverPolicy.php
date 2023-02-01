@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Http\Services\General\CheckService;
 use App\Models\Accounts\Driver;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -31,7 +32,7 @@ class DriverPolicy
      */
     public function view(User $user)
     {
-        $this->checkPermission($user, $type1 = "SMFLD4");
+        CheckService::checkOneType($user, $type1 = "SMFLD4");
     }
 
     /**
@@ -42,7 +43,7 @@ class DriverPolicy
      */
     public function create(User $user)
     {
-        return $this->checkPermission($user, $type1 = "SMFLD1");
+        return CheckService::checkOneType($user, $type1 = "SMFLD1");
     }
 
     /**
@@ -54,7 +55,7 @@ class DriverPolicy
      */
     public function update(User $user)
     {
-       return $this->checkPermission($user, $type1 = "SMFLD2");
+       return CheckService::checkOneType($user, $type1 = "SMFLD2");
     }
 
     /**
@@ -66,7 +67,7 @@ class DriverPolicy
      */
     public function delete(User $user)
     {
-        return $this->checkPermission($user, $type1 = "SMFLD3");
+        return CheckService::checkOneType($user, $type1 = "SMFLD3");
     }
 
     /**
@@ -78,7 +79,7 @@ class DriverPolicy
      */
     public function restore(User $user)
     {
-        // return $this->checkPermission($user, $type1 = "SMFL47");
+        // return CheckService::checkOneType($user, $type1 = "SMFL47");
         
     }
 
@@ -92,20 +93,5 @@ class DriverPolicy
     public function forceDelete(User $user)
     {
         //
-    }
-
-    public function checkPermission($user, $type1)
-    {
-        if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            if ($permissonis!= null) {
-                $labels = json_decode($permissonis);
-                foreach ($labels as $label) {
-                    if ($label == $type1) {
-                        return true;
-                    }
-                }
-            }
-        }
     }
 }
