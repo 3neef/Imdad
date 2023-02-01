@@ -285,7 +285,7 @@ class CategoryController extends Controller
     {
         $category =  $this->categoryService->update($request, $id);
         if ($category) {
-            return response()->json(['message' => 'Updated Successfully' ,'statusCode'=>401], 201);
+            return response()->json(['message' => 'Updated Successfully' ,'statusCode'=>401], 200);
         }
         return response()->json(['error' => false, 'message' => 'not found','statusCode'=>'111'], 200);
     }
