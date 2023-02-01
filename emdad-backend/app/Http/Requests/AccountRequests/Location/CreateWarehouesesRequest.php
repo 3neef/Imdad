@@ -38,7 +38,7 @@ class CreateWarehouesesRequest extends FormRequest
             'gateType' => [ 'string'],
             'receiverName' => [Rule::requiredIf(function () {
                 return auth()->user()->currentProfile()->type== 'supplier';
-                }),
+                })],
             'receiverPhone' => [Rule::requiredIf(function () {
                 return auth()->user()->currentProfile()->type== 'supplier';
                 }),"max:14","min:14"],
