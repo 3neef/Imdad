@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Http\Services\General\CheckService;
 use App\Models\Accounts\Warehouse;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -31,7 +32,7 @@ class WarehousePolicy
      */
     public function view(User $user)
     {
-        return $this->checkPermission($user, $type1 = "BMW4", $type2 = "SMW4");
+        return CheckService::checkTwoTypes($user, $type1 = "BMW4", $type2 = "SMW4");
     }
 
     /**
@@ -42,7 +43,7 @@ class WarehousePolicy
      */
     public function create(User $user)
     {
-        return $this->checkPermission($user, $type1 = "BMW1", $type2 = "SMW1");
+        return CheckService::checkTwoTypes($user, $type1 = "BMW1", $type2 = "SMW1");
         
     }
 
@@ -55,7 +56,7 @@ class WarehousePolicy
      */
     public function update(User $user)
     {
-        return $this->checkPermission($user, $type1 = "BMW2", $type2 = "SMW2");
+        return CheckService::checkTwoTypes($user, $type1 = "BMW2", $type2 = "SMW2");
         
     }
 
@@ -68,7 +69,7 @@ class WarehousePolicy
      */
     public function delete(User $user)
     {
-        // return $this->checkPermission($user, $type1 = "BMW3", $type2 = "SMW3");
+        // return CheckService::checkTwoTypes($user, $type1 = "BMW3", $type2 = "SMW3");
         
     }
 
@@ -81,7 +82,7 @@ class WarehousePolicy
      */
     public function restore(User $user, Warehouse $warehouse)
     {
-        // return $this->checkPermission($user, $type1 = "BMW47", $type2 = "SMW47");
+        // return CheckService::checkTwoTypes($user, $type1 = "BMW47", $type2 = "SMW47");
         
     }
 
@@ -97,18 +98,4 @@ class WarehousePolicy
         //
     }
 
-    public function checkPermission($user, $type1,$type2)
-    {
-        if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            if ($permissonis != null) {
-                $labels = json_decode($permissonis);
-                foreach ($labels as $label) {
-                    if ($label == $type1 || $label == $type2) {
-                        return true;
-                    }
-                }
-            }
-        }
-    }
 }
