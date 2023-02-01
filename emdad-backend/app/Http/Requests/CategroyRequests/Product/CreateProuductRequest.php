@@ -35,7 +35,7 @@ class CreateProuductRequest extends FormRequest
             'price' => ['nullable', 'between:0,99.99'],
             'attachementFile' => ['array'],
             'attachementFile.*' => ['nullable', 'mimes:jpg,png,jpeg,gif,svg', 'max:5120'],
-            'measruingUnit' => ['string', 'required', ],
+            'measruingUnit' => ['string', 'required' ],
             'descriptionEn' => ['required', 'string', 'max:120'],
             'descriptionAr' => ['required', 'string', 'max:120'],
 

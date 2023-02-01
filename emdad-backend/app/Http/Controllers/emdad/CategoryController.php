@@ -285,9 +285,9 @@ class CategoryController extends Controller
     {
         $category =  $this->categoryService->update($request, $id);
         if ($category) {
-            return response()->json(['message' => 'Updated Successfully' ,'statusCode'=>401], 200);
+            return response()->json(['message' => 'Updated Successfully' ,'statusCode'=>401], 201);
         }
-        return response()->json(['error' => false, 'message' => 'not found','statusCode'=>'111'], 200);
+        return response()->json(['error' => false, 'message' => 'not found'], 404);
     }
 
 
@@ -410,7 +410,7 @@ class CategoryController extends Controller
 
         $category =  $this->categoryService->show($id);
         if ($category) {
-            return response()->json(['success' => 'Status Updated Successfly','statusCode'=>'000'], 200);
+            return response()->json(['data'=> new CategoryResource($category)], 200);
         }
         return response()->json(['error' => 'No data Founded'], 404);
     }
@@ -547,7 +547,7 @@ class CategoryController extends Controller
 
         // dd($category);
         if ($category) {
-            return response()->json(['success' => 'Status Updated Successfly','statusCode'=>'000'], 200);
+            return response()->json(['success' => 'Approval Requet sent successfully'], 200);
         }
         return response()->json(['message' => 'Requset  not sent '], 403);
     }
@@ -615,7 +615,7 @@ class CategoryController extends Controller
     {
         $category =  $this->categoryService->changeCategoryStatus($request);
         if ($category) {
-            return response()->json(['success' => 'Status Updated Successfly','statusCode'=>'000'], 200);
+            return response()->json(['messge' => 'changed successfully'], 200);
         } else {
             return response()->json(['error' => 'No categories founded']);
         }
