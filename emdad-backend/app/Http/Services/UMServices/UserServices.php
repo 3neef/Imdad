@@ -35,7 +35,7 @@ class UserServices
             $value = DB::table('profile_role_user')->where('profile_id', auth()->user()->profile_id)->whereIn('role_id', [1, 2, 3, 4, 12])->count();
             $newvalue = (--$value);
             $limit = $packageLimit->packageLimitExceed("owner", $newvalue);
-            
+
 
             if ($limit == false) {
                 $output = [
@@ -44,7 +44,7 @@ class UserServices
                     'message' => "You have exceeded the allowed number of Admins to create it"
                 ];
                 return $output;
-            }elseif($limit != true && $limit == "package null"){
+            } elseif ($limit != true && $limit == "package null") {
                 $output = [
                     "statusCode" => "364",
                     'success' => false,
@@ -63,7 +63,7 @@ class UserServices
                     'message' => "You have exceeded the allowed number of Users to create it"
                 ];
                 return $output;
-            }elseif($limit != true && $limit == "package null"){
+            } elseif ($limit != true && $limit == "package null") {
                 $output = [
                     "statusCode" => "364",
                     'success' => false,
@@ -294,7 +294,7 @@ class UserServices
             );
         }
 
-        $user->update(['is_verified' => true]);
+        $user->update(['is_verified' => true, 'password_changed' => 1]);
         $token = $user->createToken('authtoken');
         return response()->json(
             [
@@ -372,7 +372,7 @@ class UserServices
                 'message' => "You have exceeded the allowed number of users to create it"
             ];
             return $output;
-        }elseif($limit != true && $limit == "package null"){
+        } elseif ($limit != true && $limit == "package null") {
             $output = [
                 "statusCode" => "364",
                 'success' => false,
@@ -577,9 +577,9 @@ class UserServices
             }
             if ($role_id && $manager_id) {
                 //TODO change the way to create permissions from get it back form db to requet  
-                 $permissions = Role::where("id", $role_id)->first()->permissions_list;
-                 
-                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id, 'permissions' => isset($request['permissions'])?json_encode($request['permissions'],true):$permissions]);
+                $permissions = Role::where("id", $role_id)->first()->permissions_list;
+
+                $user->roleInProfile()->attach($user->id, ['user_id' => $user->id, 'role_id' => $role_id, "created_by" => auth()->id(), 'profile_id' => auth()->user()->profile_id, 'is_learning' => $is_learning, 'status' => $request['status'], 'manager_user_Id' => $manager_id, 'permissions' => isset($request['permissions']) ? json_encode($request['permissions'], true) : $permissions]);
 
                 $user->update(['profile_id' => auth()->user()->profile_id]);
             }
@@ -630,6 +630,4 @@ class UserServices
             return $output;
         }
     }
-
- 
 }
