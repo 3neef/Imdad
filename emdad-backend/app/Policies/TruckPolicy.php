@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Http\Services\General\CheckService;
 use App\Models\Accounts\Truck;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -19,7 +20,7 @@ class TruckPolicy
      */
     public function viewAny(User $user)
     {
-        // return $this->checkPermission($user,$type1="SMFLT4"); 
+        // return CheckService::checkOneType($user,$type1="SMFLT4"); 
     }
 
     /**
@@ -31,7 +32,7 @@ class TruckPolicy
      */
     public function view(User $user)
     {
-        return $this->checkPermission($user,$type1="SMFLT4");
+        return CheckService::checkOneType($user,$type1="SMFLT4");
         
     }
 
@@ -43,7 +44,7 @@ class TruckPolicy
      */
     public function create(User $user)
     {
-      return  $this->checkPermission($user,$type1="SMFLT1");
+      return  CheckService::checkOneType($user,$type1="SMFLT1");
         
     }
 
@@ -56,7 +57,7 @@ class TruckPolicy
      */
     public function update(User $user)
     {
-      return  $this->checkPermission($user,$type1="SMFLT2");
+      return  CheckService::checkOneType($user,$type1="SMFLT2");
         
     }
 
@@ -69,7 +70,7 @@ class TruckPolicy
      */
     public function delete(User $user)
     {
-      return  $this->checkPermission($user,$type1="SMFLT3");
+      return  CheckService::checkOneType($user,$type1="SMFLT3");
         
     }
 
@@ -82,7 +83,7 @@ class TruckPolicy
      */
     public function restore(User $user)
     {
-    //   return  $this->checkPermission($user,$type1="SMFL47");
+    //   return  CheckService::checkOneType($user,$type1="SMFL47");
         
     }
 
@@ -96,19 +97,5 @@ class TruckPolicy
     public function forceDelete(User $user, Truck $truck)
     {
         //
-    }
-    public function checkPermission($user, $type1)
-    {
-        if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            if ($permissonis!= null) {
-                $labels = json_decode($permissonis);
-                foreach ($labels as $label) {
-                    if ($label == $type1) {
-                        return true;
-                    }
-                }
-            }
-        }
     }
 }

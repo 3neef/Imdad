@@ -4,6 +4,7 @@ namespace App\Policies;
 
 // use App\Models\Emdad\Categories;
 
+use App\Http\Services\General\CheckService;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +33,7 @@ class  CategoryPolicy
      */
     public function view(User $user)
     {
-       return $this->checkPermission($user, $type1 = "BMCT4", $type2 = "SMCT4");
+       return CheckService::checkTwoTypes($user, $type1 = "BMCT4", $type2 = "SMCT4");
         
     }
 
@@ -44,7 +45,7 @@ class  CategoryPolicy
      */
     public function create(User $user)
     {
-       return $this->checkPermission($user, $type1 = "BMCT1", $type2 = "SMCT1");
+       return CheckService::checkTwoTypes($user, $type1 = "BMCT1", $type2 = "SMCT1");
     }
 
     /**
@@ -55,7 +56,7 @@ class  CategoryPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function update(User $user)    {
-    //    return $this->checkPermission($user, $type1 = "BMCT2", $type2 = "SMCT2");
+    //    return CheckService::checkTwoTypes($user, $type1 = "BMCT2", $type2 = "SMCT2");
     }
 
     /**
@@ -89,21 +90,5 @@ class  CategoryPolicy
      */
     public function forceDelete(User $user)    {
         //
-    }
-
-    public function checkPermission($user, $type1,$type2)
-    {
-        // dd($user);
-        if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            if ($permissonis!= null) {
-                $labels = json_decode($permissonis);
-                foreach ($labels as $label) {
-                    if ($label == $type1||$label==$type2) {
-                        return true;
-                    }
-                }
-            }
-        }
     }
 }

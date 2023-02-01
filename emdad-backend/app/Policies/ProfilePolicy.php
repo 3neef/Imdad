@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Http\Services\General\CheckService;
 use App\Models\Profile;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,7 @@ class ProfilePolicy
      */
     public function view(User $user)
     {
-        return $this->checkPermission($user,$type1="BMC4" ,$type2="SMC4");
+        return CheckService::checkTwoTypes($user,$type1="BMC4" ,$type2="SMC4");
         
     }
 
@@ -43,7 +44,7 @@ class ProfilePolicy
      */
     public function create(User $user)
     {
-        return $this->checkPermission($user,$type1="BMC1" ,$type2="SMC1");
+        return CheckService::checkTwoTypes($user,$type1="BMC1" ,$type2="SMC1");
         
     }
 
@@ -93,19 +94,5 @@ class ProfilePolicy
     public function forceDelete(User $user)
     {
         //
-    }
-    public function checkPermission($user, $type1,$type2)
-    {
-        if ($user->currentProfile()->type == "Buyer" || $user->currentProfile()->type == "Supplier") {
-            $permissonis = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->pluck('permissions')->first();
-            if ($permissonis!= null) {
-                $labels = json_decode($permissonis);
-                foreach ($labels as $label) {
-                    if ($label == $type1 ||$label == $type2) {
-                        return true;
-                    }
-                }
-            }
-        }
     }
 }
