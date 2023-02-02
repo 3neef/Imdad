@@ -5812,7 +5812,7 @@
                                         "type": "integer"
                                     },
                                     "warahouseId": {
-                                        "type": "integer"
+                                        "type": "array(integer)"
                                     }
                                 },
                                 "type": "object"
@@ -6861,6 +6861,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -6872,20 +6875,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }

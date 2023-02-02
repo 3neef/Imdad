@@ -17,35 +17,43 @@ class PermissionSeeder extends Seeder
 
         $permissions = [
             //Buyer user management
-            ["name" => "buyer_User_Management_Entering_to_users_smart_link", "label" => "BMU48", "category" => "BMU", "description" => ""],
-            ["name" => "buyer_User_Management_activating_deActivate", "label" => "BMU5", "category" => "BMU", "description" => ""],
+            ["name" => "buyer_User_Management_Entering_to_users_smart_link", "label" => "BMU21", "category" => "BMU", "description" => ""],
+            ["name" => "buyer_User_Management_activate", "label" => "BMU5", "category" => "BMU", "description" => ""],
+            ["name" => "buyer_User_Management_deActivate", "label" => "BMU10", "category" => "BMU", "description" => ""],
+
             ["name" => "buyer_User_Management_editing", "label" => "BMU2", "category" => "BMU", "description" => ""],
             ["name" => "buyer_User_Management_Adding", "label" => "BMU1", "category" => "BMU", "description" => ""],
             ["name" => "buyer_User_Management_Viewing", "label" => "BMU4", "category" => "BMU", "description" => ""],
             // Buyer Category 
-            ["name" => "buyer_Category_Management_smart_link", "label" => "BMT48", "category" => "BMT", "description" => ""],
-            ["name" => "buyer_Category_Management_active_deActive", "label" => "BMT5", "category" => "BMT", "description" => ""],
+            ["name" => "buyer_Category_Management_smart_link", "label" => "BMT21", "category" => "BMT", "description" => ""],
+            ["name" => "buyer_Category_Management_active", "label" => "BMT5", "category" => "BMT", "description" => ""],
+            ["name" => "buyer_Category_Management_deactive", "label" => "BMT10", "category" => "BMT", "description" => ""],
+
             ["name" => "buyer_Category_Management_adding", "label" => "BMT1", "category" => "BMT", "description" => ""],
             ["name" => "buyer_Category_Management_Requesting", "label" => "BMT12", "category" => "BMT", "description" => ""],
             ["name" => "buyer_Category_Management_view", "label" => "BMT4", "category" => "BMT", "description" => ""],
             //Buyer Product
-            ["name" => "buyer_Product_Management_smart_link", "label" => "BMP48", "category" => "BMP", "description" => ""],
+            ["name" => "buyer_Product_Management_smart_link", "label" => "BMP21", "category" => "BMP", "description" => ""],
             ["name" => "buyer_Product_Management_adding", "label" => "BMP1", "category" => "BMP", "description" => ""],
             ["name" => "buyer_Product_Management_view", "label" => "BMP4", "category" => "BMP", "description" => ""],
             //supplier  user management
-            ["name" => "supplier_user_smart_link", "label" => "SMU48", "category" => "SMU", "description" => ""],
-            ["name" => "supplier_user_activate_deActive", "label" => "SMU5", "category" => "SMU", "description" => ""],
+            ["name" => "supplier_user_smart_link", "label" => "SMU21", "category" => "SMU", "description" => ""],
+            ["name" => "supplier_user_activate", "label" => "SMU5", "category" => "SMU", "description" => ""],
+            ["name" => "supplier_user_deActive", "label" => "SMU10", "category" => "SMU", "description" => ""],
+
             ["name" => "supplier_user_edit", "label" => "SMU2", "category" => "SMU", "description" => ""],
             ["name" => "supplier_user_add", "label" => "SMU1", "category" => "SMU", "description" => ""],
             ["name" => "supplier_user_view", "label" => "SMU4", "category" => "SMU", "description" => ""],
             // supplier Category
-            ["name" => "supplier_Category_Management_smart_link", "label" => "SMT48", "category" => "SMT", "description" => ""],
-            ["name" => "supplier_Category_Management_active_deActive", "label" => "SMT5", "category" => "SMT", "description" => ""],
+            ["name" => "supplier_Category_Management_smart_link", "label" => "SMT21", "category" => "SMT", "description" => ""],
+            ["name" => "supplier_Category_Management_active", "label" => "SMT5", "category" => "SMT", "description" => ""],
+            ["name" => "supplier_Category_Management_deActive", "label" => "SMT10", "category" => "SMT", "description" => ""],
+
             ["name" => "supplier_Category_Management_adding", "label" => "SMT1", "category" => "SMT", "description" => ""],
             ["name" => "supplier_Category_Management_Requesting", "label" => "SMT12", "category" => "SMT", "description" => ""],
             ["name" => "supplier_Category_Management_view", "label" => "SMT4", "category" => "SMT", "description" => ""],
             //Supplier Product
-            ["name" => "supplier_Product_Management_smart_link", "label" => "SMP48", "category" => "SMP", "description" => ""],
+            ["name" => "supplier_Product_Management_smart_link", "label" => "SMP21", "category" => "SMP", "description" => ""],
             ["name" => "supplier_Product_Management_adding", "label" => "SMP1", "category" => "SMP", "description" => ""],
             ["name" => "supplier_Product_Management_view", "label" => "SMP4", "category" => "SMP", "description" => ""],
             //supplier driver management 
@@ -65,22 +73,22 @@ class PermissionSeeder extends Seeder
             ["name" => "buyer_add_profiles", "label" => "BMC1", "category" => "BMC", "description" => ""],
             ["name" => "buyer_view_profiles", "label" => "BMC4", "category" => "BMC", "description" => ""],
             //buyer management profile subscriptions
-            ["name" => "buyer_Company_subscription_freeze_for_a_period", "label" => "BMCO31", "category" => "BMCO", "description" => ""],
-            ["name" => "buyer_Company_upgarde", "label" => "BMCO30", "category" => "BMCO", "description" => ""],
-            ["name" => "buyer_Company_reNew", "label" => "BMCO49", "category" => "BMCO", "description" => ""],
-            ["name" => "buyer_Company_Viewing_subscription", "label" => "BMCO50", "category" => "BMCO", "description" => ""],
+            ["name" => "buyer_Company_subscription_freeze_for_a_period", "label" => "BMCS15", "category" => "BMCS", "description" => ""],
+            ["name" => "buyer_Company_upgarde", "label" => "BMCS19", "category" => "BMCS", "description" => ""],
+            ["name" => "buyer_Company_reNew", "label" => "BMCS20", "category" => "BMCS", "description" => ""],
+            ["name" => "buyer_Company_Viewing_subscription", "label" => "BMCS4", "category" => "BMCS", "description" => ""],
             //supplier management profile subscriptions
-            ["name" => "supplier_Company_subscription_freeze_for_a_period", "label" => "SMCO31", "category" => "SMCO", "description" => ""],
-            ["name" => "supplier_Company_upgarde", "label" => "SMCO30", "category" => "SMCO", "description" => ""],
-            ["name" => "supplier_Company_reNew", "label" => "SMCO49", "category" => "SMCO", "description" => ""],
-            ["name" => "supplier_Company_Viewing_subscription", "label" => "SMCO50", "category" => "SMCO", "description" => ""],
+            ["name" => "supplier_Company_subscription_freeze_for_a_period", "label" => "SMC15", "category" => "SMCS", "description" => ""],
+            ["name" => "supplier_Company_upgarde", "label" => "SMCS19", "category" => "SMCS", "description" => ""],
+            ["name" => "supplier_Company_reNew", "label" => "SMCS20", "category" => "SMCS", "description" => ""],
+            ["name" => "supplier_Company_Viewing_subscription", "label" => "SMCS4", "category" => "SMCS", "description" => ""],
             //buyer warehouse
-            ["name" => "buyer_Management_warehouses_smart_link", "label" => "BMW48", "category" => "BMW", "description" => ""],
+            ["name" => "buyer_Management_warehouses_smart_link", "label" => "BMW21", "category" => "BMW", "description" => ""],
             ["name" => "buyer_Management_warehouses_add", "label" => "BMW1", "category" => "BMW", "description" => ""],
             ["name" => "buyer_Management_warehouses_view", "label" => "BMW4", "category" => "BMW", "description" => ""],
             ["name" => "buyer_Management_warehouses_edit", "label" => "BMW2", "category" => "BMW", "description" => ""],
             //supplier warehouse
-            ["name" => "Supplier_Management_warehouses_smart_link", "label" => "SMW48", "category" => "SMW", "description" => ""],
+            ["name" => "Supplier_Management_warehouses_smart_link", "label" => "SMW21", "category" => "SMW", "description" => ""],
             ["name" => "Supplier_Management_warehouses_add", "label" => "SMW1", "category" => "SMW", "description" => ""],
             ["name" => "Supplier_Management_warehouses_edit", "label" => "SMW2", "category" => "SMW", "description" => ""],
             ["name" => "Supplier_Management_warehouses_view", "label" => "SMW4", "category" => "SMW", "description" => ""],
