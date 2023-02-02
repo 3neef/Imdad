@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Profile\WarehousesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubscriptionPaymentController;
+use App\Http\Controllers\WarehouseTypeController;
+use App\Models\WarehouseType;
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::get('checkSubscriptionPayment', [SubscriptionPaymentController::class, 'check_subscription_payment']);
@@ -32,6 +34,8 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('warehouses')->group(
     
 });
 Route::apiResource('warehouses', WarehousesController::class)->middleware(['auth.apikey', 'auth:sanctum']);
+Route::apiResource('warehouse-types', WarehouseTypeController::class);
+Route::put('warehouse-types/restore/{warehouse_type}', [WarehouseTypeController::class, 'restore']);
 
 
 
