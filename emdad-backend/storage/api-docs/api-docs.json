@@ -5812,7 +5812,7 @@
                                         "type": "integer"
                                     },
                                     "warahouseId": {
-                                        "type": "integer"
+                                        "type": "array(integer)"
                                     }
                                 },
                                 "type": "object"
