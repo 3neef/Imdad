@@ -5,23 +5,18 @@ namespace App\Http\Controllers\User;
 use App\Http\Collections\UserCollection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UMRequests\DeleteWarehouse;
 use App\Http\Requests\UMRequests\DeleteWarehouseRequest;
 use App\Http\Requests\UMRequests\UpdateUserWarehouseStatusRequest;
-use App\Http\Requests\UMRequests\UpdateUserWharehouseStatus;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
-use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\StoreUserRequest;
-use App\Http\Requests\UMRequests\User\UpdateAvaterRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
 use App\Http\Requests\UMRequests\User\UploadAvaterRequest;
 use App\Http\Requests\UMRequests\User\UserAvtivateRerquest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\UserServices;
 use App\Models\User;
-use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
