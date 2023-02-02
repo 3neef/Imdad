@@ -983,17 +983,11 @@ class UserController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
      *               @OA\Property(property="data", type = "object")
      *            ),
      *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent(),
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function changePassword(Request $request)
