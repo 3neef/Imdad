@@ -102,7 +102,7 @@ class RegRoleSeeder extends Seeder
 
 
 
-            if ($role['type'] == 'buyer' && $role['name_en'] == 'Warehouse officer') {
+            if ($role['type'] == 'buyer' && $role['name_en'] == 'Wharehouse officer') {
                 $persomsions = ['BMC4'];
                 $this->insertRole($role, $persomsions);
                 continue;
@@ -117,7 +117,7 @@ class RegRoleSeeder extends Seeder
                 $this->insertRole($role, $persomsions);
                 continue;
             }
-            if ($role['type'] == 'buyer' && $role['name_en'] == ' Wharehouse officer') {
+            if ($role['type'] == 'buyer' && $role['name_en'] == 'Wharehouse manager') {
                 $persomsions = ['BMU4', 'BMW21', 'BMW1', 'BMW4', 'BMW2', 'BMT48', 'BMT5', 'BMT1', 'BMT12', 'BMT4', 'BMP21', 'BMP1', 'BMP4', 'BMC4'];
                 $this->insertRole($role, $persomsions);
                 continue;
