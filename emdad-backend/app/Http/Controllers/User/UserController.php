@@ -108,7 +108,7 @@ class UserController extends Controller
      * operationId="add-user",
      * tags={"UM & Permissions"},
      * summary="Register User",
-     * description="Register User Here",
+     * description="Register User in a Company with the preference of being assigned to multiple warehouses ",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
