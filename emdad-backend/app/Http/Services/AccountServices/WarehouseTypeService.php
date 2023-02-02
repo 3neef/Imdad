@@ -23,32 +23,48 @@ class WarehouseTypeService
             'name_ar' => $request->name_ar,
         ]);
 
-        return $warehouse_type;
+        $output = ["statusCode" => "000", 'success' => true, "message"=>"Tyoe Created successfully", 'data' => $warehouse_type];
+        return $output;
     }
 
     public static function update($request, $id){
         $warehouse_type = WarehouseType::find($id);
-        if($warehouse_type != null){
+        if ($warehouse_type != null) {
             $warehouse_type->update([
                 'name_en' => $request->name_en ?? $warehouse_type->name_en,
                 'name_ar' => $request->name_ar ?? $warehouse_type->name_ar,
             ]);
-        }else{
+        } else {
             $warehouse_type = null;
+            $output = ["statusCode" => "999", 'success' => false, "message" => "system error", 'data' => $warehouse_type];
+            return $output;
         }
-        return $warehouse_type;
+        $output = ["statusCode" => "000", 'success' => true, "message" => "Type Updated successfully", 'data' => $warehouse_type];
+        return $output;
     }
 
     public static function delete($id){
         $warehouse_type = WarehouseType::find($id)->delete();
 
-        return $warehouse_type;
+        if($warehouse_type){
+            $output = ["statusCode" => "000", 'success' => true, "message" => "Type deleted successfully"];
+            return $output;
+        }else{
+            $output = ["statusCode" => "999", 'success' => false, "message" => "system errors"];
+            return $output;
+        }
     }
 
     public static function restore($id){
         $warehouse_type = WarehouseType::withTrashed()->findorfail($id)->restore();
 
-        return $warehouse_type;
+        if($warehouse_type){
+            $output = ["statusCode" => "000", 'success' => true, "message" => "Type Restored Successfully"];
+            return $output;
+        }else{
+            $output = ["statusCode" => "999", 'success' => false, "message" => "System Error"];
+            return $output;
+        }
     }
 
   
