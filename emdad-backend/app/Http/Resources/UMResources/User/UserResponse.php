@@ -29,7 +29,7 @@ class UserResponse extends JsonResource
             "isSuperAdmin" => $this->is_super_admin,
             "status" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->status ?? '',
             "roleId" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->role_id ?? '',
-            "permissions" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->permissions_list ?? [],
+            "permissions" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->permissions ?? [],
             "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null,
             "expireDate" => $this->expiry_date,
             "passwordChanged" => $this->password_changed,
