@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\General;
 
+use App\Models\AppSetting;
 
 class SmsService
 {
@@ -17,13 +18,15 @@ class SmsService
 
   public  function sendSms($mobile, $var,$smsType='otp')
   {
-
+    $template_id=null;
     if($smsType==='otp'){
       $msgBody = 'Your verification code is ' . $var.'';
+      $template_id=AppSetting::where("key","sms_otp_en")->frist()?AppSetting::where("key","sms_otp_en")->frist()->value:null;
 
     } 
     if($smsType=='password'){
       $msgBody = 'Emdad account has been issued for you use this first time password ' . $var.'';
+      $template_id=AppSetting::where("key","sms_otp_en")->frist()?AppSetting::where("key","sms_password_en")->frist()->value:null;
 
     }
 
@@ -33,7 +36,7 @@ class SmsService
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://rest.gateway.sa/api/SendSMS?api_id=API8853343069&api_password=Govb6nG0um&sms_type=T&sender_id=Emdad-Aid&phonenumber=' . $mobile . '&textmessage=' . urlencode($msgBody) . '&encoding=U',
+      CURLOPT_URL => 'https://rest.gateway.sa/api/SendSMS?api_id=API8853343069&api_password=Govb6nG0um&sms_type=T&sender_id=Emdad-Aid&phonenumber=' . $mobile . '&textmessage=' . urlencode($msgBody) . '&encoding=U&template_id='.$template_id,
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
