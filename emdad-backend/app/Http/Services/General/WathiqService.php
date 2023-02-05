@@ -3,6 +3,7 @@
 namespace App\Http\Services\General;
 
 use App\Models\Emdad\RelatedCompanies;
+use App\Models\LookupLocation;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -43,5 +44,41 @@ class WathiqService
                 $related->save();
             }
         }
+    }
+
+    public static function getLocations()
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration//lookup/locations',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+            ),
+        ));
+
+        
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        if (is_array(json_decode($response))) {
+            foreach (json_decode($response) as $location) {
+                $lookup_location = new LookupLocation();
+                $lookup_location->loc_number = $location->id;
+                $lookup_location->name_ar = $location->name;
+                $lookup_location->name_en = $location->nameEn;
+                $lookup_location->save();
+            }
+        }
+        return $response;
     }
 }
