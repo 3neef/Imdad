@@ -20,6 +20,6 @@ class AppSettingController extends Controller
 
     {
         $output = $appSettings->store($request->all());
-        return response()->json(['success' => true, 'data' => AppSettingsResource::collection($output), 'statusCode' => '000', 'message' => 'settings created successfluy'], 200);
+        return response()->json(['success' => true, 'data' =>new AppSettingsResource($output), 'statusCode' => '000', 'message' => 'settings created successfluy'], 200);
     }
 }

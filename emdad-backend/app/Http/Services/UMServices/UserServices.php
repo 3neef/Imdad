@@ -563,7 +563,9 @@ class UserServices
             $request['is_super_admin'] = false;
 
             $user = User::create($request);
-            $this->UserOtp($user);
+            $respons =$this->UserOtp($user);
+
+            dd($respons);
 
             MailController::sendSignupEmail($user->name, $user->email, ["admin" => auth()->user()->full_name, "password" => $user->password], "en", "password");
 
