@@ -40,6 +40,8 @@ Route::group(['prefix' => 'installation'], function () {
 Route::middleware(['auth.apikey'])->prefix('wathiq')->group(function () {
     Route::get('relatedCr', [WathiqController::class, 'getRelatedCompanies']);
 });
+Route::get('lookup-locations', [WathiqController::class, 'getLookupLocations']);
+Route::get('lookup-businessTypes', [WathiqController::class, 'getBusinessTypes']);
 Route::get('optimize', function () {
     Artisan::call('optimize');
     dd("optimized successfully");
