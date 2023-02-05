@@ -3,7 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 class StoreSettingsRequest extends FormRequest
 {
     /**
@@ -27,4 +28,9 @@ class StoreSettingsRequest extends FormRequest
             'preferences' => 'required',
         ];
     }
+    protected function failedValidation(Validator $validator): void
+    {
+        throw new HttpResponseException(  response()->json(["success" => false, "errors" => $validator->errors(),"statusCode"=>"422"], 200));
+    }
+
 }
