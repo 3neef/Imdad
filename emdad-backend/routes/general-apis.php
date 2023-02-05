@@ -37,6 +37,9 @@ Route::middleware(['auth.apikey'])->prefix('wathiq')->group(function () {
 });
 Route::get('lookup-locations', [WathiqController::class, 'getLookupLocations']);
 Route::get('lookup-businessTypes', [WathiqController::class, 'getBusinessTypes']);
+Route::get('lookup-relations', [WathiqController::class, 'getRelations']);
+
+
 Route::get('optimize', function () {
     Artisan::call('optimize');
     dd("optimized successfully");
