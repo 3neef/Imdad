@@ -538,7 +538,7 @@ class UserServices
         return $permissions;
     }
 
-    protected  function UserOtp($user)
+    public  function UserOtp($user)
     {
 
         $smsService = new SmsService;
@@ -563,12 +563,7 @@ class UserServices
             $request['is_super_admin'] = false;
 
             $user = User::create($request);
-            $respons =$this->UserOtp($user);
-
-            dd($respons);
-
-            MailController::sendSignupEmail($user->name, $user->email, ["admin" => auth()->user()->full_name, "password" => $user->password], "en", "password");
-
+      
             $role_id = $request['roleId'] ?? null;
             $is_learning = $request['is_learning'] ?? false;
             $manager_id = null;
