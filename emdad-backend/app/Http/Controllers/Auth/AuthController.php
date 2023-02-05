@@ -165,7 +165,7 @@ class AuthController extends Controller
 
             $authenticationServices->UserOtp($user);
 
-            MailController::sendSignupEmail($user->name, $user->email, ["otp" => $user->otp], "en", "otp");
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp, "en", "otp");
 
             return response()->json([
                 "statusCode" => "000",
