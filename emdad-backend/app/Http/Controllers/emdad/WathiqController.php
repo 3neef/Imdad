@@ -73,4 +73,14 @@ class WathiqController extends Controller
             return response()->json(["status" => true, "data" => RelatedCompaiesResource::collection($related)], 200);
         }
     }
+
+    public function getLookupLocations(){
+        $locations = WathiqService::getLocations();
+        return $locations;
+    }
+
+    public function getBusinessTypes(){
+        $types = WathiqService::getBusinessTypes();
+        return $types;
+    }
 }
