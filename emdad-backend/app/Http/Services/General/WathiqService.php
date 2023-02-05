@@ -5,6 +5,7 @@ namespace App\Http\Services\General;
 use App\Models\BusinessType;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\LookupLocation;
+use App\Models\LookupNationality;
 use App\Models\LookupRelation;
 
 use function PHPUnit\Framework\isEmpty;
@@ -120,6 +121,8 @@ class WathiqService
         }
         return $response;
     }
+
+
     public static function getRelations()
     {
 
@@ -151,6 +154,44 @@ class WathiqService
                 $lookup_relation->name_ar = $relation->name;
                 $lookup_relation->name_en = $relation->nameEn;
                 $lookup_relation->save();
+            }
+        }
+        return $response;
+    }
+
+    public static function getNationalities()
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration//lookup/nationalities',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+            ),
+        ));
+
+        
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        if (is_array(json_decode($response))) {
+            foreach (json_decode($response) as $nationality) {
+                $lookup_nationality = new LookupNationality();
+                $lookup_nationality->country_id = $nationality->id;
+                $lookup_nationality->country_ar = $nationality->country;
+                $lookup_nationality->country_en = $nationality->countryEn;
+                $lookup_nationality->isoAlpha2 = $nationality->isoAlpha2;
+                $lookup_nationality->isoAlpha3 = $nationality->isoAlpha3;
+                $lookup_nationality->save();
             }
         }
         return $response;

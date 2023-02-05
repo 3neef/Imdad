@@ -88,4 +88,9 @@ class WathiqController extends Controller
         $relations = WathiqService::getRelations();
         return $relations;
     }
+
+    public function getNationalities(){
+        $nationalities = WathiqService::getNationalities();
+        return $nationalities;
+    }
 }
