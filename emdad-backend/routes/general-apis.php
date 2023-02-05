@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Accounts\SubscriptionController;
+use App\Http\Controllers\AppSettingController;
 use App\Http\Controllers\emdad\WathiqController;
 use App\Http\Controllers\Coupon\CouponController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\SubscriptionPaymentController;
 use App\Http\Controllers\Translatoin\TranslationController;
+use App\Models\AppSetting;
 use App\Models\SubscriptionPayment;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -29,6 +31,9 @@ Route::group(['prefix' => 'installation'], function () {
     Route::get('fresh', [SubscriptionController::class, 'migrateFresh']);
     Route::get('apiKey', [SubscriptionController::class, 'apiKey']);
     Route::get('key', [SubscriptionController::class, 'key']);
+    Route::get('appSettings', [AppSettingController::class, 'index']);
+    Route::post('appSettings', [AppSettingController::class, 'store']);
+
 });
 
 
