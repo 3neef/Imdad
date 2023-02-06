@@ -172,7 +172,7 @@ class UserController extends Controller
             case '000':
                 $userServices->UserOtp($output['data']);
 
-                MailController::sendSignupEmail($output['data']->name, $output['data']->email, ["admin" => auth()->user()->full_name, "password" => $user->password], "en", "password");
+                MailController::sendSignupEmail($output['data']->name, $output['data']->email, ["admin" => auth()->user()->full_name, "password" => $output['data']->password], "en", "password");
     
                 return response()->json(['data' => ['user' => new UserResponse($output['data']), 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
                 break;
