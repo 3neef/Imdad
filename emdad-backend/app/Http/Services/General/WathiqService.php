@@ -223,7 +223,6 @@ class WathiqService
         curl_close($curl);
 
         if (is_array(json_decode($response))) {
-            // return json_decode($response);
             foreach (json_decode($response) as $activity) {
                 $lookup_activity = new LookupActivities();
                 $lookup_activity->activity_id = $activity->id;
