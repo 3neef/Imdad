@@ -45,7 +45,7 @@ class  CategoryPolicy
      */
     public function create(User $user)
     {
-       return CheckService::checkTwoTypes($user, $type1 = "BMCT1", $type2 = "SMCT1");
+       return CheckService::checkTwoTypes($user, $type1 = "BMT1", $type2 = "SMT1");
     }
 
     /**
