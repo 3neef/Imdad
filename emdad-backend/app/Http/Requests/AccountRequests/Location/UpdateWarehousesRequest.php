@@ -33,7 +33,10 @@ class UpdateWarehousesRequest extends FormRequest
             'longitude' => ['string'],
             'gateType' => ['string'],
             'receiverName' => ['string','max:25'],
-            'receiverPhone' => ['string','max:14','min:14','regex:/^(00966)/']
+            'receiverPhone' => ['string','max:14','min:14','regex:/^(00966)/'],
+            'managerId' => ['integer', 'exists:users,id']
+
+            
         ];
     }
 
