@@ -34,7 +34,7 @@ class DriverPolicy
     {
         CheckService::checkOneType($user, $type1 = "SMFLD4");
     }
-
+    
     /**
      * Determine whether the user can create models.
      *
