@@ -10,6 +10,8 @@ use App\Models\LookupLocation;
 use App\Models\LookupNationality;
 use App\Models\LookupRelation;
 use App\Models\WathiqInfo;
+use App\Models\WathiqStatus;
+use Nette\Utils\Json;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -58,7 +60,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration//lookup/locations',
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/locations',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -95,7 +97,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration//lookup/businessTypes',
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/businessTypes',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -132,7 +134,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration//lookup/relations',
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/relations',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -168,7 +170,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration//lookup/nationalities',
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/nationalities',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -206,7 +208,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration//lookup/activities',
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/activities',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -301,8 +303,39 @@ class WathiqService
         return $response;
     }
     
-    public static function getStatus(){
+    public static function getStatus($id){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/status/'.$id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+            ),
+        ));
+
         
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        if ($response != NULL) {
+            $server_status = json_decode($response);
+            $full_info = new WathiqStatus();
+            $full_info->cr_number = $id;
+            $full_info->status = $server_status->id;
+            $full_info->name_ar = $server_status->name;
+            $full_info->name_en = $server_status->nameEn;
+            $full_info->cancellation = json_encode($server_status->cancellation);
+            $full_info->save();
+        }
+        return $response;
     }
     public static function getManagers(){
         
