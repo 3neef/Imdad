@@ -235,4 +235,28 @@ class WathiqService
         }
         return $response;
     }
+    public static function getFullInfo(){
+
+    }
+    public static function getInfo(){
+        
+    }
+    public static function getAddress(){
+        
+    }
+    public static function getCapital(){
+        
+    }
+    public static function getStatus(){
+        
+    }
+    public static function getTree(){
+        
+    }
+    public static function getManagers(){
+        
+    }
+    public static function getOwners(){
+        
+    }
 }
