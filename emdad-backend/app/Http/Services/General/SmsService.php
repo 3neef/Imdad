@@ -48,7 +48,7 @@ class SmsService
 
     IntegrationResponse::create([
       "model"=>"\App\Models\User",
-      "id"=>$mobile,
+      "record"=>$mobile,
       "response"=>json_encode($response)
     ]);
 
