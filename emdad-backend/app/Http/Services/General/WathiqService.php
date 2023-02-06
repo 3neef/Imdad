@@ -11,6 +11,7 @@ use App\Models\LookupNationality;
 use App\Models\LookupRelation;
 use App\Models\WathiqInfo;
 use App\Models\WathiqManagers;
+use App\Models\WathiqOwner;
 use App\Models\WathiqStatus;
 use Nette\Utils\Json;
 
@@ -375,8 +376,43 @@ class WathiqService
         }
         return $response;
     }
-    public static function getOwners(){
+    public static function getOwners($id){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/owners/'.$id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+            ),
+        ));
+
         
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        if (is_array(json_decode($response))) {
+            foreach (json_decode($response) as $wathiq_owner) {
+                $owner = new WathiqOwner();
+                $owner->cr_number = $id;
+                $owner->gross = $wathiq_owner->gross;
+                $owner->shares_count = $wathiq_owner->sharesCount;
+                $owner->name = $wathiq_owner->name;
+                $owner->birthDate = $wathiq_owner->birthDate;
+                $owner->identity = json_encode($wathiq_owner->identity);
+                $owner->relation = json_encode($wathiq_owner->relation);
+                $owner->nationality = json_encode($wathiq_owner->nationality);
+                $owner->save();
+            }
+        }
+        return $response;
     }
     public static function getOwns(){
         
