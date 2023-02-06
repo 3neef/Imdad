@@ -10,5 +10,5 @@ class IntegrationResponse extends Model
     use HasFactory;
     protected $table="integration_responses";
 
-    protected $fillable=['id','model','response'];
+    protected $fillable=['record','model','response'];
 }
