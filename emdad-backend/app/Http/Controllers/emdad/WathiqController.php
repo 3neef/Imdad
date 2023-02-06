@@ -105,8 +105,8 @@ class WathiqController extends Controller
         $Fullinfo = WathiqService::getFullInfo($id);
         return $Fullinfo;
     }
-    public function Info(){
-        $info = WathiqService::getInfo();
+    public function Info($id){
+        $info = WathiqService::getInfo($id);
         return $info;
     }  
     public function Status(){
