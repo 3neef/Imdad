@@ -14,7 +14,6 @@ return new class extends Migration
     public function up()
     {
         Schema::create('integration_responses', function (Blueprint $table) {
-            $table->id();
             $table->timestamps();
             $table->string("model",30);
             $table->text("response");
