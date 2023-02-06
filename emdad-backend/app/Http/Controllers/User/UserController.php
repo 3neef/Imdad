@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Collections\UserCollection;
+use App\Http\Controllers\Auth\MailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UMRequests\DeleteWarehouseRequest;
@@ -169,6 +170,10 @@ class UserController extends Controller
         $output = $userServices->create($request->validated());
         switch ($output['statusCode']) {
             case '000':
+                $userServices->UserOtp($output['data']);
+
+                MailController::sendSignupEmail($output['data']->name, $output['data']->email, ["admin" => auth()->user()->full_name, "password" => $output['data']->password], "en", "password");
+    
                 return response()->json(['data' => ['user' => new UserResponse($output['data']), 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
                 break;
             case '999':

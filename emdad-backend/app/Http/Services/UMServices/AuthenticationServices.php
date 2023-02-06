@@ -47,8 +47,6 @@ class AuthenticationServices
             $request['lang'] = $request['lang'] ?? 'en';
 
             $user = User::create($request);
-            $data = $this->UserOtp($user);
-            $user->update(['otp' => $data['otp']]);
 
             return $user;
         });
@@ -423,7 +421,7 @@ class AuthenticationServices
     }
 
 
-    protected  function UserOtp($user)
+    public  function UserOtp($user)
     {
 
         $smsService = new SmsService;

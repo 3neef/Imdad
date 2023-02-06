@@ -509,6 +509,100 @@
                 }
             }
         },
+        "/api/v1_0/installation": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "AppSettings",
+                "description": "Get All App Settings",
+                "operationId": "getAppSettings",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "AppSettings",
+                "description": "Store App Settings",
+                "operationId": "storeAppSettings",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "key",
+                                    "value"
+                                ],
+                                "properties": {
+                                    "Key": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1_0/auth/reset-password": {
             "put": {
                 "tags": [
