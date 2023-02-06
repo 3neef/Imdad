@@ -4,6 +4,7 @@ namespace App\Http\Resources\UMResources\User;
 
 use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
 use App\Models\Settings\Setting;
+use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
 
@@ -29,7 +30,8 @@ class UserResponse extends JsonResource
             "isSuperAdmin" => $this->is_super_admin,
             "status" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->status ?? '',
             "roleId" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->role_id ?? '',
-            "permissions" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->permissions ?? [],
+            // enActive users get empty Permiissions
+            "permissions" => $this->roles()->where('profile_id', $this->profile_id)->where('status', 'active')->first()->role->permissions ?? [],
             "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null,
             "expireDate" => $this->expiry_date,
             "passwordChanged" => $this->password_changed,
