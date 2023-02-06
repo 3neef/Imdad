@@ -265,7 +265,7 @@ class WarehousesController extends Controller
      */
     public function update(UpdateWarehousesRequest $request, $id)
     {
-         $this->authorize('update',Warehouse::class);
+        //  $this->authorize('update',Warehouse::class);
 
         $update = $this->warehouseService->update($request, $id);
         if ($update != null) {
