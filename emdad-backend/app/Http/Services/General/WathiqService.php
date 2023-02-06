@@ -10,6 +10,7 @@ use App\Models\LookupLocation;
 use App\Models\LookupNationality;
 use App\Models\LookupRelation;
 use App\Models\WathiqInfo;
+use App\Models\WathiqManagers;
 use App\Models\WathiqStatus;
 use Nette\Utils\Json;
 
@@ -337,8 +338,42 @@ class WathiqService
         }
         return $response;
     }
-    public static function getManagers(){
+
+    public static function getManagers($id){
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/managers/'.$id,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+            ),
+        ));
+
         
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        if (is_array(json_decode($response))) {
+            foreach (json_decode($response) as $wathiq_manager) {
+                $manager = new WathiqManagers();
+                $manager->cr_number = $id;
+                $manager->name = $wathiq_manager->name;
+                $manager->birthDate = $wathiq_manager->birthDate;
+                $manager->identity = json_encode($wathiq_manager->identity);
+                $manager->relation = json_encode($wathiq_manager->relation);
+                $manager->nationality = json_encode($wathiq_manager->nationality);
+                $manager->save();
+            }
+        }
+        return $response;
     }
     public static function getOwners(){
         

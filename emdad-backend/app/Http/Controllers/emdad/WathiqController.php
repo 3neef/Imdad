@@ -114,8 +114,8 @@ class WathiqController extends Controller
         return $Status;
     }
 
-    public function Managers(){
-        $Managers = WathiqService::getManagers();
+    public function Managers($id){
+        $Managers = WathiqService::getManagers($id);
         return $Managers;
     }
     public function Owners(){
