@@ -24,7 +24,7 @@ class WarehouseService
         $packageLimit = new PackageConstraint;
         $value = Warehouse::where('profile_id', auth()->user()->profile_id)->count();
         $limit = $packageLimit->packageLimitExceed("Warehouse", $value);
-        
+
         if ($limit == false) {
             $output = [
                 "statusCode" => "361",
@@ -32,7 +32,7 @@ class WarehouseService
                 'message' => "You have exceeded the allowed number of Warehouse to create it"
             ];
             return $output;
-        }elseif($limit != true && $limit == "package null"){
+        } elseif ($limit != true && $limit == "package null") {
             $output = [
                 "statusCode" => "364",
                 'success' => false,
@@ -88,11 +88,11 @@ class WarehouseService
                 "address_contact_phone" => $request->receiverPhone ?? $warehouse->address_contact_phone,
                 "latitude" => $request->latitude ?? $warehouse->latitude,
                 "longitude" => $request->longitude ?? $warehouse->longitude,
+                'manager_id' => $request->managerId ?? $warehouse->manager_id,
 
             ]);
             return $warehouse;
         }
-
     }
     public static function show($id)
     {
@@ -140,7 +140,6 @@ class WarehouseService
         if ($verfied) {
             return true;
         }
-        
     }
 
 
@@ -149,10 +148,9 @@ class WarehouseService
         $user = User::find($request->userId);
         $warehouse = Warehouse::find($request->warehouseId);
         if ($user != null && $warehouse != null) {
-             $warehouse->users()->attach($user);
+            $warehouse->users()->attach($user);
             return $warehouse;
         }
-       
     }
 
     public static  function unAssignWarehouseFromUser($request)
