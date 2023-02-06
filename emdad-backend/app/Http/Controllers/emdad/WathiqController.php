@@ -83,4 +83,19 @@ class WathiqController extends Controller
         $types = WathiqService::getBusinessTypes();
         return $types;
     }
+
+    public function getRelations(){
+        $relations = WathiqService::getRelations();
+        return $relations;
+    }
+
+    public function getNationalities(){
+        $nationalities = WathiqService::getNationalities();
+        return $nationalities;
+    }
+
+    public function getActivities(){
+        $nationalities = WathiqService::getActivities();
+        return $nationalities;
+    }
 }

@@ -162,6 +162,11 @@ class AuthController extends Controller
         $user = $authenticationServices->create($request->validated());
 
         if ($user) {
+
+            $authenticationServices->UserOtp($user);
+
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp, "en", "otp");
+
             return response()->json([
                 "statusCode" => "000",
 
