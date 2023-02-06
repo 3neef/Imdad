@@ -30,7 +30,7 @@ class UserResponse extends JsonResource
             "isSuperAdmin" => $this->is_super_admin,
             "status" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->status ?? '',
             "roleId" => $this->roles()->where('profile_id', $this->profile_id)->first()->role->role_id ?? '',
-            // enActive users get empty Permiissions
+            // inActive users get empty Permissions
             "permissions" => $this->roles()->where('profile_id', $this->profile_id)->where('status', 'active')->first()->role->permissions ?? [],
             "profileId" => $this->currentProfile() != null ? new ProfileResponse($this->currentProfile()) : null,
             "expireDate" => $this->expiry_date,
