@@ -23,7 +23,7 @@ class MailController extends Controller
                 'otp' => $var,
                 'lang' => $lang,
             ];
-            Mail::to($email)->send(new SignupEmail($data))->queue();
+            Mail::to($email)->queue(new SignupEmail($data));
         }
         if($type=='password'){
             $data = [
@@ -31,7 +31,7 @@ class MailController extends Controller
                 'var' => $var,
                 'lang' => $lang,
             ];
-            Mail::to($email)->send(new UserCreatedEmail($data))->queue();
+            Mail::to($email)->queue(new UserCreatedEmail($data));
         }
       
     }
