@@ -56,14 +56,9 @@ class Category extends Model
             ->withTimestamps();
     }
 
-    
 
 
-    public function CreatorName()
-    {
-        return   DB::table('category_profile')->where('profile_id', auth()->user()->profile_id)->where("user_id", $this->created_by)->first();
-    }
-    public function SettedCategoryStatus()
+    public function addedToProfile()
     {
         return   DB::table('category_profile')->where('profile_id', auth()->user()->profile_id)->where("category_id", $this->id)->first();
     }
