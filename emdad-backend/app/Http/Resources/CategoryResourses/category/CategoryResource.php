@@ -30,7 +30,7 @@ class CategoryResource extends JsonResource
             'isleaf' => $this->isleaf,
             'type' => $this->type,
             'note' => $this->reason,
-            "setCategoryStats" => $this->SettedCategoryStatus()->status??'',
+            "setCategoryStatus" => $this->SettedCategoryStatus()->status??'',
             'createdAt' => $this->created_at != null ? $this->created_at->format('Y-m-d') : null,
             'CreatorName' => $this->CreatorName() != null ? User::where("id", $this->CreatorName()->user_id)->first()->full_name : 'Created By Emdad',
             // 'CreatorName' => $this->CreatorName()!=null?User::where("id", $this->CreatorName()->user_id)->first()->full_name:'',
