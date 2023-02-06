@@ -45,6 +45,11 @@ class User extends  Authenticatable implements HasMedia, MustVerifyEmail
         'otp_expires_at', 'mobile',  'expiry_date', 'lang', 'password_changed'
     ];
 
+
+    public function setEmailAttribute($value)
+    {
+        $this->attributes['email'] = strtolower($value);
+    }
     /**
      * The attributes that should be hidden for arrays.
      *
