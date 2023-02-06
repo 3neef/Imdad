@@ -98,29 +98,20 @@ class WathiqController extends Controller
         $nationalities = WathiqService::getActivities();
         return $nationalities;
     }
-    public function fullInfo(){
-        $Fullinfo = WathiqService::getFullInfo();
+
+
+
+    public function fullInfo($id){
+        $Fullinfo = WathiqService::getFullInfo($id);
         return $Fullinfo;
     }
     public function Info(){
         $info = WathiqService::getInfo();
         return $info;
-    }
-    public function Address(){
-        $Address = WathiqService::getAddress();
-        return $Address;
-    }
-    public function Capital(){
-        $Capital = WathiqService::getCapital();
-        return $Capital;
-    }
+    }  
     public function Status(){
         $Status = WathiqService::getStatus();
         return $Status;
-    }
-    public function Tree(){
-        $Tree = WathiqService::getTree();
-        return $Tree;
     }
 
     public function Managers(){
