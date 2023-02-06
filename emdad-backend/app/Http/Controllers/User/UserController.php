@@ -400,7 +400,7 @@ class UserController extends Controller
      */
     public function update(UpdateRequest $request, UserServices $userServices, $id)
     {
-        $this->authorize('update', User::class);
+         $this->authorize('update', User::class);
 
         $output = $userServices->update($request, $id);
 

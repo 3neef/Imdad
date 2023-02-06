@@ -45,6 +45,8 @@ class UpdateRequest extends FormRequest
             'warehouseId.*'=>'exists:warehouses,id',
             'status' => [Rule::in('active','inActive')],
             'lang'=>  [Rule::in('en','ar')],
+            'permissions'=>['array',new UniqeValues],
+            'permissions.*'=>['string','exists:permissions,label'],
             'isLearning'=>'nullable'
         ];
     }
