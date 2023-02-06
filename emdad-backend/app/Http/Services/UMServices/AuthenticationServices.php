@@ -427,7 +427,6 @@ class AuthenticationServices
         $smsService = new SmsService;
         $otp = rand(1000, 9999);
         $user->update(['otp' => strval($otp), 'otp_expires_at' => now()->addMinutes(5), 'is_verified' => 0]);
-        MailController::sendSignupEmail($user->full_name, $user->email, $user->otp, $user->lang);
 
         $smsService->sendSms($user->mobile, $user->otp);
 
