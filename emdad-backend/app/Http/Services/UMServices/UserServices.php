@@ -132,7 +132,7 @@ class UserServices
 
         $userRoleProfile = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
-        if (isset($request->roleId) && $userRoleProfile != null) {
+        if ($request->has("roleId") && $userRoleProfile != null) {
 
             if ($id == auth()->id() && $request->status != $userRoleProfile->status) {
 
@@ -143,13 +143,10 @@ class UserServices
                 ];
                 return $output;
             }
-        }
-            // $permissions = null;
-            // if ($userRoleProfile->role_id != $request['roleId']) {
-
-            //     $permissions = Role::where('id', $request->roleId)->first();
-            // }
             $user->profiles()->updateExistingPivot($user->profile_id, ['role_id' => $request['roleId'] ?? $userRoleProfile->role_id, 'user_id' => $user->id ?? $userRoleProfile->user_id,  'status' => $request['status'] ?? $userRoleProfile->status, "manager_user_Id" => $request['managerUserId'] ?? $userRoleProfile->manager_user_Id, 'is_learning' => $request['isLearning'] ?? $userRoleProfile->is_learning, 'permissions' =>isset($request['permissions']) ? json_encode($request['permissions'], true): $userRoleProfile->permissions]);
+
+        }
+        
         
         if ($user->wasChanged('mobile')) {
             $user->update(['is_verified' => 0]);
