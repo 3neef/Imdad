@@ -45,7 +45,7 @@ class MailController extends Controller
             'name' => $name,
             'email' => $email,
             'lang' => $lang,
-            'link' => "http://172.21.1.116:9090/reset-password?email=" . $email . "&token=" . $token->token
+            'link' => "https://emdad.nctr.sd/reset-password?email=" . $email . "&token=" . $token->token
         ];
         // dd($data);
 
