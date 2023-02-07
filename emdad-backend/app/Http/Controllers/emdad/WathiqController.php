@@ -98,4 +98,31 @@ class WathiqController extends Controller
         $nationalities = WathiqService::getActivities();
         return $nationalities;
     }
+
+
+
+    public function fullInfo($id){
+        $Fullinfo = WathiqService::getFullInfo($id);
+        return $Fullinfo;
+    }
+    public function Info($id){
+        $info = WathiqService::getInfo($id);
+        return $info;
+    }  
+    public function Status($id){
+        $Status = WathiqService::getStatus($id);
+        return $Status;
+    }
+
+    public function Managers($id){
+        $Managers = WathiqService::getManagers($id);
+        return $Managers;
+    }
+    public function Owners($id){
+        $Owners = WathiqService::getOwners($id);
+        return $Owners;
+    }
+
+    
+
 }

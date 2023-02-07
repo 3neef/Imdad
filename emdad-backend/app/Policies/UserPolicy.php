@@ -56,7 +56,6 @@ class UserPolicy
     {
         return CheckService::checkTwoTypes($user, $type1 = "BMU2", $type2 = "SMU2");
     }
-
     /**
      * Determine whether the user can delete the model.
      *

@@ -3,7 +3,6 @@
 
 namespace App\Http\CustomFliters;
 
-use App\Models\ProfileCategoryPivot;
 use Spatie\QueryBuilder\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;

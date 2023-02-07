@@ -3,6 +3,7 @@
 namespace App\Http\Services\General;
 
 use App\Models\AppSetting;
+use App\Models\Settings\IntegrationResponse;
 
 class SmsService
 {
@@ -44,6 +45,12 @@ class SmsService
     ));
 
     $response = curl_exec($curl);
+
+    IntegrationResponse::create([
+      "model"=>"\App\Models\User",
+      "record"=>$mobile,
+      "response"=>json_encode($response)
+    ]);
 
     curl_close($curl);
   }

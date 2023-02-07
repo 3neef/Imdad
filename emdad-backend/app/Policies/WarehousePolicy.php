@@ -59,7 +59,6 @@ class WarehousePolicy
         return CheckService::checkTwoTypes($user, $type1 = "BMW2", $type2 = "SMW2");
         
     }
-
     /**
      * Determine whether the user can delete the model.
      *

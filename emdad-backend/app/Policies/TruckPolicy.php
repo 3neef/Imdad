@@ -33,7 +33,6 @@ class TruckPolicy
     public function view(User $user)
     {
         return CheckService::checkOneType($user,$type1="SMFLT4");
-        
     }
 
     /**

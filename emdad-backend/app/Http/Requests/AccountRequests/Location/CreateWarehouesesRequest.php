@@ -4,6 +4,7 @@ namespace App\Http\Requests\AccountRequests\Location;
 
 use App\Rules\IsCompositeUnique;
 use App\Rules\UniqeValues;
+use App\Rules\WarehouseRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -31,7 +32,7 @@ class CreateWarehouesesRequest extends FormRequest
         return [
             "userList" => ['array', new UniqeValues],
             "userList.*" => ['exists:users,id'],
-            'warehouseName' => ['required','string','max:100', new IsCompositeUnique('warehouses',['profile_id'=>auth()->user()->profile_id,'address_name'=>$this->warehouseName])],
+            'warehouseName' => ['required','string','max:100', new WarehouseRule('warehouses',['profile_id'=>auth()->user()->profile_id,'address_name'=>$this->warehouseName])],
             'warehouseType' => ['required', 'string'],
             'latitude' => ['required', 'string'],
             'longitude' => ['required', 'string'],

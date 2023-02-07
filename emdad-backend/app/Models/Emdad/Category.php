@@ -52,14 +52,15 @@ class Category extends Model
     public function companyCategory()
     {
         return $this->belongsToMany(Profile::class, 'category_profile', 'profile_id', 'category_id')
-            ->withPivot('category_id')
+            ->withPivot(['category_id','stauts'])
             ->withTimestamps();
     }
 
 
-    public function CreatorName()
+
+    public function addedToProfile()
     {
-        return   DB::table('category_profile')->where('profile_id', auth()->user()->profile_id)->where("user_id", $this->created_by)->first();
+        return   DB::table('category_profile')->where('profile_id', auth()->user()->profile_id)->where("category_id", $this->id)->first();
     }
 
     public function profiles()
