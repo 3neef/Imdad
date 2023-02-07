@@ -328,7 +328,7 @@ class AuthenticationServices
     // Todo  Need Code Again !
     public function resetPassword($request)
     {
-        $token = self::getResgetResetTokenetToken($request);
+        $token = self::getResetToken($request);
         if ($token == null) {
             return response()->json([
                 "statusCode" => "107",
