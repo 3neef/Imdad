@@ -139,7 +139,7 @@ class UserServices
                 $output = [
                     "statusCode" => "110",
                     'success' => false,
-                    'message' => "you cannot  disable your self"
+                    'message' => "you can't  disable your self"
                 ];
                 return $output;
             }
