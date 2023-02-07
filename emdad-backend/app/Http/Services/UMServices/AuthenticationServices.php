@@ -274,7 +274,7 @@ class AuthenticationServices
 
     public function logout()
     {
-        $user = auth()->user()->tokens()->delete();
+        $user = auth()->user->tokens()->delete();
         session()->invalidate();
 
         return response()->json(

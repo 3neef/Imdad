@@ -49,6 +49,6 @@ class MailController extends Controller
         ];
         // dd($data);
 
-        Mail::to($email)->send(new ForgetPassword($data));
+        Mail::to($email)->queue(new ForgetPassword($data));
     }
 }
