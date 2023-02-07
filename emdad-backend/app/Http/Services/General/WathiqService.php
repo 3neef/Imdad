@@ -11,6 +11,7 @@ use App\Models\LookupNationality;
 use App\Models\LookupRelation;
 use App\Models\WathiqInfo;
 use App\Models\WathiqManagers;
+use App\Models\WathiqOwn;
 use App\Models\WathiqOwner;
 use App\Models\WathiqStatus;
 use Nette\Utils\Json;
@@ -414,7 +415,32 @@ class WathiqService
         }
         return $response;
     }
-    public static function getOwns(){
-        
+    public static function getOwns($id, $idType){
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/owns/'.$id . '/' . $idType,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        if ($response != NULL) {
+                $owner = new WathiqOwn();
+                $owner->identity = $id;
+                $owner->idtype  = $idType;
+                $owner->owns_cr  = $response;
+                $owner->save();
+        }
+        return $response;
+
     }
 }

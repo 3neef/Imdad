@@ -122,6 +122,10 @@ class WathiqController extends Controller
         $Owners = WathiqService::getOwners($id);
         return $Owners;
     }
+    public function owns($id,$idType){
+        $owns = WathiqService::getOwns($id,$idType);
+        return $owns;
+    }
 
     
 

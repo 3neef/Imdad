@@ -53,6 +53,8 @@ Route::get('commercial-status/{id}', [WathiqController::class,'Status']);
 Route::get('commercial-tree/{id}', [WathiqController::class,'Tree']);
 Route::get('commercial-managers/{id}', [WathiqController::class,'Managers']);
 Route::get('commercial-owners/{id}', [WathiqController::class,'Owners']);
+Route::get('commercial-owns/{id}/{idtype}',[WathiqController::class,'Owns']);
+
 
 
 Route::get('optimize', function () {
