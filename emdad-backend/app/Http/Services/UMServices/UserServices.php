@@ -132,7 +132,7 @@ class UserServices
 
         $userRoleProfile = DB::table('profile_role_user')->where('user_id', $user->id)->where('profile_id', $user->profile_id)->first();
 
-        if ($request->has("roleId") && $userRoleProfile != null) {
+        if (isset($request->roleId) && $userRoleProfile != null) {
 
             if ($id == auth()->id() && $request->status != $userRoleProfile->status) {
 
