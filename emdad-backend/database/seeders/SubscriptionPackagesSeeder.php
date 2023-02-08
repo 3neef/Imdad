@@ -176,13 +176,13 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             ["key"=>"IOS","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>0,"text_en"=>"Available IOS/Android","text_ar"=>"متاح
             IOS/Android","descriptionEn"=>"Application enables the drivers to deliver the order from the warehouse to the buyer.","descriptionAr"=>"يستخدم التطبيق لتمكين السائق من توصيل وتسليم الطلب من المستودع إلى المشتري."],
 
-            ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
+            ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات المحركات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"متاح","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
             analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه الإحصائيات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
         محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
         أوامر الشراء المعتمدة..."],
     
-            ["key"=>"Points","titleEn"=>"Points of Digital Statistics Report ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3 Points","text_ar"=>"3 Points","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء التقارير الإحصائية الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
+            ["key"=>"Points","titleEn"=>"Points of Digital Statistics Report ","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>3,"text_en"=>"3 Points","text_ar"=>"ثلاث نقاط","descriptionEn"=>"Points: Used to buy engines app beside the basic free engines.","descriptionAr"=>"تستخدم النقاط لشراء التقارير الإحصائية الرقمية، ويكون لكل مستخدم عدد معين من النقاط حسب باقة 
         الاشتراك."]
  ]
  
