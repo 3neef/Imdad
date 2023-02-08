@@ -40,4 +40,12 @@ return [
         'currency' => env('TERMINAL_CURRENCY'),
     ],
 
+
+    'wathiq' => [
+        'url' => env('WATHIQ_URL'),
+        'url_commercial' => env('COMMERCIAL_URL'),
+        'apiKey' => env('WATHIQ_KEY'),
+    ]
+
+
 ];
