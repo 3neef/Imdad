@@ -7,3 +7,4 @@ delete FROM emdad.profile_role_user where id>0;
 delete FROM emdad.users where id>0;
 delete FROM emdad.profiles where id>0;
 delete FROM emdad.password_resets where email<>'';
+delete from emdad.media where id>0;
