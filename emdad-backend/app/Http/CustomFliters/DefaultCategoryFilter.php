@@ -16,11 +16,11 @@ class DefaultCategoryFilter implements Filter
             $query->where('status', "approved");
         } elseif (Route::current()->uri == "api/v1_0/categories/getCategoryProfile") {
             if ($value) {
-                $CategoriesId = DB::table('category_profile')->where("profile_id", $value['profile_id'])->where("status","approved")->pluck("category_id");
+                $CategoriesId = DB::table('category_profile')->where("profile_id", $value['profile_id'])->pluck("category_id");
                 if ($value['onlyRequested'] == true) {
                     $query->whereIn('id', $CategoriesId)->where('profile_id', $value['profile_id']);
                 } else {
-                    $query->whereIn('id', $CategoriesId);
+                    $query->whereIn('id', $CategoriesId)->where("status","approved");
                 }
             }
         }
