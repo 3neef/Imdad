@@ -20,13 +20,16 @@ use function PHPUnit\Framework\isEmpty;
 
 class WathiqService
 {
+    // public function __construct (){
+    //     $this->
+    // }
     public function getRelatedCompanies($id, $idType)
     {
 
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/related/' . $id . '/' . $idType,
+            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'related/' . $id . '/' . $idType,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -35,7 +38,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -59,11 +62,12 @@ class WathiqService
 
     public static function getLocations()
     {
-
+        // dd(config('services.wathiq.url').'/'.'locations');
+        // dd(config('services.wathiq.url'.'/'.'locations'));
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/locations',
+            CURLOPT_URL => config('services.wathiq.url').'/'.'locations',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -72,7 +76,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -100,7 +104,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/businessTypes',
+            CURLOPT_URL => config('services.wathiq.url').'/'.'businessTypes',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -109,7 +113,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -137,7 +141,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/relations',
+            CURLOPT_URL => config('services.wathiq.url').'/'.'/relations',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -146,7 +150,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -173,7 +177,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/nationalities',
+            CURLOPT_URL => config('services.wathiq.url').'/'.'/nationalities',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -182,7 +186,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -211,7 +215,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/lookup/activities',
+            CURLOPT_URL => config('services.wathiq.url').'/'.'/activities',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -220,7 +224,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -248,7 +252,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/fullinfo/'.$id,
+            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'fullinfo/'.$id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -257,7 +261,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -279,7 +283,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/info/'.$id,
+            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'info/'.$id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -288,7 +292,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -310,7 +314,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/status/'.$id,
+            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'status/'.$id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -319,7 +323,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -345,7 +349,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/managers/'.$id,
+            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'managers/'.$id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -354,7 +358,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -381,7 +385,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/owners/'.$id,
+            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'owners/'.$id,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -390,7 +394,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
@@ -416,9 +420,11 @@ class WathiqService
         return $response;
     }
     public static function getOwns($id, $idType){
+                // dd(config('services.wathiq.url_commercial').'/'.'owns');
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.wathq.sa/v5/commercialregistration/owns/'.$id . '/' . $idType,
+            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'owns/'.$id . '/' . $idType,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_TIMEOUT => 0,
@@ -426,7 +432,7 @@ class WathiqService
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
             CURLOPT_HTTPHEADER => array(
-                'apiKey: skwAyrXpbfHcLAJAna6JSN5kIz4KRGU3',
+                'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
         ));
 
