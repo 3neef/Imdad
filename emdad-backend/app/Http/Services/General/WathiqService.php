@@ -141,7 +141,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url').'/'.'/relations',
+            CURLOPT_URL => config('services.wathiq.url').'/'.'relations',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -177,7 +177,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url').'/'.'/nationalities',
+            CURLOPT_URL => config('services.wathiq.url').'/'.'nationalities',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -215,7 +215,7 @@ class WathiqService
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url').'/'.'/activities',
+            CURLOPT_URL => config('services.wathiq.url').'/'.'activities',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
