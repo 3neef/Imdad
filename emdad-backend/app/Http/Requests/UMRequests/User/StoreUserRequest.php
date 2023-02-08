@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 class   StoreUserRequest extends FormRequest
 {
@@ -41,8 +42,9 @@ class   StoreUserRequest extends FormRequest
             'permissions.*'=>['string','exists:permissions,label'],
             'isLearning'=>['boolean'],
             'managerUserId'=>'exists:users,id',//
-            'warahouseId'=>'exists:warehouses,id',
-            "status" => ['required','string'],
+            'warehouseId'=>['array', new UniqeValues],
+            'warehouseId.*'=>'exists:warehouses,id',
+            "status" => ['required',Rule::in(['active','inActive'])],
 
 
         ];

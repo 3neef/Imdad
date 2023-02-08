@@ -26,16 +26,23 @@ class UpdateProfileRequest extends FormRequest
      */
     public function rules()
     {
+        // dd($this);
         return [
+            'logo' =>'image|mimes:jpg,png,jpeg,gif,svg|max:5120',
             'nameAr' => ['string','max:100','unique:profiles,name_ar'],
+            'nameEn' => ['string','max:100','unique:profiles,name_en'],
+            'swift' => ['string','max:25','unique:profiles,swift'],
             'iban' => ['string','max:25','unique:profiles,iban'],
             'type' => [Rule::in('Buyer','suppiler')],
+            'bank' => ['unique:profiles,bank'],
+            'subscriptionDetails' => ['unique:profiles,subscription_details'],
             'vatNumber' => ['string','max:25','unique:profiles,vat_number'],
+            'active' => ['string','max:25','unique:profiles,active'],
         ];
     }
 
     protected function failedValidation(Validator $validator): void
     {
-        throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+        throw new HttpResponseException(  response()->json(["success" => false, "errors" => $validator->errors(),"statusCode"=>"422"], 200));
     }
 }

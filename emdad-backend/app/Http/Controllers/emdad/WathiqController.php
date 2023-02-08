@@ -67,8 +67,66 @@ class WathiqController extends Controller
             return response()->json(["status" => true, "data" => RelatedCompaiesResource::collection($related)], 200);
         } else {
             $service->getRelatedCompanies($request->identityNumber, $request->type);
+            
+
             $related = RelatedCompanies::where("identity", $request->identityNumber)->where("identity_type", $request->type)->get();
             return response()->json(["status" => true, "data" => RelatedCompaiesResource::collection($related)], 200);
         }
     }
+
+    public function getLookupLocations(){
+        $locations = WathiqService::getLocations();
+        return $locations;
+    }
+
+    public function getBusinessTypes(){
+        $types = WathiqService::getBusinessTypes();
+        return $types;
+    }
+
+    public function getRelations(){
+        $relations = WathiqService::getRelations();
+        return $relations;
+    }
+
+    public function getNationalities(){
+        $nationalities = WathiqService::getNationalities();
+        return $nationalities;
+    }
+
+    public function getActivities(){
+        $nationalities = WathiqService::getActivities();
+        return $nationalities;
+    }
+
+
+
+    public function fullInfo($id){
+        $Fullinfo = WathiqService::getFullInfo($id);
+        return $Fullinfo;
+    }
+    public function Info($id){
+        $info = WathiqService::getInfo($id);
+        return $info;
+    }  
+    public function Status($id){
+        $Status = WathiqService::getStatus($id);
+        return $Status;
+    }
+
+    public function Managers($id){
+        $Managers = WathiqService::getManagers($id);
+        return $Managers;
+    }
+    public function Owners($id){
+        $Owners = WathiqService::getOwners($id);
+        return $Owners;
+    }
+    public function owns($id,$idType){
+        $owns = WathiqService::getOwns($id,$idType);
+        return $owns;
+    }
+
+    
+
 }

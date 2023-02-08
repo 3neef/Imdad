@@ -6,126 +6,126 @@ use App\Http\Collections\ProductsCollection;
 use App\Http\Resources\CategoryResourses\Product\ProductResponse;
 use App\Http\Services\AccountServices\UploadServices;
 use App\Models\Emdad\Product;
+use App\Models\Emdad\ProductAttachmentFile;
+use App\Models\Profile;
 use App\Models\ProfileCategoryPivot;
 use App\Models\ProfileProductsPivot;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ProductService
 {
 
     public function index($request)
     {
-        return ProductsCollection::collection($request);
+        return ProductResponse::collection(ProductsCollection::collection($request));
     }
 
 
-    public function store($request)
+    public static function store($request)
     {
-        // dd($request->all());
-        $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
 
-        $prodcut = Product::create([
-            'category_id' => $request->categoryId,
-            'name' => $request->name,
-            "price" => $request->price,
-            "measruing_unit" => $request->measruingUnit,
-            "image" => $request->image,
+       return DB::transaction(function () use ($request) {
+            $product = Product::create([
+                'category_id' => $request->categoryId,
+                'name_en' => $request->nameEn,
+                'name_ar' => $request->nameAr,
+                'price' => $request->price??null,
+                'measruing_unit' => $request->measruingUnit,
+                'description_en' => $request->descriptionEn,
+                'description_ar' => $request->descriptionAr,
+                'created_by' => auth()->id(),
+                'profile_id' => auth()->user()->profile_id,
+            ]);
+
+            if(isset($request['attachementFile']))
+            {
+                $product->addMultipleMediaFromRequest(['attachementFile'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('products');
+                });
+            }
+            $product->companyProduct()->attach($product->id, ['profile_id' => auth()->user()->profile_id]);
+            return $product;
+        });
+       
+    }
+
+
+    public static  function update($request, $id)
+    {
+
+        $product = Product::find($id);
+
+        // attach the  product to the  meida collection  and update  product 
+
+        if (isset($request['attachementFile'])) {
+            $product->addMultipleMediaFromRequest(['attachementFile'])
+                ->each(function ($fileAdder) {
+                    $fileAdder->toMediaCollection('products');
+                });
+        }
+
+        $product->update([
+            'category_id' => $request->categoryId ?? $product->category_id,
+            'name_ar' => $request->nameAr ?? $product->name_ar,
+            'name_en' => $request->nameEn ?? $product->name_en,
+            "price" => $request->price ?? $product->price,
+            "measruing_unit" => $request->measruing_unit ?? $product->measruing_unit,
+            'description_en' => $request->descriptionEn ?? $product->description_en,
+            'description_ar' => $request->descriptionAr ?? $product->description_ar
         ]);
-        if ($prodcut) {
-            $prodcut->companyProduct()->attach($prodcut->id, ['profile_id' => auth()->user()->profile_id]);
-            return response()->json(['message' => 'created successfully'], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
+
+        return $product;
     }
 
-
-    public function update($request, $id)
+    public static function show($id)
     {
-
-        $prodcut = Product::find($id);
-        if ($request->has('attachementFile')) {
-            $request->merge(['image' => UploadServices::uploadFile($request->attachementFile, 'image', 'Products images')]);
-        }
-
-        $prodcut->update([
-            'category_id' => $request->categoryId ?? $prodcut->category_id,
-            'name' => $request->name ?? $prodcut->name,
-            "price" => $request->price ?? $prodcut->price,
-            "measruing_unit" => $request->measruing_unit ?? $prodcut->measruing_unit,
-            'image' => $request->image ?? $prodcut->image,
-        ]);
-
-        if ($prodcut) {
-            return response()->json(['message' => 'updated successfully'], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
+        $product = Product::where('id', $id)->first();
+        return $product;
     }
 
-    public function show($id)
+
+    public  static function delete($id)
     {
-        $prodcut = Product::where('id', $id)->first();
-        if ($prodcut) {
-            return response()->json(['data' => new ProductResponse($prodcut)], 200);
-        }
-        return response()->json(['error' => 'No data Founded'], 404);
+        $product = Product::find($id);
+        $deleted = $product->delete();
+        return $deleted;
     }
 
-
-    public function delete($id)
-    {
-        $prodcut = Product::find($id);
-        $deleted = $prodcut->delete();
-        if ($deleted) {
-            return response()->json(['message' => 'deleted successfully'], 301);
-        }
-        return response()->json(['error' => 'system error'], 500);
-    }
-
-    public function restore($id)
+    public  static function restore($id)
     {
         $restore = Product::where('id', $id)->withTrashed()->restore();
-        if ($restore) {
-            return response()->json(['message' => 'restored successfully'], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
+
+        return $restore;
     }
 
 
 
-    public function setcompanyproducts($request)
+    public static function setcompanyproducts($request)
     {
-
-        $product = Product::first();
+        $profile = Profile::find(auth()->user()->profile_id);
         if (isset($request['productList'])) {
             foreach ($request['productList'] as $product_id) {
-                try {
-                    $product->companyProduct()->attach(['product_id' => $product_id, 'profile_id' => auth()->user()->profile_id]);
-                }
-                catch(Exception $e){}
-            } 
-            
-        } else {
-          $product->companyProduct()->attach(['product_id' => $request, 'profile_id' => auth()->user()->profile_id]);
+                $profile->products()->attach($product_id,['profile_id' => auth()->user()->profile_id,'created_at'=>now()]);
             }
-            return response()->json(['message' => 'created successfully'], 200);
-
-        }
-       
-    
-public function changeProductStatus($request)
-    {        
-
-        $category = ProfileProductsPivot::where('id',$request->product_id)->first();
-        if ($category == null) {
-            return response()->json([
-                'error' => 'No products founded'
-            ]);
         } else {
-            $category->update(['status' => 0]);
-            return response()->json(['message' => 'aproved successfully'], 200);
+                $profile->products()->attach($request['productId'],[ 'profile_id' => auth()->user()->profile_id,'created_at'=>now()]);
         }
+        return true;
     }
 
 
+    public  static function changeProductStatus($request)
+    {
 
+
+
+        $profile = Profile::where('id', auth()->user()->profile_id)->first();
+        Product::where('id', $request->productId)->first();
+             if ($profile != null) {
+             $result = $profile->products()->updateExistingPivot($request->productId,['status' => 0]);
+            return $result;
+        }
+    }
 }

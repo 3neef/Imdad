@@ -3,7 +3,6 @@
 namespace App\Http\Services\AccountServices;
 
 use App\Models\SubscriptionPayment;
-use Carbon\Carbon;
 use Exception;
 
 class PackageConstraint
@@ -12,12 +11,11 @@ class PackageConstraint
     public function parsePackageFeatures()
     {
         $checkResposne = $this->checkPackageValidity();
-        $features = null;
         if ($checkResposne['success']) {
-            $features = json_encode($checkResposne['package']);
+            $features = json_decode($checkResposne['package']);
+            return $features;
         }
-        $features = [];
-        return $features;
+        return $feature = [];
     }
 
 
@@ -25,26 +23,31 @@ class PackageConstraint
     {
         // admin user + warehouse + 
         $features = $this->parsePackageFeatures();
-        foreach ($features as  $feature) {
-            if ($key == $feature['key'] && $feature['systemValue'] < $value) {
-                return true;
-            }
+        if($features == null){
+            return "package null";
         }
-        return false;
-
+        foreach ($features  as $feature) {
+            if ($feature->key==$key && $feature->systemValue > $value) {
+                return true;
+            } 
+        }
+            return false;
     }
 
     public function checkPackageValidity()
     {
         $subscirptionPayment = null;
         try {
-            $subscirptionPayment = auth()->user()->currentProfile->subscriptionPayments()->latest();
-            if ($subscirptionPayment->expire_date < Carbon::now()) {
+            // get current subscritpitons
+            $subscirptionPayment = auth()->user()->currentProfile()->subscription_details;
+
+            $subs = SubscriptionPayment::where('profile_id', auth()->user()->profile_id)->latest()->first();
+
+            if (now() < $subs->expire_date) {
                 // package subscription is valid return package with success true
-                return ["success" => true, "package" => auth()->user()->currentProfile->subscription_details];
+                return ["success" => true, "package" => $subscirptionPayment];
             } else {
                 // package subscription is not valid return package with success false
-
                 return ["success" => false, "package" => auth()->user()->currentProfile->subscription_details];
             }
         } catch (Exception $ex) {

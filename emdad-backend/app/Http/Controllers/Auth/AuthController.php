@@ -2,24 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Collections\UserCollection;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\RemoveUserRequets;
 use App\Http\Requests\UMRequests\User\ActivateRequest;
-use App\Http\Requests\UMRequests\User\AssignRoleRequest;
-use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
-use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
+
 use App\Http\Requests\UMRequests\User\ResetPasswordRequest;
 use App\Http\Requests\UMRequests\User\ForgotPasswordRequest;
 use App\Http\Requests\UMRequests\User\ResendOTPRequest;
-use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\StoreAuthRequest;
-use App\Http\Requests\UMRequests\User\StoreUserRequest;
-use App\Http\Requests\UMRequests\User\UpdateRequest;
+use App\Http\Requests\UMRequests\User\UploadAvaterRequest;
+use App\Http\Requests\UMRequests\User\UploadlogoRequest;
 use App\Http\Resources\UMResources\User\UserResponse;
-use App\Http\Services\General\SmsService;
 use App\Http\Services\UMServices\AuthenticationServices;
+use App\Http\Services\UMServices\UserServices;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -54,10 +51,10 @@ class AuthController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"email","oldPassword","newPassword"},
+     *               required={"email","password","token"},
      *               @OA\Property(property="email", type="email"),
-     *               @OA\Property(property="oldPassword", type="string"),
-     *               @OA\Property(property="newPassword", type="string")
+     *               @OA\Property(property="password", type="string"),
+     *               @OA\Property(property="token", type="string")
      *            ),
      *        ),
      *    ),
@@ -76,10 +73,18 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=422,
      *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+
      * )
      */
     public function resetPassword(ResetPasswordRequest $request,AuthenticationServices $userServices) {
@@ -136,15 +141,46 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=422,
      *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+     *       ),
      * )
      */
-    public function store(StoreAuthRequest $request, AuthenticationServices $userServices)
+    public function store(StoreAuthRequest $request, AuthenticationServices $authenticationServices)
     {
-        return $userServices->create($request->validated());
+
+
+        $user = $authenticationServices->create($request->validated());
+
+        if ($user) {
+
+            $authenticationServices->UserOtp($user);
+
+            MailController::sendSignupEmail($user->name, $user->email, $user->otp, "en", "otp");
+
+            return response()->json([
+                "statusCode" => "000",
+
+                'message' => 'User created successfully',
+                'data' => ['user' => new UserResponse($user)]
+            ], 200);
+        }else{
+            return response()->json([
+
+                "statusCode" => "999",
+                'success' => false, 'message' => "System Error"
+            ], 200);
+        }
+      
     }
 
 
@@ -186,15 +222,18 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Login Successfully",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -239,15 +278,18 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Login Successfully",
-     *          @OA\JsonContent()
+     *              *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
      *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -284,20 +326,41 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="resent new otp",
-     *          @OA\JsonContent()
+     *               *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function resendOTP(ResendOTPRequest $request, AuthenticationServices $userServices)
     {
-        return $userServices->resend($request);
+        $data = $userServices->resend($request);
+        if ($data == null) {
+            return response()->json(
+                [
+                    "statusCode" => "999",
+                    'message' => 'System error ',
+                ],
+                200
+            );
+        } else {
+            return response()->json(
+                [
+                    "statusCode" => "000",
+                    'message' => 'New OTP has been sent.',
+                    'otp' => $data,
+                ],
+                200
+            );
+
+        }
     }
     /**
      * @OA\Post(
@@ -325,15 +388,17 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=200,
      *          description="Logged out",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function logoutUser(AuthenticationServices $userServices)
@@ -385,18 +450,12 @@ class AuthController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               @OA\Property(property="message", type="string"),
-     *               @OA\Property(property="OTP", type="integer"),
-     *               @OA\Property(property="otpExpiresAt", type="string")
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
      *            ),
      *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
+
      * )
      */
     public function forgotPassword(ForgotPasswordRequest $request, AuthenticationServices $userServices)
@@ -432,15 +491,17 @@ class AuthController extends Controller
      *      @OA\Response(
      *          response=301,
      *          description="User deleted successfully",
-     *          @OA\JsonContent()
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -449,8 +510,76 @@ class AuthController extends Controller
         $id,
         AuthenticationServices $userServices
     ) {
-        return $userServices->removeUser($id);
+        $user = $userServices->removeUser($id);
+
+        if ($user) {
+            return response()->json([
+                "statusCode" => "000",
+
+                'message' => 'User delete form database successfully'
+            ], 200);
+        }
+        return response()->json([
+            "statusCode" => "999",
+            'error' => 'system error'
+        ], 200);
     }
 
+    /**
+     * @OA\post(
+     * path="/api/v1_0/auth/check-reset-token",
+     * operationId="checkResetToken",
+     * tags={"auth"},
+     * summary="Check Reset Token",
+     * description="check reset link validity",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"email"},
+     *               @OA\Property(property="email", type="email"),
+     *               @OA\Property(property="token", type="string")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="sended otp",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     * )
+     */
 
+    public function checkLink(Request $request,AuthenticationServices $userServices){
+        return $userServices->checkLink($request);
+    }
+
+    
 }

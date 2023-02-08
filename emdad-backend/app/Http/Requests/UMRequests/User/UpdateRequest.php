@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests\UMRequests\User;
 
+use App\Rules\UniqeValues;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
+use PhpParser\Node\NullableType;
 
 class UpdateRequest extends FormRequest
 {
@@ -36,11 +38,16 @@ class UpdateRequest extends FormRequest
             "password" => "string|min:8|max:50",
             "identityNumber"=>['string',Rule::unique('users',"identity_number")->ignore($this->id, 'id')],
             "email" => ["email", "string", "max:255"],
-            "mobile" => ["min:9","max:14","string",Rule::unique('users')->ignore($this->id, 'id')],
+            "mobile" => ["min:14","max:14","string",Rule::unique('users')->ignore($this->id, 'id')],
             "roleId" => "integer|exists:roles,id",
-            'manager_user_Id'=>'integer|exists:users,id',
-            'WarahouseId'=>'integer|exists:warehouses,id',
-            'status' => [Rule::in('Active','InActive')],
+            'managerUserId'=>'integer|exists:users,id',
+            'warehouseId'=>['array', 'nullable', new UniqeValues],
+            'warehouseId.*'=>'exists:warehouses,id',
+            'status' => [Rule::in('active','inActive')],
+            'lang'=>  [Rule::in('en','ar')],
+            'permissions'=>['array',new UniqeValues],
+            'permissions.*'=>['string','exists:permissions,label'],
+            'isLearning'=>'nullable'
         ];
     }
 

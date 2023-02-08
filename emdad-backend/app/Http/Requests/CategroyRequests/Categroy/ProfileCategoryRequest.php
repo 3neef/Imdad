@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\CategroyRequests\Categroy;
 
+use App\Rules\IsCompositeUnique;
 use App\Rules\UniqeValues;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
@@ -27,9 +28,11 @@ class ProfileCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            "categoryList" => ['required_without:category_id', 'array', new UniqeValues],
-            "categoryList.*" => ['exists:categories,id'],
-            'category_id' => ['exists:categories,id'],
+            'categoryId' => ['required_without:categoryList','exists:categories,id', new IsCompositeUnique('category_profile',['profile_id'=>auth()->user()->profile_id,'category_id'=>$this->categoryId])],
+
+            "categoryList" => ['required_without:categoryId', 'array', new UniqeValues, new IsCompositeUnique('category_profile',['profile_id'=>auth()->user()->profile_id,'category_id'=>$this->categoryList])],
+            "categoryList.*" => ['required_with:categoryList','exists:categories,id'],
+
         ];
     }
 

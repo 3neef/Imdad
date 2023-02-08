@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('model');
             $table->string('size');
             $table->string('brand');
+            $table->string('plate_number');
+            $table->foreignId('created_by');
+            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });

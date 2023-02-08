@@ -30,7 +30,7 @@ class CreateCategoryRequest extends FormRequest
                 'nameEn' => ['required', 'string', 'max:255','unique:categories,name_en'],
                 'nameAr' => ['required', 'string', 'max:255','unique:categories,name_ar'],
                 'parentId' => ['exists:categories,id'],
-                'isleaf' => ['required', 'boolean'],
+                'isleaf' => ['boolean'],
                 'note'  =>  ['required', 'string'],
                 'type' => ['string',Rule::in(['products','services'])],
 
@@ -39,6 +39,6 @@ class CreateCategoryRequest extends FormRequest
 
         protected function failedValidation(Validator $validator): void
         {
-            throw new HttpResponseException( response()->json(["success"=>false,"errors"=>$validator->errors()],422));
+            throw new HttpResponseException(  response()->json(["success" => false, "errors" => $validator->errors(),"statusCode"=>"422"], 200));
         }
 }

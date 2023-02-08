@@ -26,11 +26,14 @@ class UpdateProuductRequest extends FormRequest
     public function rules()
     {
         return [
-            "categoryId" => 'integer|exists:categories,id,isleaf,1',
-            'name' => 'string|unique:products,name',
+            'categoryId' => 'integer|exists:categories,id,isleaf,1',
+            'nameEn' => 'string|unique:products,name_en',
+            'nameAr' => 'string|unique:products,name_ar',
             'price' => 'integer',
-            'measruingUnit' => 'string|max:255',
-            'attachementFile' => 'image',
+            'measruingUnit' => ['string'],
+            'attachementFile' => 'nullable',
+            'descriptionEn' => ['string'],
+            'descriptionAr' => ['string']
         ];
     }
 

@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Truck extends Model
+class Truck extends Model  implements HasMedia
 {
-    use HasFactory , SoftDeletes , LogsActivity;
+    use HasFactory, SoftDeletes, LogsActivity, InteractsWithMedia;
     protected $fillable = [
-        'name','type', 'class', 'color', 'model','size', 'brand'
+        'name', 'type', 'class', 'color', 'model', 'size', 'brand', 'created_by', 'status', 'plate_number','profile_id'
     ];
     public function getActivitylogOptions(): LogOptions
     {
@@ -20,12 +22,9 @@ class Truck extends Model
             ->logAll()
             ->logOnlyDirty();
     }
-    
-    public function truckImage()
+
+    public function warehouses()
     {
-        return $this->hasMany(Truck_image::class);
+        return $this->belongsToMany(Warehouse::class)->withTimestamps();
     }
-
-
-
 }

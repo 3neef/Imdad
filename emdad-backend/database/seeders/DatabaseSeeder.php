@@ -5,11 +5,13 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Accounts\SubscriptionPackages;
-use App\Models\Emdad\Categories;
+use App\Models\Coupon\Coupon;
+use App\Models\Emdad\Category;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Emdad\Unit_of_measures;
 use App\Models\UM\Permission;
 use App\Models\UM\Role;
+use App\Models\User;
 use Ejarnutowski\LaravelApiKey\Models\ApiKey;
 use Exception;
 use Illuminate\Database\Seeder;
@@ -26,39 +28,58 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        // DB::table('roles')->delete();
-       
-        if(ApiKey::count()==0){
+        DB::table('categories')->delete();
+        DB::table('permissions')->delete();
+        DB::table('roles')->delete();
+
+        if (ApiKey::count() == 0) {
             $this->call([
-                ApiKeysSeeder::class]);
+                ApiKeysSeeder::class
+            ]);
         }
 
-        if(SubscriptionPackages::count()==0){
+        if (SubscriptionPackages::count() == 0) {
             $this->call([
-                SubscriptionPackagesSeeder::class]);
+                SubscriptionPackagesSeeder::class
+            ]);
         }
 
-        if(Permission::count()==0){
+        if (Permission::count() == 0) {
             $this->call([
-                PermissionSeeder::class]);
+                PermissionSeeder::class
+            ]);
         }
-        if(Unit_of_measures::count()==0){
+        if (Unit_of_measures::count() == 0) {
             $this->call([
-                UOMSeeder::class]);
+                UOMSeeder::class
+            ]);
         }
 
-        if(Role::count()==0){
+        if (Role::count() == 0) {
 
             $this->call([
-                RegRoleSeeder::class]);
+                RegRoleSeeder::class
+            ]);
         }
-        if(Categories::count()==0){
+        if(Category::count()==0){
             $this->call([
-                CategoriesSeeder::class]);
+                CategoriesSeeder::class
+            ]);
         }
-        if(RelatedCompanies::count()==0){
+        if (RelatedCompanies::count() == 0) {
             $this->call([
-                RelatedCompinesTableSeeder::class]);
+                RelatedCompinesTableSeeder::class
+            ]);
+        }
+
+        if (User::count() == 0) {
+            $this->call([
+                UserSeeder::class
+            ]);
+        }
+        if(Coupon::count()==0){
+            $this->call([
+                CouponSeeder::class]);
         }
 
 

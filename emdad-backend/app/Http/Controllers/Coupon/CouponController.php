@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Coupon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CouponRequests\CreateCouponRequest;
 use App\Http\Requests\CouponRequests\UsedCouponRequest;
+use App\Http\Resources\Subscription\SubscriptionResource;
 use App\Http\Services\CouponServices\CouponServices;
 use Illuminate\Http\Request;
 
@@ -68,7 +69,11 @@ class CouponController extends Controller
      */
     public function store(CreateCouponRequest $request)
     {
-        return $this->couponService->create($request);
+        $coupon = $this->couponService->create($request);
+
+        if($coupon){
+            return response()->json(['message' => 'coupon created successfully'],200);
+        }
     }
 
     /**
@@ -150,18 +155,31 @@ class CouponController extends Controller
      * @OA\Response(
      *         response=200,
      *         description="",
-     *         @OA\JsonContent(
-     *         @OA\Property(property="subscriptionPayment", type="object")
-     *          )
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=301, description="can,t use coupon")
+
      * )
      */
 
     public function usedCoupon(UsedCouponRequest $request)
     {
-        return $this->couponService->usedCoupon($request);
+        $subscription = $this->couponService->usedCoupon($request);
+
+        if($subscription != null) {
+            return response()->json(['data'=>new SubscriptionResource($subscription),'message' => 'aproved successfully'], 200);
+
+        }else{
+            return response()->json(['message' => 'can,t use coupon'], 301);
+        }
     }
 
 
@@ -191,16 +209,28 @@ class CouponController extends Controller
      *    @OA\Response(
      *         response=200,
      *         description="",
-     *         @OA\JsonContent(
-     *         @OA\Property(property="message",  example="{message => deleted successfully}")
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
      *          ),
-     *       )
-     *      )
+     *       ),
      *  )
      */
     public function destroy($id)
     {
-        return $this->couponService->destroy($id);
+        $coupon = $this->couponService->destroy($id);
+
+        if ($coupon) {
+            return response()->json(['message' => 'deleted successfully'], 301);
+        } else {
+            return response()->json(['success' => false, 'error' => 'not found'], 404);
+        }
     }
     /**
      * @OA\put(
@@ -228,16 +258,29 @@ class CouponController extends Controller
      *    @OA\Response(
      *         response=200,
      *         description="",
-     *         @OA\JsonContent(
-     *         @OA\Property(property="message",  example="{message => deleted successfully}")
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
      *          ),
-     *       )
-     *      )
+     *       ),
      *  )
      */
     public function restore($id)
     {
-        return $this->couponService->restore($id);
+        $restore = $this->couponService->restore($id);
+
+        if ($restore) {
+            return response()->json(['message' => 'restored successfully'], 200);
+        }
+        return response()->json(['error' => 'system error'], 500);
+
+        
     }
 
     /**
@@ -250,15 +293,23 @@ class CouponController extends Controller
      *    @OA\Response(
      *         response=200,
      *         description="",
-     *         @OA\JsonContent(
-     *         @OA\Property(property="data", type="object", example="{'id': 1, 'name':'kg'}")
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
      *          ),
-     *       )
-     *      )
+     *       ),
      *  )
      */
     public function Unit_of_measures(Request $request)
     {
-        return $this->couponService->get_all_unit_of_measure();
+        $unit = $this->couponService->get_all_unit_of_measure();
+
+        return response()->json( [ 'data'=>$unit], 200 );
     }
 }

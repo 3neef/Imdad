@@ -13,19 +13,19 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
 });
 
 
-
-
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
     Route::put('categories/RetryApproval', [CategoryController::class, 'RetryRejectedCategories']);
-
-    Route::apiResource('categories', CategoryController::class);
+    Route::put('categories/changeCategoryStatus', [CategoryController::class, 'changeCategoryStatus']);
     Route::put('categories/restore/{id}', [CategoryController::class, 'restore']);
     Route::get('categories/serviceOrproduct', [CategoryController::class,'filterCategory']);
-    Route::put('categories/changeCategoryStatus/{id}', [CategoryController::class, 'changeCategoryStatus']);
     Route::post('categories/company-categories', [CategoryController::class, 'setFavoriteCategories']);
     Route::post('categories/approveCategory', [CategoryController::class, 'approveCategory']);
     Route::post('categories/rejectCategory', [CategoryController::class, 'rejectCategory']);
+    Route::get('categories/getCategoryProfile', [CategoryController::class, 'getCategoryProfile']);
+    Route::Put('categories/activation/{id}' , [CategoryController::class, 'activate']);
 
+    
+    Route::apiResource('categories', CategoryController::class);
 });
 
 

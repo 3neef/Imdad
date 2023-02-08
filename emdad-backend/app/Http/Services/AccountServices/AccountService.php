@@ -8,14 +8,10 @@ use App\Http\Services\General\WalletsService;
 use App\Models\Emdad\RelatedCompanies;
 use App\Models\Profile;
 use App\Models\SubscriptionPayment;
-use App\Models\UM\Permission;
-use App\Models\UM\RoleUserProfile;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Mockery\Expectation;
-use PhpParser\Node\Stmt\Return_;
-use Illuminate\Support\Str;
+
 
 class AccountService
 {
@@ -37,32 +33,35 @@ class AccountService
                 ]);
                  WalletsService::create($profile);
                 $permissions = $this->pluckPermissions($request->ProfileType);
-
-                $user->roleInProfile()->attach($user->id, ['role_id' => $request['roleId'], 'profile_id' => $profile->id, 'permissions' => $permissions]);
-
+                $user->profiles()->attach($user->id, ['user_id' => $user->id, 'role_id' =>  $request['roleId'], "created_by" => auth()->id(), 'profile_id' => $profile->id, 'is_learning' => 0, 'status' => 'active', 'manager_user_Id' => auth()->user()->id,'permissions' => $permissions]);
+                $user=User::where("id",auth()->user()->id)->first();
                 $user->update(['profile_id' => $profile->id]);
 
                 return $profile;
             });
-            return response()->json(['success' => true, 'data' => new ProfileResponse($profile)], 200);
+            $output = ["statusCode" => "000", 'success' => true, "message"=>"Profile created successfully", 'data' => new ProfileResponse($profile)];
+            return $output;
         } catch (Exception $e) {
-            return response()->json(['success' => false, 'message' => "System Error"], 500);
+            $output = ["statusCode"=>'999','success' => false, 'message' => "System Error", 'data' => null];
+            return $output;
         }
     }
 
-    public function update($request, $id)
+    public function update($request,$id)
     {
-        $profile = Profile::find($id);
+        $profile =Profile::where('id',$id)->first();
         if ($profile == null) {
-            return response()->json(['error' => 'data  Not Found'], 404);
+            $output = ['message' => "data Not Found", "statusCode" => "111"];
+            return $output;
         } else {
-            $update = $profile->update([
-                'name_ar' => $request->nameAr,
-                'type' => $request->type,
-                'iban' => $request->iban,
-                'vat_number' => $request->vatNumber,
+             $profile->update([
+                'name_ar' => $request->nameAr??$profile->name_ar,
+                'type' => $request->type??$profile->type,
+                'iban' => $request->iban??$profile->iban,
+                'vat_number' => $request->vatNumber??$profile->vat_number, 
             ]);
-            return response()->json(['message' => 'updated successfully'], 200);
+            $output = ['message' => "Profile has been updated successfully", "statusCode" => "000"];
+            return $output;
         }
     }
 
@@ -71,9 +70,11 @@ class AccountService
 
         $profile = Profile::where('id', $id)->first();
         if ($profile != null) {
-            return response()->json(['data' => new ProfileResponse($profile)], 200);
+            $output = ["statusCode"=>'000','data' => new ProfileResponse($profile)];
+            return $output;
         } else {
-            return response()->json(['error' => 'No data Founded'], 404);
+            $output =["statusCode"=>"111", "error"=>"No Data Founded"];
+            return $output;
         }
     }
 
@@ -84,42 +85,55 @@ class AccountService
 
         $deleted = $profile->delete();
         if ($deleted) {
-            return response()->json(['message' => 'deleted successfully'], 301);
+            $output = ["statusCode"=>'000','message' => 'deleted successfully'];
+            return $output;
         }
-        return response()->json(['error' => 'system error'], 500);
+        $output = ["statusCode"=>'111','error' => 'system error'];
+        return $output;
     }
 
     public function restore($id)
     {
         $profile = Profile::where('id', $id)->withTrashed()->restore();
-        if ($profile != null) {
-            return response()->json(['message' => 'restored successfully'], 200);
-        } else {
-            return response()->json(['error' => 'No data Founded'], 404);
+
+        if ($profile) {
+            $output = ["statusCode"=>'000','message' => 'restored successfully'];
+            return $output;
+        }else{
+            $output = ["statusCode"=>'111','error' => 'system error'];
+            return $output;
         }
     }
 
 
     public function swap_profile($id)
     {
-        $user = RoleUserProfile::where('profile_id', $id)->where('user_id', auth()->id())->where('role_id', "!=", null)->first();
+        $company = Profile::find($id);
+        $user = $company->users()->where('user_id', auth()->id())->first();
+ 
         if ($id == auth()->user()->profile_id) {
-            return response()->json(['success' => false, 'error' => 'you are Already In this  profile'], 402);
+            $output = ["profile_id" => null, 'message' => "you are Already In this  profile", "statusCode" => "265"];
+            return $output;
         }
         if ($user) {
-            $payedSubscription = SubscriptionPayment::where('profile_id', $id)->first();
+            $payedSubscription = SubscriptionPayment::where('profile_id', $id)->where('status','Paid')->first();
             $profile = auth()->user();
-            // dd(now()  $payedSubscription->expire_date);
-            if (now() < $payedSubscription->expire_date && $payedSubscription->status == 'Paid') {
+
+            if($payedSubscription == null){
+                $output = ["profile_id" => null, 'message' => "your Subscription expired", "statusCode" => "451"];
+                return $output;
+            }
+            if (now() < $payedSubscription->expire_date) {
                 $profile->update([
                     'profile_id' => $id
                 ]);
-                return response()->json(["success" => true, 'message' => 'swaped successfully', "profile_id" => $id], 200);
+                $output = ["profile_id" => $id, 'message' => "swaped successfully", "statusCode" => "000"];
+                return $output;
             }
         }
-        return response()->json(['success' => false, 'error' => 'Profile Not Founded'], 404);
+        $output = ["profile_id" => null, 'message' => "Profile Not Founded", "statusCode" => "111"];
+        return $output;
     }
-
 
 
 
@@ -150,6 +164,19 @@ class AccountService
             return DB::table('permissions')->where("category", "LIKE", "B%")->pluck('label');
         } elseif ($type == "Supplier") {
             return DB::table('permissions')->where("category", 'LIKE', "S%")->pluck('label');
+        }
+    }
+
+    public function uploadlogo($request){
+        $profile = Profile::where('id', auth()->user()->profile_id)->first();
+        if (isset($request['logo'])) {
+            $profile->clearMediaCollection('profileLogo');
+            $profile->addMedia($request['logo'])->toMediaCollection('profileLogo');
+            $output = ["message" => "Logo uploaded Successfully", "statusCode" => "000"];
+            return $output;
+        } else {
+            $output = ["message" => "system error", "statusCode" => "999"];
+            return $output;
         }
     }
 }

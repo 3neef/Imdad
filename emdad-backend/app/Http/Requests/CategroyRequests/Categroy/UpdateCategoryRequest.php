@@ -5,7 +5,7 @@ namespace App\Http\Requests\CategroyRequests\Categroy;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rule; 
 
 class UpdateCategoryRequest extends FormRequest
 {
@@ -30,7 +30,7 @@ class UpdateCategoryRequest extends FormRequest
             'nameAr' => ['string', 'max:255'],
             'parentId' => ['exists:categories,id'],
             'isleaf' => ['boolean'],
-            "status" => [Rule::in(['aproved', 'pending', 'rejected'])],
+            "status" => [Rule::in(['approved', 'pending', 'rejected'])],
             'reason' => ['string', 'min:3', 'max:1000'],
         ];
     }

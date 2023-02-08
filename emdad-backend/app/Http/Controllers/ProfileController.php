@@ -7,7 +7,10 @@ use App\Http\Requests\AccountRequests\Account\GetByAccountIdRequest;
 use App\Http\Requests\AccountRequests\Account\RestoreAccountRequest;
 use App\Http\Requests\Profile\StoreProfileRequest;
 use App\Http\Requests\Profile\UpdateProfileRequest;
+use App\Http\Requests\UMRequests\User\UploadlogoRequest;
+use App\Http\Resources\AccountResourses\Profile\ProfileResponse;
 use App\Http\Services\AccountServices\AccountService;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProfileController extends Controller
@@ -62,11 +65,17 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="collection",
-     *
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
@@ -74,9 +83,7 @@ class ProfileController extends Controller
 
     public function index(Request $request )
     {
-
-        // dd($request);
-        return ProfileCollection::collection($request);
+        return  ProfileResponse::collection( ProfileCollection::collection($request));
     }
     
 
@@ -119,16 +126,24 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="created Successfully",
-     *
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function store(StoreProfileRequest $request)
     {
-        return $this->accountService->store($request);
+        $output = $this->accountService->store($request);
+
+        return response()->json([ 'statusCode'=> $output['statusCode'], "success"=> $output['success'], "data"=> $output['data'] ],200);
     }
 
 
@@ -170,26 +185,37 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="",
-     *         @OA\JsonContent(
-     *         @OA\Property(property="AccountById", type="integer", example="{'id': 2}")
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
      *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
     public function show($id)
     {
-        return $this->accountService->show($id);
+        $output = $this->accountService->show($id);
+        if($output['statusCode'] == "000"){
+            return response()->json(['statusCode'=> $output['statusCode'], 'data' => $output['data'] ],200);
+        }elseif($output['statusCode'] == "111") {
+            return response()->json(['statusCode'=> $output['statusCode'], 'error' => $output['error'] ],200);
+        }
     }
 
     /**
-     * @OA\put(
-     * path="/api/v1_0/profiles",
+     * @OA\post(
+     * path="/api/v1_0/updateProfile/{id}",
      * operationId="updateAccount",
      * tags={"Profile Controller"},
 
      * summary="update Account",
-     * description="update Account Here",
+     * description="update Profile using current Profile Id",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -213,25 +239,43 @@ class ProfileController extends Controller
      *            @OA\Schema(
      *               type="object",
      *               required={"id"},
-     *               @OA\Property(property="id", type="integer")
+     *               @OA\Property(property="id", type="integer"),
+     *               @OA\Property(property="logo", type="file"),
+     *               @OA\Property(property="nameAr", type="string"),
+     *               @OA\Property(property="nameEn", type="string"),
+     *               @OA\Property(property="swift", type="string"),
+     *               @OA\Property(property="iban", type="string"),
+     *               @OA\Property(property="type", type="string"),
+     *               @OA\Property(property="bank", type="string"),
+     *               @OA\Property(property="subscriptionDetails", type="string"),
+     *               @OA\Property(property="vatNumber", type="string"),
+     *               @OA\Property(property="active", type="string")
      *             ),
      *        ),
      *    ),
      *      @OA\Response(
      *        response=200,
      *          description="updated Successfully",
-     *
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=500, description="system error"),
-     *      @OA\Response(response=422, description="Validate error"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
 
 
     public function update(UpdateProfileRequest $request,$id)
     {
-        return $this->accountService->update($request,$id);
+        $output = $this->accountService->update($request,$id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
 
     /**
@@ -272,14 +316,24 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=301,
      *          description="deleted successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=500, description="system error"),
      * )
      */
     public function destroy($id)
     {
-        return $this->accountService->delete($id);
+        $output = $this->accountService->delete($id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
     /**
      * @OA\put(
@@ -319,14 +373,24 @@ class ProfileController extends Controller
      *      @OA\Response(
      *        response=200,
      *          description="restored successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
      *       ),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     *      @OA\Response(response=500, description="system error"),
      * )
      */
     public function restoreByAccountId($id)
     {
-        return $this->accountService->restore($id);
+        $output = $this->accountService->restore($id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
 
     /**
@@ -433,11 +497,17 @@ class ProfileController extends Controller
 
     public function swap_profile($id)
     {
-        return $this->accountService->swap_profile($id);
+        $output = $this->accountService->swap_profile($id);
+
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'], "profileId"=> $output['profile_id'] ]],200);
     }
 
+    public function upload(UploadlogoRequest $request,AccountService $AccountServices){
+        $output = $AccountServices->uploadlogo($request);
 
-
+        return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
+    }
+    
 
 
 }

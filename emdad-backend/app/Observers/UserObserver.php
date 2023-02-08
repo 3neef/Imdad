@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use App\Mail\WelcomeMail;
+use App\Models\Settings\Setting;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 class UserObserver
@@ -27,6 +28,12 @@ class UserObserver
      */
     public function created(User $User)
     {
+       $defaultSettings= ["lang"=> "En", "showTime"=> true, "showTraning"=> true];
+
+        Setting::updateOrCreate(['user_id' => $User->id,  'preferences' => json_encode($defaultSettings,true)]);
+
+
+
         $this->sms->sendOtp($User->name, $User->mobile, $User->otp);
 
         // MailController::sendSignupEmail($User->name, $User->email, $User->otp);

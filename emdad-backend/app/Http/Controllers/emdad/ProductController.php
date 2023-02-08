@@ -8,7 +8,10 @@ use App\Http\Requests\CategroyRequests\Product\CompanyProductRequest;
 use App\Http\Requests\CategroyRequests\Product\CreateProuductRequest;
 use App\Http\Requests\CategroyRequests\Product\StatusCompanyProductRequest;
 use App\Http\Requests\CategroyRequests\Product\UpdateProuductRequest;
+use App\Http\Resources\CategoryResourses\Product\ProductResponse;
 use App\Http\Services\CategoryServices\ProductService;
+// use App\Models\Emdad\Categories;
+use App\Models\Emdad\Product;
 
 class ProductController extends Controller
 {
@@ -24,14 +27,14 @@ class ProductController extends Controller
     {
         $this->productService = $productService;
     }
-/**
-        * @OA\Post(
-        * path="/api/v1_0/products",
-        * operationId="createProduct",
-        * tags={"Product"},
-        * summary="create Product",
-        * description="create Product Here",
-*     @OA\Parameter(
+    /**
+     * @OA\Post(
+     * path="/api/v1_0/products",
+     * operationId="createProduct",
+     * tags={"Product"},
+     * summary="create Product",
+     * description="create Product Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -47,40 +50,58 @@ class ProductController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"categoryId","name","price"},
-        *               @OA\Property(property="categoryId", type="integer"),
-        *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="price", type="integer")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *        response=200,
-        *          description="created Successfully"
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-         *      @OA\Response(response=500, description="system error")
-        * )
-        */
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"categoryId","nameEn","nameAr","measruingUnit","descriptionEn","descriptionAr"},
+     *               @OA\Property(property="categoryId", type="integer"),
+     *               @OA\Property(property="nameEn", type="string"),
+     *               @OA\Property(property="nameAr", type="string"),
+     *               @OA\Property(property="attachementFile", type="file"),
+     *               @OA\Property(property="measruingUnit", type="string"),
+     *               @OA\Property(property="descriptionEn", type="string"),
+     *               @OA\Property(property="descriptionAr", type="string"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *        response=200,
+     *          description="created Successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *       ),
+     * )
+     */
     public function store(CreateProuductRequest $request)
     {
-        return $this->productService->store($request);
+        $this->authorize('create', Product::class);
+        $product =  $this->productService->store($request);
+        if ($product != null) {
+            return response()->json(["statusCode" => "000", 'message' => 'created successfully', "data"  => new ProductResponse($product)], 200);
+        }
+        return response()->json(["statusCode" => '999',  'error' => 'unkown error'], 500);
     }
 
     /**
-        * @OA\put(
-        * path="/api/v1_0/products",
-        * operationId="updateProduct",
-        * tags={"Product"},
-        * summary="update Product",
-        * description="update Product Here",
-*     @OA\Parameter(
+     * @OA\put(
+     * path="/api/v1_0/products/{id}",
+     * operationId="updateProduct",
+     * tags={"Product"},
+     * summary="update Product",
+     * description="update Product Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -96,44 +117,61 @@ class ProductController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"id","name","price"},
-        *               @OA\Property(property="id", type="integer"),
-        *               @OA\Property(property="name", type="string"),
-        *               @OA\Property(property="price", type="integer")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="updated Successfully"
-        *       ),
-        *      @OA\Response(response=500, description="error"),
-        *      @OA\Response(response=404, description="Resource Not Found"),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="categoryId", type="integer"),
+     *               @OA\Property(property="nameEn", type="string"),
+     *               @OA\Property(property="nameAr", type="string"),
+     *               @OA\Property(property="price", type="integer"),
+     *               @OA\Property(property="attachementFile", type="file"),
+     *               @OA\Property(property="measruingUnit", type="string"),
+     *               @OA\Property(property="descriptionEn", type="string"),
+     *               @OA\Property(property="descriptionAr", type="string"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="updated Successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *       ),
+     * )
+     */
 
-        * )
-        */
-
-    public function update(UpdateProuductRequest $request,$id)
+    public function update(UpdateProuductRequest $request, $id)
     {
-        return $this->productService->update($request,$id);
+        $product =  $this->productService->update($request, $id);
+
+        if ($product != null) {
+            return response()->json(["statusCode" => '111', 'message' => 'updated successfully', 'data' => new ProductResponse($product)], 200);
+        }
+        return response()->json(["statusCode" => '999', 'error' => 'unkown error'], 500);
     }
 
 
 
-/**
-        * @OA\get(
-        * path="/api/v1_0/products",
-        * operationId="getAllProducts",
-        * tags={"Product"},
-        * summary="get All Products",
-        * description="get All Products Here",
-*     @OA\Parameter(
+    /**
+     * @OA\get(
+     * path="/api/v1_0/products",
+     * operationId="getAllProducts",
+     * tags={"Product"},
+     * summary="get All Products",
+     * description="get All Products Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -149,27 +187,26 @@ class ProductController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={""},
-        *               @OA\Property(property="", type="")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="",
-        *         @OA\JsonContent(
-        *         @OA\Property(property="MainProduct", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
-        *          ),
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={""},
+     *               @OA\Property(property="", type="")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="MainProduct", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
+     *          ),
+     *       ),
+     * )
+     */
 
 
     public function index(Request $request)
@@ -178,14 +215,14 @@ class ProductController extends Controller
     }
 
 
-/**
-        * @OA\get(
-        * path="/api/v1_0/products/get-By-Id/{id}",
-        * operationId="getByProductId",
-        * tags={"Product"},
-        * summary="get By ProductId",
-        * description="get By ProductId Here",
-*     @OA\Parameter(
+    /**
+     * @OA\get(
+     * path="/api/v1_0/products/{id}",
+     * operationId="getByProductId",
+     * tags={"Product"},
+     * summary="get By ProductId",
+     * description="get By ProductId Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -201,41 +238,49 @@ class ProductController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"id"},
-        *               @OA\Property(property="id", type="integer")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="",
-        *         @OA\JsonContent(
-        *         @OA\Property(property="ProductById", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
-        *          ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"id"},
+     *               @OA\Property(property="id", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="",
+     *         @OA\JsonContent(
+     *         @OA\Property(property="ProductById", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
+     *          ),
 
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *       ),
+
+     * )
+     */
     public function show($id)
     {
-        return $this->productService->show($id);
+        $this->authorize('view', Product::class);
+
+        $product =  $this->productService->show($id);
+
+
+        if ($product) {
+            return response()->json(["statusCode" => '000', 'data' => new ProductResponse($product)], 200);
+        }
+        return response()->json(["statusCode" => '111', 'error' => 'Record Not Founded'], 404);
     }
 
-/**
-        * @OA\delete(
-        * path="/api/v1_0/products/delete/{id}",
-        * operationId="deleteProduct",
-        * tags={"Product"},
-        * summary="delete Product",
-        * description="delete Product Here",
-*     @OA\Parameter(
+    /**
+     * @OA\delete(
+     * path="/api/v1_0/products/{id}",
+     * operationId="deleteProduct",
+     * tags={"Product"},
+     * summary="delete Product",
+     * description="delete Product Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -251,38 +296,53 @@ class ProductController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"id"},
-        *               @OA\Property(property="id", type="integer")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=301,
-        *          description="deleted successfully"
-        *       ),
-        *      @OA\Response(response=404, description="Resource Not Found"),
-        * )
-        */
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"id"},
+     *               @OA\Property(property="id", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=301,
+     *          description="deleted successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *       ),
+
+     * )
+     */
 
     public function destroy($id)
     {
-        return $this->productService->delete($id);
+        $deleted = $this->productService->delete($id);
+        if ($deleted) {
+            return response()->json(["statusCode" => '000', 'message' => 'Deleted Successfully'], 301);
+        }
+        return response()->json(["statusCode" => '111', 'error' => 'Record Not Found'], 500);
     }
 
-/**
-        * @OA\put(
-        * path="/api/v1_0/products/restore/{id}",
-        * operationId="restoreByProductId",
-        * tags={"Product"},
-        * summary="restore By ProductId",
-        * description="restore By ProductId Here",
-*     @OA\Parameter(
+    /**
+     * @OA\put(
+     * path="/api/v1_0/products/restore/{id}",
+     * operationId="restoreByProductId",
+     * tags={"Product"},
+     * summary="restore By ProductId",
+     * description="restore By ProductId Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -298,29 +358,44 @@ class ProductController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"id"},
-        *               @OA\Property(property="id", type="integer")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="restored successfully"
-        *       ),
-        *      @OA\Response(response=500, description="Resource Not Found"),
-        *      @OA\Response(response=404, description="system error"),
-        * )
-        */
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"id"},
+     *               @OA\Property(property="id", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="restored successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *       ),
+
+     * )
+     */
 
     public function restore($id)
     {
-        return $this->productService->restore($id);
+        $restore =  $this->productService->restore($id);
+
+        if ($restore) {
+            return response()->json(["statusCode" => '000', 'message' => 'restored successfully'], 200);
+        }
+        return response()->json(["statusCode" => '111', 'error' => 'Record Not Found'], 500);
     }
 
 
@@ -328,14 +403,14 @@ class ProductController extends Controller
 
 
 
-/**
-        * @OA\post(
-        * path="/api/v1_0/products/company-products",
-        * operationId="companyproduct",
-        * tags={"Product"},
-        * summary="set company product",
-        * description="company product Here",
-*     @OA\Parameter(
+    /**
+     * @OA\post(
+     * path="/api/v1_0/products/company-products",
+     * operationId="companyproduct",
+     * tags={"Product"},
+     * summary="set company product",
+     * description="Set Product or products list to a company profile",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -351,39 +426,53 @@ class ProductController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"productList"},
-        *               @OA\Property(property="productList", type="integer")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="restored successfully"
-        *       ),
-        *      @OA\Response(response=500, description="Resource Not Found"),
-        *      @OA\Response(response=404, description="system error"),
-        * )
-        */
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"productList"},
+     *               @OA\Property(property="productList", type="integer"),
+     *               @OA\Property(property="productId", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="restored successfully",
+     *      *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     *       ),
+
+     * )
+     */
     public function setCompanyProduct(CompanyProductRequest $request)
     {
-        return $this->productService->setcompanyproducts($request);
+        $product =  $this->productService->setcompanyproducts($request);
+        if ($product) {
+            return response()->json(["statusCode" => '000', 'message' => 'created successfully'], 200);
+        }
     }
 
 
     /**
-        * @OA\post(
-        * path="/api/v1_0/products/change-Product-Status",
-        * operationId="changeProductStatus",
-        * tags={"Product"},
-        * summary="set change Product Status",
-        * description="set change Product Status Here",
-*     @OA\Parameter(
+     * @OA\post(
+     * path="/api/v1_0/products/change-Product-Status",
+     * operationId="changeProductStatus",
+     * tags={"Product"},
+     * summary="set change Product Status",
+     * description="set change Product Status Here",
+     *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
      *         description="Set x-authorization",
@@ -399,28 +488,43 @@ class ProductController extends Controller
      *             type="beraer"
      *         )
      *     ),
-        *     @OA\RequestBody(
-        *         @OA\JsonContent(),
-        *         @OA\MediaType(
-        *            mediaType="multipart/form-data",
-        *            @OA\Schema(
-        *               type="object",
-        *               required={"product_id"},
-        *               @OA\Property(property="product_id", type="integer")
-        *            ),
-        *        ),
-        *    ),
-        *      @OA\Response(
-        *          response=200,
-        *          description="restored successfully"
-        *       ),
-        *      @OA\Response(response=500, description="Resource Not Found"),
-        *      @OA\Response(response=404, description="system error"),
-        * )
-        */
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"product_id"},
+     *               @OA\Property(property="product_id", type="integer")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="restored successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+
+     * )
+     */
     public function changeProductStatus(StatusCompanyProductRequest $request)
     {
-        return $this->productService->changeProductStatus($request);
+        $product = $this->productService->changeProductStatus($request);
+
+        if ($product != null) {
+            return response()->json(['message' => 'change product status successfully'], 200);
+
+        } else {
+            return response()->json(['error' => 'No products founded' ]);
+        }
     }
-    
 }

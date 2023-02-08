@@ -29,8 +29,9 @@ class SignupEmail extends Mailable implements ShouldQueue
     public function build()
 
     {
+        // dd($this->viewData['lang'] );
         return $this->from(env('MAIL_USERNAME'), 'Emdad Platform')
                     ->subject('Welcome to Emdad')
-                    ->view('mail.signup-email',["viewData"=>$this->viewData]);
+                    ->view($this->viewData['lang'] == 'en'?'mail.otp.en':'mail.otp.ar',["viewData"=>$this->viewData]);
     }
 }

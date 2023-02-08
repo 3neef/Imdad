@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string("address_name",255);
-            $table->string("address_contact_phone",15);
-            $table->string("address_contact_name",25);
+            $table->string("address_contact_phone",15)->nullable(true);
+            $table->string("address_contact_name",25)->nullable(true);
             $table->string("address_type");
             $table->string("gate_type");
             $table->string('latitude');
@@ -26,10 +26,11 @@ return new class extends Migration
             $table->boolean("otp_verfied")->default(false);
             $table->timestamp("otp_expires_at")->nullable();
             $table->string("otp_receiver",6)->nullable();
-            $table->enum('status',['Pending', 'Active'])->default('Pending');
+            $table->enum('status',['inActive', 'Active'])->default('Active');
             $table->foreignId('confirm_by')->nullable(true)->references("id")->on("users")->restrictOnDelete();
             $table->foreignId('created_by')->nullable(true)->references("id")->on("users")->restrictOnDelete();
             $table->softDeletes();
+            $table->unique('address_name','profile_id');
 
         });
     }

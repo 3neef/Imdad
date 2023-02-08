@@ -53,16 +53,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "updated successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
+                        "description": "updated successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             },
@@ -127,16 +139,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "created successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
+                        "description": "created successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -174,11 +198,14 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
                                         },
                                         "data": {
-                                            "type": "string"
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -188,15 +215,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
                     }
                 }
             }
@@ -234,11 +252,14 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
                                         },
                                         "data": {
-                                            "type": "string"
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -248,15 +269,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "422": {
-                        "description": "Validation error"
-                    },
-                    "500": {
-                        "description": "system error"
                     }
                 }
             }
@@ -301,6 +313,17 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
                                     "type": "object"
                                 }
                             },
@@ -308,15 +331,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -354,6 +368,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -363,15 +383,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -419,6 +430,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -428,15 +445,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -501,6 +509,100 @@
                 }
             }
         },
+        "/api/v1_0/installation": {
+            "get": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "AppSettings",
+                "description": "Get All App Settings",
+                "operationId": "getAppSettings",
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Platform Settings"
+                ],
+                "summary": "AppSettings",
+                "description": "Store App Settings",
+                "operationId": "storeAppSettings",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "key",
+                                    "value"
+                                ],
+                                "properties": {
+                                    "Key": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1_0/auth/reset-password": {
             "put": {
                 "tags": [
@@ -533,17 +635,17 @@
                             "schema": {
                                 "required": [
                                     "email",
-                                    "oldPassword",
-                                    "newPassword"
+                                    "password",
+                                    "token"
                                 ],
                                 "properties": {
                                     "email": {
                                         "type": "email"
                                     },
-                                    "oldPassword": {
+                                    "password": {
                                         "type": "string"
                                     },
-                                    "newPassword": {
+                                    "token": {
                                         "type": "string"
                                     }
                                 },
@@ -577,16 +679,26 @@
                     "422": {
                         "description": "Unprocessable Entity",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -681,16 +793,26 @@
                     "422": {
                         "description": "Unprocessable Entity",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -758,24 +880,26 @@
                     "200": {
                         "description": "Login Successfully",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -838,24 +962,26 @@
                     "200": {
                         "description": "Login Successfully",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -902,24 +1028,26 @@
                     "200": {
                         "description": "resent new otp",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -954,24 +1082,26 @@
                     "200": {
                         "description": "Logged out",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -1032,11 +1162,11 @@
                                         "message": {
                                             "type": "string"
                                         },
-                                        "OTP": {
-                                            "type": "integer"
-                                        },
-                                        "otpExpiresAt": {
+                                        "statusCode": {
                                             "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -1046,20 +1176,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -1098,24 +1214,103 @@
                     "301": {
                         "description": "User deleted successfully",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/auth/check-reset-token": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "summary": "Check Reset Token",
+                "description": "check reset link validity",
+                "operationId": "checkResetToken",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
-                    "422": {
-                        "description": "Unprocessable Entity",
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "email"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "sended otp",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -1296,23 +1491,26 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "subscriptionPayment": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
                                             "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "301": {
-                        "description": "can,t use coupon"
                     }
                 }
             }
@@ -1347,15 +1545,24 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "example": "{message => deleted successfully}"
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }
@@ -1392,15 +1599,24 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "example": "{message => deleted successfully}"
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }
@@ -1419,16 +1635,24 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
-                                            "type": "object",
-                                            "example": "{'id': 1, 'name':'kg'}"
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }
@@ -1475,81 +1699,33 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "collection"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "collection",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
         },
         "/api/v1_0/profiles": {
-            "put": {
-                "tags": [
-                    "Profile Controller"
-                ],
-                "summary": "update Account",
-                "description": "update Account Here",
-                "operationId": "updateAccount",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated Successfully"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            },
             "post": {
                 "tags": [
                     "Profile Controller"
@@ -1605,16 +1781,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "created Successfully"
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -1669,21 +1857,26 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "AccountById": {
-                                            "type": "integer",
-                                            "example": "{'id': 2}"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -1734,13 +1927,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "restored successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
+                        "description": "restored successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             },
@@ -1791,13 +1999,132 @@
                 },
                 "responses": {
                     "301": {
-                        "description": "deleted successfully"
+                        "description": "deleted successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/updateProfile/{id}": {
+            "post": {
+                "tags": [
+                    "Profile Controller"
+                ],
+                "summary": "update Account",
+                "description": "update Profile using current Profile Id",
+                "operationId": "updateAccount",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "id"
+                                ],
+                                "properties": {
+                                    "id": {
+                                        "type": "integer"
+                                    },
+                                    "logo": {
+                                        "type": "file"
+                                    },
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "swift": {
+                                        "type": "string"
+                                    },
+                                    "iban": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "bank": {
+                                        "type": "string"
+                                    },
+                                    "subscriptionDetails": {
+                                        "type": "string"
+                                    },
+                                    "vatNumber": {
+                                        "type": "string"
+                                    },
+                                    "active": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -1909,10 +2236,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "department created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "department created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -1978,11 +2323,14 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "name": {
-                                            "type": "string"
-                                        },
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -1992,15 +2340,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -2147,10 +2486,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "driver created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "driver created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             },
@@ -2273,6 +2630,71 @@
                 }
             }
         },
+        "/api/v1_0/drivers/suspend": {
+            "post": {
+                "tags": [
+                    "Delivery"
+                ],
+                "summary": "suspend/activate drivers",
+                "description": "suspend or activate driver Here",
+                "operationId": "suspend-drivers",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "system error"
+                    },
+                    "422": {
+                        "description": "Validate error"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
         "/api/v1_0/drivers/restore/{id}'": {
             "put": {
                 "tags": [
@@ -2369,13 +2791,28 @@
                         }
                     },
                     "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "sstring"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             },
@@ -2454,10 +2891,90 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "department created Successfully"
+                        "description": "department created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/trucks/{id}'": {
+            "get": {
+                "tags": [
+                    "trucks"
+                ],
+                "summary": "get trucks By Id",
+                "description": "get trucks By Id Here",
+                "operationId": "gettrucksById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     },
-                    "404": {
-                        "description": "Resource Not Found"
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "get trucks By Id",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -2609,6 +3126,62 @@
                 }
             }
         },
+        "/api/v1_0/trucks/suspend/{id}": {
+            "put": {
+                "tags": [
+                    "trucks"
+                ],
+                "summary": "suspend/activate trucks",
+                "description": "suspend or activate trucks Here",
+                "operationId": "suspend-trucks",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1_0/trucks/restore/{id}": {
             "put": {
                 "tags": [
@@ -2661,15 +3234,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -2706,25 +3270,24 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object"
-                                    }
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -2758,6 +3321,7 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
+                                    "managerId",
                                     "warehouseName",
                                     "warehouseType",
                                     "latitude",
@@ -2787,6 +3351,9 @@
                                     },
                                     "receiverPhone": {
                                         "type": "string"
+                                    },
+                                    "managerId": {
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -2806,6 +3373,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -2815,15 +3388,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -2868,6 +3432,17 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
                                     "type": "object"
                                 }
                             },
@@ -2875,15 +3450,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -2929,6 +3495,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -2938,15 +3510,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -3027,71 +3590,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            },
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/warehouses/restore/{id}'": {
-            "put": {
-                "tags": [
-                    "warehouse"
-                ],
-                "summary": "restore warehouse By Id",
-                "description": "restore warehouse By Id Here",
-                "operationId": "restoreWarehouseById",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "restore warehouse By Id",
-                        "content": {
-                            "multipart/form-data": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
+                                        },
+                                        "statusCode": {
                                             "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -3101,20 +3605,11 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "500": {
-                        "description": "system error"
-                    },
-                    "422": {
-                        "description": "Validate error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
         },
-        "/api/v1_0/warehouses/verfied'": {
+        "/api/v1_0/warehouses/verfied": {
             "put": {
                 "tags": [
                     "warehouse"
@@ -3195,6 +3690,598 @@
                     },
                     "404": {
                         "description": "Resource Not Found"
+                    }
+                }
+            }
+        },
+        "/api/v1_0/assignwarehousetouser": {
+            "post": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "assign warehouse to user",
+                "description": "assign warehouse to user",
+                "operationId": "assignwarehousetouser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "userId",
+                                    "warehouseId"
+                                ],
+                                "properties": {
+                                    "warehouseId": {
+                                        "type": "integer"
+                                    },
+                                    "userId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "assign warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/unassignwarehousetouser/{id}": {
+            "delete": {
+                "tags": [
+                    "warehouse"
+                ],
+                "summary": "unassign warehouse to user",
+                "description": "unassign warehouse to user",
+                "operationId": "unAssignWarehouseToUser",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "warehouseId"
+                                ],
+                                "properties": {
+                                    "warehouseId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "unassign warehouse",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/brands": {
+            "get": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "show all brands",
+                "description": "show all brands Here",
+                "operationId": "showallbrands",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000,data => $brand}200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "store brands",
+                "description": "store brands Here",
+                "operationId": "storebrands",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000 ,message => create successfully }200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/colors": {
+            "get": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "show colors",
+                "description": "show colors Here",
+                "operationId": "showcolors",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000 ,data => data }200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "store colors",
+                "description": "store colors Here",
+                "operationId": "storecolors",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000 ,message => create successfully }200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/nationality": {
+            "get": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "show nationality",
+                "description": "show nationality Here",
+                "operationId": "shownationality",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000 ,data =>  data  }200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "store nationality",
+                "description": "store nationality Here",
+                "operationId": "storenationality",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000 ,message => created successfully  }200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/models": {
+            "get": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "show models",
+                "description": "show models Here",
+                "operationId": "show models",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000 ,data =>  data  }200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "store models",
+                "description": "store models Here",
+                "operationId": "store models",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000 ,message =>  create successfully  }200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/sizes": {
+            "get": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "show sizes",
+                "description": "show sizes Here",
+                "operationId": "show sizes",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000 ,data =>   data  }200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "EmdadSettings"
+                ],
+                "summary": "store sizes",
+                "description": "store sizes Here",
+                "operationId": "store sizes",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "example": "{statusCode => 000 ,message =>  create successfully  }200"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -3777,6 +4864,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -3786,15 +4879,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -3864,6 +4948,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -3873,15 +4963,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -3889,7 +4970,7 @@
         "/api/v1_0/permissions/getAll": {
             "get": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "get permisssions",
                 "description": "get all permisssions Here",
@@ -3918,25 +4999,24 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "string"
-                                    }
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
                                 }
                             },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -3944,7 +5024,7 @@
         "/api/v1_0/permissions/getById/{id}": {
             "get": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "get permisssion",
                 "description": "get permission by id Here",
@@ -3974,11 +5054,14 @@
                             "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "privileges": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
-                                            }
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -3988,15 +5071,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4004,7 +5078,7 @@
         "/api/v1_0/permissions/delete/{id}": {
             "delete": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "update permisssion",
                 "description": "update permission to specific role Here",
@@ -4036,21 +5110,21 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4058,7 +5132,7 @@
         "/api/v1_0/permissions/restore/{id}": {
             "delete": {
                 "tags": [
-                    "UM & Permissions"
+                    "Roles and Permissions"
                 ],
                 "summary": "restore permisssion",
                 "description": "restore permission to specific role Here",
@@ -4090,21 +5164,185 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/permissions/addPermissionToRole": {
+            "post": {
+                "tags": [
+                    "Roles and Permissions"
+                ],
+                "summary": "Add new permisssion",
+                "description": "Add a new permission to the permissions list within a role",
+                "operationId": "AddPermissionToPermissions",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
-                    "422": {
-                        "description": "Unprocessable Entity"
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "userId",
+                                    "roleId",
+                                    "label"
+                                ],
+                                "properties": {
+                                    "userId": {
+                                        "type": "string"
+                                    },
+                                    "roleId": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created  new permission",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/permissions/RemovePermission": {
+            "delete": {
+                "tags": [
+                    "Roles and Permissions"
+                ],
+                "summary": "Delete permisssion from list",
+                "description": "Delete a permission label from the permissions list within a role",
+                "operationId": "DeletePermissionFromPermissions",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "userId",
+                                    "roleId",
+                                    "label"
+                                ],
+                                "properties": {
+                                    "userId": {
+                                        "type": "string"
+                                    },
+                                    "roleId": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Permission Deleted",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -4140,21 +5378,25 @@
                         "description": "get all roles",
                         "content": {
                             "multipart/form-data": {
-                                "schema": {}
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
                             },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -4217,8 +5459,11 @@
                                         "message": {
                                             "type": "string"
                                         },
-                                        "data": {
+                                        "statusCode": {
                                             "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -4228,15 +5473,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4273,6 +5509,17 @@
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
                                     "type": "object"
                                 }
                             },
@@ -4280,15 +5527,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -4346,6 +5584,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -4355,15 +5599,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -4401,6 +5636,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -4410,15 +5651,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4453,33 +5685,26 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "success": {
-                                            "type": "boolean"
-                                        },
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
-                                            "type": "string",
-                                            "example": "[{'id': 1, 'name': 'GM'}]"
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4519,6 +5744,12 @@
                                     "properties": {
                                         "message": {
                                             "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -4528,15 +5759,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity"
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -4624,7 +5846,7 @@
                     "UM & Permissions"
                 ],
                 "summary": "Register User",
-                "description": "Register User Here",
+                "description": "Register User in a Company with the preference of being assigned to multiple warehouses ",
                 "operationId": "add-user",
                 "parameters": [
                     {
@@ -4684,7 +5906,7 @@
                                         "type": "integer"
                                     },
                                     "warahouseId": {
-                                        "type": "integer"
+                                        "type": "array(integer)"
                                     }
                                 },
                                 "type": "object"
@@ -5230,7 +6452,7 @@
                 }
             }
         },
-        "/api/v1_0/users/disable": {
+        "/api/v1_0/users/change-status": {
             "put": {
                 "tags": [
                     "UM & Permissions"
@@ -5577,58 +6799,14 @@
                 }
             }
         },
-        "/api/v1_0/categories": {
-            "get": {
-                "tags": [
-                    "Catogry"
-                ],
-                "summary": "show all catogries on the user profile",
-                "description": "show all  catogry Here",
-                "operationId": "showallcatogre",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "Maincatogre": {
-                                            "type": "integer",
-                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
+        "/api/v1_0/users/upload-avatar": {
             "post": {
                 "tags": [
-                    "Catogry"
+                    "UM & Permissions"
                 ],
-                "summary": "add catogry",
-                "description": "add category or a subcategory using parent id if it exists  by the company owner",
-                "operationId": "addcatogry",
+                "summary": "Upload Avater",
+                "description": "Upload Avater Here",
+                "operationId": "upload-avatar",
                 "parameters": [
                     {
                         "name": "x-authorization",
@@ -5652,166 +6830,11 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "nameEn",
-                                    "nameAr",
-                                    "isleaf",
-                                    "companyId"
+                                    "attachementFile"
                                 ],
                                 "properties": {
-                                    "nameEn": {
-                                        "type": "string"
-                                    },
-                                    "nameAr": {
-                                        "type": "string"
-                                    },
-                                    "isleaf": {
-                                        "type": "boolean"
-                                    },
-                                    "companyId": {
-                                        "type": "integer"
-                                    },
-                                    "type": {
-                                        "type": "string"
-                                    },
-                                    "parentId": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/categories/{id}": {
-            "get": {
-                "tags": [
-                    "Catogry"
-                ],
-                "summary": "get By categoryId",
-                "description": "show category with a specifc id",
-                "operationId": "getBycategoryId",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "categoryById": {
-                                            "type": "integer",
-                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Catogry"
-                ],
-                "summary": "update Catogry",
-                "description": "update Catogry using id",
-                "operationId": "updateCatogry",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "properties": {
-                                    "nameEn": {
-                                        "type": "string"
-                                    },
-                                    "nameAr": {
-                                        "type": "string"
-                                    },
-                                    "isleaf": {
-                                        "type": "boolean"
-                                    },
-                                    "companyId": {
-                                        "type": "integer"
+                                    "attachementFile": {
+                                        "type": "file"
                                     }
                                 },
                                 "type": "object"
@@ -5824,7 +6847,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Category updated successfully",
+                        "description": "Avatar created successfully",
                         "content": {
                             "multipart/form-data": {
                                 "schema": {
@@ -5859,14 +6882,353 @@
                         "description": "Resource Not Found"
                     }
                 }
+            }
+        },
+        "/api/v1_0/users/change-password": {
+            "put": {
+                "tags": [
+                    "UM & Permissions"
+                ],
+                "summary": "change password",
+                "description": "change password Here",
+                "operationId": "ChangePassword",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "fullName": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "email"
+                                    },
+                                    "mobile": {
+                                        "type": "string"
+                                    },
+                                    "identityNumber": {
+                                        "type": "integer"
+                                    },
+                                    "expiry_date": {
+                                        "type": "string"
+                                    },
+                                    "lang": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Password changed successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "show all catogries on the user profile",
+                "description": "show all  Category Here",
+                "operationId": "showallcatogre",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [],
+                                "properties": {
+                                    "perPage": {
+                                        "type": "integer"
+                                    },
+                                    "onlyRequested": {
+                                        "type": "boolean"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "Maincatogre": {
+                                            "type": "integer",
+                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "add Category",
+                "description": "add category or a subcategory using parent id if it exists  by the company owner",
+                "operationId": "addCategory",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "nameEn",
+                                    "nameAr",
+                                    "note"
+                                ],
+                                "properties": {
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "parentId": {
+                                        "type": "integer"
+                                    },
+                                    "isleaf": {
+                                        "type": "boolean"
+                                    },
+                                    "note": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/{id}": {
+            "put": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "update Category",
+                "description": "update Category using id",
+                "operationId": "updateCategory",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "parentId": {
+                                        "type": "integer"
+                                    },
+                                    "isleaf": {
+                                        "type": "boolean"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    },
+                                    "reason": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category updated successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
             },
             "delete": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "Delete Catogry",
+                "summary": "Delete Category",
                 "description": "delete Category using Category id",
-                "operationId": "deleteCatogry",
+                "operationId": "deleteCategory",
                 "parameters": [
                     {
                         "name": "id",
@@ -5909,24 +7271,26 @@
                     "301": {
                         "description": "Category deleted successfully",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -5934,7 +7298,7 @@
         "/api/v1_0/categories/restore/{id}": {
             "get": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "restore category",
                 "description": "restore deleted category",
@@ -6000,13 +7364,79 @@
                 }
             }
         },
-        "/api/v1_0/categories/company-categories": {
-            "put": {
+        "/api/v1_0/categories/{Id}": {
+            "get": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "Retry Catogry",
-                "description": "set company Category",
+                "summary": "get By categoryId",
+                "description": "show category with a specifc id",
+                "operationId": "getBycategoryId",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "categoryById": {
+                                            "type": "integer",
+                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/company-categories": {
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Set Category",
+                "description": "set company favorite Categories using only category or categorylists ",
                 "operationId": "setFivoritecompanyCategory",
                 "parameters": [
                     {
@@ -6038,11 +7468,11 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "categoryList"
-                                ],
                                 "properties": {
                                     "categoryList": {
+                                        "type": "string"
+                                    },
+                                    "categoryId": {
                                         "type": "string"
                                     }
                                 },
@@ -6064,6 +7494,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -6075,20 +7508,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -6096,9 +7515,9 @@
         "/api/v1_0/categories/RetryApproval/{id}": {
             "put": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "Retry Catogry",
+                "summary": "Retry Category",
                 "description": "Request Category Approval",
                 "operationId": "RetryApproval",
                 "parameters": [
@@ -6132,14 +7551,14 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "status",
+                                    "categoryId",
                                     "reason"
                                 ],
                                 "properties": {
-                                    "status": {
+                                    "reason": {
                                         "type": "string"
                                     },
-                                    "reason": {
+                                    "categoryId": {
                                         "type": "string"
                                     }
                                 },
@@ -6161,6 +7580,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -6172,20 +7594,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -6193,10 +7601,10 @@
         "/api/v1_0/categories/changeCategoryStatus/{id}": {
             "put": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
-                "summary": "change  Catogry status",
-                "description": "Request change  Catogry status",
+                "summary": "change  Category status",
+                "description": "Request change  Category status",
                 "operationId": "changeCategoryStatus",
                 "parameters": [
                     {
@@ -6254,6 +7662,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -6265,20 +7676,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -6286,7 +7683,7 @@
         "/api/v1_0/categories/approveCategory": {
             "post": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "change  status approve Category",
                 "description": "Request status approve Category",
@@ -6322,10 +7719,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "category_id"
+                                    "categoryId"
                                 ],
                                 "properties": {
-                                    "category_id": {
+                                    "categoryId": {
                                         "type": "integer"
                                     }
                                 },
@@ -6347,6 +7744,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -6358,20 +7758,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -6379,7 +7765,7 @@
         "/api/v1_0/categories/rejectCategory": {
             "post": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "change  status rejectCategory Category",
                 "description": "Request status rejectCategory Category",
@@ -6415,10 +7801,10 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "category_id"
+                                    "categoryId"
                                 ],
                                 "properties": {
-                                    "category_id": {
+                                    "categoryId": {
                                         "type": "integer"
                                     }
                                 },
@@ -6440,6 +7826,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -6451,20 +7840,6 @@
                                 "schema": {}
                             }
                         }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             }
@@ -6472,7 +7847,7 @@
         "/api/v1_0/categories/serviceOrproduct": {
             "get": {
                 "tags": [
-                    "Catogry"
+                    "Category"
                 ],
                 "summary": "filter categories",
                 "description": "Check if the category type is prouduct service",
@@ -6508,11 +7883,11 @@
                         "multipart/form-data": {
                             "schema": {
                                 "required": [
-                                    "category_id"
+                                    "type"
                                 ],
                                 "properties": {
-                                    "category_id": {
-                                        "type": "integer"
+                                    "type": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -6533,6 +7908,9 @@
                                         "message": {
                                             "type": "string"
                                         },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
                                         "data": {
                                             "type": "object"
                                         }
@@ -6544,20 +7922,162 @@
                                 "schema": {}
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/getCategoryProfile": {
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "filter categories",
+                "description": "Check if the category type is prouduct service",
+                "operationId": "getCategoryProfile",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     },
-                    "422": {
-                        "description": "Unprocessable Entity",
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "checked sucessfully successfully",
                         "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
                             "application/json": {
                                 "schema": {}
                             }
                         }
+                    }
+                }
+            }
+        },
+        "/api/v1_0/categories/activation/{id}": {
+            "put": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "update Category Status",
+                "description": "update Category Status using id",
+                "operationId": "updateCategoryStatus",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
                     },
-                    "400": {
-                        "description": "Bad request"
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
-                    "404": {
-                        "description": "Resource Not Found"
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "status"
+                                ],
+                                "properties": {
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Category Status updated successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -6624,74 +8144,6 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Product"
-                ],
-                "summary": "update Product",
-                "description": "update Product Here",
-                "operationId": "updateProduct",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "multipart/form-data": {
-                            "schema": {
-                                "required": [
-                                    "id",
-                                    "name",
-                                    "price"
-                                ],
-                                "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "price": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "updated Successfully"
-                    },
-                    "500": {
-                        "description": "error"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
             },
@@ -6726,18 +8178,33 @@
                             "schema": {
                                 "required": [
                                     "categoryId",
-                                    "name",
-                                    "price"
+                                    "nameEn",
+                                    "nameAr",
+                                    "measruingUnit",
+                                    "descriptionEn",
+                                    "descriptionAr"
                                 ],
                                 "properties": {
                                     "categoryId": {
                                         "type": "integer"
                                     },
-                                    "name": {
+                                    "nameEn": {
                                         "type": "string"
                                     },
-                                    "price": {
-                                        "type": "integer"
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "attachementFile": {
+                                        "type": "file"
+                                    },
+                                    "measruingUnit": {
+                                        "type": "string"
+                                    },
+                                    "descriptionEn": {
+                                        "type": "string"
+                                    },
+                                    "descriptionAr": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -6750,18 +8217,33 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "created Successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    },
-                    "500": {
-                        "description": "system error"
+                        "description": "created Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
         },
-        "/api/v1_0/products/get-By-Id/{id}": {
+        "/api/v1_0/products/{id}": {
             "get": {
                 "tags": [
                     "Product"
@@ -6823,14 +8305,99 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
                     }
                 }
-            }
-        },
-        "/api/v1_0/products/delete/{id}": {
+            },
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "update Product",
+                "description": "update Product Here",
+                "operationId": "updateProduct",
+                "parameters": [
+                    {
+                        "name": "x-authorization",
+                        "in": "header",
+                        "description": "Set x-authorization",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "token",
+                        "in": "header",
+                        "description": "Set user authentication token",
+                        "schema": {
+                            "type": "beraer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "properties": {
+                                    "categoryId": {
+                                        "type": "integer"
+                                    },
+                                    "nameEn": {
+                                        "type": "string"
+                                    },
+                                    "nameAr": {
+                                        "type": "string"
+                                    },
+                                    "price": {
+                                        "type": "integer"
+                                    },
+                                    "attachementFile": {
+                                        "type": "file"
+                                    },
+                                    "measruingUnit": {
+                                        "type": "string"
+                                    },
+                                    "descriptionEn": {
+                                        "type": "string"
+                                    },
+                                    "descriptionAr": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "updated Successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                }
+            },
             "delete": {
                 "tags": [
                     "Product"
@@ -6878,10 +8445,28 @@
                 },
                 "responses": {
                     "301": {
-                        "description": "deleted successfully"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
+                        "description": "deleted successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -6934,13 +8519,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "restored successfully"
-                    },
-                    "500": {
-                        "description": "Resource Not Found"
-                    },
-                    "404": {
-                        "description": "system error"
+                        "description": "restored successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -6951,7 +8551,7 @@
                     "Product"
                 ],
                 "summary": "set company product",
-                "description": "company product Here",
+                "description": "Set Product or products list to a company profile",
                 "operationId": "companyproduct",
                 "parameters": [
                     {
@@ -6981,6 +8581,9 @@
                                 "properties": {
                                     "productList": {
                                         "type": "integer"
+                                    },
+                                    "productId": {
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -6993,13 +8596,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "restored successfully"
-                    },
-                    "500": {
-                        "description": "Resource Not Found"
-                    },
-                    "404": {
-                        "description": "system error"
+                        "description": "restored successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }
@@ -7052,13 +8670,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "restored successfully"
-                    },
-                    "500": {
-                        "description": "Resource Not Found"
-                    },
-                    "404": {
-                        "description": "system error"
+                        "description": "restored successfully",
+                        "content": {
+                            "multipart/form-data": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     }
                 }
             }

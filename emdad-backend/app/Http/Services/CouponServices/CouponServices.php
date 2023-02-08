@@ -16,7 +16,7 @@ class CouponServices
 
     public function create($request)
     {
-             Coupon::create([
+             $coupon = Coupon::create([
                 'allowed' => $request->allowed,
                 'start_date' => $request->startDate,
                 'end_date' => $request->endDate,
@@ -24,7 +24,8 @@ class CouponServices
                 'is_percentage' => $request->isPercentage,
                 'code' => random_int(100000,999999),
             ]);
-            return response()->json(['message' => 'coupon created successfully'],200);
+
+            return $coupon;
 
     }
 
@@ -55,10 +56,11 @@ class CouponServices
                 ]);
             }
             $subscription=$this->recalculate($subscription);
-            return response()->json(['data'=>new SubscriptionResource($subscription),'message' => 'aproved successfully'], 200);
+            return $subscription;
         }
         else{
-            return response()->json(['message' => 'can,t use coupon'], 301);
+            $subscription = null;
+            return $subscription;
         }
     }
 
@@ -76,23 +78,17 @@ class CouponServices
 
     public function destroy( $id)
     {
-        $category = Coupon::find($id);
-        if ($category == null) {
-            return response()->json(['success' => false, 'error' => 'not found'], 404);
-        } else {
-            $category->delete();
-            return response()->json(['message' => 'deleted successfully'], 301);
-        }
+        $coupon = Coupon::find($id)->delete();
+        
+        return $coupon;
     }
 
 
     public function restore($id)
     {
         $restore = Coupon::where('id',$id)->where('deleted_at','!=',null)->withTrashed()->restore();
-        if ($restore) {
-            return response()->json(['message' => 'restored successfully'], 200);
-        }
-        return response()->json(['error' => 'system error'], 500);
+        
+        return $restore;
     }
 
 
@@ -102,7 +98,8 @@ class CouponServices
     public function get_all_unit_of_measure()
     {
         $unit = Unit_of_measures::get();
-        return response()->json( [ 'data'=>$unit], 200 );
+
+        return $unit;
     }
 
 }

@@ -3,19 +3,17 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Collections\UserCollection;
+use App\Http\Controllers\Auth\MailController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UMRequests\DeleteWarehouse;
 use App\Http\Requests\UMRequests\DeleteWarehouseRequest;
 use App\Http\Requests\UMRequests\UpdateUserWarehouseStatusRequest;
-use App\Http\Requests\UMRequests\UpdateUserWharehouseStatus;
-use App\Http\Requests\UMRequests\User\AssignRoleRequest;
 use App\Http\Requests\UMRequests\User\DefaultCompanyRequest;
-use App\Http\Requests\UMRequests\User\GetUserByIdRequest;
 use App\Http\Requests\UMRequests\User\GetUserRequest;
 use App\Http\Requests\UMRequests\User\RestoreUserByIdRequest;
 use App\Http\Requests\UMRequests\User\StoreUserRequest;
 use App\Http\Requests\UMRequests\User\UpdateRequest;
+use App\Http\Requests\UMRequests\User\UploadAvaterRequest;
 use App\Http\Requests\UMRequests\User\UserAvtivateRerquest;
 use App\Http\Resources\UMResources\User\UserResponse;
 use App\Http\Services\UMServices\UserServices;
@@ -24,11 +22,13 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
+
+
     public function index(Request $request)
     {
-        return UserCollection::collection($request);
+        return UserResponse::collection(UserCollection::collection($request));
     }
-/**
+    /**
      * @OA\get(
      * path="/api/v1_0/users/get-users",
      * operationId="get-users",
@@ -86,16 +86,16 @@ class UserController extends Controller
     public function getProfileUsers(Request $request)
     {
         // return DB::statement("select * from users");
-        if(auth()->user()->profile_id==null){
-            return response()->json(["error"=>"","code"=>"100","message"=>"user does not have profile"],200);
+        if (auth()->user()->profile_id == null) {
+            return response()->json(["error" => "", "code" => "100", "message" => "user does not have profile"], 200);
         }
         $users =  DB::table('users')->select('*')
-        ->join('role_user_profile', 'role_user_profile.user_id', '=', 'users.id')->where('role_user_profile.profile_id', auth()->user()->profile_id)
-        ->get();
+            ->join('profile_role_user', 'profile_role_user.user_id', '=', 'users.id')->where('profile_role_user.profile_id', auth()->user()->profile_id)
+            ->paginate($request->pageSize ?? 100);
 
 
 
-        return response()->json(["success"=>true,"code"=>"200","data"=>$users],200);
+        return response()->json(["success" => true, "statusCode" => "000", "data" => UserResponse::collection($users)], 200);
     }
 
     /**
@@ -104,7 +104,7 @@ class UserController extends Controller
      * operationId="add-user",
      * tags={"UM & Permissions"},
      * summary="Register User",
-     * description="Register User Here",
+     * description="Register User in a Company with the preference of being assigned to multiple warehouses ",
      *     @OA\Parameter(
      *         name="x-authorization",
      *         in="header",
@@ -137,7 +137,7 @@ class UserController extends Controller
      *               @OA\Property(property="identityType", type="string"),
      *               @OA\Property(property="isLearning", type="boolean"),
      *               @OA\Property(property="managerUserId", type="integer"),
-     *               @OA\Property(property="warahouseId", type="integer"),
+     *               @OA\Property(property="warahouseId", type="array(integer)"),
      *            ),
      *        ),
      *    ),
@@ -165,7 +165,27 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request, UserServices $userServices)
     {
-        return $userServices->create($request->validated());
+        $this->authorize('create', User::class);
+
+        $output = $userServices->create($request->validated());
+        switch ($output['statusCode']) {
+            case '000':
+                $userServices->UserOtp($output['data']);
+
+                MailController::sendSignupEmail($output['data']->name, $output['data']->email, ["admin" => auth()->user()->full_name, "password" => $output['data']->password], "en", "password");
+    
+                return response()->json(['data' => ['user' => new UserResponse($output['data']), 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+                break;
+            case '999':
+                return response()->json(['data' => ['user' => null, 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+                break;
+            case '360':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message'], "success" => $output['success']]], 200);
+                break;
+            case '364':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message'], "success" => $output['success']]], 200);
+                break;
+        }
     }
 
     /**
@@ -226,24 +246,10 @@ class UserController extends Controller
      */
     public function getUserInfoByToken(Request $request)
     {
-        ///TODO
-        $user = auth()->user();
-
-        if ($request->has('dataset') && is_array($request->dataset)) {
-            if (
-                in_array(
-                    'default_company',
-                    array_map('strtolower', $request->dataset)
-                )
-            ) {
-            }
-        }
-
-
-        return response()->json(["status" => "success", "data" => new UserResponse($user)], 200);
+        return response()->json(["status" => "success", "data" => new UserResponse(auth()->user())], 200);
     }
 
-/**
+    /**
      * @OA\put(
      * path="/api/v1_0/users/update-owner-user/{id}",
      * operationId="updateOwner",
@@ -306,11 +312,22 @@ class UserController extends Controller
 
 
 
-     public function UpdateOwnerUser(UpdateRequest $request, UserServices $userServices,$id)
-     {
-         // dd(e);
-         return $userServices->update($request,$id);
-     }
+    public function UpdateOwnerUser(UpdateRequest $request, UserServices $userServices, $id)
+    {
+        $output = $userServices->update($request, $id);
+
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json(['data' => ['user' => $output['otp'] ?? new UserResponse($output['data']), 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+                break;
+            case '999':
+                return response()->json(['data' => ['user' => null, 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+                break;
+            case '110':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message'], "success" => $output['success']]], 200);
+                break;
+        }
+    }
 
 
     /**
@@ -381,10 +398,23 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function update(UpdateRequest $request, UserServices $userServices,$id)
+    public function update(UpdateRequest $request, UserServices $userServices, $id)
     {
-        // dd(e);
-        return $userServices->update($request,$id);
+         $this->authorize('update', User::class);
+
+        $output = $userServices->update($request, $id);
+
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json(['data' => ['user' => $output['otp'] ?? new UserResponse($output['data']), 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+                break;
+            case '999':
+                return response()->json(['data' => ['user' => null, 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+                break;
+            case '110':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message'], "success" => $output['success']]], 200);
+                break;
+        }
     }
 
 
@@ -427,8 +457,23 @@ class UserController extends Controller
      */
     public function restoreUser(RestoreUserByIdRequest  $request, UserServices $userServices)
     {
-        // dd('p');
-        return $userServices->restoreById($request);
+
+        $output = $userServices->restoreById($request);
+
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+                break;
+            case '999':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "error" => $output['error']]], 200);
+                break;
+            case '360':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message'], "success" => $output['success']]], 200);
+                break;
+            case '364':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message'], "success" => $output['success']]], 200);
+                break;
+        }
     }
 
 
@@ -489,9 +534,19 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function delete( GetUserRequest $id, UserServices $userServices)
+    public function delete(GetUserRequest $id, UserServices $userServices)
     {
-        return $userServices->delete($id);
+
+        $output = $userServices->delete($id);
+
+        switch ($output['statusCode']) {
+            case '000':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+                break;
+            case '999':
+                return response()->json(['data' => ['statusCode' => $output['statusCode'], "error" => $output['error']]], 200);
+                break;
+        }
     }
 
 
@@ -550,13 +605,20 @@ class UserController extends Controller
      * )
      */
 
-    public function userActivate(UserAvtivateRerquest $request,UserServices $userServices) {
-        return $userServices->userActivate($request);
+    public function userActivate(UserAvtivateRerquest $request, UserServices $userServices)
+    {
+        $output = $userServices->userActivate($request);
+
+        if ($output['statusCode'] == "000") {
+            return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+        } elseif ($output['statusCode'] == "999" || $output['statusCode'] == "263") {
+            return response()->json(['data' => ['statusCode' => $output['statusCode'], "error" => $output['error']]], 200);
+        }
     }
 
-     /**
+    /**
      * @OA\Put(
-     * path="/api/v1_0/users/disable",
+     * path="/api/v1_0/users/change-status",
      * operationId=" disable",
      * tags={"UM & Permissions"},
      * summary="disable user",
@@ -608,8 +670,11 @@ class UserController extends Controller
      * )
      */
 
-    public function disable(UserAvtivateRerquest $request,UserServices $userServices) {
-        return $userServices->disable($request);
+    public function disable(UserAvtivateRerquest $request, UserServices $userServices)
+    {
+        $output = $userServices->disable($request);
+
+        return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
     }
 
 
@@ -670,10 +735,13 @@ class UserController extends Controller
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-    public function setDefaultCompany(DefaultCompanyRequest $request,UserServices $userServices) {
-        return $userServices->setDefaultCompany($request);
+    public function setDefaultCompany(DefaultCompanyRequest $request, UserServices $userServices)
+    {
+        $output = $userServices->setDefaultCompany($request);
+
+        return response()->json(['data' => ['user' => new UserResponse($output['data']), 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
     }
-  /**
+    /**
      * @OA\delete(
      * path="/api/v1_0/users/detachWarehouse",
      * operationId="detachWarehouse",
@@ -732,11 +800,14 @@ class UserController extends Controller
      * )
      */
 
-public function detachWarehouse(DeleteWarehouseRequest $request,UserServices $userServices) {
-    return $userServices->detachWarehouse($request);
-}
+    public function detachWarehouse(DeleteWarehouseRequest $request, UserServices $userServices)
+    {
+        $output = $userServices->detachWarehouse($request);
 
-/**
+        return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+    }
+
+    /**
      * @OA\put(
      * path="/api/v1_0/users/userWarehouseStatus",
      * operationId="userWarehouseStatus",
@@ -794,8 +865,146 @@ public function detachWarehouse(DeleteWarehouseRequest $request,UserServices $us
      *      @OA\Response(response=404, description="Resource Not Found"),
      * )
      */
-public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request,UserServices $userServices) {
-    return $userServices->userWarehouseStatus($request);
-}
-}
+    public function userWarehouseStatus(UpdateUserWarehouseStatusRequest $request, UserServices $userServices)
+    {
+        $output = $userServices->userWarehouseStatus($request);
 
+        return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+    }
+
+
+    /**
+     * @OA\Post(
+     * path="/api/v1_0/users/upload-avatar",
+     * operationId="upload-avatar",
+     * tags={"UM & Permissions"},
+     * summary="Upload Avater",
+     * description="Upload Avater Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"attachementFile"},
+     *               @OA\Property(property="attachementFile", type="file"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Avatar created successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="data", type="object")
+     *            ),
+     *          ),
+     *       ),
+     *      @OA\Response(
+     *          response=422,
+     *          description="Unprocessable Entity",
+     *          @OA\JsonContent()
+     *       ),
+     *      @OA\Response(response=400, description="Bad request"),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     * )
+     */
+    public function upload(UploadAvaterRequest $request, UserServices $userServices)
+    {
+        $output = $userServices->uploadAvatar($request);
+
+        return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+    }
+    /**
+     * @OA\put(
+     * path="/api/v1_0/users/change-password",
+     * operationId="ChangePassword",
+     * tags={"UM & Permissions"},
+     * summary="change password",
+     * description="change password Here",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="fullName", type="string"),
+     *               @OA\Property(property="email", type="email"),
+     *               @OA\Property(property="mobile", type="string"),
+     *               @OA\Property(property="identityNumber", type="integer"),
+     *               @OA\Property(property="expiry_date", type="string"),
+     *               @OA\Property(property="lang", type="string"),
+     *               @OA\Property(property="password", type="string"),
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Password changed successfully",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     * )
+     */
+    public function changePassword(Request $request)
+    {
+        // if(auth()->user()->password)
+        $user = User::find(auth()->id());
+        $user->update([
+            "full_name" => $request->fullName ?? $user->full_name,
+            "email" => $request->email ?? $user->email,
+            "mobile" => $request->mobile ?? $user->mobile,
+            "identity_number" => $request->identityNumber ?? $user->identity_number,
+            'expiry_date' => $request['expireDate'] ?? $user->expiry_date,
+            'lang' =>  $request['lang'] ?? $user->lang,
+            'password' => $request->password,
+            "password_changed" => 1,
+        ]);
+
+        return response()->json(['statusCode' => "000", "message" => "password changed successfully"], 200);
+    }
+}
