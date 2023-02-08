@@ -28,7 +28,7 @@ class RegRoleSeeder extends Seeder
             ["id" => 5, "name_en" => "Finance manager", "name_ar" => "المدير المالي", "type" => 'supplier', "for_reg" => 0],
 
             ["id" => 6, "name_en" => "Warehouse manager", "name_ar" => "مدير المستودع", "type" => 'supplier', "for_reg" => 0],
-            ["id" => 7, "name_en" => "Sales officer ", "name_ar" => "مسؤول المبيعات", "type" => 'supplier', "for_reg" => 0],
+            ["id" => 7, "name_en" => "Sales officer", "name_ar" => "مسؤول المبيعات", "type" => 'supplier', "for_reg" => 0],
             ["id" => 8, "name_en" => "Finance officer", "name_ar" => "مسؤول مالي", "type" => 'supplier', "for_reg" => 0],
 
             ["id" => 9, "name_en" => "Warehouse officer", "name_ar" => "مسؤول المستودع", "type" => 'supplier', "for_reg" => 0],
