@@ -19,8 +19,8 @@ class SettingsSeeder extends Seeder
         //
         $names = [
             ['Key'=>'version','Value'=>'0.01'],
-            ['Key'=>'sms_otp_en','Value'=>'487'],
-            ['Key'=>'sms_password_en','Value'=>'486'],
+            ['Key'=>'sms_otp_en','Value'=>'604'],
+            ['Key'=>'sms_password_en','Value'=>'582'],
         ];
 
         foreach ($names as $name) {
