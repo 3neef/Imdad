@@ -29,9 +29,7 @@ class SettingsSeeder extends Seeder
                 "Key" => $name["Key"],
                 "Value" => $name["Value"],
             ]);
-            DB::table('app_settings')->insert([
-               
-            ]);
+           
         }
     }
 }
