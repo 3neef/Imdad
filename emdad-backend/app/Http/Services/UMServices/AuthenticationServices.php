@@ -178,7 +178,7 @@ class AuthenticationServices
                 200
             );
         }
-        if (!($user->password === $request->password)) {
+        if (!($user->password === Hash('sha256',$request->password))) {
             return response()->json(
                 [
                     "statusCode" => "104",
