@@ -20,7 +20,7 @@ class DefaultCategoryFilter implements Filter
                 if ($value['onlyRequested'] == true) {
                     $query->whereIn('id', $CategoriesId)->where('profile_id', $value['profile_id']);
                 } else {
-                    $query->whereIn('id', $CategoriesId);
+                    $query->whereIn('id', $CategoriesId)->where("status","approved");
                 }
             }
         }

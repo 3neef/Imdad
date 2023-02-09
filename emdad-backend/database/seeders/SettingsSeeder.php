@@ -17,10 +17,14 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         //
-        $names = ['Key'=>'','Value'=>''];
+        $names = [
+            ['Key'=>'version','Value'=>'0.01'],
+            ['Key'=>'sms_otp_en','Value'=>'487'],
+            ['Key'=>'sms_password_en','Value'=>'486'],
+        ];
 
         foreach ($names as $name) {
-            DB::table('settings_models')->insert([
+            DB::table('app_settings')->insert([
                 "Key" => $name["Key"],
                 "Value" => $name["Value"],
             ]);

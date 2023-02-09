@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Accounts\SubscriptionPackages;
+use App\Models\AppSetting;
 use App\Models\Coupon\Coupon;
 use App\Models\Emdad\Category;
 use App\Models\Emdad\RelatedCompanies;
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
 
         DB::table('categories')->delete();
         DB::table('permissions')->delete();
+        DB::table('app_settings')->delete();
         DB::table('roles')->delete();
 
         if (ApiKey::count() == 0) {
@@ -80,6 +82,11 @@ class DatabaseSeeder extends Seeder
         if(Coupon::count()==0){
             $this->call([
                 CouponSeeder::class]);
+        }
+
+        if(AppSetting::count()==0){
+            $this->call([
+                SettingsSeeder::class]);
         }
 
 
