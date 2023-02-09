@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AppSetting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Settings\SettingsModel;
@@ -19,15 +20,16 @@ class SettingsSeeder extends Seeder
         //
         $names = [
             ['Key'=>'version','Value'=>'0.01'],
-            ['Key'=>'sms_otp_en','Value'=>'487'],
-            ['Key'=>'sms_password_en','Value'=>'486'],
+            ['Key'=>'sms_otp_en','Value'=>'604'],
+            ['Key'=>'sms_password_en','Value'=>'582'],
         ];
 
         foreach ($names as $name) {
-            DB::table('app_settings')->insert([
+            AppSetting::create([
                 "Key" => $name["Key"],
                 "Value" => $name["Value"],
             ]);
+           
         }
     }
 }
