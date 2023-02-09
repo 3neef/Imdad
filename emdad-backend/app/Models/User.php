@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens as SanctumHasApiTokens;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
@@ -49,6 +50,12 @@ class User extends  Authenticatable implements HasMedia, MustVerifyEmail
     public function setEmailAttribute($value)
     {
         $this->attributes['email'] = strtolower($value);
+    }
+
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash("sha256",$value);
     }
     /**
      * The attributes that should be hidden for arrays.

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AppSetting;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Settings\SettingsModel;
@@ -24,9 +25,12 @@ class SettingsSeeder extends Seeder
         ];
 
         foreach ($names as $name) {
-            DB::table('app_settings')->insert([
+            AppSetting::create([
                 "Key" => $name["Key"],
                 "Value" => $name["Value"],
+            ]);
+            DB::table('app_settings')->insert([
+               
             ]);
         }
     }
