@@ -47,7 +47,7 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
         الاشتراك."],
 
 
-        ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"التقارير الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"Available","descriptionEn"=>"Digital Statistics App: Offer a comprehensive overview to monitor your operations or your companies’ 
+        ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"التقارير الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"متاح","descriptionEn"=>"Digital Statistics App: Offer a comprehensive overview to monitor your operations or your companies’ 
         operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
         analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه الإحصائيات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
         محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
@@ -96,7 +96,7 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             الاشتراك."],
 
 
-            ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>" متوفر","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
+            ["key"=>"Digital","titleEn"=>"Digital Statistics Report","titleAr"=>"تطبيقات الإحصائيات الرقمية","systemValue"=>1,"text_en"=>"Available","text_ar"=>"متوفر","descriptionEn"=>"Digital Statistics Report: Offer a comprehensive overview to monitor your operations or your companies’ 
             operations in a single engine panel. Each engine offers a specific algorithm to extract your data and 
             analyse it, e.g., Procurement Analysis, Orders Analysis...","descriptionAr"=>"تستخدم هذه الإحصائيات خوارزميات تحلل جميع العمليات الخاصة بالمستخدم او المنشأة وتبثها في 
         محركات رقمية على شاشة واحدة؛ على سبيل المثال: محرك تحليل المشتريات، محرك تحليل 
