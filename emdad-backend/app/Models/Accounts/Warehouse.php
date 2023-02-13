@@ -4,6 +4,7 @@ namespace App\Models\Accounts;
 
 use App\Models\User;
 use App\Models\UserWarehousePivot;
+use App\Models\WarehouseType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -23,7 +24,7 @@ class Warehouse extends Model
         'longitude',
         'address_contact_name',
         'address_type',
-        'gate_type',
+        'warehouse_type_id',
         'otp_receiver',
         'otp_expires_at',
         'otp_verfied',
@@ -39,6 +40,10 @@ class Warehouse extends Model
             ->logAll()
             ->logOnlyDirty();
     }
+    public function warehouse_type(){
+        return $this->belongsTo(WarehouseType::class);
+    }
+    
     public function users()
     {
         return $this->belongsToMany(User::class);

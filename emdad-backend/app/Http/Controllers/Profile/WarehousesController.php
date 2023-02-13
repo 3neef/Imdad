@@ -132,7 +132,7 @@ class WarehousesController extends Controller
      */
     public function store(CreateWarehouesesRequest $request)
     {
-         $this->authorize('create',Warehouse::class);
+        $this->authorize('create',Warehouse::class);
         $output = $this->warehouseService->store($request);
         
         if($output['statusCode'] == "000"){

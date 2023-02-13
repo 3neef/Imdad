@@ -19,7 +19,7 @@ class WarehouseResponse extends JsonResource
             "profileId" =>$this->profile_id,
             "warehouseName" =>$this->address_name,
             "warehouseType" =>$this->address_type,
-            "gateType" =>$this->gate_type,
+            "gateType" =>$this->warehouse_type->name_en,
             "latitude" =>$this->latitude,
             "longitude"=>$this->longitude,
             "receiverName" =>$this->address_contact_name,

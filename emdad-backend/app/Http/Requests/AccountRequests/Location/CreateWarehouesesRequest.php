@@ -36,7 +36,7 @@ class CreateWarehouesesRequest extends FormRequest
             'warehouseType' => ['required', 'string'],
             'latitude' => ['required', 'string'],
             'longitude' => ['required', 'string'],
-            'gateType' => [ 'string'],
+            'warehouseTypeId' => [ 'exists:warehouse_types,id'],
             'receiverName' => [Rule::requiredIf(function () {
                 return auth()->user()->currentProfile()->type== 'supplier';
                 })],
