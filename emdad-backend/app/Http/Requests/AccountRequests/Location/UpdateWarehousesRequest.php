@@ -29,7 +29,7 @@ class UpdateWarehousesRequest extends FormRequest
     {
         return [
             'warehouseName' => ['string','max:100', new WarehouseRule('warehouses',['profile_id'=>auth()->user()->profile_id,'address_name'=>$this->warehouseName])],
-            'warehouseType' => ['string'],
+            'warehouseTypeId' => [ 'exists:warehouse_types,id'],
             'latitude' => ['string'],
             'longitude' => ['string'],
             'gateType' => ['string'],

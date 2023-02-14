@@ -33,10 +33,10 @@ class CreateWarehouesesRequest extends FormRequest
             "userList" => ['array', new UniqeValues],
             "userList.*" => ['exists:users,id'],
             'warehouseName' => ['required','string','max:100', new WarehouseRule('warehouses',['profile_id'=>auth()->user()->profile_id,'address_name'=>$this->warehouseName])],
-            'warehouseType' => ['required', 'string'],
             'latitude' => ['required', 'string'],
             'longitude' => ['required', 'string'],
             'warehouseTypeId' => [ 'exists:warehouse_types,id'],
+            'gateType' => ['string'],
             'receiverName' => [Rule::requiredIf(function () {
                 return auth()->user()->currentProfile()->type== 'supplier';
                 })],

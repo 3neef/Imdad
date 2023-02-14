@@ -23,7 +23,7 @@ class Warehouse extends Model
         'latitude',
         'longitude',
         'address_contact_name',
-        'address_type',
+        'gate_type',
         'warehouse_type_id',
         'otp_receiver',
         'otp_expires_at',

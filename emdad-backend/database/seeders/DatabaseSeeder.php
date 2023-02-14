@@ -13,6 +13,7 @@ use App\Models\Emdad\Unit_of_measures;
 use App\Models\UM\Permission;
 use App\Models\UM\Role;
 use App\Models\User;
+use App\Models\WarehouseType;
 use Ejarnutowski\LaravelApiKey\Models\ApiKey;
 use Exception;
 use Illuminate\Database\Seeder;
@@ -87,6 +88,11 @@ class DatabaseSeeder extends Seeder
         if(AppSetting::count()==0){
             $this->call([
                 SettingsSeeder::class]);
+        }
+
+        if(WarehouseType::count()==0){
+            $this->call([
+                WarehouseTypeSeeder::class]);
         }
 
 
