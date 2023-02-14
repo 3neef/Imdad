@@ -31,7 +31,9 @@ class CouponServices
 
     public function showCoupon(){
         $couponCode = Coupon::where('end_date','>',Carbon::now())->get();
-        return  response()->json(['data' =>new CouponResponse( $couponCode)],200);
+
+       
+        return  response()->json(['data' =>  CouponResponse::collection($couponCode)],200);
     }
 
 
