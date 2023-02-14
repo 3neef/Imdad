@@ -33,7 +33,7 @@ class CouponServices
         $couponCode = Coupon::where('end_date','>',Carbon::now())->get();
 
        
-        return  response()->json(['data' =>  CouponResponse::collection($couponCode)],200);
+        return  $couponCode;
     }
 
 

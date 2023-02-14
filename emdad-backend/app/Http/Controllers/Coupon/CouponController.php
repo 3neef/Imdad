@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Coupon;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CouponRequests\CreateCouponRequest;
 use App\Http\Requests\CouponRequests\UsedCouponRequest;
+use App\Http\Resources\General\CouponResponse;
 use App\Http\Resources\Subscription\SubscriptionResource;
 use App\Http\Services\CouponServices\CouponServices;
 use Illuminate\Http\Request;
@@ -72,8 +73,10 @@ class CouponController extends Controller
         $coupon = $this->couponService->create($request);
 
         if ($coupon) {
-            return response()->json(["statusCode" => "000",
-            'message' =>'coupon created successfully'], 200);
+            return response()->json([
+                "statusCode" => "000",
+                'message' => 'coupon created successfully'
+            ], 200);
         }
         return response()->json([
             "statusCode" => "264",
@@ -117,7 +120,14 @@ class CouponController extends Controller
 
     public function index(Request $request)
     {
-        return $this->couponService->showCoupon();
+        $coupon  =  $this->couponService->showCoupon();
+
+        if ($coupon != null) {
+            response()->json(["statusCode" => '111', 'data' =>  CouponResponse::collection($coupon)], 200);
+        } else {
+            response()->json(["statusCode" => '999', 'message'=>'No  data  found'], 200);
+
+        }
     }
 
 
@@ -180,13 +190,16 @@ class CouponController extends Controller
         $subscription = $this->couponService->usedCoupon($request);
 
         if ($subscription != null) {
-            return response()->json(["statusCode" => "000",
-            'data' => new SubscriptionResource($subscription),
-             'message' => 'aproved successfully'], 200);
+            return response()->json([
+                "statusCode" => "000",
+                'data' => new SubscriptionResource($subscription),
+                'message' => 'aproved successfully'
+            ], 200);
         } else {
             return response()->json([
                 "statusCode" => "264",
-            'message' => 'can,t use coupon'], 301);
+                'message' => 'can,t use coupon'
+            ], 301);
         }
     }
 
@@ -235,9 +248,9 @@ class CouponController extends Controller
         $coupon = $this->couponService->destroy($id);
 
         if ($coupon) {
-            return response()->json(['message' => 'deleted successfully', 'statusCode'=>112], 301);
+            return response()->json(['message' => 'deleted successfully', 'statusCode' => 112], 301);
         } else {
-            return response()->json(['success' => false, 'error' => 'not found', 'statusCode'=>111], 404);
+            return response()->json(['success' => false, 'error' => 'not found', 'statusCode' => 111], 404);
         }
     }
     /**
