@@ -71,9 +71,14 @@ class CouponController extends Controller
     {
         $coupon = $this->couponService->create($request);
 
-        if($coupon){
-            return response()->json(['message' => 'coupon created successfully'],200);
+        if ($coupon) {
+            return response()->json(["statusCode" => "000",
+            'message' =>'coupon created successfully'], 200);
         }
+        return response()->json([
+            "statusCode" => "264",
+            'success' => false, 'message' => "coupon Dosn't created "
+        ], 200);
     }
 
     /**
@@ -174,11 +179,14 @@ class CouponController extends Controller
     {
         $subscription = $this->couponService->usedCoupon($request);
 
-        if($subscription != null) {
-            return response()->json(['data'=>new SubscriptionResource($subscription),'message' => 'aproved successfully'], 200);
-
-        }else{
-            return response()->json(['message' => 'can,t use coupon'], 301);
+        if ($subscription != null) {
+            return response()->json(["statusCode" => "000",
+            'data' => new SubscriptionResource($subscription),
+             'message' => 'aproved successfully'], 200);
+        } else {
+            return response()->json([
+                "statusCode" => "264",
+            'message' => 'can,t use coupon'], 301);
         }
     }
 
@@ -227,9 +235,9 @@ class CouponController extends Controller
         $coupon = $this->couponService->destroy($id);
 
         if ($coupon) {
-            return response()->json(['message' => 'deleted successfully'], 301);
+            return response()->json(['message' => 'deleted successfully', 'statusCode'=>112], 301);
         } else {
-            return response()->json(['success' => false, 'error' => 'not found'], 404);
+            return response()->json(['success' => false, 'error' => 'not found', 'statusCode'=>111], 404);
         }
     }
     /**
@@ -279,8 +287,6 @@ class CouponController extends Controller
             return response()->json(['message' => 'restored successfully'], 200);
         }
         return response()->json(['error' => 'system error'], 500);
-
-        
     }
 
     /**
@@ -310,6 +316,6 @@ class CouponController extends Controller
     {
         $unit = $this->couponService->get_all_unit_of_measure();
 
-        return response()->json( [ 'data'=>$unit], 200 );
+        return response()->json(['data' => $unit], 200);
     }
 }
