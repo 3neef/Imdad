@@ -269,7 +269,7 @@ class WarehousesController extends Controller
 
         $update = $this->warehouseService->update($request, $id);
         if ($update != null) {
-            return response()->json(["statusCode" => '000', 'success' => 'Updated Successfly', 'data' => WarehouseResponse::make($update)], 200);
+            return response()->json(["statusCode" => '000', 'message' => 'Updated Successfly', 'data' => WarehouseResponse::make($update)], 200);
         } else {
 
             return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
