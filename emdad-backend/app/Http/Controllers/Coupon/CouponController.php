@@ -120,12 +120,12 @@ class CouponController extends Controller
 
     public function index(Request $request)
     {
+       
         $coupon  =  $this->couponService->showCoupon();
-
         if ($coupon != null) {
-            response()->json(["statusCode" => '111', 'data' =>  CouponResponse::collection($coupon)], 200);
+            return  response()->json(["statusCode" => '111', 'data' =>  CouponResponse::collection($coupon)], 200);
         } else {
-            response()->json(["statusCode" => '999', 'message'=>'No  data  found'], 200);
+            return  response()->json(["statusCode" => '999', 'message'=>'No  data  found'], 200);
 
         }
     }
