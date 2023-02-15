@@ -148,8 +148,8 @@ class WarehouseService
         $user = User::find($request->userId);
         $warehouse = Warehouse::find($request->warehouseId);
         if ($user != null && $warehouse != null) {
-            $warehouse->users()->attach($user);
-            return $warehouse;
+            $assinge = $warehouse->users()->attach($warehouse->id, ['user_id' => $user_id ?? auth()->user->id]);
+            return $assinge;
         }
     }
 
@@ -158,7 +158,7 @@ class WarehouseService
         $user = User::find($request->userId);
         $warehouse = Warehouse::find($request->warehouseId);
         if ($user != null && $warehouse != null) {
-            $unAssign = $warehouse->users()->detach($user);
+            $unAssign = $warehouse->users()->detach($warehouse->id, ['user_id' => $user_id ?? auth()->user->id]);
             return $unAssign;
         }
     }
