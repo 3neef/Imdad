@@ -139,11 +139,17 @@ class CategoryController extends Controller
      *    @OA\Response(
      *         response=200,
      *         description="",
-     *         @OA\JsonContent(
-     *         @OA\Property(property="Maincatogre", type="integer", example="{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}")
+     *               *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
      *          ),
-     *       )
-     *      )
+     *       ),
      *  )
      */
     public function index(Request $request)
