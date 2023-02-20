@@ -253,6 +253,7 @@ class CouponController extends Controller
             return response()->json(['success' => false, 'error' => 'not found', 'statusCode' => 111], 404);
         }
     }
+    
     /**
      * @OA\put(
      *    path="/api/v1_0/coupon/restore/{id}",
