@@ -1659,7 +1659,7 @@
                 }
             }
         },
-        "/api/v1_0/profiles/filter-company-info": {
+        "/api/v1_0/profiles": {
             "get": {
                 "tags": [
                     "Profile Controller"
@@ -1723,9 +1723,7 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/v1_0/profiles": {
+            },
             "post": {
                 "tags": [
                     "Profile Controller"
@@ -2055,13 +2053,8 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    "id"
-                                ],
+                                "required": [],
                                 "properties": {
-                                    "id": {
-                                        "type": "integer"
-                                    },
                                     "logo": {
                                         "type": "file"
                                     },
