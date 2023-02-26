@@ -120,10 +120,10 @@ class CouponController extends Controller
 
     public function index(Request $request)
     {
-       
+
         $coupon  =  $this->couponService->showCoupon();
         if ($coupon != null) {
-            return  response()->json(["statusCode" => '111', 'data' =>  CouponResponse::collection($coupon)], 200);
+            return  response()->json(["statusCode" => '000', 'data' =>  CouponResponse::collection($coupon)], 200);
         } else {
             return  response()->json(["statusCode" => '999', 'message'=>'No  data  found'], 200);
 
@@ -253,7 +253,7 @@ class CouponController extends Controller
             return response()->json(['success' => false, 'error' => 'not found', 'statusCode' => 111], 404);
         }
     }
-    
+
     /**
      * @OA\put(
      *    path="/api/v1_0/coupon/restore/{id}",
