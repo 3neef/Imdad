@@ -209,7 +209,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @OA\post(
+     * @OA\put(
      * path="/api/v1_0/updateProfile/{id}",
      * operationId="updateAccount",
      * tags={"Profile Controller"},

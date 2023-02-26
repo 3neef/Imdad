@@ -2024,7 +2024,7 @@
             }
         },
         "/api/v1_0/updateProfile/{id}": {
-            "post": {
+            "put": {
                 "tags": [
                     "Profile Controller"
                 ],
