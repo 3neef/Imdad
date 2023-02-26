@@ -15,6 +15,7 @@ class CouponResponse extends JsonResource
     public function toArray($request)
     {
         return [
+            'id'=>$this->id,
             'allowed'=>$this->allowed,
             'startDate'=>$this->start_date,
             'endDate'=>$this->end_date,
