@@ -3316,7 +3316,7 @@
                                 "required": [
                                     "managerId",
                                     "warehouseName",
-                                    "warehouseType",
+                                    "warehouseTypeId",
                                     "latitude",
                                     "longitude",
                                     "gateType",
@@ -3327,8 +3327,8 @@
                                     "warehouseName": {
                                         "type": "string"
                                     },
-                                    "warehouseType": {
-                                        "type": "string"
+                                    "warehouseTypeId": {
+                                        "type": "integer"
                                     },
                                     "latitude": {
                                         "type": "string"
