@@ -449,7 +449,7 @@ if($result){
 
     /**
      * @OA\post(
-     * path="/api/v1_0/assignwarehousetouser",
+     * path="/api/v1_0/warehouses/assignwarehousetouser",
      * operationId="assignwarehousetouser",
      * tags={"warehouse"},
      * summary="assign warehouse to user",
