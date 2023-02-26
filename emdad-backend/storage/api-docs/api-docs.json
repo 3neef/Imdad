@@ -7024,16 +7024,24 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "Maincatogre": {
-                                            "type": "integer",
-                                            "example": "{'id': 1, 'name': 'tv','aproved': 0, 'parent_id': 1, 'isleaf': 1, 'company_id': 1}"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }
@@ -8112,12 +8120,10 @@
                     "content": {
                         "multipart/form-data": {
                             "schema": {
-                                "required": [
-                                    ""
-                                ],
+                                "required": [],
                                 "properties": {
-                                    "": {
-                                        "type": ""
+                                    "perPage": {
+                                        "type": "integer"
                                     }
                                 },
                                 "type": "object"
@@ -8132,16 +8138,24 @@
                     "200": {
                         "description": "",
                         "content": {
-                            "application/json": {
+                            "multipart/form-data": {
                                 "schema": {
                                     "properties": {
-                                        "MainProduct": {
-                                            "type": "integer",
-                                            "example": "{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}"
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
                                 }
+                            },
+                            "application/json": {
+                                "schema": {}
                             }
                         }
                     }

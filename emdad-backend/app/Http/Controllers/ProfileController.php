@@ -238,8 +238,7 @@ class ProfileController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"id"},
-     *               @OA\Property(property="id", type="integer"),
+     *               required={},
      *               @OA\Property(property="logo", type="file"),
      *               @OA\Property(property="nameAr", type="string"),
      *               @OA\Property(property="nameEn", type="string"),
