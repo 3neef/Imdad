@@ -32,7 +32,7 @@ class ProfileController extends Controller
 
  /**
      * @OA\get(
-     * path="/api/v1_0/profiles/filter-company-info",
+     * path="/api/v1_0/profiles",
      * operationId="filtercompanyinfo",
      * tags={"Profile Controller"},
      * summary="filter company info",
@@ -85,7 +85,7 @@ class ProfileController extends Controller
     {
         return  ProfileResponse::collection( ProfileCollection::collection($request));
     }
-    
+
 
     /**
      * @OA\Post(
@@ -506,7 +506,7 @@ class ProfileController extends Controller
 
         return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'] ]],200);
     }
-    
+
 
 
 }
