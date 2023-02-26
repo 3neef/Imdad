@@ -75,7 +75,7 @@ class CouponController extends Controller
         if ($coupon) {
             return response()->json([
                 "statusCode" => "000",
-                'message' => 'coupon created successfully'
+                'message' => 'created Successfully'
             ], 200);
         }
         return response()->json([
