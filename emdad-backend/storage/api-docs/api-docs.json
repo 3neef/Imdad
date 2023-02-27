@@ -3687,7 +3687,7 @@
                 }
             }
         },
-        "/api/v1_0/assignwarehousetouser": {
+        "/api/v1_0/warehouses/assignwarehousetouser": {
             "post": {
                 "tags": [
                     "warehouse"
@@ -6342,86 +6342,6 @@
                 "responses": {
                     "301": {
                         "description": "User deleted successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Unprocessable Entity",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request"
-                    },
-                    "404": {
-                        "description": "Resource Not Found"
-                    }
-                }
-            }
-        },
-        "/api/v1_0/users/Activate": {
-            "put": {
-                "tags": [
-                    "UM & Permissions"
-                ],
-                "summary": "activate user",
-                "description": "Activate a user within a company",
-                "operationId": " userActivate",
-                "parameters": [
-                    {
-                        "name": "x-authorization",
-                        "in": "header",
-                        "description": "Set x-authorization",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "name": "token",
-                        "in": "header",
-                        "description": "Set user authentication token",
-                        "schema": {
-                            "type": "beraer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "content": {
-                        "application-json": {
-                            "schema": {
-                                "required": [
-                                    "userId"
-                                ],
-                                "properties": {
-                                    "userId": {
-                                        "type": "integer"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        },
-                        "application/json": {
-                            "schema": {}
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Activated Successfully ",
-                        "content": {
-                            "application/json": {
-                                "schema": {}
-                            }
-                        }
-                    },
-                    "200": {
-                        "description": "activated Successfully",
                         "content": {
                             "application/json": {
                                 "schema": {}

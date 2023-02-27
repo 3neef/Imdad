@@ -431,23 +431,23 @@ class UserServices
         ], 200);
     }
 
-    public function userActivate($request)
-    {
-        $user = User::where('id', $request->userId)->first();
-        $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
+    // public function userActivate($request)
+    // {
+    //     $user = User::where('id', $request->userId)->first();
+    //     $userRoleProfile = RoleUserProfile::where('profile_id', $user->profile_id)->first();
 
-        if ($userRoleProfile == null) {
-            $output = ['statusCode' => '263', 'error' => 'user doesn\'t belong to this company'];
-            return $output;
-        }
-        $active = $userRoleProfile->update(['status' => 'active']);
-        if ($active) {
-            $output = ['statusCode' => '000', 'message' => 'user account has been activated successfully'];
-            return $output;
-        }
-        $output = ['statusCode' => '999', 'error' => 'system error'];
-        return $output;
-    }
+    //     if ($userRoleProfile == null) {
+    //         $output = ['statusCode' => '263', 'error' => 'user doesn\'t belong to this company'];
+    //         return $output;
+    //     }
+    //     $active = $userRoleProfile->update(['status' => 'active']);
+    //     if ($active) {
+    //         $output = ['statusCode' => '000', 'message' => 'user account has been activated successfully'];
+    //         return $output;
+    //     }
+    //     $output = ['statusCode' => '999', 'error' => 'system error'];
+    //     return $output;
+    // }
 
 
     public function disable($request)
@@ -465,7 +465,7 @@ class UserServices
 
             $active = $user->profiles()->updateExistingPivot($user->profile, ['status' => $profile->profile->status == "inActive" ? "active" : "inActive"]);
             if ($active) {
-                $output = ['statusCode' => '000', 'message' => 'user account has disabled successfully'];
+                $output = ['statusCode' => '000', 'message' => 'user status changed successfully'];
                 return $output;
             }
             $output = ['statusCode' => '999', 'message' => 'system error'];
