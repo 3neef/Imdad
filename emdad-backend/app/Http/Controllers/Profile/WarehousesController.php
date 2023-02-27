@@ -134,7 +134,7 @@ class WarehousesController extends Controller
     {
          $this->authorize('create',Warehouse::class);
         $output = $this->warehouseService->store($request);
-        
+
         if($output['statusCode'] == "000"){
             return response()->json(['statusCode'=> $output['statusCode'], "message"=>$output['message'], 'data' => WarehouseResponse::make($output['data']) ],200);
         }elseif($output['statusCode'] == "361") {
@@ -269,7 +269,7 @@ class WarehousesController extends Controller
 
         $update = $this->warehouseService->update($request, $id);
         if ($update != null) {
-            return response()->json(["statusCode" => '000', 'message' => 'Updated Successfly', 'data' => WarehouseResponse::make($update)], 200);
+            return response()->json(["statusCode" => '000', 'message' => 'Updated Successfully', 'data' => WarehouseResponse::make($update)], 200);
         } else {
 
             return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
