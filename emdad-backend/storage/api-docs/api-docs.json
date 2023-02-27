@@ -5898,7 +5898,7 @@
                                     "managerUserId": {
                                         "type": "integer"
                                     },
-                                    "warahouseId": {
+                                    "warehouseId": {
                                         "type": "array(integer)"
                                     }
                                 },

@@ -137,7 +137,7 @@ class UserController extends Controller
      *               @OA\Property(property="identityType", type="string"),
      *               @OA\Property(property="isLearning", type="boolean"),
      *               @OA\Property(property="managerUserId", type="integer"),
-     *               @OA\Property(property="warahouseId", type="array(integer)"),
+     *               @OA\Property(property="warehouseId", type="array(integer)"),
      *            ),
      *        ),
      *    ),
