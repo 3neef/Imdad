@@ -465,7 +465,7 @@ class UserServices
 
             $active = $user->profiles()->updateExistingPivot($user->profile, ['status' => $profile->profile->status == "inActive" ? "active" : "inActive"]);
             if ($active) {
-                $output = ['statusCode' => '000', 'message' => 'user account has disabled successfully'];
+                $output = ['statusCode' => '000', 'message' => 'user status changed successfully'];
                 return $output;
             }
             $output = ['statusCode' => '999', 'message' => 'system error'];
