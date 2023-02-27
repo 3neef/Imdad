@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('provider');
             $table->string('status');
             $table->integer('ref_id');
-            $table->string('gateway_tx_id');
+            $table->string('gateway_tx_id')->nullable();
             $table->timestamps();
         });
     }

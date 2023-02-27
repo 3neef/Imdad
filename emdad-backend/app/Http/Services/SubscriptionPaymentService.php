@@ -5,6 +5,7 @@ namespace App\Http\Services;
 use App\Http\Resources\Subscription\SubscriptionResource;
 use App\Http\Services\General\UrwayGateway;
 use App\Models\Accounts\SubscriptionPackages;
+use App\Models\Payment_tx;
 use App\Models\Profile;
 use App\Models\SubscriptionPayment;
 use App\Models\User;
@@ -43,14 +44,17 @@ class SubscriptionPaymentService
                 'tax_amount' => $price * 15 / 100,
                 'total' => ($price + ($price * 15 / 100)),
                 'status' => $status
-
-
+            ]);
+            $payment = Payment_tx::create([
+                'amount' => $SubscriptionPayment->total,
+                'type' => "subscription",
+                'provider' => "urway",
+                'status' => "Pending",
+                'ref_id' => $SubscriptionPayment->id,
             ]);
             $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
-
             return response()->json(['data' => new SubscriptionResource($SubscriptionPayment), "oldOwner" => $oldOwner, "statusCode" => "000"], 200);
         } else {
-
             if ($payedSubscription->status === 'Pending') {
                 $payedSubscription->update([
                     'package_id' => $request->packageId,
@@ -63,7 +67,6 @@ class SubscriptionPaymentService
 
                 ]);
                 $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
-
                 return response()->json(['data' => new SubscriptionResource($payedSubscription), "oldOwner" => $oldOwner, 'statusCode' => "000"], 200);
             }
         }
@@ -104,6 +107,8 @@ class SubscriptionPaymentService
         $user = User::where("id", auth()->id())->first();
         $profile = Profile::where("id", $user->profile_id)->first();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->where("status", "Pending")->first();
+        $paymentRef = Payment_tx::where("ref_id", $paymentRequest->id)->first();
+
         if ($paymentRequest == null) {
             return response()->json(['error' => 'system error', 'statusCode' => '111'], 200);
         }
@@ -111,7 +116,10 @@ class SubscriptionPaymentService
         try {
             $response = UrwayGateway::initPayment($request);
             $json = json_decode($response, true);
-            $paymentRequest->update(['tx_id' => $json['payid']]);
+            $paymentRef->update(['gateway_tx_id' => $json['payid'],'status'=>'paid']);
+
+            $paymentRequest->update(['tx_id' => $json['payid'],'status'=>'paid']);
+
             return response()->json(['data' => new SubscriptionResource($paymentRequest), 'statusCode' => "000"], 200);
         } catch (Exception $e) {
 
@@ -124,6 +132,7 @@ class SubscriptionPaymentService
         $user = User::where("id", auth()->id())->first();
         $profile = $user->currentProfile();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->first();
+
         if ($paymentRequest == null) {
             return response()->json(['message' => "you have not selected any package yet", "statusCode" => "111"], 200);
         }
