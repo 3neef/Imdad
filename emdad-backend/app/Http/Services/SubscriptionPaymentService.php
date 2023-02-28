@@ -45,13 +45,17 @@ class SubscriptionPaymentService
                 'total' => ($price + ($price * 15 / 100)),
                 'status' => $status
             ]);
-            $payment = Payment_tx::create([
-                'amount' => $SubscriptionPayment->total,
-                'type' => "subscription",
-                'provider' => "urway",
-                'status' => "Pending",
-                'ref_id' => $SubscriptionPayment->id,
-            ]);
+            if ($SubscriptionPayment->total > 0) {
+
+
+                $payment = Payment_tx::create([
+                    'amount' => $SubscriptionPayment->total,
+                    'type' => "subscription",
+                    'provider' => "urway",
+                    'status' => "Pending",
+                    'ref_id' => $SubscriptionPayment->id,
+                ]);
+            }
             $user->profile()->update(['subs_id' => $request->packageId, 'subscription_details' => $subscription->features]);
             return response()->json(['data' => new SubscriptionResource($SubscriptionPayment), "oldOwner" => $oldOwner, "statusCode" => "000"], 200);
         } else {
@@ -107,18 +111,19 @@ class SubscriptionPaymentService
         $user = User::where("id", auth()->id())->first();
         $profile = Profile::where("id", $user->profile_id)->first();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->where("status", "Pending")->first();
-        $paymentRef = Payment_tx::where("ref_id", $paymentRequest->id)->first();
+        $paymentRef = Payment_tx::where("ref_id", $paymentRequest->id)->where('type', 'subscription')->first();
+
 
         if ($paymentRequest == null) {
-            return response()->json(['error' => 'system error', 'statusCode' => '111'], 200);
+            return response()->json(['error' => 'not found', 'statusCode' => '111'], 200);
         }
-        $request = ["transId" => $paymentRequest->id, "trackId" => $paymentRequest->id, "amount" => $paymentRequest->total, 'email' => $user->email];
+        $request = ["transId" => $paymentRef->id, "trackId" => $paymentRef->id, "amount" => $paymentRef->amount, 'email' => $user->email];
         try {
             $response = UrwayGateway::initPayment($request);
             $json = json_decode($response, true);
-            $paymentRef->update(['gateway_tx_id' => $json['payid'],'status'=>'paid']);
+            dd($json);
 
-            $paymentRequest->update(['tx_id' => $json['payid'],'status'=>'paid']);
+            $paymentRef->update(['gateway_tx_id' => $json['payid']]);
 
             return response()->json(['data' => new SubscriptionResource($paymentRequest), 'statusCode' => "000"], 200);
         } catch (Exception $e) {
@@ -132,6 +137,7 @@ class SubscriptionPaymentService
         $user = User::where("id", auth()->id())->first();
         $profile = $user->currentProfile();
         $paymentRequest = SubscriptionPayment::where("profile_id", $profile->id)->first();
+        $paymentRef = Payment_tx::where("ref_id", $paymentRequest->id)->where('type', 'subscription')->first();
 
         if ($paymentRequest == null) {
             return response()->json(['message' => "you have not selected any package yet", "statusCode" => "111"], 200);
@@ -140,12 +146,15 @@ class SubscriptionPaymentService
             return response()->json(['data' => new SubscriptionResource($paymentRequest), "statusCode" => "000"], 200);
         }
         if ($paymentRequest->status == "Pending") {
-            $request = ["transId" => $paymentRequest->tx_id, "trackId" => $paymentRequest->id, "amount" => $paymentRequest->total, 'email' => $user->email];
+            $request = ["transId" => $paymentRef->gateway_tx_id, "trackId" => $paymentRef->id, "amount" => $paymentRef->amount, 'email' => $user->email];
             try {
                 $response = UrwayGateway::getPaymentStatus($request);
                 $json = json_decode($response, true);
+                // DB transaction
                 if ($json['responseCode'] == 000 && $json['result'] == "Successful") {
-                    $paymentRequest->update(['status' => 'Paid']);
+                    $paymentRef->update(['status' => 'Paid']);
+                    $paymentRequest->update(['tx_id' => $paymentRef->id, 'status' => 'paid']);
+
                     return response()->json(['data' => new SubscriptionResource($paymentRequest), "statusCode" => "000"], 200);
                 } elseif ($json['responseCode'] == 601 && $json['result'] == "UnSuccessful") {
                     return response()->json(['Success' => $json['result'], 'data' => new SubscriptionResource($paymentRequest), "statusCode" => "601"], 200);
