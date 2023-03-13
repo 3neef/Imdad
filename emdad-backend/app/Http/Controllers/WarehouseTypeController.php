@@ -17,7 +17,7 @@ class WarehouseTypeController extends Controller
     
      /**
      * @OA\get(
-     * path="/api/v1_0/warehouse-types",
+     * path="/api/v1_0/warehouses/warehouse-types",
      * operationId="WarehouseTypes",
      * tags={"WarehouseTypeController"},
      * summary="get the warehouse types",
@@ -70,7 +70,7 @@ class WarehouseTypeController extends Controller
 
      /**
      * @OA\Post(
-     * path="/api/v1_0/warehouse-types",
+     * path="/api/v1_0/warehouses/warehouse-types",
      * operationId="create-warehouse-types",
      * tags={"warehouse-types"},
      * summary="create warehouse-types",
@@ -129,7 +129,7 @@ class WarehouseTypeController extends Controller
 
     /**
      * @OA\put(
-     * path="/api/v1_0/warehouse-types/{warehouse_type}",
+     * path="/api/v1_0/warehouses/warehouse-types/{warehouse_type}",
      * operationId="update_warehouse_type",
      * tags={"warehouse_type"},
      * summary="update warehouse type",
@@ -187,7 +187,7 @@ class WarehouseTypeController extends Controller
 
     /**
      * @OA\delete(
-     * path="/api/v1_0/warehouse-types/{warehouse_type}",
+     * path="/api/v1_0/warehouses/warehouse-types/{warehouse_type}",
      * operationId="delete_warehouse_type",
      * tags={"warehouse_type"},
      * summary="delete warehouse type",
@@ -247,7 +247,7 @@ class WarehouseTypeController extends Controller
     
     /**
      * @OA\put(
-     * path="/api/v1_0/warehouse-types/restore/{warehouse_type}",
+     * path="/api/v1_0/warehouses/warehouse-types/restore/{warehouse_type}",
      * operationId="restore_warehouse_type",
      * tags={"warehouse_type"},
      * summary="restore By warehouse_type_id",

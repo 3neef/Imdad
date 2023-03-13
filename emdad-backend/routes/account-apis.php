@@ -31,11 +31,11 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('warehouses')->group(
     Route::post('assignwarehousetouser', [WarehousesController::class, 'assignWarehouseToUser']);
     Route::post('unassignwarehousefromuser', [WarehousesController::class, 'unAssignWarehouseFromUser']);
 
+    Route::apiResource('warehouse-types', WarehouseTypeController::class);
+    Route::put('warehouse-types/restore/{warehouse_type}', [WarehouseTypeController::class, 'restore']);
     
 });
 Route::apiResource('warehouses', WarehousesController::class)->middleware(['auth.apikey', 'auth:sanctum']);
-Route::apiResource('warehouse-types', WarehouseTypeController::class);
-Route::put('warehouse-types/restore/{warehouse_type}', [WarehouseTypeController::class, 'restore']);
 
 
 

@@ -6886,7 +6886,7 @@
                 }
             }
         },
-        "/api/v1_0/warehouse-types": {
+        "/api/v1_0/warehouses/warehouse-types": {
             "get": {
                 "tags": [
                     "WarehouseTypeController"
@@ -7028,7 +7028,7 @@
                 }
             }
         },
-        "/api/v1_0/warehouse-types/{warehouse_type}": {
+        "/api/v1_0/warehouses/warehouse-types/{warehouse_type}": {
             "put": {
                 "tags": [
                     "warehouse_type"
@@ -7174,7 +7174,7 @@
                 }
             }
         },
-        "/api/v1_0/warehouse-types/restore/{warehouse_type}": {
+        "/api/v1_0/warehouses/warehouse-types/restore/{warehouse_type}": {
             "put": {
                 "tags": [
                     "warehouse_type"

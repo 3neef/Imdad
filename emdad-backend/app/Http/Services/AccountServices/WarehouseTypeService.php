@@ -3,7 +3,9 @@
 namespace App\Http\Services\AccountServices;
 
 use App\Http\Collections\WarehouseCollection;
+use App\Http\Collections\WarehouseTypeCollection;
 use App\Http\Resources\AccountResourses\warehouses\WarehouseResponse;
+use App\Http\Resources\AccountResourses\warehouses\WarehouseTypeResponse;
 use App\Models\Accounts\Warehouse;
 use App\Models\User;
 use App\Models\UserWarehousePivot;
@@ -14,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class WarehouseTypeService
 {
     public function index($request){
-        return WarehouseType::all();
+        return WarehouseTypeResponse::collection(WarehouseTypeCollection::collection($request));
     }
 
     public static function store($request){
