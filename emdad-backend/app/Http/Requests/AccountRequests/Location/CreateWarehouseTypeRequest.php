@@ -27,8 +27,8 @@ class CreateWarehouseTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            "name_en" => ["required", "unique:warehouse_types,name_en"],
-            "name_ar" => ["required", "unique:warehouse_types,name_ar"],
+            "nameEn" => ["required", "unique:warehouse_types,name_en"],
+            "nameAr" => ["required", "unique:warehouse_types,name_ar"],
         ];
     }
 

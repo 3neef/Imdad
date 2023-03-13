@@ -19,8 +19,8 @@ class WarehouseTypeService
 
     public static function store($request){
         $warehouse_type = WarehouseType::create([
-            'name_en' => $request->name_en,
-            'name_ar' => $request->name_ar,
+            'name_en' => $request->nameEn,
+            'name_ar' => $request->nameAr,
         ]);
 
         $output = ["statusCode" => "000", 'success' => true, "message"=>"Tyoe Created successfully", 'data' => $warehouse_type];
@@ -31,8 +31,8 @@ class WarehouseTypeService
         $warehouse_type = WarehouseType::find($id);
         if ($warehouse_type != null) {
             $warehouse_type->update([
-                'name_en' => $request->name_en ?? $warehouse_type->name_en,
-                'name_ar' => $request->name_ar ?? $warehouse_type->name_ar,
+                'name_en' => $request->nameEn ?? $warehouse_type->name_en,
+                'name_ar' => $request->nameAr ?? $warehouse_type->name_ar,
             ]);
         } else {
             $warehouse_type = null;
