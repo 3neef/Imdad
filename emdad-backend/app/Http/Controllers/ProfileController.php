@@ -502,6 +502,51 @@ class ProfileController extends Controller
         return response()->json([ 'data' => ['statusCode'=> $output['statusCode'], "message"=> $output['message'], "profileId"=> $output['profile_id'] ]],200);
     }
 
+
+    
+    /**
+     * @OA\post(
+     * path="/api/v1_0/upload-logo",
+     * operationId="uploadlogo",
+     * tags={"Profile Controller"},
+
+     * summary="validatedAccount",
+     * description="validatedAccount",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *     @OA\RequestBody(
+     *         @OA\JsonContent(),
+     *         @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               required={"logo"},
+     *               @OA\Property(property="logo", type="")
+     *            ),
+     *        ),
+     *    ),
+     *      @OA\Response(
+     *        response=200,
+     *          description="validated successfully ",
+     *       ),
+     *      @OA\Response(response=404, description="Resource Not Found"),
+     *      @OA\Response(response=500, description="system error"),
+     * )
+     */
     public function upload(UploadlogoRequest $request,AccountService $AccountServices){
         $output = $AccountServices->uploadlogo($request);
 
