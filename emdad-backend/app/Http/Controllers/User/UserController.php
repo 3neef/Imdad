@@ -137,7 +137,7 @@ class UserController extends Controller
      *               @OA\Property(property="identityType", type="string"),
      *               @OA\Property(property="isLearning", type="boolean"),
      *               @OA\Property(property="managerUserId", type="integer"),
-     *               @OA\Property(property="warahouseId", type="array(integer)"),
+     *               @OA\Property(property="warehouseId", type="array(integer)"),
      *            ),
      *        ),
      *    ),
@@ -551,70 +551,17 @@ class UserController extends Controller
 
 
 
-    /**
-     * @OA\Put(
-     * path="/api/v1_0/users/Activate",
-     * operationId=" userActivate",
-     * tags={"UM & Permissions"},
-     * summary="activate user",
-     * description="Activate a user within a company",
-     *     @OA\Parameter(
-     *         name="x-authorization",
-     *         in="header",
-     *         description="Set x-authorization",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *         *     @OA\Parameter(
-     *         name="token",
-     *         in="header",
-     *         description="Set user authentication token",
-     *         @OA\Schema(
-     *             type="beraer"
-     *         )
-     *     ),
-     *     @OA\RequestBody(
-     *         @OA\JsonContent(),
-     *         @OA\MediaType(
-     *            mediaType="application-json",
-     *            @OA\Schema(
-     *               type="object",
-     *               required={"userId"},
-     *               @OA\Property(property="userId", type="integer"),
-     *            ),
-     *        ),
-     *    ),
-     *      @OA\Response(
-     *          response=201,
-     *          description="Activated Successfully ",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="activated Successfully",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(
-     *          response=422,
-     *          description="Unprocessable Entity",
-     *          @OA\JsonContent()
-     *       ),
-     *      @OA\Response(response=400, description="Bad request"),
-     *      @OA\Response(response=404, description="Resource Not Found"),
-     * )
-     */
 
-    public function userActivate(UserAvtivateRerquest $request, UserServices $userServices)
-    {
-        $output = $userServices->userActivate($request);
+    // public function userActivate(UserAvtivateRerquest $request, UserServices $userServices)
+    // {
+    //     $output = $userServices->userActivate($request);
 
-        if ($output['statusCode'] == "000") {
-            return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
-        } elseif ($output['statusCode'] == "999" || $output['statusCode'] == "263") {
-            return response()->json(['data' => ['statusCode' => $output['statusCode'], "error" => $output['error']]], 200);
-        }
-    }
+    //     if ($output['statusCode'] == "000") {
+    //         return response()->json(['data' => ['statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
+    //     } elseif ($output['statusCode'] == "999" || $output['statusCode'] == "263") {
+    //         return response()->json(['data' => ['statusCode' => $output['statusCode'], "error" => $output['error']]], 200);
+    //     }
+    // }
 
     /**
      * @OA\Put(

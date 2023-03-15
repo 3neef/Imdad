@@ -102,9 +102,9 @@ class WarehousesController extends Controller
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={"managerId","warehouseName","warehouseType","latitude","longitude","gateType","receiverName","receiverPhone"},
+     *               required={"managerId","warehouseName","warehouseTypeId","latitude","longitude","gateType","receiverName","receiverPhone"},
      *               @OA\Property(property="warehouseName", type="string"),
-     *               @OA\Property(property="warehouseType", type="string"),
+     *               @OA\Property(property="warehouseTypeId", type="integer"),
      *               @OA\Property(property="latitude", type="string"),
      *               @OA\Property(property="longitude", type="string"),
      *               @OA\Property(property="gateType", type="string"),
@@ -134,7 +134,7 @@ class WarehousesController extends Controller
     {
         $this->authorize('create',Warehouse::class);
         $output = $this->warehouseService->store($request);
-        
+
         if($output['statusCode'] == "000"){
             return response()->json(['statusCode'=> $output['statusCode'], "message"=>$output['message'], 'data' => WarehouseResponse::make($output['data']) ],200);
         }elseif($output['statusCode'] == "361") {
@@ -265,11 +265,11 @@ class WarehousesController extends Controller
      */
     public function update(UpdateWarehousesRequest $request, $id)
     {
-        //  $this->authorize('update',Warehouse::class);
+          $this->authorize('update',Warehouse::class);
 
         $update = $this->warehouseService->update($request, $id);
         if ($update != null) {
-            return response()->json(["statusCode" => '000', 'message' => 'Updated Successfly', 'data' => WarehouseResponse::make($update)], 200);
+            return response()->json(["statusCode" => '000', 'message' => 'Updated Successfully', 'data' => WarehouseResponse::make($update)], 200);
         } else {
 
             return response()->json(["statusCode" => '999', 'error' => 'No data Found'], 404);
@@ -449,7 +449,7 @@ if($result){
 
     /**
      * @OA\post(
-     * path="/api/v1_0/assignwarehousetouser",
+     * path="/api/v1_0/warehouses/assignwarehousetouser",
      * operationId="assignwarehousetouser",
      * tags={"warehouse"},
      * summary="assign warehouse to user",

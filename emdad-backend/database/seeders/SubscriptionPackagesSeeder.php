@@ -141,7 +141,7 @@ a particular date.","descriptionAr"=>"التوريد لمرة واحدة: في �
             ["key"=>"Suppliers","titleEn"=>"Suppliers Management","titleAr"=>"إدارة الموردين","systemValue"=>80,"text_en"=>"80 ","text_ar"=>"80","descriptionEn"=>"The number of suppliers that can be added for direct dealing.","descriptionAr"=>"تمكن المنشأة من إضافة عدد من الموردين للتعامل المباشر، ويكون الحد الأعلى حسب باقة 
         الاشتراك."],
 
-            ["key"=>"items","titleEn"=>"Number of items in a requestion","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>20,"text_en"=>"20","text_ar"=>"20","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد الأعلى حسب باقة 
+            ["key"=>"items","titleEn"=>"Number of items in a requisition","titleAr"=>"عدد المنتجات للطلب الواحد","systemValue"=>20,"text_en"=>"20","text_ar"=>"20","descriptionEn"=>"When creating a requisition, a certain number of items can be added according to the package. ","descriptionAr"=>"عند إنشاء الطلب يتم إضافة عدد معين من المنتجات لكل طلب ويكون الحد الأعلى حسب باقة 
             الاشتراك."],
 
 

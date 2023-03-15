@@ -27,8 +27,8 @@ class UpdateWarehouseTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            "name_en" => ["sometimes", "unique:warehouse_types,name_en"],
-            "name_ar" => ["sometimes", "unique:warehouse_types,name_ar"],
+            "nameEn" => ["sometimes", "unique:warehouse_types,name_en"],
+            "nameAr" => ["sometimes", "unique:warehouse_types,name_ar"],
         ];
     }
 

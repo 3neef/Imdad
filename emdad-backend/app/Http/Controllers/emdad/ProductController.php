@@ -187,22 +187,29 @@ class ProductController extends Controller
      *             type="beraer"
      *         )
      *     ),
-     *     @OA\RequestBody(
+     *      *     @OA\RequestBody(
      *         @OA\JsonContent(),
      *         @OA\MediaType(
      *            mediaType="multipart/form-data",
      *            @OA\Schema(
      *               type="object",
-     *               required={""},
-     *               @OA\Property(property="", type="")
+     *               required={},
+     *               @OA\Property(property="perPage", type="integer"),
      *            ),
      *        ),
      *    ),
-     *      @OA\Response(
-     *          response=200,
-     *          description="",
-     *         @OA\JsonContent(
-     *         @OA\Property(property="MainProduct", type="integer", example="{'id': 2, 'name': 'LG','salary': 10000, 'parent_id': 1,'company_id': 1}")
+     *    @OA\Response(
+     *         response=200,
+     *         description="",
+     *               *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
      *          ),
      *       ),
      * )

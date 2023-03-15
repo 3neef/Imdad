@@ -28,7 +28,7 @@ class UpdateWarehousesRequest extends FormRequest
     public function rules()
     {
         return [
-            'warehouseName' => ['string','max:100', new WarehouseRule('warehouses',['profile_id'=>auth()->user()->profile_id,'address_name'=>$this->warehouseName])],
+            'warehouseName' => ['string','max:100', new WarehouseRule('warehouses',['profile_id'=>auth()->user()->profile_id,'address_name'=>$this->warehouseName],$this->id)],
             'warehouseTypeId' => [ 'exists:warehouse_types,id'],
             'latitude' => ['string'],
             'longitude' => ['string'],
