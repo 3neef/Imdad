@@ -16,20 +16,18 @@ use App\Models\WathiqOwner;
 use App\Models\WathiqStatus;
 use Nette\Utils\Json;
 
-use function PHPUnit\Framework\isEmpty;
+// use function PHPUnit\Framework\isEmpty;
 
 class WathiqService
 {
     // public function __construct (){
     //     $this->
     // }
-    public function getRelatedCompanies($id, $idType)
-    {
+    public function parameters(){
 
-        $curl = curl_init();
+        // configure parameters without repeating code
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'related/' . $id . '/' . $idType,
+        $param =  array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -40,12 +38,44 @@ class WathiqService
             CURLOPT_HTTPHEADER => array(
                 'apiKey: ' .config('services.wathiq.apiKey').'',
             ),
-        ));
+        );
+        return $param;
 
+    }
+
+    public function getRelatedCompanies($id, $idType)
+    {
+
+        // before refactoring
+
+        // curl_setopt_array($curl, array(
+        //     CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'related/' . $id . '/' . $idType,
+        //     CURLOPT_RETURNTRANSFER => true,
+        //     CURLOPT_ENCODING => '',
+        //     CURLOPT_MAXREDIRS => 10,
+        //     CURLOPT_TIMEOUT => 0,
+        //     CURLOPT_FOLLOWLOCATION => true,
+        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        //     CURLOPT_CUSTOMREQUEST => 'GET',
+        //     CURLOPT_HTTPHEADER => array(
+        //         'apiKey: ' .config('services.wathiq.apiKey').'',
+        //     ),
+        // ));
+
+
+        $curl = curl_init();
         
+        // after refactoring
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'related/'.$id.'/'. $idType,);  
+        
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
+
         if (is_array(json_decode($response))) {
             foreach (json_decode($response) as $relatedCompany) {
                 $related = new RelatedCompanies();
@@ -65,20 +95,12 @@ class WathiqService
         // dd(config('services.wathiq.url').'/'.'locations');
         // dd(config('services.wathiq.url'.'/'.'locations'));
         $curl = curl_init();
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'locations',);       
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url').'/'.'locations',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         
 
@@ -102,22 +124,12 @@ class WathiqService
     {
 
         $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url').'/'.'businessTypes',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
-
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'businessTypes',);  
         
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
@@ -138,23 +150,14 @@ class WathiqService
     public static function getRelations()
     {
 
+
         $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url').'/'.'relations',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
-
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'relations',);  
         
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
@@ -175,25 +178,16 @@ class WathiqService
     {
 
         $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url').'/'.'nationalities',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
-
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'nationalities',);  
         
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
+
 
         if (is_array(json_decode($response))) {
             foreach (json_decode($response) as $nationality) {
@@ -212,26 +206,18 @@ class WathiqService
     public static function getActivities()
     {
 
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url').'/'.'activities',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
-
         
+        $curl = curl_init();
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'activities',);  
+        
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
+     
 
         if (is_array(json_decode($response))) {
             foreach (json_decode($response) as $activity) {
@@ -250,26 +236,16 @@ class WathiqService
 
     public static function getFullInfo($id){
         $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'fullinfo/'.$id,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
-
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'fullinfo/'.$id,);  
         
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
-
+     
         if (json_decode($response)) {
             $full_info = new FullInfo();
             $full_info->cr_number = $id;
@@ -280,23 +256,14 @@ class WathiqService
     }
 
     public static function getInfo($id){
+
         $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'info/'.$id,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
-
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'info/'.$id,);  
         
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
@@ -311,27 +278,19 @@ class WathiqService
     }
     
     public static function getStatus($id){
+
         $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'status/'.$id,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
-
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'status/'.$id,);  
         
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
-
+     
+        
         if ($response != NULL) {
             $server_status = json_decode($response);
             $full_info = new WathiqStatus();
@@ -346,23 +305,14 @@ class WathiqService
     }
 
     public static function getManagers($id){
+    
         $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'managers/'.$id,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
-
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'managers/'.$id,);  
         
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
@@ -382,23 +332,14 @@ class WathiqService
         return $response;
     }
     public static function getOwners($id){
+
         $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'owners/'.$id,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
-
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'owners/'.$id,);  
         
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
@@ -423,18 +364,12 @@ class WathiqService
                 // dd(config('services.wathiq.url_commercial').'/'.'owns');
 
         $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => config('services.wathiq.url_commercial').'/'.'owns/'.$id . '/' . $idType,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'apiKey: ' .config('services.wathiq.apiKey').'',
-            ),
-        ));
+        $param = self::parameters();
+        $url =   array(CURLOPT_URL => config('services.wathiq.url').'/'.'owners/'.$id . '/' . $idType,);  
+        
+        $param = array_merge($param,$url);
+        // dd($param);
+        curl_setopt_array($curl,$param);
 
         $response = curl_exec($curl);
         curl_close($curl);
