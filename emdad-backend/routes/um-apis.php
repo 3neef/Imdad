@@ -50,6 +50,8 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
 Route::put('users/update-owner-user/{id}', [UserController::class, 'UpdateOwnerUser'])->middleware(['auth.apikey']);
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    Route::get('permissions/allowedFilter',[PermissionsController::class, 'allowedFilter']);
+
     Route::Post('permissions/addPermissionToRole' , [PermissionsController::class,'PermissionToRole']);
     Route::delete('permissions/RemovePermission',[PermissionsController::class,'DeletePermissionOnRole']);
 
@@ -58,6 +60,8 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
 });
 
 Route::middleware(['auth.apikey'])->group(function () {
+    Route::get('roles/allowedFilter',[RoleController::class, 'allowedFilter']);
+
     Route::put('roles/restore/{roleId}', [RoleController::class, 'restoreByRoleId']);
     Route::get('roles/roles-for-reg', [RoleController::class, 'getRolesForReg']);
 });

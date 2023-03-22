@@ -28,7 +28,12 @@ class WarehousesController extends Controller
     {
         $this->warehouseService = $warehouseService;
     }
+    public function allowedFilter(){
+        return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[  'address_name', 'address_contact_phone', 'address_type', 'gate_type', 'created_by',
+            'confirm_by',
+        ]],200);
 
+    }
 
     /**
      * @OA\get(

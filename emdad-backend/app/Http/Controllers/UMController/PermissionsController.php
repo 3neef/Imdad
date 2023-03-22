@@ -28,6 +28,14 @@ class PermissionsController extends Controller
     {
         $this->PermissionService = $PermissionService;
     }
+
+    public function allowedFilter(){
+        return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[
+            'address_name', 'address_contact_phone', 'address_type', 'gate_type', 'created_by',
+            'confirm_by',
+        ]],200);
+
+    }
        /**
         * @OA\Post(
         * path="/api/v1_0/permissions",
@@ -452,7 +460,7 @@ class PermissionsController extends Controller
         if($permission){
             return response()->json(["statusCode"=>'000','data'=>$permission,'message' => 'permission Deleted Successfully'], 200);
         }
-        return response()->json(["statusCode"=>'111','data'=>$permission,'error' => 'Record not Found'], 200);   
+        return response()->json(["statusCode"=>'111','data'=>$permission,'error' => 'Record not Found'], 200);
 
     }
 }

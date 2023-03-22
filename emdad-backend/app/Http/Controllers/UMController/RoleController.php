@@ -28,6 +28,16 @@ class RoleController extends Controller
         $this->roleServices = $roleServices;
     }
 
+    public function allowedFilter(){
+        return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[
+            'id',
+            'name_en',
+            'name_ar',
+            'type',
+            'for_reg',
+        ]],200);
+
+    }
     /**
      * @OA\get(
      * path="/api/v1_0/roles",
