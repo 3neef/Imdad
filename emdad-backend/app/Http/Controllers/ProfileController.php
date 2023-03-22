@@ -28,7 +28,20 @@ class ProfileController extends Controller
     {
         $this->accountService = $accountService;
     }
+    public function allowedFilter(){
+        return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[
+            'id',
+            'name_ar',
+            'name_en',
+            'cr_number',
+            'vat_number',
+            'iban',
+            'updated_at',
+            'created_at',
+            'created_by',
+        ]],200);
 
+    }
 
  /**
      * @OA\get(
@@ -502,7 +515,7 @@ class ProfileController extends Controller
     }
 
 
-    
+
     /**
      * @OA\post(
      * path="/api/v1_0/upload-logo",

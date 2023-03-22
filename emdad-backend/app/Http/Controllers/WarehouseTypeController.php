@@ -14,7 +14,7 @@ class WarehouseTypeController extends Controller
     {
         $this->warehouseTypeService = $warehouseTypeService;
     }
-    
+
      /**
      * @OA\get(
      * path="/api/v1_0/warehouses/warehouse-types",
@@ -63,7 +63,7 @@ class WarehouseTypeController extends Controller
      *       ),
      * )
      */
-   
+
     public function index(Request $request){
         return $this->warehouseTypeService->index($request);
     }
@@ -120,7 +120,7 @@ class WarehouseTypeController extends Controller
      *       ),
      * )
      */
-    
+
     public function store(CreateWarehouseTypeRequest $request){
         $output = $this->warehouseTypeService->store($request);
 
@@ -178,7 +178,7 @@ class WarehouseTypeController extends Controller
      *       ),
      * )
      */
-    
+
     public function update(UpdateWarehouseTypeRequest $request, $id){
         $output = $this->warehouseTypeService->update($request, $id);
 
@@ -237,14 +237,14 @@ class WarehouseTypeController extends Controller
 
      * )
      */
-    
+
     public function destroy($id){
         $output = $this->warehouseTypeService->delete($id);
 
         return response()->json([ 'statusCode'=> $output['statusCode'], "message"=>$output['message'], "success"=> $output['success']],200);
 
     }
-    
+
     /**
      * @OA\put(
      * path="/api/v1_0/warehouses/warehouse-types/restore/{warehouse_type}",
