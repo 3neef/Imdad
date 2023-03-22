@@ -28,6 +28,46 @@ class ProfileController extends Controller
     {
         $this->accountService = $accountService;
     }
+
+        /**
+     * @OA\get(
+     * path="/api/v1_0/profiles/allowedFilter",
+     * operationId="allowedFilterProfile",
+     * tags={"Profile Controller"},
+     * summary="Choose which properties to filter the profiles based on",
+     * description="Filter using this property",
+     *     @OA\Parameter(
+     *         name="x-authorization",
+     *         in="header",
+     *         description="Set x-authorization",
+     *         @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *         *     @OA\Parameter(
+     *         name="token",
+     *         in="header",
+     *         description="Set user authentication token",
+     *         @OA\Schema(
+     *             type="beraer"
+     *         )
+     *     ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="Filtered based on",
+     *          @OA\JsonContent(),
+     *          @OA\MediaType(
+     *            mediaType="multipart/form-data",
+     *            @OA\Schema(
+     *               type="object",
+     *               @OA\Property(property="message", type="string"),
+     *               @OA\Property(property="statusCode", type="string"),
+     *               @OA\Property(property="data", type = "object")
+     *            ),
+     *          ),
+     *       ),
+     * )
+     */
     public function allowedFilter(){
         return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[
             'id',
