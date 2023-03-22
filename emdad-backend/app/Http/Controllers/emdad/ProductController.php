@@ -27,6 +27,20 @@ class ProductController extends Controller
     {
         $this->productService = $productService;
     }
+
+    public function allowedFilter(){
+        return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[
+            'name_ar',
+            'name_en',
+            'measruing_unit',
+            'category_id',
+            'price',
+            'description_en',
+            'description_ar',
+            'profile_id',
+        ]],200);
+
+    }
     /**
      * @OA\Post(
      * path="/api/v1_0/products",

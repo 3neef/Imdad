@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\emdad\ProductController;
 
 Route::middleware(['auth.apikey', 'auth:sanctum'])->group(function () {
+    Route::get('products/allowedFilter',[ProductController::class, 'allowedFilter']);
+
     Route::apiResource('products', ProductController::class);
     Route::put('products/restore/{id}', [ProductController::class, 'restore']);
     Route::post('products/company-products', [ProductController::class, 'setCompanyProduct']);
