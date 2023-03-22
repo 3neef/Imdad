@@ -22,6 +22,12 @@ class TruckController extends Controller
         $this->truckservice = $truckservice;
     }
 
+    public function allowedFilter(){
+        return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[
+            'id', 'name','type', 'class', 'color', 'model','size', 'brand', 'status', 'created_by', 'status', 'plate_number'
+        ]],200);
+
+    }
 
 
     /**
@@ -136,7 +142,7 @@ class TruckController extends Controller
     public function store(CreateTruckRequest $request)
     {
         $this->authorize('create', Truck::class);
-        $truck = $this->truckservice->store($request); 
+        $truck = $this->truckservice->store($request);
         if ($truck !=null) {
             return  response()->json(['statusCode' => 000, 'message' => 'created successfully', 'data' => new TruckResponse($truck)], 201);
         } else {
@@ -192,7 +198,7 @@ class TruckController extends Controller
      * )
      */
     public function show($id)
-    { 
+    {
         $truck = $this->truckservice->show($id);
         if ($truck != null) {
             return response()->json(['data' => new TruckResponse($truck)], 200);

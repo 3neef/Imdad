@@ -18,6 +18,20 @@ class DriverController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function allowedFilter(){
+        return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[
+            'id',
+            'name_ar',
+            'name_en',
+            'age',
+            'phone',
+            'nationality',
+            'status'
+        ]],200);
+
+    }
+
+
     public function index(Request $request)
     {
         return DriverCollection::collection($request);

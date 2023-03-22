@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
+    Route::get('trucks/allowedFilter',[TruckController::class, 'allowedFilter']);
+
     Route::apiResource('trucks',TruckController::class);
 });
 
@@ -17,6 +19,8 @@ Route::middleware(['auth.apikey','auth:sanctum'])->prefix('trucks')->group(funct
 
 
 Route::middleware(['auth.apikey','auth:sanctum'])->group(function() {
+    Route::get('drivers/allowedFilter',[DriverController::class, 'allowedFilter']);
+
     Route::apiResource('drivers',DriverController::class);
     Route::put('drivers/restore/{id}', [DriverController::class, 'restore']);
     Route::post('drivers/suspend/{id}', [DriverController::class, 'suspend']);
