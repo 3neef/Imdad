@@ -34,7 +34,7 @@ Route::middleware(['auth.apikey', 'auth:sanctum'])->prefix('users')->group(funct
     Route::get('user-data', [UserController::class, 'getUserInfoByToken']);
     Route::get('index', [UserController::class, 'index']);
     Route::post('register', [UserController::class, 'store']);
-    // Route::put("Activate", [UserController::class, 'userActivate']);
+    Route::get('allowedFilter',[UserController::class, 'allowedFilter']);
     Route::put("change-status", [UserController::class, 'disable']);
     Route::put('update/{id}', [UserController::class, 'update']);
     Route::put("setDefaultCompany", [UserController::class, 'setDefaultCompany']);

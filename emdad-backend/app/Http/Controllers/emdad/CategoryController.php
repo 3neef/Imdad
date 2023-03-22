@@ -27,6 +27,20 @@ class CategoryController extends Controller
 
         $this->categoryService = $categoryService;
     }
+
+    public function allowedFilter(){
+        return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[
+            'name_en',
+            'name_ar',
+            'parent_id',
+            'isleaf',
+            'type',
+            'status',
+            'profile_id',
+            'reason',
+        ]],200);
+
+    }
     /**
      * @OA\post(
      * path="/api/v1_0/categories",

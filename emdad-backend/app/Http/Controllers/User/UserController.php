@@ -24,6 +24,23 @@ class UserController extends Controller
 {
 
 
+   public function allowedFilter(){
+       return response()->json(["success" => true, "statusCode" => "000", "allowedFilter" =>[
+           'id',
+           'full_name',
+           'mobile',
+           'expiry_date',
+           'identity_type',
+           'identity_number',
+           'profile_id',
+           'email',
+           'updated_at',
+           'created_at',
+           'lang',
+       ]],200);
+
+   }
+
     public function index(Request $request)
     {
         return UserResponse::collection(UserCollection::collection($request));
@@ -173,7 +190,7 @@ class UserController extends Controller
                 $userServices->UserOtp($output['data']);
 
                 MailController::sendSignupEmail($output['data']->name, $output['data']->email, ["admin" => auth()->user()->full_name, "password" => $output['data']->password], "en", "password");
-    
+
                 return response()->json(['data' => ['user' => new UserResponse($output['data']), 'statusCode' => $output['statusCode'], "message" => $output['message']]], 200);
                 break;
             case '999':

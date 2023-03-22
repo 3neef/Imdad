@@ -62,6 +62,8 @@ Route::get('optimize', function () {
     dd("optimized successfully");
 });
 
+
+
 Route::get('route', function () {
     Artisan::call('route:list');
 });
