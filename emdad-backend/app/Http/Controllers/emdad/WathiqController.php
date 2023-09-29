@@ -77,7 +77,7 @@ class WathiqController extends Controller
     public function getLookupLocations(){
         $locations = WathiqService::getLocations();
         return $locations;
-    }
+    } 
 
     public function getBusinessTypes(){
         $types = WathiqService::getBusinessTypes();

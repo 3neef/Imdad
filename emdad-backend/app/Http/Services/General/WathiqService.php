@@ -107,7 +107,7 @@ class WathiqService
         $response = curl_exec($curl);
         curl_close($curl);
 
-        if (is_array(json_decode($response))) {
+        if (is_array(json_decode($response))) { 
             foreach (json_decode($response) as $location) {
                 $lookup_location = new LookupLocation();
                 $lookup_location->loc_number = $location->id;
